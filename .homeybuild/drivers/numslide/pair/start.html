@@ -1,0 +1,35 @@
+﻿<head>
+    <link rel="stylesheet" type="text/css" href="../../../assets/bootstrap.css" />
+</head>
+
+<div class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-heading"> Please provide the minimum, maximum and stepsize settings you want to use for the slider...</div>
+    <div class="panel-body">
+        <div class="form-group">
+            <label for="min">Minimum value</label>
+            <input class="form-control" type="number" name="min" id="min" required="required" value="0">
+        </div>
+        <div class="form-group">
+            <label for="max">Maximum value</label>
+            <input class="form-control" type="number" name="max" id="max" required="required" value="100">
+        </div>
+        <div class="form-group">
+            <label for="step">Stepsize</label>
+            <input class="form-control" type="number" name="step" id="step" required="required" value="0.5">
+        </div>
+    </div>
+    <div class="panel-footer">
+    <button id="next" type="button" class="btn btn-primary right">Next</button>
+    </div>
+  </div>
+</div>
+
+<script>
+    $("#next").click(function () {
+        Homey.emit('start', { 'min': $("#min").val(), 'max': $("#max").val(), 'step': $("#step").val() }, function (err, result) {
+            console.log(result); // result is Started!
+        });
+        Homey.showView('list_numbers');
+    });
+</script>
