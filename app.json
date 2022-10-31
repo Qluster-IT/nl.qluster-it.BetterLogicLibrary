@@ -1,5 +1,5 @@
 {
-  "id": "sdk3.i-dev.betterlogic",
+  "id": "net.i-dev.betterlogic",
   "version": "1.3.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
@@ -7,7 +7,7 @@
     "en": "Better Logic"
   },
   "description": {
-    "en": "Just some better logic"
+    "en": "Just some better logic and variable management"
   },
   "category": [
     "tools"
@@ -19,6 +19,7 @@
     "large": "/assets/images/large.png",
     "small": "/assets/images/small.png"
   },
+  "brandColor":"#A3DF20",
   "author": {
     "name": "Arie J. Godschalk",
     "email": "arie@qluster-it.nl"

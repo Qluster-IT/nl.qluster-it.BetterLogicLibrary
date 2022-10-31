@@ -4,6 +4,10 @@ const Homey = require('homey');
 
 var math = require('../util/math.js');
 var util = require('../util/util.js');
+const _ = require('lodash-core');
+
+let homey;
+let lastQuery;
 
 module.exports = {
     CreateFlowCardTriggers: function (variableManager) {
@@ -13,6 +17,83 @@ module.exports = {
 
         this.variableManager = variableManager;
         this.homey = variableManager.homey;
+
+
+        this.cards = {};
+
+        this.initArgumentReader = async function() {
+          for (const flowTypeId in this.homey.manifest.flow) {
+            if (Object.hasOwnProperty.call(this.homey.manifest.flow, flowTypeId)) {
+              const flowType = this.homey.manifest.flow[flowTypeId];
+              
+              let type = flowTypeId=='actions' ? 'Action' : flowTypeId=='conditions' ? 'Condition' : 'Trigger';
+              for (const flowcard of flowType) {
+                if(flowcard.args && flowcard.args.find(x=>x.name==='variable' && x.type==='autocomplete')) {
+                  if(!this.cards[flowcard.id]) {
+                    this.cards[flowcard.id] = {card:await this.homey.flow['get'+type+'Card'](flowcard.id), names:[], id:flowcard.id };
+                  }
+                  await this.setArgumentNames(this.cards[flowcard.id]);
+                  this.cards[flowcard.id].card.on('update', async ()=> { 
+                    await this.setArgumentNames(this.cards[flowcard.id]); 
+                    await this.setVariablesFromArguments();
+                  });
+                }
+              }
+            }
+          }      
+          await this.setVariablesFromArguments();
+        };
+    
+        let retrieveCountdowns = (query, args) => {
+          let allVariables =variableManager.getVariables();
+          let l = allVariables.filter(util.contains(query));
+          let added = false;
+          if(query && query.length && !allVariables.find(x=>x.name.toLowerCase()===(''||query).toLowerCase())) {
+            l.unshift({name:query, type:'number', description:'Create new countdown'});
+            added = true;
+          } //else lastQuery = null;
+    
+          if(lastQuery && lastQuery.length && !query.startsWith(lastQuery) && !l.find(x=>x.name.toLowerCase()===(''||lastQuery).toLowerCase()) && !allVariables.find(x=>x.name.toLowerCase()===(''||lastQuery).toLowerCase())) {
+            let a = {name:lastQuery, type:'number', description:'Just added'};
+            if(added) l.splice(1,0,a);
+            else l.unshift(a);
+          }
+          if(query && query.length) lastQuery = query;
+          
+          return l;
+        };
+    
+        this.setArgumentNames = async (card) => {
+          let args = await card.card.getArgumentValues();
+          card.names = _.uniq(args.map(x=>x.variable.name));
+          console.log(args);      
+        };
+    
+        this.setVariablesFromArguments = async ()=> {
+          let allNames = _.uniq(_.flatMap(this.cards, x=> x.names));
+          let variables = variableManager.getVariables();
+          for (const name of allNames) {
+            if(!_.find(variables, v=>v.name===name)) {
+              variableManager.addVariable(name);
+              variables = variableManager.getVariables();
+            }
+          }
+          for (const variable of variables) {        
+            if(!_.find(allNames, v=>v===variable.name)) {
+              let vari = variableManager.getVariable(variable.name);
+              if(vari && vari.auto===true) {
+                variableManager.removeVariable(variable.name);
+                variables = variableManager.getVariables();
+              }
+            }
+          }
+        };
+    
+    
+    
+        this.initArgumentReader();
+
+
 
         // if_variable_changed
         let if_variable_changed = this.homey.flow.getTriggerCard('if_variable_changed');
