@@ -15,7 +15,7 @@ class TriggerDriver extends Homey.Driver {
   onPair( socket ) {
 
     socket.on('list_devices', function( data, callback ) {
-        var bools = variableManager.getVariables().filter(util.findVariable('', 'trigger'));
+        var bools = variableManager.retrieveVariables('query', null, 'trigger');
         var devices = [];
 
         bools.forEach(function (variable) {
@@ -25,7 +25,7 @@ class TriggerDriver extends Homey.Driver {
                     id: variable.name,
                     type: variable.type
                 }
-            }
+            };
             devices.push(device);
         });
 

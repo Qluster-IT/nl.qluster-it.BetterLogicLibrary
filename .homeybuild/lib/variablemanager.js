@@ -9,7 +9,8 @@ var tokens = [];
 const Homey = require('homey');
 let homey;
 
-module.exports = {
+let lastQuery = {};
+let variableManager = module.exports = {
     init: function(_homey) {
         this.homey = _homey;
         homey = _homey;
@@ -46,13 +47,58 @@ module.exports = {
     },
     updateVariable: function(name, value, type) {
         updateVariable(name, value, type);
-    }
+    },
+    
+    addVariable: function(name, type) {
+        return updateVariable(name,
+            type==="string" ? "" : 
+            type==="boolean" ? false : 
+            type==="number" ? 0 : 
+            type==="trigger" ? -1 : 
+            null, 
+        type, false, true);
+    },
+    removeVariable: function(name) {
+        return updateVariable(name, null, null, true);
+        
+        // console.log('removingVariable: ' + name);
+        // const variables = getVariables();
+        
+        // let variable = _.find(variables, x=> x.name===name);//this.getVariable(name);
+        // if(!variable) return;
+        
+        // variables.splice(variables.indexOf(variable), 1);
+        // processValueChanged(variables);
+        // homey.api.realtime('setting_changed', variable);
+        // removeToken(name);
+        // return true;
+        //return variableManager.updateVariable(name, -1, "number", "0", true, undefined);
+    },
+    retrieveVariables: (query, args, type) => {
+        let AllTypesVariables = variableManager.getVariables();
+        let allVariables = type=='any' ?  AllTypesVariables.filter(util.contains(query)) : AllTypesVariables.filter(util.filterVariable(query, type)) ;// variableManager.getVariables();
+        let l = allVariables.filter(util.contains(query));
+        let added = false;
+        if (type != 'any' && query && query.length && !AllTypesVariables.find(x => x.name.toLowerCase() === ('' || query).toLowerCase())) {
+          l.unshift({ name: query, type: type, description: 'Create new ' + type });
+          added = true;
+        } //else lastQuery[type] = null;
+  
+        if (type != 'any' && lastQuery[type] && lastQuery[type].length && !query.startsWith(lastQuery[type]) && !l.find(x => x.name.toLowerCase() === ('' || lastQuery[type]).toLowerCase()) && !AllTypesVariables.find(x => x.name.toLowerCase() === ('' || lastQuery[type]).toLowerCase())) {
+          let a = { name: lastQuery[type], type: 'number', description: 'Just added' };
+          if (added) l.splice(1, 0, a);
+          else l.unshift(a);
+        }
+        if (query && query.length) lastQuery[type] = query;
+  
+        return l;
+      }
 };
 
 
 
 
-function updateVariable(name, value, type, remove = false) {
+function updateVariable(name, value, type, remove = false, auto = false) {
     const variables = getVariables();
     const oldVariable = findVariable(variables, name);
     if (oldVariable) {
@@ -66,6 +112,8 @@ function updateVariable(name, value, type, remove = false) {
         remove: remove,
         lastChanged: getShortDate()
     };
+    if(auto) newVariable.auto = true;
+    if(oldVariable && oldVariable.auto && !auto) newVariable.auto = true;
 
     if (!remove) {
         variables.unshift(newVariable);
@@ -85,7 +133,7 @@ function processValueChanged(variables, oldVariable, newVariable) {
 
     if (newVariable && newVariable.remove) {
         removeInsights(newVariable.name);
-        homey.insights.deleteLog(newVariable.name, function(err, state) {});
+        //homey.insights.deleteLog(newVariable.name, function(err, state) {});
         removeToken(newVariable.name);
         return;
     }
@@ -144,7 +192,7 @@ async function createOrUpdateInsights(name, value, type) {
   } catch(err) {
     console.log(err);
   }
-};
+}
 
 function GetInsightOptions(name, type)
 {
@@ -179,13 +227,14 @@ function deleteAllInsights() {
     });
 }
 
-function removeInsights(name) {
-    homey.insights.getLog(name,
-        function(err, log) {
-            if (log) {
-                homey.insights.deleteLog(log);
-            }
-        });
+async function removeInsights(name) {
+    try {
+        let log = await homey.insights.getLog(name);
+        return await homey.insights.deleteLog(log);
+    } catch (error) {
+        console.log('ERROR removeInsights: ' + error.toString());
+        
+    }
 }
 
 function deleteAllTokens() {

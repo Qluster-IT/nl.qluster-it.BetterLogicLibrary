@@ -1,5 +1,11 @@
 {
   "1.3.0": {
     "en": "Updated to SDK3."
+  },
+  "1.4.0": {
+    "en": "Improvement: Variables can be created directly in flows: Just start typing and select."
+  },
+  "1.4.1": {
+    "en": "Improvement: Variables can be created directly in flows: Just start typing and select (notification)."
   }
 }

@@ -39,7 +39,7 @@ class NumSlideDriver extends Homey.Driver {
     });
 
     socket.on('list_devices', function (data, callback) {
-        var nums = variableManager.getVariables().filter(util.findVariable('', 'number'));
+        var nums = variableManager.retrieveVariables('query', null, 'number');
         var devices = [];
 
         nums.forEach(function (variable) {
@@ -59,7 +59,7 @@ class NumSlideDriver extends Homey.Driver {
                         step: myData.step*1
                     }
                 }
-            }
+            };
             devices.push(device);
 
         });
