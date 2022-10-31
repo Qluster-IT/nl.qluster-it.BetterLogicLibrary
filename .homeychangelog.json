@@ -7,5 +7,8 @@
   },
   "1.4.1": {
     "en": "Improvement: Variables can be created directly in flows: Just start typing and select (notification)."
+  },
+  "1.4.2": {
+    "en": "Improvement: Variables can be created directly in flows: Just start typing and select (notification)."
   }
 }
