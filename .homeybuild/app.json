@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -44,7 +44,13 @@
 		"donate": {
 			"paypal": {
 				"username": "QlusterIT"
-			}
+			},
+      "patreon": {
+				"username": "QlusterIT"
+			},
+      "githubSponsors": {
+        "username": "XeroxQ"
+      }
 		}
 	},
   "homeyCommunityTopicId": 5568,

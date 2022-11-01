@@ -10,5 +10,8 @@
   },
   "1.4.2": {
     "en": "Improvement: Variables can be created directly in flows: Just start typing and select (notification)."
+  },
+  "1.4.3": {
+    "en": "Added: Contribution options: Patreon and GithubSponsors (with PayPal already available)."
   }
 }
