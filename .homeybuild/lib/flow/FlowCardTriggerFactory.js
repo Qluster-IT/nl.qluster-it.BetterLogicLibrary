@@ -102,7 +102,7 @@ module.exports = {
     // if_variable_changed
     let if_variable_changed = this.homey.flow.getTriggerCard('if_variable_changed');
     if_variable_changed
-      .on('run', async (args, state) => {
+      .registerRunListener( async (args, state) => {
         if (args.variable && state.name && args.variable.name == state.name) {
           return true; // true to make the flow continue, or false to abort
         }
@@ -116,7 +116,7 @@ module.exports = {
     // if_variable_set
     let if_variable_set = this.homey.flow.getTriggerCard('if_variable_set');
     if_variable_set
-      .on('run', async (args, state) => {
+      .registerRunListener( async (args, state) => {
         if (args.variable && state.name && args.variable.name == state.name) {
           return true; // true to make the flow continue, or false to abort
         }
@@ -130,7 +130,7 @@ module.exports = {
     // if_one_of_variable_changed
     let if_one_of_variable_changed = this.homey.flow.getTriggerCard('if_one_of_variable_changed');
     if_one_of_variable_changed
-      .on('run', async (args, state) => {
+      .registerRunListener( async (args, state) => {
         if (args.variable && state.name) {
           try {
             var selectedVariables = args.variable.replace(/^\s+|\s+$/g, "").split(/\s*,\s*/);
@@ -145,7 +145,7 @@ module.exports = {
     // if_number_variable_changed
     let if_number_variable_changed = this.homey.flow.getTriggerCard('if_number_variable_changed');
     if_number_variable_changed
-      .on('run', async (args, state) => {
+      .registerRunListener( async (args, state) => {
         if (args.variable && state && state.oldVariable && state.newVariable) {
           if (args.variable.name === state.newVariable.name) {
             if (args.action === 'changed') {
@@ -177,7 +177,7 @@ module.exports = {
     // debug_any_variable_changed
     let debug_any_variable_changed = this.homey.flow.getTriggerCard('debug_any_variable_changed');
     debug_any_variable_changed
-      .on('run', async (args, state) => {
+      .registerRunListener( async (args, state) => {
         return false; // true to make the flow continue, or false to abort
       });
   }

@@ -12,13 +12,14 @@ class TriggerDriver extends Homey.Driver {
       this.log('TriggerDevice initialized');
   }
 
-  onPair( socket ) {
+  async onPair( session ) {
 
-    socket.on('list_devices', function( data, callback ) {
-        var bools = variableManager.retrieveVariables('query', null, 'trigger');
+    session.setHandler('list_devices', ( data )=> {
+        //var bools = variableManager.retrieveVariables('query', null, 'trigger');
+        var triggers = variableManager.retrieveVariables(null, null, 'trigger');
         var devices = [];
 
-        bools.forEach(function (variable) {
+        triggers.forEach(function (variable) {
             var device = {
                 name: variable.name,
                 data: {
@@ -32,8 +33,8 @@ class TriggerDriver extends Homey.Driver {
         return devices ;
     });
 
-    socket.on("add_devices", function(device, callback) {
-        devices.push(device);
+    session.setHandler("add_devices", (device)=> {
+        return devices.push(device);
     });
   }
 }

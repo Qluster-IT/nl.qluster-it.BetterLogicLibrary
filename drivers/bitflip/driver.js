@@ -33,15 +33,16 @@ class BitFlipDriver extends Homey.Driver {
 
 
 
-  onPair( socket ) {
+  async onPair( session ) {
 
-    socket.on('list_devices', function( data, callback ) {
+    session.setHandler('list_devices', ( data )=> {
         var vars = variableManager.getVariables();
-        var bools = variableManager.retrieveVariables('query', null, 'boolean');//variableManager.getVariables().filter(util.findVariable('', 'boolean'));
-
+        //var bools = variableManager.retrieveVariables('query', null, 'boolean');
+        var booleans = variableManager.retrieveVariables(null, null, 'boolean');
+        
         var devices = [];
 
-        bools.forEach(function (variable) {
+        booleans.forEach(function (variable) {
             console.log(variable);
             var device = {
                 name: variable.name,
@@ -57,8 +58,8 @@ class BitFlipDriver extends Homey.Driver {
         return devices;
     });
 
-    socket.on("add_devices", function(device, callback) {
-        devices.push(device);
+    session.setHandler("add_devices", (device)=> {
+        return devices.push(device);
     });
   }
 }

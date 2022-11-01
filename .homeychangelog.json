@@ -13,5 +13,8 @@
   },
   "1.4.3": {
     "en": "Added: Contribution options: Patreon and GithubSponsors (with PayPal already available)."
+  },
+  "1.4.4": {
+    "en": "Bugfixed: Device Creation SDk3 error."
   }
 }

@@ -31,18 +31,19 @@ class NumSlideDriver extends Homey.Driver {
           });
   }
 
-  onPair( socket ) {
+  async onPair( session ) {
     var myData;
 
-    socket.on('start', function (data, callback) {
+    session.setHandler('start', (data)=> {
         myData = data;
     });
 
-    socket.on('list_devices', function (data, callback) {
-        var nums = variableManager.retrieveVariables('query', null, 'number');
+    session.setHandler('list_devices', (data)=> {
+        //var nums = variableManager.retrieveVariables('query', null, 'number');
+        var numbers = variableManager.retrieveVariables(null, null, 'number');
         var devices = [];
 
-        nums.forEach(function (variable) {
+        numbers.forEach(function (variable) {
             console.log(variable);
             var device = {
                 name: variable.name,
@@ -66,8 +67,8 @@ class NumSlideDriver extends Homey.Driver {
 
         return devices;
     });
-    socket.on("add_device", function(device, callback) {
-        devices.push(device);
+    session.setHandler("add_device", (device)=> {
+        return devices.push(device);
     });
   }
 }
