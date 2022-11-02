@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -653,7 +653,7 @@
   {
     "getVariable": {
       "method": "GET",
-      "path": "/variable",
+      "path": "/:variable",
       "public": false
     },
     "triggerVariable": {

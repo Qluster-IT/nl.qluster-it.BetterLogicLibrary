@@ -19,5 +19,8 @@
   },
   "1.4.5": {
     "en": "Improved: Description."
+  },
+  "1.4.6": {
+    "en": "Bugfixed: API."
   }
 }
