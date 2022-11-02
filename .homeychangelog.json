@@ -16,5 +16,8 @@
   },
   "1.4.4": {
     "en": "Bugfixed: Device Creation SDk3 error."
+  },
+  "1.4.5": {
+    "en": "Improved: Description."
   }
 }

@@ -2,7 +2,7 @@ An advanced logic library with variable management for Homey.
 
 New: Manage variables directly in flows!
 
-Just type a variable name within any flowcard and select it from the list: the variable will be automaticly created.
+Just type a variable name within any Then- and Andcard and select it from the list: the variable will be automaticly created.
 If you want to use the tag, press save first.
 
 Variables that were automaticly created from within flows will also be automaticly deleted when they are no longer used in flowcards.
