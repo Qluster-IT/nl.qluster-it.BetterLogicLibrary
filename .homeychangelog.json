@@ -22,5 +22,8 @@
   },
   "1.4.6": {
     "en": "Bugfixed: API."
+  },
+  "1.4.7": {
+    "en": "Added: Confirm to Delete variable button (Delete All already has a confirm)."
   }
 }

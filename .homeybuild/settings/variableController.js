@@ -30,7 +30,7 @@
                     });
                 });
             });
-        }
+        };
         vm.addVariable = function() {
             if (vm.variables && vm.variables.filter(function(e) { return e.name == vm.newVariable.name; }).length > 0) {
                 vm.errorMessage = "Variable does already exist in database.";
@@ -51,20 +51,25 @@
         vm.deleteAll = function() {
             vm.homey.confirm('Are you sure you wish to delete ALL variables?', 'warning', function(err, val) {
                 if(err) return vm.homey.alert(err);
-                if(val) {
-                    vm.$apply(()=> {
-                        vm.homey.set('variables',[] );
-                        vm.variables = [];
-                    });
-                }
+                if(val) $scope.$apply(()=> {
+                    vm.homey.set('variables',[] );
+                    vm.variables = [];
+                });
+                
             });
         };
         vm.removeVariable = function(row) {
             var index = vm.variables.indexOf(row);
             var toDeleteVariable = vm.variables[index];
-            toDeleteVariable.remove = true;
-            vm.variables.splice(index, 1);
-            storeVariable(toDeleteVariable);
+            if(!toDeleteVariable) return;
+            vm.homey.confirm(`Are you sure you wish to delete the variable ${toDeleteVariable.name}?`, 'warning', function(err, val) {
+                if(err) return vm.homey.alert(err);
+                if(val) $scope.$apply(()=> {
+                    toDeleteVariable.remove = true;
+                    vm.variables.splice(index, 1);
+                    storeVariable(toDeleteVariable);
+                });
+            });
         };
 
         vm.showExport = function() {
