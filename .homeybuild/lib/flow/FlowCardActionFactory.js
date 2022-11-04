@@ -93,7 +93,7 @@ module.exports = {
             if (args.expression && args.variable && args.variable.name) {
                 try {
                     var result = variableManager.getVariable(args.variable.name);
-                    var expression = util.buildExpression(args.expression);
+                    var expression = util.buildExpression(args.expression, this.homey);
 
                     if (result) {
                         var newValue = math.eval(expression);

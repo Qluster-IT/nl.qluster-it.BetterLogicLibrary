@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "1.4.7",
+  "version": "1.4.9",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -536,6 +536,32 @@
             "type": "text",
             "placeholder": {
               "en": "value"
+            }
+          }
+        ]
+      },
+      {
+        "id": "get_formatted_text",
+        "title": {
+          "en": "Get formatted text"
+        },"titleFormatted": {
+          "en": "Get [[format]]"
+        },
+        "args": [
+          {
+            "name": "format",
+            "type": "autocomplete",
+            "placeholder": {
+              "en": "dd-MM-yyyy"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "name": "result",
+            "type": "string",
+            "title": {
+              "en": "Formatted result"
             }
           }
         ]

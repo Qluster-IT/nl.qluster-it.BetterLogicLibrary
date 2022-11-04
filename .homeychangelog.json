@@ -25,5 +25,11 @@
   },
   "1.4.7": {
     "en": "Added: Confirm to Delete variable button (Delete All already has a confirm)."
+  },
+  "1.4.8": {
+    "en": "Solved: MathJS UTC/Local timezone issue since SDK3."
+  },
+  "1.4.9": {
+    "en": "Added: Get formatted datetime token through flowcard."
   }
 }
