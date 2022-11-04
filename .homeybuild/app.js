@@ -63,8 +63,8 @@ class BetterLogic extends Homey.App {
 
 			
 		// get_stamp
-		let get_formatted_text = this.homey.flow.getActionCard('get_formatted_text');
-		get_formatted_text
+		let format_datetime = this.homey.flow.getActionCard('format_datetime');
+		format_datetime
 		.registerRunListener( async (args, state) => {
 			return {result:this.homey.app.dateTime.toString(args.format.name)};
 		})

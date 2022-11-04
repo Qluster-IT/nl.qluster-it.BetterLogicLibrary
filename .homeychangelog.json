@@ -31,5 +31,8 @@
   },
   "1.4.9": {
     "en": "Added: Get formatted datetime token through flowcard."
+  },
+  "1.4.10": {
+    "en": "Added: Get formatted datetime token through flowcard."
   }
 }

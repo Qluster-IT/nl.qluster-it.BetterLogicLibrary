@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "1.4.9",
+  "version": "1.4.10",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -541,11 +541,11 @@
         ]
       },
       {
-        "id": "get_formatted_text",
+        "id": "format_datetime",
         "title": {
-          "en": "Get formatted text"
+          "en": "Format datetime"
         },"titleFormatted": {
-          "en": "Get [[format]]"
+          "en": "Format [[format]]"
         },
         "args": [
           {
