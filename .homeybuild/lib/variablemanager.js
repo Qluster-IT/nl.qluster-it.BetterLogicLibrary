@@ -64,7 +64,7 @@ let variableManager = module.exports = {
         // console.log('removingVariable: ' + name);
         // const variables = getVariables();
         
-        // let variable = _.find(variables, x=> x.name===name);//this.getVariable(name);
+        // let variable = BL._.find(variables, x=> x.name===name);//this.getVariable(name);
         // if(!variable) return;
         
         // variables.splice(variables.indexOf(variable), 1);

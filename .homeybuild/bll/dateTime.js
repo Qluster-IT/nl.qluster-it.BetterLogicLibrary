@@ -1,6 +1,8 @@
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#parameters
 
-const _ = require('lodash-core');
+const { BL } = require("./lib/bll-loader.js");
+
+
 class DateTime  {  
 	static get locale() { return this._locale; }
 	static set locale(v) { this._locale = v; }
@@ -10,17 +12,19 @@ class DateTime  {
 
 	static get date() { return this._date; }
 	static set date(v) { this._date = v; }
+  
+	get now() { return new Datetime(this.locale, this.timeZone, new Date()); }
 
     constructor(locale, timeZone, date) {
       this.locale = locale;
       this.timeZone = timeZone;
       
-      this.yearCodesArr = _.sortBy(_.map(this.yearCodes, (x, key)=>{return{key,val:x}}, 'key.length'));
-      this.monthCodesArr = _.sortBy(_.map(this.monthCodes, (x, key)=>{return{key,val:x}}, 'key.length'));
-      this.dayCodesArr = _.sortBy(_.map(this.dayCodes, (x, key)=>{return{key,val:x}}, 'key.length'));
-      this.hourCodesArr = _.sortBy(_.map(this.hourCodes, (x, key)=>{return{key,val:x}}, 'key.length'));
-      this.minuteCodesArr = _.sortBy(_.map(this.minuteCodes, (x, key)=>{return{key,val:x}}, 'key.length'));
-      this.secondCodesArr = _.sortBy(_.map(this.secondCodes, (x, key)=>{return{key,val:x}}, 'key.length'));
+      this.yearCodesArr = BL._.sortBy(BL._.map(this.yearCodes, (x, key)=>{return{key,val:x}}, 'key.length'));
+      this.monthCodesArr = BL._.sortBy(BL._.map(this.monthCodes, (x, key)=>{return{key,val:x}}, 'key.length'));
+      this.dayCodesArr = BL._.sortBy(BL._.map(this.dayCodes, (x, key)=>{return{key,val:x}}, 'key.length'));
+      this.hourCodesArr = BL._.sortBy(BL._.map(this.hourCodes, (x, key)=>{return{key,val:x}}, 'key.length'));
+      this.minuteCodesArr = BL._.sortBy(BL._.map(this.minuteCodes, (x, key)=>{return{key,val:x}}, 'key.length'));
+      this.secondCodesArr = BL._.sortBy(BL._.map(this.secondCodes, (x, key)=>{return{key,val:x}}, 'key.length'));
       
       this.codes = {};
       this.codes['yearCodesArr'] = this.getYear;
@@ -30,9 +34,10 @@ class DateTime  {
       this.codes['minuteCodesArr'] = this.getMinute;
       this.codes['secondCodesArr'] = this.getSecond;
     }
-    new() {
-      return new Datetime(this.locale, this.timeZone, new Date());
-    }
+
+    // new() {
+    //   return new Datetime(this.locale, this.timeZone, new Date());
+    // }
     getString(options) {
       //console.log('getString' + JSON.stringify(options));
       options.timeZone = this.timeZone;
@@ -125,50 +130,50 @@ class DateTime  {
       return this.getString({weekday:format||'long'});
     }
 
+    yearCodes = {'yyyy':'numeric', 'yy':'2-digit'};
     /**
      * @param {"yyyy"|"yy"} code * @returns {String}
      */
-    yearCodes = {'yyyy':'numeric', 'yy':'2-digit'};
     getYear(code) {
       return this.getYearByFormat(code && this.yearCodes[code] ?  this.yearCodes[code] : 'numeric');
     }
 
+    monthCodes = {'MMMM':'long', 'MMM':'short', 'MM':'2-digit', 'M':'numeric'};
     /**
      * @param {"MMMM"|"MMM"|"MM"|"M"} format * @returns {String}
      */
-    monthCodes = {'MMMM':'long', 'MMM':'short', 'MM':'2-digit', 'M':'numeric'};
     getMonth(code) {
       return this.getMonthByFormat(code && this.monthCodes[code] ?  this.monthCodes[code] : 'numeric');
     }
 
+    dayCodes = {'dddd':'long', 'ddd':'short', 'dd':'2-digit', 'd':'numeric'};
     /**
      * @param {"dddd"|"ddd"|"dd"|"d"} format * @returns {String}
      */
-    dayCodes = {'dddd':'long', 'ddd':'short', 'dd':'2-digit', 'd':'numeric'};
     getDay(code) {
       return code=='dddd' || code=='ddd' ? ( this.getWeekdayByFormat(code && this.dayCodes[code] ?  this.dayCodes[code] : 'numeric')) :(this.getDayByFormat(code && this.dayCodes[code] ?  this.dayCodes[code] : 'numeric'));
     }
 
+    hourCodes = {'hh':'2-digit', 'h':'numeric'};
     /**
      * @param {"hh"|"h"} format * @returns {String}
      */
-    hourCodes = {'hh':'2-digit', 'h':'numeric'};
     getHour(code) {
       return this.getHourByFormat(code && this.hourCodes[code] ?  this.hourCodes[code] : 'numeric');
     }
 
+    minuteCodes = {'mm':'2-digit', 'm':'numeric'};
     /**
      * @param {"mm"|"m"} format * @returns {String}
      */
-    minuteCodes = {'mm':'2-digit', 'm':'numeric'};
     getMinute(code) {
       return this.getMinuteByFormat(code && this.minuteCodes[code] ?  this.minuteCodes[code] : 'numeric');
     }
 
+    secondCodes = {'ss':'2-digit', 's':'numeric'};
     /**
      * @param {"ss"|"s"} format * @returns {String}
      */
-    secondCodes = {'ss':'2-digit', 's':'numeric'};
     getSecond(code) {
       return this.getSecondByFormat(code && this.secondCodes[code] ?  this.secondCodes[code] : 'numeric');
     }
@@ -202,9 +207,9 @@ class DateTime  {
       let r = '';
       for (let i=0;i<coding.length;i++) {
         let s = false;
-        _.each(this.codes, (func,funcKey)=> { 
+        BL._.each(this.codes, (func,funcKey)=> { 
           if(s) return;
-          _.each(this[funcKey], (code)=> {
+          BL._.each(this[funcKey], (code)=> {
             if(s) return;
             if(coding.indexOf(code.key)===0) {
               s=true;

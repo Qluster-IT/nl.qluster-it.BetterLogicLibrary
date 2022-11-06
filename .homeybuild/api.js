@@ -3,9 +3,28 @@
 var variableManager = require('./lib/variablemanager.js');
 
 var util = require('./lib/util/util.js');
+const { readFile:_readFile } = require('fs');
+const { promisify } = require('util');
+
+const readFileAsync = promisify(_readFile);
+
+async function readFile(path, ops) { return await readFileAsync(path, ops); }
 
 module.exports =
 {
+    async getLibrary({ homey, params }) {
+        if (params) switch (params.library) {
+            case "bll": return {file:await readFile('/bll/bll.js', {encoding:'utf8'})};            
+            case "lodash-core": return {file:await readFile('/node_modules/lodash-core/distrib/lodash-core.min.js', {encoding:'utf8'})};
+            case "math": return {file:await readFile('/lib/util/math.js', {encoding:'utf8'})};
+            case "datetime": return {file:await readFile('/bll/dateTime.js', {encoding:'utf8'})};
+        }
+        return null;
+    },
+
+
+
+
     async getVariable({ homey, params }) {
         if (params && params.variable) {
             if (params.variable.toLowerCase() === 'all') {
@@ -106,4 +125,4 @@ module.exports =
 };
 
 
-function isNumber(obj) { return !isNaN(parseFloat(obj)) }
+function isNumber(obj) { return !isNaN(parseFloat(obj)); }

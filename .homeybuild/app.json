@@ -13,7 +13,7 @@
     "tools"
   ],
   "permissions": [
-    
+    "homey:app:net.i-dev.betterlogic"
   ],
   "images": {
     "large": "/assets/images/large.png",
@@ -676,7 +676,12 @@
     }
   ],
   "api":
-  {
+    {
+      "getLibrary": {
+      "method": "GET",
+      "path": "/library/:library",
+      "public": false
+    },
     "getVariable": {
       "method": "GET",
       "path": "/:variable",
