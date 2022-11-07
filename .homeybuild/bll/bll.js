@@ -1,4 +1,4 @@
-const { BL } = require("../lib/bll-loader");
+const { BL } = require("../lib/bll/bll-loader");
 
 class BLL {
     
@@ -22,39 +22,50 @@ class BLL {
     /**
      * @param {Object} options 
      */
-    constructor({homey, modules} = {}) {
+    constructor({homey, modules, silent} = {}) {
+        if(BLL._current) return BLL._current;
         BLL._current = this;
         BLL._homey = homey;
+        this.silent = silent;
         return this.init({modules});        
     }
     async init({modules} = {modules:[]}) {
         if(modules) for (const module of modules) {
             switch (module) {
                 case "_":
-                    let _ = await this.getLibrary('lodash-core'); BLL.__ = this.requireFromString(_.file, '');
+                    let _ = await this.getLibrary('lodash'); BLL.__ = this.requireFromString(_.file, '');
                     BL._ = BLL._;
                     break;
                 case "math":                    
-                    let math = await this.getLibrary('math'); BLL._math = this.requireFromString(math.file, '');
+                    let math = await this.getLibrary('mathjs'); BLL._math = this.requireFromString(math.file, '');
                     BL.math = BLL.math;
                     break;
                 case "datetime":  
                 case "dateTime":                    
                     let datetime = await this.getLibrary('datetime'); 
                     let dateTimeObj = this.requireFromString(datetime.file, '');
-
                     BLL._datetime = new dateTimeObj(this.homey.i18n.getLanguage(), this.homey.clock.getTimezone());
                     BL.datetime = BLL._datetime;
-                    //BLL.date
                     break;
             }
         }
+        // let coding = await this.getLibrary('coding'); 
+        // let codingClass = this.requireFromString(coding.file, '');
+        // BL.coding = BLL.coding = new codingClass();
+        BL.prototype.decode = BLL.prototype.decode = async (text) => {
+              return await BL.l.post('decode', {text});        
+        };
         return this;
+    }
+    async getApi() {
+        if(!this.api && BL.Current.api) this.api = BL.Current.api;
+        if(!this.api) this.api = await this.getAppApi('net.i-dev.betterlogic', 'Better Logic Library');
+        return this.api;
     }
 
     async getLibrary(libraryName) {
-        if(!this.api) this.api = await this.getAppApi('net.i-dev.betterlogic', 'Better Logic Library');
-        return await this.api.get('/library/'+libraryName);
+        let api = await this.getApi();
+        return await api.get('/library/'+libraryName);
     }
 
     requireFromString(src, filename) {
@@ -64,16 +75,37 @@ class BLL {
         m._compile(src, filename||'');
         return m.exports;
       }
+
+    async post(url, opt) {
+        try {
+            return await this.api.post(url, opt);
+        } catch (error) {
+            BL.homey.error(error);
+            throw new Error('Better Logic is not installed or running.');
+        }
+    }
       
       
     async getAppApi(appId, appname) {
-        if(!this.homey.app[appId]) this.homey.app[appId] = this.homey.api.getApiApp(appId);
+        if(!this.api) this.api = this.homey.api.getApiApp(appId);
         
-        if(!this.homey.app[appId]) throw new Error(appname + ' is not installed.');
-        else if(!await this.homey.app[appId].getInstalled()) throw new Error(appname + ' is not installed.');
+        if(!this.api) throw new Error(appname + ' is not installed.');
+        else if(!await this.api.getInstalled()) throw new Error(appname + ' is not installed.');
 
-        return this.homey.app[appId];
+        return this.api;
     }
+
+    
+    async decode(text) {
+        try {         
+            return await BL.l.post('decode', {text});  
+        } catch (error) {
+            if(BL.l.silent===true) return text;
+            if(BL.l.silent!==true) throw error;
+        }
+        
+    }
+
 
 }
 

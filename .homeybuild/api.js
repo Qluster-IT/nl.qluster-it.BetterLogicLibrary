@@ -15,13 +15,16 @@ module.exports =
     async getLibrary({ homey, params }) {
         if (params) switch (params.library) {
             case "bll": return {file:await readFile('/bll/bll.js', {encoding:'utf8'})};            
-            case "lodash-core": return {file:await readFile('/node_modules/lodash-core/distrib/lodash-core.min.js', {encoding:'utf8'})};
-            case "math": return {file:await readFile('/lib/util/math.js', {encoding:'utf8'})};
+            case "lodash": return {file:await readFile('/assets/js/lodash.min.js', {encoding:'utf8'})};
+            case "mathjs": return {file:await readFile('/lib/util/math.js', {encoding:'utf8'})};
             case "datetime": return {file:await readFile('/bll/dateTime.js', {encoding:'utf8'})};
+            case "coding": return {file:await readFile('/bll/coding.js', {encoding:'utf8'})};
         }
         return null;
     },
-
+    async decode({ homey, body }) {
+        return await homey.app.runCoding({text:body.text});
+    },
 
 
 

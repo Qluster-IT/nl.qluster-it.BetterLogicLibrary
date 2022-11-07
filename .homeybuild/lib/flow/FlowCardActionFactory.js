@@ -1,6 +1,7 @@
 "use strict";
 
 const Homey = require('homey');
+const { BL } = require('../bll/bll-loader.js');
 
 var math = require('../util/math.js');
 var util = require('../util/util.js');
@@ -15,26 +16,24 @@ module.exports = {
         this.homey = variableManager.homey;
 
         // set string
-        let set_string_variable = this.homey.flow.getActionCard('set_string_variable');
-        
-        set_string_variable.registerRunListener((args, state) => {
+        let set_string_variable = this.homey.flow.getActionCard('set_string_variable');        
+        set_string_variable.registerRunListener(async (args, state) => {
             if (args.variable && args.variable.name) {
                 var result = variableManager.getVariable(args.variable.name);
+                if(args && args.value) args.value = await BL.coding.toString(args.value);
 
                 if (result) {
-                  return Promise.resolve(variableManager.updateVariable(args.variable.name, args.value, 'string'));
+                  return variableManager.updateVariable(args.variable.name, args.value, 'string');
                 }
-                return Promise.reject(new Error('String variable not found (' + args.variable.name + ')'));
+                throw new Error('String variable not found (' + args.variable.name + ')');
             }
         })
-            .getArgument('variable')
-            .registerAutocompleteListener((query, args) => {
-                return Promise.resolve(variableManager.retrieveVariables(query, args, 'string'));
+            .getArgument('variable').registerAutocompleteListener((query, args) => {
+                return variableManager.retrieveVariables(query, args, 'string');
             });
 
         // set number
-        let set_number_variable = this.homey.flow.getActionCard('set_number_variable');
-        
+        let set_number_variable = this.homey.flow.getActionCard('set_number_variable');        
         set_number_variable.registerRunListener((args, state) => {
             if (args.variable && args.variable.name) {
                 var result = variableManager.getVariable(args.variable.name);
@@ -45,8 +44,7 @@ module.exports = {
                 return Promise.reject(new Error('Number variable not found (' + args.variable.name + ')'));
             }
         })
-            .getArgument('variable')
-            .registerAutocompleteListener((query, args) => {
+            .getArgument('variable').registerAutocompleteListener((query, args) => {
                 return Promise.resolve(variableManager.retrieveVariables(query, args, 'number'));
             });
 

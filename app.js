@@ -2,11 +2,10 @@
 
 var variableManager = require('./lib/variablemanager.js');
 const Homey = require('homey');
-//const DateTime = require('./bll/dateTime.js');
 let timezone;
 
-const _ = require('lodash-core');
-const {BL} = require('./lib/bll-loader.js');
+const {BL} = require('./lib/bll/bll-loader.js');
+const sandbox = require('./bll/sandbox');
 
 
 class BetterLogic extends Homey.App {	
@@ -46,8 +45,9 @@ class BetterLogic extends Homey.App {
 		if (process.env.DEBUG === '1') require('inspector').open(9232, '0.0.0.0', true);
     	this.log('BetterLogic is running...');
 		
-
+		timezone = this.homey.clock.getTimezone();
 		
+				
 		let bl = new BL({
 			homey:this.homey,
 			modules:[
@@ -56,11 +56,19 @@ class BetterLogic extends Homey.App {
 				"datetime",
 			]
 		});
-		bl.then(x=> {
+		let timeoutset = false;
+		setTimeout(async ()=> {
+			if(!timeoutset)(timeoutset=true) | await this.homey.api.realtime("running");
+		}, 10*10000);
+		
+		
+		bl.then(async (x)=> {
+			
+			if(!timeoutset)(timeoutset=true) | await this.homey.api.realtime("running");
 			let a = BL.L;
-			timezone = this.homey.clock.getTimezone();
 			//this.dateTime = new DateTime(this.homey.i18n.getLanguage(), timezone);
 			//console.log(this.dateTime.toString('ddd'));
+
 
 
 			variableManager.init(this.homey);
@@ -85,8 +93,64 @@ class BetterLogic extends Homey.App {
 				return r;
 			});
 
+			
+			let execute_bl_expression = this.homey.flow.getActionCard('execute_bl_expression');
+			execute_bl_expression.registerRunListener(async (args, state) => {
+				try {
+					if(args.code) return await this.runTempCode(args.code);
+					
+					var result = args.variable ? variableManager.getVariable(args.variable.name) : null;
+					if(!result) {
+						return Promise.reject(new Error('Variable not found (' + args.variable.name + ')'));
+					}
+
+					if (args.expression !== undefined && args.expression !== 'undefined') {
+						
+						let value = await this.runSandBox(args.expression);
+						return variableManager.updateVariable(result.name, value, result.type);
+					}
+				} catch (error) {
+					this.log('execute_bl_expression:');
+					this.error(error);
+					return new Error(error);
+				}
+			});
+			execute_bl_expression.getArgument('variable').registerAutocompleteListener((query, args) => {
+                return Promise.resolve(variableManager.retrieveVariables(query, args, 'any'));
+            });
 
 			
+			
+			this.homey.flow.getActionCard('execute_bl_expression_tag').registerRunListener(async (args, state) => {
+				try {
+					if (args.expression !== undefined && args.expression !== 'undefined') {
+						let value = this.runSandBox(args.expression);
+						let tokens = { text: '', number: 0, boolean: false };
+						switch (typeof (value)) {
+							case "string": tokens.text = value; break;
+							case "number": tokens.number = value; break;
+							case "boolean": tokens.boolean = value; break;
+							default:
+								break;
+						}
+						return tokens;
+					}
+				} catch (error) {
+					this.log('execute_bl_expression_tag:');
+					this.error(error);
+					return new Error(error);
+				}
+			});
+
+
+
+			this.homey.settings.on('set', async (settingName)=> {
+				if (settingName == 'javascript_functions') {
+					this.setFunctions();
+				}
+			});
+	
+			await this.setFunctions();
 		});
 		
 
@@ -94,12 +158,92 @@ class BetterLogic extends Homey.App {
 
 
 		
-		if(!await this.homey.settings.get('notification_update_variablesinflows')) {
-			this.homey.notifications.createNotification({excerpt : "The Better Logic App has been transferred to a new developer and rewriten to SDK3.\nVariables can now be created directly from within AND and THEN cards!\nJust type a name and select it from the list!\nAnd also, the Delete All button now has a Confirm before all are variables deleted.\nSee the Forum Topic for more info or to request a feature." });  
-			this.homey.settings.set('notification_update_variablesinflows', true);
-		}
+		// if(!await this.homey.settings.get('notification_update_variablesinflows')) {
+		// 	this.homey.notifications.createNotification({excerpt : "The Better Logic App has been transferred to a new developer and rewriten to SDK3.\nVariables can now be created directly from within AND and THEN cards!\nJust type a name and select it from the list!\nAnd also, the Delete All button now has a Confirm before all are variables deleted.\nSee the Forum Topic for more info or to request a feature." });  
+		// 	this.homey.settings.set('notification_update_variablesinflows', true);
+		// }
 
 	}
+
+	
+	async setFunctions() {
+		this.functions = await this.homey.settings.get('javascript_functions');
+		//this.log('this.functions', typeof(this.functions), this.functions);
+		this.context = {
+			_: BL._,
+			math : BL.math,
+			datetime : BL.datetime,
+			date : (coding)=> BL.datetime.toString(coding)			
+		};
+		if (this.functions && this.functions.length > 0) for (let i = 0; i < this.functions.length; i++) {
+			try {
+				const funcObj = this.functions[i];
+
+				let func = funcObj.value.parseFunction();
+				this.log('func', func);
+				this.context[funcObj.name] = func;
+			} catch (error) {
+				this.log('Error creating function ' + this.functions[i].name);
+				this.error(error);
+			}
+		}
+	}
+	//		(?'Before'(?:[^{])?)\{\[(.*?)\]\}(?(R&Before)(?'After'(?:[^}])))(?(R&After)(?:.))
+	//		(?:[^{])?\{\[(.*?)\]\}(?:[^}])?
+	//		(?<B>(?:{)?){\[(((?!]})(.))+?)\]}(?(R&B)|(?!}))
+	//		(?'b'(?:{)?){\[(((?!]})(.))+?)\]}(?(R&b)(?<A>(?!})))
+
+	codingRegExp = /(?:(?<!{)){\[(((?!]})(.))+?)\]}(?:(?!}))/gsi;
+	runCoding({ text })  {
+		try {
+				
+			let codingsToRun = {};
+			let codings = text.matchAll(this.codingRegExp);
+			let codingsFound = codings? [...codings] : [];
+			
+			for (let i = 0; i < codingsFound.length; i++) {
+				const code = codingsFound[i][1];
+				if(!codingsToRun[code]) codingsToRun[code] = this.runSandBox(code);
+			}
+
+
+			text = text.replaceAll(this.codingRegExp, (arr, val)=> {
+				return codingsToRun[val];
+			});
+
+			// let codings = completeText.matchAll(/\[\{(.*?)\}\]/gmsi);
+			// let codingsFound = codings? [...codings] : [];
+			
+			// for (let i = 0; i < codingsFound.length; i++) {
+			// 	const code = Number.parseInt(codingsFound[i][1]);
+
+			// }
+		} catch (error) {
+			
+		}
+		return text;
+	}
+
+	async runTempCode(code) {
+		let val = await BL.coding.toString(code);//await this.runSandBox(code);
+		let r = {number:0, boolean:false,string:''}; 
+		switch (typeof(val)) {
+			case "string": 
+			case "boolean": 
+			case "number": 
+				r[typeof(val)] = val; return r;		
+			default:
+				return r;
+		}
+	}
+
+
+
+	runSandBox(code) {
+		var context = this.context;
+		return sandbox(code, context, {timeout:55*1000}); //55 seconds timeout
+	}
+
 
 }
 

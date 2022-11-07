@@ -1,6 +1,6 @@
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#parameters
 
-const { BL } = require("./lib/bll-loader.js");
+const { BL } = require("./lib/bll/bll-loader.js");
 
 
 class DateTime  {  
@@ -13,7 +13,8 @@ class DateTime  {
 	static get date() { return this._date; }
 	static set date(v) { this._date = v; }
   
-	get now() { return new Datetime(this.locale, this.timeZone, new Date()); }
+	get(dt) { return new Datetime(this.locale, this.timeZone, dt||new Date()); }
+	//set(date) { return new Datetime(this.locale, this.timeZone, new Date()); }
 
     constructor(locale, timeZone, date) {
       this.locale = locale;
@@ -35,28 +36,26 @@ class DateTime  {
       this.codes['secondCodesArr'] = this.getSecond;
     }
 
-    // new() {
-    //   return new Datetime(this.locale, this.timeZone, new Date());
-    // }
     getString(options) {
       //console.log('getString' + JSON.stringify(options));
       options.timeZone = this.timeZone;
       return (this.date||new Date()).toLocaleString(this.locale, options);
     }
-    getNow() {
-      let r =  (this.date||new Date()).toLocaleString(this.locale,
-        {
-        hour12: false,
-        timeZone: this.timeZone,
-        hour: "2-digit",
-        minute: "2-digit",
-        day: "2-digit",
-        month: "2-digit",
-        second: "2-digit",
-        year: "numeric"
-        });
-        return r;
-    }
+    // getNow() {
+    //   let r =  (this.date||new Date()).toLocaleString(this.locale,
+    //     {
+    //     hour12: false,
+    //     timeZone: this.timeZone,
+    //     hour: "2-digit",
+    //     minute: "2-digit",
+    //     day: "2-digit",
+    //     month: "2-digit",
+    //     second: "2-digit",
+    //     year: "numeric"
+    //     });
+    //     return r;
+    // }
+
     // /** 
     //  * @param {"long"|"short"|"narrow"} format * @returns {String}
     //  */

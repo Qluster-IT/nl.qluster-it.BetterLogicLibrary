@@ -1,4 +1,4 @@
-const _ = require('lodash-core');
+const { BL } = require("../lib/bll/bll-loader");
 
 /// Define defaults
 const _now = Date.now();
@@ -30,7 +30,7 @@ module.exports = FindObjectsInFlows;
 //return await FindObject('apps', 'Device Cap*');
 
 async function FindObjectsInFlows(type, toFind, Homey) {
-
+  const _ = BL._;
   let preType;
   let objectsToFind;
   if(toFind) {

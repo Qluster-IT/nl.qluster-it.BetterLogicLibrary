@@ -19,7 +19,7 @@
     "large": "/assets/images/large.png",
     "small": "/assets/images/small.png"
   },
-  "brandColor":"#A3DF20",
+  "brandColor": "#A3DF20",
   "author": {
     "name": "Arie J. Godschalk",
     "email": "arie@qluster-it.nl"
@@ -40,24 +40,24 @@
       }
     ]
   },
-	"contributing": {
-		"donate": {
-			"paypal": {
-				"username": "QlusterIT"
-			},
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "QlusterIT"
+      },
       "patreon": {
-				"username": "QlusterIT"
-			},
+        "username": "QlusterIT"
+      },
       "githubSponsors": {
         "username": "XeroxQ"
       }
-		}
-	},
+    }
+  },
   "homeyCommunityTopicId": 5568,
-	"source": "https://bitbucket.org/QlusterIT/nl.qluster-it.BetterLogic/",
-  	"bugs": {
-		"url": "https://bitbucket.org/QlusterIT/nl.qluster-it.BetterLogic/issues"
-	  },
+  "source": "https://bitbucket.org/QlusterIT/nl.qluster-it.BetterLogic/",
+  "bugs": {
+    "url": "https://bitbucket.org/QlusterIT/nl.qluster-it.BetterLogic/issues"
+  },
   "flow": {
     "triggers": [
       {
@@ -544,7 +544,8 @@
         "id": "format_datetime",
         "title": {
           "en": "Format datetime"
-        },"titleFormatted": {
+        },
+        "titleFormatted": {
           "en": "Format [[format]]"
         },
         "args": [
@@ -562,6 +563,115 @@
             "type": "string",
             "title": {
               "en": "Formatted result"
+            }
+          }
+        ]
+      },
+      {
+        "id": "execute_bl_expression",
+        "title": {
+          "en": "Execute BL Expression",
+          "nl": "Voer BL expressie uit",
+          "de": "BL Bezeichnung setzen"
+        },
+        "titleFormatted": {
+          "en": "Set [[variable]] to [[expression]] with optional [[argument]]",
+          "nl": "Zet [[variable]] naar [[expression]] met optioneel [[argument]]",
+          "de": "Setze [[variable]] auf [[expression]] mit optional [[argument]]"
+        },
+        "args": [
+          {
+            "name": "variable",
+            "type": "autocomplete",
+            "placeholder": {
+              "en": "name"
+            }
+          },
+          {
+            "name": "expression",
+            "type": "code",
+            "language": "homeyscript",
+            "placeholder": {
+              "en": "BL Expression",
+              "nl": "BL Expression",
+              "de": "BL Bezeichnung"
+            }
+          },
+          {
+            "name": "argument",
+            "type": "text",
+            "required": false,
+            "title": {
+              "en": "Argument",
+              "nl": "Argument"
+            },
+            "placeholder": {
+              "en": "Argument",
+              "nl": "Argument"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "name": "string",
+            "type": "string",
+            "title": {
+              "en": "Result as Text",
+              "nl": "Resultaat als Tekst",
+              "de": "Ergebnis als Text"
+            }
+          }
+        ]
+      },
+      {
+        "id": "execute_bl_expression_tag",
+        "title": {
+          "en": "Execute BL Expression (as Tag)",
+          "nl": "Voer BL expressie uit (als Tag)",
+          "de": "BL Bezeichnung setzen (als Tag)"
+        },
+        "titleFormatted": {
+          "en": "Execute BL [[expression]] (as Tag)",
+          "nl": "Voer BL [[expression]] uit (als Tag)",
+          "de": "Führen Sie BL [[expression]] aus (als Tag)"
+        },
+        "args": [
+          {
+            "type": "text",
+            "name": "expression",
+            "placeholder": {
+              "en": "Expression",
+              "nl": "Expression",
+              "de": "Bezeichnung"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "name": "text",
+            "type": "string",
+            "title": {
+              "en": "Expression value (Text)",
+              "nl": "Expressie waarde (Tekst)",
+              "de": "Text"
+            }
+          },
+          {
+            "name": "number",
+            "type": "number",
+            "title": {
+              "en": "Expression value (Number)",
+              "nl": "Expressie waarde (Nummer)",
+              "de": "Nummer"
+            }
+          },
+          {
+            "name": "boolean",
+            "type": "boolean",
+            "title": {
+              "en": "Expression value (Yes/No)",
+              "nl": "Expressie waarde (Ja/Nee)",
+              "de": "Ja/Nein"
             }
           }
         ]
@@ -675,11 +785,15 @@
       ]
     }
   ],
-  "api":
-    {
-      "getLibrary": {
+  "api": {
+    "getLibrary": {
       "method": "GET",
       "path": "/library/:library",
+      "public": false
+    },  
+    "decode": {
+      "method": "POST",
+      "path": "/decode",
       "public": false
     },
     "getVariable": {
@@ -702,5 +816,5 @@
       "path": "/:variable/:value",
       "public": false
     }
-}
+  }
 }

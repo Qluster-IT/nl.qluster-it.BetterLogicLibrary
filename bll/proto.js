@@ -4,28 +4,20 @@ class Defer {
     
     get promise() { return this._promise ; }
     set promise(v) { this._promise = v; }
-    /**
-     * 
+    /** 
      * @param {Number} timeout 
      */
-    constructor(timeout, originalPromise) {
-        
+    constructor(timeout, originalPromise) {        
         this._promise = new Promise((resolve, reject) => {
             this._resolve = resolve;
             this._reject = reject;
-        });
-        
+        });        
         if(timeout) {
             setTimeout(function () {
                 if(!this.isDefered && this.promise && this.promise.resolve) this.promise.resolve();
             }.bind(this),timeout);
         }
-
         if(originalPromise && originalPromise.then) originalPromise.then((val1,val2,val3,val4)=>this.resolve(val1,val2,val3,val4)).catch((val1,val2,val3,val4)=>this.reject(val1,val2,val3,val4));
-        
-        // this.isFulfilled = function() { return isFulfilled; };
-        // this.isPending = function() { return isPending; };
-        // this.isRejected = function() { return isRejected; };
     }
     then(fun) { this._promise.then(fun); }
     catch(fun) { this._promise.catch(fun); }

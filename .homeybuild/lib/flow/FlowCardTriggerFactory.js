@@ -4,8 +4,8 @@ const Homey = require('homey');
 
 var math = require('../util/math.js');
 var util = require('../util/util.js');
-//const _ = require('lodash-core');
-const {BL } = require('../bll-loader.js');
+
+const {BL } = require('../bll/bll-loader.js');
 
 let homey;
 let lastQuery;
@@ -18,7 +18,7 @@ module.exports = {
     
 		this.variableManager = variableManager;
     this.homey = variableManager.homey;
-    this.homey.log('BL.Current CreateFlowCardTriggers: ', BL.Current);
+    
     homey = variableManager.homey;
 
 
@@ -49,15 +49,17 @@ module.exports = {
 
 
     this.getTypeFromCardId = (cardId) => {
-      return cardId.indexOf('trigger') > -1 ? "trigger" :
-        cardId.indexOf('expression') > -1 || cardId.indexOf('if_variable_changed') > -1 || cardId.indexOf('if_variable_set') > -1 ? "any" :
-          cardId.indexOf('boolean') > -1 ? "boolean" :
-            cardId.indexOf('number') > -1 || cardId.indexOf('_than') > -1 ? "number" :
-              cardId.indexOf('string') > -1 || cardId.indexOf('starts_with') || cardId.indexOf('contains') > -1 ? "string" : undefined;
+      return cardId == 'execute_bl_expression_tag' ? undefined :
+        cardId.indexOf('trigger') > -1 ? "trigger" :
+          cardId.indexOf('expression') > -1 || cardId.indexOf('if_variable_changed') > -1 || cardId.indexOf('if_variable_set') > -1 ? "any" :
+            cardId.indexOf('boolean') > -1 ? "boolean" :
+              cardId.indexOf('number') > -1 || cardId.indexOf('_than') > -1 ? "number" :
+                cardId.indexOf('string') > -1 || cardId.indexOf('starts_with') || cardId.indexOf('contains') > -1 ? "string" : undefined;
 
     };
     this.setArgumentNames = async (card) => {
       let args = await card.card.getArgumentValues();
+      args = BL._.filter(args, x=>x.variable);
       card.type = this.getTypeFromCardId(card.id);
       card.names = BL._.uniq(args.map(x => x.variable.name));
       //console.log(args);      
