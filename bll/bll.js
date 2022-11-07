@@ -1,4 +1,4 @@
-const { BL } = require("../lib/bll/bll-loader");
+const { BL } = require("../lib/bll/bl");
 
 class BLL {
     
@@ -52,9 +52,9 @@ class BLL {
         // let coding = await this.getLibrary('coding'); 
         // let codingClass = this.requireFromString(coding.file, '');
         // BL.coding = BLL.coding = new codingClass();
-        BL.prototype.decode = BLL.prototype.decode = async (text) => {
-              return await BL.l.post('decode', {text});        
-        };
+        // BL.prototype.decode = BLL.prototype.decode = async (text) => {
+        //       return await BL.l.post('decode', {text});        
+        // };
         return this;
     }
     async getApi() {

@@ -4,7 +4,7 @@ var variableManager = require('./lib/variablemanager.js');
 const Homey = require('homey');
 let timezone;
 
-const {BL} = require('./lib/bll/bll-loader.js');
+const {BL} = require('./lib/bll/bl.js');
 const sandbox = require('./bll/sandbox');
 
 

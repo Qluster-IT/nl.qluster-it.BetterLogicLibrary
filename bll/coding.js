@@ -1,4 +1,4 @@
-const { BL } = require("./lib/bll/bll-loader.js");
+const { BL } = require("./lib/bll/bl.js");
 
 
 class Coding  {  

@@ -1,4 +1,4 @@
-const { BL } = require("../lib/bll/bll-loader");
+const { BL } = require("../lib/bll/bl");
 
 /// Define defaults
 const _now = Date.now();

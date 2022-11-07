@@ -1,6 +1,6 @@
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#parameters
 
-const { BL } = require("./lib/bll/bll-loader.js");
+const { BL } = require("./lib/bll/bl.js");
 
 
 class DateTime  {  
