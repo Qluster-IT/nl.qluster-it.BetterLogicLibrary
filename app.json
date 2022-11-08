@@ -556,15 +556,6 @@
               "en": "dd-MM-yyyy"
             }
           }
-        ],
-        "tokens": [
-          {
-            "name": "result",
-            "type": "string",
-            "title": {
-              "en": "Formatted result"
-            }
-          }
         ]
       },
       {

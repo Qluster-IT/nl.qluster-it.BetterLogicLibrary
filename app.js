@@ -4,6 +4,8 @@ var variableManager = require('./lib/variablemanager.js');
 const Homey = require('homey');
 let timezone;
 
+const util = require('util');
+
 const {BL} = require('./lib/bll/bl.js');
 const sandbox = require('./bll/sandbox');
 
@@ -82,6 +84,7 @@ class BetterLogic extends Homey.App {
 			.getArgument('format')
 			.registerAutocompleteListener((query, args) => {
 				let r = [
+					{name:'smalldate'},
 					{name:'dd-MM-yyyy'},
 					{name:'dd-MM-yyyy hh:mm'},
 					{name:'dd-MM-yyyy hh:mm:ss'},
@@ -96,9 +99,19 @@ class BetterLogic extends Homey.App {
 			
 			let execute_bl_expression = this.homey.flow.getActionCard('execute_bl_expression');
 			execute_bl_expression.registerRunListener(async (args, state) => {
+				if(args.code && !args.expression) {
+					let val = JSON.stringify(await this.runSandBox(args.code));
+					// if (true) {
+					// 	this.homey.api.realtime('log', {
+					// 	  text: util.format(val),
+					// 	  script: "id"
+					// 	});
+					//   }
+					// return {string:val};
+					throw new Error("Result = " + val);
+				}
 				try {
-					if(args.code) return await this.runTempCode(args.code);
-					
+				
 					var result = args.variable ? variableManager.getVariable(args.variable.name) : null;
 					if(!result) {
 						return Promise.reject(new Error('Variable not found (' + args.variable.name + ')'));
@@ -112,7 +125,7 @@ class BetterLogic extends Homey.App {
 				} catch (error) {
 					this.log('execute_bl_expression:');
 					this.error(error);
-					return new Error(error);
+					throw new Error(error);
 				}
 			});
 			execute_bl_expression.getArgument('variable').registerAutocompleteListener((query, args) => {
@@ -207,7 +220,7 @@ class BetterLogic extends Homey.App {
 			}
 
 
-			text = text.replaceAll(this.codingRegExp, (arr, val)=> {
+			text = text.replaceAll(this.codingRegExp, (val, index)=> {
 				return codingsToRun[val];
 			});
 
@@ -225,7 +238,7 @@ class BetterLogic extends Homey.App {
 	}
 
 	async runTempCode(code) {
-		let val = await BL.coding.toString(code);//await this.runSandBox(code);
+		let val = await BL.toString(code);//await this.runSandBox(code);
 		let r = {number:0, boolean:false,string:''}; 
 		switch (typeof(val)) {
 			case "string": 

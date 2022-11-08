@@ -20,7 +20,8 @@ module.exports = {
         set_string_variable.registerRunListener(async (args, state) => {
             if (args.variable && args.variable.name) {
                 var result = variableManager.getVariable(args.variable.name);
-                if(args && args.value) args.value = await BL.coding.toString(args.value);
+                
+                if(args && args.value) args.value = await BL.decode(args.value);
 
                 if (result) {
                   return variableManager.updateVariable(args.variable.name, args.value, 'string');
