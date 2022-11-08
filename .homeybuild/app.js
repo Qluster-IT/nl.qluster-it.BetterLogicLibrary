@@ -8,7 +8,6 @@ const util = require('util');
 
 const {BL} = require('./lib/bll/bl.js');
 const sandbox = require('./bll/sandbox');
-const DateTime = require('./bll/dateTime.js');
 
 
 class BetterLogic extends Homey.App {	
@@ -64,6 +63,7 @@ class BetterLogic extends Homey.App {
 			if(!timeoutset)(timeoutset=true) | await this.homey.api.realtime("running");
 		}, 10*10000);
 		
+		BL.decode()
 		
 		this.bl.then(async (x)=> {
 			
@@ -86,8 +86,8 @@ class BetterLogic extends Homey.App {
 			.getArgument('format')
 			.registerAutocompleteListener((query, args) => {
 				
-				let aa = new DateTime().get().toString(query);
 				
+
 				let r = [
 					{name:'shortdate'},
 					{name:'date'},

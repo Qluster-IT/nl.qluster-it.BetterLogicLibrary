@@ -63,9 +63,9 @@ class DateTime {
     dateTimeStatics.timeZone = BL.homey.clock.getTimezone();
   }
 
-  static toString(coding) {
+  static toString(format) {
     let dt = new DateTime(DateTime.locale, DateTime.timeZone, DateTime.date);
-    return dt.toString(coding);
+    return dt.toString(format);
   }
 
   static get(dt) { return new DateTime(DateTime.locale, DateTime.timeZone, dt || DateTime.date); }

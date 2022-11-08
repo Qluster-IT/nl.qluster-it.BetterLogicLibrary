@@ -1,11 +1,28 @@
 /**
- * 
-  @namespace BL
+ * @namespace typedefs
+ */
+
+/**
   @typedef BL
   @property {BL} Current Active BetterLogic Loader
-  @property {object} product
+  @property {BL_decode} BL.decode Decode the given {@link String} for any BLL codings and returns the decoded string.
   @property {BLL} L
+  @property {DateTime} datetime
+  @memberof typedefs
 */
+
+
+  /**
+   * @description Decode the given {@link String} for any BLL codings and returns the decoded string.
+   * @typedef BL_decode
+   * @type {(coding:string)=>Promise<string>}
+   * @static
+   * @async
+   * @param {string} text
+   * @return {string} A decoded {@link String} if BLL is running, otherwise it will return the original {@link String}.
+   * @memberof BL
+   */
+  
 
 
 /**
@@ -13,44 +30,14 @@
   @property {BLL} Current Active BetterLogic Library
   @property {object} product
   @property {object} L
+  @memberof typedefs
 */
 
 /**
 *  @typedef DateTime 
-*  property {(coding:String)=> String} toString Get's the current datetime or set datetime in the format and timezone of the user.
-*  @property {DateTime.toString} toString 
-*  @property {DateTime_construct_param1} constructor Init
-*/
-
-/**
-  @typedef DateTime_construct_param1
-  @description Dateadadasdasddsadadcadsa
-  @property {Object} homey The this.homey from the App, Driver or Devices.
-  @property {Array[String]} modules The this.homey from the App, Driver or Devices.
+*  @property {(format:string)=>string} toString Get the current datetime in the given format with the timezone of the user applied.
+*  @property {(date?:string)=>DateTime} get Get a new {@link DateTime} with the given Date or current Date.
 */
 
 
-/**
-  @typedef {(format:string)=>string} DateTime.toString  
-  @param {string } format - The format to ouput it in.
-  @static
-  @returns {string}
-*/
-
-// @memberof DateTime
-   
-// 
-// 
-// @function Get's the current datetime or set datetime in the format and timezone of the user.
-  
-
-
-
-/**
- * @type {BL}
- * @class fake
- */
- class fake {
-    
-}
-module.exports = fake;
+module.exports = {};

@@ -1,0 +1,15 @@
+{
+  "name": "net.i-dev.betterlogic",
+  "version": "1.4.11",
+  "main": "app.js",
+  "--author": "arie@qluster-it.nl",
+  "scripts": {
+    "generate-docs": "jsdoc -c config.json"
+  },
+  "devDependencies": {
+    "@tsconfig/node12": "^1.0.11",
+    "@types/homey": "npm:homey-apps-sdk-v3-types@^0.3.1",
+    "@types/node": "^18.11.0"
+  },
+  "dependencies": {}
+}
