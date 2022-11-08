@@ -32,7 +32,8 @@ class BL {
      * @description The DateTime library, used for converting date and times to strings formatted for the user.
      * @type {import("./bl.typedef").DateTime}
      * */
-    static get datetime() { if (_) return datetime; throw new Error('BLL: DateTime has not been loaded.'); }
+     static get datetime() { if (datetime) return datetime; throw new Error('BLL: DateTime has not been loaded.'); }
+     static get dateTime() { if (datetime) return datetime; throw new Error('BLL: DateTime has not been loaded.'); }
     static set datetime(val) { datetime = val; }
 
     /**
@@ -63,10 +64,18 @@ class BL {
         });
         if (!this.api) {
             this.api = await this.getAppApi('net.i-dev.betterlogic', 'Better Logic Library', true);
-            this.api.on('realtime', async (event) => {
+            
+            if(this.homey.app.id!=='net.i-dev.betterlogic' )this.api.on('realtime', async (event) => {
                 if(event==='running') {
-                    await this.initBll({ version: await this.api.getVersion() });
-                    if(!defer.isDefered) defer.resolve(this);
+                    let x = async ()=> {
+                        await this.initBll({ version: await this.api.getVersion() });
+                        if(!defer.isDefered) defer.resolve(this);
+                    };
+                    if(this.api.getInstalled()) x();
+                    
+                    else {
+                        setTimeout(x, 15000);
+                    }
                     
                 }
             });
@@ -85,13 +94,13 @@ class BL {
     /** @private */
     async initBll({ version }={}) {        
         if(version && version===_version && process.env.DEBUG !== '1') return;
-        _version = version || await this.api.getVersion();
         let bblFile;
         bblFile = await this.getLibrary('bll');
         let bll = this.requireFromString(bblFile.file, '');
-        _L = bll.BLL;
         try {
             _l = await new bll.BLL({ homey: this.homey, modules:this.modules, silent:this.silent });
+            _L = bll.BLL;
+            _version = version || await this.api.getVersion();
         } catch (error) { }
         return this;
     }
@@ -124,6 +133,7 @@ class BL {
 
     static async decode(text) {
         if(!BL.l && !this.silent) throw new Error('Better Logic Library is not loaded.');
+        if(!BL.l) return text;
         return await BL.l.decode(text);
     }
 }

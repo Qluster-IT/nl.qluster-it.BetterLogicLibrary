@@ -1,6 +1,7 @@
 "use strict";
 
 const Homey = require('homey');
+const { BL } = require('../bll/bl.js');
 
 var math = require('../util/math.js');
 var util = require('../util/util.js');
@@ -19,6 +20,8 @@ module.exports = {
         variable_contains
             .registerRunListener( async (args, state) => {
                 if (args.variable) {
+                    if(args && args.value) args.value = await BL.decode(args.value);
+                    
                     var variable = variableManager.getVariable(args.variable.name);
                     if (variable && variable.value.toLowerCase().indexOf(args.value.toLowerCase()) > -1) {
                         return true;

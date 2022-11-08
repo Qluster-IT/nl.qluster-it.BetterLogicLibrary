@@ -1,55 +1,96 @@
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#parameters
 
-const { BL } = require("./lib/bll/bl.js");
+//const { BL } = require("./lib/bll/bl.js");
+const { BL } = require("./../lib/bll/bl");
 
+let _locale, _timeZone, _date, _codes;
+
+class dateTimeStatics {
+
+}
+
+class Codes {
+
+  constructor() {    
+    this.dayPeriodCodesArr = BL._.sortBy(BL._.map(DateTime.dayPeriodCodes, (x, key) => { return { key, val: x } }, 'key.length'));
+    this.dateTimeCodesArr = BL._.sortBy(BL._.map(DateTime.dateTimeCodes, (x, key) => { return { key, val: x } }, 'key.length'));
+    this.dateCodesArr = BL._.sortBy(BL._.map(DateTime.dateCodes, (x, key) => { return { key, val: x } }, 'key.length'));
+    this.timeCodesArr = BL._.sortBy(BL._.map(DateTime.timeCodes, (x, key) => { return { key, val: x } }, 'key.length'));
+    this.eraCodesArr = BL._.sortBy(BL._.map(DateTime.eraCodes, (x, key) => { return { key, val: x } }, 'key.length'));
+    this.yearCodesArr = BL._.sortBy(BL._.map(DateTime.yearCodes, (x, key) => { return { key, val: x } }, 'key.length'));
+    this.monthCodesArr = BL._.sortBy(BL._.map(DateTime.monthCodes, (x, key) => { return { key, val: x } }, 'key.length'));
+    this.dayCodesArr = BL._.sortBy(BL._.map(DateTime.dayCodes, (x, key) => { return { key, val: x } }, 'key.length'));
+    this.hourCodesArr = BL._.sortBy(BL._.map(DateTime.hourCodes, (x, key) => { return { key, val: x } }, 'key.length'));
+    this.minuteCodesArr = BL._.sortBy(BL._.map(DateTime.minuteCodes, (x, key) => { return { key, val: x } }, 'key.length'));
+    this.secondCodesArr = BL._.sortBy(BL._.map(DateTime.secondCodes, (x, key) => { return { key, val: x } }, 'key.length'));
+    this.fractionalSecondCodesArr = BL._.sortBy(BL._.map(DateTime.fractionalSecondCodes, (x, key) => { return { key, val: x } }, 'key.length'));
+
+    this.arrays = {};
+    this.arrays['dayPeriodCodesArr'] = 'getDayPeriod';
+    this.arrays['dateTimeCodesArr'] = 'getDateTime';
+    this.arrays['dateCodesArr'] = 'getDate';
+    this.arrays['timeCodesArr'] = 'getTime';
+    this.arrays['eraCodesArr'] = 'getEra';
+    this.arrays['yearCodesArr'] = 'getYear';
+    this.arrays['monthCodesArr'] = 'getMonth';
+    this.arrays['dayCodesArr'] = 'getDay';
+    this.arrays['hourCodesArr'] = 'getHour';
+    this.arrays['minuteCodesArr'] = 'getMinute';
+    this.arrays['secondCodesArr'] = 'getSecond';
+    this.arrays['fractionalSecondCodesArr'] = 'getFractionalSecond';
+    this.array = BL._.sortBy(BL._.flatMap(this.arrays, (val, key)=> { return BL._.map(this[key], (code, format)=> { return { code:code.key, format:code.val, func:val };  });  }), (x)=>-x.code.length); //return { name:key, func:val, list:this[key]}; });
+  }
+}
 
 class DateTime {
-  static get locale() { return this._locale; }
-  static set locale(v) { this._locale = v; }
 
-  static get timeZone() { return this._timeZone; }
-  static set timeZone(v) { this._timeZone = v; }
+  static get locale() { return dateTimeStatics.locale; }
 
-  static get date() { return this._date; }
-  static set date(v) { this._date = v; }
+  static get timeZone() { return dateTimeStatics.timeZone; }
 
-  get(dt) { return new Datetime(this.locale, this.timeZone, dt || new Date()); }
-  //set(date) { return new Datetime(this.locale, this.timeZone, new Date()); }
+  static get date() { return new Date(); }
+  
+  static get codes() {    
+    if(!dateTimeStatics.codes) {
+      dateTimeStatics.codes = new Codes();
+      console.log('ALERT: dateTimeStatics.codes = new Codes();');
+    }
+    return dateTimeStatics.codes;
+  }
+
+  static async init() {
+    dateTimeStatics.locale = await BL.homey.i18n.getLanguage();
+    dateTimeStatics.timeZone = BL.homey.clock.getTimezone();
+  }
+
+  static toString(coding) {
+    let dt = new DateTime(DateTime.locale, DateTime.timeZone, DateTime.date);
+    return dt.toString(coding);
+  }
+
+  static get(dt) { return new DateTime(DateTime.locale, DateTime.timeZone, dt || DateTime.date); }
+
+
+
+  get locale() { return _locale; }
+  set locale(v) { _locale = v; }
+
+  get timeZone() { return _timeZone; }
+  set timeZone(v) { _timeZone = v; }
+
+  get date() { return _date; }
+  set date(v) { _date = v; }
+  
+  get(dt) { return new DateTime(this.locale, this.timeZone, dt || new Date()); }
+
 
   constructor(locale, timeZone, date) {
     this.locale = locale;
     this.timeZone = timeZone;
-
-    this.dayPeriodCodesArr = BL._.sortBy(BL._.map(this.dayPeriodCodes, (x, key) => { return { key, val: x } }, 'key.length'));
-    this.dateTimeCodesArr = BL._.sortBy(BL._.map(this.dateTimeCodes, (x, key) => { return { key, val: x } }, 'key.length'));
-    this.dateCodesArr = BL._.sortBy(BL._.map(this.dateCodes, (x, key) => { return { key, val: x } }, 'key.length'));
-    this.timeCodesArr = BL._.sortBy(BL._.map(this.timeCodes, (x, key) => { return { key, val: x } }, 'key.length'));
-    this.eraCodesArr = BL._.sortBy(BL._.map(this.eraCodes, (x, key) => { return { key, val: x } }, 'key.length'));
-    this.yearCodesArr = BL._.sortBy(BL._.map(this.yearCodes, (x, key) => { return { key, val: x } }, 'key.length'));
-    this.monthCodesArr = BL._.sortBy(BL._.map(this.monthCodes, (x, key) => { return { key, val: x } }, 'key.length'));
-    this.dayCodesArr = BL._.sortBy(BL._.map(this.dayCodes, (x, key) => { return { key, val: x } }, 'key.length'));
-    this.hourCodesArr = BL._.sortBy(BL._.map(this.hourCodes, (x, key) => { return { key, val: x } }, 'key.length'));
-    this.minuteCodesArr = BL._.sortBy(BL._.map(this.minuteCodes, (x, key) => { return { key, val: x } }, 'key.length'));
-    this.secondCodesArr = BL._.sortBy(BL._.map(this.secondCodes, (x, key) => { return { key, val: x } }, 'key.length'));
-    this.fractionalSecondCodesArr = BL._.sortBy(BL._.map(this.fractionalSecondCodes, (x, key) => { return { key, val: x } }, 'key.length'));
-
-    this.codes = {};
-    this.codes['dayPeriodCodesArr'] = this.getDayPeriod;
-    this.codes['dateTimeCodesArr'] = this.getDateTime;
-    this.codes['dateCodesArr'] = this.getDate;
-    this.codes['timeCodesArr'] = this.getTime;
-    this.codes['eraCodesArr'] = this.getEra;
-    this.codes['yearCodesArr'] = this.getYear;
-    this.codes['monthCodesArr'] = this.getMonth;
-    this.codes['dayCodesArr'] = this.getDay;
-    this.codes['hourCodesArr'] = this.getHour;
-    this.codes['minuteCodesArr'] = this.getMinute;
-    this.codes['secondCodesArr'] = this.getSecond;
-    this.codes['fractionalSecondCodesArr'] = this.getFractionalSecond;
+    this.date = date;
   }
 
   getString(options) {
-    //console.log('getString' + JSON.stringify(options));
     options.timeZone = this.timeZone;
     return (this.date || new Date()).toLocaleString(this.locale, options);
   }
@@ -168,171 +209,133 @@ class DateTime {
 
 
 
-  datetimeCodes = { 'DATETIMELONG': 'full', 'datetimelong': 'full', 'datetimeshort': 'short', 'DATETIME': 'long', 'datetime': 'medium' };
+  static dateTimeCodes = { 'DATETIMELONG': 'full', 'datetimelong': 'full', 'datetimeshort': 'short', 'LONGDATETIME': 'full', 'longdatetime': 'full', 'shortdatetime': 'short', 'DATETIME': 'long', 'datetime': 'medium' };
   /**
    * @param {"DATETIMELONG"|"datetimelong"|"DATETIME"|"datetime"|"datetimeshort"} code * @returns {String}
    */
   getDateTime(code) {
-    return this.getDateTimeByFormat(code && this.datetimeCodes[code] ? this.datetimeCodes[code] : 'long');
+    return this.getDateTimeByFormat(code && DateTime.dateTimeCodes[code] ? DateTime.dateTimeCodes[code] : 'long');
   }
 
 
-  dateCodes = { 'DATELONG': 'full', 'datelong': 'full', 'dateshort': 'short', 'DATE': 'long', 'date': 'medium' };
+  static dateCodes = { 'DATELONG': 'full', 'datelong': 'full', 'dateshort': 'short',  'LONGDATE': 'full', 'longdate': 'full', 'shortdate': 'short', 'DATE': 'long', 'date': 'medium' };
   /**
    * @param {"DATELONG"|"datelong"|"DATE"|"date"|"dateshort"} code * @returns {String}
    */
   getDate(code) {
-    return this.getDateByFormat(code && this.dateCodes[code] ? this.dateCodes[code] : 'long');
+    return this.getDateByFormat(code && DateTime.dateCodes[code] ? DateTime.dateCodes[code] : 'long');
   }
 
-  timeCodes = { 'TIMELONG': 'full', 'timelong': 'full', 'timeshort': 'short', 'TIME': 'long', 'time': 'medium' };
+  static timeCodes = { 'TIMELONG': 'full', 'timelong': 'full', 'timeshort': 'short', 'LONGTIME': 'full', 'longtime': 'full', 'shorttime': 'short', 'TIME': 'long', 'time': 'medium' };
   /**
    * @param {"TIMELONG"|"timelong"|"TIME"|"time"|"timeshort"} code * @returns {String}
    */
   getTime(code) {
-    return this.getTimeByFormat(code && this.timeCodes[code] ? this.timeCodes[code] : 'long');
+    return this.getTimeByFormat(code && DateTime.timeCodes[code] ? DateTime.timeCodes[code] : 'long');
   }
 
-  dayPeriodCodes = { 'PERIOD': 'long', 'period': 'short' };
+  static dayPeriodCodes = { 'PERIOD': 'long', 'period': 'short' };
   /**
    * @param {"PERIOD"|"period"} code * @returns {String}
    */
   getDayPeriod(code) {
-    return this.getDayPeriodByFormat(code && this.dayPeriodCodes[code] ? this.dayPeriodCodes[code] : 'long');
+    return this.getDayPeriodByFormat(code && DateTime.dayPeriodCodes[code] ? DateTime.dayPeriodCodes[code] : 'long');
   }
 
-  eraCodes = { 'ERA': 'long', 'era': 'short' };
+  static  eraCodes = { 'ERA': 'long', 'era': 'short' };
   /**
    * @param {"ERA"|"era"} code * @returns {String}
    */
   getEra(code) {
-    return this.getEraByFormat(code && this.eraCodes[code] ? this.eraCodes[code] : 'long');
+    return this.getEraByFormat(code && DateTime.eraCodes[code] ? DateTime.eraCodes[code] : 'long');
   }
 
-  yearCodes = { 'yyyy': 'numeric', 'yy': '2-digit' };
+  static yearCodes = { 'yyyy': 'numeric', 'yy': '2-digit' };
   /**
    * @param {"yyyy"|"yy"} code * @returns {String}
    */
   getYear(code) {
-    return this.getYearByFormat(code && this.yearCodes[code] ? this.yearCodes[code] : 'numeric');
+    return this.getYearByFormat(code && DateTime.yearCodes[code] ? DateTime.yearCodes[code] : 'numeric');
   }
 
-  monthCodes = { 'MMMM': 'long', 'MMM': 'short', 'MM': '2-digit', 'M': 'numeric' };
+  static monthCodes = { 'MMMM': 'long', 'MMM': 'short', 'MM': '2-digit', 'M': 'numeric' };
   /**
    * @param {"MMMM"|"MMM"|"MM"|"M"} format * @returns {String}
    */
   getMonth(code) {
-    return this.getMonthByFormat(code && this.monthCodes[code] ? this.monthCodes[code] : 'numeric');
+    return this.getMonthByFormat(code && DateTime.monthCodes[code] ? DateTime.monthCodes[code] : 'numeric');
   }
 
-  dayCodes = { 'dddd': 'long', 'ddd': 'short', 'dd': '2-digit', 'd': 'numeric' };
+  static dayCodes = { 'dddd': 'long', 'ddd': 'short', 'dd': '2-digit', 'd': 'numeric' };
   /**
    * @param {"dddd"|"ddd"|"dd"|"d"} format * @returns {String}
    */
   getDay(code) {
-    return code == 'dddd' || code == 'ddd' ? (this.getWeekdayByFormat(code && this.dayCodes[code] ? this.dayCodes[code] : 'numeric')) : (this.getDayByFormat(code && this.dayCodes[code] ? this.dayCodes[code] : 'numeric'));
+    return code == 'dddd' || code == 'ddd' ? (this.getWeekdayByFormat(code && DateTime.dayCodes[code] ? DateTime.dayCodes[code] : 'numeric')) : (this.getDayByFormat(code && DateTime.dayCodes[code] ? DateTime.dayCodes[code] : 'numeric'));
   }
 
-  hourCodes = { 'hh': '2-digit', 'h': 'numeric' };
+  static hourCodes = { 'hh': '2-digit', 'h': 'numeric' };
   /**
    * @param {"hh"|"h"} format * @returns {String}
    */
   getHour(code) {
-    return this.getHourByFormat(code && this.hourCodes[code] ? this.hourCodes[code] : 'numeric');
+    return this.getHourByFormat(code && DateTime.hourCodes[code] ? DateTime.hourCodes[code] : 'numeric');
   }
 
-  minuteCodes = { 'mm': '2-digit', 'm': 'numeric' };
+  static minuteCodes = { 'mm': '2-digit', 'm': 'numeric' };
   /**
    * @param {"mm"|"m"} format * @returns {String}
    */
   getMinute(code) {
-    return this.getMinuteByFormat(code && this.minuteCodes[code] ? this.minuteCodes[code] : 'numeric');
+    return this.getMinuteByFormat(code && DateTime.minuteCodes[code] ? DateTime.minuteCodes[code] : 'numeric');
   }
 
-  secondCodes = { 'ss': '2-digit', 's': 'numeric' };
+  static secondCodes = { 'ss': '2-digit', 's': 'numeric' };
   /**
    * @param {"ss"|"s"} format * @returns {String}
    */
   getSecond(code) {
-    return this.getSecondByFormat(code && this.secondCodes[code] ? this.secondCodes[code] : 'numeric');
+    return this.getSecondByFormat(code && DateTime.secondCodes[code] ? DateTime.secondCodes[code] : 'numeric');
   }
 
 
-  fractionalSecondCodes = { 'SSS': 3, 'SS': 2, 'S': 1 };
+  static fractionalSecondCodes = { 'SSS': 3, 'SS': 2, 'S': 1 };
   /**
    * @param {"SSS"|"SS"|"S"} format * @returns {String}
    */
   getFractionalSecond(code) {
-    return this.getFractionalSecondByFormat(code && this.fractionalSecondCodes[code] ? this.fractionalSecondCodes[code] : 3);
+    return this.getFractionalSecondByFormat(code && DateTime.fractionalSecondCodes[code] ? DateTime.fractionalSecondCodes[code] : 3);
   }
 
 
-  // /**
-  //  * @param {1,2,3} digits * @returns {String}
-  //  */
-  // monthCodes = {'MMMM':'long', 'MMM':'short', 'MM':'2-digit', 'M':'numeric'};
-  // getFractionalSecond(digits) {
-  //   return this.getString({fractionalSecondDigits:digits||3});
-  // }    
-
-  // /**
-  //  * @param {"narrow"|"short"|"long"} format * @returns {String}
-  //  */
-  // monthCodes = {'MMMM':'long', 'MMM':'short', 'MM':'2-digit', 'M':'numeric'};
-  // getDayPeriod(format) {
-  //   return this.getString({dayPeriod:format||'narrow', hour12:true});
-  // }
-
-  // /**
-  //  * @param {"long"|"short"|"narrow"} format * @returns {String}
-  //  */
-  // monthCodes = {'MMMM':'long', 'MMM':'short', 'MM':'2-digit', 'M':'numeric'};
-  // getWeekday(format) {
-  //   return this.getString({weekday:format||'long'});
-  // }
 
   toString(coding) {
-    if (!coding || !coding.length) return coding;
-    BL._.each(this.codes, (func, funcKey) => {
-      BL._.each(this[funcKey], (code) => {
-        let regexp = new RegExp(code.key, 'gs');
-        coding = coding.replaceAll(regexp, (val, index)=> {
-          return func.call(this,val);
-        });
+    if(!coding || !coding.length) return coding;
+    let r = '';
+    for (let i=0;i<coding.length;i++) {
+      let s = false;
+      
+      BL._.each(DateTime.codes.array, (code,funcKey)=> { 
+        if(s) return;
+        if(coding.indexOf(code.code)===0) {
+          s=true;
+          r+= this[code.func](code.code);
+          coding = coding.substr(0,i) + coding.substr(i+code.code.length); 
+        }        
       });
-    });
-
-    return coding;
+      i=-1;
+      if(s) continue;
+      r+=coding[0];
+      coding=coding.substr(1);
+    }
+    return r;
   }
+
+
+
+
+
 }
-
-
-
-//   toString(coding) {
-//     if(!coding || !coding.length) return coding;
-//     let r = '';
-//     for (let i=0;i<coding.length;i++) {
-//       let s = false;
-//       BL._.each(this.codes, (func,funcKey)=> { 
-//         if(s) return;
-//         BL._.each(this[funcKey], (code)=> {
-//           if(s) return;
-//           if(coding.indexOf(code.key)===0) {
-//             s=true;
-//             r+= func.call(this, code.key);
-//             coding = coding.substr(0,i) + coding.substr(i+code.key.length); 
-//           }
-//         });
-//       });
-//       i=-1;
-//       if(s) continue;
-//       r+=coding[0];
-//       coding=coding.substr(1);
-//     }
-//     return r;
-//   }
-// }
-
 
 
 // let dateTime = new DateTime('nl', 'Europe/Amsterdam');

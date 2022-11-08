@@ -11,6 +11,8 @@ class BLL {
 
 	static get datetime() {  return this._datetime; }
 	static get dateTime() {  return this._datetime; }
+	
+    //static get DateTime() {  return this._DateTime; }
     
 	/**@type {Homey} */
 	static get homey() { return this._homey; }
@@ -31,23 +33,33 @@ class BLL {
     }
     async init({modules} = {modules:[]}) {
         if(modules) for (const module of modules) {
-            switch (module) {
-                case "_":
-                    let _ = await this.getLibrary('lodash'); BLL.__ = this.requireFromString(_.file, '');
-                    BL._ = BLL._;
-                    break;
-                case "math":                    
-                    let math = await this.getLibrary('mathjs'); BLL._math = this.requireFromString(math.file, '');
-                    BL.math = BLL.math;
-                    break;
-                case "datetime":  
-                case "dateTime":                    
-                    let datetime = await this.getLibrary('datetime'); 
-                    let dateTimeObj = this.requireFromString(datetime.file, '');
-                    BLL._datetime = new dateTimeObj(this.homey.i18n.getLanguage(), this.homey.clock.getTimezone());
-                    BL.datetime = BLL._datetime;
-                    break;
-            }
+            try {                    
+                switch (module) {
+                    case "_":
+                        let _ = await this.getLibrary('lodash'); 
+                        BLL.__ = this.requireFromString(_.file, '');
+                        BL._ = BLL._;
+                        break;
+                    case "math":                    
+                        let math = await this.getLibrary('mathjs');
+                        BLL._math = this.requireFromString(math.file, '');
+                        BL.math = BLL.math;
+                        break;
+                    case "datetime":  
+                    case "dateTime":                    
+                        let datetime = await this.getLibrary('datetime'); 
+                        let dateTimeObj = this.requireFromString(datetime.file, '');
+                        //BLL._DateTime = dateTimeObj;
+
+                        
+                        BLL._datetime = dateTimeObj;//new dateTimeObj();
+                        BL.datetime = BLL.datetime;
+                        
+                        await dateTimeObj.init();
+
+                        break;
+                }
+            } catch (error) { BL.homey.error(error); }
         }
         // let coding = await this.getLibrary('coding'); 
         // let codingClass = this.requireFromString(coding.file, '');
@@ -64,16 +76,24 @@ class BLL {
     }
 
     async getLibrary(libraryName) {
-        let api = await this.getApi();
-        return await api.get('/library/'+libraryName);
+        try {
+            let api = await this.getApi();
+            return await api.get('/library/'+libraryName);            
+        } catch (error) {
+            BL.homey.error(error);
+        }
     }
 
     requireFromString(src, filename) {
-        var m = new module.constructor();
-        m.paths = module.paths;// + ',/lib,/bll';
-        console.log('m.paths: ' + m.paths);
-        m._compile(src, filename||'');
-        return m.exports;
+        try {                
+            var m = new module.constructor();
+            m.paths = module.paths;// + ',/lib,/bll';
+            console.log('m.paths: ' + m.paths);
+            m._compile(src, filename||'');
+            return m.exports;
+        } catch (error) {
+            BL.homey.error(error);
+        }
       }
 
     async post(url, opt) {

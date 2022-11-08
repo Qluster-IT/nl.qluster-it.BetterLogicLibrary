@@ -8,6 +8,7 @@ const util = require('util');
 
 const {BL} = require('./lib/bll/bl.js');
 const sandbox = require('./bll/sandbox');
+const DateTime = require('./bll/dateTime.js');
 
 
 class BetterLogic extends Homey.App {	
@@ -50,7 +51,7 @@ class BetterLogic extends Homey.App {
 		timezone = this.homey.clock.getTimezone();
 		
 				
-		let bl = new BL({
+		this.bl = new BL({
 			homey:this.homey,
 			modules:[
 				"_",
@@ -64,7 +65,7 @@ class BetterLogic extends Homey.App {
 		}, 10*10000);
 		
 		
-		bl.then(async (x)=> {
+		this.bl.then(async (x)=> {
 			
 			if(!timeoutset)(timeoutset=true) | await this.homey.api.realtime("running");
 			let a = BL.L;
@@ -73,6 +74,7 @@ class BetterLogic extends Homey.App {
 
 
 
+			
 			variableManager.init(this.homey);
 				
 			// get_stamp
@@ -83,16 +85,22 @@ class BetterLogic extends Homey.App {
 			})
 			.getArgument('format')
 			.registerAutocompleteListener((query, args) => {
+				
+				let aa = new DateTime().get().toString(query);
+				
 				let r = [
-					{name:'smalldate'},
+					{name:'shortdate'},
+					{name:'date'},
+					{name:'DATE'},
+					{name:'LONGDATE'},
 					{name:'dd-MM-yyyy'},
 					{name:'dd-MM-yyyy hh:mm'},
 					{name:'dd-MM-yyyy hh:mm:ss'},
 					{name:'hh:mm'},
 					{name:'hh:mm:ss'},
 				];
-				BL.L._.each(r, x=>x.description=BL.L.dateTime.toString(x.name) );
-				r.unshift({name:query, description:BL.L.dateTime.toString(query)});
+				BL.L._.each(r, x=>x.description=BL.datetime.toString(x.name) );
+				if(query && query.length) r.unshift({name:query, description:BL.datetime.toString(query)});
 				return r;
 			});
 
@@ -221,7 +229,7 @@ class BetterLogic extends Homey.App {
 
 
 			text = text.replaceAll(this.codingRegExp, (val, index)=> {
-				return codingsToRun[val];
+				return codingsToRun[index];
 			});
 
 			// let codings = completeText.matchAll(/\[\{(.*?)\}\]/gmsi);

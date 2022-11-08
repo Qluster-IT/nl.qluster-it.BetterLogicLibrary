@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "1.4.10",
+  "version": "1.4.11",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -180,19 +180,30 @@
         "title": {
           "en": "!{{Text contains|Text does not contain}}"
         },
+        "titleFormatted": {
+          "en": "[[variable]] contains [[value]]"
+        },
         "args": [
           {
             "name": "variable",
             "type": "autocomplete",
             "placeholder": {
-              "en": "value"
+              "en": "Variable"
+            },
+            "title": {
+              "en": "Variable"
             }
           },
           {
             "name": "value",
             "type": "text",
             "placeholder": {
-              "en": "value"
+              "en":"Value (* BLL supported)",
+              "nl":"Waarde (* BLL ondersteund)"
+            },
+            "title":{
+              "en":"Value",
+              "nl":"Waarde"
             }
           }
         ]
@@ -343,199 +354,31 @@
     ],
     "actions": [
       {
-        "id": "set_string_variable",
-        "title": {
-          "en": "Set string variable"
-        },
-        "args": [
-          {
-            "name": "variable",
-            "type": "autocomplete",
-            "placeholder": {
-              "en": "name"
-            }
-          },
-          {
-            "name": "value",
-            "type": "text",
-            "placeholder": {
-              "en": "value"
-            }
-          }
-        ]
-      },
-      {
-        "id": "set_number_variable",
-        "title": {
-          "en": "Set number variable"
-        },
-        "args": [
-          {
-            "name": "variable",
-            "type": "autocomplete",
-            "placeholder": {
-              "en": "name"
-            }
-          },
-          {
-            "name": "value",
-            "type": "number",
-            "step": 0.01,
-            "placeholder": {
-              "en": "value"
-            }
-          }
-        ]
-      },
-      {
-        "id": "increment_number_variable",
-        "title": {
-          "en": "Increment number variable"
-        },
-        "args": [
-          {
-            "name": "variable",
-            "type": "autocomplete",
-            "placeholder": {
-              "en": "name"
-            }
-          },
-          {
-            "name": "value",
-            "type": "number",
-            "step": 0.01,
-            "placeholder": {
-              "en": "value"
-            }
-          }
-        ]
-      },
-      {
-        "id": "decrement_number_variable",
-        "title": {
-          "en": "Decrement number variable"
-        },
-        "args": [
-          {
-            "name": "variable",
-            "type": "autocomplete",
-            "placeholder": {
-              "en": "name"
-            }
-          },
-          {
-            "name": "value",
-            "type": "number",
-            "step": 0.01,
-            "placeholder": {
-              "en": "value"
-            }
-          }
-        ]
-      },
-      {
-        "id": "execute_expression",
-        "title": {
-          "en": "Execute mathjs expression"
-        },
-        "args": [
-          {
-            "name": "expression",
-            "type": "text",
-            "placeholder": {
-              "en": "($n1$ * 42) + 1"
-            }
-          },
-          {
-            "name": "variable",
-            "type": "autocomplete",
-            "placeholder": {
-              "en": "name"
-            }
-          }
-        ]
-      },
-      {
-        "id": "set_boolean_variable",
-        "title": {
-          "en": "Set boolean variable"
-        },
-        "args": [
-          {
-            "name": "variable",
-            "type": "autocomplete",
-            "placeholder": {
-              "en": "name"
-            }
-          },
-          {
-            "name": "boolean_value",
-            "type": "dropdown",
-            "values": [
-              {
-                "id": "true",
-                "label": {
-                  "en": "True"
-                }
-              },
-              {
-                "id": "false",
-                "label": {
-                  "en": "False"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "flip_boolean_variable",
-        "title": {
-          "en": "Flip boolean variable"
-        },
-        "args": [
-          {
-            "name": "variable",
-            "type": "autocomplete",
-            "placeholder": {
-              "en": "name"
-            }
-          }
-        ]
-      },
-      {
-        "id": "trigger_variable",
-        "title": {
-          "en": "Execute a trigger"
-        },
-        "args": [
-          {
-            "name": "variable",
-            "type": "autocomplete",
-            "placeholder": {
-              "en": "name"
-            }
-          }
-        ]
-      },
-      {
         "id": "set_a_variable",
         "title": {
           "en": "Set a variable"
         },
+        "titleFormatted": {
+          "en": "Set [[variable]] to [[value]]"
+        },
         "args": [
           {
             "name": "variable",
             "type": "autocomplete",
             "placeholder": {
-              "en": "name"
+              "en": "Variable"
             }
           },
           {
             "name": "value",
             "type": "text",
             "placeholder": {
-              "en": "value"
+              "en":"Value (* BLL supported)",
+              "nl":"Waarde (* BLL ondersteund)"
+            },
+            "title":{
+              "en":"Value",
+              "nl":"Waarde"
             }
           }
         ]
@@ -554,6 +397,15 @@
             "type": "autocomplete",
             "placeholder": {
               "en": "dd-MM-yyyy"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "name": "result",
+            "type": "string",
+            "title": {
+              "en": "Formatted result"
             }
           }
         ]
@@ -663,6 +515,219 @@
               "en": "Expression value (Yes/No)",
               "nl": "Expressie waarde (Ja/Nee)",
               "de": "Ja/Nein"
+            }
+          }
+        ]
+      },
+      {
+        "id": "set_string_variable",
+        "title": {
+          "en": "Set string variable"
+        },
+        "titleFormatted": {
+          "en": "Set [[variable]] to [[value]]"
+        },
+        "args": [
+          {
+            "name": "variable",
+            "type": "autocomplete",
+            "placeholder": {
+              "en": "Variable"
+            }
+          },
+          {
+            "name": "value",
+            "type": "text",
+            "placeholder": {
+              "en":"Text (* BLL supported)",
+              "nl":"Tekst (* BLL ondersteund)"
+            },
+            "title":{
+              "en":"Text",
+              "nl":"Tekst"
+            }
+          }
+        ]
+      },
+      {
+        "id": "set_number_variable",
+        "title": {
+          "en": "Set number variable"
+        },
+        "titleFormatted": {
+          "en": "Set [[variable]] to [[value]]"
+        },
+        "args": [
+          {
+            "name": "variable",
+            "type": "autocomplete",
+            "placeholder": {
+              "en": "Variable"
+            }
+          },
+          {
+            "name": "value",
+            "type": "number",
+            "step": 0.01,
+            "placeholder": {
+              "en":"0.01 (* BLL supported)",
+              "nl":"0,01 (* BLL ondersteund)"
+            },
+            "title":{
+              "en":"Number",
+              "nl":"Nummer"
+            }
+          }
+        ]
+      },
+      {
+        "id": "increment_number_variable",
+        "title": {
+          "en": "Increment number variable"
+        },
+        "titleFormatted": {
+          "en": "Increment [[variable]] by [[value]]"
+        },
+        "args": [
+          {
+            "name": "variable",
+            "type": "autocomplete",
+            "placeholder": {
+              "en": "Variable"
+            }
+          },
+          {
+            "name": "value",
+            "type": "number",
+            "step": 0.01,
+            "placeholder": {
+              "en": "Number"
+            }
+          }
+        ]
+      },
+      {
+        "id": "decrement_number_variable",
+        "title": {
+          "en": "Decrement number variable"
+        },
+        "titleFormatted": {
+          "en": "Decrement [[variable]] by [[value]]"
+        },
+        "args": [
+          {
+            "name": "variable",
+            "type": "autocomplete",
+            "placeholder": {
+              "en": "Variable"
+            }
+          },
+          {
+            "name": "value",
+            "type": "number",
+            "step": 0.01,
+            "placeholder": {
+              "en": "Number"
+            }
+          }
+        ]
+      },
+      {
+        "id": "execute_expression",
+        "title": {
+          "en": "Execute mathjs expression"
+        },
+        "args": [
+          {
+            "name": "expression",
+            "type": "text",
+            "placeholder": {
+              "en": "($n1$ * 42) + 1 (* BLL supported)"
+            },
+            "title":{
+              "en":"Expression",
+              "nl":"Expressie"
+            }
+          },
+          {
+            "name": "variable",
+            "type": "autocomplete",
+            "placeholder": {
+              "en": "name"
+            }
+          }
+        ]
+      },
+      {
+        "id": "set_boolean_variable",
+        "title": {
+          "en": "Set boolean variable"
+        },
+        "titleFormatted": {
+          "en": "Set [[variable]] to [[boolean_value]]"
+        },
+        "args": [
+          {
+            "name": "variable",
+            "type": "autocomplete",
+            "placeholder": {
+              "en": "name"
+            }
+          },
+          {
+            "name": "boolean_value",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "true",
+                "label": {
+                  "en": "True"
+                }
+              },
+              {
+                "id": "false",
+                "label": {
+                  "en": "False"
+                }
+              }
+            ],
+            "placeholder": {
+              "en":"Yes/No (* BLL supported)",
+              "nl":"Ja/Nee (* BLL ondersteund)"
+            },
+            "title":{
+              "en":"Yes/No",
+              "nl":"Ja/Nee"
+            }
+          }
+        ]
+      },
+      {
+        "id": "flip_boolean_variable",
+        "title": {
+          "en": "Flip boolean variable"
+        },
+        "args": [
+          {
+            "name": "variable",
+            "type": "autocomplete",
+            "placeholder": {
+              "en": "name"
+            }
+          }
+        ]
+      },
+      {
+        "id": "trigger_variable",
+        "title": {
+          "en": "Execute a trigger"
+        },
+        "args": [
+          {
+            "name": "variable",
+            "type": "autocomplete",
+            "placeholder": {
+              "en": "name"
             }
           }
         ]
