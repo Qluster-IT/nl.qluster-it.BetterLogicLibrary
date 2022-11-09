@@ -1,0 +1,8 @@
+.overflow-y {
+    overflow-y:scroll;
+}
+[ng-click^="show"],
+[ng-click^="view"],
+[ng-click] {
+    cursor: pointer;
+}

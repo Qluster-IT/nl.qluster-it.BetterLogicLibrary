@@ -1,107 +1,127 @@
 <!doctype html>
 <html ng-app="variableApp">
 <head>
+    <link rel="stylesheet" type="text/css" href="../assets/css/defaults.css" />
     <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css" />
-    <script type="text/javascript" src="/manager/webserver/assets/js/angular.js"></script>
-    <script type="text/javascript" src="smart-table.min.js"></script>
+    <!-- <script type="text/javascript" src="../assets/js/bootstrap.bundle.min.js"></script> -->
+    
+    <script type="text/javascript" src="../assets/js/angular.min.js"></script>
+    <script type="text/javascript" src="../assets/js/smart-table.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../assets/css/smart-table.css" />
+
     <script type="text/javascript" src="variableController.js"></script>
     <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
+<style>
+    label:not(.hy-nostyle), .hy-label {
+        text-transform: initial;
+        font-size:12pt;
 
+    }
+
+</style>
 </head>
 
-<body ng-controller="VariableSettingsController as vm">
-<div>
+<body ng-controller="VariableSettingsController as vm" class="container-fluid h-100 g-2">
+    <div class="h-100 d-flex flex-column" ng-show="!view.id" >
+        <header class="homey-header">
+            <h1 class="homey-title" data-i18n="settings.title">Better Logic Library</h1>
+            <p class="homey-subtitle" data-i18n="settings.subtitle">Just some better logic, variable and library management</p>
+          </header>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">Add variable</div>
-        <div class="panel-body">
-            <form role="form">
-                <div class="form-group">
-                    <label for="variableName">Variable name</label>
-                    <input class="form-control" id="variableName" type="text" ng-model="vm.newVariable.name" placeholder="Name"><span class="error">{{vm.errorMessage}}</span>
+        <div class="">
+            <div class="card card-default">
+                <div class="card-header" ng-click="view.addVariable=!view.addVariable">Add variable</div>
+                <div class="card-body" ng-show="view.addVariable">
+                    <form role="form">
+                        <div class="form-group form-floating mb-1">
+                            <input class="form-control hy-nostyle " id="variableName" type="text" ng-model="vm.newVariable.name" placeholder="Name"><span class="error">{{vm.errorMessage}}</span>
+                            <label for="variableName">Variable name</label>
+                        </div>
+                        <div class="form-group form-floating mb-1">
+                            <select class="form-control hy-nostyle" name="variableType" id="variableType" ng-model="vm.newVariable.type" ng-change="vm.selectUpdate(vm.newVariable.type)">
+                                <option value disbled="disabled" selected="selected">Select a value type</option>
+                                <option value="string">String</option>
+                                <option value="boolean">Boolean</option>
+                                <option value="number">Number</option>
+                                <option value="trigger">Trigger</option>
+                            </select>
+                            <label for="variableType">Variable type</label>
+                        </div>
+                        <!--<div class="form-group">
+                            <label for="useInsight">Store insight</label>
+                            <input class="" id="useInsight" type="checkbox" ng-model="vm.newVariable.hasInsights" placeholder="Name"><span class="error">{{vm.errorMessage}}</span>
+                        </div>-->
+                        <div class="form-group mb-1">
+                            <div ng-switch on="vm.newVariable.type">
+                                <div ng-switch-when="boolean">
+                                    <div ng-include="'addboolean.html'" class="form-floating"></div></div>
+                                <div ng-switch-when="number">
+                                    <div ng-include="'addnumber.html'" class="form-floating"></div></div>
+                                <div ng-switch-when="string">
+                                    <div ng-include="'addstring.html'" class="form-floating"></div></div>
+                                <div ng-switch-default>
+                                    <div></div></div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-1">
+                            <button class="btn btn-primary" type="button" ng-disabled="!vm.newVariable.name||!vm.newVariable.type" ng-click="vm.addVariable()">Add variable</button>
+                            <button class="btn btn-secondary" type="button" ng-click="vm.showExport()">Export</button>
+                            <button class="btn btn-secondary" type="button" ng-click="vm.showImport()">Import</button>
+                            <button class="btn btn-secondary" type="button" ng-click="vm.deleteAll()">Delete All</button>
+                        </div>
+                        <h6>*Be aware that removing variables could corrupt flows that are using that variable.</h6>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="variableType">Variable type</label>
-                    <select class="form-control" name="variableType" id="variableType" ng-model="vm.newVariable.type" ng-change="vm.selectUpdate(vm.newVariable.type)">
-                        <option value disbled="disabled" selected="selected">Select a value type</option>
-                        <option value="string">String</option>
-                        <option value="boolean">Boolean</option>
-                        <option value="number">Number</option>
-                        <option value="trigger">Trigger</option>
-                    </select>
-                </div>
-                <!--<div class="form-group">
-                    <label for="useInsight">Store insight</label>
-                    <input class="" id="useInsight" type="checkbox" ng-model="vm.newVariable.hasInsights" placeholder="Name"><span class="error">{{vm.errorMessage}}</span>
-                </div>-->
-                <div class="form-group">
-                    <label for="variableValue">Variable value</label>
-                    <div ng-switch on="vm.newVariable.type">
-                        <div ng-switch-when="boolean">
-                            <div ng-include="'addboolean.html'"></div></div>
-                        <div ng-switch-when="number">
-                            <div ng-include="'addnumber.html'"></div></div>
-                        <div ng-switch-when="string">
-                            <div ng-include="'addstring.html'"></div></div>
-                        <div ng-switch-default>
-                            <div></div></div>
+            </div>
+
+            <div ng-show="vm.showExportToggle">
+                <b>Exported values:</b><br/>
+                Copy selection below to save your configuration offline.
+                <p>
+                    <textarea rows="6" cols="60">{{vm.variables | json}}</textarea>
+                </p>
+            </div>
+            <div ng-show="vm.showImportToggle">
+                <b>Import values:</b><br/>
+                Paste in the box below the exported values. Be aware that all existing values and insights will be removed.
+                <p>
+                    <textarea rows="6" cols="60" ng-Model="vm.importJson"></textarea>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="button" ng-click="vm.import()">Import</button>
                     </div>
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-default" type="button" ng-disabled="!vm.newVariable.name||!vm.newVariable.type" ng-click="vm.addVariable()">Add variable</button>
-                    <button class="btn btn-default" type="button" ng-click="vm.showExport()">Export</button>
-                    <button class="btn btn-default" type="button" ng-click="vm.showImport()">Import</button>
-                    <button class="btn btn-default" type="button" ng-click="vm.deleteAll()">Delete All</button>
-                </div>
-                <h6>*Be aware that removing variables could corrupt flows that are using that variable.</h6>
-            </form>
+                </p>
+            </div>
+        </div>
+        <div class="flex-grow-1 overflow-y">
+            <table st-safe-src="vm.variables" st-table="displayedCollection" class="table st table-striped" style="width:300%">
+                <thead>
+                <tr>
+                    <th st-sort="name">Name</th>
+                    <th st-sort="type">Type</th>
+                    <th st-sort="lastChanged" st-sort-default="reverse">Last set</th>
+                    <!--<th st-sort="value">Insight</th>-->
+                    <th st-sort="value">Value</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th>
+                        <input st-search="name" placeholder="search for name" class="input-sm form-control hy-nostyle" type="search"/>
+                    </th>
+                    <th>
+                    </th>
+                    <th>
+                    </th>
+                    <!--<th></th>-->
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="variable in displayedCollection" ng-include="vm.getTemplate(variable)"></tr>
+                </tbody>
+            </table>
         </div>
     </div>
-    <div ng-show="vm.showExportToggle">
-        <b>Exported values:</b><br/>
-        Copy selection below to save your configuration offline.
-        <p>
-            <textarea rows="6" cols="60">{{vm.variables | json}}</textarea>
-        </p>
-    </div>
-    <div ng-show="vm.showImportToggle">
-        <b>Import values:</b><br/>
-        Paste in the box below the exported values. Be aware that all existing values and insights will be removed.
-        <p>
-            <textarea rows="6" cols="60" ng-Model="vm.importJson"></textarea>
-            <div class="form-group">
-                <button class="btn btn-default" type="button" ng-click="vm.import()">Import</button>
-            </div>
-        </p>
-    </div>
-    <table st-safe-src="vm.variables" st-table="displayedCollection" class="table table-striped">
-        <thead>
-        <tr>
-            <th st-sort="name">Name</th>
-            <th st-sort="type">Type</th>
-            <th st-sort="lastChanged" st-sort-default="reverse">Last set</th>
-            <!--<th st-sort="value">Insight</th>-->
-            <th st-sort="value">Value</th>
-            <th></th>
-        </tr>
-        <tr>
-            <th>
-                <input st-search="name" placeholder="search for name" class="input-sm form-control" type="search"/>
-            </th>
-            <th>
-            </th>
-            <th>
-            </th>
-            <!--<th></th>-->
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="variable in displayedCollection" ng-include="vm.getTemplate(variable)"></tr>
-        </tbody>
-    </table>
-</div>
 
     <script type="text/ng-template" id="display">
         <td>{{variable.name}}</td>
@@ -141,22 +161,25 @@
     </script>
 
     <script type="text/ng-template" id="addnumber.html">
-        <input class="form-control" id="variableValue" type="number" ng-disabled="!vm.newVariable.name||!vm.newVariable.type" ng-model="vm.newVariable.value" placeholder="value">
+        <input class="form-control hy-nostyle" id="variableValue" type="number" ng-disabled="!vm.newVariable.name||!vm.newVariable.type" ng-model="vm.newVariable.value" placeholder="value">
+        <label for="variableValue">Variable value</label>
     </script>
     <script type="text/ng-template" id="addstring.html">
-        <input class="form-control" id="variableValue" type="text" ng-disabled="!vm.newVariable.name||!vm.newVariable.type" ng-model="vm.newVariable.value" placeholder="value">
+        <input class="form-control hy-nostyle" id="variableValue" type="text" ng-disabled="!vm.newVariable.name||!vm.newVariable.type" ng-model="vm.newVariable.value" placeholder="value">
+        <label for="variableValue">Variable value</label>
     </script>
     <script type="text/ng-template" id="addboolean.html">
-        <input id="variableValue" type="checkbox" ng-disabled="!vm.newVariable.name||!vm.newVariable.type" ng-model="vm.newVariable.value" placeholder="value">
+        <input class=" hy-nostyle" id="variableValue" type="checkbox" ng-disabled="!vm.newVariable.name||!vm.newVariable.type" ng-model="vm.newVariable.value" placeholder="value">
+        <label for="variableValue">Variable value</label>
     </script>
     <script type="text/ng-template" id="editnumber.html">
-        <input class="form-control col-xs-2" id="variableValue" type="number" ng-model="vm.selected.value" placeholder="value">
+        <input class="form-control col-xs-2 hy-nostyle" id="variableValue" type="number" ng-model="vm.selected.value" placeholder="value">
     </script>
     <script type="text/ng-template" id="editstring.html">
-        <input class="form-control col-xs-2" id="variableValue" type="text" ng-model="vm.selected.value" placeholder="value">
+        <input class="form-control col-xs-2 hy-nostyle" id="variableValue" type="text" ng-model="vm.selected.value" placeholder="value">
     </script>
     <script type="text/ng-template" id="editboolean.html">
-        <input class="col-xs-2" id="variableValue" type="checkbox" ng-model="vm.selected.value" placeholder="value">
+        <input class="col-xs-2 hy-nostyle" id="variableValue" type="checkbox" ng-model="vm.selected.value" placeholder="value">
     </script>
     <script>
         function onHomeyReady(Homey) {

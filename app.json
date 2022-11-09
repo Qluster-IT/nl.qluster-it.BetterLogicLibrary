@@ -4,10 +4,10 @@
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
-    "en": "Better Logic"
+    "en": "Better Logic Library"
   },
   "description": {
-    "en": "Just some better logic and variable management"
+    "en": "Just some better logic, variable and library management"
   },
   "category": [
     "tools"

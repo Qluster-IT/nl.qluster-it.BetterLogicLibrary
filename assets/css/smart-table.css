@@ -1,0 +1,52 @@
+
+    table.st {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        padding:0px;
+        margin:0px;
+    }
+
+    table.st * {
+        box-sizing: inherit;
+        -moz-box-sizing: inherit;
+    }
+
+    table.st thead {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    table.st tbody {
+        overflow-y: scroll;
+        display: inline-block;
+    }
+
+    table.st thead > tr, table.st tbody > tr, table.st tfoot > tr {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+
+    table.st thead, table.st tfoot {
+        flex-shrink: 0;
+    }
+
+    table.st th, table.st tbody td {
+        width: 20%; /* this can vary */
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+        display: inline-block;
+    }
+
+    table.st tfoot {
+        display: inline-block;
+    }
+
+    table.st tfoot td {
+        width: 100%;
+        display: inline-block;
+    }
