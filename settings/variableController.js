@@ -8,6 +8,10 @@
         vm.selected = {};
         vm.homey;
 
+        $scope.view = {id:''};
+        
+
+
         vm.init = function(homey, scope) {
             vm.homey = homey;
             vm.homey.get('variables', function(err, newVariables) {
@@ -21,6 +25,7 @@
             });
             vm.homey.on('setting_changed', function (name) {
                 console.log(name);
+                
                 vm.homey.get('variables', function(err, newVariables) {
                     if (!newVariables) {
                         newVariables = [];
