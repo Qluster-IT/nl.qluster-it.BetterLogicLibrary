@@ -32,23 +32,24 @@ class BLL {
         return this.init({modules});        
     }
     async init({modules} = {modules:[]}) {
+        BL.homey.log('init BLL');
         if(modules) for (const module of modules) {
             try {                    
                 switch (module) {
                     case "_":
                         let _ = await this.getLibrary('lodash'); 
-                        BLL.__ = this.requireFromString(_.file, '');
+                        BLL.__ = this.requireFromString(_.file, 'lodash');
                         BL._ = BLL._;
                         break;
                     case "math":                    
                         let math = await this.getLibrary('mathjs');
-                        BLL._math = this.requireFromString(math.file, '');
+                        BLL._math = this.requireFromString(math.file);
                         BL.math = BLL.math;
                         break;
                     case "datetime":  
                     case "dateTime":                    
                         let datetime = await this.getLibrary('datetime'); 
-                        let dateTimeObj = this.requireFromString(datetime.file, '');
+                        let dateTimeObj = this.requireFromString(datetime.file);
                         //BLL._DateTime = dateTimeObj;
 
                         
@@ -98,7 +99,8 @@ class BLL {
 
     async post(url, opt) {
         try {
-            return await this.api.post(url, opt);
+            let api = await this.getApi();
+            return await api.post(url, opt);
         } catch (error) {
             BL.homey.error(error);
             throw new Error('Better Logic is not installed or running.');
@@ -116,9 +118,10 @@ class BLL {
     }
 
     
-    async decode(text) {
+    async decode(text, date, locale, timeZone) {
         try {         
-            return await BL.l.post('decode', {text});  
+            BL.homey.log('decode: ', arguments);
+            return await BL.l.post('decode', {text, date, locale, timeZone});  
         } catch (error) {
             if(BL.l.silent===true) return text;
             if(BL.l.silent!==true) throw error;
@@ -129,4 +132,4 @@ class BLL {
 
 }
 
-module.exports = {BLL, _:BLL._};
+module.exports = {BLL};

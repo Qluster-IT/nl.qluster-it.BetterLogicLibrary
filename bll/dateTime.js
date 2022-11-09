@@ -63,8 +63,8 @@ class DateTime {
     dateTimeStatics.timeZone = BL.homey.clock.getTimezone();
   }
 
-  static toString(format) {
-    let dt = new DateTime(DateTime.locale, DateTime.timeZone, DateTime.date);
+  static toString(format, date, locale, timeZone) {
+    let dt = new DateTime(locale || DateTime.locale, timeZone || DateTime.timeZone, date || DateTime.date);
     return dt.toString(format);
   }
 

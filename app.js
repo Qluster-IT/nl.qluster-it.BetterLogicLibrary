@@ -10,6 +10,7 @@ const {BL} = require('./lib/bll/bl.js');
 const sandbox = require('./bll/sandbox');
 
 
+
 class BetterLogic extends Homey.App {	
 	
 	static get dateTime() { return this._dateTime; }
@@ -62,7 +63,7 @@ class BetterLogic extends Homey.App {
 			if(!timeoutset)(timeoutset=true) | await this.homey.api.realtime("running");
 		}, 10*10000);
 		
-		BL.decode
+		//BL.decode
 		
 		this.bl.then(async (x)=> {
 			
@@ -127,7 +128,8 @@ class BetterLogic extends Homey.App {
 					if (args.expression !== undefined && args.expression !== 'undefined') {
 						
 						let value = await this.runSandBox(args.expression);
-						return variableManager.updateVariable(result.name, value, result.type);
+						variableManager.updateVariable(result.name, value, result.type);
+
 					}
 				} catch (error) {
 					this.log('execute_bl_expression:');
@@ -193,7 +195,7 @@ class BetterLogic extends Homey.App {
 			_: BL._,
 			math : BL.math,
 			datetime : BL.datetime,
-			date : (coding)=> BL.datetime.toString(coding)			
+			date : (coding, date, locale, timeZone) => BL.datetime.toString(coding, date, locale, timeZone)
 		};
 		if (this.functions && this.functions.length > 0) for (let i = 0; i < this.functions.length; i++) {
 			try {
@@ -214,7 +216,8 @@ class BetterLogic extends Homey.App {
 	//		(?'b'(?:{)?){\[(((?!]})(.))+?)\]}(?(R&b)(?<A>(?!})))
 
 	codingRegExp = /(?:(?<!{)){\[(((?!]})(.))+?)\]}(?:(?!}))/gsi;
-	runCoding({ text })  {
+	
+	runCoding({ text, locale })  {
 		try {
 				
 			let codingsToRun = {};
@@ -223,7 +226,7 @@ class BetterLogic extends Homey.App {
 			
 			for (let i = 0; i < codingsFound.length; i++) {
 				const code = codingsFound[i][1];
-				if(!codingsToRun[code]) codingsToRun[code] = this.runSandBox(code);
+				if(!codingsToRun[code]) codingsToRun[code] = this.runSandBox(code, {locale});
 			}
 
 
@@ -259,8 +262,12 @@ class BetterLogic extends Homey.App {
 
 
 
-	runSandBox(code) {
-		var context = this.context;
+	runSandBox(code, {locale, date, timeZone}={}) {
+		var context = BL._.clone(this.context);
+		//if(locale) {
+			//context.locale = locale;
+			context.date = (coding, _date, _locale, _timeZone) => BL.datetime.toString(coding, _date||date, _locale||locale, _timeZone||timeZone); 
+		//}
 		return sandbox(code, context, {timeout:55*1000}); //55 seconds timeout
 	}
 

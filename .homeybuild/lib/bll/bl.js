@@ -24,10 +24,10 @@ class BL {
 /**
  * @type {import("./bl.typedef").BL_decode}
  */
-static async decode(text) {
+static async decode(text) { //text, date, locale, timeZone
         if (!BL.l && !this.silent) throw new Error('Better Logic Library is not loaded.');
         if (!BL.l) return text;
-        return await BL.l.decode(text);
+        return await BL.l.decode.apply(null, arguments);
     }
 
 
@@ -65,13 +65,14 @@ static async decode(text) {
 
     /**
      * Creates an instance of BL.
-     * @param {import("./bl.typedef").DateTime_construct_param} [{homey, modules}={}]
+     * @param {[{ homey:String, modules, silent, waitTime, waitForBll }={ waitForBll: true }]} [{ homey, modules, silent, waitTime, waitForBll }={ waitForBll: true }]
      * @memberof BL
      */
     constructor({ homey, modules, silent, waitTime, waitForBll } = { waitForBll: true }) {
         if (BL._current) return BL._current;
         BL._current = this;
         BL.homey = homey;
+        
         this.homey = homey;
         this.silent = silent === undefined ? (!modules || !modules.length) : silent;
         this.modules = modules;
@@ -81,8 +82,10 @@ static async decode(text) {
         return this.init();
     }
 
+
     /** @private */
     async init() {
+        
         let defer = new Defer(5 * 60 * 1000, null, () => {
             if (this.silent === false) {
                 this.homey.notifications.createNotification({ excerpt: 'Warning: Better Logic Library could not be loaded and is required! Install the Better Logic Library App to continue to use this app.' });

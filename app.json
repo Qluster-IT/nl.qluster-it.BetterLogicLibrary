@@ -453,17 +453,6 @@
               "nl": "Argument"
             }
           }
-        ],
-        "tokens": [
-          {
-            "name": "string",
-            "type": "string",
-            "title": {
-              "en": "Result as Text",
-              "nl": "Resultaat als Tekst",
-              "de": "Ergebnis als Text"
-            }
-          }
         ]
       },
       {

@@ -23,7 +23,7 @@ module.exports =
         return null;
     },
     async decode({ homey, body }) {
-        return await homey.app.runCoding({text:body.text});
+        return await homey.app.runCoding({text:body.text, date:body.date, locale:body.locale, timeZone:body.timeZone});
     },
 
 
