@@ -3,7 +3,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="../assets/css/defaults.css" />
     <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css" />
-    <!-- <script type="text/javascript" src="../assets/js/bootstrap.bundle.min.js"></script> -->
+    <script type="text/javascript" src="../assets/js/bootstrap.bundle.min.js"></script>
     
     <script type="text/javascript" src="../assets/js/angular.min.js"></script>
     <script type="text/javascript" src="../assets/js/smart-table.min.js"></script>
@@ -22,11 +22,41 @@
 </head>
 
 <body ng-controller="VariableSettingsController as vm" class="container-fluid h-100 g-2">
+    <nav class="navbar fixed-top navbar-expand nav-tabs text-dark navbar-dark bg-dark justify-content-center">
+        <div class="container-fluid">
+          <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#" ng-click="view.id=''">Variables</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" ng-click="view.id='coding'">Coding</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <header class="homey-header">
+        <h1 class="homey-title" data-i18n="settings.title">Better Logic Library</h1>
+        <p class="homey-subtitle" data-i18n="settings.subtitle">Just some better logic, variable and library management</p>
+    </header>
     <div class="h-100 d-flex flex-column" ng-show="!view.id" >
-        <header class="homey-header">
-            <h1 class="homey-title" data-i18n="settings.title">Better Logic Library</h1>
-            <p class="homey-subtitle" data-i18n="settings.subtitle">Just some better logic, variable and library management</p>
-          </header>
+        
 
         <div class="">
             <div class="card card-default">

@@ -25,6 +25,7 @@
             });
             vm.homey.on('setting_changed', function (name) {
                 console.log(name);
+                
                 vm.homey.get('variables', function(err, newVariables) {
                     if (!newVariables) {
                         newVariables = [];
