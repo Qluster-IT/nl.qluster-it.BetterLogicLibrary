@@ -5,9 +5,7 @@ const { BL } = require("./../lib/bll/bl");
 
 let _locale, _timeZone, _date, _codes;
 
-class dateTimeStatics {
-
-}
+class dateTimeStatics { }
 
 class Codes {
 
@@ -58,12 +56,18 @@ class DateTime {
     return dateTimeStatics.codes;
   }
 
-  static async init() {
-    dateTimeStatics.locale = await BL.homey.i18n.getLanguage();
-    dateTimeStatics.timeZone = BL.homey.clock.getTimezone();
+  static async init(bll) {
+    dateTimeStatics.locale = await bll.get('locale') || await BL.homey.i18n.getLanguage();
+    dateTimeStatics.timeZone = BL.homey.clock.getTimezone();    
+    bll.api.on('realtime', (event, data)=> {
+      switch (event) {
+        case "bllSetLocale": dateTimeStatics.locale = data.default; BL.homey.log('bllSetLocale', data);
+      }
+    });
   }
 
   static toString(format, date, locale, timeZone) {
+    BL.homey.log('datetime.toString', locale, DateTime.locale);
     let dt = new DateTime(locale || DateTime.locale, timeZone || DateTime.timeZone, date || DateTime.date);
     return dt.toString(format);
   }
@@ -92,6 +96,7 @@ class DateTime {
 
   getString(options) {
     options.timeZone = this.timeZone;
+    //BL.homey.log('getString', this.locale, (this.date || new Date()).toLocaleString(this.locale, options));
     return (this.date || new Date()).toLocaleString(this.locale, options);
   }
   // getNow() {
@@ -173,7 +178,7 @@ class DateTime {
    * @param {"numeric"|"2-digit"} format * @returns {String}
    */
   getHourByFormat(format) {
-    let r = this.getString({ hour: format || 'numeric' });
+    let r = this.getString({ hour: format || 'numeric', hour12:false });
     return format == '2-digit' ? r.padStart(2, '0') : r;
   }
 
@@ -309,7 +314,20 @@ class DateTime {
 
 
 
-  toString(coding) {
+  toString(format) {
+    if(!format) return format;
+    if(typeof(format)=='string') return this.format(format);
+    if(BL._.isArray(format)) {
+        let r = {};
+        for (const _format of format) {
+            if(Object.keys(r).indexOf(_format)===-1) r[_format] = this.format(_format);
+        }
+        return r;
+    }
+  }
+
+  /** @private */
+  format(coding) {
     if(!coding || !coding.length) return coding;
     let r = '';
     for (let i=0;i<coding.length;i++) {

@@ -1,8 +1,15 @@
 .overflow-y {
     overflow-y:scroll;
 }
+.overflow-y-auto {
+    overflow-y:auto;
+}
 [ng-click^="show"],
 [ng-click^="view"],
 [ng-click] {
     cursor: pointer;
+}
+
+.pre-wrap {
+    white-space:pre-wrap;
 }

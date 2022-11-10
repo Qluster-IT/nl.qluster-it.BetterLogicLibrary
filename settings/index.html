@@ -1,63 +1,98 @@
 <!doctype html>
 <html ng-app="variableApp">
 <head>
+    <script type="text/javascript" src="../assets/js/lodash.min.js"></script>
+
     <link rel="stylesheet" type="text/css" href="../assets/css/defaults.css" />
     <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css" />
     <script type="text/javascript" src="../assets/js/bootstrap.bundle.min.js"></script>
     
     <script type="text/javascript" src="../assets/js/angular.min.js"></script>
-    <script type="text/javascript" src="../assets/js/smart-table.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../assets/css/smart-table.css" />
+    <script type="text/javascript" src="../assets/js/smart-table.min.js"></script>    
+    <link rel="stylesheet" type="text/css" src="../assets/css/smart-table.css" />
+    
+    <link rel="stylesheet" type="text/css" src="../assets/css/fontawesome.min.css" />
+    
+    <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
+
+    <script type="text/javascript" src="../assets/js/bll.module.js"></script>
 
     <script type="text/javascript" src="variableController.js"></script>
-    <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
 <style>
+    html { height: 100%; } 
+    .main-view {
+        height:calc(100% - 70px);
+    }
+    .sub-view {
+        height:35vh;
+    }
+    
+    
     label:not(.hy-nostyle), .hy-label {
         text-transform: initial;
         font-size:12pt;
-
     }
-
+    :root {
+        --bs-blue: #0d6efd;
+        --bs-indigo: #6610f2;
+        --bs-purple: #6f42c1;
+        --bs-pink: #d63384;
+        --bs-red: #dc3545;
+        --bs-orange: #fd7e14;
+        --bs-yellow: #ffc107;
+        --bs-green: #198754;
+        --bs-teal: #20c997;
+        --bs-cyan: #0dcaf0;
+        --bs-white: #fff;
+        --bs-gray: #6c757d;
+        --bs-gray-dark: #343a40;
+        --bs-primary: #0d6efd;
+        --bs-secondary: #6c757d;
+        --bs-success: #198754;
+        --bs-info: #0dcaf0;
+        --bs-warning: #ffc107;
+        --bs-danger: #dc3545;
+        --bs-light: #f8f9fa;
+        --bs-dark: #212529;
+        --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+        
+    }
+    .btn-primary {
+        /* --bs-btn-disabled-bg:#1e1e1e; */
+    }
 </style>
 </head>
 
-<body ng-controller="VariableSettingsController as vm" class="container-fluid h-100 g-2">
-    <nav class="navbar fixed-top navbar-expand nav-tabs text-dark navbar-dark bg-dark justify-content-center">
+<body ng-controller="VariableSettingsController as vm" class="container-fluid h-100 g-0">
+    <nav class="navbar sticky-top navbar-expand font-dark navbar-dark bg-dark mb-2">
         <div class="container-fluid">
           <!-- <a class="navbar-brand" href="#">Navbar</a> -->
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav nav me-auto mb-2 mb-lg-0" >
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#" ng-click="view.id=''">Variables</a>
+                <a class="nav-link" aria-current="page" href="#" ng-class="{active:!view.id}" ng-click="view.id=''">Variables</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#" ng-click="view.id='coding'">Coding</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
+                <a class="nav-link" href="#" ng-class="{active:view.id=='coding'}" ng-click="view.id='coding'">Coding</a>
+              </li>              
+              <li class="nav-item">
+                <a class="nav-link" href="#" ng-class="{active:view.id=='locale_timezone'}" ng-click="view.id='locale_timezone'">Locale/TimeZone</a>
               </li>
             </ul>
           </div>
         </div>
       </nav>
-    <header class="homey-header">
+    <!-- <header class="homey-header container g-2">
         <h1 class="homey-title" data-i18n="settings.title">Better Logic Library</h1>
         <p class="homey-subtitle" data-i18n="settings.subtitle">Just some better logic, variable and library management</p>
-    </header>
-    <div class="h-100 d-flex flex-column" ng-show="!view.id" >
-        
+    </header> -->
 
+    <div class="main-view d-flex flex-column container g-2" ng-show="!view.id" >
         <div class="">
             <div class="card card-default">
                 <div class="card-header" ng-click="view.addVariable=!view.addVariable">Add variable</div>
@@ -151,8 +186,90 @@
                 </tbody>
             </table>
         </div>
+    
     </div>
 
+
+    <div class="main-view d-flex flex-column container g-2"  ng-show="view.id=='coding' || view.id=='locale_timezone'">
+        
+        <div class="flex-grow-1 overflow-y-auto" ng-show="view.id=='coding'">
+            <div class="card">
+                <div class="card-header">BLL Coding</div>
+                <div class="card-body">
+                    <form role="form">
+                        <div class="col-12">BLL codings are expressions within text-arguments in flowcards.</div>
+                        <div class="col-12">In every App that supports BLL coding, for each text-argument in flowcards that goes through the BLL decoder, you can use <pre class="d-inline">{[ expression ]}</pre> .</div>
+                        <div class="col-12">Within these expressions, you can use build-in modules, functions and your own customisable functions.</div>
+
+                        <div class="col-12 fw-bold mt-2">Modules</div>
+                        <ul>
+                            <li>
+                                <pre class="mb-0 pre-wrap">_</pre>
+                                <a href="https://lodash.com/docs/4.17.15">Lodash 4.17.21</a>
+                            </li>
+                            <li>
+                                <pre class="mb-0 pre-wrap">math</pre>
+                                <a href="https://mathjs.org/docs/index.html">Math.js 11.3.3</a>
+                            </li>
+                            <li>                                
+                                <div class="col-12 mt-1 mb-1 fw-bold">Example</span></div>
+                                <div class="col-12 mb-1"><input class="form-control" type="text" value="" ng-model="vars.moduleExampleValue" ng-change="updateModuleExample();" /></div>
+                                <div class="col-12">{{vars.moduleExampleResult}}</div>
+                            </li>
+                        </ul>
+                        <div class="col-12 fw-bold">Build-in functions</div>
+                        <ul>
+                            <li><pre class="mb-0 pre-wrap">date(format, date?, locale?, timeZone?)</pre>
+                                <div class="col-12">This method will return the current date(time) in the entered format, with respect to the users defined locale (language) en timezone.</div>
+                                <div class="col-12">Optionally you can supply the date(time), locale and/or timeZone.</div>
+                                <div class="col-12 mt-1 mb-1 fw-bold" ng-click="view.bottom=(view.bottom=='datetimeExamples'?undefined:'datetimeExamples')">Example <span class="fa fa-icon fa-eye"></span></div>
+                                <div class="col-12 mb-1"><input class="form-control" type="text" value="" ng-model="vars.dateExampleValue" ng-change="updateDateExample();" /></div>
+                                <div class="col-12" ng-bind="vars.dateExampleResult"></div>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="flex-grow-1 overflow-y-auto" ng-show="view.id=='locale_timezone'" >
+            <div class="card">
+                <div class="card-header">Locale and Timezone</div>
+                <div class="card-body">
+                    <form role="form">
+                        <div class="col-12">Here you can configure your locale (language) and timezone.</div>
+                        <div class="col-12">Later on, you will be able to configure this from here separatly for each app that uses BLL coding.</div>
+                        <div class="col-12">
+                            <div class="form-floating hy-nostyle">
+                                <select id="locale" name="locale" class="form-control" ng-model="vars.locale.default" ng-change="setLocale();">
+                                    <option ng-if="!vars.locales.indexOf(vars.locale.default)==-1" ng-value="vars.locale.default" ng-bind="vars.locale.default"></option>
+                                    <option ng-repeat="locale in vars.locales" ng-value="locale.tag" >{{locale.name}} ({{locale.tag}})</option>
+                                </select>
+                                <label for="locale">Locale</label>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>        
+        <div class="flex-grow-1 pt-2" ng-show="(view.bottom=='datetimeExamples' && view.id=='coding') || view.id=='locale_timezone'">
+            <div class="sub-view  overflow-y-auto">
+                <div ng-repeat="type in vars.dateOptions">
+                    <div class="card">                        
+                        <div class="card-header fw-bolder" ng-bind="type.id"></div>
+                        <div class="card-body container">
+                            <div class="row" ng-repeat="format in type.formats">
+                                <div class="col-5">{{format}}</div>
+                                <div class="col-7">{{vars.datesExampleResult[format]}}</div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script type="text/ng-template" id="display">
         <td>{{variable.name}}</td>
         <td>{{variable.type}}</td>
@@ -176,7 +293,7 @@
         <td>{{vm.selected.name}}</td>
         <td>{{vm.selected.type}}</td>
         <td>{{variable.lastChanged | date:'yyyy-MM-dd HH:mm:ss' }}</td>
-        <!--<td><input class="col-xs-2" id="variableValue" type="checkbox" ng-model="vm.selected.hasInsights" placeholder="value"></td>-->
+        <!--<td><input class="col-2" id="variableValue" type="checkbox" ng-model="vm.selected.hasInsights" placeholder="value"></td>-->
         <td>
             <div ng-switch on="vm.selected.type">
                 <div ng-switch-when="boolean"><div ng-include="'editboolean.html'"></div></div>
@@ -203,13 +320,13 @@
         <label for="variableValue">Variable value</label>
     </script>
     <script type="text/ng-template" id="editnumber.html">
-        <input class="form-control col-xs-2 hy-nostyle" id="variableValue" type="number" ng-model="vm.selected.value" placeholder="value">
+        <input class="form-control col-2 hy-nostyle" id="variableValue" type="number" ng-model="vm.selected.value" placeholder="value">
     </script>
     <script type="text/ng-template" id="editstring.html">
-        <input class="form-control col-xs-2 hy-nostyle" id="variableValue" type="text" ng-model="vm.selected.value" placeholder="value">
+        <input class="form-control col-2 hy-nostyle" id="variableValue" type="text" ng-model="vm.selected.value" placeholder="value">
     </script>
     <script type="text/ng-template" id="editboolean.html">
-        <input class="col-xs-2 hy-nostyle" id="variableValue" type="checkbox" ng-model="vm.selected.value" placeholder="value">
+        <input class="col-2 hy-nostyle" id="variableValue" type="checkbox" ng-model="vm.selected.value" placeholder="value">
     </script>
     <script>
         function onHomeyReady(Homey) {

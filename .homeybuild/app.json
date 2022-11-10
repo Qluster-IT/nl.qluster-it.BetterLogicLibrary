@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "1.4.11",
+  "version": "1.4.14",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -839,6 +839,26 @@
     "decode": {
       "method": "POST",
       "path": "/decode",
+      "public": false
+    }, 
+    "date": {
+      "method": "POST",
+      "path": "/date",
+      "public": false
+    },
+    "getLocale": {
+      "method": "GET",
+      "path": "/locale",
+      "public": false
+    },
+    "getLocales": {
+      "method": "GET",
+      "path": "/locales",
+      "public": false
+    },
+    "getTimeZones": {
+      "method": "GET",
+      "path": "/timezones",
       "public": false
     },
     "getVariable": {

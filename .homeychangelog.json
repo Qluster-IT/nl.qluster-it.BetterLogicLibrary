@@ -37,5 +37,17 @@
   },
   "1.4.11": {
     "en": "New: Better Logic Library (coding)."
+  },
+  "1.4.12": {
+    "en": "Improved: App Settings for Better Logic Library (coding)."
+  },
+  "1.4.13": {
+    "en": "New: COnfigure your Locale (nl-NL or nl-BE) from the App Settings for All Apps that support BLL coding."
+  },
+  "1.4.14": {
+    "en": "New: COnfigure your Locale (nl-NL or nl-BE) from the App Settings for All Apps that support BLL coding."
+  },
+  "1.4.15": {
+    "en": "New: Configure your Locale (nl-NL or nl-BE) from the App Settings for All Apps that support BLL coding."
   }
 }

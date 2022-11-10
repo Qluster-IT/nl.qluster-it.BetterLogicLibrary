@@ -128,8 +128,10 @@ static async decode(text) { //text, date, locale, timeZone
         bblFile = await this.getLibrary('bll');
         let bll = this.requireFromString(bblFile.file, '');
         try {
+            let old_bll = _l;
             _l = await new bll.BLL({ homey: this.homey, modules: this.modules, silent: this.silent });
             _L = bll.BLL;
+            if(old_bll) old_bll.destroy();
             _version = version || await this.api.getVersion();
         } catch (error) { }
         return this;

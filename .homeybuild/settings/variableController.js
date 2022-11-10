@@ -1,5 +1,7 @@
-﻿angular.module('variableApp', ['smart-table'])
-    .controller('VariableSettingsController', function($scope) {
+﻿angular.module('variableApp', ['smart-table', 'bll'])
+    .controller('VariableSettingsController', ['$scope', 'bl', function($scope, bl) {
+        //console.log(homeyTools);
+
         var vm = this;
         vm.errorMessage = '';
         vm.showExportToggle = false;
@@ -7,12 +9,104 @@
         vm.importJson = '';
         vm.selected = {};
         vm.homey;
+        //console.log(window.HT);
 
-        $scope.view = {id:''};
+        $scope.view = {id:undefined, bottom:undefined};
+        const vars = $scope.vars = {
+            locales: [],
+            locale:{
+                default:'nl'
+            },
+            moduleExampleValue:'The last one is: {[ _.last(["1", "2"]) ]}.',
+            moduleExampleResult:'The last one is 2.',
+            dateExampleValue:'Today is a {[ date("dddd") ]}',
+            dateExampleResult:'Today is a donderdag',
+            datesExampleValue:undefined,
+            datesExampleResult:{"DATETIMELONG":"donderdag 10 november 2022 om 13:53:48 Midden-Europese standaardtijd","DATETIME":"10 november 2022 om 13:53:48 CET","datetime":"10 nov. 2022 13:53:48","datetimeshort":"10-11-2022 13:53","DATELONG":"donderdag 10 november 2022","DATE":"10 november 2022","date":"10 nov. 2022","dateshort":"10-11-2022","TIMELONG":"13:53:48 Midden-Europese standaardtijd","TIME":"13:53:48 CET","time":"13:53:48","timeshort":"13:53","yy":"22","yyyy":"2022","M":"11","MM":"11","MMM":"nov.","MMMM":"november","d":"10","dd":"10","ddd":"do","dddd":"donderdag","h":"13","hh":"13","m":"53","mm":"53","s":"48","ss":"48","S":"8","SS":"89","SSS":"898","PERIOD":"’s middags","period":"’s middags","ERA":"na Christus","era":"n.Chr."},
+
+            dateOptions : [
+                {
+                    id:'Date & Time',
+                    formats:['DATETIMELONG', 'DATETIME', 'datetime', 'datetimeshort']
+                },
+                {
+                    id:'Date',
+                    formats:['DATELONG', 'DATE', 'date', 'dateshort']
+                },
+                {
+                    id:'Time',
+                    formats:['TIMELONG', 'TIME', 'time', 'timeshort']
+                },
+                {
+                    id:'Year',
+                    formats:['yy', 'yyyy']
+                },
+                {
+                    id:'Month',
+                    formats:['M', 'MM', 'MMM', 'MMMM']
+                },
+                {
+                    id:'Day',
+                    formats:['d', 'dd', 'ddd', 'dddd']
+                },                
+                {
+                    id:'Hour',
+                    formats:['h', 'hh']
+                },
+                {
+                    id:'Minute',
+                    formats:['m', 'mm']
+                },
+                {
+                    id:'Second',
+                    formats:['s', 'ss']
+                },
+                {
+                    id:'Fractional second',
+                    formats:['S', 'SS', 'SSS']
+                },
+                {
+                    id:'Other',
+                    formats:['PERIOD', 'period', 'ERA', 'era']
+                },
+            ]
+        };
+        vars.datesExampleValue = _.flatMap(vars.dateOptions, 'formats');
+
+        $scope.updateDateExample = async function() {
+            await bl.api("POST", "/decode", {text:vars.dateExampleValue}, (x)=> vars.dateExampleResult = x);
+        };
         
+        $scope.updateModuleExample = async function() {
+            await bl.api("POST", "/decode", {text:vars.moduleExampleValue}, (x)=> vars.moduleExampleResult = x);
+        };
+        
+        $scope.updateDatesExample = async function() {
+            await bl.api("POST", "/date", {format:vars.datesExampleValue}, (x)=> vars.datesExampleResult = x);
+        };
+        
+        $scope.setLocale = async function() {
+            console.log(vars.locale);
+            await bl.set('locale', vars.locale, ()=> {
+                $scope.updateExamples();
+            });
+        };
+
+        $scope.updateExamples = function() {
+
+            $scope.updateModuleExample();
+            $scope.updateDateExample();
+            $scope.updateDatesExample();
+        }
 
 
         vm.init = function(homey, scope) {
+            bl.init(homey, $scope);
+            bl.get("locale", (x)=> vars.locale = x);
+            bl.api("GET", "/locales", null, (x)=> vars.locales = x );
+
+            $scope.updateExamples();
+
             vm.homey = homey;
             vm.homey.get('variables', function(err, newVariables) {
                 console.log(newVariables);
@@ -35,6 +129,8 @@
                     });
                 });
             });
+            $scope.updateDateExample();
+            $scope.updateDatesExample();
         };
         vm.addVariable = function() {
             if (vm.variables && vm.variables.filter(function(e) { return e.name == vm.newVariable.name; }).length > 0) {
@@ -165,7 +261,7 @@
 
             vm.homey.set('deleteall', dummyChangedObject, function (err) { console.log(err)});            
         }
-    });
+    }]);
 
 function getShortDate() {
     return new Date().toISOString();

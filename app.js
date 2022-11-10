@@ -8,6 +8,7 @@ const util = require('util');
 
 const {BL} = require('./lib/bll/bl.js');
 const sandbox = require('./bll/sandbox');
+const DateTime = require('./bll/dateTime.js');
 
 
 
@@ -46,6 +47,14 @@ class BetterLogic extends Homey.App {
 
 		if (process.env.DEBUG === '1') require('inspector').open(9232, '0.0.0.0', true);
     	this.log('BetterLogic is running...');
+		this.locale = await this.homey.settings.get('locale');		
+		if(!this.locale) {
+			this.locale = {default:await this.homey.i18n.getLanguage()};
+			await this.homey.settings.set('locale', this.locale);
+		}		
+		this.homey.api.realtime('bllSetLocale', this.locale);
+
+		//await DateTime.init();
 		
 		timezone = this.homey.clock.getTimezone();
 		
@@ -85,9 +94,6 @@ class BetterLogic extends Homey.App {
 			})
 			.getArgument('format')
 			.registerAutocompleteListener((query, args) => {
-				
-				
-
 				let r = [
 					{name:'shortdate'},
 					{name:'date'},
@@ -169,6 +175,10 @@ class BetterLogic extends Homey.App {
 			this.homey.settings.on('set', async (settingName)=> {
 				if (settingName == 'javascript_functions') {
 					this.setFunctions();
+				}
+				if (settingName == 'locale') {
+					this.locale = await this.homey.settings.get(settingName);
+					this.homey.api.realtime('bllSetLocale', this.locale);
 				}
 			});
 	

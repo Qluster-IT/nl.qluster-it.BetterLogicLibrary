@@ -25,14 +25,26 @@ class BLL {
      * @param {Object} options 
      */
     constructor({homey, modules, silent} = {}) {
-        if(BLL._current) return BLL._current;
+        //if(BLL._current) return BLL._current;
+        // if(BLL._current) {
+        //     BL.homey.log('BLL already exists');
+        // }
+        // if(BL.L) {
+        //     BL.homey.log('BL.L already exists');
+        // }
+        
         BLL._current = this;
         BLL._homey = homey;
         this.silent = silent;
         return this.init({modules});        
     }
+    destroy() {
+        if(this.api) this.api.unregister();
+        BL.homey.log('BLL destroyed');
+    }
     async init({modules} = {modules:[]}) {
         BL.homey.log('init BLL');
+        let api = this.getApi();
         if(modules) for (const module of modules) {
             try {                    
                 switch (module) {
@@ -56,7 +68,7 @@ class BLL {
                         BLL._datetime = dateTimeObj;//new dateTimeObj();
                         BL.datetime = BLL.datetime;
                         
-                        await dateTimeObj.init();
+                        await dateTimeObj.init(this);
 
                         break;
                 }
@@ -71,7 +83,7 @@ class BLL {
         return this;
     }
     async getApi() {
-        if(!this.api && BL.Current.api) this.api = BL.Current.api;
+        //if(!this.api && BL.Current.api) this.api = BL.Current.api;
         if(!this.api) this.api = await this.getAppApi('net.i-dev.betterlogic', 'Better Logic Library');
         return this.api;
     }
@@ -107,6 +119,15 @@ class BLL {
         }
     }
       
+    async get(url, opt) {
+        try {
+            let api = await this.getApi();
+            return await api.get(url);
+        } catch (error) {
+            BL.homey.error(error);
+            throw new Error('Better Logic is not installed or running.');
+        }
+    }
       
     async getAppApi(appId, appname) {
         if(!this.api) this.api = this.homey.api.getApiApp(appId);
