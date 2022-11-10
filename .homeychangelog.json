@@ -49,5 +49,14 @@
   },
   "1.4.15": {
     "en": "New: Configure your Locale (nl-NL or nl-BE) from the App Settings for All Apps that support BLL coding."
+  },
+  "1.4.16": {
+    "en": "Update: App Settings design."
+  },
+  "1.4.17": {
+    "en": "Update: App Settings."
+  },
+  "1.4.18": {
+    "en": "New: App Settings - Formats."
   }
 }

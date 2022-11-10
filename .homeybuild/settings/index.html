@@ -21,7 +21,11 @@
 <style>
     html { height: 100%; } 
     .main-view {
-        height:calc(100% - 70px);
+        height:calc(100% - 90px);
+    }
+    
+    .show-buttons .main-view {
+        height:calc(100% - 128px);
     }
     .sub-view {
         height:35vh;
@@ -65,28 +69,31 @@
 </style>
 </head>
 
-<body ng-controller="VariableSettingsController as vm" class="container-fluid h-100 g-0">
+<body ng-controller="VariableSettingsController as vm" class="container-fluid h-100 g-0" ng-class="{'show-buttons':temp.showButtons}">
     <nav class="navbar sticky-top navbar-expand font-dark navbar-dark bg-dark mb-2">
-        <div class="container-fluid">
+        <div class="container-fluid p-0">
           <!-- <a class="navbar-brand" href="#">Navbar</a> -->
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav nav me-auto mb-2 mb-lg-0" >
+            <ul class="navbar-nav nav me-auto m-0" >
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="#" ng-class="{active:!view.id}" ng-click="view.id=''">Variables</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#" ng-class="{active:view.id=='coding'}" ng-click="view.id='coding'">Coding</a>
-              </li>              
+              </li>
               <li class="nav-item">
-                <a class="nav-link" href="#" ng-class="{active:view.id=='locale_timezone'}" ng-click="view.id='locale_timezone'">Locale/TimeZone</a>
+                <a class="nav-link text-center" href="#" ng-class="{active:view.id=='locale_timezone'}" ng-click="view.id='locale_timezone'">Locale<br/>TimeZone</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" ng-class="{active:view.id=='formats'}" ng-click="view.id='formats'">Formats</a>
               </li>
             </ul>
           </div>
         </div>
-      </nav>
+    </nav>
     <!-- <header class="homey-header container g-2">
         <h1 class="homey-title" data-i18n="settings.title">Better Logic Library</h1>
         <p class="homey-subtitle" data-i18n="settings.subtitle">Just some better logic, variable and library management</p>
@@ -158,7 +165,7 @@
             </div>
         </div>
         <div class="flex-grow-1 overflow-y">
-            <table st-safe-src="vm.variables" st-table="displayedCollection" class="table st table-striped" style="width:300%">
+            <table st-safe-src="vm.variables" st-table="displayedCollection" class="table st table-striped" style="width:200%">
                 <thead>
                 <tr>
                     <th st-sort="name">Name</th>
@@ -190,7 +197,7 @@
     </div>
 
 
-    <div class="main-view d-flex flex-column container g-2"  ng-show="view.id=='coding' || view.id=='locale_timezone'">
+    <div class="main-view d-flex flex-column container g-2"  ng-show="view.id=='coding' || view.id=='locale_timezone' || view.id=='formats'">
         
         <div class="flex-grow-1 overflow-y-auto" ng-show="view.id=='coding'">
             <div class="card">
@@ -205,15 +212,15 @@
                         <ul>
                             <li>
                                 <pre class="mb-0 pre-wrap">_</pre>
-                                <a href="https://lodash.com/docs/4.17.15">Lodash 4.17.21</a>
+                                <a href="#" bl-href="https://lodash.com/docs/4.17.15">Lodash</a> 4.17.21
                             </li>
                             <li>
                                 <pre class="mb-0 pre-wrap">math</pre>
-                                <a href="https://mathjs.org/docs/index.html">Math.js 11.3.3</a>
+                                <a href="#" bl-href="https://mathjs.org/docs/index.html">Math.js</a> 11.3.3
                             </li>
                             <li>                                
                                 <div class="col-12 mt-1 mb-1 fw-bold">Example</span></div>
-                                <div class="col-12 mb-1"><input class="form-control" type="text" value="" ng-model="vars.moduleExampleValue" ng-change="updateModuleExample();" /></div>
+                                <div class="col-12 mb-1"><input type="text" class="form-control" value="" ng-model="vars.moduleExampleValue" ng-change="updateModuleExample();" ng-model-options="{ debounce: 300 }" /></div>
                                 <div class="col-12">{{vars.moduleExampleResult}}</div>
                             </li>
                         </ul>
@@ -222,8 +229,8 @@
                             <li><pre class="mb-0 pre-wrap">date(format, date?, locale?, timeZone?)</pre>
                                 <div class="col-12">This method will return the current date(time) in the entered format, with respect to the users defined locale (language) en timezone.</div>
                                 <div class="col-12">Optionally you can supply the date(time), locale and/or timeZone.</div>
-                                <div class="col-12 mt-1 mb-1 fw-bold" ng-click="view.bottom=(view.bottom=='datetimeExamples'?undefined:'datetimeExamples')">Example <span class="fa fa-icon fa-eye"></span></div>
-                                <div class="col-12 mb-1"><input class="form-control" type="text" value="" ng-model="vars.dateExampleValue" ng-change="updateDateExample();" /></div>
+                                <div class="col-12 mt-1 mb-1 fw-bold">Example</div>
+                                <div class="col-12 mb-1"><input class="form-control" type="text" value="" ng-model="vars.dateExampleValue" ng-change="updateDateExample();" ng-model-options="{ debounce: 300 }"/></div>
                                 <div class="col-12" ng-bind="vars.dateExampleResult"></div>
                             </li>
                         </ul>
@@ -252,34 +259,57 @@
                     </form>
                 </div>
             </div>
-        </div>        
-        <div class="flex-grow-1 pt-2" ng-show="(view.bottom=='datetimeExamples' && view.id=='coding') || view.id=='locale_timezone'">
-            <div class="sub-view  overflow-y-auto">
-                <div ng-repeat="type in vars.dateOptions">
-                    <div class="card">                        
-                        <div class="card-header fw-bolder" ng-bind="type.id"></div>
-                        <div class="card-body container">
-                            <div class="row" ng-repeat="format in type.formats">
-                                <div class="col-5">{{format}}</div>
-                                <div class="col-7">{{vars.datesExampleResult[format]}}</div>
+        </div>
+        
+        <div class="flex-grow-1 overflow-y-auto" ng-show="view.id=='formats'" >
+            <div class="container">
+                <div class="col-12 mb-2">Here you can alter the definition of any default datetime formats.</div>
+            </div>
+            <form role="form"></form>
+                <div class="card mt-1"  ng-repeat="type in vars.formats">                        
+                    <div class="card-header fw-bolder" ng-bind="type.id"></div>
+                    <div class="card-body container">
+                        <div ng-repeat="format in type.formats">
+                            <div class="col-12 col-sm-7 form-group form-floating">
+                                <input type="text" class="form-control hy-nostyle" name="format{{format}}" placeholder="{{format}}" ng-model="vars.locale.formats[format]" ng-change="setFormatExample(format);" ng-model-options="{ debounce: 300 }"/>
+                                <label for="format{{format}}">{{format}}</label>
                             </div>
+                            <div class="col-12 col-sm-12 mb-2">{{temp.formats[format] || vars.datesExampleResult[format]}}</div>
+                        </div>
 
+                    </div>
+                </div>
+        </form>
+        </div>
+        <div class="flex-grow-1 pt-2" ng-show="view.id=='coding' || view.id=='locale_timezone'">
+            <div class="sub-view  overflow-y-auto">
+                <div class="card mt-1"  ng-repeat="type in vars.dateOptions">                        
+                    <div class="card-header fw-bolder" ng-bind="type.id"></div>
+                    <div class="card-body container">
+                        <div class="row" ng-repeat="format in type.formats">
+                            <div class="col-5">{{format}}</div>
+                            <div class="col-7">{{vars.datesExampleResult[format]}}</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="btn-group fixed-bottom" ng-show="temp.showButtons = (view.id=='formats')">
+        <button type="button" class="btn btn-primary" ng-click="setLocale();">Save</button>
+    </div>
+
     <script type="text/ng-template" id="display">
         <td>{{variable.name}}</td>
         <td>{{variable.type}}</td>
-        <td>{{variable.lastChanged | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+        <td>{{(vars.variableDates[variable.lastChanged]) || (variable.lastChanged | date:'yyyy-MM-dd HH:mm:ss')}}</td>
         <!--<td><input type='checkbox' disabled ng-model='variable.hasInsights' /></td>-->
 
         <td ng-if="variable.type === 'boolean'">{{variable.value}}</td>
         <td ng-if="variable.type === 'number'">{{variable.value}}</td>
         <td ng-if="variable.type === 'string'">{{variable.value}}</td>
-        <td ng-if="variable.type === 'trigger'">{{variable.value | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+        <td ng-if="variable.type === 'trigger'">{{(vars.variableDates[variable.lastChanged]) || (variable.value | date:'yyyy-MM-dd HH:mm:ss')}}</td>
 
         <td>
             <button ng-click="vm.editVariable(variable)" ng-if="variable.type !== 'trigger'">Edit</button>
@@ -292,7 +322,7 @@
     <script type="text/ng-template" id="edit">
         <td>{{vm.selected.name}}</td>
         <td>{{vm.selected.type}}</td>
-        <td>{{variable.lastChanged | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+        <td>{{(vars.variableDates[variable.lastChanged]) || (variable.lastChanged | date:'yyyy-MM-dd HH:mm:ss')}}</td>
         <!--<td><input class="col-2" id="variableValue" type="checkbox" ng-model="vm.selected.hasInsights" placeholder="value"></td>-->
         <td>
             <div ng-switch on="vm.selected.type">

@@ -21,30 +21,22 @@ class BL {
     static get l() { return BL.L.Current; }
 
     
-/**
- * @type {import("./bl.typedef").BL_decode}
- */
+/** @type {import("./bl.typedef").BL_decode}*/
 static async decode(text) { //text, date, locale, timeZone
         if (!BL.l && !this.silent) throw new Error('Better Logic Library is not loaded.');
-        if (!BL.l) return text;
+        if (!BL.l) return !text ? text : typeof(text)=='object' ? text.text : text;
         return await BL.l.decode.apply(null, arguments);
     }
 
 
     /**
      * Indicates if the BLL has been loaded before     *
-     * @readonly
-     * @static
-     * @memberof BL
-     */
+     * @readonly @static @memberof BL */
     static get isLoaded() { return _isLoaded; }
 
     /**
      * @description The lodash library
-     * @readonly
-     * @static
-     * @memberof BL
-     */
+     * @readonly @static @memberof BL */
     static get _() { if (_) return _; throw new Error('BLL: Lodash has not been loaded.'); }
 
     /** @private */
@@ -52,11 +44,7 @@ static async decode(text) { //text, date, locale, timeZone
 
     /**
      * @description The DateTime library, used for converting date and times to strings formatted for the user.
-     * @type {import("./bl.typedef").DateTime}
-     * @readonly
-     * @static
-     * @memberof BL
-     * */
+     * @type {import("./bl.typedef").DateTime} @readonly @static @memberof BL */
     static get datetime() { if (datetime) return datetime; throw new Error('BLL: DateTime has not been loaded.'); }
     //static get dateTime() { if (datetime) return datetime; throw new Error('BLL: DateTime has not been loaded.'); }
 
@@ -65,8 +53,7 @@ static async decode(text) { //text, date, locale, timeZone
 
     /**
      * Creates an instance of BL.
-     * @param {[{ homey:String, modules, silent, waitTime, waitForBll }={ waitForBll: true }]} [{ homey, modules, silent, waitTime, waitForBll }={ waitForBll: true }]
-     * @memberof BL
+     * @param {[{ homey:String, modules, silent, waitTime, waitForBll }={ waitForBll: true }]} [{ homey, modules, silent, waitTime, waitForBll }={ waitForBll: true }] @memberof BL
      */
     constructor({ homey, modules, silent, waitTime, waitForBll } = { waitForBll: true }) {
         if (BL._current) return BL._current;

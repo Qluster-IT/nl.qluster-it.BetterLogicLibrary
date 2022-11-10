@@ -1,5 +1,8 @@
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#parameters
 
+//https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings
+//https://docs.angularjs.org/api/ng/filter/date
+
 //const { BL } = require("./lib/bll/bl.js");
 const { BL } = require("./../lib/bll/bl");
 
@@ -67,9 +70,29 @@ class DateTime {
   }
 
   static toString(format, date, locale, timeZone) {
-    BL.homey.log('datetime.toString', locale, DateTime.locale);
-    let dt = new DateTime(locale || DateTime.locale, timeZone || DateTime.timeZone, date || DateTime.date);
-    return dt.toString(format);
+    if(!format) throw new Error("Format is required.");
+    BL.homey.log('datetime.toString', arguments);
+    if(!date || !BL._.isArray(date)) {
+      let dt = new DateTime(locale || DateTime.locale, timeZone || DateTime.timeZone, date? DateTime.convertToDate(date) : DateTime.date);
+      return dt.toString(format);
+    } else if (BL._.isArray(date)){
+      BL.homey.log('isArray');
+      let r = {};
+      for (const _date of date) {
+        //BL.homey.log(new DateTime(locale || DateTime.locale, timeZone || DateTime.timeZone, DateTime.convertToDate(_date)).toString(format));
+        try {         
+          if(Object.keys(r).indexOf(_date)===-1) r[_date] = new DateTime(locale || DateTime.locale, timeZone || DateTime.timeZone, DateTime.convertToDate(_date)).toString(format); 
+        } catch (error) {
+          BL.homey.error(error); }
+      }
+      return r;
+    }
+  }
+  static convertToDate(date) {
+    if(!date) return date;
+    if(date instanceof Date) return date;
+    if(typeof(date)=='string' && date.length==="2022-11-10T19:17:01.439Z".length && date.endsWith('Z') && date.substr(10,1)=='T') return new Date(date);
+    if(typeof(date)=='number') return new Date(date);
   }
 
   static get(dt) { return new DateTime(DateTime.locale, DateTime.timeZone, dt || DateTime.date); }
@@ -279,9 +302,9 @@ class DateTime {
     return code == 'dddd' || code == 'ddd' ? (this.getWeekdayByFormat(code && DateTime.dayCodes[code] ? DateTime.dayCodes[code] : 'numeric')) : (this.getDayByFormat(code && DateTime.dayCodes[code] ? DateTime.dayCodes[code] : 'numeric'));
   }
 
-  static hourCodes = { 'hh': '2-digit', 'h': 'numeric' };
+  static hourCodes = { 'HH': '2-digit', 'H': 'numeric' };
   /**
-   * @param {"hh"|"h"} format * @returns {String}
+   * @param {"HH"|"H"} format * @returns {String}
    */
   getHour(code) {
     return this.getHourByFormat(code && DateTime.hourCodes[code] ? DateTime.hourCodes[code] : 'numeric');
@@ -304,9 +327,9 @@ class DateTime {
   }
 
 
-  static fractionalSecondCodes = { 'SSS': 3, 'SS': 2, 'S': 1 };
+  static fractionalSecondCodes = { 'fff': 3, 'ff': 2, 'f': 1 };
   /**
-   * @param {"SSS"|"SS"|"S"} format * @returns {String}
+   * @param {"fff"|"ff"|"f"} format * @returns {String}
    */
   getFractionalSecond(code) {
     return this.getFractionalSecondByFormat(code && DateTime.fractionalSecondCodes[code] ? DateTime.fractionalSecondCodes[code] : 3);
@@ -373,7 +396,7 @@ class DateTime {
 // console.log(dateTime.getMonth('MM'));
 // console.log(dateTime.getDay('dd'));
 
-// console.log(dateTime.getHour('hh'));
+// console.log(dateTime.getHour('HH'));
 // console.log(dateTime.getMinute('mm'));
 // console.log(dateTime.getSecond('ss'));
 // console.log(dateTime.getNow());

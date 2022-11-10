@@ -12,6 +12,7 @@
         //console.log(window.HT);
 
         $scope.view = {id:undefined, bottom:undefined};
+        const temp = $scope.temp = {formats:{}};
         const vars = $scope.vars = {
             locales: [],
             locale:{
@@ -22,7 +23,7 @@
             dateExampleValue:'Today is a {[ date("dddd") ]}',
             dateExampleResult:'Today is a donderdag',
             datesExampleValue:undefined,
-            datesExampleResult:{"DATETIMELONG":"donderdag 10 november 2022 om 13:53:48 Midden-Europese standaardtijd","DATETIME":"10 november 2022 om 13:53:48 CET","datetime":"10 nov. 2022 13:53:48","datetimeshort":"10-11-2022 13:53","DATELONG":"donderdag 10 november 2022","DATE":"10 november 2022","date":"10 nov. 2022","dateshort":"10-11-2022","TIMELONG":"13:53:48 Midden-Europese standaardtijd","TIME":"13:53:48 CET","time":"13:53:48","timeshort":"13:53","yy":"22","yyyy":"2022","M":"11","MM":"11","MMM":"nov.","MMMM":"november","d":"10","dd":"10","ddd":"do","dddd":"donderdag","h":"13","hh":"13","m":"53","mm":"53","s":"48","ss":"48","S":"8","SS":"89","SSS":"898","PERIOD":"’s middags","period":"’s middags","ERA":"na Christus","era":"n.Chr."},
+            datesExampleResult:{"DATETIMELONG":"donderdag 10 november 2022 om 13:53:48 Midden-Europese standaardtijd","DATETIME":"10 november 2022 om 13:53:48 CET","datetime":"10 nov. 2022 13:53:48","datetimeshort":"10-11-2022 13:53","DATELONG":"donderdag 10 november 2022","DATE":"10 november 2022","date":"10 nov. 2022","dateshort":"10-11-2022","TIMELONG":"13:53:48 Midden-Europese standaardtijd","TIME":"13:53:48 CET","time":"13:53:48","timeshort":"13:53","yy":"22","yyyy":"2022","M":"11","MM":"11","MMM":"nov.","MMMM":"november","d":"10","dd":"10","ddd":"do","dddd":"donderdag","H":"13","HH":"13","m":"53","mm":"53","s":"48","ss":"48","f":"8","ff":"89","fff":"898","PERIOD":"’s middags","period":"’s middags","ERA":"na Christus","era":"n.Chr."},
 
             dateOptions : [
                 {
@@ -51,7 +52,7 @@
                 },                
                 {
                     id:'Hour',
-                    formats:['h', 'hh']
+                    formats:['H', 'HH']
                 },
                 {
                     id:'Minute',
@@ -63,72 +64,88 @@
                 },
                 {
                     id:'Fractional second',
-                    formats:['S', 'SS', 'SSS']
+                    formats:['f', 'ff', 'fff']
                 },
                 {
                     id:'Other',
                     formats:['PERIOD', 'period', 'ERA', 'era']
                 },
-            ]
+            ],
+            formats :undefined
+
         };
         vars.datesExampleValue = _.flatMap(vars.dateOptions, 'formats');
+        vars.formats = _.filter(vars.dateOptions, (v,i)=>i<=2);
+        
+        $scope.updateModuleExample = async function() {
+            await bl.api("POST", "/decode", {text:vars.moduleExampleValue}, (x)=> vars.moduleExampleResult = x);
+        };
 
         $scope.updateDateExample = async function() {
             await bl.api("POST", "/decode", {text:vars.dateExampleValue}, (x)=> vars.dateExampleResult = x);
         };
         
-        $scope.updateModuleExample = async function() {
-            await bl.api("POST", "/decode", {text:vars.moduleExampleValue}, (x)=> vars.moduleExampleResult = x);
-        };
-        
         $scope.updateDatesExample = async function() {
             await bl.api("POST", "/date", {format:vars.datesExampleValue}, (x)=> vars.datesExampleResult = x);
         };
-        
+        $scope.setFormatExample = async function(format) {
+            if(!vars.locale.formats[format] || !vars.locale.formats[format].length) temp.formats[format] = undefined;
+            else await bl.api("POST", "/date", {format:vars.locale.formats[format]}, (x)=> temp.formats[format] = x);
+        };
         $scope.setLocale = async function() {
-            console.log(vars.locale);
+            console.log(JSON.stringify(vars.locale.formats));
+            for (const formatKey in vars.locale.formats) {
+                if (Object.hasOwnProperty.call(vars.locale.formats, formatKey)) {
+                    const format = vars.locale.formats[formatKey];
+                    if(!format || !format.length) delete vars.locale.formats[formatKey];
+                }
+            }
             await bl.set('locale', vars.locale, ()=> {
                 $scope.updateExamples();
             });
         };
 
         $scope.updateExamples = function() {
-
             $scope.updateModuleExample();
             $scope.updateDateExample();
             $scope.updateDatesExample();
-        }
+        };
 
 
         vm.init = function(homey, scope) {
             bl.init(homey, $scope);
-            bl.get("locale", (x)=> vars.locale = x);
+            bl.get("locale", (x)=> {
+                vars.locale = x;
+                if(x && !x.formats) x.formats={};
+
+            });
             bl.api("GET", "/locales", null, (x)=> vars.locales = x );
 
             $scope.updateExamples();
 
             vm.homey = homey;
-            vm.homey.get('variables', function(err, newVariables) {
-                console.log(newVariables);
-                if (!newVariables) {
-                    newVariables = [];
-                }
-                scope.$apply(function() {
-                    vm.variables = newVariables;
-                });
-            });
+            
+            loadVariables();
             vm.homey.on('setting_changed', function (name) {
                 console.log(name);
-                
+                loadVariables();
+            });
+
+            function loadVariables() {
                 vm.homey.get('variables', function(err, newVariables) {
+                    console.log(newVariables);
+    
                     if (!newVariables) {
                         newVariables = [];
                     }
+                    let dates = _.uniqBy(_.flatMap(newVariables, 'lastChanged'));
+                    bl.api("POST", "/date", {date:dates, format:'datetime'}, (x)=> vars.variableDates = x);
+    
                     scope.$apply(function() {
                         vm.variables = newVariables;
                     });
                 });
-            });
+            }
             $scope.updateDateExample();
             $scope.updateDatesExample();
         };

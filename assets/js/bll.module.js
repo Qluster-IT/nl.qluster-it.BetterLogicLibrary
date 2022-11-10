@@ -3,15 +3,16 @@ app.factory('bl', ['$q', function($q){
     let Homey;
     let $scope;
     
-    return {
+    let factory = {
         init,
         api,
         get,
         set
     };
+    return factory;
 
     function init(homey, scope) {
-        Homey = homey;
+        Homey = homey;        
         $scope = scope;
         console.log(Homey);
     }
@@ -67,3 +68,10 @@ app.factory('bl', ['$q', function($q){
     }
 }]);
 
+app.directive('blHref', function () {
+    return function (scope, element, attrs) {
+        element.bind('click', function (event) {
+            Homey.openURL(attrs.blHref);
+        });
+    };
+})

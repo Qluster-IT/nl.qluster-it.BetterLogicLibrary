@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "1.4.15",
+  "version": "1.4.18",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -12,6 +12,10 @@
   "category": [
     "tools"
   ],
+  "tags": {
+    "en": ["variable", "bbl", "bl", "coding"],
+    "nl": ["variabelen", "bbl", "bl", "coding"]
+  },
   "permissions": [
     "homey:app:net.i-dev.betterlogic"
   ],

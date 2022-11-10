@@ -100,10 +100,10 @@ class BetterLogic extends Homey.App {
 					{name:'DATE'},
 					{name:'LONGDATE'},
 					{name:'dd-MM-yyyy'},
-					{name:'dd-MM-yyyy hh:mm'},
-					{name:'dd-MM-yyyy hh:mm:ss'},
-					{name:'hh:mm'},
-					{name:'hh:mm:ss'},
+					{name:'dd-MM-yyyy HH:mm'},
+					{name:'dd-MM-yyyy HH:mm:ss'},
+					{name:'HH:mm'},
+					{name:'HH:mm:ss'},
 				];
 				BL.L._.each(r, x=>x.description=BL.datetime.toString(x.name) );
 				if(query && query.length) r.unshift({name:query, description:BL.datetime.toString(query)});
