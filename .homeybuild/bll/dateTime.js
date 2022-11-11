@@ -77,7 +77,7 @@ class DateTime {
     if(!format) throw new Error("Format is required.");
     BL.homey.log('datetime.toString', arguments);
     if(!date || !BL._.isArray(date)) {
-      let dt = new DateTime(locale || DateTime.locale, timeZone || DateTime.timeZone, date? DateTime.convertToDate(date) : DateTime.date);
+      let dt = new DateTime(locale, timeZone, date? DateTime.convertToDate(date) : DateTime.date);
       return dt.toString(format);
     } else if (BL._.isArray(date)){
       BL.homey.log('isArray');
@@ -85,7 +85,7 @@ class DateTime {
       for (const _date of date) {
         //BL.homey.log(new DateTime(locale || DateTime.locale, timeZone || DateTime.timeZone, DateTime.convertToDate(_date)).toString(format));
         try {         
-          if(Object.keys(r).indexOf(_date)===-1) r[_date] = new DateTime(locale || DateTime.locale, timeZone || DateTime.timeZone, DateTime.convertToDate(_date)).toString(format); 
+          if(Object.keys(r).indexOf(_date)===-1) r[_date] = new DateTime(locale, timeZone, DateTime.convertToDate(_date)).toString(format); 
         } catch (error) {
           BL.homey.error(error); }
       }
@@ -107,6 +107,7 @@ class DateTime {
         let f = BL._.find(this.codes.array, a=> a.customisable && a.code===format );
         if(f) {
           BL.homey.log('f before: ', f);
+          f.originalFunc = f.func;
           f.format = customFormat;
           f.func = 'formatCustom';
           f.customized = true;
@@ -116,7 +117,7 @@ class DateTime {
     }
   }
 
-  static get(dt) { return new DateTime(DateTime.locale, DateTime.timeZone, dt || DateTime.date); }
+  static get(dt) { return new DateTime(undefined, undefined, dt || DateTime.date); }
 
 
 
@@ -139,9 +140,9 @@ class DateTime {
   }
 
   getString(options) {
-    options.timeZone = this.timeZone;
+    options.timeZone = this.timeZone || DateTime.timeZone;
     //BL.homey.log('getString', this.locale, (this.date || new Date()).toLocaleString(this.locale, options));
-    return (this.date || new Date()).toLocaleString(this.locale, options);
+    return (this.date || new Date()).toLocaleString(this.locale || DateTime.locale, options);
   }
   // getNow() {
   //   let r =  (this.date||new Date()).toLocaleString(this.locale,
@@ -387,7 +388,8 @@ class DateTime {
         if(s) return;
         if(coding.indexOf(code.code)===0) {
           s=true;
-          r+= this[code.func](code.code);
+          if(code.customized && this.locale) r+= this[code.originalFunc](code.code);
+          else r+= this[code.func](code.code);
           coding = coding.substr(0,i) + coding.substr(i+code.code.length); 
         }        
       });

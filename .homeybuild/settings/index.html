@@ -266,7 +266,8 @@
         
         <div class="flex-grow-1 overflow-y-auto" ng-show="view.id=='formats'" >
             <div class="container">
-                <div class="col-12 mb-2">Here you can alter the definition of any default datetime formats.</div>
+                <div class="col-12">Here you can alter the definition of any default datetime formats for the default locale.</div>
+                <div class="col-12 mb-2">This will be applied to every app using the BLL coding or DateTime.</div>
             </div>
             <form role="form"></form>
                 <div class="card mt-1"  ng-repeat="type in vars.formats">                        
