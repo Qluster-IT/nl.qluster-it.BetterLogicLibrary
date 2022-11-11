@@ -270,15 +270,15 @@
                 <div class="col-12 mb-2">This will be applied to every app using the BLL coding or DateTime.</div>
             </div>
             <form role="form"></form>
-                <div class="card mt-1"  ng-repeat="type in vars.formats">                        
+                <div class="card mt-1"  ng-repeat="type in vars.dateFormats">                        
                     <div class="card-header fw-bolder" ng-bind="type.id"></div>
                     <div class="card-body container">
                         <div ng-repeat="format in type.formats">
                             <div class="col-12 col-sm-7 form-group form-floating">
-                                <input type="text" class="form-control hy-nostyle" name="format{{format}}" placeholder="{{format}}" ng-model="vars.locale.formats[format]" ng-change="setFormatExample(format);" ng-model-options="{ debounce: 300 }"/>
+                                <input type="text" class="form-control hy-nostyle" name="format{{format}}" placeholder="{{format}}" ng-model="vars.locale.dateFormats[format]" ng-change="setFormatExample(format);" ng-model-options="{ debounce: 300 }"/>
                                 <label class="hy-nostyle" for="format{{format}}">{{format}}</label>
                             </div>
-                            <div class="col-12 col-sm-12 mb-2">{{temp.formats[format] || vars.datesExampleResult[format]}}</div>
+                            <div class="col-12 col-sm-12 mb-2">{{temp.dateFormats[format] || vars.datesExampleResult[format]}}</div>
                         </div>
 
                     </div>

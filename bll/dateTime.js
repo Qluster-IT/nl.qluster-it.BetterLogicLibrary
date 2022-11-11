@@ -12,17 +12,24 @@ class dateTimeStatics { }
 
 class Codes {
 
-  constructor() {    
+  constructor() {   
+    this.init(); 
+  }
+  init() {
     this.dateTimeCodesArr = BL._.sortBy(BL._.map(DateTime.dateTimeCodes, (x, key) => { return { key, val: x, customisable:true }; }, 'key.length'));
     this.dateCodesArr = BL._.sortBy(BL._.map(DateTime.dateCodes, (x, key) => { return { key, val: x, customisable:true }; }, 'key.length'));
     this.timeCodesArr = BL._.sortBy(BL._.map(DateTime.timeCodes, (x, key) => { return { key, val: x, customisable:true }; }, 'key.length'));
     
     this.dayPeriodCodesArr = BL._.sortBy(BL._.map(DateTime.dayPeriodCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
     this.eraCodesArr = BL._.sortBy(BL._.map(DateTime.eraCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
+    this.isoCodesArr = BL._.sortBy(BL._.map(DateTime.isoCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
+    this.timeZoneCodesArr = BL._.sortBy(BL._.map(DateTime.timeZoneCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
     this.yearCodesArr = BL._.sortBy(BL._.map(DateTime.yearCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
     this.monthCodesArr = BL._.sortBy(BL._.map(DateTime.monthCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
     this.dayCodesArr = BL._.sortBy(BL._.map(DateTime.dayCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
     this.hourCodesArr = BL._.sortBy(BL._.map(DateTime.hourCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
+    this.hour12CodesArr = BL._.sortBy(BL._.map(DateTime.hour12Codes, (x, key) => { return { key, val: x }; }, 'key.length'));
+    this.amPmCodesArr = BL._.sortBy(BL._.map(DateTime.amPmCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
     this.minuteCodesArr = BL._.sortBy(BL._.map(DateTime.minuteCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
     this.secondCodesArr = BL._.sortBy(BL._.map(DateTime.secondCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
     this.fractionalSecondCodesArr = BL._.sortBy(BL._.map(DateTime.fractionalSecondCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
@@ -33,14 +40,19 @@ class Codes {
     this.arrays['dateCodesArr'] = 'getDate';
     this.arrays['timeCodesArr'] = 'getTime';
     this.arrays['eraCodesArr'] = 'getEra';
+    this.arrays['isoCodesArr'] = 'getIso';
+    this.arrays['timeZoneCodesArr'] = 'getTimeZone';
     this.arrays['yearCodesArr'] = 'getYear';
     this.arrays['monthCodesArr'] = 'getMonth';
     this.arrays['dayCodesArr'] = 'getDay';
     this.arrays['hourCodesArr'] = 'getHour';
+    this.arrays['hour12CodesArr'] = 'getHour12';
+    this.arrays['amPmCodesArr'] = 'getAmPm';
     this.arrays['minuteCodesArr'] = 'getMinute';
     this.arrays['secondCodesArr'] = 'getSecond';
     this.arrays['fractionalSecondCodesArr'] = 'getFractionalSecond';
     this.array = BL._.sortBy(BL._.flatMap(this.arrays, (val, key)=> { return BL._.map(this[key], (code, format)=> { return { code:code.key, format:code.val, func:val, customisable:code.customisable };  });  }), (x)=>-x.code.length); //return { name:key, func:val, list:this[key]}; });
+  
   }
 }
 
@@ -62,13 +74,13 @@ class DateTime {
 
   static async init(bll) {
     let locale = await bll.get('locale');
-    dateTimeStatics.formats = locale ? locale.formats : undefined;
+    dateTimeStatics.formats = locale ? locale.dateFormats : undefined;
     dateTimeStatics.locale = locale ? locale.default : await BL.homey.i18n.getLanguage();
     dateTimeStatics.timeZone = BL.homey.clock.getTimezone();    
     DateTime.updateFormats();
     bll.api.on('realtime', (event, data)=> {
       switch (event) {
-        case "bllSetLocale": dateTimeStatics.locale = data.default; dateTimeStatics.formats = data.formats;DateTime.updateFormats(); //BL.homey.log('bllSetLocale', data);
+        case "bllSetLocale": dateTimeStatics.locale = data.default; dateTimeStatics.formats = data.dateFormats;DateTime.updateFormats(); //BL.homey.log('bllSetLocale', data);
       }
     });
   }
@@ -101,6 +113,7 @@ class DateTime {
   }
 
   static updateFormats() {
+    this.codes.init();
     if(dateTimeStatics.formats) for (const format in dateTimeStatics.formats) {
       if (Object.hasOwnProperty.call(dateTimeStatics.formats, format)) {
         const customFormat = dateTimeStatics.formats[format];
@@ -182,6 +195,9 @@ class DateTime {
     return this.getString({ timeStyle: format || 'full' });
   }
 
+  
+
+
 
   /**
    * @param {"narrow"|"short"|"long"} format * @returns {String}
@@ -194,9 +210,24 @@ class DateTime {
    * @param {"long"|"short"|"narrow"} format * @returns {String}
    */
   getEraByFormat(format) {
-    let year = new Date().getUTCFullYear();
-    return this.getString({ era: format || 'long', year: 'numeric' }).replace(year, '').replace(year - 1, '').replace(year + 1, '').trim();
+    return removeYear(this.getString({ era: format || 'long', year: 'numeric' }));
   }
+
+  
+  /** 
+   * @param {"KK"|"K"|"kk"|"k"} format * @returns {String}
+   */
+   getTimeZoneByFormat(format) {
+    let c;
+    switch (format) {
+      case "KK":c='long';break;
+      case "kk":c='short';break;
+    }
+    let s = this.getSecondByFormat("numeric");
+    return this.getString({ second: 'numeric', timeZoneName:c }).substr(s.length).trim();
+
+  }
+
 
   /**
    * @param {"numeric"|"2-digit"} format * @returns {String}
@@ -224,6 +255,14 @@ class DateTime {
    */
   getHourByFormat(format) {
     let r = this.getString({ hour: format || 'numeric', hour12:false });
+    return format == '2-digit' ? r.padStart(2, '0') : r;
+  }
+
+  /**
+   * @param {"numeric"|"2-digit"} format * @returns {String}
+   */
+   getHour12ByFormat(format) {
+    let r = this.getString({ hour: format || 'numeric', hour12:true });
     return format == '2-digit' ? r.padStart(2, '0') : r;
   }
 
@@ -300,6 +339,16 @@ class DateTime {
     return this.getEraByFormat(code && DateTime.eraCodes[code] ? DateTime.eraCodes[code] : 'long');
   }
 
+  
+
+  static timeZoneCodes = { 'KK': 'KK', 'kk':'kk' };
+  /**
+   * @param {"KK"|"kk"} code * @returns {String}
+   */
+  getTimeZone(code) {
+    return this.getTimeZoneByFormat(code);
+  }
+
   static yearCodes = { 'yyyy': 'numeric', 'yy': '2-digit' };
   /**
    * @param {"yyyy"|"yy"} code * @returns {String}
@@ -332,6 +381,21 @@ class DateTime {
     return this.getHourByFormat(code && DateTime.hourCodes[code] ? DateTime.hourCodes[code] : 'numeric');
   }
 
+  static hour12Codes = { 'hh': '2-digit', 'h': 'numeric' };
+  /**
+   * @param {"hh"|"h"} format * @returns {String}
+   */
+  getHour12(code) {
+    return removeNonNumeric(this.getHour12ByFormat(code && DateTime.hour12Codes[code] ? DateTime.hour12Codes[code] : 'numeric'));
+  }
+  static amPmCodes = { 'tt': '2-digit' };
+  /**
+   * @param {"tt"} format * @returns {String}
+   */
+  getAmPm(code) {
+    return removeNumeric(this.getHour12ByFormat('numeric'));
+  }
+  
   static minuteCodes = { 'mm': '2-digit', 'm': 'numeric' };
   /**
    * @param {"mm"|"m"} format * @returns {String}
@@ -355,6 +419,14 @@ class DateTime {
    */
   getFractionalSecond(code) {
     return this.getFractionalSecondByFormat(code && DateTime.fractionalSecondCodes[code] ? DateTime.fractionalSecondCodes[code] : 3);
+  }
+
+  static isoCodes = { 'ISO': 'ISO' };
+  /**
+   * @param {"ISO"} format * @returns {String}
+   */
+  getIso(code) {
+    return (this.date || new Date()).toISOString();
   }
 
 
@@ -436,5 +508,18 @@ class DateTime {
 
 // return dateTime.toString('yyyy-MM-dddd');
 
+
+function removeYear(str) {
+  let year = new Date().getUTCFullYear();
+  return str.replace(year, '').replace(year - 1, '').replace(year + 1, '').trim();
+}
+
+function removeNumeric(str) {
+  return str.replace(/[0-9]/g, '').trim();
+}
+
+function removeNonNumeric(str) {
+  return str.replace(/[^0-9]/g, '').trim();
+}
 
 module.exports = DateTime;

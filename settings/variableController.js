@@ -12,7 +12,7 @@
         //console.log(window.HT);
 
         $scope.view = {id:undefined, bottom:undefined};
-        const temp = $scope.temp = {formats:{}};
+        const temp = $scope.temp = {dateFormats:{}};
         const vars = $scope.vars = {
             locales: [],
             locale:{
@@ -53,6 +53,10 @@
                 {
                     id:'Hour',
                     formats:['H', 'HH']
+                },              
+                {
+                    id:'Hour 12-hour cycle',
+                    formats:['h', 'hh', 'tt']
                 },
                 {
                     id:'Minute',
@@ -67,15 +71,19 @@
                     formats:['f', 'ff', 'fff']
                 },
                 {
-                    id:'Other',
-                    formats:['PERIOD', 'period', 'ERA', 'era']
+                    id:'TimeZone',
+                    formats:['KK', 'kk']
                 },
+                {
+                    id:'Other',
+                    formats:['PERIOD', 'period', 'ERA', 'era', 'ISO']
+                }
             ],
             formats :undefined
 
         };
         vars.datesExampleValue = _.flatMap(vars.dateOptions, 'formats');
-        vars.formats = _.filter(vars.dateOptions, (v,i)=>i<=2);
+        vars.dateFormats = _.filter(vars.dateOptions, (v,i)=>i<=2);
         
         $scope.updateModuleExample = async function() {
             await bl.api("POST", "/decode", {text:vars.moduleExampleValue}, (x)=> vars.moduleExampleResult = x);
@@ -89,15 +97,15 @@
             await bl.api("POST", "/date", {format:vars.datesExampleValue}, (x)=> vars.datesExampleResult = x);
         };
         $scope.setFormatExample = async function(format) {
-            if(!vars.locale.formats[format] || !vars.locale.formats[format].length) temp.formats[format] = undefined;
-            else await bl.api("POST", "/date", {format:vars.locale.formats[format]}, (x)=> temp.formats[format] = x);
+            if(!vars.locale.dateFormats[format] || !vars.locale.dateFormats[format].length) temp.dateFormats[format] = undefined;
+            else await bl.api("POST", "/date", {format:vars.locale.dateFormats[format]}, (x)=> temp.dateFormats[format] = x);
         };
         $scope.setLocale = async function() {
-            console.log(JSON.stringify(vars.locale.formats));
-            for (const formatKey in vars.locale.formats) {
-                if (Object.hasOwnProperty.call(vars.locale.formats, formatKey)) {
-                    const format = vars.locale.formats[formatKey];
-                    if(!format || !format.length) delete vars.locale.formats[formatKey];
+            console.log(JSON.stringify(vars.locale.dateFormats));
+            for (const formatKey in vars.locale.dateFormats) {
+                if (Object.hasOwnProperty.call(vars.locale.dateFormats, formatKey)) {
+                    const format = vars.locale.dateFormats[formatKey];
+                    if(!format || !format.length) delete vars.locale.dateFormats[formatKey];
                 }
             }
             await bl.set('locale', vars.locale, ()=> {
@@ -118,7 +126,7 @@
             bl.init(homey, $scope);
             bl.get("locale", (x)=> {
                 vars.locale = x;
-                if(x && !x.formats) x.formats={};
+                if(x && !x.dateFormats) x.dateFormats={};
 
             });
             bl.api("GET", "/locales", null, (x)=> vars.locales = x );

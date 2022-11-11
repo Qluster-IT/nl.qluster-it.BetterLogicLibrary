@@ -404,7 +404,12 @@ class BetterLogic extends Homey.App {
 		if(!this.locale) {
 			this.locale = {default:await this.homey.i18n.getLanguage()};
 			await this.homey.settings.set('locale', this.locale);
-		}		
+		}
+		if(this.locale && this.locale.formats) {
+			this.locale.dateFormats = this.locale.formats;
+			delete this.locale.formats;
+			await this.homey.settings.set('locale', this.locale);
+		}
 		this.homey.api.realtime('bllSetLocale', this.locale);
 
 		//await DateTime.init();
