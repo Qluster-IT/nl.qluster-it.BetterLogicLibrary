@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "1.4.18",
+  "version": "2.0.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -13,8 +13,8 @@
     "tools"
   ],
   "tags": {
-    "en": ["variable", "bbl", "bl", "coding"],
-    "nl": ["variabelen", "bbl", "bl", "coding"]
+    "en": ["variable", "bbl", "bl", "coding", "date", "time", "datetime"],
+    "nl": ["variabelen", "bbl", "bl", "coding", "datum", "tijd", "datumtijd"]
   },
   "permissions": [
     "homey:app:net.i-dev.betterlogic"
@@ -393,14 +393,50 @@
           "en": "Format datetime"
         },
         "titleFormatted": {
-          "en": "Format [[format]]"
+          "en": "Format [[format]] (optional: [[date]], [[locale]], [[timeZone]])"
         },
         "args": [
           {
             "name": "format",
             "type": "autocomplete",
             "placeholder": {
-              "en": "dd-MM-yyyy"
+              "en": "Type your own format or select from the list"
+            },
+            "title": {
+              "en": "Date"
+            }
+          },
+          {
+            "name": "date",
+            "type": "text",
+            "required": false,
+            "placeholder": {
+              "en": "String, Number or Date, or Array of any of those"
+            },
+            "title": {
+              "en": "Date"
+            }
+          },          
+          {
+            "name": "locale",
+            "type": "autocomplete",
+            "required": false,
+            "placeholder": {
+              "en": "Select a locale from the list"
+            },
+            "title": {
+              "en": "Locale"
+            }
+          },          
+          {
+            "name": "timeZone",
+            "type": "autocomplete",
+            "required": false,
+            "placeholder": {
+              "en": "Select a timezone from the list"
+            },
+            "title": {
+              "en": "TimeZone"
             }
           }
         ],

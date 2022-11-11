@@ -13,18 +13,19 @@ class dateTimeStatics { }
 class Codes {
 
   constructor() {    
-    this.dayPeriodCodesArr = BL._.sortBy(BL._.map(DateTime.dayPeriodCodes, (x, key) => { return { key, val: x } }, 'key.length'));
-    this.dateTimeCodesArr = BL._.sortBy(BL._.map(DateTime.dateTimeCodes, (x, key) => { return { key, val: x } }, 'key.length'));
-    this.dateCodesArr = BL._.sortBy(BL._.map(DateTime.dateCodes, (x, key) => { return { key, val: x } }, 'key.length'));
-    this.timeCodesArr = BL._.sortBy(BL._.map(DateTime.timeCodes, (x, key) => { return { key, val: x } }, 'key.length'));
-    this.eraCodesArr = BL._.sortBy(BL._.map(DateTime.eraCodes, (x, key) => { return { key, val: x } }, 'key.length'));
-    this.yearCodesArr = BL._.sortBy(BL._.map(DateTime.yearCodes, (x, key) => { return { key, val: x } }, 'key.length'));
-    this.monthCodesArr = BL._.sortBy(BL._.map(DateTime.monthCodes, (x, key) => { return { key, val: x } }, 'key.length'));
-    this.dayCodesArr = BL._.sortBy(BL._.map(DateTime.dayCodes, (x, key) => { return { key, val: x } }, 'key.length'));
-    this.hourCodesArr = BL._.sortBy(BL._.map(DateTime.hourCodes, (x, key) => { return { key, val: x } }, 'key.length'));
-    this.minuteCodesArr = BL._.sortBy(BL._.map(DateTime.minuteCodes, (x, key) => { return { key, val: x } }, 'key.length'));
-    this.secondCodesArr = BL._.sortBy(BL._.map(DateTime.secondCodes, (x, key) => { return { key, val: x } }, 'key.length'));
-    this.fractionalSecondCodesArr = BL._.sortBy(BL._.map(DateTime.fractionalSecondCodes, (x, key) => { return { key, val: x } }, 'key.length'));
+    this.dateTimeCodesArr = BL._.sortBy(BL._.map(DateTime.dateTimeCodes, (x, key) => { return { key, val: x, customisable:true }; }, 'key.length'));
+    this.dateCodesArr = BL._.sortBy(BL._.map(DateTime.dateCodes, (x, key) => { return { key, val: x, customisable:true }; }, 'key.length'));
+    this.timeCodesArr = BL._.sortBy(BL._.map(DateTime.timeCodes, (x, key) => { return { key, val: x, customisable:true }; }, 'key.length'));
+    
+    this.dayPeriodCodesArr = BL._.sortBy(BL._.map(DateTime.dayPeriodCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
+    this.eraCodesArr = BL._.sortBy(BL._.map(DateTime.eraCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
+    this.yearCodesArr = BL._.sortBy(BL._.map(DateTime.yearCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
+    this.monthCodesArr = BL._.sortBy(BL._.map(DateTime.monthCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
+    this.dayCodesArr = BL._.sortBy(BL._.map(DateTime.dayCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
+    this.hourCodesArr = BL._.sortBy(BL._.map(DateTime.hourCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
+    this.minuteCodesArr = BL._.sortBy(BL._.map(DateTime.minuteCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
+    this.secondCodesArr = BL._.sortBy(BL._.map(DateTime.secondCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
+    this.fractionalSecondCodesArr = BL._.sortBy(BL._.map(DateTime.fractionalSecondCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
 
     this.arrays = {};
     this.arrays['dayPeriodCodesArr'] = 'getDayPeriod';
@@ -39,7 +40,7 @@ class Codes {
     this.arrays['minuteCodesArr'] = 'getMinute';
     this.arrays['secondCodesArr'] = 'getSecond';
     this.arrays['fractionalSecondCodesArr'] = 'getFractionalSecond';
-    this.array = BL._.sortBy(BL._.flatMap(this.arrays, (val, key)=> { return BL._.map(this[key], (code, format)=> { return { code:code.key, format:code.val, func:val };  });  }), (x)=>-x.code.length); //return { name:key, func:val, list:this[key]}; });
+    this.array = BL._.sortBy(BL._.flatMap(this.arrays, (val, key)=> { return BL._.map(this[key], (code, format)=> { return { code:code.key, format:code.val, func:val, customisable:code.customisable };  });  }), (x)=>-x.code.length); //return { name:key, func:val, list:this[key]}; });
   }
 }
 
@@ -50,7 +51,7 @@ class DateTime {
   static get timeZone() { return dateTimeStatics.timeZone; }
 
   static get date() { return new Date(); }
-  
+  /** @type {Codes} */
   static get codes() {    
     if(!dateTimeStatics.codes) {
       dateTimeStatics.codes = new Codes();
@@ -60,11 +61,14 @@ class DateTime {
   }
 
   static async init(bll) {
-    dateTimeStatics.locale = await bll.get('locale') || await BL.homey.i18n.getLanguage();
+    let locale = await bll.get('locale');
+    dateTimeStatics.formats = locale ? locale.formats : undefined;
+    dateTimeStatics.locale = locale ? locale.default : await BL.homey.i18n.getLanguage();
     dateTimeStatics.timeZone = BL.homey.clock.getTimezone();    
+    DateTime.updateFormats();
     bll.api.on('realtime', (event, data)=> {
       switch (event) {
-        case "bllSetLocale": dateTimeStatics.locale = data.default; BL.homey.log('bllSetLocale', data);
+        case "bllSetLocale": dateTimeStatics.locale = data.default; dateTimeStatics.formats = data.formats;DateTime.updateFormats(); //BL.homey.log('bllSetLocale', data);
       }
     });
   }
@@ -92,7 +96,24 @@ class DateTime {
     if(!date) return date;
     if(date instanceof Date) return date;
     if(typeof(date)=='string' && date.length==="2022-11-10T19:17:01.439Z".length && date.endsWith('Z') && date.substr(10,1)=='T') return new Date(date);
+    if(typeof(date)=='string' && /^\d+$/.test(date)) return new Date(Number.parseInt(date));
     if(typeof(date)=='number') return new Date(date);
+  }
+
+  static updateFormats() {
+    if(dateTimeStatics.formats) for (const format in dateTimeStatics.formats) {
+      if (Object.hasOwnProperty.call(dateTimeStatics.formats, format)) {
+        const customFormat = dateTimeStatics.formats[format];
+        let f = BL._.find(this.codes.array, a=> a.customisable && a.code===format );
+        if(f) {
+          BL.homey.log('f before: ', f);
+          f.format = customFormat;
+          f.func = 'formatCustom';
+          f.customized = true;
+          BL.homey.log('f after : ', f);
+        }
+      }
+    }
   }
 
   static get(dt) { return new DateTime(DateTime.locale, DateTime.timeZone, dt || DateTime.date); }
@@ -349,14 +370,20 @@ class DateTime {
     }
   }
 
+
   /** @private */
-  format(coding) {
+  formatCustom(coding) {
+    return this.format(dateTimeStatics.formats && dateTimeStatics.formats[coding] ? dateTimeStatics.formats[coding] : coding , true);
+  }
+  /** @private */
+  format(coding, noCustomized) {
     if(!coding || !coding.length) return coding;
     let r = '';
+    let a = noCustomized===true ? BL._.filter(DateTime.codes.array, x=>!x.customized) : DateTime.codes.array; 
     for (let i=0;i<coding.length;i++) {
       let s = false;
       
-      BL._.each(DateTime.codes.array, (code,funcKey)=> { 
+      BL._.each(a, (code,funcKey)=> { 
         if(s) return;
         if(coding.indexOf(code.code)===0) {
           s=true;

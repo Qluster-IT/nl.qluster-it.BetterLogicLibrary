@@ -102,6 +102,8 @@
             }
             await bl.set('locale', vars.locale, ()=> {
                 $scope.updateExamples();
+                let dates = _.uniqBy(_.flatMap(vm.variables, 'lastChanged'));
+                bl.api("POST", "/date", {date:dates, format:'datetime'}, (x)=> vars.variableDates = x);
             });
         };
 

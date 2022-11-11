@@ -1,4 +1,4 @@
-An advanced logic library with variable management for Homey.
+New: The Better Logic App has been rebranded to Better Logic Library.\nCheck out the new App Settings for the new features, like BLL coding in supported apps!
 
 New: Manage variables directly in flows!
 
@@ -10,6 +10,9 @@ Variables that were automaticly created from within flows will also be automatic
 Variables can still also be managed from the settings screen. These variables will not be automaticly deleted if not used, but must be manually deleted.
 
 And the Delete All button has a confirm now!
+
+
+An advanced logic library with variable and library management for Homey.
 
 
 * Feature: NumSlide device. When adding, first you have to specify the min, max and step size. After that you can select your number variable.

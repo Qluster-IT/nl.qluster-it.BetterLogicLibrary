@@ -58,5 +58,14 @@
   },
   "1.4.18": {
     "en": "New: App Settings - Formats."
+  },
+  "1.4.19": {
+    "en": "New: App Settings - Formats, all are overridable."
+  },
+  "1.4.20": {
+    "en": "New: App Settings - Formats, all are overridable, immediately updated."
+  },
+  "2.0.0": {
+    "en": "Rebrand: The Better Logic App has been rebranded to Better Logic Library.\nCheck out the new App Settings for the new features, like BLL coding in supported apps!"
   }
 }
