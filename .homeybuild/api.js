@@ -6,7 +6,7 @@ var variableManager = require('./lib/variablemanager.js');
 var util = require('./lib/util/util.js');
 const { readFile:_readFile } = require('fs');
 const { promisify } = require('util');
-const { BL } = require('./lib/bll/bl.js');
+const { BL } = require("betterlogiclibrary");
 
 const readFileAsync = promisify(_readFile);
 

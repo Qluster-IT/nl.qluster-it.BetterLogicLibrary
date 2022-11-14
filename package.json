@@ -13,6 +13,7 @@
     "typescript": "^4.8.4"
   },
   "dependencies": {
+    "betterlogiclibrary": "0.0.1",
     "locale-codes": "^1.3.1"
   }
 }

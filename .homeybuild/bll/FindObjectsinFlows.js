@@ -1,4 +1,5 @@
-const { BL } = require("../lib/bll/bl");
+
+const { BL } = require("betterlogiclibrary");
 
 /// Define defaults
 const _now = Date.now();

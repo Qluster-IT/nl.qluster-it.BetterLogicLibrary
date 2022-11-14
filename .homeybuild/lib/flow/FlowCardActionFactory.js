@@ -2,7 +2,8 @@
 
 const Homey = require('homey');
 //const DateTime = require('../../bll/dateTime.js');
-const { BL } = require('../bll/bl.js');
+
+const { BL } = require("betterlogiclibrary");
 
 var math = require('../util/math.js');
 var util = require('../util/util.js');

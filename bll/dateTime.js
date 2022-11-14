@@ -3,8 +3,9 @@
 //https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings
 //https://docs.angularjs.org/api/ng/filter/date
 
-//const { BL } = require("./lib/bll/bl.js");
-const { BL } = require("./../lib/bll/bl");
+
+const { BL } = require("betterlogiclibrary");
+
 
 let _locale, _timeZone, _date, _codes;
 

@@ -1,4 +1,5 @@
-const { BL } = require("./lib/bll/bl.js");
+
+const { BL } = require("betterlogiclibrary");
 
 
 class Coding  {  
