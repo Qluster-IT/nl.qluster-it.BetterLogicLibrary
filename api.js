@@ -21,6 +21,7 @@ module.exports =
             case "mathjs": return {file:await readFile('/lib/util/math.js', {encoding:'utf8'})};
             case "datetime": return {file:await readFile('/bll/dateTime.js', {encoding:'utf8'})};
             case "coding": return {file:await readFile('/bll/coding.js', {encoding:'utf8'})};
+            case "proto": return {file:await readFile('/bll/proto.js', {encoding:'utf8'})};
         }
         return null;
     },

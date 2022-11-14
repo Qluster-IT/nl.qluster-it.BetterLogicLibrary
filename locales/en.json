@@ -1,1 +1,22 @@
-{}
+{
+    "settings":{
+		"delete": "Remove",
+        "functions":"Functions",
+		"functions_expressions":"These functions can be used within (javascript) expression.",
+		"functions_be_aware":"Be aware that removing functions could corrupt flows that are using that function.",
+		"add_function_text":"To create a function, enter a name, press Add Function, then press edit below.",
+		"add_function":"Add function",
+		"function_name":"Function name",
+		"delete_all":"Delete All",
+		"name":"Name",
+		"edit":"Edit",
+		"save":"Save",
+		"save_close":"Save & Close",
+		"functions_saved":"Functions saved.",
+		"function_exists":"Function already exists.",
+		"delete_all_confirm":"Are you sure you wish to delete ALL functions?",
+		"delete_confirm":"Are you sure you wish to delete function __functionName__?",
+		"search_for_name":"search for name",		
+		"close":"Close"
+    }
+}

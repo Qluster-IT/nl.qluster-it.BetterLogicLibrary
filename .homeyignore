@@ -4,7 +4,7 @@
 docs/*
 
 manager/*
-
+bll_notyet/*
 
 todo.js
 bugs.txt

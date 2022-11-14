@@ -1,1 +1,22 @@
-{}
+{
+    "settings":{
+		"delete": "Verwijderen",
+        "functions":"Functies",
+		"functions_expressions":"Deze functies kunnen gebruikt worden binnen (javascript) expressies.",
+		"functions_be_aware":"Houd er rekening mee dat het verwijderen van functies, flows, welke die functie gebruiken, kan breken.",
+		"add_function_text":"Om een functie aan te maken, voert u een naam in, drukt u op Functie toevoegen en drukt u vervolgens op aanpassen hieronder.",
+		"add_function":"Functie toevoegen",
+		"function_name":"Functienaam",
+		"delete_all":"Verwijder alles",
+		"name":"Naam",
+		"edit":"Aanpassen",
+		"save":"Opslaan",
+		"save_close":"Opslaan & sluiten",
+		"functions_saved":"Functies opgeslagen.",
+		"function_exists":"Functie bestaat al.",
+		"delete_all_confirm":"Weet u zeker dat u ALLE functies wilt verwijderen?",
+		"delete_confirm":"Weet u zeker dat u de functie __functionName__ wilt verwijderen?",
+		"search_for_name":"zoek op naam",		
+		"close":"Sluiten"
+    }
+}

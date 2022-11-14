@@ -71,6 +71,10 @@ class BLL {
                         
                         await dateTimeObj.init(this);
 
+                        break;                        
+                    case "proto":
+                        let proto = await this.getLibrary('proto'); 
+                        let protoExport = this.requireFromString(proto.file, 'proto');
                         break;
                 }
             } catch (error) { BL.homey.error(error); }

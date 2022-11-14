@@ -5,11 +5,10 @@ var variableManager = require('./lib/variablemanager.js');
 const Homey = require('homey');
 let timezone;
 
-const util = require('util');
+//const util = require('util');
 
 const {BL} = require('betterlogiclibrary');
-const sandbox = require('./bll/sandbox');
-const DateTime = require('./bll/dateTime.js');
+const sandbox = require('./lib/sandbox');
 
 
 
@@ -423,6 +422,7 @@ class BetterLogic extends Homey.App {
 				"_",
 				"math",
 				"datetime",
+				"proto",
 			]
 		});
 		let timeoutset = false;
@@ -551,6 +551,11 @@ class BetterLogic extends Homey.App {
 			
 			this.homey.flow.getActionCard('execute_bl_expression_tag').registerRunListener(async (args, state) => {
 				try {
+					if(args.code && !args.expression) {
+						let val = JSON.stringify(await this.runSandBox(args.code));
+						throw new Error("Result = " + val);
+					}
+
 					if (args.expression !== undefined && args.expression !== 'undefined') {
 						let value = this.runSandBox(args.expression);
 						let tokens = { text: '', number: 0, boolean: false };
@@ -610,7 +615,7 @@ class BetterLogic extends Homey.App {
 		this.context = {
 			_: BL._,
 			math : BL.math,
-			datetime : BL.datetime,
+			//datetime : BL.datetime,
 			date : (coding, date, locale, timeZone) => BL.datetime.toString(coding, date, locale, timeZone)
 		};
 		if (this.functions && this.functions.length > 0) for (let i = 0; i < this.functions.length; i++) {

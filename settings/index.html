@@ -1,100 +1,140 @@
 <!doctype html>
 <html ng-app="variableApp">
+
 <head>
     <script type="text/javascript" src="../assets/js/lodash.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="../assets/css/defaults.css" />
     <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css" />
     <script type="text/javascript" src="../assets/js/bootstrap.bundle.min.js"></script>
-    
+
     <script type="text/javascript" src="../assets/js/angular.min.js"></script>
-    <script type="text/javascript" src="../assets/js/smart-table.min.js"></script>    
+    <script type="text/javascript" src="../assets/js/smart-table.min.js"></script>
     <link rel="stylesheet" type="text/css" src="../assets/css/smart-table.css" />
-    
+
     <link rel="stylesheet" type="text/css" src="../assets/css/fontawesome.min.css" />
+
+
     
+    <script src="../assets/js/codemirror/codemirror.js"></script>
+    <script src="../assets/js/codemirror/addon/display/autorefresh.js"></script>
+    <script src="../assets/js/codemirror/addon/display/fullscreen.js"></script>
+    <script src="../assets/js/codemirror/addon/hint/show-hint.js"></script>
+    <script src="../assets/js/codemirror/mode/javascript/javascript.js"></script>
+    <script src="../assets/js/codemirror/addon/hint/javascript-hint.js"></script>
+    <script src="../assets/js/ui-codemirror.js"></script>
+    <link href="../assets/js/codemirror/codemirror.css" rel="stylesheet" />
+    <link href="../assets/js/codemirror/theme/mdn-like.css" rel="stylesheet" />
+    <link href="../assets/js/codemirror/addon/display/fullscreen.css" rel="stylesheet" />
+    <link href="../assets/js/codemirror/addon/hint/show-hint.css" rel="stylesheet" />
+
+
     <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
 
     <script type="text/javascript" src="../assets/js/bll.module.js"></script>
 
     <script type="text/javascript" src="variableController.js"></script>
-<style>
-    html { height: 100%; } 
-    .main-view {
-        height:calc(100% - 90px);
-    }
-    
-    .show-buttons .main-view {
-        height:calc(100% - 128px);
-    }
-    .sub-view {
-        height:35vh;
-    }
-    
-    
-    label:not(.hy-nostyle), .hy-label {
-        text-transform: initial;
-        font-size:12pt;
-    }
-    .form-floating label {
-        font-size: 10px;
-    }
-    :root {
-        --bs-blue: #0d6efd;
-        --bs-indigo: #6610f2;
-        --bs-purple: #6f42c1;
-        --bs-pink: #d63384;
-        --bs-red: #dc3545;
-        --bs-orange: #fd7e14;
-        --bs-yellow: #ffc107;
-        --bs-green: #198754;
-        --bs-teal: #20c997;
-        --bs-cyan: #0dcaf0;
-        --bs-white: #fff;
-        --bs-gray: #6c757d;
-        --bs-gray-dark: #343a40;
-        --bs-primary: #0d6efd;
-        --bs-secondary: #6c757d;
-        --bs-success: #198754;
-        --bs-info: #0dcaf0;
-        --bs-warning: #ffc107;
-        --bs-danger: #dc3545;
-        --bs-light: #f8f9fa;
-        --bs-dark: #212529;
-        --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-        --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-        --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+    <style>
+        html {
+            height: 100%;
+        }
+
+        .main-view {
+            height: calc(100% - 130px);
+        }
+
+        .main-floating {
+            position: fixed;
+            z-index: 1030;
+            top: 0;
+            background-color: white;
+            height: 100%;
+            width: 100%;
+        }
+
+        .show-buttons .main-view {
+            height: calc(100% - 160px);
+        }
+
+        .sub-view {
+            height: 35vh;
+        }
+
+
+        label:not(.hy-nostyle),
+        .hy-label {
+            text-transform: initial;
+            font-size: 12pt;
+        }
+
+        .form-floating label {
+            font-size: 10px;
+        }
+        .functions-table {
+            height: auto!important;
+        }
         
-    }
-    .btn-primary {
-        /* --bs-btn-disabled-bg:#1e1e1e; */
-    }
-</style>
+
+        :root {
+            --bs-blue: #0d6efd;
+            --bs-indigo: #6610f2;
+            --bs-purple: #6f42c1;
+            --bs-pink: #d63384;
+            --bs-red: #dc3545;
+            --bs-orange: #fd7e14;
+            --bs-yellow: #ffc107;
+            --bs-green: #198754;
+            --bs-teal: #20c997;
+            --bs-cyan: #0dcaf0;
+            --bs-white: #fff;
+            --bs-gray: #6c757d;
+            --bs-gray-dark: #343a40;
+            --bs-primary: #0d6efd;
+            --bs-secondary: #6c757d;
+            --bs-success: #198754;
+            --bs-info: #0dcaf0;
+            --bs-warning: #ffc107;
+            --bs-danger: #dc3545;
+            --bs-light: #f8f9fa;
+            --bs-dark: #212529;
+            --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+
+        }
+
+        .btn-primary {
+            /* --bs-btn-disabled-bg:#1e1e1e; */
+        }
+    </style>
 </head>
 
 <body ng-controller="VariableSettingsController as vm" class="container-fluid h-100 g-0" ng-class="{'show-buttons':temp.showButtons}">
     <nav class="navbar sticky-top navbar-expand font-dark navbar-dark bg-dark mb-2">
         <div class="container-fluid p-0">
-          <!-- <a class="navbar-brand" href="#">Navbar</a> -->
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav nav me-auto m-0" >
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#" ng-class="{active:!view.id}" ng-click="view.id=''">Variables</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" ng-class="{active:view.id=='coding'}" ng-click="view.id='coding'">Coding</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-center" href="#" ng-class="{active:view.id=='locale_timezone'}" ng-click="view.id='locale_timezone'">Locale<br/>TimeZone</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" ng-class="{active:view.id=='formats'}" ng-click="view.id='formats'">Formats</a>
-              </li>
-            </ul>
-          </div>
+            <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav nav me-auto m-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#" ng-class="{active:!view.id}" ng-click="view.id=''">Variables</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" ng-class="{active:view.id=='coding'}" ng-click="view.id='coding'">Coding</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-center" href="#" ng-class="{active:view.id=='locale_timezone'}" ng-click="view.id='locale_timezone'">Locale<br />TimeZone</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" ng-class="{active:view.id=='formats'}" ng-click="view.id='formats'">Formats</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" ng-class="{active:view.id=='functions'}" ng-click="view.id='functions'">Functions</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
     <!-- <header class="homey-header container g-2">
@@ -102,7 +142,7 @@
         <p class="homey-subtitle" data-i18n="settings.subtitle">Just some better logic, variable and library management</p>
     </header> -->
 
-    <div class="main-view d-flex flex-column container g-2" ng-show="!view.id" >
+    <div class="main-view d-flex flex-column container g-2" ng-show="!view.id">
         <div class="">
             <div class="card card-default">
                 <div class="card-header" ng-click="view.addVariable=!view.addVariable">Add variable</div>
@@ -129,13 +169,17 @@
                         <div class="form-group mb-1">
                             <div ng-switch on="vm.newVariable.type">
                                 <div ng-switch-when="boolean">
-                                    <div ng-include="'addboolean.html'" class="form-floating"></div></div>
+                                    <div ng-include="'addboolean.html'" class="form-floating"></div>
+                                </div>
                                 <div ng-switch-when="number">
-                                    <div ng-include="'addnumber.html'" class="form-floating"></div></div>
+                                    <div ng-include="'addnumber.html'" class="form-floating"></div>
+                                </div>
                                 <div ng-switch-when="string">
-                                    <div ng-include="'addstring.html'" class="form-floating"></div></div>
+                                    <div ng-include="'addstring.html'" class="form-floating"></div>
+                                </div>
                                 <div ng-switch-default>
-                                    <div></div></div>
+                                    <div></div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group mb-1">
@@ -150,65 +194,67 @@
             </div>
 
             <div ng-show="vm.showExportToggle">
-                <b>Exported values:</b><br/>
+                <b>Exported values:</b><br />
                 Copy selection below to save your configuration offline.
                 <p>
                     <textarea rows="6" cols="60">{{vm.variables | json}}</textarea>
                 </p>
             </div>
             <div ng-show="vm.showImportToggle">
-                <b>Import values:</b><br/>
+                <b>Import values:</b><br />
                 Paste in the box below the exported values. Be aware that all existing values and insights will be removed.
                 <p>
                     <textarea rows="6" cols="60" ng-Model="vm.importJson"></textarea>
-                    <div class="form-group">
-                        <button class="btn btn-primary" type="button" ng-click="vm.import()">Import</button>
-                    </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" type="button" ng-click="vm.import()">Import</button>
+                </div>
                 </p>
             </div>
         </div>
         <div class="flex-grow-1 overflow-y">
             <table st-safe-src="vm.variables" st-table="displayedCollection" class="table st table-striped" style="width:200%">
                 <thead>
-                <tr>
-                    <th st-sort="name">Name</th>
-                    <th st-sort="type">Type</th>
-                    <th st-sort="lastChanged" st-sort-default="reverse">Last set</th>
-                    <!--<th st-sort="value">Insight</th>-->
-                    <th st-sort="value">Value</th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <th>
-                        <input st-search="name" placeholder="search for name" class="input-sm form-control hy-nostyle" type="search"/>
-                    </th>
-                    <th>
-                    </th>
-                    <th>
-                    </th>
-                    <!--<th></th>-->
-                    <th></th>
-                    <th></th>
-                </tr>
+                    <tr>
+                        <th st-sort="name">Name</th>
+                        <th st-sort="type">Type</th>
+                        <th st-sort="lastChanged" st-sort-default="reverse">Last set</th>
+                        <!--<th st-sort="value">Insight</th>-->
+                        <th st-sort="value">Value</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <input st-search="name" placeholder="search for name" class="input-sm form-control hy-nostyle" type="search" />
+                        </th>
+                        <th>
+                        </th>
+                        <th>
+                        </th>
+                        <!--<th></th>-->
+                        <th></th>
+                        <th></th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="variable in displayedCollection" ng-include="vm.getTemplate(variable)"></tr>
+                    <tr ng-repeat="variable in displayedCollection" ng-include="vm.getTemplate(variable)"></tr>
                 </tbody>
             </table>
         </div>
-    
+
     </div>
 
 
-    <div class="main-view d-flex flex-column container g-2"  ng-show="view.id=='coding' || view.id=='locale_timezone' || view.id=='formats'">
-        
+    <div class="main-view d-flex flex-column container g-2" ng-show="view.id=='coding' || view.id=='locale_timezone' || view.id=='formats'">
+
         <div class="flex-grow-1 overflow-y-auto" ng-show="view.id=='coding'">
             <div class="card">
                 <div class="card-header">BLL Coding</div>
                 <div class="card-body">
                     <form role="form">
                         <div class="col-12">BLL codings are expressions within text-arguments in flowcards.</div>
-                        <div class="col-12">In every App that supports BLL coding, for each text-argument in flowcards that goes through the BLL decoder, you can use <pre class="d-inline">{[ expression ]}</pre> .</div>
+                        <div class="col-12">In every App that supports BLL coding, for each text-argument in flowcards that goes through the BLL decoder, you can use
+                            <pre class="d-inline">{[ expression ]}</pre> .
+                        </div>
                         <div class="col-12">Within these expressions, you can use build-in modules, functions and your own customisable functions.</div>
 
                         <div class="col-12 fw-bold mt-2">Modules</div>
@@ -221,7 +267,7 @@
                                 <pre class="mb-0 pre-wrap">math</pre>
                                 <a href="#" bl-href="https://mathjs.org/docs/index.html">Math.js</a> 11.3.3
                             </li>
-                            <li>                                
+                            <li>
                                 <div class="col-12 mt-1 mb-1 fw-bold">Example</span></div>
                                 <div class="col-12 mb-1"><input type="text" class="form-control" value="" ng-model="vars.moduleExampleValue" ng-change="updateModuleExample();" ng-model-options="{ debounce: 300 }" /></div>
                                 <div class="col-12">{{vars.moduleExampleResult}}</div>
@@ -229,11 +275,12 @@
                         </ul>
                         <div class="col-12 fw-bold">Build-in functions</div>
                         <ul>
-                            <li><pre class="mb-0 pre-wrap">date(format, date?, locale?, timeZone?)</pre>
+                            <li>
+                                <pre class="mb-0 pre-wrap">date(format, date?, locale?, timeZone?)</pre>
                                 <div class="col-12">This method will return the current date(time) in the entered format, with respect to the users defined locale (language) en timezone.</div>
                                 <div class="col-12">Optionally you can supply the date(time), locale and/or timeZone.</div>
                                 <div class="col-12 mt-1 mb-1 fw-bold">Example</div>
-                                <div class="col-12 mb-1"><input class="form-control" type="text" value="" ng-model="vars.dateExampleValue" ng-change="updateDateExample();" ng-model-options="{ debounce: 300 }"/></div>
+                                <div class="col-12 mb-1"><input class="form-control" type="text" value="" ng-model="vars.dateExampleValue" ng-change="updateDateExample();" ng-model-options="{ debounce: 300 }" /></div>
                                 <div class="col-12" ng-bind="vars.dateExampleResult"></div>
                             </li>
                         </ul>
@@ -241,8 +288,8 @@
                 </div>
             </div>
         </div>
-        
-        <div class="flex-grow-1 overflow-y-auto" ng-show="view.id=='locale_timezone'" >
+
+        <div class="flex-grow-1 overflow-y-auto" ng-show="view.id=='locale_timezone'">
             <div class="card">
                 <div class="card-header">Locale and Timezone</div>
                 <div class="card-body">
@@ -253,7 +300,7 @@
                             <div class="form-floating hy-nostyle">
                                 <select id="locale" name="locale" class="form-control" ng-model="vars.locale.default" ng-change="setLocale();">
                                     <option ng-if="!vars.locales.indexOf(vars.locale.default)==-1" ng-value="vars.locale.default" ng-bind="vars.locale.default"></option>
-                                    <option ng-repeat="locale in vars.locales" ng-value="locale.tag" >{{locale.name}} ({{locale.tag}})</option>
+                                    <option ng-repeat="locale in vars.locales" ng-value="locale.tag">{{locale.name}} ({{locale.tag}})</option>
                                 </select>
                                 <label for="locale">Locale</label>
                             </div>
@@ -263,31 +310,31 @@
                 </div>
             </div>
         </div>
-        
-        <div class="flex-grow-1 overflow-y-auto" ng-show="view.id=='formats'" >
+
+        <div class="flex-grow-1 overflow-y-auto" ng-show="view.id=='formats'">
             <div class="container">
                 <div class="col-12">Here you can alter the definition of any default datetime formats for the default locale.</div>
                 <div class="col-12 mb-2">This will be applied to every app using the BLL coding or DateTime.</div>
             </div>
             <form role="form"></form>
-                <div class="card mt-1"  ng-repeat="type in vars.dateFormats">                        
-                    <div class="card-header fw-bolder" ng-bind="type.id"></div>
-                    <div class="card-body container">
-                        <div ng-repeat="format in type.formats">
-                            <div class="col-12 col-sm-7 form-group form-floating">
-                                <input type="text" class="form-control hy-nostyle" name="format{{format}}" placeholder="{{format}}" ng-model="vars.locale.dateFormats[format]" ng-change="setFormatExample(format);" ng-model-options="{ debounce: 300 }"/>
-                                <label class="hy-nostyle" for="format{{format}}">{{format}}</label>
-                            </div>
-                            <div class="col-12 col-sm-12 mb-2">{{temp.dateFormats[format] || vars.datesExampleResult[format]}}</div>
+            <div class="card mt-1" ng-repeat="type in vars.dateFormats">
+                <div class="card-header fw-bolder" ng-bind="type.id"></div>
+                <div class="card-body container">
+                    <div ng-repeat="format in type.formats">
+                        <div class="col-12 col-sm-7 form-group form-floating">
+                            <input type="text" class="form-control hy-nostyle" name="format{{format}}" placeholder="{{format}}" ng-model="vars.locale.dateFormats[format]" ng-change="setFormatExample(format);" ng-model-options="{ debounce: 300 }" />
+                            <label class="hy-nostyle" for="format{{format}}">{{format}}</label>
                         </div>
-
+                        <div class="col-12 col-sm-12 mb-2">{{temp.dateFormats[format] || vars.datesExampleResult[format]}}</div>
                     </div>
+
                 </div>
-        </form>
+            </div>
+            </form>
         </div>
         <div class="flex-grow-1 pt-2" ng-show="view.id=='coding' || view.id=='locale_timezone'">
             <div class="sub-view  overflow-y-auto">
-                <div class="card mt-1"  ng-repeat="type in vars.dateOptions">                        
+                <div class="card mt-1" ng-repeat="type in vars.dateOptions">
                     <div class="card-header fw-bolder" ng-bind="type.id"></div>
                     <div class="card-body container">
                         <div class="row" ng-repeat="format in type.formats">
@@ -300,9 +347,71 @@
         </div>
     </div>
 
+    <!-- Functions  -->
+    <div class="main-view d-flex flex-column container g-2" ng-show="view.id=='functions'">
+        <div>
+            <h1 data-i18n="settings.functions">Functions</h1>
+            <p data-i18n="settings.functions_expressions">These functions can be used within
+                (javascript) expression.</p>
+            <p data-i18n="settings.functions_be_aware">Be aware that removing functions could
+                corrupt
+                flows that are using
+                that function.</p>
+
+            <div class="" data-i18n="settings.add_function_text">To create a function, enter a name,
+                press Add Function, then press edit below.</div>                
+            <form role="form">
+                <div class="form-group form-floating">
+                    <input class="form-control" id="functionName" type="text" ng-model="newFunction.name" placeholder="{{__('settings.name') || 'Name'}}"><span class="error">{{messages}}</span>
+                    <label for="functionName" data-i18n="settings.function_name">Function name</label>                    
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-primary" type="button" ng-disabled="!newFunction.name" ng-click="addFunction()" data-i18n="settings.add_function">Add function</button>
+                    <button class="btn btn-secondary" type="button" ng-click="deleteAll()" data-i18n="settings.delete_all">Delete All</button>
+                </div>
+            </form>
+
+        </div>
+        <div class="flex-grow-1 overflow-y-auto">
+            <table st-safe-src="functions" st-table="displayedFunctions" class="table table-striped functions-table">
+                <thead>
+                    <tr>
+                        <th st-sort="name" colspan="3" data-i18n="settings.name">Name</th>
+                    </tr>
+                    <tr>
+                        <th colspan="3">
+                            <input st-search="name" placeholder="{{__('settings.search_for_name') || 'search for name'}}" class="input-sm form-control" type="search" />
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="function in functions">
+                        <td class="fw-bold">{{function.name}}</td>
+                        <td><button ng-click="editFunction(function)" data-i18n="settings.edit">{{__('settings.edit') || 'Edit'}}</button></td>
+                        <td><button ng-click="removeFunction(function)" data-i18n="settings.delete">{{__('settings.delete') || 'Delete'}}</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="editFunction" ng-if="editFunctionItem" class="main-floating">
+        <input class="input-sm form-control" style="height:40px;" ng-model="editFunctionItem.name" />
+        <div>
+            <textarea ui-codemirror ui-codemirror-opts="editorOptions" type="text" class="form-control"  ng-model="editFunctionItem.value" placeholder="function () {\n\n}"></textarea>
+        </div>
+        <div class="main-buttons">
+            <button class="button" ng-click="saveActiveFunction()" data-i18n="settings.save">Save</button>
+            <button class="button" ng-click="saveActiveFunction(true)" data-i18n="settings.save_close">Save & Close</button>
+        </div>
+    </div>
+    </div>
+
     <div class="btn-group fixed-bottom" ng-show="temp.showButtons = (view.id=='formats')">
         <button type="button" class="btn btn-primary hy-nostyle" ng-click="setLocale();">Save</button>
     </div>
+
 
     <script type="text/ng-template" id="display">
         <td>{{variable.name}}</td>
@@ -372,4 +481,5 @@
         }
     </script>
 </body>
+
 </html>

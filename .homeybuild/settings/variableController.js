@@ -1,4 +1,4 @@
-﻿angular.module('variableApp', ['smart-table', 'bll'])
+﻿angular.module('variableApp', ['smart-table', 'bll', 'ui.codemirror'])
     .controller('VariableSettingsController', ['$scope', 'bl', function($scope, bl) {
         //console.log(homeyTools);
 
@@ -8,7 +8,7 @@
         vm.showImportToggle = false;
         vm.importJson = '';
         vm.selected = {};
-        vm.homey;
+        //vm.homey;
         //console.log(window.HT);
 
         $scope.view = {id:undefined, bottom:undefined};
@@ -84,6 +84,7 @@
         };
         vars.datesExampleValue = _.flatMap(vars.dateOptions, 'formats');
         vars.dateFormats = _.filter(vars.dateOptions, (v,i)=>i<=2);
+        $scope.editorOptions = getEditorOptions();
         
         $scope.updateModuleExample = async function() {
             await bl.api("POST", "/decode", {text:vars.moduleExampleValue}, (x)=> vars.moduleExampleResult = x);
@@ -122,7 +123,86 @@
         };
 
 
+
+        $scope.getFunctionFromSettings = function () {
+            vm.homey.get('javascript_functions', (err, newFunctions) => {
+                if (!err && !newFunctions) {
+                    newFunctions = [];
+                }
+                $scope.$apply(() => {
+                    $scope.functions = newFunctions;
+                    $scope.messages = err;
+                });
+            });
+        };
+
+        $scope.savefunctions = function () {
+            vm.homey.set('javascript_functions', $scope.functions);
+            vm.homey.alert(vm.homey.__("settings.functions_saved") || 'Functions saved');
+        };
+
+        $scope.addFunction = function () {
+            try {
+                console.log('addFunction');
+                if ($scope.functions && $scope.functions.filter(function (e) { return e.name == $scope.newFunction.name; }).length > 0) {
+                    $scope.messages = vm.homey.__("settings.function_exists") || "Function already exists.";
+                    return;
+                }
+
+                var func = {
+                    name: $scope.newFunction.name,
+                    value: undefined,
+                    remove: false
+                };
+                $scope.functions.push(func);
+                $scope.storeFunction();
+                $scope.messages = '';
+                $scope.newFunction = {};
+                console.log('addFunction done');
+            } catch (error) {
+                console.log('addFunction error: ' + error);
+                $scope.messages = error;
+                //$scope.messages = JSON.stringify($scope.functions) + '\r\n\r\n' +  JSON.stringify($scope.newFunction) ;
+            }
+        };
+        $scope.deleteAll = function () {
+            vm.homey.confirm(vm.homey.__("settings.delete_all_confirm") || 'Are you sure you wish to delete ALL functions?',  'warning', function (err, val) {
+                if(err) return vm.homey.alert(err);
+                if(!val) return;
+                $scope.$apply(function () {
+                    $scope.functions = [];
+                    $scope.storeFunction();
+                });
+            });
+        };
+        $scope.removeFunction = function (row) {
+            vm.homey.confirm(vm.homey.__("settings.delete_confirm", { functionName: row.name }) || ('Are you sure you wish to delete function ' + row.name + '?'),  'warning', function (err, val) {
+                if(err) return vm.homey.alert(err);
+                if(!val) return;
+                var index = $scope.functions.indexOf(row);
+                $scope.$apply(function () {
+                    $scope.functions.splice(index, 1);
+                    $scope.storeFunction();
+                });
+            });
+        };
+        $scope.editFunction = function (row) {
+            $scope.editFunctionItem = row;
+        };
+        $scope.saveActiveFunction = function (close) {
+            $scope.storeFunction();
+            if (close) $scope.editFunctionItem = null;
+        };
+
+        $scope.storeFunction = function () {
+            vm.homey.set('javascript_functions', angular.copy($scope.functions));
+        };
+
+
+
+
         vm.init = function(homey, scope) {
+            vm.homey = homey;
             bl.init(homey, $scope);
             bl.get("locale", (x)=> {
                 vars.locale = x;
@@ -132,8 +212,8 @@
             bl.api("GET", "/locales", null, (x)=> vars.locales = x );
 
             $scope.updateExamples();
+            $scope.getFunctionFromSettings();
 
-            vm.homey = homey;
             
             loadVariables();
             vm.homey.on('setting_changed', function (name) {
@@ -189,8 +269,9 @@
         vm.removeVariable = function(row) {
             var index = vm.variables.indexOf(row);
             var toDeleteVariable = vm.variables[index];
+
             if(!toDeleteVariable) return;
-            vm.homey.confirm(`Are you sure you wish to delete the variable ${toDeleteVariable.name}?`, 'warning', function(err, val) {
+            vm.homey.confirm(`Are you sure you wish to delete the variable ${toDeleteVariable.name}?`, 'warning', function (err, val) {
                 if(err) return vm.homey.alert(err);
                 if(val) $scope.$apply(()=> {
                     toDeleteVariable.remove = true;
@@ -288,6 +369,41 @@
 
             vm.homey.set('deleteall', dummyChangedObject, function (err) { console.log(err)});            
         }
+
+        
+    function getEditorOptions() {
+        
+        var r = {
+            lineWrapping: true,
+            lineNumbers: true,
+            //readOnly: 'nocursor',
+            mode: 'javascript',//'sql',
+            autoRefresh: true,
+            theme: 'mdn-like',
+
+            indentWithTabs: true,
+            smartIndent: true,
+            matchBrackets: true,
+            autofocus: true,
+            //hintOptions: {
+            //    tables: {
+            //        users: ["name", "score", "birthDate"],
+            //        countries: ["name", "population", "size"]
+            //    }
+            //},
+            extraKeys: {
+                "F11": function (cm) {
+                    cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+                },
+                "Esc": function (cm) {
+                    if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+                },
+                "Ctrl-Space": "autocomplete"
+            }
+        };
+        return r;
+    }
+
     }]);
 
 function getShortDate() {
