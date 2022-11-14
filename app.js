@@ -417,7 +417,7 @@ class BetterLogic extends Homey.App {
 		timezone = this.homey.clock.getTimezone();
 		
 				
-		this.bl = new BL({
+		this.bl = BL.init({
 			homey:this.homey,
 			modules:[
 				"_",
@@ -435,9 +435,9 @@ class BetterLogic extends Homey.App {
 		//BL.decode()
 		
 		this.bl.then(async (x)=> {
+			this.bl = x;
 			
 			if(!timeoutset)(timeoutset=true) | await this.homey.api.realtime("running");
-			let a = BL.L;
 			//this.dateTime = new DateTime(this.homey.i18n.getLanguage(), timezone);
 			//console.log(this.dateTime.toString('ddd'));
 
