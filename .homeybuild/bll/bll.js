@@ -137,10 +137,11 @@ class BLL {
     }
 
     
-    async decode(text, opts={locale, timeZone}) {
+    async decode(text, {locale, timeZone}={}) {
         try {         
             BL.homey.log('decode: ', arguments);
-            return await BL.l.post('decode', {text, date, locale, timeZone});  
+            //BL.homey.log('decode options: ', options);
+            return await BL.l.post('decode', {text, locale, timeZone});  
         } catch (error) {
             if(BL.l.silent===true) return text;
             else throw error;

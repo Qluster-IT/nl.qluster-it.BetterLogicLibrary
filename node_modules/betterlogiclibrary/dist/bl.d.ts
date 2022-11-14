@@ -9,11 +9,11 @@ export class BL {
      * @description Decode the given {@link String} for any BLL codings and returns the decoded string.
      * @static
      * @async
-     * @param {string} text
+     * @param {string} text The text which could contain BLL coding and needs be be converted.
      * @return {string} A decoded {@link String} if BLL is running, otherwise it will return the original {@link String}.
      * @memberof BL
      */
-    static decode(text: string, opts?: {
+    static decode(text: string, { locale, timeZone }?: {
         locale: any;
         timeZone: any;
     }, ...args: any[]): string;
@@ -33,9 +33,17 @@ export class BL {
      * @description The DateTime library, used for converting date and times to strings formatted for the user.
      * @type {typeof import('../dist/dateTime')} @readonly @static @memberof BL */
     static readonly get datetime(): typeof import("../dist/dateTime");
+    static init({ homey, modules, silent, waitTime, waitForBll }?: {
+        homey: any;
+        modules: any;
+        silent: any;
+        waitTime: any;
+        waitForBll: any;
+    }): Promise<BL>;
     /**
      * Creates an instance of BL.
      * @param {[{ homey:String, modules, silent, waitTime, waitForBll }={ waitForBll: true }]} [{ homey, modules, silent, waitTime, waitForBll }={ waitForBll: true }] @memberof BL
+     * @returns {String} Returns a Promise! You can await this contructor.
      */
     constructor({ homey, modules, silent, waitTime, waitForBll }?: [{
         homey: string;

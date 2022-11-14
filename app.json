@@ -16,9 +16,7 @@
     "en": ["variable", "bbl", "bl", "coding", "date", "time", "datetime"],
     "nl": ["variabelen", "bbl", "bl", "coding", "datum", "tijd", "datumtijd"]
   },
-  "permissions": [
-    "homey:app:net.i-dev.betterlogic"
-  ],
+  "permissions": ["homey:app:net.i-dev.betterlogic"],
   "images": {
     "large": "/assets/images/large.png",
     "small": "/assets/images/small.png"

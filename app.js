@@ -432,7 +432,7 @@ class BetterLogic extends Homey.App {
 		
 		
 
-		//BL.decode
+		//BL.decode()
 		
 		this.bl.then(async (x)=> {
 			

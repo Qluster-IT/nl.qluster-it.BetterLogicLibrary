@@ -25,7 +25,7 @@ export class BLL {
     post(url: any, opt: any): Promise<any>;
     get(url: any, opt: any): Promise<any>;
     getAppApi(appId: any, appname: any): any;
-    decode(text: any, opts?: {
+    decode(text: any, { locale, timeZone }?: {
         locale: any;
         timeZone: any;
     }, ...args: any[]): Promise<any>;
