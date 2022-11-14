@@ -7,7 +7,7 @@ let timezone;
 
 const util = require('util');
 
-const {BL} = require('./lib/bll/bl.js');
+const {BL} = require('betterlogiclibrary');
 const sandbox = require('./bll/sandbox');
 const DateTime = require('./bll/dateTime.js');
 
@@ -430,6 +430,8 @@ class BetterLogic extends Homey.App {
 			if(!timeoutset)(timeoutset=true) | await this.homey.api.realtime("running");
 		}, 10*10000);
 		
+		
+
 		//BL.decode
 		
 		this.bl.then(async (x)=> {

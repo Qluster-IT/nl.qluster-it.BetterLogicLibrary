@@ -11,30 +11,55 @@ let _locale, _timeZone, _date, _codes;
 
 class dateTimeStatics { }
 
+/**
+ * Codes
+ *
+ * @class Codes
+ */
 class Codes {
+  
 
   constructor() {   
     this.init(); 
   }
   init() {
+
+    /** @private */    
     this.dateTimeCodesArr = BL._.sortBy(BL._.map(DateTime.dateTimeCodes, (x, key) => { return { key, val: x, customisable:true }; }, 'key.length'));
+    /** @private */
     this.dateCodesArr = BL._.sortBy(BL._.map(DateTime.dateCodes, (x, key) => { return { key, val: x, customisable:true }; }, 'key.length'));
+    /** @private */
     this.timeCodesArr = BL._.sortBy(BL._.map(DateTime.timeCodes, (x, key) => { return { key, val: x, customisable:true }; }, 'key.length'));
     
+    
+    /** @private */
     this.dayPeriodCodesArr = BL._.sortBy(BL._.map(DateTime.dayPeriodCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
+    /** @private */
     this.eraCodesArr = BL._.sortBy(BL._.map(DateTime.eraCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
+    /** @private */
     this.isoCodesArr = BL._.sortBy(BL._.map(DateTime.isoCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
+    /** @private */
     this.timeZoneCodesArr = BL._.sortBy(BL._.map(DateTime.timeZoneCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
+    /** @private */
     this.yearCodesArr = BL._.sortBy(BL._.map(DateTime.yearCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
+    /** @private */
     this.monthCodesArr = BL._.sortBy(BL._.map(DateTime.monthCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
+    /** @private */
     this.dayCodesArr = BL._.sortBy(BL._.map(DateTime.dayCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
+    /** @private */
     this.hourCodesArr = BL._.sortBy(BL._.map(DateTime.hourCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
+    /** @private */
     this.hour12CodesArr = BL._.sortBy(BL._.map(DateTime.hour12Codes, (x, key) => { return { key, val: x }; }, 'key.length'));
+    /** @private */
     this.amPmCodesArr = BL._.sortBy(BL._.map(DateTime.amPmCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
+    /** @private */
     this.minuteCodesArr = BL._.sortBy(BL._.map(DateTime.minuteCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
+    /** @private */
     this.secondCodesArr = BL._.sortBy(BL._.map(DateTime.secondCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
+    /** @private */
     this.fractionalSecondCodesArr = BL._.sortBy(BL._.map(DateTime.fractionalSecondCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
 
+    /** @private */
     this.arrays = {};
     this.arrays['dayPeriodCodesArr'] = 'getDayPeriod';
     this.arrays['dateTimeCodesArr'] = 'getDateTime';
@@ -52,6 +77,7 @@ class Codes {
     this.arrays['minuteCodesArr'] = 'getMinute';
     this.arrays['secondCodesArr'] = 'getSecond';
     this.arrays['fractionalSecondCodesArr'] = 'getFractionalSecond';
+    /** @private */
     this.array = BL._.sortBy(BL._.flatMap(this.arrays, (val, key)=> { return BL._.map(this[key], (code, format)=> { return { code:code.key, format:code.val, func:val, customisable:code.customisable };  });  }), (x)=>-x.code.length); //return { name:key, func:val, list:this[key]}; });
   
   }
@@ -64,7 +90,8 @@ class DateTime {
   static get timeZone() { return dateTimeStatics.timeZone; }
 
   static get date() { return new Date(); }
-  /** @type {Codes} */
+
+  /** @type {Codes} @private */
   static get codes() {    
     if(!dateTimeStatics.codes) {
       dateTimeStatics.codes = new Codes();
@@ -73,6 +100,7 @@ class DateTime {
     return dateTimeStatics.codes;
   }
 
+  /** @private */
   static async init(bll) {
     let locale = await bll.get('locale');
     dateTimeStatics.formats = locale ? locale.dateFormats : undefined;
@@ -105,6 +133,8 @@ class DateTime {
       return r;
     }
   }
+  
+  /** @private */
   static convertToDate(date) {
     if(!date) return date;
     if(date instanceof Date) return date;
@@ -113,6 +143,7 @@ class DateTime {
     if(typeof(date)=='number') return new Date(date);
   }
 
+  /** @private */
   static updateFormats() {
     this.codes.init();
     if(dateTimeStatics.formats) for (const format in dateTimeStatics.formats) {
@@ -144,6 +175,7 @@ class DateTime {
   get date() { return _date; }
   set date(v) { _date = v; }
   
+  /** @private */
   get(dt) { return new DateTime(this.locale, this.timeZone, dt || new Date()); }
 
 
@@ -153,27 +185,13 @@ class DateTime {
     this.date = date;
   }
 
+  /** @private */
   getString(options) {
     options.timeZone = this.timeZone || DateTime.timeZone;
     //BL.homey.log('getString', this.locale, (this.date || new Date()).toLocaleString(this.locale, options));
     return (this.date || new Date()).toLocaleString(this.locale || DateTime.locale, options);
   }
-  // getNow() {
-  //   let r =  (this.date||new Date()).toLocaleString(this.locale,
-  //     {
-  //     hour12: false,
-  //     timeZone: this.timeZone,
-  //     hour: "2-digit",
-  //     minute: "2-digit",
-  //     day: "2-digit",
-  //     month: "2-digit",
-  //     second: "2-digit",
-  //     year: "numeric"
-  //     });
-  //     return r;
-  // }  
-
-
+  
   /**
    * @param {"full"|"long"|"medium"|"short"} format * @returns {String}
    */
@@ -299,6 +317,7 @@ class DateTime {
 
 
 
+  /** @private */
   static dateTimeCodes = { 'DATETIMELONG': 'full', 'datetimelong': 'full', 'datetimeshort': 'short', 'LONGDATETIME': 'full', 'longdatetime': 'full', 'shortdatetime': 'short', 'DATETIME': 'long', 'datetime': 'medium' };
   /**
    * @param {"DATETIMELONG"|"datetimelong"|"DATETIME"|"datetime"|"datetimeshort"} code * @returns {String}
@@ -308,6 +327,7 @@ class DateTime {
   }
 
 
+  /** @private */
   static dateCodes = { 'DATELONG': 'full', 'datelong': 'full', 'dateshort': 'short',  'LONGDATE': 'full', 'longdate': 'full', 'shortdate': 'short', 'DATE': 'long', 'date': 'medium' };
   /**
    * @param {"DATELONG"|"datelong"|"DATE"|"date"|"dateshort"} code * @returns {String}
@@ -316,6 +336,7 @@ class DateTime {
     return this.getDateByFormat(code && DateTime.dateCodes[code] ? DateTime.dateCodes[code] : 'long');
   }
 
+  /** @private */
   static timeCodes = { 'TIMELONG': 'full', 'timelong': 'full', 'timeshort': 'short', 'LONGTIME': 'full', 'longtime': 'full', 'shorttime': 'short', 'TIME': 'long', 'time': 'medium' };
   /**
    * @param {"TIMELONG"|"timelong"|"TIME"|"time"|"timeshort"} code * @returns {String}
@@ -324,6 +345,7 @@ class DateTime {
     return this.getTimeByFormat(code && DateTime.timeCodes[code] ? DateTime.timeCodes[code] : 'long');
   }
 
+  /** @private */
   static dayPeriodCodes = { 'PERIOD': 'long', 'period': 'short' };
   /**
    * @param {"PERIOD"|"period"} code * @returns {String}
@@ -332,6 +354,7 @@ class DateTime {
     return this.getDayPeriodByFormat(code && DateTime.dayPeriodCodes[code] ? DateTime.dayPeriodCodes[code] : 'long');
   }
 
+  /** @private */
   static  eraCodes = { 'ERA': 'long', 'era': 'short' };
   /**
    * @param {"ERA"|"era"} code * @returns {String}
@@ -342,6 +365,7 @@ class DateTime {
 
   
 
+  /** @private */
   static timeZoneCodes = { 'KK': 'KK', 'kk':'kk' };
   /**
    * @param {"KK"|"kk"} code * @returns {String}
@@ -350,6 +374,7 @@ class DateTime {
     return this.getTimeZoneByFormat(code);
   }
 
+  /** @private */
   static yearCodes = { 'yyyy': 'numeric', 'yy': '2-digit' };
   /**
    * @param {"yyyy"|"yy"} code * @returns {String}
@@ -358,6 +383,7 @@ class DateTime {
     return this.getYearByFormat(code && DateTime.yearCodes[code] ? DateTime.yearCodes[code] : 'numeric');
   }
 
+  /** @private */
   static monthCodes = { 'MMMM': 'long', 'MMM': 'short', 'MM': '2-digit', 'M': 'numeric' };
   /**
    * @param {"MMMM"|"MMM"|"MM"|"M"} format * @returns {String}
@@ -366,6 +392,7 @@ class DateTime {
     return this.getMonthByFormat(code && DateTime.monthCodes[code] ? DateTime.monthCodes[code] : 'numeric');
   }
 
+  /** @private */
   static dayCodes = { 'dddd': 'long', 'ddd': 'short', 'dd': '2-digit', 'd': 'numeric' };
   /**
    * @param {"dddd"|"ddd"|"dd"|"d"} format * @returns {String}
@@ -374,6 +401,7 @@ class DateTime {
     return code == 'dddd' || code == 'ddd' ? (this.getWeekdayByFormat(code && DateTime.dayCodes[code] ? DateTime.dayCodes[code] : 'numeric')) : (this.getDayByFormat(code && DateTime.dayCodes[code] ? DateTime.dayCodes[code] : 'numeric'));
   }
 
+  /** @private */
   static hourCodes = { 'HH': '2-digit', 'H': 'numeric' };
   /**
    * @param {"HH"|"H"} format * @returns {String}
@@ -382,6 +410,7 @@ class DateTime {
     return this.getHourByFormat(code && DateTime.hourCodes[code] ? DateTime.hourCodes[code] : 'numeric');
   }
 
+  /** @private */
   static hour12Codes = { 'hh': '2-digit', 'h': 'numeric' };
   /**
    * @param {"hh"|"h"} format * @returns {String}
@@ -389,6 +418,8 @@ class DateTime {
   getHour12(code) {
     return removeNonNumeric(this.getHour12ByFormat(code && DateTime.hour12Codes[code] ? DateTime.hour12Codes[code] : 'numeric'));
   }
+  
+  /** @private */
   static amPmCodes = { 'tt': '2-digit' };
   /**
    * @param {"tt"} format * @returns {String}
@@ -397,6 +428,7 @@ class DateTime {
     return removeNumeric(this.getHour12ByFormat('numeric'));
   }
   
+  /** @private */
   static minuteCodes = { 'mm': '2-digit', 'm': 'numeric' };
   /**
    * @param {"mm"|"m"} format * @returns {String}
@@ -405,6 +437,7 @@ class DateTime {
     return this.getMinuteByFormat(code && DateTime.minuteCodes[code] ? DateTime.minuteCodes[code] : 'numeric');
   }
 
+  /** @private */
   static secondCodes = { 'ss': '2-digit', 's': 'numeric' };
   /**
    * @param {"ss"|"s"} format * @returns {String}
@@ -414,6 +447,7 @@ class DateTime {
   }
 
 
+  /** @private */
   static fractionalSecondCodes = { 'fff': 3, 'ff': 2, 'f': 1 };
   /**
    * @param {"fff"|"ff"|"f"} format * @returns {String}
@@ -422,6 +456,7 @@ class DateTime {
     return this.getFractionalSecondByFormat(code && DateTime.fractionalSecondCodes[code] ? DateTime.fractionalSecondCodes[code] : 3);
   }
 
+  /** @private */
   static isoCodes = { 'ISO': 'ISO' };
   /**
    * @param {"ISO"} format * @returns {String}

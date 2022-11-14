@@ -77,10 +77,7 @@ class BLL {
         }
         // let coding = await this.getLibrary('coding'); 
         // let codingClass = this.requireFromString(coding.file, '');
-        // BL.coding = BLL.coding = new codingClass();
-        // BL.prototype.decode = BLL.prototype.decode = async (text) => {
-        //       return await BL.l.post('decode', {text});        
-        // };
+        // BL.coding = BLL.coding = new codingClass();        
         return this;
     }
     async getApi() {
@@ -140,13 +137,13 @@ class BLL {
     }
 
     
-    async decode(text, date, locale, timeZone) {
+    async decode(text, opts={locale, timeZone}) {
         try {         
             BL.homey.log('decode: ', arguments);
             return await BL.l.post('decode', {text, date, locale, timeZone});  
         } catch (error) {
             if(BL.l.silent===true) return text;
-            if(BL.l.silent!==true) throw error;
+            else throw error;
         }
         
     }
