@@ -1,4 +1,5 @@
-New: The Better Logic App has been rebranded to Better Logic Library.\nCheck out the new App Settings for the new features, like BLL coding in supported apps!
+New: The Better Logic App has been rebranded to Better Logic Library.
+Check out the new App Settings for the new features, like BLL coding in supported apps!
 
 New: Manage variables directly in flows!
 

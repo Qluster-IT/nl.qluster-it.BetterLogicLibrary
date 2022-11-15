@@ -1,6 +1,20 @@
-An advanced logic library with variable management for Homey.
+New: The Better Logic App has been rebranded to Better Logic Library.
+Check out the new App Settings for the new features, like BLL coding in supported apps!
 
-Variables can be managed from the settings screen. All variables must be defined before using them in the flows.
+
+New: Manage variables directly in flows!
+
+Just type a variable name within any Then- and Andcard and select it from the list: the variable will be automaticly created.
+If you want to use the tag, press save first.
+
+Variables that were automaticly created from within flows will also be automaticly deleted when they are no longer used in flowcards.
+
+Variables can still also be managed from the settings screen. These variables will not be automaticly deleted if not used, but must be manually deleted.
+
+And the Delete All button has a confirm now!
+
+
+An advanced logic library with variable and library management for Homey.
 
 
 V1.0.5
