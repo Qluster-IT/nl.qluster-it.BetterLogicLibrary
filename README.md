@@ -1,6 +1,8 @@
 New: The Better Logic App has been rebranded to Better Logic Library.
 Check out the new App Settings for the new features, like BLL coding in supported apps!
 
+BLL now has new expression cards, but also a new coding for text arguments within flowcards.
+For instance, when you place this within a textargument:  - Hello, today is {[date("dddd")]} -, BLL will automaticly find those expressions within the texts and decode them, resulting in - Hello, today is monday - .
 
 New: Manage variables directly in flows!
 
