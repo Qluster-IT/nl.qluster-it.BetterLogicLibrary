@@ -490,8 +490,29 @@ class DateTime {
     if(!coding || !coding.length) return coding;
     let r = '';
     let a = noCustomized===true ? BL._.filter(DateTime.codes.array, x=>!x.customized) : DateTime.codes.array; 
+    let stringMode = false;
     for (let i=0;i<coding.length;i++) {
       let s = false;
+
+      if(coding.substr(i,2)==="\"\"") {
+        r+="\"";
+        coding = coding.substr(0,i) + coding.substr(i+2);
+        i--;
+        continue;
+      }
+      
+      if(coding.substr(i,1)==="\"") {
+        stringMode = !stringMode;
+        coding = coding.substr(0,i) + coding.substr(i+1);
+        i--;
+        continue;
+      }
+      if(stringMode) {
+        r+=coding[0];
+        coding = coding.substr(0,i) + coding.substr(i+1);
+        i--;
+        continue;
+      }
       
       BL._.each(a, (code,funcKey)=> { 
         if(s) return;

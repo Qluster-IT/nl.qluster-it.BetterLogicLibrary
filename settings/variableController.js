@@ -76,7 +76,7 @@
                 },
                 {
                     id:'Other',
-                    formats:['PERIOD', 'period', 'ERA', 'era', 'ISO']
+                    formats:['PERIOD', 'period', 'ERA', 'era', 'ISO', 'dd "text" yy', '""']
                 }
             ],
             formats :undefined
@@ -374,23 +374,28 @@
     function getEditorOptions() {
         
         var r = {
-            lineWrapping: true,
-            lineNumbers: true,
-            //readOnly: 'nocursor',
-            mode: 'javascript',//'sql',
-            autoRefresh: true,
-            theme: 'mdn-like',
-
-            indentWithTabs: true,
-            smartIndent: true,
-            matchBrackets: true,
-            autofocus: true,
             //hintOptions: {
             //    tables: {
             //        users: ["name", "score", "birthDate"],
             //        countries: ["name", "population", "size"]
             //    }
             //},
+            autoCloseBrackets:true,
+            lineWrapping: true,
+            lineNumbers: true,
+            //readOnly: 'nocursor',
+            mode: 'javascript',//'sql',
+            autoRefresh: true,
+            theme: 'mdn-like',
+            scrollbarStyle: "simple",
+
+            indentWithTabs: true,
+            smartIndent: true,
+            matchBrackets: true,
+            autofocus: true,
+            foldGutter: true,
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+
             extraKeys: {
                 "F11": function (cm) {
                     cm.setOption("fullScreen", !cm.getOption("fullScreen"));
@@ -398,7 +403,8 @@
                 "Esc": function (cm) {
                     if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
                 },
-                "Ctrl-Space": "autocomplete"
+                "Ctrl-Space": "autocomplete",
+                "Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); }
             }
         };
         return r;

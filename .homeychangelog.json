@@ -109,5 +109,11 @@
   },
   "2.1.8": {
     "en": "Change: The new Expressioncards will use default text-arguments instead of code-arguments, to support default flows."
+  },
+  "2.1.9": {
+    "en": "Added: String posibility within date-formats by using double-quotes \"text\"."
+  },
+  "2.1.10": {
+    "en": "Improved: Functions editing view in App Settings is more advanced."
   }
 }
