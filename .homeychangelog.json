@@ -91,5 +91,17 @@
   },
   "2.1.2": {
     "en": "Rebrand: The Better Logic App has been rebranded to Better Logic Library.\nCheck out the new App Settings for the new features, like BLL coding in supported apps!"
+  },
+  "2.1.3": {
+    "en": "Rebrand: The Better Logic App has been rebranded to Better Logic Library.\nCheck out the new App Settings for the new features, like BLL coding in supported apps!"
+  },
+  "2.1.4": {
+    "en": "Added: Dates will also be converted from string if it matches the Homey Localization (for now that means GB), f.i.: 11/15/2022, 6:00:00 PM."
+  },
+  "2.1.5": {
+    "en": "Added: Method d() within BLL coding or expressions: converts a string into a date."
+  },
+  "2.1.6": {
+    "en": "Removed: Method d() within BLL coding or expressions: No need yet: EN by default."
   }
 }

@@ -140,7 +140,8 @@ class DateTime {
     if(date instanceof Date) return date;
     if(typeof(date)=='string' && date.length==="2022-11-10T19:17:01.439Z".length && date.endsWith('Z') && date.substr(10,1)=='T') return new Date(date);
     if(typeof(date)=='string' && /^\d+$/.test(date)) return new Date(Number.parseInt(date));
-    if(typeof(date)=='number') return new Date(date);
+    if(typeof(date)=='number') return new Date(date);    
+    if(typeof(date)=='string' ) return new Date(date); // EN by default!
   }
 
   /** @private */

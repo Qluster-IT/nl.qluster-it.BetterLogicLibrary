@@ -610,6 +610,7 @@ class BetterLogic extends Homey.App {
 			math : BL.math,
 			//datetime : BL.datetime,
 			date : (coding, date, locale, timeZone) => BL.datetime.toString(coding, date, locale, timeZone)
+			//d : (s) => new Date(s)
 		};
 		if (this.functions && this.functions.length > 0) for (let i = 0; i < this.functions.length; i++) {
 			try {

@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "2.1.2",
+  "version": "2.1.6",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -501,9 +501,9 @@
           "de": "BL Bezeichnung setzen (als Tag)"
         },
         "titleFormatted": {
-          "en": "Execute BL [[expression]] with optional [[argument]] (as Tag)",
-          "nl": "Voer BL [[expression]] uit met optioneel [[argument]] (als Tag)",
-          "de": "Führen Sie BL [[expression]] aus mit optional [[argument]] (als Tag)"
+          "en": "Execute [[expression]] with optional [[argument]] (as Tag)",
+          "nl": "Voer [[expression]] uit met optioneel [[argument]] (als Tag)",
+          "de": "Führen Sie [[expression]] aus mit optional [[argument]] (als Tag)"
         },
         "args": [          
           {
@@ -511,9 +511,9 @@
             "type": "code",
             "language": "homeyscript",
             "placeholder": {
-              "en": "BL Expression",
-              "nl": "BL Expression",
-              "de": "BL Bezeichnung"
+              "en": "BLL Expression",
+              "nl": "BLL Expression",
+              "de": "BLL Bezeichnung"
             }
           },
           {
