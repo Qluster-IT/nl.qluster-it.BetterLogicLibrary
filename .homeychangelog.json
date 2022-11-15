@@ -103,5 +103,11 @@
   },
   "2.1.6": {
     "en": "Removed: Method d() within BLL coding or expressions: No need yet: EN by default."
+  },
+  "2.1.7": {
+    "en": "Change: The new Expressioncards will use default text-arguments instead of code-arguments, to support default flows."
+  },
+  "2.1.8": {
+    "en": "Change: The new Expressioncards will use default text-arguments instead of code-arguments, to support default flows."
   }
 }

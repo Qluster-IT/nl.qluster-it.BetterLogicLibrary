@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "2.1.6",
+  "version": "2.1.8",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -456,9 +456,9 @@
           "de": "BL Bezeichnung setzen"
         },
         "titleFormatted": {
-          "en": "Set [[variable]] to [[expression]] with optional [[argument]]",
-          "nl": "Zet [[variable]] naar [[expression]] met optioneel [[argument]]",
-          "de": "Setze [[variable]] auf [[expression]] mit optional [[argument]]"
+          "en": "Set [[variable]] to [[expression]]",
+          "nl": "Zet [[variable]] naar [[expression]]",
+          "de": "Setze [[variable]] auf [[expression]]"
         },
         "args": [
           {
@@ -470,25 +470,11 @@
           },
           {
             "name": "expression",
-            "type": "code",
-            "language": "homeyscript",
+            "type": "text",
             "placeholder": {
               "en": "BL Expression",
               "nl": "BL Expression",
               "de": "BL Bezeichnung"
-            }
-          },
-          {
-            "name": "argument",
-            "type": "text",
-            "required": false,
-            "title": {
-              "en": "Argument",
-              "nl": "Argument"
-            },
-            "placeholder": {
-              "en": "Argument",
-              "nl": "Argument"
             }
           }
         ]
@@ -501,32 +487,18 @@
           "de": "BL Bezeichnung setzen (als Tag)"
         },
         "titleFormatted": {
-          "en": "Execute [[expression]] with optional [[argument]] (as Tag)",
-          "nl": "Voer [[expression]] uit met optioneel [[argument]] (als Tag)",
-          "de": "Führen Sie [[expression]] aus mit optional [[argument]] (als Tag)"
+          "en": "Execute [[expression]] (as Tag)",
+          "nl": "Voer [[expression]] (als Tag)",
+          "de": "Führen Sie [[expression]] (als Tag)"
         },
         "args": [          
           {
             "name": "expression",
-            "type": "code",
-            "language": "homeyscript",
+            "type": "text",
             "placeholder": {
               "en": "BLL Expression",
               "nl": "BLL Expression",
               "de": "BLL Bezeichnung"
-            }
-          },
-          {
-            "name": "argument",
-            "type": "text",
-            "required": false,
-            "title": {
-              "en": "Argument",
-              "nl": "Argument"
-            },
-            "placeholder": {
-              "en": "Argument",
-              "nl": "Argument"
             }
           }
         ],
