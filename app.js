@@ -514,14 +514,7 @@ class BetterLogic extends Homey.App {
 			let execute_bl_expression = this.homey.flow.getActionCard('execute_bl_expression');
 			execute_bl_expression.registerRunListener(async (args, state) => {
 				if(args.code && !args.expression) {
-					let val = JSON.stringify(await this.runSandBox(args.code));
-					// if (true) {
-					// 	this.homey.api.realtime('log', {
-					// 	  text: util.format(val),
-					// 	  script: "id"
-					// 	});
-					//   }
-					// return {string:val};
+					let val = JSON.stringify(await this.runSandBox(args.code, {arg:args.argument}));
 					throw new Error("Result = " + val);
 				}
 				try {
@@ -533,7 +526,7 @@ class BetterLogic extends Homey.App {
 
 					if (args.expression !== undefined && args.expression !== 'undefined') {
 						
-						let value = await this.runSandBox(args.expression);
+						let value = await this.runSandBox(args.expression, {arg:args.argument});
 						variableManager.updateVariable(result.name, value, result.type);
 
 					}
@@ -552,12 +545,12 @@ class BetterLogic extends Homey.App {
 			this.homey.flow.getActionCard('execute_bl_expression_tag').registerRunListener(async (args, state) => {
 				try {
 					if(args.code && !args.expression) {
-						let val = JSON.stringify(await this.runSandBox(args.code));
+						let val = JSON.stringify(await this.runSandBox(args.code, {arg:args.argument}));
 						throw new Error("Result = " + val);
 					}
 
 					if (args.expression !== undefined && args.expression !== 'undefined') {
-						let value = this.runSandBox(args.expression);
+						let value = this.runSandBox(args.expression, {arg:args.argument});
 						let tokens = { text: '', number: 0, boolean: false };
 						switch (typeof (value)) {
 							case "string": tokens.text = value; break;
@@ -638,7 +631,7 @@ class BetterLogic extends Homey.App {
 
 	codingRegExp = /(?:(?<!{)){\[(((?!]})(.))+?)\]}(?:(?!}))/gsi;
 	
-	runCoding({ text, locale })  {
+	runCoding({ text, locale, arg })  {
 		try {
 				
 			let codingsToRun = {};
@@ -647,7 +640,7 @@ class BetterLogic extends Homey.App {
 			
 			for (let i = 0; i < codingsFound.length; i++) {
 				const code = codingsFound[i][1];
-				if(!codingsToRun[code]) codingsToRun[code] = this.runSandBox(code, {locale});
+				if(!codingsToRun[code]) codingsToRun[code] = this.runSandBox(code, {locale, arg});
 			}
 
 
@@ -683,10 +676,11 @@ class BetterLogic extends Homey.App {
 
 
 
-	runSandBox(code, {locale, date, timeZone}={}) {
+	runSandBox(code, {locale, date, timeZone, arg}={}) {
 		var context = BL._.clone(this.context);
 		//if(locale) {
 			//context.locale = locale;
+			context.arg = arg;
 			context.date = (coding, _date, _locale, _timeZone) => BL.datetime.toString(coding, _date||date, _locale||locale, _timeZone||timeZone); 
 		//}
 		return sandbox(code, context, {timeout:55*1000}); //55 seconds timeout
