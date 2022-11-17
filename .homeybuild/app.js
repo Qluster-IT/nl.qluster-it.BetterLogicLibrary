@@ -26,7 +26,7 @@ class BetterLogic extends Homey.App {
 		minute: "2-digit",
 		day: "2-digit",
 		month: "2-digit",
-		seconds: "2-digit", // not included in nl.
+		second: "2-digit",
 		year: "numeric"
 		});
 
@@ -428,7 +428,7 @@ class BetterLogic extends Homey.App {
 		let timeoutset = false;
 		setTimeout(async ()=> {
 			if(!timeoutset)(timeoutset=true) | await this.homey.api.realtime("running");
-		}, 10*10000);
+		}, 10*1000);
 		
 		
 

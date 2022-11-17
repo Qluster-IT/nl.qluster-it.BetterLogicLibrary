@@ -45,10 +45,10 @@ export class BL {
     /** @private */
     private init;
     homey: any;
+    required: any;
     silent: any;
     modules: any;
     waitTime: any;
-    required: any;
     api: any;
     /** @private */
     private initBll;
