@@ -513,10 +513,10 @@ class BetterLogic extends Homey.App {
 			
 			let execute_bl_expression = this.homey.flow.getActionCard('execute_bl_expression');
 			execute_bl_expression.registerRunListener(async (args, state) => {
-				if(args.code && !args.expression) {
-					let val = JSON.stringify(await this.runSandBox(args.code, {arg:args.argument}));
-					throw new Error("Result = " + val);
-				}
+				// if(args.code && !args.expression) {
+				// 	let val = JSON.stringify(await this.runSandBox(args.code, {arg:args.argument}));
+				// 	throw new Error("Result = " + val);
+				// }
 				try {
 				
 					var result = args.variable ? variableManager.getVariable(args.variable.name) : null;
@@ -544,10 +544,10 @@ class BetterLogic extends Homey.App {
 			
 			this.homey.flow.getActionCard('execute_bl_expression_tag').registerRunListener(async (args, state) => {
 				try {
-					if(args.code && !args.expression) {
-						let val = JSON.stringify(await this.runSandBox(args.code, {arg:args.argument}));
-						throw new Error("Result = " + val);
-					}
+					// if(args.code && !args.expression) {
+					// 	let val = JSON.stringify(await this.runSandBox(args.code, {arg:args.argument}));
+					// 	throw new Error("Result = " + val);
+					// }
 
 					if (args.expression !== undefined && args.expression !== 'undefined') {
 						let value = this.runSandBox(args.expression, {arg:args.argument});

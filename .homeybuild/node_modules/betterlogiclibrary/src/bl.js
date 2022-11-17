@@ -82,10 +82,10 @@ static async decode(text, {locale, timeZone}={}) { //text, {locale}
         this.waitTime = waitTime;
         //this.required = required;
 
-        let defer = new Defer(5 * 60 * 1000, null, () => {
+        let defer = new Defer(15 * 60 * 1000, null, () => {
             if (this.silent === false) {
                 this.homey.notifications.createNotification({ excerpt: `Warning: Better Logic Library could not be loaded and is required! Install the Better Logic Library App to continue to use this app (${this.homey.app.id}).` });
-                defer.reject(this);
+                defer.reject(new Error('The Better Logic Library could not be loaded.'));
             } else defer.resolve(this);
         });
         if(this.homey.app.id!=='net.i-dev.betterlogic' && !await this.homey.settings.get('notification_bll_supported')) {
@@ -93,7 +93,11 @@ static async decode(text, {locale, timeZone}={}) { //text, {locale}
             this.homey.settings.set('notification_bll_supported', true);
         }
         if (!this.api) {
-            this.api = await this.getAppApi('net.i-dev.betterlogic', 'Better Logic Library', true);
+            try {             
+                this.api = await this.getAppApi('net.i-dev.betterlogic', 'Better Logic Library', true);   
+            } catch (error) {
+                this.homey.error(error);
+            }
 
             if (this.homey.app.id !== 'net.i-dev.betterlogic') this.api.on('realtime', async (event) => {
                 if (event === 'running') {

@@ -115,5 +115,8 @@
   },
   "2.1.10": {
     "en": "Improved: Functions editing view in App Settings is more advanced."
+  },
+  "2.1.11": {
+    "en": "Improved: Performance."
   }
 }
