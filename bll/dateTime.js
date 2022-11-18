@@ -109,19 +109,19 @@ class DateTime {
     DateTime.updateFormats();
     bll.api.on('realtime', (event, data)=> {
       switch (event) {
-        case "bllSetLocale": dateTimeStatics.locale = data.default; dateTimeStatics.formats = data.dateFormats;DateTime.updateFormats(); //BL.homey.log('bllSetLocale', data);
+        case "bllSetLocale": dateTimeStatics.locale = data.default; dateTimeStatics.formats = data.dateFormats;DateTime.updateFormats();
       }
     });
   }
 
   static toString(format, date, locale, timeZone) {
     if(!format) throw new Error("Format is required.");
-    BL.homey.log('datetime.toString', arguments);
+    //BL.homey.log('datetime.toString', arguments);
     if(!date || !BL._.isArray(date)) {
       let dt = new DateTime(locale, timeZone, date? DateTime.convertToDate(date) : DateTime.date);
       return dt.toString(format);
     } else if (BL._.isArray(date)){
-      BL.homey.log('isArray');
+      //BL.homey.log('isArray');
       let r = {};
       for (const _date of date) {
         //BL.homey.log(new DateTime(locale || DateTime.locale, timeZone || DateTime.timeZone, DateTime.convertToDate(_date)).toString(format));
@@ -152,12 +152,12 @@ class DateTime {
         const customFormat = dateTimeStatics.formats[format];
         let f = BL._.find(this.codes.array, a=> a.customisable && a.code===format );
         if(f) {
-          BL.homey.log('f before: ', f);
+          //BL.homey.log('f before: ', f);
           f.originalFunc = f.func;
           f.format = customFormat;
           f.func = 'formatCustom';
           f.customized = true;
-          BL.homey.log('f after : ', f);
+          //BL.homey.log('f after : ', f);
         }
       }
     }

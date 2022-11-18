@@ -18,8 +18,9 @@ class BitFlipDriver extends Homey.Driver {
                 const changedVariable = this.homey.settings.get('boolValueChanged');
 
                 if (changedVariable.type == 'boolean') {
-                    var device = devices.find(function (dev) {
-                        return dev.getData().id == changedVariable.name;
+                    var device = devices.find(function (dev) {                        
+                        if(dev.getData) return dev.getData().id == changedVariable.name;
+                        else return dev.data.id == changedVariable.name;
                     });
 
                     if (device) {

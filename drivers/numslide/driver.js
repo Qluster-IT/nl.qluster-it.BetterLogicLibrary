@@ -5,7 +5,7 @@ const Homey = require('homey');
 var util = require('../../lib/util/util.js');
 var variableManager = require('../../lib/variablemanager.js');
 
-var devices = [];
+let devices = [];
 
 class NumSlideDriver extends Homey.Driver {
   onInit() {
@@ -19,7 +19,8 @@ class NumSlideDriver extends Homey.Driver {
 
                   if (changedVariable.type == 'number') {
                       var device = devices.find(function (dev) {
-                          return dev.getData().id == changedVariable.name;
+                        if(dev.getData) return dev.getData().id == changedVariable.name;
+                        else return dev.data.id == changedVariable.name;
                       });
 
                       if (device) {
@@ -68,6 +69,7 @@ class NumSlideDriver extends Homey.Driver {
         return devices;
     });
     session.setHandler("add_device", (device)=> {
+        //devices = this.getDevices();
         return devices.push(device);
     });
   }

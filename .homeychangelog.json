@@ -118,5 +118,8 @@
   },
   "2.1.11": {
     "en": "Improved: Performance."
+  },
+  "2.1.12": {
+    "en": "Bugfixed: dev.getData error solved in newly created slider."
   }
 }

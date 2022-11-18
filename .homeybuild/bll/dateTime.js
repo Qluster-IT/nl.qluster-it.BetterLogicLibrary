@@ -116,12 +116,12 @@ class DateTime {
 
   static toString(format, date, locale, timeZone) {
     if(!format) throw new Error("Format is required.");
-    BL.homey.log('datetime.toString', arguments);
+    //BL.homey.log('datetime.toString', arguments);
     if(!date || !BL._.isArray(date)) {
       let dt = new DateTime(locale, timeZone, date? DateTime.convertToDate(date) : DateTime.date);
       return dt.toString(format);
     } else if (BL._.isArray(date)){
-      BL.homey.log('isArray');
+      //BL.homey.log('isArray');
       let r = {};
       for (const _date of date) {
         //BL.homey.log(new DateTime(locale || DateTime.locale, timeZone || DateTime.timeZone, DateTime.convertToDate(_date)).toString(format));
