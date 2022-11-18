@@ -109,7 +109,7 @@ class DateTime {
     DateTime.updateFormats();
     bll.api.on('realtime', (event, data)=> {
       switch (event) {
-        case "bllSetLocale": dateTimeStatics.locale = data.default; dateTimeStatics.formats = data.dateFormats;DateTime.updateFormats(); //BL.homey.log('bllSetLocale', data);
+        case "bllSetLocale": dateTimeStatics.locale = data.default; dateTimeStatics.formats = data.dateFormats;DateTime.updateFormats();
       }
     });
   }
@@ -152,12 +152,12 @@ class DateTime {
         const customFormat = dateTimeStatics.formats[format];
         let f = BL._.find(this.codes.array, a=> a.customisable && a.code===format );
         if(f) {
-          BL.homey.log('f before: ', f);
+          //BL.homey.log('f before: ', f);
           f.originalFunc = f.func;
           f.format = customFormat;
           f.func = 'formatCustom';
           f.customized = true;
-          BL.homey.log('f after : ', f);
+          //BL.homey.log('f after : ', f);
         }
       }
     }
