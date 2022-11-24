@@ -121,5 +121,8 @@
   },
   "2.1.12": {
     "en": "Bugfixed: dev.getData error solved in newly created slider."
+  },
+  "2.1.13": {
+    "en": "Bugfixed: math.js."
   }
 }
