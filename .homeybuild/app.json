@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "2.1.13",
+  "version": "2.1.14",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -349,6 +349,21 @@
             "type": "text",
             "placeholder": {
               "en": "$v1$ > 100 and $v1$ < 200 and $b1$"
+            }
+          }
+        ]
+      },
+      {
+        "id": "bl_expression",
+        "title": {
+          "en": "BLL expression !{{is true|is false}}"
+        },
+        "args": [
+          {
+            "name": "expression",
+            "type": "text",
+            "placeholder": {
+              "en": "\"test\"=== \"test\" and 1 < 2"
             }
           }
         ]

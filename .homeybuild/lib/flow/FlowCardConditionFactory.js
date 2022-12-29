@@ -149,5 +149,20 @@ module.exports = {
                     }
                 }
             });
+            // condition_expression
+        let condition_bl_expression = this.homey.flow.getConditionCard('bl_expression');
+        condition_bl_expression
+            .registerRunListener( async (args, state) => {
+                if (args.expression) {
+                    try {
+                        let value = this.homey.app.runSandBox(args.expression, {arg:args.argument});
+                        return value==true;
+                        // var expression = util.buildExpression(args.expression, this.homey);
+                        // return math.evaluate(expression);
+                    } catch (err) {
+                        return false;
+                    }
+                }
+            });
     }
 };

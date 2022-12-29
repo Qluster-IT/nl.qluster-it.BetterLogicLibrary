@@ -124,5 +124,8 @@
   },
   "2.1.13": {
     "en": "Bugfixed: math.js."
+  },
+  "2.1.14": {
+    "en": "Added: BLL expression conditional card."
   }
 }
