@@ -127,5 +127,8 @@
   },
   "2.1.14": {
     "en": "Added: BLL expression conditional card."
+  },
+  "2.2.0": {
+    "en": "Resolved: Works with Early 2023!"
   }
 }

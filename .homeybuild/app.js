@@ -598,7 +598,7 @@ class BetterLogic extends Homey.App {
 
 		
 		if(!await this.homey.settings.get('notification_update_newsettings')) {
-			this.homey.notifications.createNotification({excerpt : "The Better Logic App has been rebranded to Better Logic Library.\nCheck out the new App Settings for the new features, like BLL coding in supported apps!" });  
+			this.homey.notifications.createNotification({excerpt : "The Better Logic App has been rebranded to Better Logic Library.\nCheck out the new App Settings for the new features, like BLL coding in supporting apps!" });  
 			this.homey.settings.set('notification_update_newsettings', true);
 		}
 

@@ -28,6 +28,6 @@ export class BLL {
     decode(text: any, { locale, timeZone }?: {
         locale: any;
         timeZone: any;
-    }, ...args: any[]): Promise<any>;
+    }): Promise<any>;
 }
 //# sourceMappingURL=bll.d.ts.map

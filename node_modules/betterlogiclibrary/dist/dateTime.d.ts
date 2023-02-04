@@ -7,7 +7,7 @@ declare class DateTime {
     private static get codes();
     /** @private */
     private static init;
-    static toString(format: any, date: any, locale: any, timeZone: any, ...args: any[]): any;
+    static toString(format: any, date: any, locale: any, timeZone: any): any;
     /** @private */
     private static convertToDate;
     /** @private */

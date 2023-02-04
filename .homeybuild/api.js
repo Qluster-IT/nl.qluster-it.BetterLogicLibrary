@@ -15,21 +15,19 @@ async function readFile(path, ops) { return await readFileAsync(path, ops); }
 module.exports =
 {
     async getLibrary({ homey, params }) {
-        homey.log('getLibrary', params);
-        let dir = homey.platform=='local' && homey.platformVersion==2 ? '/app' : '';
+        homey.log('getLibrary', params, __dirname);
         try {                
             if (params) switch (params.library) {
-                case "bll": return {file:await readFile(dir+'/bll/bll.js', {encoding:'utf8'})};            
-                case "lodash": return {file:await readFile(dir+'/assets/js/lodash.min.js', {encoding:'utf8'})};
-                case "mathjs": return {file:await readFile(dir+'/lib/util/math.js', {encoding:'utf8'})};
-                case "datetime": return {file:await readFile(dir+'/bll/dateTime.js', {encoding:'utf8'})};
-                case "coding": return {file:await readFile(dir+'/bll/coding.js', {encoding:'utf8'})};
-                case "proto": return {file:await readFile(dir+'/bll/proto.js', {encoding:'utf8'})};
+                case "bll": return {file:await readFile(__dirname+'/bll/bll.js', {encoding:'utf8'})};            
+                case "lodash": return {file:await readFile(__dirname+'/assets/js/lodash.min.js', {encoding:'utf8'})};
+                case "mathjs": return {file:await readFile(__dirname+'/lib/util/math.js', {encoding:'utf8'})};
+                case "datetime": return {file:await readFile(__dirname+'/bll/dateTime.js', {encoding:'utf8'})};
+                case "coding": return {file:await readFile(__dirname+'/bll/coding.js', {encoding:'utf8'})};
+                case "proto": return {file:await readFile(__dirname+'/bll/proto.js', {encoding:'utf8'})};
             }
             return null;
         } catch (error) {
             homey.error(error);
-            homey.log(homey);
             throw error;
         }
     },
