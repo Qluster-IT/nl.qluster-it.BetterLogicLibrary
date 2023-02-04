@@ -45,7 +45,7 @@ class BetterLogic extends Homey.App {
 	async onInit() {
 		BetterLogic.homey = this.homey;		
 
-		if (process.env.DEBUG === '1') require('inspector').open(9232, '0.0.0.0', true);
+		//if (process.env.DEBUG === '1') require('inspector').open(9232, '0.0.0.0', true);
     	this.log('BetterLogic is running...');
 		
 		this.timezones = [
@@ -414,7 +414,6 @@ class BetterLogic extends Homey.App {
 		//await DateTime.init();
 		
 		timezone = this.homey.clock.getTimezone();
-		
 				
 		this.bl = BL.init({
 			homey:this.homey,
@@ -424,9 +423,13 @@ class BetterLogic extends Homey.App {
 				"datetime",
 				"proto",
 			]
-		});
+		}).catch(this.error);
+		
+		
+		
+
 		let timeoutset = false;
-		setTimeout(async ()=> {
+		this.homey.setTimeout(async ()=> {
 			if(!timeoutset)(timeoutset=true) | await this.homey.api.realtime("running");
 		}, 10*1000);
 		
@@ -595,7 +598,7 @@ class BetterLogic extends Homey.App {
 
 		
 		if(!await this.homey.settings.get('notification_update_newsettings')) {
-			this.homey.notifications.createNotification({excerpt : "The Better Logic App has been rebranded to Better Logic Library.\nCheck out the new App Settings for the new features, like BLL coding in supported apps!" });  
+			this.homey.notifications.createNotification({excerpt : "The Better Logic App has been rebranded to Better Logic Library.\nCheck out the new App Settings for the new features, like BLL coding in supporting apps!" });  
 			this.homey.settings.set('notification_update_newsettings', true);
 		}
 
