@@ -10,13 +10,13 @@ export class BL {
      * @static
      * @async
      * @param {string} text The text which could contain BLL coding and needs be be converted.
-     * @return {string} A decoded {@link String} if BLL is running, otherwise it will return the original {@link String}.
+     * @return {Promise<string>} A decoded {@link String} if BLL is running, otherwise it will return the original {@link String}.
      * @memberof BL
      */
     static decode(text: string, { locale, timeZone }?: {
         locale: any;
         timeZone: any;
-    }, ...args: any[]): string;
+    }, ...args: any[]): Promise<string>;
     /**
      * Indicates if the BLL has been loaded before     *
      * @static*/
