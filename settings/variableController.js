@@ -136,7 +136,10 @@
         };
 
         $scope.removeCustomFormat = function(index) {
-            if(vars.locale.customDateFormats) vars.locale.customDateFormats.splice(index,1);
+            if(vars.locale.customDateFormats && vars.locale.customDateFormats.length>index) {
+                vars.locale.customDateFormats.splice(index,1);
+                $scope.formatsForm.$setDirty();
+            }
         };
 
 

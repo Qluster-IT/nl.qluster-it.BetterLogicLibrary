@@ -133,5 +133,8 @@
   },
   "2.3.0": {
     "en": "Added: Custom datetime formats can now be added in the Settings --> Formats. And some Settings UI improvements."
+  },
+  "2.3.1": {
+    "en": "Improved: More (small) Settings UI improvements."
   }
 }
