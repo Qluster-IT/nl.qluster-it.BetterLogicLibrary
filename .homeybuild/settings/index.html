@@ -335,7 +335,7 @@
         <div class="flex-grow-1 overflow-y-auto" ng-show="view.id=='formats'">
             <form role="form" name="formatsForm">                
                 <div class="container">
-                    <div class="col-12">Here you can create custom definition with any datetime format you wish.</div>                
+                    <div class="col-12">Here you can create custom datetime definitions with any format you wish.</div>                
                 </div>
                 <div class="card mt-1">
                     <div class="card-header fw-bolder">Custom formats</div>
@@ -348,7 +348,7 @@
                                     <label class="hy-nostyle" for="customformat{{$index}}">Name</label>
                                 </div>
                             </div>
-                            <div class="btn btn-primary" ng-click="removeCustomFormat($index);"><span class="fa fa-icon fa-trash"></div>
+                            <div class="btn btn-secondary" ng-click="removeCustomFormat($index);"><span class="fa fa-icon fa-trash"></div>
                             <div class="col-12 col-sm-7 form-group form-floating">
                                 <input type="text" class="form-control hy-nostyle" name="customformat{{$index}}" placeholder="dd-MM" ng-model="format.format" ng-change="setCustomFormat(format);" ng-model-options="{ debounce: 300 }" 
                                     minlength="1" required="true"/>
@@ -356,7 +356,7 @@
                             </div>
                             <div class="col-12 col-sm-12 mb-2">{{temp.dateFormats[format.format] || vars.datesExampleResult[format.format]}}</div>
                         </div>
-                        <div class="col-12 btn btn-secondary" ng-click="addCustomFormat();">Add</div>
+                        <div class="col-12 btn btn-primary" ng-click="addCustomFormat();">Add</div>
                     </div>
                 </div>
                 <div class="container">

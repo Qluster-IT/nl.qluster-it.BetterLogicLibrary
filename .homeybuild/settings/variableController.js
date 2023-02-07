@@ -221,9 +221,14 @@
         vm.init = function(homey, scope) {
             vm.homey = homey;
             bl.init(homey, $scope);
-            bl.get("locale", (x)=> {
+            bl.get("locale", async(x)=> {
                 vars.locale = x;
                 if(x && !x.dateFormats) x.dateFormats={};
+                if(x && x.customDateFormats && x.customDateFormats.length) {
+                    let formats = _.uniqBy(_.flatMap(x.customDateFormats, 'format'));
+                    await bl.api("POST", "/date", {format:formats}, (x)=> temp.dateFormats = x );//temp.dateFormats[format] = x);
+                    }
+
             });
             bl.api("GET", "/locales", null, (x)=> vars.locales = x );
 

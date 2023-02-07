@@ -128,7 +128,14 @@ class DateTime {
   //   BL.homey.log('ret', ret);
   //   return ret;
   // }
-
+/**
+ * 
+ * @param {String|String[]} format 
+ * @param {String|String[]|Number|Number[]|Date|Date[]} date 
+ * @param {String} locale 
+ * @param {String} timeZone 
+ * @returns 
+ */
   static toString(format, date, locale, timeZone) {
     if(!format) throw new Error("Format is required.");
     //BL.homey.log('datetime.toString', arguments);

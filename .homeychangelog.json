@@ -130,5 +130,8 @@
   },
   "2.2.0": {
     "en": "Resolved: Works with Early 2023!"
+  },
+  "2.3.0": {
+    "en": "Added: Custom datetime formats can now be added in the Settings --> Formats. And some Settings UI improvements."
   }
 }
