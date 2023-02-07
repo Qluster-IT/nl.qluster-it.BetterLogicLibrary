@@ -16,7 +16,7 @@
         const vars = $scope.vars = {
             locales: [],
             locale:{
-                default:'nl'
+                default:'en'
             },
             moduleExampleValue:'The last one is: {[ _.last(["1", "2"]) ]}.',
             moduleExampleResult:'The last one is 2.',
@@ -81,6 +81,7 @@
             ],
             formats :undefined
 
+
         };
         vars.datesExampleValue = _.flatMap(vars.dateOptions, 'formats');
         vars.dateFormats = _.filter(vars.dateOptions, (v,i)=>i<=2);
@@ -101,6 +102,12 @@
             if(!vars.locale.dateFormats[format] || !vars.locale.dateFormats[format].length) temp.dateFormats[format] = undefined;
             else await bl.api("POST", "/date", {format:vars.locale.dateFormats[format]}, (x)=> temp.dateFormats[format] = x);
         };
+        
+        $scope.setCustomFormat = async function(format) {
+            if(!format.name || !format.format) temp.dateFormats[format.format] = undefined;
+            else await bl.api("POST", "/date", {format:format.format}, (x)=> temp.dateFormats[format.format] = x);
+        };
+
         $scope.setLocale = async function() {
             console.log(JSON.stringify(vars.locale.dateFormats));
             for (const formatKey in vars.locale.dateFormats) {
@@ -120,6 +127,14 @@
             $scope.updateModuleExample();
             $scope.updateDateExample();
             $scope.updateDatesExample();
+        };
+        $scope.addCustomFormat = function() {
+            if(!vars.locale.customDateFormats) vars.locale.customDateFormats = [];
+            vars.locale.customDateFormats.push({name:'', format:''});
+        };
+
+        $scope.removeCustomFormat = function(index) {
+            if(vars.locale.customDateFormats) vars.locale.customDateFormats.splice(index,1);
         };
 
 
@@ -151,7 +166,7 @@
 
                 var func = {
                     name: $scope.newFunction.name,
-                    value: undefined,
+                    value: "function() {\r\n\t\r\n}",
                     remove: false
                 };
                 $scope.functions.push(func);
@@ -207,7 +222,6 @@
             bl.get("locale", (x)=> {
                 vars.locale = x;
                 if(x && !x.dateFormats) x.dateFormats={};
-
             });
             bl.api("GET", "/locales", null, (x)=> vars.locales = x );
 

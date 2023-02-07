@@ -63,6 +63,7 @@
             background-color: white;
             height: 100%;
             width: 100%;
+            left:0px;
         }
         
         .show-buttons .main-view {
@@ -333,21 +334,46 @@
                 <div class="col-12">Here you can alter the definition of any default datetime formats for the default locale.</div>
                 <div class="col-12 mb-2">This will be applied to every app using the BLL coding or DateTime.</div>
             </div>
-            <form role="form"></form>
-            <div class="card mt-1" ng-repeat="type in vars.dateFormats">
-                <div class="card-header fw-bolder" ng-bind="type.id"></div>
-                <div class="card-body container">
-                    <div ng-repeat="format in type.formats">
-                        <div class="col-12 col-sm-7 form-group form-floating">
-                            <input type="text" class="form-control hy-nostyle" name="format{{format}}" placeholder="{{format}}" ng-model="vars.locale.dateFormats[format]" ng-change="setFormatExample(format);" ng-model-options="{ debounce: 300 }" />
-                            <label class="hy-nostyle" for="format{{format}}">{{format}}</label>
+            <form role="form" name="formatsForm">  
+                <div class="card mt-1">
+                    <div class="card-header fw-bolder">Custom formats</div>
+                    <div class="card-body container">
+                        <div ng-repeat="format in vars.locale.customDateFormats">
+                            <div class="col-9 col-sm-4 d-inline-block">
+                                <div class="col-12 form-group form-floating">
+                                    <input type="text" class="form-control hy-nostyle" name="customformat{{$index}}" placeholder="Name" ng-model="format.name" ng-model-options="{ debounce: 300 }" 
+                                        minlength="5" required="true"/>
+                                    <label class="hy-nostyle" for="customformat{{$index}}">Name</label>
+                                </div>
+                            </div>
+                            <div class="btn btn-primary" ng-click="removeCustomFormat($index);"><span class="fa fa-icon fa-trash"></div>
+                            <div class="col-12 col-sm-7 form-group form-floating">
+                                <input type="text" class="form-control hy-nostyle" name="customformat{{$index}}" placeholder="dd-MM" ng-model="format.format" ng-change="setCustomFormat(format);" ng-model-options="{ debounce: 300 }" 
+                                    minlength="1" required="true"/>
+                                <label class="hy-nostyle" for="customformat{{$index}}">Format</label>
+                            </div>
+                            <div class="col-12 col-sm-12 mb-2">{{temp.dateFormats[format.format] || vars.datesExampleResult[format.format]}}</div>
                         </div>
-                        <div class="col-12 col-sm-12 mb-2">{{temp.dateFormats[format] || vars.datesExampleResult[format]}}</div>
+                        <div class="col-12 btn btn-secondary" ng-click="addCustomFormat();">Add</div>
                     </div>
-
                 </div>
+                <div class="card mt-1" ng-repeat="type in vars.dateFormats">
+                    <div class="card-header fw-bolder" ng-bind="type.id"></div>
+                    <div class="card-body container">
+                        <div ng-repeat="format in type.formats">
+                            <div class="col-12 col-sm-7 form-group form-floating">
+                                <input type="text" class="form-control hy-nostyle" name="format{{format}}" placeholder="{{format}}" ng-model="vars.locale.dateFormats[format]" ng-change="setFormatExample(format);" ng-model-options="{ debounce: 300 }" />
+                                <label class="hy-nostyle" for="format{{format}}">{{format}}</label>
+                            </div>
+                            <div class="col-12 col-sm-12 mb-2">{{temp.dateFormats[format] || vars.datesExampleResult[format]}}</div>
+                        </div>
+
+                    </div>
+                </div>
+            </form>                    
+            <div class="btn-group fixed-bottom">
+                <button type="button" class="btn btn-primary hy-nostyle" ng-click="formatsForm.$valid ? setLocale() : null;" ng-disabled="!formatsForm.$valid">Save</button>
             </div>
-            </form>
         </div>
         <div class="flex-grow-1 pt-2" ng-show="view.id=='coding' || view.id=='locale_timezone'">
             <div class="sub-view  overflow-y-auto">
@@ -425,10 +451,6 @@
             <button class="btn btn-primary col-6 hy-nostyle" ng-click="saveActiveFunction(true)" data-i18n="settings.save_close">Save & Close</button>
         </div>
     </div>
-    </div>
-
-    <div class="btn-group fixed-bottom" ng-show="temp.showButtons = (view.id=='formats')">
-        <button type="button" class="btn btn-primary hy-nostyle" ng-click="setLocale();">Save</button>
     </div>
 
 

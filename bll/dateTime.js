@@ -103,16 +103,31 @@ class DateTime {
   /** @private */
   static async init(bll) {
     let locale = await bll.get('locale');
+    
     dateTimeStatics.formats = locale ? locale.dateFormats : undefined;
+    dateTimeStatics.customFormats = locale ? locale.customDateFormats : undefined;
     dateTimeStatics.locale = locale ? locale.default : await BL.homey.i18n.getLanguage();
     dateTimeStatics.timeZone = BL.homey.clock.getTimezone();    
     DateTime.updateFormats();
     bll.api.on('realtime', (event, data)=> {
       switch (event) {
-        case "bllSetLocale": dateTimeStatics.locale = data.default; dateTimeStatics.formats = data.dateFormats;DateTime.updateFormats();
+        case "bllSetLocale": dateTimeStatics.locale = data.default; dateTimeStatics.formats = data.dateFormats; dateTimeStatics.customFormats = data.customDateFormats; DateTime.updateFormats();
       }
     });
   }
+
+  // static getFormats(locale) {
+  //   BL.homey.log('getFormats', locale);
+  //   let ret = {};
+  //   if(!locale) return undefined;
+  //   if(locale.dateFormats) ret = locale.dateFormats;
+  //   if(locale.customDateFormats && locale.customDateFormats.length) for (let i = 0; i < locale.customDateFormats.length; i++) {
+  //     const customDateFormat = locale.customDateFormats[i];
+  //     ret[customDateFormat.name] = customDateFormat.format;
+  //   }
+  //   BL.homey.log('ret', ret);
+  //   return ret;
+  // }
 
   static toString(format, date, locale, timeZone) {
     if(!format) throw new Error("Format is required.");
@@ -161,6 +176,24 @@ class DateTime {
         }
       }
     }
+    if(dateTimeStatics.customFormats) {
+      for (let i = 0; i < dateTimeStatics.customFormats.length; i++) {
+      const format = dateTimeStatics.customFormats[i];      
+      this.codes.array.push({format:format.format, func:'formatCustom', originalFunc:'formatCustom', customized:true, code:format.name, custom:true});
+      //const customFormat = dateTimeStatics.customFormats[format];
+      // let f = BL._.find(this.codes.array, a=> a.customisable && a.code===format );
+      // if(f) {
+      //   //BL.homey.log('f before: ', f);
+      //   f.originalFunc = f.func;
+      //   f.format = customFormat;
+      //   f.func = 'formatCustom';
+      //   f.customized = true;
+      //   //BL.homey.log('f after : ', f);
+      // }
+      }
+      this.codes.array = BL._.sortBy(this.codes.array, (x)=>-x.code.length);
+    }
+    BL.homey.log('updateFormats', this.codes.array);
   }
 
   static get(dt) { return new DateTime(undefined, undefined, dt || DateTime.date); }
@@ -489,7 +522,8 @@ class DateTime {
   format(coding, noCustomized) {
     if(!coding || !coding.length) return coding;
     let r = '';
-    let a = noCustomized===true ? BL._.filter(DateTime.codes.array, x=>!x.customized) : DateTime.codes.array; 
+    let codes = noCustomized===true ? BL._.filter(DateTime.codes.array, x=>!x.customized) : DateTime.codes.array; 
+    BL.homey.log('format', codes);
     let stringMode = false;
     for (let i=0;i<coding.length;i++) {
       let s = false;
@@ -513,12 +547,36 @@ class DateTime {
         i--;
         continue;
       }
+
+      // if(!noCustomized) {
+      //   if(f) {
+      //     //BL.homey.log('f before: ', f);
+      //     f.originalFunc = f.func;
+      //     f.format = customFormat;
+      //     f.func = 'formatCustom';
+      //     f.customized = true;
+      //     //BL.homey.log('f after : ', f);
+      //   }
+        
+      //   BL._.each(codes, (code,funcKey)=> { 
+      //     if(s) return;
+      //     if(coding.indexOf(code.code)===0) {
+      //       s=true;
+      //       if(code.customized && this.locale) r+= this[code.originalFunc](code.code);
+      //       else r+= this[code.func](code.code);
+      //       coding = coding.substr(0,i) + coding.substr(i+code.code.length); 
+      //     }        
+      //   });
+      // }
       
-      BL._.each(a, (code,funcKey)=> { 
+      BL._.each(codes, (code,funcKey)=> { 
         if(s) return;
         if(coding.indexOf(code.code)===0) {
+          BL.homey.log('code.code', code.code);
+          //BL.homey.log('code.code result', this[code.originalFunc](code.code));
           s=true;
-          if(code.customized && this.locale) r+= this[code.originalFunc](code.code);
+          if(code.custom) r+= this[code.func](code.format);
+          else if(code.customized && this.locale) r+= this[code.originalFunc](code.code);
           else r+= this[code.func](code.code);
           coding = coding.substr(0,i) + coding.substr(i+code.code.length); 
         }        
