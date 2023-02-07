@@ -124,6 +124,9 @@
         .btn-primary {
             /* --bs-btn-disabled-bg:#1e1e1e; */
         }
+        .btn-group {
+            background-color:var(--bs-light);
+        }
     </style>
 </head>
 
@@ -287,7 +290,7 @@
                             </li>
                             <li>
                                 <div class="col-12 mt-1 mb-1 fw-bold">Example</span></div>
-                                <div class="col-12 mb-1"><input type="text" class="form-control" value="" ng-model="vars.moduleExampleValue" ng-change="updateModuleExample();" ng-model-options="{ debounce: 300 }" /></div>
+                                <div class="col-12 mb-1"><input type="text" class="form-control hy-nostyle" value="" ng-model="vars.moduleExampleValue" ng-change="updateModuleExample();" ng-model-options="{ debounce: 300 }" /></div>
                                 <div class="col-12">{{vars.moduleExampleResult}}</div>
                             </li>
                         </ul>
@@ -298,7 +301,7 @@
                                 <div class="col-12">This method will return the current date(time) in the entered format, with respect to the users defined locale (language) en timezone.</div>
                                 <div class="col-12">Optionally you can supply the date(time), locale and/or timeZone.</div>
                                 <div class="col-12 mt-1 mb-1 fw-bold">Example</div>
-                                <div class="col-12 mb-1"><input class="form-control" type="text" value="" ng-model="vars.dateExampleValue" ng-change="updateDateExample();" ng-model-options="{ debounce: 300 }" /></div>
+                                <div class="col-12 mb-1"><input class="form-control hy-nostyle" type="text" value="" ng-model="vars.dateExampleValue" ng-change="updateDateExample();" ng-model-options="{ debounce: 300 }" /></div>
                                 <div class="col-12" ng-bind="vars.dateExampleResult"></div>
                             </li>
                         </ul>
@@ -316,7 +319,7 @@
                         <div class="col-12">Later on, you will be able to configure this from here separatly for each app that uses BLL coding.</div>
                         <div class="col-12">
                             <div class="form-floating hy-nostyle">
-                                <select id="locale" name="locale" class="form-control" ng-model="vars.locale.default" ng-change="setLocale();">
+                                <select id="locale" name="locale" class="form-control hy-nostyle" ng-model="vars.locale.default" ng-change="setLocale();">
                                     <option ng-if="!vars.locales.indexOf(vars.locale.default)==-1" ng-value="vars.locale.default" ng-bind="vars.locale.default"></option>
                                     <option ng-repeat="locale in vars.locales" ng-value="locale.tag">{{locale.name}} ({{locale.tag}})</option>
                                 </select>
@@ -330,11 +333,10 @@
         </div>
 
         <div class="flex-grow-1 overflow-y-auto" ng-show="view.id=='formats'">
-            <div class="container">
-                <div class="col-12">Here you can alter the definition of any default datetime formats for the default locale.</div>
-                <div class="col-12 mb-2">This will be applied to every app using the BLL coding or DateTime.</div>
-            </div>
-            <form role="form" name="formatsForm">  
+            <form role="form" name="formatsForm">                
+                <div class="container">
+                    <div class="col-12">Here you can create custom definition with any datetime format you wish.</div>                
+                </div>
                 <div class="card mt-1">
                     <div class="card-header fw-bolder">Custom formats</div>
                     <div class="card-body container">
@@ -342,7 +344,7 @@
                             <div class="col-9 col-sm-4 d-inline-block">
                                 <div class="col-12 form-group form-floating">
                                     <input type="text" class="form-control hy-nostyle" name="customformat{{$index}}" placeholder="Name" ng-model="format.name" ng-model-options="{ debounce: 300 }" 
-                                        minlength="5" required="true"/>
+                                        minlength="1" required="true"/>
                                     <label class="hy-nostyle" for="customformat{{$index}}">Name</label>
                                 </div>
                             </div>
@@ -356,6 +358,10 @@
                         </div>
                         <div class="col-12 btn btn-secondary" ng-click="addCustomFormat();">Add</div>
                     </div>
+                </div>
+                <div class="container">
+                    <div class="col-12">Here you can alter the definition of any default datetime formats.</div>
+                    <div class="col-12 mb-2">This will be applied to every app using the BLL coding or DateTime.</div>
                 </div>
                 <div class="card mt-1" ng-repeat="type in vars.dateFormats">
                     <div class="card-header fw-bolder" ng-bind="type.id"></div>
@@ -372,7 +378,7 @@
                 </div>
             </form>                    
             <div class="btn-group fixed-bottom">
-                <button type="button" class="btn btn-primary hy-nostyle" ng-click="formatsForm.$valid ? setLocale() : null;" ng-disabled="!formatsForm.$valid">Save</button>
+                <button type="button" class="btn btn-primary hy-nostyle" ng-click="formatsForm.$valid && formatsForm.$dirty ? setLocale() : null;" ng-disabled="!formatsForm.$valid || !formatsForm.$dirty">Save</button>
             </div>
         </div>
         <div class="flex-grow-1 pt-2" ng-show="view.id=='coding' || view.id=='locale_timezone'">

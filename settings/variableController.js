@@ -109,7 +109,9 @@
         };
 
         $scope.setLocale = async function() {
-            console.log(JSON.stringify(vars.locale.dateFormats));
+            console.log($scope.formatsForm);
+            $scope.formatsForm.$setSubmitted();
+            $scope.formatsForm.$setPristine();
             for (const formatKey in vars.locale.dateFormats) {
                 if (Object.hasOwnProperty.call(vars.locale.dateFormats, formatKey)) {
                     const format = vars.locale.dateFormats[formatKey];
@@ -166,7 +168,7 @@
 
                 var func = {
                     name: $scope.newFunction.name,
-                    value: "function() {\r\n\t\r\n}",
+                    value: "function() {\r\n  \r\n}",
                     remove: false
                 };
                 $scope.functions.push(func);
