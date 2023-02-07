@@ -10,9 +10,10 @@
 
     <script type="text/javascript" src="../assets/js/angular.min.js"></script>
     <script type="text/javascript" src="../assets/js/smart-table.min.js"></script>
-    <link rel="stylesheet" type="text/css" src="../assets/css/smart-table.css" />
+    
+    <link rel="stylesheet" type="text/css" href="../assets/css/smart-table.css" />
 
-    <link rel="stylesheet" type="text/css" src="../assets/css/fontawesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/fontawesome.min.css" />
 
 
     
@@ -54,6 +55,9 @@
 
         .main-view {
             height: calc(100% - 130px);
+        }
+        .main-view>.flex-grow-1 {
+            min-height:auto;
         }
 
         .main-floating {
@@ -126,6 +130,16 @@
         }
         .btn-group {
             background-color:var(--bs-light);
+        }
+        table.st th, table.st tbody td {
+            word-break: break-word;
+            max-height:100px;
+        }
+        table.st td textarea {
+            position: fixed;
+            left: 0px;
+            height: 90px;
+            width: 70%;
         }
     </style>
 </head>
@@ -232,27 +246,20 @@
                 </p>
             </div>
         </div>
-        <div class="flex-grow-1 overflow-y">
-            <table st-safe-src="vm.variables" st-table="displayedCollection" class="table st table-striped" style="width:200%">
+        <div class="flex-grow-1 overflow-y-hidden">
+            <table st-safe-src="vm.variables" st-table="displayedCollection" class="table st table-striped"><!-- style="width:200%">-->
                 <thead>
                     <tr>
+                        <th class="w-100" colspan="4">
+                            <input st-search="name" placeholder="search for name" class="input-sm form-control hy-nostyle" type="search" />
+                        </th>
+                    </tr>
+                    <tr>
                         <th st-sort="name">Name</th>
+                        <th st-sort="value">Value</th>
                         <th st-sort="type">Type</th>
                         <th st-sort="lastChanged" st-sort-default="reverse">Last set</th>
                         <!--<th st-sort="value">Insight</th>-->
-                        <th st-sort="value">Value</th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <input st-search="name" placeholder="search for name" class="input-sm form-control hy-nostyle" type="search" />
-                        </th>
-                        <th>
-                        </th>
-                        <th>
-                        </th>
-                        <!--<th></th>-->
-                        <th></th>
                         <th></th>
                     </tr>
                 </thead>
@@ -261,7 +268,13 @@
                 </tbody>
             </table>
         </div>
-
+        <div ng-show="vm.selected" class="mt-2 b-1 bg-primary-subtle">
+            <div ng-switch on="vm.selected.type">
+                <div ng-switch-when="boolean"><div ng-include="'editboolean.html'"></div></div>
+                <div ng-switch-when="number"><div ng-include="'editnumber.html'"></div></div>
+                <div ng-switch-default><div ng-include="'editstring.html'"></div></div>
+            </div>
+        </div>
     </div>
 
 
@@ -462,38 +475,37 @@
 
     <script type="text/ng-template" id="display">
         <td>{{variable.name}}</td>
-        <td>{{variable.type}}</td>
-        <td>{{(vars.variableDates[variable.lastChanged]) || (variable.lastChanged | date:'yyyy-MM-dd HH:mm:ss')}}</td>
-        <!--<td><input type='checkbox' disabled ng-model='variable.hasInsights' /></td>-->
-
+        
         <td ng-if="variable.type === 'boolean'">{{variable.value}}</td>
         <td ng-if="variable.type === 'number'">{{variable.value}}</td>
         <td ng-if="variable.type === 'string'">{{variable.value}}</td>
         <td ng-if="variable.type === 'trigger'">{{(vars.variableDates[variable.lastChanged]) || (variable.value | date:'yyyy-MM-dd HH:mm:ss')}}</td>
-
+        <td>{{variable.type}}</td>
+        <td>{{(vars.variableDates[variable.lastChanged]) || (variable.lastChanged | date:'yyyy-MM-dd HH:mm:ss')}}</td>
+        <!--<td><input type='checkbox' disabled ng-model='variable.hasInsights' /></td>-->
         <td>
-            <button class="btn btn-secondary hy-nostyle" ng-click="vm.editVariable(variable)" ng-if="variable.type !== 'trigger'">Edit</button>
-            <button class="btn btn-secondary hy-nostyle" ng-click="vm.triggerVariable(variable)" ng-if="variable.type === 'trigger'">Trigger</button>
-            <button class="btn btn-secondary hy-nostyle" ng-click="vm.removeVariable(variable)">Delete</button>
-
+            <button class="btn btn-secondary hy-nostyle" ng-click="vm.editVariable(variable)" ng-if="variable.type !== 'trigger'"><span class="fa fa-icon fa-pen-to-square"></span></button>
+            <button class="btn btn-secondary hy-nostyle" ng-click="vm.triggerVariable(variable)" ng-if="variable.type === 'trigger'"><span class="fa fa-icon fa-bolt"></span></button>
+            <button class="btn btn-secondary hy-nostyle" ng-click="vm.removeVariable(variable)"><span class="fa fa-icon fa-trash"></span></button>
         </td>
     </script>
 
     <script type="text/ng-template" id="edit">
         <td>{{vm.selected.name}}</td>
+        <td>
+            <!-- <div ng-switch on="vm.selected.type">
+                <div ng-switch-when="boolean"><div ng-include="'editboolean.html'"></div></div>
+                <div ng-switch-when="number"><div ng-include="'editnumber.html'"></div></div>
+                <div ng-switch-default><div ng-include="'editstring.html'"></div></div>
+            </div> -->
+        </td>
         <td>{{vm.selected.type}}</td>
         <td>{{(vars.variableDates[variable.lastChanged]) || (variable.lastChanged | date:'yyyy-MM-dd HH:mm:ss')}}</td>
         <!--<td><input class="col-2" id="variableValue" type="checkbox" ng-model="vm.selected.hasInsights" placeholder="value"></td>-->
+        
         <td>
-            <div ng-switch on="vm.selected.type">
-                <div ng-switch-when="boolean"><div ng-include="'editboolean.html'"></div></div>
-                <div ng-switch-when="number"><div ng-include="'editnumber.html'"></div></div>
-                <div ng-switch-default><div ng-include="'editstring.html'"><</div></div>
-            </div>
-        </td>
-        <td>
-            <button class="btn btn-secondary hy-nostyle" ng-click="vm.saveVariable(variable)">Save</button>
-            <button class="btn btn-secondary hy-nostyle" ng-click="vm.reset()">Cancel</button>
+            <button class="btn hy-nostyle" ng-class="{'btn-primary':vm.selected.name==variable.name, 'btn-secondary':vm.selected.name!=variable.name}" ng-click="vm.saveVariable(variable)"><span class="fa fa-icon fa-floppy-disk"></span></button>
+            <button class="btn btn-secondary hy-nostyle" ng-click="vm.reset()"><span class="fa fa-icon fa-ban"></span></button>
         </td>
     </script>
 
@@ -513,7 +525,7 @@
         <input class="form-control col-2 hy-nostyle" id="variableValue" type="number" ng-model="vm.selected.value" placeholder="value">
     </script>
     <script type="text/ng-template" id="editstring.html">
-        <input class="form-control col-2 hy-nostyle" id="variableValue" type="text" ng-model="vm.selected.value" placeholder="value">
+        <textarea rows="4" class="form-control col-2 hy-nostyle bg-primary-subtle" id="variableValue" type="text" ng-model="vm.selected.value" placeholder="value"></textarea>
     </script>
     <script type="text/ng-template" id="editboolean.html">
         <input class="col-2 hy-nostyle" id="variableValue" type="checkbox" ng-model="vm.selected.value" placeholder="value">

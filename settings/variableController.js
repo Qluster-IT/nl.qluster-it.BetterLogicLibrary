@@ -7,7 +7,7 @@
         vm.showExportToggle = false;
         vm.showImportToggle = false;
         vm.importJson = '';
-        vm.selected = {};
+        vm.selected = null;
         //vm.homey;
         //console.log(window.HT);
 
@@ -350,7 +350,7 @@
         };
 
         vm.reset = function() {
-            vm.selected = {};
+            vm.selected = null;//{};
         };
 
         vm.selectUpdate = function(type) {
@@ -367,7 +367,7 @@
         }
 
         vm.getTemplate = function(variable) {
-            if (variable.name === vm.selected.name && variable.type === vm.selected.type) return 'edit';
+            if (vm.selected && variable.name === vm.selected.name && variable.type === vm.selected.type) return 'edit';
             else return 'display';
         };
 
