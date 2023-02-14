@@ -440,6 +440,8 @@ class BetterLogic extends Homey.App {
 		this.bl.then(async (x)=> {
 			this.bl = x;
 			
+			variableManager.init(this.homey);
+
 			if(!timeoutset)(timeoutset=true) | await this.homey.api.realtime("running");
 			//this.dateTime = new DateTime(this.homey.i18n.getLanguage(), timezone);
 			//console.log(this.dateTime.toString('ddd'));
@@ -447,7 +449,6 @@ class BetterLogic extends Homey.App {
 
 
 			
-			variableManager.init(this.homey);
 				
 			// get_stamp
 			let format_datetime = this.homey.flow.getActionCard('format_datetime');
@@ -530,7 +531,7 @@ class BetterLogic extends Homey.App {
 					if (args.expression !== undefined && args.expression !== 'undefined') {
 						
 						let value = await this.runSandBox(args.expression, {arg:args.argument});
-						variableManager.updateVariable(result.name, value, result.type);
+						await variableManager.updateVariable(result.name, value, result.type);
 
 					}
 				} catch (error) {

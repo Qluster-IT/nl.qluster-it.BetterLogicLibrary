@@ -10,14 +10,14 @@ class BitFlipDevice extends Homey.Device {
         this.registerCapabilityListener('onoff', this.onCapabilityOnOff.bind(this))
     }
 
-    onCapabilityOnOff( value, opts, callback ) {
+    async onCapabilityOnOff( value, opts, callback ) {
         var variable = variableManager.getVariable(this.getData().id);
         if (variable) {
-            variableManager.updateVariable(this.getData().id, value, this.getData().type);
+            await variableManager.updateVariable(this.getData().id, value, this.getData().type);
 
-            return Promise.resolve(true);
+            return true;
         } else {
-            return Promise.reject(new Error('Variable not found!'));
+            throw new Error('Variable not found!');
         }
     }
 

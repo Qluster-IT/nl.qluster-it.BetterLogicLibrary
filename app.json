@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "2.3.2",
+  "version": "2.3.3",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -376,14 +376,19 @@
           "en": "Set a variable"
         },
         "titleFormatted": {
-          "en": "Set [[variable]] to [[value]]"
+          "en": "Set [[variable]] to [[value]]",
+          "nl": "Zet [[variable]] naar [[value]]",
+          "de": "Setze [[variable]] auf [[value]]"
         },
         "args": [
           {
             "name": "variable",
             "type": "autocomplete",
-            "placeholder": {
+            "title": {
               "en": "Variable"
+            },
+            "placeholder": {
+              "en": "Name"
             }
           },
           {
@@ -466,9 +471,9 @@
       {
         "id": "execute_bl_expression",
         "title": {
-          "en": "Execute BL Expression",
-          "nl": "Voer BL expressie uit",
-          "de": "BL Bezeichnung setzen"
+          "en": "Execute BLL Expression",
+          "nl": "Voer BLL expressie uit",
+          "de": "BLL Bezeichnung setzen"
         },
         "titleFormatted": {
           "en": "Set [[variable]] to [[expression]]",
@@ -479,17 +484,25 @@
           {
             "name": "variable",
             "type": "autocomplete",
+            "title": {
+              "en": "Variable"
+            },
             "placeholder": {
-              "en": "name"
+              "en": "Name"
             }
           },
           {
             "name": "expression",
             "type": "text",
+            "title": {
+              "en": "BLL Expression",
+              "nl": "BLL Expression",
+              "de": "BLL Bezeichnung"
+            },
             "placeholder": {
-              "en": "BL Expression",
-              "nl": "BL Expression",
-              "de": "BL Bezeichnung"
+              "en": "BLL Expression",
+              "nl": "BLL Expression",
+              "de": "BLL Bezeichnung"
             }
           }
         ]

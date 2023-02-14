@@ -139,5 +139,8 @@
   },
   "2.3.2": {
     "en": "Improved: Again more (small) improvements to the Settings UI."
+  },
+  "2.3.3": {
+    "en": "Improved: Bufixes and improved Error handling in flowcards."
   }
 }

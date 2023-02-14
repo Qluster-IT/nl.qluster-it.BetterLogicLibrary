@@ -30,7 +30,7 @@ module.exports = {
                 if(args && args.value) args.value = await BL.decode(args.value);
 
                 if (result) {
-                  return variableManager.updateVariable(args.variable.name, args.value, 'string');
+                  return await variableManager.updateVariable(args.variable.name, args.value, 'string');
                 }
                 throw new Error('String variable not found (' + args.variable.name + ')');
             }
@@ -41,14 +41,14 @@ module.exports = {
 
         // set number
         let set_number_variable = this.homey.flow.getActionCard('set_number_variable');        
-        set_number_variable.registerRunListener((args, state) => {
+        set_number_variable.registerRunListener(async (args, state) => {
             if (args.variable && args.variable.name) {
                 var result = variableManager.getVariable(args.variable.name);
 
                 if (result) {
-                  return Promise.resolve(variableManager.updateVariable(args.variable.name, args.value, 'number'));
+                  return await variableManager.updateVariable(args.variable.name, args.value, 'number');
                 }
-                return Promise.reject(new Error('Number variable not found (' + args.variable.name + ')'));
+                throw new Error('Number variable not found (' + args.variable.name + ')');
             }
         })
             .getArgument('variable').registerAutocompleteListener((query, args) => {
@@ -58,14 +58,14 @@ module.exports = {
         // increment number
         let increment_number_variable = this.homey.flow.getActionCard('increment_number_variable');
         
-        increment_number_variable.registerRunListener((args, state) => {
+        increment_number_variable.registerRunListener(async (args, state) => {
             if (args.variable && args.variable.name) {
                 var result = variableManager.getVariable(args.variable.name);
 
                 if (result) {
-                  return Promise.resolve(variableManager.updateVariable(args.variable.name, result.value + args.value, 'number'));
+                  return await variableManager.updateVariable(args.variable.name, result.value + args.value, 'number');
                 }
-                return Promise.reject(new Error('Number variable not found (' + args.variable.name + ')'));
+                throw new Error('Number variable not found (' + args.variable.name + ')');
             }
         })
             .getArgument('variable')
@@ -76,14 +76,14 @@ module.exports = {
         // decrement number
         let decrement_number_variable = this.homey.flow.getActionCard('decrement_number_variable');
         
-        decrement_number_variable.registerRunListener((args, state) => {
+        decrement_number_variable.registerRunListener(async (args, state) => {
             if (args.variable && args.variable.name) {
                 var result = variableManager.getVariable(args.variable.name);
 
                 if (result) {
-                  return Promise.resolve(variableManager.updateVariable(args.variable.name, result.value - args.value, 'number'));
+                  return await variableManager.updateVariable(args.variable.name, result.value - args.value, 'number');
                 }
-                return Promise.reject(new Error('Number variable not found (' + args.variable.name + ')'));
+                throw new Error('Number variable not found (' + args.variable.name + ')');
             }
           })
             .getArgument('variable')
@@ -105,7 +105,7 @@ module.exports = {
                     if (result) {
                         var newValue = math.evaluate(expression);
 
-                        return variableManager.updateVariable(args.variable.name, newValue, 'number');
+                        return await variableManager.updateVariable(args.variable.name, newValue, 'number');
                     }
                     throw new Error('Variable not found (' + args.variable.name + ')');
                 } catch (err) {
@@ -121,14 +121,14 @@ module.exports = {
         // set boolean
         let set_boolean_variable = this.homey.flow.getActionCard('set_boolean_variable');
         
-        set_boolean_variable.registerRunListener((args, state) => {
+        set_boolean_variable.registerRunListener(async (args, state) => {
             if (args.variable && args.variable.name) {
                 var result = variableManager.getVariable(args.variable.name);
 
                 if (result) {
-                    return Promise.resolve(variableManager.updateVariable(args.variable.name, (args.boolean_value.toLowerCase()==='true'), 'boolean'));
+                    return await variableManager.updateVariable(args.variable.name, (args.boolean_value.toLowerCase()==='true'), 'boolean');
                 }
-                return Promise.reject(new Error('Boolean variable not found (' + args.variable.name + ')'));
+                throw new Error('Boolean variable not found (' + args.variable.name + ')');
             }
           })
             .getArgument('variable')
@@ -139,14 +139,14 @@ module.exports = {
         // flip Boolean
         let flip_boolean_variable = this.homey.flow.getActionCard('flip_boolean_variable');
         
-        flip_boolean_variable.registerRunListener((args, state) => {
+        flip_boolean_variable.registerRunListener(async (args, state) => {
             if (args.variable && args.variable.name) {
                 var result = variableManager.getVariable(args.variable.name);
 
                 if (result) {
-                    return Promise.resolve(variableManager.updateVariable(args.variable.name, !result.value, 'boolean'));
+                    return await variableManager.updateVariable(args.variable.name, !result.value, 'boolean');
                 }
-                return Promise.reject(new Error('Boolean variable not found (' + args.variable.name + ')'));
+                throw new Error('Boolean variable not found (' + args.variable.name + ')');
             }
         })
             .getArgument('variable')
@@ -157,12 +157,12 @@ module.exports = {
         // trigger variable
         let trigger_variable = this.homey.flow.getActionCard('trigger_variable');
         
-        trigger_variable.registerRunListener((args, state) => {
+        trigger_variable.registerRunListener(async (args, state) => {
             if (args.variable && args.variable.name) {
                 var result = variableManager.getVariable(args.variable.name);
 
                 if (result) {
-                    return Promise.resolve(variableManager.updateVariable(args.variable.name, new Date().toISOString(), 'trigger'));
+                    return await variableManager.updateVariable(args.variable.name, new Date().toISOString(), 'trigger');
                 }
                 return Promise.reject(new Error('Trigger variable not found (' + args.variable.name + ')'));
             }
@@ -183,19 +183,19 @@ module.exports = {
                 if (result) {
                     if (result.type === "boolean") {
                         if (args.value === "true" || args.value === "false") {
-                            return variableManager.updateVariable(result.name, (args.value === 'true'), result.type);
+                            return await variableManager.updateVariable(result.name, (args.value === 'true'), result.type);
                         }
                         throw new Error('No boolean value');
                     }
                     else if (result.type === "number") {
                         if (!isNaN(parseFloat(args.value))) {
-                            return variableManager.updateVariable(result.name, parseFloat(args.value), result.type);
+                            return await variableManager.updateVariable(result.name, parseFloat(args.value), result.type);
                         }
                         throw new Error('Not a number');
                     }
                     else if (result.type === "string") {
                         if (typeof args.value === "string") {
-                          return variableManager.updateVariable(result.name, args.value, result.type);
+                          return await variableManager.updateVariable(result.name, args.value, result.type);
                         }
                         throw new Error('No string value');
                     }

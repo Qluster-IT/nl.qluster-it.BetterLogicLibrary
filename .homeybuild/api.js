@@ -73,7 +73,7 @@ module.exports =
                 throw new Error("Only a trigger can be triggered");
             }
 
-            variableManager.updateVariable(variable.name, new Date().toISOString(), variable.type);
+            await variableManager.updateVariable(variable.name, new Date().toISOString(), variable.type);
             return "OK";
         }
         throw new Error("Incorect call");
@@ -95,11 +95,11 @@ module.exports =
                 throw new Error("Can only increment or decrement numbers");
             }
             if (params.action.toLowerCase() === "i" || params.action.toLowerCase() === "increment") {
-                variableManager.updateVariable(variable.name, variable.value + parseFloat(params.value), variable.type);
+                await variableManager.updateVariable(variable.name, variable.value + parseFloat(params.value), variable.type);
                 return "OK";
             }
             if (params.action.toLowerCase() === "d" || params.action.toLowerCase() === "decrement") {
-                variableManager.updateVariable(variable.name, variable.value - parseFloat(params.value), variable.type);
+                await variableManager.updateVariable(variable.name, variable.value - parseFloat(params.value), variable.type);
                 return "OK";
             }
             throw new Error("Incorect call");
@@ -115,9 +115,9 @@ module.exports =
 
                         if (params.value === "toggle") {
                             var oldVariable = variableManager.getVariable(variable.name);
-                            variableManager.updateVariable(variable.name, (!oldVariable.value), variable.type);
+                            await variableManager.updateVariable(variable.name, (!oldVariable.value), variable.type);
                         } else {
-                            variableManager.updateVariable(variable.name, (params.value === 'true'), variable.type);
+                            await variableManager.updateVariable(variable.name, (params.value === 'true'), variable.type);
                         }
                         return "OK";
                     }
@@ -125,7 +125,7 @@ module.exports =
                 }
                 if (variable.type === "number") {
                     if (isNumber(params.value)) {
-                        variableManager.updateVariable(variable.name, parseFloat(params.value), variable.type);
+                        await variableManager.updateVariable(variable.name, parseFloat(params.value), variable.type);
                         return "OK";
                     }
                     throw new Error("Incorrect value for number: " + params.value);
@@ -133,7 +133,7 @@ module.exports =
                 }
                 if (variable.type === "string") {
                     if (typeof params.value === "string") {
-                        variableManager.updateVariable(variable.name, params.value, variable.type);
+                        await variableManager.updateVariable(variable.name, params.value, variable.type);
                         return "OK";
                     }
                     throw new Error("Incorrect value for string: " + params.value);

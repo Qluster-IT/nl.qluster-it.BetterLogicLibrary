@@ -7,17 +7,17 @@ var variableManager = require('../../lib/variablemanager.js');
 class NumSlideDevice extends Homey.Device {
 
     onInit() {
-        this.registerCapabilityListener('dim', this.onCapabilityDim.bind(this))
+        this.registerCapabilityListener('dim', this.onCapabilityDim.bind(this));
     }
 
-    onCapabilityDim( value, opts, callback ) {
+    async onCapabilityDim( value, opts, callback ) {
         var variable = variableManager.getVariable(this.getData().id);
         if (variable) {
-            variableManager.updateVariable(this.getData().id, value, this.getData().type);
+            await variableManager.updateVariable(this.getData().id, value, this.getData().type);
 
-            return Promise.resolve(true);
+            return true;
         } else {
-            return Promise.reject(new Error('Variable not found!'));
+            throw new Error('Variable not found!');
         }
     }
 

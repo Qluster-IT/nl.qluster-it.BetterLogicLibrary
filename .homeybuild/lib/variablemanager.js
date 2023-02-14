@@ -7,6 +7,7 @@ var newVar = '';
 var tokens = [];
 
 const Homey = require('homey');
+const { BL } = require('betterlogiclibrary');
 let homey;
 
 let lastQuery = {};
@@ -45,8 +46,8 @@ let variableManager = module.exports = {
     getVariable: function(variable) {
         return findVariable(getVariables(), variable);
     },
-    updateVariable: function(name, value, type) {
-        updateVariable(name, value, type);
+    updateVariable: async function(name, value, type) {
+        return await updateVariable(name, value, type);
     },
     
     addVariable: function(name, type) {
@@ -72,7 +73,7 @@ let variableManager = module.exports = {
         // homey.api.realtime('setting_changed', variable);
         // removeToken(name);
         // return true;
-        //return variableManager.updateVariable(name, -1, "number", "0", true, undefined);
+        //return await variableManager.updateVariable(name, -1, "number", "0", true, undefined);
     },
     retrieveVariables: (query, args, type) => {
         let AllTypesVariables = variableManager.getVariables();
@@ -85,7 +86,8 @@ let variableManager = module.exports = {
         } //else lastQuery[type] = null;
   
         if (type != 'any' && lastQuery[type] && lastQuery[type].length && !query.startsWith(lastQuery[type]) && !l.find(x => x.name.toLowerCase() === ('' || lastQuery[type]).toLowerCase()) && !AllTypesVariables.find(x => x.name.toLowerCase() === ('' || lastQuery[type]).toLowerCase())) {
-          let a = { name: lastQuery[type], type: 'number', description: 'Just added' };
+            let a = { name: lastQuery[type], type: type, description: 'Just added' };
+            //let a = { name: lastQuery[type], type: 'number', description: 'Just added' };
           if (added) l.splice(1, 0, a);
           else l.unshift(a);
         }
@@ -98,7 +100,7 @@ let variableManager = module.exports = {
 
 
 
-function updateVariable(name, value, type, remove = false, auto = false) {
+async function updateVariable(name, value, type, remove = false, auto = false) {
     const variables = getVariables();
     const oldVariable = findVariable(variables, name);
     if (oldVariable) {
@@ -120,7 +122,7 @@ function updateVariable(name, value, type, remove = false, auto = false) {
         homey.api.realtime('setting_changed', newVariable);
     }
 
-    processValueChanged(variables, oldVariable, newVariable);
+    return await processValueChanged(variables, oldVariable, newVariable);
 }
 
 function findVariable(variables, variable) {
@@ -128,7 +130,7 @@ function findVariable(variables, variable) {
         return item.name === variable;
     })[0];
 }
-function processValueChanged(variables, oldVariable, newVariable) {
+async function processValueChanged(variables, oldVariable, newVariable) {
     homey.settings.set('variables', variables);
 
     if (newVariable && newVariable.remove) {
@@ -146,7 +148,7 @@ function processValueChanged(variables, oldVariable, newVariable) {
 
     if (newVariable && oldVariable && oldVariable.value !== newVariable.value) {
         createOrUpdateInsights(newVariable.name, newVariable.value, newVariable.type);
-        updateToken(newVariable.name, newVariable.value);
+        await updateToken(newVariable.name, newVariable.value);
 
         getTrigger('if_variable_changed').trigger({ "variable": newVariable.name, "value": newVariable.value }, newVariable);
         getTrigger('debug_any_variable_changed').trigger({ "variable": newVariable.name, "value": newVariable.value }, newVariable);
@@ -183,12 +185,16 @@ async function createOrUpdateInsights(name, value, type) {
     log = await homey.insights.getLog(name);
     console.log("else createEntry  > " + value);
   } catch(e) {
-    log = await homey.insights.createLog(name, GetInsightOptions(name, type));
-    console.log("if createLog > createEntry > " + value);
+    try {            
+        log = await homey.insights.createLog(name, GetInsightOptions(name, type));
+        console.log("if createLog > createEntry > " + value);
+    } catch (error) {
+        console.log("if createLog > createEntry > " + value + " -- ERROR ");
+    }
   }
 
   try {
-    await log.createEntry(value);
+    if(log) await log.createEntry(value);
   } catch(err) {
     console.log(err);
   }
@@ -246,10 +252,16 @@ function deleteAllTokens() {
 
 async function createToken(name, value, type) {
     if (type !== 'trigger') {
-        var token = await homey.flow.createToken(name, { type: type, title: name });  
-        tokens.push(token);
+        let token;
         try {            
-            return await token.setValue(value);
+            token = await homey.flow.createToken(name, { type: type, title: name });  
+            tokens.push(token);
+        } catch (error) {
+            homey.error('homey.flow.createToken', error);
+            token = BL._.find(tokens, t=>t.name===name);
+        }
+        try {            
+            if(token) return await token.setValue(value);
         } catch (error) {
             homey.error('value: ', value);
             homey.error(error);
@@ -267,14 +279,15 @@ function removeToken(name) {
     }
 }
 
-function updateToken(name, value) {
+async function updateToken(name, value) {
     for (var i = tokens.length - 1; i >= 0; i--) {
         if (tokens[i].id === name) {
             try {             
-                tokens[i].setValue(value);   
+                await tokens[i].setValue(value);
             } catch (error) {
                 homey.error('value: value', value);
                 homey.error(error);
+                throw error;
             }
         }
     }
