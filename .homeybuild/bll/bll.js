@@ -12,8 +12,9 @@ class BLL {
 
 	static get datetime() {  return this._datetime; }
 	static get dateTime() {  return this._datetime; }
+
+    static get proto() {  return this._proto; }
 	
-    //static get DateTime() {  return this._DateTime; }
     
 	/**@type {Object} */
 	static get homey() { return this._homey; }
@@ -26,14 +27,6 @@ class BLL {
      * @param {Object} options 
      */
     constructor({homey, modules, silent} = {}) {
-        //if(BLL._current) return BLL._current;
-        // if(BLL._current) {
-        //     BL.homey.log('BLL already exists');
-        // }
-        // if(BL.L) {
-        //     BL.homey.log('BL.L already exists');
-        // }
-        
         BLL._current = this;
         BLL._homey = homey;
         this.silent = silent;
@@ -67,7 +60,6 @@ class BLL {
                     case "dateTime":                    
                         let datetime = await this.getLibrary('datetime'); 
                         let dateTimeObj = this.requireFromString(datetime.file);
-                        //BLL._DateTime = dateTimeObj;
 
                         
                         BLL._datetime = dateTimeObj;//new dateTimeObj();
@@ -78,7 +70,8 @@ class BLL {
                         break;                        
                     case "proto":
                         let proto = await this.getLibrary('proto'); 
-                        let protoExport = this.requireFromString(proto.file, 'proto');
+                        BLL._proto = this.requireFromString(proto.file, 'proto');
+                        BL.proto = BLL.proto;
                         break;
                 }
             } catch (error) { BL.homey.error(error); }
