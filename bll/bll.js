@@ -15,10 +15,10 @@ class BLL {
 	
     //static get DateTime() {  return this._DateTime; }
     
-	/**@type {Homey} */
+	/**@type {Object} */
 	static get homey() { return this._homey; }
     
-    /**@type {Homey} */
+    /**@type {Object} */
     get homey() { return BLL.homey; }
 
 
@@ -40,13 +40,16 @@ class BLL {
         return this.init({modules});        
     }
     destroy() {
+        if(BLL.datetime) BLL.datetime.destroy();
         if(this.api) this.api.unregister();
         BL.homey.log('BLL destroyed');
     }
     async init({modules} = {modules:[]}) {
         BL.homey.log('init BLL');
         let api = this.getApi();
-        if((modules.indexOf('datetime')>-1 || modules.indexOf('dateTime')>-1) && modules.indexOf('_')==-1) modules.push('_');
+        if((modules.indexOf('datetime')>-1 || modules.indexOf('dateTime')>-1) && modules.indexOf('_')==-1) modules.unshift('_');
+        // modules = modules.sort((a,b)=> a -b );
+        BL.homey.log('modules', modules);
         if(modules) for (const module of modules) {
             try {                    
                 switch (module) {

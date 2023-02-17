@@ -7,7 +7,16 @@ declare class DateTime {
     private static get codes();
     /** @private */
     private static init;
-    static toString(format: any, date: any, locale: any, timeZone: any): any;
+    static destroy(): void;
+    /**
+     *
+     * @param {String|String[]} format
+     * @param {String|String[]|Number|Number[]|Date|Date[]} date
+     * @param {String} locale
+     * @param {String} timeZone
+     * @returns
+     */
+    static toString(format: string | string[], date: string | string[] | number | number[] | Date | Date[], locale: string, timeZone: string): any;
     /** @private */
     private static convertToDate;
     /** @private */

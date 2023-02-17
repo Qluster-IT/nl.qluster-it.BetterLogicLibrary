@@ -109,11 +109,16 @@ class DateTime {
     dateTimeStatics.locale = locale ? locale.default : await BL.homey.i18n.getLanguage();
     dateTimeStatics.timeZone = BL.homey.clock.getTimezone();    
     DateTime.updateFormats();
-    bll.api.on('realtime', (event, data)=> {
+    this.onRealtime = (event, data)=> {
       switch (event) {
         case "bllSetLocale": dateTimeStatics.locale = data.default; dateTimeStatics.formats = data.dateFormats; dateTimeStatics.customFormats = data.customDateFormats; DateTime.updateFormats();
       }
-    });
+    };
+    bll.api.on('realtime', this.onRealtime);
+  }
+  
+  static destroy() {    
+    bll.api.off('realtime', this.onRealtime);
   }
 
   // static getFormats(locale) {
@@ -530,7 +535,7 @@ class DateTime {
     if(!coding || !coding.length) return coding;
     let r = '';
     let codes = noCustomized===true ? BL._.filter(DateTime.codes.array, x=>!x.customized) : DateTime.codes.array; 
-    BL.homey.log('format', codes);
+    //BL.homey.log('format', codes);
     let stringMode = false;
     for (let i=0;i<coding.length;i++) {
       let s = false;
@@ -579,7 +584,7 @@ class DateTime {
       BL._.each(codes, (code,funcKey)=> { 
         if(s) return;
         if(coding.indexOf(code.code)===0) {
-          BL.homey.log('code.code', code.code);
+          //BL.homey.log('code.code', code.code);
           //BL.homey.log('code.code result', this[code.originalFunc](code.code));
           s=true;
           if(code.custom) r+= this[code.func](code.format);
