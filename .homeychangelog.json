@@ -142,5 +142,8 @@
   },
   "2.3.3": {
     "en": "Improved: Bufixes and improved Error handling in flowcards."
+  },
+  "2.3.4": {
+    "en": "Improved: BLL datetime object improvements for Simple Log."
   }
 }

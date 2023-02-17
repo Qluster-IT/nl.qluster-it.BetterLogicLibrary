@@ -46,6 +46,7 @@ class BLL {
     async init({modules} = {modules:[]}) {
         BL.homey.log('init BLL');
         let api = this.getApi();
+        if((modules.indexOf('datetime')>-1 || modules.indexOf('dateTime')>-1) && modules.indexOf('_')==-1) modules.push('_');
         if(modules) for (const module of modules) {
             try {                    
                 switch (module) {
