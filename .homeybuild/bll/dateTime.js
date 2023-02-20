@@ -143,8 +143,11 @@ class DateTime {
  */
   static toString(format, date, locale, timeZone) {
     if(!format) throw new Error("Format is required.");
-    //BL.homey.log('datetime.toString', arguments);
-    if(!date || !BL._.isArray(date)) {
+    BL.homey.log('datetime.toString', arguments);
+    if(date && !BL._.isArray(date)) {
+      
+      BL.homey.log('datetime.toString date', typeof(date), date, date ? DateTime.convertToDate(date) : DateTime.date);
+      BL.homey.log('datetime.toString date', date instanceof Date);
       let dt = new DateTime(locale, timeZone, date? DateTime.convertToDate(date) : DateTime.date);
       return dt.toString(format);
     } else if (BL._.isArray(date)){
@@ -166,6 +169,7 @@ class DateTime {
     if(!date) return date;
     if(date instanceof Date) return date;
     if(typeof(date)=='string' && date.length==="2022-11-10T19:17:01.439Z".length && date.endsWith('Z') && date.substr(10,1)=='T') return new Date(date);
+    if(typeof(date)=='object' && date.getTime) return new Date(date.getTime());
     if(typeof(date)=='string' && /^\d+$/.test(date)) return new Date(Number.parseInt(date));
     if(typeof(date)=='number') return new Date(date);    
     if(typeof(date)=='string' ) return new Date(date); // EN by default!
