@@ -145,5 +145,8 @@
   },
   "2.3.4": {
     "en": "Improved: BLL datetime object improvements for Simple Log."
+  },
+  "2.3.5": {
+    "en": "Improved: Many coding improvements and BLL improvements for Simple Log."
   }
 }
