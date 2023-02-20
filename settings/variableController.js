@@ -72,7 +72,7 @@
                 },
                 {
                     id:'TimeZone',
-                    formats:['KK', 'kk']
+                    formats:['KK', 'kk', 'z', 'zz']
                 },
                 {
                     id:'Other',

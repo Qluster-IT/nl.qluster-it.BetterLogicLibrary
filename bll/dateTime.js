@@ -3,7 +3,6 @@
 //https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings
 //https://docs.angularjs.org/api/ng/filter/date
 
-
 const { BL } = require("betterlogiclibrary");
 
 
@@ -17,21 +16,21 @@ class dateTimeStatics { }
  * @class Codes
  */
 class Codes {
-  
 
-  constructor() {   
-    this.init(); 
+
+  constructor() {
+    this.init();
   }
   init() {
 
-    /** @private */    
-    this.dateTimeCodesArr = BL._.sortBy(BL._.map(DateTime.dateTimeCodes, (x, key) => { return { key, val: x, customisable:true }; }, 'key.length'));
     /** @private */
-    this.dateCodesArr = BL._.sortBy(BL._.map(DateTime.dateCodes, (x, key) => { return { key, val: x, customisable:true }; }, 'key.length'));
+    this.dateTimeCodesArr = BL._.sortBy(BL._.map(DateTime.dateTimeCodes, (x, key) => { return { key, val: x, customisable: true }; }, 'key.length'));
     /** @private */
-    this.timeCodesArr = BL._.sortBy(BL._.map(DateTime.timeCodes, (x, key) => { return { key, val: x, customisable:true }; }, 'key.length'));
-    
-    
+    this.dateCodesArr = BL._.sortBy(BL._.map(DateTime.dateCodes, (x, key) => { return { key, val: x, customisable: true }; }, 'key.length'));
+    /** @private */
+    this.timeCodesArr = BL._.sortBy(BL._.map(DateTime.timeCodes, (x, key) => { return { key, val: x, customisable: true }; }, 'key.length'));
+
+
     /** @private */
     this.dayPeriodCodesArr = BL._.sortBy(BL._.map(DateTime.dayPeriodCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
     /** @private */
@@ -78,8 +77,8 @@ class Codes {
     this.arrays['secondCodesArr'] = 'getSecond';
     this.arrays['fractionalSecondCodesArr'] = 'getFractionalSecond';
     /** @private */
-    this.array = BL._.sortBy(BL._.flatMap(this.arrays, (val, key)=> { return BL._.map(this[key], (code, format)=> { return { code:code.key, format:code.val, func:val, customisable:code.customisable };  });  }), (x)=>-x.code.length); //return { name:key, func:val, list:this[key]}; });
-  
+    this.array = BL._.sortBy(BL._.flatMap(this.arrays, (val, key) => { return BL._.map(this[key], (code, format) => { return { code: code.key, format: code.val, func: val, customisable: code.customisable }; }); }), (x) => -x.code.length); //return { name:key, func:val, list:this[key]}; });
+
   }
 }
 
@@ -92,8 +91,8 @@ class DateTime {
   static get date() { return new Date(); }
 
   /** @type {Codes} @private */
-  static get codes() {    
-    if(!dateTimeStatics.codes) {
+  static get codes() {
+    if (!dateTimeStatics.codes) {
       dateTimeStatics.codes = new Codes();
       console.log('ALERT: dateTimeStatics.codes = new Codes();');
     }
@@ -103,21 +102,21 @@ class DateTime {
   /** @private */
   static async init(bll) {
     let locale = await bll.get('locale');
-    
+
     dateTimeStatics.formats = locale ? locale.dateFormats : undefined;
     dateTimeStatics.customFormats = locale ? locale.customDateFormats : undefined;
     dateTimeStatics.locale = locale ? locale.default : await BL.homey.i18n.getLanguage();
-    dateTimeStatics.timeZone = BL.homey.clock.getTimezone();    
+    dateTimeStatics.timeZone = BL.homey.clock.getTimezone();
     DateTime.updateFormats();
-    this.onRealtime = (event, data)=> {
+    this.onRealtime = (event, data) => {
       switch (event) {
         case "bllSetLocale": dateTimeStatics.locale = data.default; dateTimeStatics.formats = data.dateFormats; dateTimeStatics.customFormats = data.customDateFormats; DateTime.updateFormats();
       }
     };
     bll.api.on('realtime', this.onRealtime);
   }
-  
-  static destroy() {    
+
+  static destroy() {
     bll.api.off('realtime', this.onRealtime);
   }
 
@@ -133,54 +132,55 @@ class DateTime {
   //   BL.homey.log('ret', ret);
   //   return ret;
   // }
-/**
- * 
- * @param {String|String[]} format 
- * @param {String|String[]|Number|Number[]|Date|Date[]} date 
- * @param {String} locale 
- * @param {String} timeZone 
- * @returns 
- */
+  /**
+   * 
+   * @param {String|String[]} format 
+   * @param {String|String[]|Number|Number[]|Date|Date[]} date 
+   * @param {String} locale 
+   * @param {String} timeZone 
+   * @returns 
+   */
   static toString(format, date, locale, timeZone) {
-    if(!format) throw new Error("Format is required.");
+    if (!format) throw new Error("Format is required.");
     BL.homey.log('datetime.toString', arguments);
     BL.homey.log('datetime.toString date', date, date instanceof Date);
-    if(!BL._.isArray(date)) {
-      let dt = new DateTime(locale, timeZone, date? DateTime.convertToDate(date) : DateTime.date);
+    if (!BL._.isArray(date)) {
+      let dt = new DateTime(locale, timeZone, date ? DateTime.convertToDate(date) : DateTime.date);
       return dt.toString(format);
-    } else if (BL._.isArray(date)){
+    } else if (BL._.isArray(date)) {
       //BL.homey.log('isArray');
       let r = {};
       for (const _date of date) {
         //BL.homey.log(new DateTime(locale || DateTime.locale, timeZone || DateTime.timeZone, DateTime.convertToDate(_date)).toString(format));
-        try {         
-          if(Object.keys(r).indexOf(_date)===-1) r[_date] = new DateTime(locale, timeZone, DateTime.convertToDate(_date)).toString(format); 
+        try {
+          if (Object.keys(r).indexOf(_date) === -1) r[_date] = new DateTime(locale, timeZone, DateTime.convertToDate(_date)).toString(format);
         } catch (error) {
-          BL.homey.error(error); }
+          BL.homey.error(error);
+        }
       }
       return r;
     }
   }
-  
+
   /** @private */
   static convertToDate(date) {
-    if(!date) return date;
-    if(date instanceof Date) return date;
-    if(typeof(date)=='string' && date.length==="2022-11-10T19:17:01.439Z".length && date.endsWith('Z') && date.substr(10,1)=='T') return new Date(date);
-    if(typeof(date)=='object' && date.getTime) return new Date(date.getTime());
-    if(typeof(date)=='string' && /^\d+$/.test(date)) return new Date(Number.parseInt(date));
-    if(typeof(date)=='number') return new Date(date);    
-    if(typeof(date)=='string' ) return new Date(date); // EN by default!
+    if (!date) return date;
+    if (date instanceof Date) return date;
+    if (typeof (date) == 'string' && date.length === "2022-11-10T19:17:01.439Z".length && date.endsWith('Z') && date.substr(10, 1) == 'T') return new Date(date);
+    if (typeof (date) == 'object' && date.getTime) return new Date(date.getTime());
+    if (typeof (date) == 'string' && /^\d+$/.test(date)) return new Date(Number.parseInt(date));
+    if (typeof (date) == 'number') return new Date(date);
+    if (typeof (date) == 'string') return new Date(date); // EN by default!
   }
 
   /** @private */
   static updateFormats() {
     this.codes.init();
-    if(dateTimeStatics.formats) for (const format in dateTimeStatics.formats) {
+    if (dateTimeStatics.formats) for (const format in dateTimeStatics.formats) {
       if (Object.hasOwnProperty.call(dateTimeStatics.formats, format)) {
         const customFormat = dateTimeStatics.formats[format];
-        let f = BL._.find(this.codes.array, a=> a.customisable && a.code===format );
-        if(f) {
+        let f = BL._.find(this.codes.array, a => a.customisable && a.code === format);
+        if (f) {
           //BL.homey.log('f before: ', f);
           f.originalFunc = f.func;
           f.format = customFormat;
@@ -190,22 +190,22 @@ class DateTime {
         }
       }
     }
-    if(dateTimeStatics.customFormats) {
+    if (dateTimeStatics.customFormats) {
       for (let i = 0; i < dateTimeStatics.customFormats.length; i++) {
-      const format = dateTimeStatics.customFormats[i];      
-      this.codes.array.push({format:format.format, func:'formatCustom', originalFunc:'formatCustom', customized:true, code:format.name, custom:true});
-      //const customFormat = dateTimeStatics.customFormats[format];
-      // let f = BL._.find(this.codes.array, a=> a.customisable && a.code===format );
-      // if(f) {
-      //   //BL.homey.log('f before: ', f);
-      //   f.originalFunc = f.func;
-      //   f.format = customFormat;
-      //   f.func = 'formatCustom';
-      //   f.customized = true;
-      //   //BL.homey.log('f after : ', f);
-      // }
+        const format = dateTimeStatics.customFormats[i];
+        this.codes.array.push({ format: format.format, func: 'formatCustom', originalFunc: 'formatCustom', customized: true, code: format.name, custom: true });
+        //const customFormat = dateTimeStatics.customFormats[format];
+        // let f = BL._.find(this.codes.array, a=> a.customisable && a.code===format );
+        // if(f) {
+        //   //BL.homey.log('f before: ', f);
+        //   f.originalFunc = f.func;
+        //   f.format = customFormat;
+        //   f.func = 'formatCustom';
+        //   f.customized = true;
+        //   //BL.homey.log('f after : ', f);
+        // }
       }
-      this.codes.array = BL._.sortBy(this.codes.array, (x)=>-x.code.length);
+      this.codes.array = BL._.sortBy(this.codes.array, (x) => -x.code.length);
     }
     BL.homey.log('updateFormats', this.codes.array);
   }
@@ -222,7 +222,7 @@ class DateTime {
 
   get date() { return _date; }
   set date(v) { _date = v; }
-  
+
   /** @private */
   get(dt) { return new DateTime(this.locale, this.timeZone, dt || new Date()); }
 
@@ -237,9 +237,9 @@ class DateTime {
   getString(options) {
     options.timeZone = this.timeZone || DateTime.timeZone;
     //BL.homey.log('getString', this.locale, (this.date || new Date()).toLocaleString(this.locale, options));
-    return (this.date || new Date()).toLocaleString(this.locale || DateTime.locale, options);
+    return (this.date || new Date()).toLocaleString(options.locale || this.locale || DateTime.locale, options);
   }
-  
+
   /**
    * @param {"full"|"long"|"medium"|"short"} format * @returns {String}
    */
@@ -262,7 +262,7 @@ class DateTime {
     return this.getString({ timeStyle: format || 'full' });
   }
 
-  
+
 
 
 
@@ -280,18 +280,37 @@ class DateTime {
     return removeYear(this.getString({ era: format || 'long', year: 'numeric' }));
   }
 
-  
+
   /** 
-   * @param {"KK"|"K"|"kk"|"k"} format * @returns {String}
+   * @param {"KK"|"K"|"kk"|"k"|"z"|"zz"} format * @returns {String}
    */
-   getTimeZoneByFormat(format) {
-    let c;
-    switch (format) {
-      case "KK":c='long';break;
-      case "kk":c='short';break;
+  getTimeZoneByFormat(format) {
+    if (format == 'z' || format == 'zz' || format == 'zzz') {
+      let options =
+      {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZoneName: 'short',
+        locale:'en'
+      };
+      let val = this.getString(options);
+      val = Number.parseInt(BL._.last(val.split('GMT')) || '0');
+      BL.homey.log('Date z: ', val);
+      return (val>0?'+':'-') + val.toString().padStart(format.length>1?2:1,'0');
+      
+    } else {
+      let c;
+      switch (format) {
+        case "KK": c = 'long'; break;
+        case "kk": c = 'short'; break;
+      }
+      let s = this.getSecondByFormat("numeric");
+      return this.getString({ second: 'numeric', timeZoneName: c }).substr(s.length).trim();
     }
-    let s = this.getSecondByFormat("numeric");
-    return this.getString({ second: 'numeric', timeZoneName:c }).substr(s.length).trim();
 
   }
 
@@ -321,15 +340,15 @@ class DateTime {
    * @param {"numeric"|"2-digit"} format * @returns {String}
    */
   getHourByFormat(format) {
-    let r = this.getString({ hour: format || 'numeric', hour12:false });
+    let r = this.getString({ hour: format || 'numeric', hour12: false });
     return format == '2-digit' ? r.padStart(2, '0') : r;
   }
 
   /**
    * @param {"numeric"|"2-digit"} format * @returns {String}
    */
-   getHour12ByFormat(format) {
-    let r = this.getString({ hour: format || 'numeric', hour12:true });
+  getHour12ByFormat(format) {
+    let r = this.getString({ hour: format || 'numeric', hour12: true });
     return format == '2-digit' ? r.padStart(2, '0') : r;
   }
 
@@ -376,7 +395,7 @@ class DateTime {
 
 
   /** @private */
-  static dateCodes = { 'DATELONG': 'full', 'datelong': 'full', 'dateshort': 'short',  'LONGDATE': 'full', 'longdate': 'full', 'shortdate': 'short', 'DATE': 'long', 'date': 'medium' };
+  static dateCodes = { 'DATELONG': 'full', 'datelong': 'full', 'dateshort': 'short', 'LONGDATE': 'full', 'longdate': 'full', 'shortdate': 'short', 'DATE': 'long', 'date': 'medium' };
   /**
    * @param {"DATELONG"|"datelong"|"DATE"|"date"|"dateshort"} code * @returns {String}
    */
@@ -403,7 +422,7 @@ class DateTime {
   }
 
   /** @private */
-  static  eraCodes = { 'ERA': 'long', 'era': 'short' };
+  static eraCodes = { 'ERA': 'long', 'era': 'short' };
   /**
    * @param {"ERA"|"era"} code * @returns {String}
    */
@@ -411,10 +430,10 @@ class DateTime {
     return this.getEraByFormat(code && DateTime.eraCodes[code] ? DateTime.eraCodes[code] : 'long');
   }
 
-  
+
 
   /** @private */
-  static timeZoneCodes = { 'KK': 'KK', 'kk':'kk' };
+  static timeZoneCodes = { 'KK': 'KK', 'kk': 'kk', 'z':'z', 'zz':'zz' };
   /**
    * @param {"KK"|"kk"} code * @returns {String}
    */
@@ -466,7 +485,7 @@ class DateTime {
   getHour12(code) {
     return removeNonNumeric(this.getHour12ByFormat(code && DateTime.hour12Codes[code] ? DateTime.hour12Codes[code] : 'numeric'));
   }
-  
+
   /** @private */
   static amPmCodes = { 'tt': '2-digit' };
   /**
@@ -475,7 +494,7 @@ class DateTime {
   getAmPm(code) {
     return removeNumeric(this.getHour12ByFormat('numeric'));
   }
-  
+
   /** @private */
   static minuteCodes = { 'mm': '2-digit', 'm': 'numeric' };
   /**
@@ -516,48 +535,48 @@ class DateTime {
 
 
   toString(format) {
-    if(!format) return format;
-    if(typeof(format)=='string') return this.format(format);
-    if(BL._.isArray(format)) {
-        let r = {};
-        for (const _format of format) {
-            if(Object.keys(r).indexOf(_format)===-1) r[_format] = this.format(_format);
-        }
-        return r;
+    if (!format) return format;
+    if (typeof (format) == 'string') return this.format(format);
+    if (BL._.isArray(format)) {
+      let r = {};
+      for (const _format of format) {
+        if (Object.keys(r).indexOf(_format) === -1) r[_format] = this.format(_format);
+      }
+      return r;
     }
   }
 
 
   /** @private */
   formatCustom(coding) {
-    return this.format(dateTimeStatics.formats && dateTimeStatics.formats[coding] ? dateTimeStatics.formats[coding] : coding , true);
+    return this.format(dateTimeStatics.formats && dateTimeStatics.formats[coding] ? dateTimeStatics.formats[coding] : coding, true);
   }
   /** @private */
   format(coding, noCustomized) {
-    if(!coding || !coding.length) return coding;
+    if (!coding || !coding.length) return coding;
     let r = '';
-    let codes = noCustomized===true ? BL._.filter(DateTime.codes.array, x=>!x.customized) : DateTime.codes.array; 
+    let codes = noCustomized === true ? BL._.filter(DateTime.codes.array, x => !x.customized) : DateTime.codes.array;
     //BL.homey.log('format', codes);
     let stringMode = false;
-    for (let i=0;i<coding.length;i++) {
+    for (let i = 0; i < coding.length; i++) {
       let s = false;
 
-      if(coding.substr(i,2)==="\"\"") {
-        r+="\"";
-        coding = coding.substr(0,i) + coding.substr(i+2);
+      if (coding.substr(i, 2) === "\"\"") {
+        r += "\"";
+        coding = coding.substr(0, i) + coding.substr(i + 2);
         i--;
         continue;
       }
-      
-      if(coding.substr(i,1)==="\"") {
+
+      if (coding.substr(i, 1) === "\"") {
         stringMode = !stringMode;
-        coding = coding.substr(0,i) + coding.substr(i+1);
+        coding = coding.substr(0, i) + coding.substr(i + 1);
         i--;
         continue;
       }
-      if(stringMode) {
-        r+=coding[0];
-        coding = coding.substr(0,i) + coding.substr(i+1);
+      if (stringMode) {
+        r += coding[0];
+        coding = coding.substr(0, i) + coding.substr(i + 1);
         i--;
         continue;
       }
@@ -571,7 +590,7 @@ class DateTime {
       //     f.customized = true;
       //     //BL.homey.log('f after : ', f);
       //   }
-        
+
       //   BL._.each(codes, (code,funcKey)=> { 
       //     if(s) return;
       //     if(coding.indexOf(code.code)===0) {
@@ -582,23 +601,23 @@ class DateTime {
       //     }        
       //   });
       // }
-      
-      BL._.each(codes, (code,funcKey)=> { 
-        if(s) return;
-        if(coding.indexOf(code.code)===0) {
+
+      BL._.each(codes, (code, funcKey) => {
+        if (s) return;
+        if (coding.indexOf(code.code) === 0) {
           //BL.homey.log('code.code', code.code);
           //BL.homey.log('code.code result', this[code.originalFunc](code.code));
-          s=true;
-          if(code.custom) r+= this[code.func](code.format);
-          else if(code.customized && this.locale) r+= this[code.originalFunc](code.code);
-          else r+= this[code.func](code.code);
-          coding = coding.substr(0,i) + coding.substr(i+code.code.length); 
-        }        
+          s = true;
+          if (code.custom) r += this[code.func](code.format);
+          else if (code.customized && this.locale) r += this[code.originalFunc](code.code);
+          else r += this[code.func](code.code);
+          coding = coding.substr(0, i) + coding.substr(i + code.code.length);
+        }
       });
-      i=-1;
-      if(s) continue;
-      r+=coding[0];
-      coding=coding.substr(1);
+      i = -1;
+      if (s) continue;
+      r += coding[0];
+      coding = coding.substr(1);
     }
     return r;
   }
