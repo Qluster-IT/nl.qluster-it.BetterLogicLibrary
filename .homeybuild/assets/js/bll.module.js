@@ -1,5 +1,5 @@
 var app = angular.module('bll', []);
-app.factory('bl', ['$q', function($q){ 
+app.factory('$bl', ['$q', function($q){ 
     let Homey;
     let $scope;
     
@@ -7,7 +7,8 @@ app.factory('bl', ['$q', function($q){
         init,
         api,
         get,
-        set
+        set,
+        error
     };
     return factory;
 
@@ -66,6 +67,11 @@ app.factory('bl', ['$q', function($q){
         });
         return defer.promise;
     }
+    function error(err) {
+        if(Homey.hideLoadingOverlay) Homey.hideLoadingOverlay();
+        Homey.alert(err, 'error');
+        return;
+    }
 }]);
 
 app.directive('blHref', function () {
@@ -74,4 +80,4 @@ app.directive('blHref', function () {
             Homey.openURL(attrs.blHref);
         });
     };
-})
+});

@@ -1,5 +1,5 @@
 ﻿angular.module('variableApp', ['smart-table', 'bll', 'ui.codemirror'])
-    .controller('VariableSettingsController', ['$scope', 'bl', function($scope, bl) {
+    .controller('VariableSettingsController', ['$scope', '$bl', function($scope, $bl) {
         //console.log(homeyTools);
 
         var vm = this;
@@ -88,24 +88,24 @@
         $scope.editorOptions = getEditorOptions();
         
         $scope.updateModuleExample = async function() {
-            await bl.api("POST", "/decode", {text:vars.moduleExampleValue}, (x)=> vars.moduleExampleResult = x);
+            await $bl.api("POST", "/decode", {text:vars.moduleExampleValue}, (x)=> vars.moduleExampleResult = x);
         };
 
         $scope.updateDateExample = async function() {
-            await bl.api("POST", "/decode", {text:vars.dateExampleValue}, (x)=> vars.dateExampleResult = x);
+            await $bl.api("POST", "/decode", {text:vars.dateExampleValue}, (x)=> vars.dateExampleResult = x);
         };
         
         $scope.updateDatesExample = async function() {
-            await bl.api("POST", "/date", {format:vars.datesExampleValue}, (x)=> vars.datesExampleResult = x);
+            await $bl.api("POST", "/date", {format:vars.datesExampleValue}, (x)=> vars.datesExampleResult = x);
         };
         $scope.setFormatExample = async function(format) {
             if(!vars.locale.dateFormats[format] || !vars.locale.dateFormats[format].length) temp.dateFormats[format] = undefined;
-            else await bl.api("POST", "/date", {format:vars.locale.dateFormats[format]}, (x)=> temp.dateFormats[format] = x);
+            else await $bl.api("POST", "/date", {format:vars.locale.dateFormats[format]}, (x)=> temp.dateFormats[format] = x);
         };
         
         $scope.setCustomFormat = async function(format) {
             if(!format.name || !format.format) temp.dateFormats[format.format] = undefined;
-            else await bl.api("POST", "/date", {format:format.format}, (x)=> temp.dateFormats[format.format] = x);
+            else await $bl.api("POST", "/date", {format:format.format}, (x)=> temp.dateFormats[format.format] = x);
         };
 
         $scope.setLocale = async function() {
@@ -118,10 +118,10 @@
                     if(!format || !format.length) delete vars.locale.dateFormats[formatKey];
                 }
             }
-            await bl.set('locale', vars.locale, ()=> {
+            await $bl.set('locale', vars.locale, ()=> {
                 $scope.updateExamples();
                 let dates = _.uniqBy(_.flatMap(vm.variables, 'lastChanged'));
-                bl.api("POST", "/date", {date:dates, format:'datetime'}, (x)=> vars.variableDates = x);
+                $bl.api("POST", "/date", {date:dates, format:'datetime'}, (x)=> vars.variableDates = x);
             });
         };
 
@@ -223,17 +223,17 @@
 
         vm.init = function(homey, scope) {
             vm.homey = homey;
-            bl.init(homey, $scope);
-            bl.get("locale", async(x)=> {
+            $bl.init(homey, $scope);
+            $bl.get("locale", async(x)=> {
                 vars.locale = x;
                 if(x && !x.dateFormats) x.dateFormats={};
                 if(x && x.customDateFormats && x.customDateFormats.length) {
                     let formats = _.uniqBy(_.flatMap(x.customDateFormats, 'format'));
-                    await bl.api("POST", "/date", {format:formats}, (x)=> temp.dateFormats = x );//temp.dateFormats[format] = x);
+                    await $bl.api("POST", "/date", {format:formats}, (x)=> temp.dateFormats = x );//temp.dateFormats[format] = x);
                     }
 
             });
-            bl.api("GET", "/locales", null, (x)=> vars.locales = x );
+            $bl.api("GET", "/locales", null, (x)=> vars.locales = x );
 
             $scope.updateExamples();
             $scope.getFunctionFromSettings();
@@ -253,7 +253,7 @@
                         newVariables = [];
                     }
                     let dates = _.uniqBy(_.flatMap(newVariables, 'lastChanged'));
-                    bl.api("POST", "/date", {date:dates, format:'datetime'}, (x)=> vars.variableDates = x);
+                    $bl.api("POST", "/date", {date:dates, format:'datetime'}, (x)=> vars.variableDates = x);
     
                     scope.$apply(function() {
                         vm.variables = newVariables;
@@ -364,7 +364,7 @@
             }
             vm.newVariable.value = '';
             return;
-        }
+        };
 
         vm.getTemplate = function(variable) {
             if (vm.selected && variable.name === vm.selected.name && variable.type === vm.selected.type) return 'edit';
@@ -375,7 +375,7 @@
             var changeObject = {
                 variable: variable
             };
-            vm.homey.set('changedvariables', changeObject, function (err) { console.log(err)});
+            vm.homey.set('changedvariables', changeObject, function (err) { console.log(err);});
         }
 
         function deleteAllVariables() {
@@ -391,7 +391,7 @@
                 variable: dummyVar
             };
 
-            vm.homey.set('deleteall', dummyChangedObject, function (err) { console.log(err)});            
+            vm.homey.set('deleteall', dummyChangedObject, function (err) { console.log(err);});            
         }
 
         

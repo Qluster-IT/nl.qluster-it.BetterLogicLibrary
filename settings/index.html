@@ -534,6 +534,7 @@
         function onHomeyReady(Homey) {
             Homey.ready();
             var scope = angular.element(document.getElementById('variableName')).scope();
+            console.log(scope);
             scope.$apply(function () {
                 scope.vm.init(Homey, scope);
             });
