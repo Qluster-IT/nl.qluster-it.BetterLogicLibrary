@@ -169,7 +169,7 @@ class DateTime {
    * @returns 
    */
   static fromUTC(date) {
-    return !date ? date : date.setHours(date.getHours() + Number.parseInt(DateTime.toString('z', date)));
+    return !date ? date : new Date(date.setHours(date.getHours() - Number.parseInt(DateTime.toString('z', date))));
   }
 
 
