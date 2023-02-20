@@ -143,7 +143,7 @@ class DateTime {
  */
   static toString(format, date, locale, timeZone) {
     if(!format) throw new Error("Format is required.");
-    BL.homey.log('datetime.toString', arguments);
+    //BL.homey.log('datetime.toString', arguments);
     if(date && !BL._.isArray(date)) {
       let dt = new DateTime(locale, timeZone, date? DateTime.convertToDate(date) : DateTime.date);
       return dt.toString(format);
