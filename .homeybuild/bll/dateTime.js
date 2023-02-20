@@ -163,6 +163,16 @@ class DateTime {
     }
   }
 
+  /**
+   * 
+   * @param {Date} date 
+   * @returns 
+   */
+  static fromUTC(date) {
+    return !date ? date : date.setHours(date.getHours() + Number.parseInt(DateTime.toString('z', date)));
+  }
+
+
   /** @private */
   static convertToDate(date) {
     if (!date) return date;
