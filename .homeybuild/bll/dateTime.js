@@ -300,7 +300,7 @@ class DateTime {
       };
       let val = this.getString(options);
       val = Number.parseInt(BL._.last(val.split('GMT')) || '0');
-      BL.homey.log('Date z: ', val);
+      //BL.homey.log('Date z: ', val);
       return (val>0?'+':'-') + val.toString().padStart(format.length>1?2:1,'0');
       
     } else {
