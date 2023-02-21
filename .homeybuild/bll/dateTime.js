@@ -218,7 +218,7 @@ class DateTime {
       }
       this.codes.array = BL._.sortBy(this.codes.array, (x) => -x.code.length);
     }
-    BL.homey.log('updateFormats', this.codes.array);
+    //BL.homey.log('updateFormats', this.codes.array);
   }
 
   static get(dt) { return new DateTime(undefined, undefined, dt || DateTime.date); }

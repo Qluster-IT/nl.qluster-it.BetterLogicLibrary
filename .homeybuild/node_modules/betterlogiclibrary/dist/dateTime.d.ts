@@ -17,6 +17,12 @@ declare class DateTime {
      * @returns
      */
     static toString(format: string | string[], date: string | string[] | number | number[] | Date | Date[], locale: string, timeZone: string): any;
+    /**
+     *
+     * @param {Date} date
+     * @returns
+     */
+    static fromUTC(date: Date): Date;
     /** @private */
     private static convertToDate;
     /** @private */
@@ -86,9 +92,9 @@ declare class DateTime {
      */
     getEraByFormat(format: "long" | "short" | "narrow"): string;
     /**
-     * @param {"KK"|"K"|"kk"|"k"} format * @returns {String}
+     * @param {"KK"|"K"|"kk"|"k"|"z"|"zz"} format * @returns {String}
      */
-    getTimeZoneByFormat(format: "KK" | "K" | "kk" | "k"): string;
+    getTimeZoneByFormat(format: "KK" | "K" | "kk" | "k" | "z" | "zz"): string;
     /**
      * @param {"numeric"|"2-digit"} format * @returns {String}
      */
