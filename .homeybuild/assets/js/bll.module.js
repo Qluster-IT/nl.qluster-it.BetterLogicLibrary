@@ -43,8 +43,8 @@ app.factory('$bl', ['$q', function($q){
                     defer.reject(err);
                     return Homey.alert(err);
                 });
-            }
-            $scope.$apply(()=> {
+            } 
+            else $scope.$apply(()=> {
                 if(callback) callback(val);
                 defer.resolve(val);
             });
