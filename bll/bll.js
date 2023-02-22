@@ -40,7 +40,7 @@ class BLL {
     async init({modules} = {modules:[]}) {
         BL.homey.log('init BLL');
         let api = this.getApi();
-        if((modules.indexOf('datetime')>-1 || modules.indexOf('dateTime')>-1) && modules.indexOf('_')==-1) modules.unshift('_');
+        if(modules && modules.length && ((modules.indexOf('datetime')>-1 || modules.indexOf('dateTime')>-1) && modules.indexOf('_')==-1)) modules.unshift('_');
         // modules = modules.sort((a,b)=> a -b );
         BL.homey.log('modules', modules);
         if(modules) for (const module of modules) {
