@@ -913,6 +913,11 @@
       "path": "/timezones",
       "public": false
     },
+    "getDownloadUrl": {
+      "method": "GET",
+      "path": "/getdownloadurl",
+      "public": false
+    },
     "getVariable": {
       "method": "GET",
       "path": "/:variable",

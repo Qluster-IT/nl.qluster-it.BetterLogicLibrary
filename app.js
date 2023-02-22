@@ -9,6 +9,7 @@ let timezone;
 
 const {BL} = require('betterlogiclibrary');
 const sandbox = require('./lib/sandbox');
+const FileServer = require('./lib/FileServer.js');
 
 
 
@@ -605,6 +606,17 @@ class BetterLogic extends Homey.App {
 
 	}
 
+	async onUninit() {		
+		if(this.fileServer) await this.fileServer.destroy();
+	}
+
+	async getDownloadUrl() {
+		if(!this.fileServer) await this.initFileServer();
+		return await this.fileServer.getDownloadUrl();
+	}
+	async initFileServer() {		
+		this.fileServer = await new FileServer().init({homey:this.homey});
+	}
 	
 	async setFunctions() {
 		this.functions = await this.homey.settings.get('javascript_functions');

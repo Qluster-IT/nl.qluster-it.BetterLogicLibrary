@@ -41,6 +41,9 @@ module.exports =
     async getLocale({ homey }) {
         return await homey.app.locale;
     },
+    async getAsd({ homey }) {
+        return 'asd';
+    },
 
     async getLocales({ homey }) {
         return await locale.all;
@@ -145,6 +148,9 @@ module.exports =
 
         }
         throw new Error("Incorect call");
+    },
+    async getDownloadUrl({homey}) {
+        return await homey.app.getDownloadUrl();
     }
 };
 
