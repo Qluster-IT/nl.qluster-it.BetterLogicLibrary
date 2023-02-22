@@ -146,8 +146,8 @@ module.exports =
         }
         throw new Error("Incorect call");
     },
-    async getDownloadUrl({homey}) {
-        return await homey.app.getDownloadUrl();
+    async getDownloadUrl({homey, body}) {
+        return await homey.app.getDownloadUrl(body);
     }
 };
 

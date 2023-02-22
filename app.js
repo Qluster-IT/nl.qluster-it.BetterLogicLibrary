@@ -610,9 +610,9 @@ class BetterLogic extends Homey.App {
 		if(this.fileServer) await this.fileServer.destroy();
 	}
 
-	async getDownloadUrl() {
+	async getDownloadUrl(body) {
 		if(!this.fileServer) await this.initFileServer();
-		return await this.fileServer.getDownloadUrl();
+		return await this.fileServer.getDownloadUrl(body);
 	}
 	async initFileServer() {		
 		this.fileServer = await new FileServer().init({homey:this.homey});

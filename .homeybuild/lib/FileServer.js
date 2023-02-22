@@ -22,6 +22,7 @@ class FileServer {
     this.homey = homey;
     this.ip = (await this.homey.cloud.getLocalAddress()).split(':')[0];
     this.port = 47335;
+    this.files = {};
     try {
 
       this.server = http.createServer((async function (req, res) {
@@ -35,6 +36,9 @@ class FileServer {
           const filename = decodeURIComponent(url.substring(token.length + 1));
           this.homey.log('token', token, 'id', filename);
           try {
+            if(token && this.files[token]) {
+              return returnBinary(Buffer.from(this.files[token].base64, 'base64'));
+            }
             let body = await getBody();
             homey.log('body', body);
             return returnBinary(Buffer.from(body.base64, 'base64'));
@@ -97,8 +101,15 @@ class FileServer {
     return this;
   }
 
-  async getDownloadUrl() {
-    return {url:`http://${this.ip}:${this.port}/getfile/${randomBytes(24).toString('hex')}/`};
+  async getDownloadUrl({base64, contentType}={}) {
+    let code = randomBytes(24).toString('hex');
+    if(base64) {
+      this.files[code] = {base64, contentType};
+      homey.setTimeout(()=> {
+        delete this.files[code];
+      }, 60*1000);
+    }
+    return {url:`http://${this.ip}:${this.port}/getfile/${code}/`};
 
   }
 }
