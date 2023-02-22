@@ -25,10 +25,10 @@ class FileServer {
     this.files = {};
     try {
 
-      this.server = http.createServer((async function (req, res) {
+      this.server = http.createServer((async (req, res)=> {
         if (!req.headers || !req.headers.host || req.headers.host != this.ip + ':'+this.port) returnStatus();
 
-        let contentType = req.headers.accept && req.headers.accept !== '*/*' ? req.headers.accept : 'text/plain';
+        let contentType = req.headers.accept && req.headers.accept !== '*/*' ? req.headers.accept : 'application/json';
 
         if (req.url.toLowerCase().startsWith('/getfile/')) {
           let url = req.url.substring('/getfile/'.length);
@@ -37,7 +37,7 @@ class FileServer {
           this.homey.log('token', token, 'id', filename);
           try {
             if(token && this.files[token]) {
-              return returnBinary(Buffer.from(this.files[token].base64, 'base64'));
+              return returnBinary(Buffer.from(this.files[token].base64, 'base64'), this.files[token].contentType);
             }
             let body = await getBody();
             homey.log('body', body);
@@ -70,8 +70,8 @@ class FileServer {
           return defer.promise;
         }
 
-        function returnBinary(binary) {
-          res.writeHead(200, { 'content-type': contentType });
+        function returnBinary(binary, _contentType) {
+          res.writeHead(200, { 'content-type': _contentType || contentType });
           res.write(binary, 'binary');
           res.end(null, 'binary');
         }
@@ -105,9 +105,9 @@ class FileServer {
     let code = randomBytes(24).toString('hex');
     if(base64) {
       this.files[code] = {base64, contentType};
-      homey.setTimeout(()=> {
+      this.homey.setTimeout(()=> {
         delete this.files[code];
-      }, 60*1000);
+      }, 30*1000);
     }
     return {url:`http://${this.ip}:${this.port}/getfile/${code}/`};
 

@@ -1,18 +1,110 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "node",
-            "request": "attach",
-            "restart": true,
-            "name": "Attach to Homey",
-            // "address": "192.168.1.239",
-            "port": 9229,
-            "localRoot": "${workspaceFolder}",
-            "remoteRoot": "/app",            
-        }
-    ]
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Select Homey",
+			"type": "node",
+			"request": "launch",
+			"cwd": "${workspaceFolder}",
+			"runtimeExecutable": "homey",
+			"args": [
+				"select",
+				"-n",
+				"Homey"
+			]
+		},
+		{
+			"name": "Select Homey Pro Early 2023",
+			"type": "node",
+			"request": "launch",
+			"cwd": "${workspaceFolder}",
+			"runtimeExecutable": "homey",
+			"args": [
+				"select",
+				"-n",
+				"Homey Pro van Danee"
+			]
+		},
+		{
+			"name": "Launch app on Homey",
+			"type": "node",
+			"request": "launch",
+			"cwd": "${workspaceFolder}",
+			"runtimeExecutable": "homey",
+			"args": [
+				"app",
+				"run"
+			],
+			"outputCapture": "std",
+			"serverReadyAction": {
+				"pattern": "Debugger listening on",
+				"action": "startDebugging",
+				"name": "Attach to Homey"
+			}
+		},
+		{
+			"name": "Attach to Homey",
+			"type": "node",
+			"request": "attach",
+			"address": "192.168.1.17",
+			"port": 9216,
+			"localRoot": "${workspaceFolder}",
+			"remoteRoot": "/"
+		},
+		{
+			"name": "Launch app on Homey Pro Early 2023",
+			"type": "node",
+			"request": "launch",
+			"cwd": "${workspaceFolder}",
+			"runtimeExecutable": "homey",
+			"args": [
+				"app",
+				"run",
+				"--remote"
+			],
+			"outputCapture": "std",
+			"serverReadyAction": {
+				"pattern": "Debugger listening on",
+				"action": "startDebugging",
+				"name": "Attach to Homey Pro Early 2023"
+			}
+		},
+		{
+			"name": "Attach to Homey Pro Early 2023",
+			"type": "node",
+			"request": "attach",
+			"address": "192.168.1.239",
+			"port": 9216,
+			"localRoot": "${workspaceFolder}",
+			"remoteRoot": "/app/",
+			"restart": true
+		},
+		{
+			"name": "Launch app on Docker",
+			"type": "node",
+			"request": "launch",
+			"cwd": "${workspaceFolder}",
+			"runtimeExecutable": "homey",
+			"args": [
+				"app",
+				"run"
+			],
+			"outputCapture": "std",
+			"serverReadyAction": {
+				"pattern": "Debugger listening on",
+				"action": "startDebugging",
+				"name": "Attach to Docker"
+			}
+		},
+		{
+			"name": "Attach to Docker",
+			"type": "node",
+			"request": "attach",
+			"address": "0.0.0.0",
+			"port": 9229,
+			"localRoot": "${workspaceFolder}",
+			"remoteRoot": "/app/",
+			"restart": true
+		}
+	]
 }

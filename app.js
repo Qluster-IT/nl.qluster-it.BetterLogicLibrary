@@ -44,7 +44,15 @@ class BetterLogic extends Homey.App {
 	}
 
 	async onInit() {
-		BetterLogic.homey = this.homey;		
+		BetterLogic.homey = this.homey;
+		if (process.env.DEBUG === '1' || false) {
+			try {
+			  require('inspector').waitForDebugger();
+			}
+			catch (error) {
+			  require('inspector').open(9216, '0.0.0.0', true);
+			}
+		  } 
 
 		//if (process.env.DEBUG === '1') require('inspector').open(9232, '0.0.0.0', true);
     	this.log('BetterLogic is running...');
