@@ -8,7 +8,8 @@ app.factory('$bl', ['$q', function($q){
         api,
         get,
         set,
-        error
+        error,
+        openURL
     };
     return factory;
 
@@ -71,6 +72,9 @@ app.factory('$bl', ['$q', function($q){
         if(Homey.hideLoadingOverlay) Homey.hideLoadingOverlay();
         Homey.alert(err, 'error');
         return;
+    }
+    function openURL(url) {
+        return Homey.openURL(url);
     }
 }]);
 
