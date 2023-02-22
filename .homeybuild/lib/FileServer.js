@@ -8,7 +8,7 @@ class FileServer {
   //static client;
 
   async destroy() {
-    return this.close();
+    return await this.close();
   }
 
   async close() {
@@ -107,7 +107,7 @@ class FileServer {
       this.files[code] = {base64, contentType};
       this.homey.setTimeout(()=> {
         delete this.files[code];
-      }, 30*1000);
+      }, 60*1000);
     }
     return {url:`http://${this.ip}:${this.port}/getfile/${code}/`};
 
