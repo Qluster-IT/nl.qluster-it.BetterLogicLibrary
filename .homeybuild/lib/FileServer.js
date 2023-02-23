@@ -21,7 +21,7 @@ class FileServer {
   async init({ homey }) {
     this.homey = homey;
     this.ip = (await this.homey.cloud.getLocalAddress()).split(':')[0];
-    this.port = 47335;
+    this.port = 47330;
     this.files = {};
     try {
 
