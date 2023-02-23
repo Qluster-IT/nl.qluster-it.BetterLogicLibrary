@@ -613,7 +613,26 @@ class BetterLogic extends Homey.App {
 			this.homey.settings.set('notification_update_newsettings', true);
 		}
 
+		// this.homey.settings.on('set', async (settingName) => {
+		// 	switch (settingName) {
+		// 	  case 'settings': this.getSettings(); break;
+		// 	}
+		//   });
+		//   this.getSettings();
+	  
+		// }
 	}
+
+	// getSettings() {
+	// 	this.settings = this.homey.settings.get('settings');
+	// 	let changed=false;
+	// 	if (!this.settings) this.settings = {};
+	// 	if (!this.settings.csvFilename && (changed=true)) this.settings.csvFilename = "Logs_{[date('yyyy-MM-dd_HH-mm-ss')]}.csv";
+	// 	if (!this.settings.jsonFilename && (changed=true)) this.settings.jsonFilename = "Logs_{[date('yyyy-MM-dd_HH-mm-ss')]}.json";
+	// 	if (!this.settings.xlsxFilename && (changed=true)) this.settings.xlsxFilename = "Logs_{[date('yyyy-MM-dd_HH-mm-ss')]}.xlsx";
+	// 	if(changed) this.homey.settings.set('settings', this.settings);
+	// }
+	  
 
 	async onUninit() {		
 		if(this.fileServer) await this.fileServer.destroy();

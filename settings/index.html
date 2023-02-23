@@ -10,13 +10,13 @@
 
     <script type="text/javascript" src="../assets/js/angular.min.js"></script>
     <script type="text/javascript" src="../assets/js/smart-table.min.js"></script>
-    
+
     <link rel="stylesheet" type="text/css" href="../assets/css/smart-table.css" />
 
     <link rel="stylesheet" type="text/css" href="../assets/css/fontawesome.min.css" />
 
 
-    
+
     <script src="../assets/js/codemirror/codemirror.js"></script>
     <script src="../assets/js/codemirror/addon/display/autorefresh.js"></script>
     <script src="../assets/js/codemirror/addon/display/fullscreen.js"></script>
@@ -35,116 +35,24 @@
     <script src="../assets/js/codemirror/addon/fold/foldgutter.js"></script>
     <script src="../assets/js/codemirror/addon/fold/indent-fold.js"></script>
     <script src="../assets/js/codemirror/addon/scroll/simplescrollbars.js"></script>
-    
+
     <link href="../assets/js/codemirror/codemirror.css" rel="stylesheet" />
     <link href="../assets/js/codemirror/theme/mdn-like.css" rel="stylesheet" />
     <link href="../assets/js/codemirror/addon/display/fullscreen.css" rel="stylesheet" />
     <link href="../assets/js/codemirror/addon/hint/show-hint.css" rel="stylesheet" />
     <link href="../assets/js/codemirror/addon/fold/foldgutter.css" rel="stylesheet" />
     <link href="../assets/js/codemirror/addon/scroll/simplescrollbars.css" rel="stylesheet" />
-    
+
     <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
 
     <script type="text/javascript" src="../assets/js/bll.module.js"></script>
 
     <script type="text/javascript" src="variableController.js"></script>
-    <style>
-        html {
-            height: 100%;
-        }
+    <link href="../assets/css/default.css" rel="stylesheet" />
 
-        .main-view {
-            height: calc(100% - 130px);
-        }
-        .main-view>.flex-grow-1 {
-            min-height:auto;
-        }
-
-        .main-floating {
-            position: fixed;
-            z-index: 1030;
-            top: 0;
-            background-color: white;
-            height: 100%;
-            width: 100%;
-            left:0px;
-        }
-        
-        .show-buttons .main-view {
-            height: calc(100% - 160px);
-        }
-
-        .sub-view {
-            height: 35vh;
-        }
-
-        .CodeMirror {
-            height:98%;
-        }
-
-
-        label:not(.hy-nostyle),
-        .hy-label {
-            text-transform: initial;
-            font-size: 12pt;
-        }
-
-        .form-floating label {
-            font-size: 10px;
-        }
-        .functions-table {
-            height: auto!important;
-        }
-        
-
-        :root {
-            --bs-blue: #0d6efd;
-            --bs-indigo: #6610f2;
-            --bs-purple: #6f42c1;
-            --bs-pink: #d63384;
-            --bs-red: #dc3545;
-            --bs-orange: #fd7e14;
-            --bs-yellow: #ffc107;
-            --bs-green: #198754;
-            --bs-teal: #20c997;
-            --bs-cyan: #0dcaf0;
-            --bs-white: #fff;
-            --bs-gray: #6c757d;
-            --bs-gray-dark: #343a40;
-            --bs-primary: #0d6efd;
-            --bs-secondary: #6c757d;
-            --bs-success: #198754;
-            --bs-info: #0dcaf0;
-            --bs-warning: #ffc107;
-            --bs-danger: #dc3545;
-            --bs-light: #f8f9fa;
-            --bs-dark: #212529;
-            --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-            --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-            --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
-
-        }
-
-        .btn-primary {
-            /* --bs-btn-disabled-bg:#1e1e1e; */
-        }
-        .btn-group {
-            background-color:var(--bs-light);
-        }
-        table.st th, table.st tbody td {
-            word-break: break-word;
-            max-height:100px;
-        }
-        table.st td textarea {
-            position: fixed;
-            left: 0px;
-            height: 90px;
-            width: 70%;
-        }
-    </style>
 </head>
 
-<body ng-controller="VariableSettingsController as vm" class="container-fluid h-100 g-0" ng-class="{'show-buttons':temp.showButtons}">
+<body ng-controller="VariableSettingsController as vm" class="main-body container-fluid h-100 g-0" ng-class="{'show-buttons':temp.showButtons}">
     <nav class="navbar sticky-top navbar-expand font-dark navbar-dark bg-dark mb-2">
         <div class="container-fluid p-0">
             <!-- <a class="navbar-brand" href="#">Navbar</a> -->
@@ -167,6 +75,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" ng-class="{active:view.id=='functions'}" ng-click="view.id='functions'">Functions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" ng-class="{active:view.id=='fileserver'}" ng-click="view.id='fileserver'">File Server</a>
                     </li>
                 </ul>
             </div>
@@ -270,13 +181,63 @@
         </div>
         <div ng-show="vm.selected" class="mt-2 b-1 bg-primary-subtle">
             <div ng-switch on="vm.selected.type">
-                <div ng-switch-when="boolean"><div ng-include="'editboolean.html'"></div></div>
-                <div ng-switch-when="number"><div ng-include="'editnumber.html'"></div></div>
-                <div ng-switch-default><div ng-include="'editstring.html'"></div></div>
+                <div ng-switch-when="boolean">
+                    <div ng-include="'editboolean.html'"></div>
+                </div>
+                <div ng-switch-when="number">
+                    <div ng-include="'editnumber.html'"></div>
+                </div>
+                <div ng-switch-default>
+                    <div ng-include="'editstring.html'"></div>
+                </div>
             </div>
         </div>
     </div>
+    <div class="main-view d-flex flex-column container g-2" ng-show="view.id=='fileserver'">
 
+        <div class="flex-grow-1 overflow-y-auto" ng-show="view.id=='coding'">
+            <div class="card">
+                <div class="card-header">BLL Coding</div>
+                <div class="card-body">
+                    <form role="form">
+                        <div class="col-12">BLL codings are expressions within text-arguments in flowcards.</div>
+                        <div class="col-12">In every App that supports BLL coding, for each text-argument in flowcards that goes through the BLL decoder, you can use
+                            <pre class="d-inline">{[ expression ]}</pre> .
+                        </div>
+                        <div class="col-12">Within these expressions, you can use build-in modules, functions and your own customisable functions.</div>
+
+                        <div class="col-12 fw-bold mt-2">Modules</div>
+                        <ul>
+                            <li>
+                                <pre class="mb-0 pre-wrap">_</pre>
+                                <a href="#" bl-href="https://lodash.com/docs/4.17.15">Lodash</a> 4.17.21
+                            </li>
+                            <li>
+                                <pre class="mb-0 pre-wrap">math</pre>
+                                <a href="#" bl-href="https://mathjs.org/docs/index.html">Math.js</a> 11.3.3
+                            </li>
+                            <li>
+                                <div class="col-12 mt-1 mb-1 fw-bold">Example</span></div>
+                                <div class="col-12 mb-1"><input type="text" class="form-control hy-nostyle" value="" ng-model="vars.moduleExampleValue" ng-change="updateModuleExample();" ng-model-options="{ debounce: 300 }" /></div>
+                                <div class="col-12">{{vars.moduleExampleResult}}</div>
+                            </li>
+                        </ul>
+                        <div class="col-12 fw-bold">Build-in functions</div>
+                        <ul>
+                            <li>
+                                <pre class="mb-0 pre-wrap">date(format, date?, locale?, timeZone?)</pre>
+                                <div class="col-12">This method will return the current date(time) in the entered format, with respect to the users defined locale (language) en timezone.</div>
+                                <div class="col-12">Optionally you can supply the date(time), locale and/or timeZone.</div>
+                                <div class="col-12 mt-1 mb-1 fw-bold">Example</div>
+                                <div class="col-12 mb-1"><input class="form-control hy-nostyle" type="text" value="" ng-model="vars.dateExampleValue" ng-change="updateDateExample();" ng-model-options="{ debounce: 300 }" /></div>
+                                <div class="col-12" ng-bind="vars.dateExampleResult"></div>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="main-view d-flex flex-column container g-2" ng-show="view.id=='coding' || view.id=='locale_timezone' || view.id=='formats'">
 
@@ -346,9 +307,9 @@
         </div>
 
         <div class="flex-grow-1 overflow-y-auto" ng-show="view.id=='formats'">
-            <form role="form" name="formatsForm">                
+            <form role="form" name="formatsForm">
                 <div class="container">
-                    <div class="col-12">Here you can create custom datetime definitions with any format you wish.</div>                
+                    <div class="col-12">Here you can create custom datetime definitions with any format you wish.</div>
                 </div>
                 <div class="card mt-1">
                     <div class="card-header fw-bolder">Custom formats</div>
@@ -356,15 +317,13 @@
                         <div ng-repeat="format in vars.locale.customDateFormats">
                             <div class="col-9 col-sm-4 d-inline-block">
                                 <div class="col-12 form-group form-floating">
-                                    <input type="text" class="form-control hy-nostyle" name="customformat{{$index}}" placeholder="Name" ng-model="format.name" ng-model-options="{ debounce: 300 }" 
-                                        minlength="1" required="true"/>
+                                    <input type="text" class="form-control hy-nostyle" name="customformat{{$index}}" placeholder="Name" ng-model="format.name" ng-model-options="{ debounce: 300 }" minlength="1" required="true" />
                                     <label class="hy-nostyle" for="customformat{{$index}}">Name</label>
                                 </div>
                             </div>
                             <div class="btn btn-secondary" ng-click="removeCustomFormat($index);"><span class="fa fa-icon fa-trash"></div>
                             <div class="col-12 col-sm-7 form-group form-floating">
-                                <input type="text" class="form-control hy-nostyle" name="customformat{{$index}}" placeholder="dd-MM" ng-model="format.format" ng-change="setCustomFormat(format);" ng-model-options="{ debounce: 300 }" 
-                                    minlength="1" required="true"/>
+                                <input type="text" class="form-control hy-nostyle" name="customformat{{$index}}" placeholder="dd-MM" ng-model="format.format" ng-change="setCustomFormat(format);" ng-model-options="{ debounce: 300 }" minlength="1" required="true" />
                                 <label class="hy-nostyle" for="customformat{{$index}}">Format</label>
                             </div>
                             <div class="col-12 col-sm-12 mb-2">{{temp.dateFormats[format.format] || vars.datesExampleResult[format.format]}}</div>
@@ -389,7 +348,7 @@
 
                     </div>
                 </div>
-            </form>                    
+            </form>
             <div class="btn-group fixed-bottom">
                 <button type="button" class="btn btn-primary hy-nostyle" ng-click="formatsForm.$valid && formatsForm.$dirty ? setLocale() : null;" ng-disabled="!formatsForm.$valid || !formatsForm.$dirty">Save</button>
             </div>
@@ -421,11 +380,11 @@
                 that function.</p>
 
             <div class="" data-i18n="settings.add_function_text">To create a function, enter a name,
-                press Add Function, then press edit below.</div>                
+                press Add Function, then press edit below.</div>
             <form role="form">
                 <div class="form-group form-floating">
                     <input class="form-control" id="functionName" type="text" ng-model="newFunction.name" placeholder="{{__('settings.name') || 'Name'}}"><span class="error">{{messages}}</span>
-                    <label for="functionName" data-i18n="settings.function_name">Function name</label>                    
+                    <label for="functionName" data-i18n="settings.function_name">Function name</label>
                 </div>
 
                 <div class="btn-group w-100">
@@ -461,7 +420,7 @@
     <div id="editFunction" ng-if="editFunctionItem" class="main-floating">
         <input class="input-sm form-control" style="height:40px;" ng-model="editFunctionItem.name" />
         <div style=" height: calc(100% - 80px);">
-            <textarea ui-codemirror ui-codemirror-opts="editorOptions" type="text" class="form-control h-100"  ng-model="editFunctionItem.value" placeholder="function () {
+            <textarea ui-codemirror ui-codemirror-opts="editorOptions" type="text" class="form-control h-100" ng-model="editFunctionItem.value" placeholder="function () {
 
 }"></textarea>
         </div>
