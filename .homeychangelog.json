@@ -154,5 +154,8 @@
   },
   "2.3.8": {
     "en": "New: File Server for retrieving files securely through the Homey App (App Settings)."
+  },
+  "2.3.9": {
+    "en": "New: File Server for retrieving large(!) files securely through the Homey App (App Settings)."
   }
 }

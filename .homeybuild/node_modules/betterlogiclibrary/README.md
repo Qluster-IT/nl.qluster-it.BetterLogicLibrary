@@ -54,7 +54,7 @@ Currently you can reference to the next files in Settings or (Re)Pair screens:
 
 ## The Basic
 
-There are just a few simple steps to start with the most basic: include the BLL and initialize it:
+These are just a few simple steps to start with the most basic: include the BLL and initialize it:
 * Add BLL through NPM.
 `npm install betterlogiclibrary`
 * Add the permission to your app.json
