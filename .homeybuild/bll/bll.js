@@ -139,7 +139,9 @@ class BLL {
 
     
     async decode(text, {locale, timeZone}={}) {
-        try {         
+        try {
+            
+            if(!text || typeof(text)!=='string' || text.indexOf('{[')===-1 || text.indexOf(']}')===-1) return text;
             //BL.homey.log('decode: ', arguments);
             //BL.homey.log('decode options: ', options);
             return await BL.l.post('decode', {text, locale, timeZone});  
