@@ -77,9 +77,6 @@ export class BL {
      */
     get ready(): Promise<any>;
     /** @private */
-    private _init;
-    defer: any;
-    /** @private */
     private initBll;
     /** @private */
     private getLibrary;

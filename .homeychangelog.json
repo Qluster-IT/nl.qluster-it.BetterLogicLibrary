@@ -169,5 +169,11 @@
   },
   "2.4.1": {
     "en": "Bugfixed: Apps using BLL optional (like Google Services) work correctly with all Homey Pro's again."
+  },
+  "2.4.2": {
+    "en": "Bugfixed: Wrong notifications."
+  },
+  "2.4.3": {
+    "en": "Bugfixed: Wrong notifications."
   }
 }
