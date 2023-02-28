@@ -166,5 +166,8 @@
   },
   "2.4.0": {
     "en": "Bugfixed: Works correctly with all Homey Pro's again."
+  },
+  "2.4.1": {
+    "en": "Bugfixed: Apps using BLL optional (like Google Services) work correctly with all Homey Pro's again."
   }
 }

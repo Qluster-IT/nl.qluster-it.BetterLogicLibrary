@@ -447,7 +447,7 @@ class BetterLogic extends Homey.App {
 
 		//BL.decode()
 		
-		bl.then(async (x)=> {
+		BL.ready.then(async (x)=> {
 			this.bl = x;
 			
 			variableManager.init(this.homey);
