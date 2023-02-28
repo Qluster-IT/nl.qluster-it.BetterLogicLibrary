@@ -1,0 +1,1 @@
+npm install "D:\Qlustrator\Local Visual Code\nl.qluster-it.BetterLogicLibraryNPM"

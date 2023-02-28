@@ -163,5 +163,8 @@
   },
   "2.3.11": {
     "en": "Improved: Set variable to expression card can be used to create new variable: Fill a new name, run the card and the variable is created with it's result type.."
+  },
+  "2.4.0": {
+    "en": "Bugfixed: Works correctly with all Homey Pro's again."
   }
 }

@@ -9,7 +9,7 @@ html > body.main-body  {
 
 
 .main-view {
-    height: calc(100% - 130px);
+    height: calc(100% - 160px);
 }
 .main-view>.flex-grow-1 {
     min-height:auto;

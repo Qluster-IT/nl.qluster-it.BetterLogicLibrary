@@ -424,8 +424,8 @@ class BetterLogic extends Homey.App {
 		//await DateTime.init();
 		
 		timezone = this.homey.clock.getTimezone();
-				
-		this.bl = BL.init({
+			
+		let bl = BL.init({
 			homey:this.homey,
 			modules:[
 				"_",
@@ -447,7 +447,7 @@ class BetterLogic extends Homey.App {
 
 		//BL.decode()
 		
-		this.bl.then(async (x)=> {
+		bl.then(async (x)=> {
 			this.bl = x;
 			
 			variableManager.init(this.homey);
