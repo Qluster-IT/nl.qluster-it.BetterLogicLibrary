@@ -12,7 +12,7 @@
     "@types/node": "^18.11.0"
   },
   "dependencies": {
-    "betterlogiclibrary": "^0.6.13",
+    "betterlogiclibrary": "^0.6.14",
     "locale-codes": "^1.3.1"
   }
 }
