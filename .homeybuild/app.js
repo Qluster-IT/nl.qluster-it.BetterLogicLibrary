@@ -438,10 +438,18 @@ class BetterLogic extends Homey.App {
 		
 		
 
-		let timeoutset = false;
+		//let timeoutset = false;
 		this.homey.setTimeout(async ()=> {
-			if(!timeoutset)(timeoutset=true) | await this.homey.api.realtime("running");
+			await this.homey.api.realtime("running");
 		}, 5*1000);
+		
+		this.homey.setTimeout(async ()=> {
+			await this.homey.api.realtime("running_2x");
+		}, 10*1000);
+		
+		this.homey.setTimeout(async ()=> {
+			await this.homey.api.realtime("running_3x");
+		}, 20*1000);
 		
 		
 
@@ -452,7 +460,8 @@ class BetterLogic extends Homey.App {
 			
 			variableManager.init(this.homey);
 
-			if(!timeoutset)(timeoutset=true) | await this.homey.api.realtime("running");
+			//if(!timeoutset)(timeoutset=true) | await this.homey.api.realtime("running");
+
 			//this.dateTime = new DateTime(this.homey.i18n.getLanguage(), timezone);
 			//console.log(this.dateTime.toString('ddd'));
 

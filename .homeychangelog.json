@@ -175,5 +175,14 @@
   },
   "2.4.3": {
     "en": "Bugfixed: Wrong notifications."
+  },
+  "2.4.4": {
+    "en": "Improved: Translation injections, Modules for Simple (Sys) LOG and the File Server."
+  },
+  "2.4.5": {
+    "en": "Bugfixing: Fixing new bugs."
+  },
+  "2.4.6": {
+    "en": "Bugfixing: Solving new bugs."
   }
 }
