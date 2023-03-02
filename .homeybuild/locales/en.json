@@ -1,4 +1,14 @@
 {
+	"Variables":"Variables",
+	"Coding":"Coding",
+	"Locale<br />TimeZone":"Locale<br />TimeZone",
+	"Formats":"Formats",
+	"Functions":"Functions",
+	"File Server":"File Server",
+	"Options":"Options",
+	"Auto update":"Auto update",
+	"":"",
+	"":"",
     "settings":{
 		"delete": "Remove",
         "functions":"Functions",

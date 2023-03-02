@@ -79,6 +79,21 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#" ng-class="{active:view.id=='fileserver'}" ng-click="view.id='fileserver'">File Server</a>
                     </li>
+                    <li class="nav-item dropdown- position-absolute end-0 bottom-0 mb-2">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Options</a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input hy-nostyle" type="checkbox" role="switch" id="autoupdate" checked ng-model="view.autoUpdate" ng-change="view.autoUpdate ? vm.loadVariables() : null" />
+                                    <label class="form-check-label" for="autoupdate">Auto update</label>
+                                </div>
+                            </li>
+                            <!-- <li><a class="dropdown-item" href="#">Another action</a></li>
+                          <li><a class="dropdown-item" href="#">Something else here</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="#">Separated link</a></li> -->
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>

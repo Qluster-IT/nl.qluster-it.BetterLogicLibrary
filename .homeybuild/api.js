@@ -38,6 +38,7 @@ module.exports =
     async date({ homey, body }) {        
         return await BL.datetime.toString(body.format, body.date, body.locale,body.timeZone);
     },
+    
     async getLocale({ homey }) {
         return await homey.app.locale;
     },

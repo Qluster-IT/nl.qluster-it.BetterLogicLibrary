@@ -1,4 +1,16 @@
 {
+	"Variables":"Variabelen",
+	"Coding":"Codering",
+	"Locale<br />TimeZone":"Locatie en tijdzone",
+	"Formats":"Formaten",
+	"Functions":"Functies",
+	"File Server":"Bestanden server",
+	"Options":"Opties",
+	"Auto update":"Auto update",
+
+
+
+
     "settings":{
 		"delete": "Verwijderen",
         "functions":"Functies",

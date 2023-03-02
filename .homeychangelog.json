@@ -184,5 +184,11 @@
   },
   "2.4.6": {
     "en": "Bugfixing: Solving new bugs."
+  },
+  "2.4.7": {
+    "en": "Improved: Settings performance is improved when you have many variables being updated."
+  },
+  "2.4.8": {
+    "en": "Added: A Auto Update toggle in the Settingspage."
   }
 }
