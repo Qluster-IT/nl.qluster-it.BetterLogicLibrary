@@ -193,5 +193,8 @@
   },
   "2.4.9": {
     "en": "Bugfixed: App crash when saving variable from Settingpage but giving from format."
+  },
+  "2.4.10": {
+    "en": "Improved: Many parts have been put into translations (Dutch right now)."
   }
 }
