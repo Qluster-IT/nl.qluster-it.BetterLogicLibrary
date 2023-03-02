@@ -189,6 +189,9 @@
     "en": "Improved: Settings performance is improved when you have many variables being updated."
   },
   "2.4.8": {
-    "en": "Added: A Auto Update toggle in the Settingspage."
+    "en": "Added: An Auto-Update toggle in the Settingspage."
+  },
+  "2.4.9": {
+    "en": "Bugfixed: App crash when saving variable from Settingpage but giving from format."
   }
 }

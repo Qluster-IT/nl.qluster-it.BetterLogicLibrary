@@ -36,7 +36,11 @@ let variableManager = module.exports = {
                 if (action == 'changedvariables') {
                     const changeObject = this.homey.settings.get('changedvariables');
                     const newVariable = changeObject.variable;
-                    updateVariable(newVariable.name, newVariable.value, newVariable.type, newVariable.remove);
+                    try {                        
+                        updateVariable(newVariable.name, newVariable.value, newVariable.type, newVariable.remove);
+                    } catch (error) {
+                        this.homey.error('Setting.On(\'changedvariables\') error: ', error);
+                    }
                 }
             });
     },
