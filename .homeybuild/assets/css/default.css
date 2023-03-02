@@ -9,7 +9,8 @@ html > body.main-body  {
 
 
 .main-view {
-    height: calc(100% - 160px);
+    overflow-y:auto;
+    /* height: calc(100% - 126px); */
 }
 .main-view>.flex-grow-1 {
     min-height:auto;
@@ -26,7 +27,7 @@ html > body.main-body  {
 }
 
 .show-buttons .main-view {
-    height: calc(100% - 160px);
+    /* height: calc(100% - 160px); */
 }
 
 .sub-view {
@@ -86,7 +87,8 @@ label:not(.hy-nostyle),
 .btn-group {
     background-color:var(--bs-light);
 }
-table.st th, table.st tbody td {
+/* table.st th,  */
+table.st tbody td {
     word-break: break-word;
     max-height:100px;
 }
@@ -96,3 +98,11 @@ table.st td textarea {
     height: 90px;
     width: 70%;
 }
+
+.mb-btn {
+    margin-bottom:40px;
+}
+/* 
+.navbar .nav-fill .nav-link {
+    white-space: pre-line;
+} */

@@ -1,11 +1,16 @@
 ﻿angular.module('variableApp', ['smart-table', 'bll', 'ui.codemirror'])
-    .controller('VariableSettingsController', ['$scope', '$bl', function ($scope, $bl) {
+    .controller('VariableSettingsController', ['$scope', '$bl', '$window', function ($scope, $bl, $window) {
         var vm = this;
+        
+        vm.homey = $window.Homey;
+        let homey = this.homey = $window.Homey;
+        
         vm.errorMessage = '';
         vm.showExportToggle = false;
         vm.showImportToggle = false;
         vm.importJson = '';
         vm.selected = null;
+        let __ = $scope.__ = homey.__;
         
 
         const view = $scope.view = { id: undefined, bottom: undefined, autoUpdate: true };
@@ -15,9 +20,9 @@
             locale: {
                 default: 'en'
             },
-            moduleExampleValue: 'The last one is: {[ _.last(["1", "2"]) ]}.',
+            moduleExampleValue: __('The last one is'),
             moduleExampleResult: 'The last one is 2.',
-            dateExampleValue: 'Today is a {[ date("dddd") ]}',
+            dateExampleValue: __('Today is a'),
             dateExampleResult: 'Today is a donderdag',
             datesExampleValue: undefined,
             datesExampleResult: { "DATETIMELONG": "donderdag 10 november 2022 om 13:53:48 Midden-Europese standaardtijd", "DATETIME": "10 november 2022 om 13:53:48 CET", "datetime": "10 nov. 2022 13:53:48", "datetimeshort": "10-11-2022 13:53", "DATELONG": "donderdag 10 november 2022", "DATE": "10 november 2022", "date": "10 nov. 2022", "dateshort": "10-11-2022", "TIMELONG": "13:53:48 Midden-Europese standaardtijd", "TIME": "13:53:48 CET", "time": "13:53:48", "timeshort": "13:53", "yy": "22", "yyyy": "2022", "M": "11", "MM": "11", "MMM": "nov.", "MMMM": "november", "d": "10", "dd": "10", "ddd": "do", "dddd": "donderdag", "H": "13", "HH": "13", "m": "53", "mm": "53", "s": "48", "ss": "48", "f": "8", "ff": "89", "fff": "898", "PERIOD": "’s middags", "period": "’s middags", "ERA": "na Christus", "era": "n.Chr." },
@@ -77,12 +82,14 @@
                 }
             ],
             formats: undefined
-
-
         };
+        
         vars.datesExampleValue = _.flatMap(vars.dateOptions, 'formats');
         vars.dateFormats = _.filter(vars.dateOptions, (v, i) => i <= 2);
         $scope.editorOptions = getEditorOptions();
+
+        for (let i = 0; i < vars.dateOptions.length; i++) vars.dateOptions[i].label = __(vars.dateOptions[i].id) ;
+        //for (let i = 0; i < vars.dateFormats.length; i++) vars.dateFormats[i].label = __(vars.dateFormats[i].id) ;
 
         $scope.updateModuleExample = async function () {
             await $bl.api("POST", "/decode", { text: vars.moduleExampleValue }, (x) => vars.moduleExampleResult = x);
@@ -215,7 +222,7 @@
 
 
 
-        vm.init = function (homey, scope) {
+        vm.init = async function () {
             vm.homey = homey;
             $bl.init(homey, $scope);
             $bl.get("locale", async (x) => {
@@ -238,7 +245,7 @@
             vm.homey.on('setting_changed', function ({ variable, date }) {
                 if (!view.autoUpdate) return;
                 let findIndex = _.findIndex(vm.variables, x => x.name === variable.name);
-                scope.$apply(function () {
+                $scope.$apply(function () {
                     if (variable.remove && findIndex > -1) vm.variables.splice(findIndex, 1);
                     else if (!variable.remove) {
                         if (findIndex > -1) vm.variables.splice(findIndex, 1);
@@ -373,6 +380,10 @@
             if (vm.selected && variable.name === vm.selected.name && variable.type === vm.selected.type) return 'edit';
             else return 'display';
         };
+
+
+
+        vm.init();
 
         function storeVariable(variable) {
             var changeObject = {

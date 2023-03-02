@@ -112,7 +112,7 @@ app.directive('blTranslate', ['$bl', function ($bl) {
         replace: true,        
         link: function compile(scope, element, attrs, controller) {
             let html = element.html();
-            html = $bl.homey.__(html);            
+            html = $bl.homey.__(html) || html;            
             element.html(html);
         
         }
