@@ -61,7 +61,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav nav nav-fill me-auto m-0">
                     <li class="nav-item dropdown ">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" bl-translate>Options</a>
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" data-i18n="Options">Options</a>
                         <ul class="dropdown-menu dropdown-menu-start">
                             <li>
                                 <div class="form-check form-switch">
@@ -72,22 +72,22 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#" ng-class="{active:!view.id}" ng-click="view.id=''" bl-translate>Variables</a>
+                        <a class="nav-link" aria-current="page" href="#" ng-class="{active:!view.id}" ng-click="view.id=''" data-i18n="Variables">Variables</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" ng-class="{active:view.id=='coding'}" ng-click="view.id='coding'" bl-translate>Coding</a>
+                        <a class="nav-link" href="#" ng-class="{active:view.id=='coding'}" ng-click="view.id='coding'" data-i18n="Coding">Coding</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-center" href="#" ng-class="{active:view.id=='locale_timezone'}" ng-click="view.id='locale_timezone'" bl-translate>Locale Timezone</a>
+                        <a class="nav-link text-center" href="#" ng-class="{active:view.id=='locale_timezone'}" ng-click="view.id='locale_timezone'" data-i18n="Locale Timezone">Locale Timezone</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" ng-class="{active:view.id=='formats'}" ng-click="view.id='formats'" bl-translate>Formats</a>
+                        <a class="nav-link" href="#" ng-class="{active:view.id=='formats'}" ng-click="view.id='formats'" data-i18n="Formats">Formats</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" ng-class="{active:view.id=='functions'}" ng-click="view.id='functions'" bl-translate>Functions</a>
+                        <a class="nav-link" href="#" ng-class="{active:view.id=='functions'}" ng-click="view.id='functions'" data-i18n="Functions">Functions</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" ng-class="{active:view.id=='fileserver'}" ng-click="view.id='fileserver'" bl-translate>File Server</a>
+                        <a class="nav-link" href="#" ng-class="{active:view.id=='fileserver'}" ng-click="view.id='fileserver'" data-i18n="File Server">File Server</a>
                     </li>
                     
                 </ul>
@@ -98,22 +98,22 @@
     <div class="main-view d-flex flex-column container g-2 pt-2 flex-grow-1" ng-show="!view.id">
         <div class="">
             <div class="card card-default">
-                <div class="card-header" ng-click="view.addVariable=!view.addVariable" bl-translate>Add variable</div>
+                <div class="card-header fw-bolder" ng-click="view.addVariable=!view.addVariable" data-i18n="Add variable">Add variable</div>
                 <div class="card-body" ng-show="view.addVariable">
                     <form role="form">
                         <div class="form-group form-floating mb-1">
                             <input class="form-control hy-nostyle " id="variableName" type="text" ng-model="vm.newVariable.name" placeholder="Name"><span class="error">{{vm.errorMessage}}</span>
-                            <label for="variableName" bl-translate>Variable name</label>
+                            <label for="variableName" data-i18n="Variable name">Variable name</label>
                         </div>
                         <div class="form-group form-floating mb-1">
                             <select class="form-control hy-nostyle" name="variableType" id="variableType" ng-model="vm.newVariable.type" ng-change="vm.selectUpdate(vm.newVariable.type)">
-                                <option value disbled="disabled" selected="selected" bl-translate>Select a value type</option>
-                                <option value="string" bl-translate>String</option>
-                                <option value="boolean" bl-translate>Boolean</option>
-                                <option value="number" bl-translate>Number</option>
-                                <option value="trigger" bl-translate>Trigger</option>
+                                <option value disbled="disabled" selected="selected" data-i18n="Select a value type">Select a value type</option>
+                                <option value="string" data-i18n="String">String</option>
+                                <option value="boolean" data-i18n="Boolean">Boolean</option>
+                                <option value="number" data-i18n="Number">Number</option>
+                                <option value="trigger" data-i18n="Trigger">Trigger</option>
                             </select>
-                            <label for="variableType" bl-translate>Variable type</label>
+                            <label for="variableType" data-i18n="Variable type">Variable type</label>
                         </div>
                         <!--<div class="form-group">
                             <label for="useInsight">Store insight</label>
@@ -136,12 +136,12 @@
                             </div>
                         </div>
                         <div class="form-group mb-1">
-                            <button class="btn btn-primary" type="button" ng-disabled="!vm.newVariable.name||!vm.newVariable.type" ng-click="vm.addVariable()" bl-translate>Add variable</button>
-                            <button class="btn btn-secondary" type="button" ng-click="vm.showExport()" bl-translate>Export</button>
-                            <button class="btn btn-secondary" type="button" ng-click="vm.showImport()" bl-translate>Import</button>
-                            <button class="btn btn-secondary" type="button" ng-click="vm.deleteAll()" bl-translate>Delete All</button>
+                            <button class="btn btn-primary" type="button" ng-disabled="!vm.newVariable.name||!vm.newVariable.type" ng-click="vm.addVariable()" data-i18n="Add variable">Add variable</button>
+                            <button class="btn btn-secondary" type="button" ng-click="vm.showExport()" data-i18n="Export">Export</button>
+                            <button class="btn btn-secondary" type="button" ng-click="vm.showImport()" data-i18n="Import">Import</button>
+                            <button class="btn btn-secondary" type="button" ng-click="vm.deleteAll()" data-i18n="Delete All">Delete All</button>
                         </div>
-                        <h6 bl-translate>Be aware that removing variables will corrupt flows that are using that variable</h6>
+                        <h6 data-i18n="Be_aware_removing_variable">* Be aware that removing variables will corrupt flows that are using that variable.</h6>
                     </form>
                 </div>
             </div>
@@ -173,10 +173,10 @@
                         </th>
                     </tr>
                     <tr>
-                        <th st-sort="name" bl-translate>Name</th>
-                        <th st-sort="value" bl-translate>Value</th>
-                        <th st-sort="type" bl-translate>Type</th>
-                        <th st-sort="lastChanged" st-sort-default="reverse" bl-translate>Last set</th>
+                        <th st-sort="name" data-i18n="Name">Name</th>
+                        <th st-sort="value" data-i18n="Value">Value</th>
+                        <th st-sort="type" data-i18n="Type">Type</th>
+                        <th st-sort="lastChanged" st-sort-default="reverse" data-i18n="Last set">Last set</th>
                         <!--<th st-sort="value">Insight</th>-->
                         <th></th>
                     </tr>
@@ -204,40 +204,11 @@
 
         <div class="flex-grow-1 overflow-y-auto" ng-show="view.id=='coding'">
             <!-- <div class="card">
-                <div class="card-header" bl-translate>BLL Coding</div>
+                <div class="card-header fw-bolder" data-i18n="">File Server</div>
                 <div class="card-body">
                     <form role="form">
-                        <div class="col-12" bl-translate>BLL codings are expressions within text-arguments in flowcards</div>
-                        <div class="col-12" bl-translate>In every App that supports BLL coding</div>
-                        <div class="col-12" bl-translate>Within these expressions, you can use build-in modules, functions and your own customisable functions</div>
+                        <div class="col-12" data-i18n="">Bla bla</div>
 
-                        <div class="col-12 fw-bold mt-2" bl-translate>Modules</div>
-                        <ul>
-                            <li>
-                                <pre class="mb-0 pre-wrap">_</pre>
-                                <a href="#" bl-href="https://lodash.com/docs/4.17.15">Lodash</a> 4.17.21
-                            </li>
-                            <li>
-                                <pre class="mb-0 pre-wrap">math</pre>
-                                <a href="#" bl-href="https://mathjs.org/docs/index.html">Math.js</a> 11.3.3
-                            </li>
-                            <li>
-                                <div class="col-12 mt-1 mb-1 fw-bold" bl-translate>Example</span></div>
-                                <div class="col-12 mb-1"><input type="text" class="form-control hy-nostyle" value="" ng-model="vars.moduleExampleValue" ng-change="updateModuleExample();" ng-model-options="{ debounce: 300 }" /></div>
-                                <div class="col-12">{{vars.moduleExampleResult}}</div>
-                            </li>
-                        </ul>
-                        <div class="col-12 fw-bold" bl-translate>Build-in functions</div>
-                        <ul>
-                            <li>
-                                <pre class="mb-0 pre-wrap">date(format, date?, locale?, timeZone?)</pre>
-                                <div class="col-12" bl-translate>This method will return the current date(time) in the entered format, with respect to the users defined locale (language) en timezone</div>
-                                <div class="col-12" bl-translate>Optionally you can supply the date(time), locale and/or timeZone</div>
-                                <div class="col-12 mt-1 mb-1 fw-bold" bl-translate>Example</div>
-                                <div class="col-12 mb-1"><input class="form-control hy-nostyle" type="text" value="" ng-model="vars.dateExampleValue" ng-change="updateDateExample();" ng-model-options="{ debounce: 300 }" /></div>
-                                <div class="col-12" ng-bind="vars.dateExampleResult"></div>
-                            </li>
-                        </ul>
                     </form>
                 </div>
             </div> -->
@@ -248,14 +219,14 @@
 
         <div class="flex-grow-1 overflow-y-auto pt-2" ng-show="view.id=='coding'">
             <div class="card">
-                <div class="card-header" bl-translate>BLL Coding</div>
+                <div class="card-header fw-bolder" data-i18n="BLL Coding">BLL Coding</div>
                 <div class="card-body">
                     <form role="form">
-                        <div class="col-12" bl-translate>BLL codings are expressions within text-arguments in flowcards</div>
-                        <div class="col-12" bl-translate>In every App that supports BLL coding</div>
-                        <div class="col-12" bl-translate>Within these expressions, you can use build-in modules, functions and your own customisable functions</div>
+                        <div class="col-12" data-i18n="BLL_codings_are_expressions">BLL codings are expressions within text-arguments in flowcards.</div>
+                        <div class="col-12" data-i18n="In_every_app_that_supports">In every App that supports BLL coding, for each text-argument in flowcards that goes through the BLL decoder, you can use<pre class="d-inline">{[ expression ]}</pre> .</div>
+                        <div class="col-12" data-i18n="Within_these_expressions">Within these expressions, you can use build-in modules, functions and your own customisable functions.</div>
 
-                        <div class="col-12 fw-bold mt-2" bl-translate>Modules</div>
+                        <div class="col-12 fw-bold mt-2" data-i18n="Modules">Modules</div>
                         <ul>
                             <li>
                                 <pre class="mb-0 pre-wrap">_</pre>
@@ -266,18 +237,18 @@
                                 <a href="#" bl-href="https://mathjs.org/docs/index.html">Math.js</a> 11.3.3
                             </li>
                             <li>
-                                <div class="col-12 mt-1 mb-1 fw-bold" bl-translate>Example</span></div>
+                                <div class="col-12 mt-1 mb-1 fw-bold" data-i18n="Example">Example</span></div>
                                 <div class="col-12 mb-1"><input type="text" class="form-control hy-nostyle" value="" ng-model="vars.moduleExampleValue" ng-change="updateModuleExample();" ng-model-options="{ debounce: 300 }" /></div>
                                 <div class="col-12">{{vars.moduleExampleResult}}</div>
                             </li>
                         </ul>
-                        <div class="col-12 fw-bold" bl-translate>Build-in functions</div>
+                        <div class="col-12 fw-bold" data-i18n="Build-in functions">Build-in functions</div>
                         <ul>
                             <li>
                                 <pre class="mb-0 pre-wrap">date(format, date?, locale?, timeZone?)</pre>
-                                <div class="col-12" bl-translate>This method will return the current date(time) in the entered format, with respect to the users defined locale (language) en timezone</div>
-                                <div class="col-12" bl-translate>Optionally you can supply the date(time), locale and/or timeZone</div>
-                                <div class="col-12 mt-1 mb-1 fw-bold" bl-translate>Example</div>
+                                <div class="col-12" data-i18n="Method_date_explanation">This method will return the current date(time) in the entered format, with respect to the users defined locale (language) en timezone.</div>
+                                <div class="col-12" data-i18n="Method_date_optionally">Optionally you can supply the date(time), locale and/or timeZone.</div>
+                                <div class="col-12 mt-1 mb-1 fw-bold" data-i18n="Example">Example</div>
                                 <div class="col-12 mb-1"><input class="form-control hy-nostyle" type="text" value="" ng-model="vars.dateExampleValue" ng-change="updateDateExample();" ng-model-options="{ debounce: 300 }" /></div>
                                 <div class="col-12" ng-bind="vars.dateExampleResult"></div>
                             </li>
@@ -289,18 +260,18 @@
 
         <div class="flex-grow-1 overflow-y-auto pt-2" ng-show="view.id=='locale_timezone'">
             <div class="card">
-                <div class="card-header" bl-translate>Locale and Timezone</div>
+                <div class="card-header fw-bolder" data-i18n="Locale and Timezone">Locale and Timezone</div>
                 <div class="card-body">
                     <form role="form">
-                        <div class="col-12" bl-translate>Here you can configure your locale (language) and timezone</div>
-                        <div class="col-12" bl-translate>Later on, you will be able to configure this from here separatly for each app that uses BLL coding</div>
+                        <div class="col-12" data-i18n="Configure_locale_timezone">Here you can configure your locale (language) and timezone.</div>
+                        <div class="col-12" data-i18n="Later_on_each_app">Later on, you will be able to configure this from here separatly for each app that uses BLL coding.</div>
                         <div class="col-12">
                             <div class="form-floating hy-nostyle">
                                 <select id="locale" name="locale" class="form-control hy-nostyle" ng-model="vars.locale.default" ng-change="setLocale();">
                                     <option ng-if="!vars.locales.indexOf(vars.locale.default)==-1" ng-value="vars.locale.default" ng-bind="vars.locale.default"></option>
                                     <option ng-repeat="locale in vars.locales" ng-value="locale.tag">{{locale.name}} ({{locale.tag}})</option>
                                 </select>
-                                <label for="locale" bl-translate>Locale</label>
+                                <label for="locale" data-i18n="Locale">Locale</label>
                             </div>
                         </div>
 
@@ -312,29 +283,29 @@
         <div class="flex-grow-1 overflow-y-auto pt-2 mb-btn" ng-show="view.id=='formats'">
             <form role="form" name="formatsForm">
                 <div class="card mt-1">
-                    <div class="card-header fw-bolder" bl-translate>Custom formats</div>
+                    <div class="card-header fw-bolder" data-i18n="Custom formats">Custom formats</div>
                     <div class="card-body container">
-                        <div class="col-12 mb-3" bl-translate>Here you can create custom datetime definitions with any format you wish</div>
+                        <div class="col-12 mb-3" data-i18n="Create_custom_datetime_formats">Here you can create custom datetime definitions with any format you wish.</div>
                         <div ng-repeat="format in vars.locale.customDateFormats">
                             <div class="col-9 col-sm-4 d-inline-block">
                                 <div class="col-12 form-group form-floating">
                                     <input type="text" class="form-control hy-nostyle" name="customformat{{$index}}" placeholder="Name" ng-model="format.name" ng-model-options="{ debounce: 300 }" minlength="1" required="true" />
-                                    <label class="hy-nostyle" for="customformat{{$index}}" bl-translate>Name</label>
+                                    <label class="hy-nostyle" for="customformat{{$index}}" data-i18n="Name">Name</label>
                                 </div>
                             </div>
                             <div class="btn btn-secondary" ng-click="removeCustomFormat($index);"><span class="fa fa-icon fa-trash"></div>
                             <div class="col-12 col-sm-7 form-group form-floating">
                                 <input type="text" class="form-control hy-nostyle" name="customformat{{$index}}" placeholder="dd-MM" ng-model="format.format" ng-change="setCustomFormat(format);" ng-model-options="{ debounce: 300 }" minlength="1" required="true" />
-                                <label class="hy-nostyle" for="customformat{{$index}}" bl-translate>Format</label>
+                                <label class="hy-nostyle" for="customformat{{$index}}" data-i18n="Format">Format</label>
                             </div>
                             <div class="col-12 col-sm-12 mb-2">{{temp.dateFormats[format.format] || vars.datesExampleResult[format.format]}}</div>
                         </div>
-                        <div class="col-12 btn btn-primary" ng-click="addCustomFormat();" bl-translate>Add</div>
+                        <div class="col-12 btn btn-primary" ng-click="addCustomFormat();" data-i18n="Add">Add</div>
                     </div>
                 </div>
                 <div class="container mt-2 mb-2">
-                    <div class="col-12" bl-translate>Here you can alter the definition of any default datetime formats</div>
-                    <div class="col-12" bl-translate>This will be applied to every app using the BLL coding or DateTime</div>
+                    <div class="col-12" data-i18n="Alter_default_datetime_formats">Here you can alter the definition of any default datetime formats.</div>
+                    <div class="col-12" data-i18n="Applies_to_every_app">This will be applied to every app using the BLL coding or DateTime.</div>
                 </div>
                 <div class="card mt-1" ng-repeat="type in vars.dateFormats">
                     <div class="card-header fw-bolder" ng-bind="type.label"></div>
@@ -351,7 +322,7 @@
                 </div>
             </form>
             <div class="btn-group fixed-bottom">
-                <button type="button" class="btn btn-primary hy-nostyle" ng-click="formatsForm.$valid && formatsForm.$dirty ? setLocale() : null;" ng-disabled="!formatsForm.$valid || !formatsForm.$dirty" bl-translate>Save</button>
+                <button type="button" class="btn btn-primary hy-nostyle" ng-click="formatsForm.$valid && formatsForm.$dirty ? setLocale() : null;" ng-disabled="!formatsForm.$valid || !formatsForm.$dirty" data-i18n="Save">Save</button>
             </div>
         </div>
         <div class="flex-grow-1 pt-2" ng-show="view.id=='coding' || view.id=='locale_timezone'">
@@ -373,10 +344,8 @@
     <div class="main-view d-flex flex-column container g-2 pt-2 flex-grow-1" ng-show="view.id=='functions'">
         <div>
             <h1 data-i18n="settings.functions">Functions</h1>
-            <p data-i18n="settings.functions_expressions">These functions can be used within
-                (javascript) expression.</p>
+            <p data-i18n="settings.functions_expressions">These functions can be used within (javascript) expression.</p>
             <p data-i18n="settings.functions_be_aware">Be aware that removing functions will corrupt flows that are using that function.</p>
-
             <div class="" data-i18n="settings.add_function_text">To create a function, enter a name, press Add Function, then press edit below.</div>
             <form role="form">
                 <div class="form-group form-floating">
@@ -455,7 +424,7 @@
                 <div ng-switch-default><div ng-include="'editstring.html'"></div></div>
             </div> -->
         </td>
-        <td bl-translate>{{vm.selected.type}}</td>
+        <td data-i18n="">{{vm.selected.type}}</td>
         <td>{{(vars.variableDates[variable.lastChanged]) || (variable.lastChanged | date:'yyyy-MM-dd HH:mm:ss')}}</td>
         <!--<td><input class="col-2" id="variableValue" type="checkbox" ng-model="vm.selected.hasInsights" placeholder="value"></td>-->
         
@@ -467,15 +436,15 @@
 
     <script type="text/ng-template" id="addnumber.html">
         <input class="form-control hy-nostyle" id="variableValue" type="number" ng-disabled="!vm.newVariable.name||!vm.newVariable.type" ng-model="vm.newVariable.value" placeholder="value">
-        <label for="variableValue" bl-translate>Variable value</label>
+        <label for="variableValue" data-i18n="Variable value">Variable value</label>
     </script>
     <script type="text/ng-template" id="addstring.html">
         <input class="form-control hy-nostyle" id="variableValue" type="text" ng-disabled="!vm.newVariable.name||!vm.newVariable.type" ng-model="vm.newVariable.value" placeholder="value">
-        <label for="variableValue" bl-translate>Variable value</label>
+        <label for="variableValue" data-i18n="Variable value">Variable value</label>
     </script>
     <script type="text/ng-template" id="addboolean.html">
         <input class=" hy-nostyle" id="variableValue" type="checkbox" ng-disabled="!vm.newVariable.name||!vm.newVariable.type" ng-model="vm.newVariable.value" placeholder="value">
-        <label for="variableValue" bl-translate>Variable value</label>
+        <label for="variableValue" data-i18n="Variable value">Variable value</label>
     </script>
     <script type="text/ng-template" id="editnumber.html">
         <input class="form-control col-2 hy-nostyle" id="variableValue" type="number" ng-model="vm.selected.value" placeholder="value">

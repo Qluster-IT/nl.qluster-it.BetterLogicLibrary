@@ -74,7 +74,7 @@
                 },
                 {
                     id: 'TimeZone',
-                    formats: ['KK', 'kk', 'z', 'zz']
+                    formats: ['KK', 'kk', 'z', 'zz', 'Z', 'ZZ']
                 },
                 {
                     id: 'Other',

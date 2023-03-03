@@ -293,10 +293,10 @@ class DateTime {
 
 
   /** 
-   * @param {"KK"|"K"|"kk"|"k"|"z"|"zz"} format * @returns {String}
+   * @param {"KK"|"K"|"kk"|"k"|"z"|"zz"|"Z"|"ZZ"} format * @returns {String}
    */
   getTimeZoneByFormat(format) {
-    if (format == 'z' || format == 'zz' || format == 'zzz') {
+    if (format == 'z' || format == 'zz' || format == 'zzz' || format == 'Z' || format == 'ZZ' || format == 'ZZZ') {
       let options =
       {
         weekday: 'long',
@@ -311,7 +311,8 @@ class DateTime {
       let val = this.getString(options);
       val = Number.parseInt(BL._.last(val.split('GMT')) || '0');
       //BL.homey.log('Date z: ', val);
-      return (val>0?'+':'-') + val.toString().padStart(format.length>1?2:1,'0');
+      let result = (val>0?'+':'-') + val.toString().padStart(format.length>1?2:1,'0');
+      return (format[0]==='Z' ? 'GMT' : '' ) + result;
       
     } else {
       let c;
@@ -444,9 +445,9 @@ class DateTime {
 
 
   /** @private */
-  static timeZoneCodes = { 'KK': 'KK', 'kk': 'kk', 'z':'z', 'zz':'zz' };
+  static timeZoneCodes = { 'KK': 'KK', 'kk': 'kk', 'z':'z', 'zz':'zz', 'Z':'Z', 'ZZ':'ZZ' };
   /**
-   * @param {"KK"|"kk"} code * @returns {String}
+   * @param {"KK"|"kk"|"z"|"zz"|"Z"|"ZZ"} code * @returns {String}
    */
   getTimeZone(code) {
     return this.getTimeZoneByFormat(code);

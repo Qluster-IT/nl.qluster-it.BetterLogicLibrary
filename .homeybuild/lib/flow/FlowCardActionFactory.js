@@ -23,16 +23,12 @@ module.exports = {
             if (args.variable && args.variable.name) {
                 var result = variableManager.getVariable(args.variable.name);
                 
-                //TESTING
-                //console.log(DateTime.get().toString('dd-MM-yyyy'));
-                //console.log(BL.datetime.toString('dd-MM-yyyy'));
-                
                 if(args && args.value) args.value = await BL.decode(args.value);
 
                 if (result) {
                   return await variableManager.updateVariable(args.variable.name, args.value, 'string');
-                }
-                throw new Error('String variable not found (' + args.variable.name + ')');
+                } else  throw new Error(this.homey.__('errors.variable_not_found',  { variablename: args.variable.name} ) );
+                //throw new Error('String variable not found (' + args.variable.name + ')');
             }
         })
             .getArgument('variable').registerAutocompleteListener((query, args) => {
@@ -47,8 +43,8 @@ module.exports = {
 
                 if (result) {
                   return await variableManager.updateVariable(args.variable.name, args.value, 'number');
-                }
-                throw new Error('Number variable not found (' + args.variable.name + ')');
+                } else  throw new Error(this.homey.__('errors.variable_not_found',  { variablename: args.variable.name} ) );
+                //throw new Error('Number variable not found (' + args.variable.name + ')');
             }
         })
             .getArgument('variable').registerAutocompleteListener((query, args) => {
@@ -64,8 +60,8 @@ module.exports = {
 
                 if (result) {
                   return await variableManager.updateVariable(args.variable.name, result.value + args.value, 'number');
-                }
-                throw new Error('Number variable not found (' + args.variable.name + ')');
+                } else  throw new Error(this.homey.__('errors.variable_not_found',  { variablename: args.variable.name} ) );
+                //throw new Error('Number variable not found (' + args.variable.name + ')');
             }
         })
             .getArgument('variable')
@@ -82,8 +78,8 @@ module.exports = {
 
                 if (result) {
                   return await variableManager.updateVariable(args.variable.name, result.value - args.value, 'number');
-                }
-                throw new Error('Number variable not found (' + args.variable.name + ')');
+                } else  throw new Error(this.homey.__('errors.variable_not_found',  { variablename: args.variable.name} ) );
+                //throw new Error('Number variable not found (' + args.variable.name + ')');
             }
           })
             .getArgument('variable')
@@ -106,10 +102,10 @@ module.exports = {
                         var newValue = math.evaluate(expression);
 
                         return await variableManager.updateVariable(args.variable.name, newValue, 'number');
-                    }
-                    throw new Error('Variable not found (' + args.variable.name + ')');
+                    } else throw new Error(this.homey.__('errors.variable_not_found',  { variablename: args.variable.name} ) );
+                    //throw new Error('Variable not found (' + args.variable.name + ')');
                 } catch (err) {
-                    return new Error('Error executing expression: ' + err.message);
+                    throw new Error('Error executing expression: ' + err.message);
                 }
             }
           })
@@ -127,8 +123,8 @@ module.exports = {
 
                 if (result) {
                     return await variableManager.updateVariable(args.variable.name, (args.boolean_value.toLowerCase()==='true'), 'boolean');
-                }
-                throw new Error('Boolean variable not found (' + args.variable.name + ')');
+                } else throw new Error(this.homey.__('errors.variable_not_found',  { variablename: args.variable.name} ) );
+                //throw new Error('Boolean variable not found (' + args.variable.name + ')');
             }
           })
             .getArgument('variable')
@@ -145,8 +141,8 @@ module.exports = {
 
                 if (result) {
                     return await variableManager.updateVariable(args.variable.name, !result.value, 'boolean');
-                }
-                throw new Error('Boolean variable not found (' + args.variable.name + ')');
+                } else throw new Error(this.homey.__('errors.variable_not_found',  { variablename: args.variable.name} ) );
+                //throw new Error('Boolean variable not found (' + args.variable.name + ')');
             }
         })
             .getArgument('variable')
@@ -163,8 +159,8 @@ module.exports = {
 
                 if (result) {
                     return await variableManager.updateVariable(args.variable.name, new Date().toISOString(), 'trigger');
-                }
-                return Promise.reject(new Error('Trigger variable not found (' + args.variable.name + ')'));
+                } else throw new Error(this.homey.__('errors.variable_not_found',  { variablename: args.variable.name} ) ); 
+                //return Promise.reject(new Error('Trigger variable not found (' + args.variable.name + ')'));
             }
         })
             .getArgument('variable')
@@ -185,23 +181,23 @@ module.exports = {
                         if (args.value === "true" || args.value === "false") {
                             return await variableManager.updateVariable(result.name, (args.value === 'true'), result.type);
                         }
-                        throw new Error('No boolean value');
+                        throw new Error(this.homey.__('Boolean_invalid_value'));
                     }
                     else if (result.type === "number") {
                         if (!isNaN(parseFloat(args.value))) {
                             return await variableManager.updateVariable(result.name, parseFloat(args.value), result.type);
                         }
-                        throw new Error('Not a number');
+                        throw new Error(this.homey.__('Number_invalid_value'));
                     }
                     else if (result.type === "string") {
                         if (typeof args.value === "string") {
                           return await variableManager.updateVariable(result.name, args.value, result.type);
                         }
-                        throw new Error('No string value');
+                        throw new Error(this.homey.__('String_invalid_value'));
                     }
                     return true;
                 }
-                throw new Error('Variable not found (' + args.variable.name + ')');
+                throw new Error(this.homey.__('errors.variable_not_found',  { variablename: args.variable.name} ) );
             }
             return true;
         })

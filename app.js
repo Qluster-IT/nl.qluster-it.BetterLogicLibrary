@@ -741,7 +741,22 @@ class BetterLogic extends Homey.App {
 			context.arg = arg;
 			context.date = (coding, _date, _locale, _timeZone) => BL.datetime.toString(coding, _date||date, _locale||locale, _timeZone||timeZone); 
 		//}
-		return sandbox(code, context, {timeout:55*1000}); //55 seconds timeout
+		try {			
+			return sandbox(code, context, {timeout:55*1000}); //55 seconds timeout
+		} catch (error) {
+			let end;
+			if(error && error.stack && (end = error.stack.indexOf('\n\nSyntaxError'))>-1) {
+			  let start = error.stack.indexOf('=')+1;
+			  let startMinus = error.stack.indexOf('\n')+1;
+			  let msg = error.stack.substring(start, end);
+			  let msgs = msg.split('\n');
+			  let pos = msgs[msgs.length-1];
+			  pos = pos.substring(start - startMinus);
+			  msgs.pop();
+			  msg = msgs.join('\n') + '\n' + pos;
+			  throw new Error(error.message + '\n' + msg );
+			}
+		  }
 	}
 
 

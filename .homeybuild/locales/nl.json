@@ -22,20 +22,20 @@
 	"Export":"Exporteren",
 	"Import":"Importeren",
 	"Delete All":"Verwijder alles",
-	"Be aware that removing variables will corrupt flows that are using that variable":"* Houd er rekening mee dat het verwijderen van variabelen flows breekt welke die variabele gebruiken.",
+	"Be_aware_removing_variable":"* Houd er rekening mee dat het verwijderen van variabelen flows breekt welke die variabele gebruiken.",
 	"Name":"Naam",
 	"Value":"Waarde",
 	"Type":"Type",
 	"Last set":"Laatste ingesteld",
 	"BLL Coding":"BLL-codering",
-	"BLL codings are expressions within text-arguments in flowcards":"BLL-coderingen zijn expressies in tekstargumenten van flowkaarten.",
-	"In every App that supports BLL coding":"In elke app die BLL-codering ondersteunt, kunt u voor elk tekstargument in flowkaarten dat door de BLL-decoder gaat <pre class=\"d-inline\">{[ expression ]}</pre> gebruiken.",
-	"Within these expressions, you can use build-in modules, functions and your own customisable functions":"In deze expressies kunt u gebruik maken van ingebouwde modules, functies en uw eigen aanpasbare functies.",
+	"BLL_codings_are_expressions":"BLL-coderingen zijn expressies in tekstargumenten van flowkaarten.",
+	"In_every_app_that_supports":"In elke app die BLL-codering ondersteunt, kunt u voor elk tekstargument in flowkaarten dat door de BLL-decoder gaat <pre class=\"d-inline\">{[ expression ]}</pre> gebruiken.",
+	"Within_these_expressions":"In deze expressies kunt u gebruik maken van ingebouwde modules, functies en uw eigen aanpasbare functies.",
 	"Modules":"Modules",
 	"Example":"Voorbeeld",
 	"Build-in functions":"Ingebouwde functies",
-	"This method will return the current date(time) in the entered format, with respect to the users defined locale (language) en timezone":"Deze methode retourneert de huidige datum(tijd) in het ingevoerde formaat, met betrekking tot de door de gebruiker gedefinieerde locale (taal) en tijdzone.",
-	"Optionally you can supply the date(time), locale and/or timeZone":"Optioneel kunt u de datum(tijd), locale en/of timeZone opgeven.",
+	"Method_date_explanation":"Deze methode retourneert de huidige datum(tijd) in het ingevoerde formaat, met betrekking tot de door de gebruiker gedefinieerde locale (taal) en tijdzone.",
+	"Method_date_optionally":"Optioneel kunt u de datum(tijd), locale en/of timeZone opgeven.",
 	"Variable value":"Variabel waarde",
 	"The last one is":"De laatste is: {[ _.last([\"1\", \"2\"]) ]}.",
 	"Today is a":"Vandaag is een {[ date(\"dddd\") ]}.",
@@ -53,15 +53,15 @@
 	"TimeZone":"Tijdzone",
 	"Other":"Overige",
 	"Locale and Timezone":"Locatie en tijdzone",
-	"Here you can configure your locale (language) and timezone":"Hier kunt u uw locale (taal) en tijdzone configureren.",
-	"Later on, you will be able to configure this from here separatly for each app that uses BLL coding":"Later kunt u dit vanaf hier afzonderlijk configureren voor elke app die BLL-codering gebruikt.",
+	"Configure_locale_timezone":"Hier kunt u uw locale (taal) en tijdzone configureren.",
+	"Later_on_each_app":"Later kunt u dit vanaf hier afzonderlijk configureren voor elke app die BLL-codering gebruikt.",
 	"Locale":"Locale",
 	"Custom formats":"Aangepaste formaten",
-	"Here you can create custom datetime definitions with any format you wish":"Hier kunt u aangepaste datum/tijd-definities maken met elk gewenst formaat.",
+	"Create_custom_datetime_formats":"Hier kunt u aangepaste datum/tijd-definities maken met elk gewenst formaat.",
 	"Format":"Formaat",
 	"Add":"Toevoegen",
-	"Here you can alter the definition of any default datetime formats":"Hier kunt u de definitie van alle standaard datum/tijd-notaties wijzigen.",
-	"This will be applied to every app using the BLL coding or DateTime":"Dit wordt toegepast op elke app met behulp van de BLL-codering of DateTime.",
+	"Alter_default_datetime_formats":"Hier kunt u de definitie van alle standaard datum/tijd-notaties wijzigen.",
+	"Applies_to_every_app":"Dit wordt toegepast op elke app met behulp van de BLL-codering of DateTime.",
 	"Save":"Opslaan",
 
     "settings":{
@@ -83,5 +83,12 @@
 		"delete_confirm":"Weet u zeker dat u de functie __functionName__ wilt verwijderen?",
 		"search_for_name":"zoek op naam",		
 		"close":"Sluiten"
-    }
+    },
+	
+	"errors":{
+		"variable_not_found":"Variabele __variablename__ niet gevonden.",
+		"String_invalid_value":"Geen geldige tekstswaarde",
+		"Number_invalid_value":"Geen geldige getalwaarde",
+		"Boolean_invalid_value":"Geen geldige ja/nee waarde"
+	}
 }

@@ -186,7 +186,7 @@
               {
                 "id": "decreased",
                 "label": {
-                  "en": "min. decreased with",                  
+                  "en": "min. decreased with",
                   "nl": "min. gedaald met"
                 }
               }
@@ -222,7 +222,7 @@
           "nl": "[[variable]] zijn veranderd"
         },
         "hint": {
-          "en": "Type the variable names seperated by a comma.\nTags will not work in this card.",          
+          "en": "Type the variable names seperated by a comma.\nTags will not work in this card.",
           "nl": "Typ de namen van de variabelen, gescheiden door een komma.\nTags werken niet op deze kaart."
         },
         "args": [
@@ -243,7 +243,7 @@
         "id": "debug_any_variable_changed",
         "title": {
           "en": "Any variable changed (DEBUG)",
-          "nl": "Enig variabele gewijzigd (DEBUG)"
+          "nl": "Enige variabele gewijzigd (DEBUG)"
         }
       }
     ],
@@ -254,17 +254,20 @@
           "en": "!{{Text contains|Text does not contain}}"
         },
         "titleFormatted": {
-          "en": "[[variable]] contains [[value]]"
+          "en": "[[variable]] !{{contains|does not contain}} [[value]]",
+          "nl": "[[variable]] !{{bevat|bevat niet}} [[value]]"
         },
         "args": [
           {
             "name": "variable",
             "type": "autocomplete",
-            "placeholder": {
-              "en": "Variable"
-            },
             "title": {
-              "en": "Variable"
+              "en": "Variable",
+              "nl": "Variabele"
+            },
+            "placeholder": {
+              "en": "Variable",
+              "nl": "Variabele"
             }
           },
           {
@@ -284,21 +287,36 @@
       {
         "id": "variable_starts_with",
         "title": {
-          "en": "!{{Text starts with|Text does not start with}}"
+          "en": "!{{Text starts with|Text does not start with}}",
+          "nl": "!{{Tekst begint met|Tekst begint niet met}}"
+        },
+        "titleFormatted": {
+          "en": "[[variable]] !{{starts with|does not start with}} [[value]]",
+          "nl": "[[variable]] !{{begint met|begint niet met}} [[value]]"
         },
         "args": [
           {
             "name": "variable",
             "type": "autocomplete",
+            "title": {
+              "en": "Variable",
+              "nl": "Variabele"
+            },
             "placeholder": {
-              "en": "value"
+              "en": "Variable",
+              "nl": "Variabele"
             }
           },
           {
             "name": "value",
             "type": "text",
+            "title": {
+              "en": "Value",
+              "nl": "Waarde"
+            },
             "placeholder": {
-              "en": "value"
+              "en": "Value (* BLL supported)",
+              "nl": "Waarde (* BLL ondersteund)"
             }
           }
         ]
@@ -306,21 +324,36 @@
       {
         "id": "variable_matches_string",
         "title": {
-          "en": "!{{Text is exact|Text is not exactly}}"
+          "en": "!{{Text is exact|Text is not exactly}}",
+          "nl": "!{{Tekst is exact|Tekst is niet exact}}"
+        },
+        "titleFormatted": {
+          "en": "[[variable]] !{{is exactly|is not exactly}} [[value]]",
+          "nl": "[[variable]] !{{is precies|is niet precies}} [[value]]"
         },
         "args": [
           {
             "name": "variable",
             "type": "autocomplete",
+            "title": {
+              "en": "Variable",
+              "nl": "Variabele"
+            },
             "placeholder": {
-              "en": "value"
+              "en": "Variable",
+              "nl": "Variabele"
             }
           },
           {
             "name": "value",
             "type": "text",
+            "title": {
+              "en": "Value",
+              "nl": "Waarde"
+            },
             "placeholder": {
-              "en": "value"
+              "en": "Value (* BLL supported)",
+              "nl": "Waarde (* BLL ondersteund)"
             }
           }
         ]
@@ -328,22 +361,37 @@
       {
         "id": "variable_matches_number",
         "title": {
-          "en": "!{{Number is exact|Number is not exactly}}"
+          "en": "!{{Number is exactly|Number is not exactly}}",
+          "nl": "!{{Getal is exact|Getal is niet exact}}"
+        },
+        "titleFormatted": {
+          "en": "[[variable]] !{{is exactly|is not exactly}} [[value]]",
+          "nl": "[[variable]] !{{is precies|is niet precies}} [[value]]"
         },
         "args": [
           {
             "name": "variable",
             "type": "autocomplete",
+            "title": {
+              "en": "Number Variable",
+              "nl": "Nummer Variabele"
+            },
             "placeholder": {
-              "en": "value"
+              "en": "Number Variable",
+              "nl": "Nummer Variabele"
             }
           },
           {
             "name": "value",
             "type": "number",
             "step": 0.01,
+            "title": {
+              "en": "Value",
+              "nl": "Waarde"
+            },
             "placeholder": {
-              "en": "value"
+              "en": "Value",
+              "nl": "Waarde"
             }
           }
         ]
@@ -351,22 +399,37 @@
       {
         "id": "variable_greater_than",
         "title": {
-          "en": "!{{|not}} greater than"
+          "en": "!{{Greater than|Not greater than}}",
+          "nl": "!{{Groter dan|Niet groter dan}}"
+        },
+        "titleFormatted": {
+          "en": "[[variable]] !{{is greater than|is not greater than}} [[value]]",
+          "nl": "[[variable]] !{{is groter dan|is niet groter dan}} [[value]]"
         },
         "args": [
           {
             "name": "variable",
             "type": "autocomplete",
+            "title": {
+              "en": "Number Variable",
+              "nl": "Nummer Variabele"
+            },
             "placeholder": {
-              "en": "value"
+              "en": "Number Variable",
+              "nl": "Nummer Variabele"
             }
           },
           {
             "name": "value",
             "type": "number",
             "step": 0.01,
+            "title": {
+              "en": "Value",
+              "nl": "Waarde"
+            },
             "placeholder": {
-              "en": "value"
+              "en": "Value",
+              "nl": "Waarde"
             }
           }
         ]
@@ -374,22 +437,37 @@
       {
         "id": "variable_less_than",
         "title": {
-          "en": "!{{|not}} less than"
+          "en": "!{{Less than|Not less than}}",
+          "nl": "!{{Kleiner dan|Niet kleiner dan}}"
+        },
+        "titleFormatted": {
+          "en": "[[variable]] !{{is less than|is not less than}} [[value]]",
+          "nl": "[[variable]] !{{is kleiner dan|is niet kleiner dan}} [[value]]"
         },
         "args": [
           {
             "name": "variable",
             "type": "autocomplete",
+            "title": {
+              "en": "Number Variable",
+              "nl": "Nummer Variabele"
+            },
             "placeholder": {
-              "en": "value"
+              "en": "Number Variable",
+              "nl": "Nummer Variabele"
             }
           },
           {
             "name": "value",
             "type": "number",
             "step": 0.01,
+            "title": {
+              "en": "Value",
+              "nl": "Waarde"
+            },
             "placeholder": {
-              "en": "value"
+              "en": "Value",
+              "nl": "Waarde"
             }
           }
         ]
@@ -397,14 +475,24 @@
       {
         "id": "variable_is_equal",
         "title": {
-          "en": "!{{is true|is false}}"
+          "en": "Variable !{{is true|is false}}",
+          "nl": "Variabele !{{is waar|is niet waar}}"
+        },
+        "titleFormatted": {
+          "en": "[[variable]] !{{is true|is false}}",
+          "nl": "[[variable]] !{{is waar|is niet waar}}"
         },
         "args": [
           {
             "name": "variable",
             "type": "autocomplete",
+            "title": {
+              "en": "Variable",
+              "nl": "Variabele"
+            },
             "placeholder": {
-              "en": "value"
+              "en": "Variable",
+              "nl": "Variabele"
             }
           }
         ]
@@ -412,12 +500,21 @@
       {
         "id": "expression",
         "title": {
-          "en": "Math.js expression !{{is true|is false}}"
+          "en": "Math.js expression !{{is true|is false}}",
+          "nl": "Math.js-expressie !{{is waar|is niet waar}}"
+        },
+        "titleFormatted": {
+          "en": "[[expression]] !{{is true|is false}}",
+          "nl": "[[expression]] !{{is waar|is niet waar}}"
         },
         "args": [
           {
             "name": "expression",
             "type": "text",
+            "title": {
+              "en": "Math.js expression",
+              "nl": "Math.js-expressie"
+            },
             "placeholder": {
               "en": "$v1$ > 100 and $v1$ < 200 and $b1$"
             }
@@ -427,14 +524,19 @@
       {
         "id": "bl_expression",
         "title": {
-          "en": "BLL expression !{{is true|is false}}"
+          "en": "BLL expression !{{is true|is false}}",
+          "nl": "BLL-expressie !{{is waar|is niet waar}}"
+        },
+        "titleFormatted": {
+          "en": "[[expression]] !{{is true|is false}}",
+          "nl": "[[expression]] !{{is waar|is niet waar}}"
         },
         "args": [
           {
             "name": "expression",
             "type": "text",
             "placeholder": {
-              "en": "\"test\"=== \"test\" and 1 < 2"
+              "en": "\"test\"=== \"test\" && 1 < 2"
             }
           }
         ]
@@ -442,57 +544,26 @@
     ],
     "actions": [
       {
-        "id": "set_a_variable",
-        "title": {
-          "en": "Set a variable"
-        },
-        "titleFormatted": {
-          "en": "Set [[variable]] to [[value]]",
-          "nl": "Zet [[variable]] naar [[value]]",
-          "de": "Setze [[variable]] auf [[value]]"
-        },
-        "args": [
-          {
-            "name": "variable",
-            "type": "autocomplete",
-            "title": {
-              "en": "Variable"
-            },
-            "placeholder": {
-              "en": "Name"
-            }
-          },
-          {
-            "name": "value",
-            "type": "text",
-            "placeholder": {
-              "en": "Value (* BLL supported)",
-              "nl": "Waarde (* BLL ondersteund)"
-            },
-            "title": {
-              "en": "Value",
-              "nl": "Waarde"
-            }
-          }
-        ]
-      },
-      {
         "id": "format_datetime",
         "title": {
-          "en": "Format datetime"
+          "en": "Format datetime",
+          "nl": "Formaat datumtijd"
         },
         "titleFormatted": {
-          "en": "Format [[format]] (optional: [[date]], [[locale]], [[timeZone]])"
+          "en": "Format date as [[format]] (optional: [[date]], [[locale]], [[timeZone]])",
+          "nl": "Datum opmaken als [[format]] (optioneel: [[date]], [[locale]], [[timeZone]])"
         },
         "args": [
           {
             "name": "format",
             "type": "autocomplete",
             "placeholder": {
-              "en": "Type your own format or select from the list"
+              "en": "Type your own format or select from the list",
+              "nl": "Typ uw eigen formaat of kies een uit de lijst"
             },
             "title": {
-              "en": "Date"
+              "en": "Format",
+              "nl": "Opmaak"
             }
           },
           {
@@ -500,10 +571,12 @@
             "type": "text",
             "required": false,
             "placeholder": {
-              "en": "String, Number or Date, or Array of any of those"
+              "en": "String, Number or Date, or Array of any of those",
+              "nl": "Tekst, nummer of datum, of array van een van deze"
             },
             "title": {
-              "en": "Date"
+              "en": "Date",
+              "nl": "Datum"
             }
           },
           {
@@ -511,10 +584,12 @@
             "type": "autocomplete",
             "required": false,
             "placeholder": {
-              "en": "Select a locale from the list"
+              "en": "Select a locale from the list",
+              "nl": "Selecteer een locale uit de lijst"
             },
             "title": {
-              "en": "Locale"
+              "en": "Locale",
+              "nl": "Locale"
             }
           },
           {
@@ -522,10 +597,12 @@
             "type": "autocomplete",
             "required": false,
             "placeholder": {
-              "en": "Select a timezone from the list"
+              "en": "Select a timezone from the list",
+              "nl": "Selecteer een tijdzone uit de lijst"
             },
             "title": {
-              "en": "TimeZone"
+              "en": "TimeZone",
+              "nl": "Tijdzone"
             }
           }
         ],
@@ -534,46 +611,8 @@
             "name": "result",
             "type": "string",
             "title": {
-              "en": "Formatted result"
-            }
-          }
-        ]
-      },
-      {
-        "id": "execute_bl_expression",
-        "title": {
-          "en": "Execute BLL Expression",
-          "nl": "Voer BLL expressie uit",
-          "de": "BLL Bezeichnung setzen"
-        },
-        "titleFormatted": {
-          "en": "Set [[variable]] to [[expression]]",
-          "nl": "Zet [[variable]] naar [[expression]]",
-          "de": "Setze [[variable]] auf [[expression]]"
-        },
-        "args": [
-          {
-            "name": "variable",
-            "type": "autocomplete",
-            "title": {
-              "en": "Variable"
-            },
-            "placeholder": {
-              "en": "Name"
-            }
-          },
-          {
-            "name": "expression",
-            "type": "text",
-            "title": {
-              "en": "BLL Expression",
-              "nl": "BLL Expression",
-              "de": "BLL Bezeichnung"
-            },
-            "placeholder": {
-              "en": "BLL Expression",
-              "nl": "BLL Expression",
-              "de": "BLL Bezeichnung"
+              "en": "Formatted result",
+              "nl": "Opgemaakte resultaat"
             }
           }
         ]
@@ -587,8 +626,8 @@
         },
         "titleFormatted": {
           "en": "Execute [[expression]] (as Tag)",
-          "nl": "Voer [[expression]] (als Tag)",
-          "de": "Führen Sie [[expression]] (als Tag)"
+          "nl": "Voer [[expression]] uit (als Tag)",
+          "de": "Führen Sie [[expression]] aus (als Tag)"
         },
         "args": [
           {
@@ -632,19 +671,106 @@
         ]
       },
       {
-        "id": "set_string_variable",
+        "id": "execute_bl_expression",
         "title": {
-          "en": "Set string variable"
+          "en": "Execute BLL Expression",
+          "nl": "Voer BLL expressie uit",
+          "de": "BLL Bezeichnung setzen"
         },
         "titleFormatted": {
-          "en": "Set [[variable]] to [[value]]"
+          "en": "Set [[variable]] to [[expression]]",
+          "nl": "Zet [[variable]] naar [[expression]]",
+          "de": "Setze [[variable]] auf [[expression]]"
         },
         "args": [
           {
             "name": "variable",
             "type": "autocomplete",
+            "title": {
+              "en": "Variable",
+              "nl": "Variabele"
+            },
             "placeholder": {
-              "en": "Variable"
+              "en": "Variable",
+              "nl": "Variabele"
+            }
+          },
+          {
+            "name": "expression",
+            "type": "text",
+            "title": {
+              "en": "BLL Expression",
+              "nl": "BLL Expression",
+              "de": "BLL Bezeichnung"
+            },
+            "placeholder": {
+              "en": "BLL Expression",
+              "nl": "BLL Expression",
+              "de": "BLL Bezeichnung"
+            }
+          }
+        ]
+      },
+      {
+        "id": "set_a_variable",
+        "title": {
+          "en": "Set a variable",
+          "nl": "Stel een variabele in"
+        },
+        "titleFormatted": {
+          "en": "Set [[variable]] to [[value]]",
+          "nl": "Zet [[variable]] naar [[value]]",
+          "de": "Setze [[variable]] auf [[value]]"
+        },
+        "args": [
+          {
+            "name": "variable",
+            "type": "autocomplete",
+            "title": {
+              "en": "Variable",
+              "nl": "Variabele"
+            },
+            "placeholder": {
+              "en": "Variable",
+              "nl": "Variabele"
+            }
+          },
+          {
+            "name": "value",
+            "type": "text",
+            "placeholder": {
+              "en": "Value (* BLL supported)",
+              "nl": "Waarde (* BLL ondersteund)"
+            },
+            "title": {
+              "en": "Value",
+              "nl": "Waarde"
+            }
+          }
+        ]
+      },
+      {
+        "id": "set_string_variable",
+        "title": {
+          "en": "Set string variable",
+          "nl": "Stel een tekst variabele in"
+        },
+        "titleFormatted": {
+          "en": "Set [[variable]] to [[value]]",
+          "nl": "Zet [[variable]] naar [[value]]",
+          "de": "Setze [[variable]] auf [[value]]"
+        },
+        "args": [
+          {
+            "name": "variable",
+            "type": "autocomplete",
+            "title": {
+              "en": "Variable",
+              "nl": "Variabele"
+            },
+            "placeholder": {
+              "en": "Variable",
+              "nl": "Variabele"
             }
           },
           {
@@ -664,17 +790,25 @@
       {
         "id": "set_number_variable",
         "title": {
-          "en": "Set number variable"
+          "en": "Set number variable",
+          "nl": "Stel een nummer variabele in"
         },
         "titleFormatted": {
-          "en": "Set [[variable]] to [[value]]"
+          "en": "Set [[variable]] to [[value]]",
+          "nl": "Zet [[variable]] naar [[value]]",
+          "de": "Setze [[variable]] auf [[value]]"
         },
         "args": [
           {
             "name": "variable",
             "type": "autocomplete",
+            "title": {
+              "en": "Variable",
+              "nl": "Variabele"
+            },
             "placeholder": {
-              "en": "Variable"
+              "en": "Variable",
+              "nl": "Variabele"
             }
           },
           {
@@ -682,8 +816,8 @@
             "type": "number",
             "step": 0.01,
             "placeholder": {
-              "en": "0.01 (* BLL supported)",
-              "nl": "0,01 (* BLL ondersteund)"
+              "en": "0.01",
+              "nl": "0,01"
             },
             "title": {
               "en": "Number",
@@ -695,17 +829,24 @@
       {
         "id": "increment_number_variable",
         "title": {
-          "en": "Increment number variable"
+          "en": "Increment number variable",
+          "nl": "Verhoog nummer variabele"
         },
         "titleFormatted": {
-          "en": "Increment [[variable]] by [[value]]"
+          "en": "Increment [[variable]] by [[value]]",
+          "nl": "Verhoog [[variable]] met [[value]]"
         },
         "args": [
           {
             "name": "variable",
             "type": "autocomplete",
+            "title": {
+              "en": "Variable",
+              "nl": "Variabele"
+            },
             "placeholder": {
-              "en": "Variable"
+              "en": "Variable",
+              "nl": "Variabele"
             }
           },
           {
@@ -713,7 +854,8 @@
             "type": "number",
             "step": 0.01,
             "placeholder": {
-              "en": "Number"
+              "en": "Number",
+              "nl": "Nummer"
             }
           }
         ]
@@ -721,17 +863,24 @@
       {
         "id": "decrement_number_variable",
         "title": {
-          "en": "Decrement number variable"
+          "en": "Decrement number variable",
+          "nl": "Verlaag nummer variabele"
         },
         "titleFormatted": {
-          "en": "Decrement [[variable]] by [[value]]"
+          "en": "Decrement [[variable]] by [[value]]",
+          "nl": "Verlaag [[variable]] met [[value]]"
         },
         "args": [
           {
             "name": "variable",
             "type": "autocomplete",
+            "title": {
+              "en": "Variable",
+              "nl": "Variabele"
+            },
             "placeholder": {
-              "en": "Variable"
+              "en": "Variable",
+              "nl": "Variabele"
             }
           },
           {
@@ -739,7 +888,8 @@
             "type": "number",
             "step": 0.01,
             "placeholder": {
-              "en": "Number"
+              "en": "Number",
+              "nl": "Nummer"
             }
           }
         ]
@@ -747,25 +897,37 @@
       {
         "id": "execute_expression",
         "title": {
-          "en": "Execute mathjs expression"
+          "en": "Execute Math.js  expression",
+          "nl": "Voer Math.js-expressie uit"
+        },
+        "titleFormatted": {
+          "en": "Set [[variable]] to [[expression]]",
+          "nl": "Zet [[variable]] naar [[expression]]",
+          "de": "Setze [[variable]] auf [[expression]]"
         },
         "args": [
           {
             "name": "expression",
             "type": "text",
             "placeholder": {
-              "en": "($n1$ * 42) + 1 (* BLL supported)"
+              "en": "($n1$ * 42) + 1 (* BLL supported)",
+              "nl": "($n1$ * 42) + 1 (* BLL ondersteund)"
             },
             "title": {
-              "en": "Expression",
-              "nl": "Expressie"
+              "en": "Math.js Expression",
+              "nl": "Math.js-expressie"
             }
           },
           {
             "name": "variable",
             "type": "autocomplete",
+            "title": {
+              "en": "Variable",
+              "nl": "Variabele"
+            },
             "placeholder": {
-              "en": "name"
+              "en": "Variable",
+              "nl": "Variabele"
             }
           }
         ]
@@ -776,14 +938,21 @@
           "en": "Set boolean variable"
         },
         "titleFormatted": {
-          "en": "Set [[variable]] to [[boolean_value]]"
+          "en": "Set [[variable]] to [[boolean_value]]",
+          "nl": "Zet [[variable]] naar [[boolean_value]]",
+          "de": "Setze [[variable]] auf [[boolean_value]]"
         },
         "args": [
           {
             "name": "variable",
             "type": "autocomplete",
+            "title": {
+              "en": "Variable",
+              "nl": "Variabele"
+            },
             "placeholder": {
-              "en": "name"
+              "en": "Variable",
+              "nl": "Variabele"
             }
           },
           {
@@ -793,19 +962,21 @@
               {
                 "id": "true",
                 "label": {
-                  "en": "True"
+                  "en": "True",
+                  "nl": "Waar"
                 }
               },
               {
                 "id": "false",
                 "label": {
-                  "en": "False"
+                  "en": "False",
+                  "nl": "Niet waar"
                 }
               }
             ],
             "placeholder": {
-              "en": "Yes/No (* BLL supported)",
-              "nl": "Ja/Nee (* BLL ondersteund)"
+              "en": "Yes/No",
+              "nl": "Ja/Nee"
             },
             "title": {
               "en": "Yes/No",
@@ -817,14 +988,24 @@
       {
         "id": "flip_boolean_variable",
         "title": {
-          "en": "Flip boolean variable"
+          "en": "Flip boolean variable",
+          "nl": "Draai ja/nee waarde om"
+        },
+        "titleFormatted": {
+          "en": "Flip [[variable]]",
+          "nl": "Draai [[variable]] om"
         },
         "args": [
           {
             "name": "variable",
             "type": "autocomplete",
+            "title": {
+              "en": "Variable",
+              "nl": "Variabele"
+            },
             "placeholder": {
-              "en": "name"
+              "en": "Variable",
+              "nl": "Variabele"
             }
           }
         ]
@@ -832,14 +1013,24 @@
       {
         "id": "trigger_variable",
         "title": {
-          "en": "Execute a trigger"
+          "en": "Execute a trigger",
+          "nl": "Voer een trigger uit"
+        },
+        "titleFormatted": {
+          "en": "Execute [[variable]]",
+          "nl": "Voer [[variable]] uit"
         },
         "args": [
           {
             "name": "variable",
             "type": "autocomplete",
+            "title": {
+              "en": "Trigger",
+              "nl": "Trigger"
+            },
             "placeholder": {
-              "en": "name"
+              "en": "Trigger",
+              "nl": "Trigger"
             }
           }
         ]
