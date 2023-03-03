@@ -224,7 +224,11 @@ class BL {
     }
     async init({ reload } = {}) {
         //BL.homey.log('BL.init');
-        if (reload !== true) {
+        if (reload === true) {
+            _isLoaded = false;
+            if (initDefer) initDefer.reject();
+            initDefer = new Defer();
+        } else {
             if (initDefer) return await initDefer.promise;
             else initDefer = new Defer();
             if (_isLoaded) return this;
@@ -400,8 +404,8 @@ class BL {
 
     /** @private */
     async getAppApi(appId, appname, onlyApi) {
-        try {         
-            if (!this.api) this.api = this.homey.api.getApiApp(appId);   
+        try {
+            if (!this.api) this.api = this.homey.api.getApiApp(appId);
         } catch (error) {
             throw new Error(error);
         }
