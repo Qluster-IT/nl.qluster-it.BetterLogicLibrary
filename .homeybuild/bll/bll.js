@@ -1,5 +1,8 @@
 
-const { BL } = require("betterlogiclibrary");
+const { BL, Defer } = require("betterlogiclibrary");
+//var querystring = require('querystring');
+var http = require('http');
+
 
 class BLL {
     
@@ -35,14 +38,14 @@ class BLL {
     destroy() {
         if(BLL.datetime) BLL.datetime.destroy();
         if(this.api) this.api.unregister();
-        BL.homey.log('BLL destroyed');
+        //BL.homey.log('BLL destroyed');
     }
     async init({modules} = {modules:[]}) {
-        BL.homey.log('init BLL');
+        //BL.homey.log('BLL.init');
         let api = this.getApi();
         if(modules && modules.length && ((modules.indexOf('datetime')>-1 || modules.indexOf('dateTime')>-1) && modules.indexOf('_')==-1)) modules.unshift('_');
         // modules = modules.sort((a,b)=> a -b );
-        BL.homey.log('modules', modules);
+        //BL.homey.log('modules', modules);
         if(modules) for (const module of modules) {
             try {                    
                 switch (module) {
@@ -51,13 +54,13 @@ class BLL {
                         BLL.__ = this.requireFromString(_.file, 'lodash');
                         BL._ = BLL._;
                         break;
-                    case "math":                    
+                    case "math":
                         let math = await this.getLibrary('mathjs');
                         BLL._math = this.requireFromString(math.file);
                         BL.math = BLL.math;
                         break;
-                    case "datetime":  
-                    case "dateTime":                    
+                    case "datetime":
+                    case "dateTime":
                         let datetime = await this.getLibrary('datetime'); 
                         let dateTimeObj = this.requireFromString(datetime.file);
 
@@ -150,6 +153,60 @@ class BLL {
             else throw error;
         }
         
+    }
+    async getDownloadUrl({ base64, contentType, buffer, json, text } = {}) {
+        try {
+            let defer = new Defer();
+            let api = await BL.Current.getAppApi('net.i-dev.betterlogic', 'Better Logic Library', true);
+            //let link = await api.post('/getdownloadurl/', { base64, contentType }); base 64 is to big, send it separate.
+            let link = await api.post('/getdownloadurl/', { contentType });
+            let type = 'base64';
+            if (buffer) type = 'application/octet-stream';
+            else if (json) type = 'text/json';
+            else if (text) type = 'text/plain';
+
+
+
+            let send = buffer || base64 || json || text;
+            if (send) {
+                var post_options = {
+                    host: (await BL.homey.cloud.getLocalAddress()).split(':')[0],
+                    port: link.port,
+                    path: link.path,
+                    method: 'POST',
+                    headers: {
+                        'Accept': contentType,
+                        'Content-Type': type,
+                        'Content-Length': buffer ? Buffer.byteLength(buffer) : send.length
+                    }
+                };
+
+                // Set up the request
+                var post_req = http.request(post_options, function (res) {
+                    res.setEncoding('utf8');
+                    res.on('data', function (chunk) {
+                        //console.log('Response: ' + chunk);
+                    });
+                    res.on('end', function (chunk) {
+                        defer.resolve(link);
+                        //console.log('Response: ' + chunk);
+                    });
+                });
+                post_req.on('error', (e) => {
+                    console.error(`problem with request: ${e.message}`);
+                    defer.reject(e);
+                  });
+                // post the data
+                //let typeee = typeof(buffer);
+                //let _buffer = Buffer.from(buffer);
+                post_req.write(send);
+                post_req.end();
+                return defer.promise;
+
+            } else return link;
+        } catch (error) {
+            throw new Error(error);
+        }
     }
 
 

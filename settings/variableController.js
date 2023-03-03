@@ -81,7 +81,8 @@
                     formats: ['PERIOD', 'period', 'ERA', 'era', 'ISO', 'dd "text" yy', '""']
                 }
             ],
-            formats: undefined
+            formats: undefined,
+            filserver:undefined
         };
         
         vars.datesExampleValue = _.flatMap(vars.dateOptions, 'formats');
@@ -125,6 +126,14 @@
                 $scope.updateExamples();
                 let dates = _.uniqBy(_.flatMap(vm.variables, 'lastChanged'));
                 $bl.api("POST", "/date", { date: dates, format: 'datetime' }, (x) => vars.variableDates = x);
+            });
+        };
+        
+        $scope.saveFileServer = async function () {
+            $scope.fileserverForm.$setSubmitted();
+            $scope.fileserverForm.$setPristine();
+            await $bl.set('fileserver', vars.fileserver, () => {
+                
             });
         };
 
@@ -180,6 +189,7 @@
                 $scope.storeFunction();
                 $scope.messages = '';
                 $scope.newFunction = {};
+                $scope.editFunction(func);
             } catch (error) {
                 console.log('addFunction error: ' + error);
                 $scope.messages = error;
@@ -232,10 +242,11 @@
                     let formats = _.uniqBy(_.flatMap(x.customDateFormats, 'format'));
                     await $bl.api("POST", "/date", { format: formats }, (x) => temp.dateFormats = x);//temp.dateFormats[format] = x);
                 }
-
             });
             $bl.api("GET", "/locales", null, (x) => vars.locales = x);
-
+            $bl.get("fileserver", async (x) => {
+                vars.fileserver = x;
+            });
             $scope.updateExamples();
             $scope.getFunctionFromSettings();
 

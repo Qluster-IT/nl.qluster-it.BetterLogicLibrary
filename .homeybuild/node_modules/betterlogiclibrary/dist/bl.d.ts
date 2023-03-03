@@ -23,7 +23,7 @@ export class BL {
         buffer: any;
         json: any;
         text: any;
-    }): Promise<any>;
+    }, ...args: any[]): Promise<any>;
     /**
      * Indicates if the BLL has been loaded before     *
      * @static*/
@@ -70,7 +70,9 @@ export class BL {
     modules: any;
     waitTime: any;
     isReady: boolean;
-    init(): Promise<any>;
+    init({ reload }?: {
+        reload: any;
+    }): Promise<any>;
     api: any;
     /**
      * @type {Promise<any>}

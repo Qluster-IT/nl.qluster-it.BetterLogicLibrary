@@ -4,7 +4,7 @@
 	"Locale Timezone":"Locatie \\ tijdzone",
 	"Formats":"Formaten",
 	"Functions":"Functies",
-	"File Server":"Bestanden server",
+	"File Server":"Bestandsserver",
 	"Options":"Opties",
 	"Auto update":"Auto update",
 	"Add variable":"Variabele toevoegen",
@@ -64,12 +64,16 @@
 	"Applies_to_every_app":"Dit wordt toegepast op elke app met behulp van de BLL-codering of DateTime.",
 	"Save":"Opslaan",
 
-    "settings":{
+	"Configure_file_server":"Hier kunt u de bestandsserver configureren die door andere apps kan worden gebruikt, zoals <a href=\"#\" bl-href=\"https://homey.app/a/nl.nielsdeklerk.log/\">Simple (Sys) LOG</a>, om bestanden op je LAN beschikbaar te stellen of om ze te downloaden in de Homey Mobiele App of de <a href=\"#\" bl-href=\"https://tools.developer.homey.app/tools/app-settings\">Developertools</a>.",
+	"Auto_start_app_start":"Start wanneer de App start",
+
+
+	"settings":{
 		"delete": "Verwijderen",
         "functions":"Functies",
-		"functions_expressions":"Deze functies kunnen gebruikt worden binnen (javascript) expressies.",
+		"functions_expressions":"Deze functies kunnen gebruikt worden in BLL-expressies.",
 		"functions_be_aware":"Houd er rekening mee dat het verwijderen van functies, flows, welke die functie gebruiken, kan breken.",
-		"add_function_text":"Om een functie aan te maken, voert u een naam in, drukt u op Functie toevoegen en drukt u vervolgens op aanpassen hieronder.",
+		"add_function_text":"Om een functie aan te maken, voert u een naam in en drukt u op Functie toevoegen.",
 		"add_function":"Functie toevoegen",
 		"function_name":"Functienaam",
 		"delete_all":"Verwijder alles",

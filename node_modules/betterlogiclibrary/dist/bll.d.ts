@@ -30,5 +30,12 @@ export class BLL {
         locale: any;
         timeZone: any;
     }): Promise<any>;
+    getDownloadUrl({ base64, contentType, buffer, json, text }?: {
+        base64: any;
+        contentType: any;
+        buffer: any;
+        json: any;
+        text: any;
+    }): Promise<any>;
 }
 //# sourceMappingURL=bll.d.ts.map

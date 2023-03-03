@@ -457,7 +457,8 @@ class BetterLogic extends Homey.App {
 		
 		BL.ready.then(async (x)=> {
 			this.bl = x;
-			
+			await this.initFileServerFromSettings();
+
 			variableManager.init(this.homey);
 
 			//if(!timeoutset)(timeoutset=true) | await this.homey.api.realtime("running");
@@ -600,10 +601,11 @@ class BetterLogic extends Homey.App {
 			this.homey.settings.on('set', async (settingName)=> {
 				if (settingName == 'javascript_functions') {
 					this.setFunctions();
-				}
-				if (settingName == 'locale') {
+				} else if (settingName == 'locale') {
 					this.locale = await this.homey.settings.get(settingName);
 					this.homey.api.realtime('bllSetLocale', this.locale);
+				} else if (settingName == 'fileserver') {
+					await this.initFileServerFromSettings();
 				}
 			});
 	
@@ -656,8 +658,18 @@ class BetterLogic extends Homey.App {
 		return await this.fileServer.getDownloadUrl(body);
 	}
 	async initFileServer() {		
-		this.fileServer = await new FileServer().init({homey:this.homey});
+		this.fileServer = await new FileServer().init({homey:this.homey, settings:this.fileserverSettings});
 	}
+
+	async initFileServerFromSettings() {	
+		this.fileserverSettings = await this.homey.settings.get('fileserver');
+		if(!this.fileserverSettings || !Object.keys(this.fileserverSettings).length) {
+			this.fileserverSettings = {port:47330, autoStart:false};
+			await this.homey.settings.set('fileserver', this.fileserverSettings);
+		} else if(this.fileserverSettings.autoStart) await this.initFileServer();			
+	}
+
+	
 	
 	async setFunctions() {
 		this.functions = await this.homey.settings.get('javascript_functions');

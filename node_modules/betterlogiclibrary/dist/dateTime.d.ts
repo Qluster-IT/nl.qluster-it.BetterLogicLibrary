@@ -92,9 +92,9 @@ declare class DateTime {
      */
     getEraByFormat(format: "long" | "short" | "narrow"): string;
     /**
-     * @param {"KK"|"K"|"kk"|"k"|"z"|"zz"} format * @returns {String}
+     * @param {"KK"|"K"|"kk"|"k"|"z"|"zz"|"Z"|"ZZ"} format * @returns {String}
      */
-    getTimeZoneByFormat(format: "KK" | "K" | "kk" | "k" | "z" | "zz"): string;
+    getTimeZoneByFormat(format: "KK" | "K" | "kk" | "k" | "z" | "zz" | "Z" | "ZZ"): string;
     /**
      * @param {"numeric"|"2-digit"} format * @returns {String}
      */
@@ -152,9 +152,9 @@ declare class DateTime {
      */
     getEra(code: "ERA" | "era"): string;
     /**
-     * @param {"KK"|"kk"} code * @returns {String}
+     * @param {"KK"|"kk"|"z"|"zz"|"Z"|"ZZ"} code * @returns {String}
      */
-    getTimeZone(code: "KK" | "kk"): string;
+    getTimeZone(code: "KK" | "kk" | "z" | "zz" | "Z" | "ZZ"): string;
     /**
      * @param {"yyyy"|"yy"} code * @returns {String}
      */

@@ -196,5 +196,8 @@
   },
   "2.4.10": {
     "en": "Improved: Many parts have been put into translations (Dutch right now)."
+  },
+  "2.4.11": {
+    "en": "Translation: Dutch."
   }
 }

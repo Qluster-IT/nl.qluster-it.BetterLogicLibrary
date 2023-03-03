@@ -89,7 +89,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#" ng-class="{active:view.id=='fileserver'}" ng-click="view.id='fileserver'" data-i18n="File Server">File Server</a>
                     </li>
-                    
+
                 </ul>
             </div>
         </div>
@@ -97,7 +97,7 @@
 
     <div class="main-view d-flex flex-column container g-2 pt-2 flex-grow-1" ng-show="!view.id">
         <div class="">
-            <div class="card card-default">
+            <div class="card mt-1">
                 <div class="card-header fw-bolder" ng-click="view.addVariable=!view.addVariable" data-i18n="Add variable">Add variable</div>
                 <div class="card-body" ng-show="view.addVariable">
                     <form role="form">
@@ -202,28 +202,42 @@
     </div>
     <div class="main-view d-flex flex-column container g-2 pt-2 flex-grow-1" ng-show="view.id=='fileserver'">
 
-        <div class="flex-grow-1 overflow-y-auto" ng-show="view.id=='coding'">
-            <!-- <div class="card">
-                <div class="card-header fw-bolder" data-i18n="">File Server</div>
-                <div class="card-body">
-                    <form role="form">
-                        <div class="col-12" data-i18n="">Bla bla</div>
+        <div class="flex-grow-1 overflow-y-auto">
+            <form role="form" name="fileserverForm">
+                <div class="card mt-1">
+                    <div class="card-header fw-bolder" data-i18n="File Server">File Server</div>
+                    <div class="card-body">
+                        <div class="col-12" data-i18n="Configure_file_server">Here you can configure the File Server that can be consumed by other apps, like <a href="#" bl-href="https://homey.app/a/nl.nielsdeklerk.log/">Simple (Sys) LOG</a>, to serve files on you LAN or to download them on the Homey Mobile App or the <a href="#" bl-href="https://tools.developer.homey.app/tools/app-settings">Developertools</a>.</div>
 
-                    </form>
+                        
+                        <div class="col-12 form-group form-floating mt-3 mb-2">
+                            <input type="number" class="form-control hy-nostyle" name="serverport" placeholder="Serverport" ng-model="vars.fileserver.port" ng-change="setCustomFormat(format);" ng-model-options="{ debounce: 300 }" minlength="1" required="true" />
+                            <label class="hy-nostyle" for="serverport" data-i18n="Serverport">Serverport</label>
+                        </div>
+                        <div class="form-check form-switch mb-2">
+                            <input class="form-check-input hy-nostyle" type="checkbox" role="switch" id="autostart" ng-model="vars.fileserver.autoStart" />
+                            <label class="form-check-label" for="autostart" data-i18n="Auto_start_app_start">Start on App start</label>
+                        </div>
+                    </div>
                 </div>
-            </div> -->
+            </form>
+            <div class="btn-group fixed-bottom">
+                <button type="button" class="btn btn-primary hy-nostyle" ng-click="fileserverForm.$valid && fileserverForm.$dirty ? saveFileServer() : null;" ng-disabled="!fileserverForm.$valid || !fileserverForm.$dirty" data-i18n="Save">Save</button>
+            </div>
         </div>
     </div>
 
     <div class="main-view d-flex flex-column container g-2 flex-grow-1" ng-show="view.id=='coding' || view.id=='locale_timezone' || view.id=='formats'">
 
         <div class="flex-grow-1 overflow-y-auto pt-2" ng-show="view.id=='coding'">
-            <div class="card">
+            <div class="card mt-1">
                 <div class="card-header fw-bolder" data-i18n="BLL Coding">BLL Coding</div>
                 <div class="card-body">
                     <form role="form">
                         <div class="col-12" data-i18n="BLL_codings_are_expressions">BLL codings are expressions within text-arguments in flowcards.</div>
-                        <div class="col-12" data-i18n="In_every_app_that_supports">In every App that supports BLL coding, for each text-argument in flowcards that goes through the BLL decoder, you can use<pre class="d-inline">{[ expression ]}</pre> .</div>
+                        <div class="col-12" data-i18n="In_every_app_that_supports">In every App that supports BLL coding, for each text-argument in flowcards that goes through the BLL decoder, you can use
+                            <pre class="d-inline">{[ expression ]}</pre> .
+                        </div>
                         <div class="col-12" data-i18n="Within_these_expressions">Within these expressions, you can use build-in modules, functions and your own customisable functions.</div>
 
                         <div class="col-12 fw-bold mt-2" data-i18n="Modules">Modules</div>
@@ -259,7 +273,7 @@
         </div>
 
         <div class="flex-grow-1 overflow-y-auto pt-2" ng-show="view.id=='locale_timezone'">
-            <div class="card">
+            <div class="card mt-1">
                 <div class="card-header fw-bolder" data-i18n="Locale and Timezone">Locale and Timezone</div>
                 <div class="card-body">
                     <form role="form">
@@ -287,18 +301,18 @@
                     <div class="card-body container">
                         <div class="col-12 mb-3" data-i18n="Create_custom_datetime_formats">Here you can create custom datetime definitions with any format you wish.</div>
                         <div ng-repeat="format in vars.locale.customDateFormats">
-                            <div class="col-9 col-sm-4 d-inline-block">
+                            <div class="col-9 d-inline-block">
                                 <div class="col-12 form-group form-floating">
                                     <input type="text" class="form-control hy-nostyle" name="customformat{{$index}}" placeholder="Name" ng-model="format.name" ng-model-options="{ debounce: 300 }" minlength="1" required="true" />
                                     <label class="hy-nostyle" for="customformat{{$index}}" data-i18n="Name">Name</label>
                                 </div>
                             </div>
                             <div class="btn btn-secondary" ng-click="removeCustomFormat($index);"><span class="fa fa-icon fa-trash"></div>
-                            <div class="col-12 col-sm-7 form-group form-floating">
+                            <div class="col-12 form-group form-floating">
                                 <input type="text" class="form-control hy-nostyle" name="customformat{{$index}}" placeholder="dd-MM" ng-model="format.format" ng-change="setCustomFormat(format);" ng-model-options="{ debounce: 300 }" minlength="1" required="true" />
                                 <label class="hy-nostyle" for="customformat{{$index}}" data-i18n="Format">Format</label>
                             </div>
-                            <div class="col-12 col-sm-12 mb-2">{{temp.dateFormats[format.format] || vars.datesExampleResult[format.format]}}</div>
+                            <div class="col-12 mb-2">{{temp.dateFormats[format.format] || vars.datesExampleResult[format.format]}}</div>
                         </div>
                         <div class="col-12 btn btn-primary" ng-click="addCustomFormat();" data-i18n="Add">Add</div>
                     </div>
@@ -325,6 +339,7 @@
                 <button type="button" class="btn btn-primary hy-nostyle" ng-click="formatsForm.$valid && formatsForm.$dirty ? setLocale() : null;" ng-disabled="!formatsForm.$valid || !formatsForm.$dirty" data-i18n="Save">Save</button>
             </div>
         </div>
+
         <div class="flex-grow-1 pt-2" ng-show="view.id=='coding' || view.id=='locale_timezone'">
             <div class="sub-view  overflow-y-auto">
                 <div class="card mt-1" ng-repeat="type in vars.dateOptions">
@@ -342,59 +357,63 @@
 
     <!-- Functions  -->
     <div class="main-view d-flex flex-column container g-2 pt-2 flex-grow-1" ng-show="view.id=='functions'">
-        <div>
-            <h1 data-i18n="settings.functions">Functions</h1>
-            <p data-i18n="settings.functions_expressions">These functions can be used within (javascript) expression.</p>
-            <p data-i18n="settings.functions_be_aware">Be aware that removing functions will corrupt flows that are using that function.</p>
-            <div class="" data-i18n="settings.add_function_text">To create a function, enter a name, press Add Function, then press edit below.</div>
-            <form role="form">
-                <div class="form-group form-floating">
-                    <input class="form-control hy-nostyle" id="functionName" type="text" ng-model="newFunction.name" placeholder="{{__('settings.name') || 'Name'}}"><span class="error">{{messages}}</span>
-                    <label for="functionName" data-i18n="settings.function_name">Function name</label>
+        <div class="card mt-1">
+            <div class="card-header fw-bolder" data-i18n="settings.functions">Functions</div>
+            <div class="card-body container">
+                <div>
+                    <div data-i18n="settings.functions_expressions">These functions can be used within (javascript) expression.</div>
+                    <div data-i18n="settings.functions_be_aware">Be aware that removing functions will corrupt flows that are using that function.</div>
+                    <div data-i18n="settings.add_function_text mt-1">To create a function, enter a name and press Add Function.</div>
+                    <form role="form">
+                        <div class="form-group form-floating mt-1 mb-1">
+                            <input class="form-control hy-nostyle mb-1" id="functionName" type="text" ng-model="newFunction.name" placeholder="{{__('settings.name') || 'Name'}}">
+                            <span class="d-block alert alert-danger" ng-show="messages && messages.length">{{messages}}</span>
+                            <label for="functionName" data-i18n="settings.function_name">Function name</label>
+                        </div>
+
+                        <div class="btn-group w-100">
+                            <button class="btn btn-primary col-6 hy-nostyle" type="button" ng-disabled="!newFunction.name" ng-click="addFunction()" data-i18n="settings.add_function">Add function</button>
+                            <button class="btn btn-secondary col-6 hy-nostyle" type="button" ng-click="deleteAll()" data-i18n="settings.delete_all">Delete All</button>
+                        </div>
+                    </form>
+
                 </div>
-
-                <div class="btn-group w-100">
-                    <button class="btn btn-primary col-6 hy-nostyle" type="button" ng-disabled="!newFunction.name" ng-click="addFunction()" data-i18n="settings.add_function">Add function</button>
-                    <button class="btn btn-secondary col-6 hy-nostyle" type="button" ng-click="deleteAll()" data-i18n="settings.delete_all">Delete All</button>
+                <div class="">
+                    <table st-safe-src="functions" st-table="displayedFunctions" class="table table-striped functions-table">
+                        <thead>
+                            <tr>
+                                <th st-sort="name" colspan="3" data-i18n="settings.name">Name</th>
+                            </tr>
+                            <tr>
+                                <th colspan="3">
+                                    <input st-search="name" placeholder="{{__('settings.search_for_name') || 'search for name'}}" class="input-sm form-control hy-nostyle" type="search" />
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="function in displayedFunctions">
+                                <td class="fw-bold">{{function.name}}</td>
+                                <td><button class="btn btn-secondary hy-nostyle" ng-click="editFunction(function)" data-i18n="settings.edit">{{__('settings.edit') || 'Edit'}}</button></td>
+                                <td><button class="btn btn-secondary hy-nostyle" ng-click="removeFunction(function)" data-i18n="settings.delete">{{__('settings.delete') || 'Delete'}}</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-            </form>
-
+            </div>
         </div>
-        <div class="">
-            <table st-safe-src="functions" st-table="displayedFunctions" class="table table-striped functions-table">
-                <thead>
-                    <tr>
-                        <th st-sort="name" colspan="3" data-i18n="settings.name">Name</th>
-                    </tr>
-                    <tr>
-                        <th colspan="3">
-                            <input st-search="name" placeholder="{{__('settings.search_for_name') || 'search for name'}}" class="input-sm form-control hy-nostyle" type="search" />
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="function in displayedFunctions">
-                        <td class="fw-bold">{{function.name}}</td>
-                        <td><button class="btn btn-secondary hy-nostyle" ng-click="editFunction(function)" data-i18n="settings.edit">{{__('settings.edit') || 'Edit'}}</button></td>
-                        <td><button class="btn btn-secondary hy-nostyle" ng-click="removeFunction(function)" data-i18n="settings.delete">{{__('settings.delete') || 'Delete'}}</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
 
-    <div id="editFunction" ng-if="editFunctionItem" class="main-floating">
-        <input class="input-sm form-control hy-nostyle" style="height:40px;" ng-model="editFunctionItem.name" />
-        <div style=" height: calc(100% - 80px);">
-            <textarea ui-codemirror ui-codemirror-opts="editorOptions" type="text" class="form-control h-100" ng-model="editFunctionItem.value" placeholder="function () {
+        <div id="editFunction" ng-if="editFunctionItem" class="main-floating">
+            <input class="input-sm form-control hy-nostyle" style="height:40px;" ng-model="editFunctionItem.name" />
+            <div style=" height: calc(100% - 80px);">
+                <textarea ui-codemirror ui-codemirror-opts="editorOptions" type="text" class="form-control h-100" ng-model="editFunctionItem.value" placeholder="function () {
 
 }"></textarea>
+            </div>
+            <div class="btn-group w-100">
+                <button class="btn btn-secondary col-6 hy-nostyle" ng-click="saveActiveFunction()" data-i18n="settings.save">Save</button>
+                <button class="btn btn-primary col-6 hy-nostyle" ng-click="saveActiveFunction(true)" data-i18n="settings.save_close">Save & Close</button>
+            </div>
         </div>
-        <div class="btn-group w-100">
-            <button class="btn btn-secondary col-6 hy-nostyle" ng-click="saveActiveFunction()" data-i18n="settings.save">Save</button>
-            <button class="btn btn-primary col-6 hy-nostyle" ng-click="saveActiveFunction(true)" data-i18n="settings.save_close">Save & Close</button>
-        </div>
-    </div>
     </div>
 
 
@@ -464,13 +483,13 @@
                 scope.vm.init(Homey, scope);
             });
         }
-    </script> -->    
-	<script>
-		function onHomeyReady(Homey) {
-			Homey.ready();
-			angular.bootstrap(document, ['variableApp']);
-		}
-	</script>
+    </script> -->
+    <script>
+        function onHomeyReady(Homey) {
+            Homey.ready();
+            angular.bootstrap(document, ['variableApp']);
+        }
+    </script>
 </body>
 
 </html>
