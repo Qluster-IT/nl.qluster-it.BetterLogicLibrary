@@ -207,22 +207,45 @@
                 <div class="card mt-1">
                     <div class="card-header fw-bolder" data-i18n="File Server">File Server</div>
                     <div class="card-body">
-                        <div class="col-12" data-i18n="Configure_file_server">Here you can configure the File Server that can be consumed by other apps, like <a href="#" bl-href="https://homey.app/a/nl.nielsdeklerk.log/">Simple (Sys) LOG</a>, to serve files on you LAN or to download them on the Homey Mobile App or the <a href="#" bl-href="https://tools.developer.homey.app/tools/app-settings">Developertools</a>.</div>
+                        <div class="col-12" data-i18n="Configure_fileserver">Here you can configure the File Server that can be consumed by other apps, like <a href="#" bl-href="https://homey.app/a/nl.nielsdeklerk.log/">Simple (Sys) LOG</a>, to serve files on you LAN or to download them on the Homey Mobile App or the <a href="#" bl-href="https://tools.developer.homey.app/tools/app-settings">Developertools</a>.</div>
 
                         
-                        <div class="col-12 form-group form-floating mt-3 mb-2">
-                            <input type="number" class="form-control hy-nostyle" name="serverport" placeholder="Serverport" ng-model="vars.fileserver.port" ng-change="setCustomFormat(format);" ng-model-options="{ debounce: 300 }" minlength="1" required="true" />
+                        <div class="form-label mb-1 mt-3" data-i18n="Configure_port_fileserver">
+                            Configure the Port for the File Server to use for incoming connections.
+                        </div>
+                        <div class="col-12 form-group form-floating">
+                            <input type="number" class="form-control hy-nostyle" name="serverport" placeholder="Serverport" ng-model="vars.fileserver.port" ng-model-options="{ debounce: 300 }" minlength="4" required="true" />
                             <label class="hy-nostyle" for="serverport" data-i18n="Serverport">Serverport</label>
                         </div>
-                        <div class="form-check form-switch mb-2">
-                            <input class="form-check-input hy-nostyle" type="checkbox" role="switch" id="autostart" ng-model="vars.fileserver.autoStart" />
-                            <label class="form-check-label" for="autostart" data-i18n="Auto_start_app_start">Start on App start</label>
+
+                        <div class="form-label mb-1 mt-3" data-i18n="Automaticly_started_fileserver">
+                            The File Server can be automaticly started when BLL is started, speeding up the first File request.
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input hy-nostyle" type="checkbox" role="switch" id="autoStart" ng-model="vars.fileserver.autoStart" ng-change="vars.fileserver.autoStart ? (vars.fileserver.autoShutdown=false) : null" />
+                            <label class="form-check-label" for="autoStart" data-i18n="Auto_start_fileserver">Auto Start</label>
+                        </div>
+
+                        <div class="form-label mb-1 mt-3" data-i18n="Automaticly_shutdown_fileserver">
+                            You can close the server automaticly as soon as there are no more files currently waiting for download.
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input hy-nostyle" type="checkbox" role="switch" id="autoShutdown" ng-model="vars.fileserver.autoShutdown" ng-disabled="vars.fileserver.autoStart"  />
+                            <label class="form-check-label" for="autoShutdown" data-i18n="Auto_shutdown_fileserver">Auto Shutdown</label>
+                        </div>
+
+                        <div class="form-label mb-1 mt-3" data-i18n="defineFileAvailableDuration">
+                            Define the duration files will be available for download.
+                        </div>
+                        <div class="col-12 form-group form-floating">
+                            <input type="number" class="form-control hy-nostyle" name="fileAvailableDuration" placeholder="Duration availability (in seconds)" ng-model="vars.fileserver.fileAvailableDuration" ng-model-options="{ debounce: 300 }" minlength="1" required="true" min="1" />
+                            <label class="hy-nostyle" for="serverport" data-i18n="fileAvailableDuration">Duration availability (in seconds)</label>
                         </div>
                     </div>
                 </div>
             </form>
             <div class="btn-group fixed-bottom">
-                <button type="button" class="btn btn-primary hy-nostyle" ng-click="fileserverForm.$valid && fileserverForm.$dirty ? saveFileServer() : null;" ng-disabled="!fileserverForm.$valid || !fileserverForm.$dirty" data-i18n="Save">Save</button>
+                <button type="button" class="btn btn-primary hy-nostyle" ng-click="fileserverForm.$valid && fileserverForm.$dirty ? saveFileServer() : null;" ng-disabled="!fileserverForm.$valid || !fileserverForm.$dirty"  data-i18n="Save">Save</button>
             </div>
         </div>
     </div>

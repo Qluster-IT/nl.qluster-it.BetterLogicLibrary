@@ -1,22 +1,31 @@
-New: The Better Logic App has been rebranded to Better Logic Library.
-Check out the new App Settings for the new features, like BLL coding in supported apps!
-
-BLL now has new expression cards, but also a new coding for text arguments within flowcards.
-For instance, when you place this within a textargument:  - Hello, today is {[date("dddd")]} -, BLL will automaticly find those expressions within the texts and decode them, resulting in - Hello, today is monday - .
-
-New: Manage variables directly in flows!
-
-Just type a variable name within any Then- and Andcard and select it from the list: the variable will be automaticly created.
-If you want to use the tag, press save first.
-
-Variables that were automaticly created from within flows will also be automaticly deleted when they are no longer used in flowcards.
-
-Variables can still also be managed from the settings screen. These variables will not be automaticly deleted if not used, but must be manually deleted.
-
-And the Delete All button has a confirm now!
-
+Welcome to the Better Logic Library.
 
 An advanced logic library with variable and library management for Homey.
+
+This apps supplies your Homey with Better Logic and Libraries:
+* Variable management in a smart, integrated way.
+* Advanced action- and conditioncards with Better Logic, like Math.js.
+* Devices to directly manage the variables.
+* Datetime formatting, fully customisable, shared with other apps.
+* BLL coding and BLL expressions to use directly within other apps flowcards.
+* Custom functions to use within BLL coding and BLL expressions.
+* Libraries to use within BLL coding and BLL expressions, like Math.js and Lodash.
+* A File Server that can be consumed by other apps, like Simple (Sys) LOG, to serve files on you LAN or to download them on the Homey Mobile App or the Developertools.
+* Libraries for other Apps to consume, reducing app sizes and redundancies and improving management.
+* APIs for variable management, using the File Server or other BLL functions.
+
+Check out the (new) App Settings for all features and explanations, like BLL coding in supported apps!
+
+Example BLL coding: When you place this within a textargument:  - Hello, today is {[date("dddd")]} -, BLL will automaticly find those expressions within the texts and decode them, resulting in - Hello, today is monday - .
+
+Further: Manage variables directly in flows!
+
+Just type a variable name within any when- and thencard and select it from the list: the variable will be automaticly created.
+If you want to use the tag, press save first.
+Variables that were automaticly created from within flows will also be automaticly deleted when they are no longer used in flowcards.
+Variables can also still be managed from the settings screen. These variables will not be automaticly deleted if not used, but must be manually deleted.
+
+And the Delete All button has a confirm now!
 
 
 V1.0.5

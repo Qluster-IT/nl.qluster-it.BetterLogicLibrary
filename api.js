@@ -15,7 +15,7 @@ async function readFile(path, ops) { return await readFileAsync(path, ops); }
 module.exports =
 {
     async getLibrary({ homey, params }) {
-        homey.log('getLibrary', params, __dirname);
+        //homey.log('getLibrary', params, __dirname);
         try {                
             if (params) switch (params.library) {
                 case "bll": return {file:await readFile(__dirname+'/bll/bll.js', {encoding:'utf8'})};            

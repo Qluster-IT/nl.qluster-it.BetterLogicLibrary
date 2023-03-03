@@ -103,7 +103,7 @@ class BLL {
         try {                
             var m = new module.constructor();
             m.paths = module.paths;// + ',/lib,/bll';
-            console.log('m.paths: ' + m.paths);
+            //console.log('m.paths: ' + m.paths);
             m._compile(src, filename||'');
             return m.exports;
         } catch (error) {
@@ -166,7 +166,8 @@ class BLL {
             else if (text) type = 'text/plain';
 
 
-
+            /// If there is a file already handed with the request, send it to the File Server to be cached.
+            /// The Homey AppApi cannot handle large files.
             let send = buffer || base64 || json || text;
             if (send) {
                 var post_options = {
@@ -185,20 +186,15 @@ class BLL {
                 var post_req = http.request(post_options, function (res) {
                     res.setEncoding('utf8');
                     res.on('data', function (chunk) {
-                        //console.log('Response: ' + chunk);
                     });
                     res.on('end', function (chunk) {
                         defer.resolve(link);
-                        //console.log('Response: ' + chunk);
                     });
                 });
                 post_req.on('error', (e) => {
-                    console.error(`problem with request: ${e.message}`);
                     defer.reject(e);
                   });
-                // post the data
-                //let typeee = typeof(buffer);
-                //let _buffer = Buffer.from(buffer);
+                  
                 post_req.write(send);
                 post_req.end();
                 return defer.promise;

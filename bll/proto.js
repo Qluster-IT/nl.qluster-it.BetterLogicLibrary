@@ -1,4 +1,4 @@
-console.log('setting parseFunction');
+//console.log('setting parseFunction');
 var zlib = require('zlib');
 
 if (typeof String.prototype.parseFunction != 'function') {

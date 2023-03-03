@@ -657,16 +657,18 @@ class BetterLogic extends Homey.App {
 		if(!this.fileServer) await this.initFileServer();
 		return await this.fileServer.getDownloadUrl(body);
 	}
-	async initFileServer() {		
-		this.fileServer = await new FileServer().init({homey:this.homey, settings:this.fileserverSettings});
+	async initFileServer() {
+		if(this.fileServer) await this.fileServer.update(this.fileserverSettings);
+		else this.fileServer = await new FileServer().init({homey:this.homey, settings:this.fileserverSettings});
 	}
 
 	async initFileServerFromSettings() {	
 		this.fileserverSettings = await this.homey.settings.get('fileserver');
 		if(!this.fileserverSettings || !Object.keys(this.fileserverSettings).length) {
-			this.fileserverSettings = {port:47330, autoStart:false};
+			this.fileserverSettings = {port:47330, autoStart:false, autoShutdown:true, fileAvailableDuration:60 };
 			await this.homey.settings.set('fileserver', this.fileserverSettings);
-		} else if(this.fileserverSettings.autoStart) await this.initFileServer();			
+		} //else if(this.fileserverSettings.autoStart) 
+		await this.initFileServer();			
 	}
 
 	
@@ -686,7 +688,7 @@ class BetterLogic extends Homey.App {
 				const funcObj = this.functions[i];
 
 				let func = funcObj.value.parseFunction();
-				this.log('func', func);
+				//this.log('func', func);
 				this.context[funcObj.name] = func;
 			} catch (error) {
 				this.log('Error creating function ' + this.functions[i].name);
@@ -731,18 +733,18 @@ class BetterLogic extends Homey.App {
 		return text;
 	}
 
-	async runTempCode(code) {
-		let val = await BL.toString(code);//await this.runSandBox(code);
-		let r = {number:0, boolean:false,string:''}; 
-		switch (typeof(val)) {
-			case "string": 
-			case "boolean": 
-			case "number": 
-				r[typeof(val)] = val; return r;		
-			default:
-				return r;
-		}
-	}
+	// async runTempCode(code) {
+	// 	let val = await BL.toString(code);//await this.runSandBox(code);
+	// 	let r = {number:0, boolean:false,string:''}; 
+	// 	switch (typeof(val)) {
+	// 		case "string": 
+	// 		case "boolean": 
+	// 		case "number": 
+	// 			r[typeof(val)] = val; return r;		
+	// 		default:
+	// 			return r;
+	// 	}
+	// }
 
 
 

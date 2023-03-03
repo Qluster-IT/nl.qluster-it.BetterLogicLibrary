@@ -64,9 +64,15 @@
 	"Applies_to_every_app":"Dit wordt toegepast op elke app met behulp van de BLL-codering of DateTime.",
 	"Save":"Opslaan",
 
-	"Configure_file_server":"Hier kunt u de bestandsserver configureren die door andere apps kan worden gebruikt, zoals <a href=\"#\" bl-href=\"https://homey.app/a/nl.nielsdeklerk.log/\">Simple (Sys) LOG</a>, om bestanden op je LAN beschikbaar te stellen of om ze te downloaden in de Homey Mobiele App of de <a href=\"#\" bl-href=\"https://tools.developer.homey.app/tools/app-settings\">Developertools</a>.",
-	"Auto_start_app_start":"Start wanneer de App start",
+	"Configure_fileserver":"Hier kunt u de bestandsserver configureren die door andere apps kan worden gebruikt, zoals <a href=\"#\" bl-href=\"https://homey.app/a/nl.nielsdeklerk.log/\">Simple (Sys) LOG</a>, om bestanden op je LAN beschikbaar te stellen of om ze te downloaden in de Homey Mobiele App of de <a href=\"#\" bl-href=\"https://tools.developer.homey.app/tools/app-settings\">Developertools</a>.",
+	"Auto_start_fileserver":"Automatisch opstarten",
+	"Auto_shutdown_fileserver":"Automatisch afsluiten",
+	"Configure_port_fileserver":"Configureer de poort die de bestandsserver moet gebruiken voor inkomende verbindingen.",
+	"Automaticly_started_fileserver":"De bestandsserver kan automatisch worden gestart wanneer BLL wordt gestart, waardoor het eerste downloadverzoek wordt versneld.",
+	"Automaticly_shutdown_fileserver":"U kunt de server automatisch sluiten zodra er geen bestanden meer wachten om te downloaden, waardoor bronnen worden bespaard.",
 
+	"defineFileAvailableDuration":"Definieer de duur dat bestanden beschikbaar zijn om te downloaden.",
+	"fileAvailableDuration":"Duur beschikbaarheid (in seconden)",
 
 	"settings":{
 		"delete": "Verwijderen",
