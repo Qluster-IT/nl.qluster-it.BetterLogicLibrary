@@ -4,10 +4,10 @@ export class BLL {
     static get _(): any;
     static get math(): any;
     static get datetime(): any;
-    static get dateTime(): any;
     static get proto(): any;
     /**@type {Object} */
     static get homey(): any;
+    static clearObj(obj: any): void;
     /**
      * @param {Object} options
      */

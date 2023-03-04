@@ -150,12 +150,13 @@ class BL {
      * @return {*} 
      */
     static async init({ homey, modules, silent, waitTime, required } = {}) {
+        let bl = new BL({ homey, modules, silent, waitTime, required });
+        
         homey.app.__BL_OnUninit = homey.app.onUninit;
-        let getApi = () => { return this.Current ? this.Current.api : null; };
         homey.app.onUninit = async function (args) {
-            let api = getApi();
+
             try {
-                if (api && BL.Current) api.off('realtime', BL.Current.realtimeFunction);
+                if (BL.Current) await BL.Current.detroy();
             } catch (error) {
                 console.log(error);
             }
@@ -166,7 +167,6 @@ class BL {
             }
         };
 
-        let bl = new BL({ homey, modules, silent, waitTime, required });
         try {
             return await bl.init({ reload: true });
         } catch (error) {
@@ -198,6 +198,26 @@ class BL {
             //     BL.homey.setTimeout(x, 15000);
             // }
         }
+    }
+
+    static detroy() {
+        BL.homey.settings.set('___TEST___', 'detroy');
+        try {
+            BL.homey.settings.set('___TEST___', 'BL.Current' + !!(BL.Current));
+            if (!BL.Current) return;
+            if (BL.Current.api) {
+                BL.Current.api.off('realtime', BL.Current.realtimeFunction);
+                BL.Current.api.unregister();
+            }
+            if (BL.Current.l) {
+                BL.homey.settings.set('___TEST___', 'CLEANING');
+                let clearObj = BL.Current.L.clearObj;            
+                BL.Current.l.detroy();
+                clearObj(BL.Current);
+                clearObj(BL);
+            }
+        } catch (error) { console.log(error); }
+        //throw new Error('DONE FINISHED');
     }
 
     constructor({ homey, modules, silent, waitTime, required } = {}) {
@@ -355,7 +375,7 @@ class BL {
     /** @private */
     async initBll({ version } = {}) {
         //BL.homey.log('initBll');
-        if (version && version === _version && process.env.DEBUG !== '1') return;
+        if (version && version === _version && process.env.DEBUG !== '1') return this;
         let bblFile;
         try {
             bblFile = await this.getLibrary('bll');
@@ -363,7 +383,7 @@ class BL {
             throw new Error('The Better Logic Library app is not started.');
             //throw error;
         }
-        let bll = this.requireFromString(bblFile.file, '');
+        let bll = this.requireFromString(bblFile.file, 'bll');
         try {
             let old_bll = this.l;
             _l = await new bll.BLL({ homey: this.homey, modules: this.modules, silent: this.silent });
@@ -417,6 +437,10 @@ class BL {
         }
         return this.api;
     }
+
+
+
+
 }
 
 class Defer {

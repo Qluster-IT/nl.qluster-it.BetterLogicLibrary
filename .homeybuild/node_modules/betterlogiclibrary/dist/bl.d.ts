@@ -54,6 +54,7 @@ export class BL {
      * @return {*}
      */
     static init({ homey, modules, silent, waitTime, required }?: any): any;
+    static detroy(): void;
     constructor({ homey, modules, silent, waitTime, required }?: {
         homey: any;
         modules: any;

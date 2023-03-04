@@ -5,23 +5,23 @@ var http = require('http');
 
 
 class BLL {
-    
-	/**@type {BLL} */
-	static get Current() { return this._current; }
-    
-	static get _() {  return this.__; }
 
-	static get math() {  return this._math; }
+    /**@type {BLL} */
+    static get Current() { return this._current; }
 
-	static get datetime() {  return this._datetime; }
-	static get dateTime() {  return this._datetime; }
+    static get _() { return this.__; }
 
-    static get proto() {  return this._proto; }
-	
-    
-	/**@type {Object} */
-	static get homey() { return this._homey; }
-    
+    static get math() { return this._math; }
+
+    static get datetime() { return this._datetime; }
+    //static get dateTime() {  return this._datetime; }
+
+    static get proto() { return this._proto; }
+
+
+    /**@type {Object} */
+    static get homey() { return this._homey; }
+
     /**@type {Object} */
     get homey() { return BLL.homey; }
 
@@ -29,50 +29,69 @@ class BLL {
     /**
      * @param {Object} options 
      */
-    constructor({homey, modules, silent} = {}) {
+    constructor({ homey, modules, silent } = {}) {
         BLL._current = this;
         BLL._homey = homey;
         this.silent = silent;
-        return this.init({modules});        
+        return this.init({ modules });
     }
+
+
+    static clearObj(obj) {
+        for (const key in obj)
+            if (Object.hasOwnProperty.call(obj, key)){
+                try {
+                    delete obj[key];
+                } catch (ex) { }}
+    }
+
     destroy() {
-        if(BLL.datetime) BLL.datetime.destroy();
-        if(this.api) this.api.unregister();
-        //BL.homey.log('BLL destroyed');
+        if (BLL.datetime) BLL.datetime.destroy();
+        if (this.api) this.api.unregister();
+        BLL._current = null;
+        BLL.__ = null;
+        BLL._math = null;
+        BLL._datetime = null;
+        BLL._proto = null;
+        BLL._homey = null;
+        BLL.clearObj(this);
+        BLL.clearObj(BLL);
+
+        BL.homey.log('BLL destroyed');
     }
-    async init({modules} = {modules:[]}) {
+    async init({ modules } = { modules: [] }) {
         //BL.homey.log('BLL.init');
-        let api = this.getApi();
-        if(modules && modules.length && ((modules.indexOf('datetime')>-1 || modules.indexOf('dateTime')>-1) && modules.indexOf('_')==-1)) modules.unshift('_');
+        //let api = await this.getApi();
+        if (modules && modules.length && ((modules.indexOf('datetime') > -1 || modules.indexOf('dateTime') > -1) && modules.indexOf('_') == -1)) modules.unshift('_');
         // modules = modules.sort((a,b)=> a -b );
         //BL.homey.log('modules', modules);
-        if(modules) for (const module of modules) {
-            try {                    
+        if (modules) for (const module of modules) {
+            try {
                 switch (module) {
                     case "_":
-                        let _ = await this.getLibrary('lodash'); 
+                        let _ = await this.getLibrary('lodash');
                         BLL.__ = this.requireFromString(_.file, 'lodash');
                         BL._ = BLL._;
                         break;
                     case "math":
                         let math = await this.getLibrary('mathjs');
-                        BLL._math = this.requireFromString(math.file);
+                        BLL._math = this.requireFromString(math.file, 'mathjs');
                         BL.math = BLL.math;
                         break;
                     case "datetime":
                     case "dateTime":
-                        let datetime = await this.getLibrary('datetime'); 
-                        let dateTimeObj = this.requireFromString(datetime.file);
+                        let datetime = await this.getLibrary('datetime');
+                        let dateTimeObj = this.requireFromString(datetime.file, 'datetime');
 
-                        
+
                         BLL._datetime = dateTimeObj;//new dateTimeObj();
                         BL.datetime = BLL.datetime;
-                        
+
                         await dateTimeObj.init(this);
 
-                        break;                        
+                        break;
                     case "proto":
-                        let proto = await this.getLibrary('proto'); 
+                        let proto = await this.getLibrary('proto');
                         BLL._proto = this.requireFromString(proto.file, 'proto');
                         BL.proto = BLL.proto;
                         break;
@@ -86,30 +105,30 @@ class BLL {
     }
     async getApi() {
         //if(!this.api && BL.Current.api) this.api = BL.Current.api;
-        if(!this.api) this.api = await this.getAppApi('net.i-dev.betterlogic', 'Better Logic Library');
+        if (!this.api) this.api = await this.getAppApi('net.i-dev.betterlogic', 'Better Logic Library');
         return this.api;
     }
 
     async getLibrary(libraryName) {
         try {
             let api = await this.getApi();
-            return await api.get('/library/'+libraryName);            
+            return await api.get('/library/' + libraryName);
         } catch (error) {
             //BL.homey.error(error);
         }
     }
 
     requireFromString(src, filename) {
-        try {                
+        try {
             var m = new module.constructor();
             m.paths = module.paths;// + ',/lib,/bll';
             //console.log('m.paths: ' + m.paths);
-            m._compile(src, filename||'');
+            m._compile(src, filename || '');
             return m.exports;
         } catch (error) {
             BL.homey.error(error);
         }
-      }
+    }
 
     async post(url, opt) {
         try {
@@ -120,7 +139,7 @@ class BLL {
             throw new Error('Better Logic is not installed or running.');
         }
     }
-      
+
     async get(url, opt) {
         try {
             let api = await this.getApi();
@@ -130,30 +149,31 @@ class BLL {
             throw new Error('Better Logic is not installed or running.');
         }
     }
-      
+
     async getAppApi(appId, appname) {
-        if(!this.api) this.api = this.homey.api.getApiApp(appId);
-        
-        if(!this.api) throw new Error(appname + ' is not installed.');
-        else if(!await this.api.getInstalled()) throw new Error(appname + ' is not installed.');
+        if (!this.api) this.api = this.homey.api.getApiApp(appId);
+
+        if (!this.api) throw new Error(appname + ' is not installed.');
+        else if (!await this.api.getInstalled()) throw new Error(appname + ' is not installed.');
 
         return this.api;
     }
 
-    
-    async decode(text, {locale, timeZone}={}) {
+
+    async decode(text, { locale, timeZone } = {}) {
         try {
-            
-            if(!text || typeof(text)!=='string' || text.indexOf('{[')===-1 || text.indexOf(']}')===-1) return text;
+
+            if (!text || typeof (text) !== 'string' || text.indexOf('{[') === -1 || text.indexOf(']}') === -1) return text;
             //BL.homey.log('decode: ', arguments);
             //BL.homey.log('decode options: ', options);
-            return await BL.l.post('decode', {text, locale, timeZone});  
+            return await BL.l.post('decode', { text, locale, timeZone });
         } catch (error) {
-            if(BL.l.silent===true) return text;
+            if (BL.l.silent === true) return text;
             else throw error;
         }
-        
+
     }
+
     async getDownloadUrl({ base64, contentType, buffer, json, text } = {}) {
         try {
             let defer = new Defer();
@@ -161,15 +181,15 @@ class BLL {
             //let link = await api.post('/getdownloadurl/', { base64, contentType }); base 64 is to big, send it separate.
             let link = await api.post('/getdownloadurl/', { contentType });
             let type = 'base64';
-            if (buffer) type = 'application/octet-stream';
-            else if (json) type = 'text/json';
-            else if (text) type = 'text/plain';
+            if (buffer !== undefined) type = 'application/octet-stream';
+            else if (json !== undefined) type = 'text/json';
+            else if (text !== undefined) type = 'text/plain';
 
 
             /// If there is a file already handed with the request, send it to the File Server to be cached.
             /// The Homey AppApi cannot handle large files.
             let send = buffer || base64 || json || text;
-            if (send) {
+            if (send !== undefined) {
                 var post_options = {
                     host: (await BL.homey.cloud.getLocalAddress()).split(':')[0],
                     port: link.port,
@@ -178,7 +198,7 @@ class BLL {
                     headers: {
                         'Accept': contentType,
                         'Content-Type': type,
-                        'Content-Length': buffer ? Buffer.byteLength(buffer) : send.length
+                        'Content-Length': buffer !== undefined ? Buffer.byteLength(buffer) : send.length
                     }
                 };
 
@@ -193,10 +213,12 @@ class BLL {
                 });
                 post_req.on('error', (e) => {
                     defer.reject(e);
-                  });
-                  
-                post_req.write(send);
-                post_req.end();
+                });
+
+                post_req.write(send, (error) => {
+                    BL.homey.log('write error', error);
+                    post_req.end();
+                });
                 return defer.promise;
 
             } else return link;
@@ -208,4 +230,4 @@ class BLL {
 
 }
 
-module.exports = {BLL};
+module.exports = { BLL };

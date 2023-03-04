@@ -6,8 +6,6 @@
 const { BL } = require("betterlogiclibrary");
 
 
-let _locale, _timeZone, _date, _codes;
-
 class dateTimeStatics { }
 
 /**
@@ -114,11 +112,39 @@ class DateTime {
       }
     };
     bll.api.on('realtime', this.onRealtime);
+    this.bll = bll;
   }
 
   static destroy() {
-    BLL.api.off('realtime', this.onRealtime);
+    BL.homey.log('DateTime.destroy()');    
+    this.bll.api.off('realtime', this.onRealtime);
+
+    BL.homey.log('DateTime.destroying');
+    for (const key in this) {
+      if (Object.hasOwnProperty.call(this, key)) {
+        try {
+          delete this[key];
+        } catch (ex) {}
+      }
+    }
+    delete this.bll; // Needed?
+    BL.L.clearObj(dateTimeStatics);
+    BL.L.clearObj(this);
+    // BL.homey.log('DateTime.destroying dateTimeStatics clear', BL.L.clearObj(dateTimeStatics));    
+    // BL.homey.log('DateTime.destroying dateTimeStatics', Object.keys(dateTimeStatics));
+
+    
+    // BL.homey.log('DateTime.destroying DateTime', Object.keys(this));    
+    // BL.homey.log('DateTime.destroying DateTime clear', BL.L.clearObj(this));    
+    // BL.homey.log('DateTime.destroying DateTime', Object.keys(this));
+    
+    // BL.homey.log('DateTime.destroying datetime', Object.keys(this));    
+    // BL.homey.log('DateTime.destroying datetime clear', this.clearObj(this));    
+    // BL.homey.log('DateTime.destroying datetime', Object.keys(this));
+    
+    BL.homey.log('DateTime.destroyed');
   }
+
 
   // static getFormats(locale) {
   //   BL.homey.log('getFormats', locale);
@@ -225,14 +251,14 @@ class DateTime {
 
 
 
-  get locale() { return _locale; }
-  set locale(v) { _locale = v; }
+  get locale() { return this._locale; }
+  set locale(v) { this._locale = v; }
 
-  get timeZone() { return _timeZone; }
-  set timeZone(v) { _timeZone = v; }
+  get timeZone() { return this._timeZone; }
+  set timeZone(v) { this._timeZone = v; }
 
-  get date() { return _date; }
-  set date(v) { _date = v; }
+  get date() { return this._date; }
+  set date(v) { this._date = v; }
 
   /** @private */
   get(dt) { return new DateTime(this.locale, this.timeZone, dt || new Date()); }
@@ -242,6 +268,7 @@ class DateTime {
     this.locale = locale;
     this.timeZone = timeZone;
     this.date = date;
+    
   }
 
   /** @private */

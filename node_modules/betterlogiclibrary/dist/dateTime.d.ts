@@ -63,10 +63,13 @@ declare class DateTime {
     constructor(locale: any, timeZone: any, date: any);
     set locale(arg: any);
     get locale(): any;
+    _locale: any;
     set timeZone(arg: any);
     get timeZone(): any;
+    _timeZone: any;
     set date(arg: any);
     get date(): any;
+    _date: any;
     /** @private */
     private get;
     /** @private */
