@@ -52,7 +52,7 @@ class BetterLogic extends Homey.App {
 			catch (error) {
 			  require('inspector').open(9216, '0.0.0.0', true);
 			}
-		  } 
+		  }
 
 		//require('inspector').open(9216, '0.0.0.0', true);
 		//if (process.env.DEBUG === '1') require('inspector').open(9232, '0.0.0.0', true);

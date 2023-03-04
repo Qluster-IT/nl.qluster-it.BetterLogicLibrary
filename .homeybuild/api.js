@@ -3,7 +3,7 @@ const locale = require('locale-codes');
 
 var variableManager = require('./lib/variablemanager.js');
 
-var util = require('./lib/util/util.js');
+//var util = require('./lib/util/util.js');
 const { readFile:_readFile } = require('fs');
 const { promisify } = require('util');
 const { BL } = require("betterlogiclibrary");
@@ -16,7 +16,7 @@ module.exports =
 {
     async getLibrary({ homey, params }) {
         //homey.log('getLibrary', params, __dirname);
-        try {                
+        try {
             if (params) switch (params.library) {
                 case "bll": return {file:await readFile(__dirname+'/bll/bll.js', {encoding:'utf8'})};            
                 case "lodash": return {file:await readFile(__dirname+'/assets/js/lodash.min.js', {encoding:'utf8'})};
