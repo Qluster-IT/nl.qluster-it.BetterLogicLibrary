@@ -44,6 +44,9 @@ class BetterLogic extends Homey.App {
 	}
 
 	async onInit() {
+
+		
+		//BL.json.toExcel([], { schema: [{}]})
 		BetterLogic.homey = this.homey;
 		if (process.env.DEBUG === '1' || false) {
 			try {
@@ -432,6 +435,7 @@ class BetterLogic extends Homey.App {
 				"math",
 				"datetime",
 				"proto",
+				"json"
 			]
 		}).catch(this.error);
 		

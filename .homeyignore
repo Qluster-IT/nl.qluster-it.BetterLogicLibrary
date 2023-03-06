@@ -5,6 +5,7 @@ docs/*
 
 manager/*
 bll_notyet/*
+bll/d.ts/
 
 todo.js
 bugs.txt

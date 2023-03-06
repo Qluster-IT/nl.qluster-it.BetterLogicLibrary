@@ -24,6 +24,9 @@ module.exports =
                 case "datetime": return {file:await readFile(__dirname+'/bll/dateTime.js', {encoding:'utf8'})};
                 case "coding": return {file:await readFile(__dirname+'/bll/coding.js', {encoding:'utf8'})};
                 case "proto": return {file:await readFile(__dirname+'/bll/proto.js', {encoding:'utf8'})};
+                case "json": return {file:await readFile(__dirname+'/bll/json.js', {encoding:'utf8'})};
+                case "write-excel-file-min": return {file:await readFile(__dirname+'/lib/write-excel-file-min.js', {encoding:'utf8'})};
+                case "json2csv": return {file:await readFile(__dirname+'/lib/json2csv.js', {encoding:'utf8'})};
             }
             return null;
         } catch (error) {

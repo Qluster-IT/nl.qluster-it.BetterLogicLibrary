@@ -17,6 +17,8 @@ class BLL {
     //static get dateTime() {  return this._datetime; }
 
     static get proto() { return this._proto; }
+    
+    static get json() { return this._json; }
 
 
     /**@type {Object} */
@@ -33,20 +35,22 @@ class BLL {
         BLL._current = this;
         BLL._homey = homey;
         this.silent = silent;
+        if (!BL.submodules) BL.submodules = {};
         return this.init({ modules });
     }
 
 
     static clearObj(obj) {
         for (const key in obj)
-            if (Object.hasOwnProperty.call(obj, key)){
+            if (Object.hasOwnProperty.call(obj, key)) {
                 try {
                     delete obj[key];
-                } catch (ex) { }}
+                } catch (ex) { }
+            }
     }
 
     destroy() {
-        
+
         if (BLL.datetime) BLL.datetime.destroy();
         //if (this.api) this.api.unregister();
         // delete BLL._current;
@@ -61,7 +65,7 @@ class BLL {
         BL.homey.log('BLL destroyed');
     }
     async init({ modules } = { modules: [] }) {
-        
+
         //BL.homey.log('BLL.init');
         //let api = await this.getApi();
         if (modules && modules.length && ((modules.indexOf('datetime') > -1 || modules.indexOf('dateTime') > -1) && modules.indexOf('_') == -1)) modules.unshift('_');
@@ -71,14 +75,22 @@ class BLL {
             try {
                 switch (module) {
                     case "_":
-                        let _ = await this.getLibrary('lodash');
-                        BLL.__ = this.requireFromString(_.file, 'lodash');
-                        BL._ = BLL._;
+                        if (BL.__) {
+                            BLL.__ = BL.__;
+                        } else {
+                            let _ = await this.getLibrary('lodash');
+                            BLL.__ = this.requireFromString(_.file, 'lodash');
+                            BL._ = BLL._;
+                        }
                         break;
                     case "math":
-                        let math = await this.getLibrary('mathjs');
-                        BLL._math = this.requireFromString(math.file, 'mathjs');
-                        BL.math = BLL.math;
+                        if (BL._math) {
+                            BLL._math = BL._math;
+                        } else {
+                            let math = await this.getLibrary('mathjs');
+                            BLL._math = this.requireFromString(math.file, 'mathjs');
+                            BL.math = BLL.math;
+                        }
                         break;
                     case "datetime":
                     case "dateTime":
@@ -93,9 +105,26 @@ class BLL {
 
                         break;
                     case "proto":
-                        let proto = await this.getLibrary('proto');
-                        BLL._proto = this.requireFromString(proto.file, 'proto');
-                        BL.proto = BLL.proto;
+                        if (BL._proto) {
+                            BLL._proto = BL._proto;
+                        } else {
+                            let proto = await this.getLibrary('proto');
+                            BLL._proto = this.requireFromString(proto.file, 'proto');
+                            BL.proto = BLL.proto;
+                        }
+                        break;
+                    case "json":
+                        if (!BL.submodules['write-excel-file-min']) {
+                            let writeexcelfilemin = await this.getLibrary('write-excel-file-min');
+                            BL.submodules['write-excel-file-min'] = this.requireFromString(writeexcelfilemin.file, 'write-excel-file-min');
+                        }
+                        if (!BL.submodules['json2csv']) {
+                            let writeexcelfilemin = await this.getLibrary('json2csv');
+                            BL.submodules['json2csv'] = this.requireFromString(writeexcelfilemin.file, 'json2csv');
+                        }
+                        let json = await this.getLibrary('json');
+                        BLL._json = this.requireFromString(json.file, 'json');
+                        BL.json = BLL.json;                        
                         break;
                 }
             } catch (error) { BL.homey.error(error); }
@@ -106,7 +135,7 @@ class BLL {
         return this;
     }
     async getApi() {
-        if(BL.Current && BL.Current.api) 
+        if (BL.Current && BL.Current.api)
             return BL.Current.api;
         //if(!this.api && BL.Current.api) this.api = BL.Current.api;
         if (!this.api) this.api = await this.getAppApi('net.i-dev.betterlogic', 'Better Logic Library');
