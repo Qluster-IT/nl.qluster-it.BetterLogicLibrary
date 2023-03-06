@@ -286,7 +286,13 @@ class BL {
     get ready() { return BL._ready; }
 
     /** @private */
-    async initBll({ version } = {}) {
+    async initBll() {
+        let version;
+        try {
+            version = await this.api.getVersion();
+        } catch (error) {
+            
+        }
         BL.homey.log('initBll');
         if (version && version === BL._version && process.env.DEBUG !== '1') return this;
         BL.homey.log('initBll version change');
@@ -312,7 +318,7 @@ class BL {
             } else {
                 await new bll.BLL({ homey: this.homey, modules: this.modules, silent: this.silent });
             }
-            BL._version = version || await this.api.getVersion();
+            BL._version = version;// || await this.api.getVersion();
         } catch (error) {
             BL.homey.error('BL.initBll', error);
         }
