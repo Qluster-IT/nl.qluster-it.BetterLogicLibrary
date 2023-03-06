@@ -111,13 +111,13 @@ class DateTime {
         case "bllSetLocale": dateTimeStatics.locale = data.default; dateTimeStatics.formats = data.dateFormats; dateTimeStatics.customFormats = data.customDateFormats; DateTime.updateFormats();
       }
     };
-    bll.api.on('realtime', this.onRealtime);
-    this.bll = bll;
+    BL.Current.api.on('realtime', this.onRealtime);
+    //this.bll = bll;
   }
 
   static destroy() {
     BL.homey.log('DateTime.destroy()');    
-    this.bll.api.off('realtime', this.onRealtime);
+    BL.Current.api.off('realtime', this.onRealtime);
 
     BL.homey.log('DateTime.destroying');
     // for (const key in this) {
@@ -127,7 +127,7 @@ class DateTime {
     //     } catch (ex) {}
     //   }
     // }
-    delete this.bll; // Needed?
+    //delete this.bll; // Needed?
     BL.L.clearObj(dateTimeStatics);
     BL.L.clearObj(this);
     // BL.homey.log('DateTime.destroying dateTimeStatics clear', BL.L.clearObj(dateTimeStatics));    
