@@ -104,6 +104,8 @@ class BLL {
         return this;
     }
     async getApi() {
+        if(BL.Current && BL.Current.api) 
+            return BL.Current.api;
         //if(!this.api && BL.Current.api) this.api = BL.Current.api;
         if (!this.api) this.api = await this.getAppApi('net.i-dev.betterlogic', 'Better Logic Library');
         return this.api;

@@ -208,5 +208,8 @@
   },
   "3.0.2": {
     "en": "Version 3.0"
+  },
+  "3.0.3": {
+    "en": "Version 3.0: TEST VERSION: might contain a bug!"
   }
 }
