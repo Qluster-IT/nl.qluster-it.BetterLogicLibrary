@@ -61,6 +61,7 @@ class BLL {
         BL.homey.log('BLL destroyed');
     }
     async init({ modules } = { modules: [] }) {
+        
         //BL.homey.log('BLL.init');
         //let api = await this.getApi();
         if (modules && modules.length && ((modules.indexOf('datetime') > -1 || modules.indexOf('dateTime') > -1) && modules.indexOf('_') == -1)) modules.unshift('_');
@@ -177,12 +178,12 @@ class BLL {
 
     }
 
-    async getDownloadUrl({ base64, contentType, buffer, json, text } = {}) {
+    async getDownloadUrl({ base64, contentType, buffer, json, text, filename } = {}) {
         try {
             let defer = new Defer();
-            let api = await BL.Current.getAppApi('net.i-dev.betterlogic', 'Better Logic Library', true);
+            let api = BL.Current.api;//('net.i-dev.betterlogic', 'Better Logic Library', true);
             //let link = await api.post('/getdownloadurl/', { base64, contentType }); base 64 is to big, send it separate.
-            let link = await api.post('/getdownloadurl/', { contentType });
+            let link = await api.post('/getdownloadurl/', { contentType, filename });
             let type = 'base64';
             if (buffer !== undefined) type = 'application/octet-stream';
             else if (json !== undefined) type = 'text/json';

@@ -1,6 +1,8 @@
 const http = require('http');
 const { Defer } = require('betterlogiclibrary/src/bl');
 const { randomBytes } = require('crypto');
+const sanitize = require("sanitize-filename");
+const { createWriteStream, existsSync, mkdirSync, rmSync, unlinkSync, readdirSync, statSync, readFileSync, openSync, readSync, closeSync, writeFileSync } = require("fs");
 
 const BAD_REQUEST = 400;
 
@@ -12,17 +14,35 @@ class FileServer {
   }
 
   async close() {
-    if (this.server) this.homey.log('shutdown file server');
+    try {
 
-    if (this.server) this.server.close(((err) => {
-      if (!err);
-      this.server = null;
-    }).bind(this));
+      if (this.server) this.homey.log('shutdown file server');
+
+      if (this.server) this.server.close(((err) => {
+        if (!err);
+        this.server = null;
+      }).bind(this));
+    } catch (error) {
+
+    }
+    if (this.files && Object.keys(this.files).length)
+      for (const key in this.files) {
+        if (Object.hasOwnProperty.call(this.files, key)) {
+          const file = this.files[key];
+          try {
+            if ((existsSync(`/userdata/getfile/${file.token}/`))) rmSync(`/userdata/getfile/${file.token}/`, { recursive: true, force: true });
+          } catch (error) {
+            let a = error;
+          }
+        }
+      }
   }
 
   async init({ homey, settings: { port, autoStart, autoShutdown, fileAvailableDuration } } = {}) {
     this.homey = homey;
     this.ip = (await this.homey.cloud.getLocalAddress()).split(':')[0];
+    this.ipDashed = this.ip.replaceAll('.', '-');
+    this.cloudId = (await this.homey.cloud.getHomeyId());
     this.port = port;
     this.files = {};
     this.autoStart = autoStart;
@@ -51,11 +71,12 @@ class FileServer {
               if (this.files[token].base64 === undefined && req.method == 'POST') {
                 this.files[token].defer = new Defer();
                 let body = await getBody();
-                if (body instanceof Buffer)
-                  this.homey.log('Buffer');
-                if (body instanceof String)
-                  this.homey.log('String');
+                // if (body instanceof Buffer)
+                //   this.homey.log('Buffer');
+                // if (body instanceof String)
+                //   this.homey.log('String');
                 this.files[token].buffer = body;
+                await this.writeFile(this.files[token]);
                 await this.files[token].defer.resolve();
                 return returnStatus();
               }
@@ -153,6 +174,17 @@ class FileServer {
     return true;
   }
 
+  async writeFile(file) {
+    if (!(existsSync(`/userdata/getfile/${file.token}/`))) mkdirSync(`/userdata/getfile/${file.token}/`, { recursive: true });
+    try {
+
+      writeFileSync(`/userdata/getfile/${file.token}/${file.filename}`, file.buffer);
+      let a = 'asdsad';
+    } catch (error) {
+      let b = error;
+    }
+  }
+
   async update({ port, autoStart, autoShutdown, fileAvailableDuration }) {
 
     if (port !== this.port) {
@@ -167,20 +199,37 @@ class FileServer {
     if (autoShutdown && this.server && !this.files.length) await this.close();
   }
 
-  async getDownloadUrl({ base64, contentType } = {}) {
+  async getDownloadUrl({ base64, contentType, filename } = {}) {
     if (!this.server) await this.initServer();
 
-    let code = randomBytes(24).toString('hex');
+    let token = randomBytes(24).toString('hex');
     if (base64 || contentType) {
-      this.files[code] = { base64, contentType };
+      this.files[token] = { base64, contentType, token };
       this.homey.setTimeout(async () => {
-        delete this.files[code];
+        if ((existsSync(`/userdata/getfile/${this.files[token].token}/`))) rmSync(`/userdata/getfile/${this.files[token].token}/`, { recursive: true, force: true });
+        delete this.files[token];
         if (!this.files.length && this.autoShutdown) await this.close();
       }, this.fileAvailableDuration * 1000);
     }
-    let path = `/getfile/${code}/`;
-    return { url: `http://${this.ip}:${this.port}${path}`, path, port: this.port };
 
+    if (filename) filename = sanitize(filename);
+    else filename = '';
+    this.files[token].filename = filename;
+
+
+    let path = `/getfile/${token}/`;
+    let result = { url: `http://${this.ip}:${this.port}${path}`, path, port: this.port, filename };
+    let app = 'app/net.i-dev.betterlogic';
+
+    let url = app + '/userdata' + path;
+    result.localTestUrl = `https://${this.ipDashed}.homey.homeylocal.com/${app}/assets/space.txt`;
+    result.localUrl = `https://${this.ipDashed}.homey.homeylocal.com/${url}${filename}`;
+    result.cloudUrl = `https://${this.cloudId}.connect.athom.com/${url}${filename}`;
+
+
+    // if (useUrl==='localssl') url = `https://${this.homey.app.ip.replaceAll('.', '-')}.homey.homeylocal.com/` + url;
+    //         else if  (useUrl==='cloudssl') url = `https://${this.homey.app.cloudId}.connect.athom.com/` + url;
+    return result;
   }
 }
 
