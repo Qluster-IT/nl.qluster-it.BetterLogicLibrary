@@ -214,5 +214,8 @@
   },
   "3.0.4": {
     "en": "Version 3.0: No more startup issues!"
+  },
+  "3.0.5": {
+    "en": "Version 3.0: No more startup issues with other apps."
   }
 }
