@@ -211,5 +211,8 @@
   },
   "3.0.3": {
     "en": "Version 3.0: TEST VERSION: might contain a bug!"
+  },
+  "3.0.4": {
+    "en": "Version 3.0: No more startup issues!"
   }
 }

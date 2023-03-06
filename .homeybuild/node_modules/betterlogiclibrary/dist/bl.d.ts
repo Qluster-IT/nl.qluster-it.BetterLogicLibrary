@@ -17,6 +17,10 @@ export class BL {
         locale: any;
         timeZone: any;
     }, ...args: any[]): Promise<string>;
+    /**
+     * NOT YET PUBLICLY IN USE!
+     * @returns
+     */
     static getDownloadUrl({ base64, contentType, buffer, json, text }?: {
         base64: any;
         contentType: any;
@@ -27,7 +31,7 @@ export class BL {
     /**
      * Indicates if the BLL has been loaded before     *
      * @static*/
-    static get isLoaded(): boolean;
+    static get isLoaded(): any;
     static isInit(): Promise<boolean>;
     /** @private */
     static set _(arg: any);
@@ -54,6 +58,7 @@ export class BL {
      * @return {*}
      */
     static init({ homey, modules, silent, waitTime, required }?: any): any;
+    static clearObj(obj: any): void;
     static detroy(): void;
     constructor({ homey, modules, silent, waitTime, required }?: {
         homey: any;
@@ -82,6 +87,8 @@ export class BL {
     get ready(): Promise<any>;
     /** @private */
     private initBll;
+    bllFile: any;
+    _l: any;
     /** @private */
     private getLibrary;
     /** @private */

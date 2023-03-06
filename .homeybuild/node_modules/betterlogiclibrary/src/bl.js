@@ -1,22 +1,19 @@
-let _version;
-let _L; // statics
-let _l;
-let _, datetime, proto;
-let _isLoaded = false;
+//let this._l;
+//let BL.__, BL._datetime, BL._proto;
+//let BL._isLoaded = false;
 
 
-let _homey, _modules, _silent, _waitTime, _required;
-let ready, defer, initDefer;
+//let BL._ready, BL._defer, BL._initDefer;
 
 class BL {
     /** @private @type {BL} */
     static get Current() { return this._current; }
 
     /** @private @type {import("../dist/bll").BLL */
-    static get L() { return _L; }
+    static get L() { return BL._L; }
 
     /** @private @type {import("../dist/bll").BLL} */
-    get l() { return _l; }
+    get l() { return this._l; }
 
     /** @private */
     static get l() { return BL && BL.L ? BL.L.Current : null; }
@@ -41,69 +38,20 @@ class BL {
         return await BL.l.decode.apply(null, arguments);
     }
 
+    /**
+     * NOT YET PUBLICLY IN USE!
+     * @returns 
+     */
     static async getDownloadUrl({ base64, contentType, buffer, json, text } = {}) {
         if (!BL.l && BL && BL.Current && !BL.Current.silent) throw new Error('Better Logic Library is not loaded.');
         if (!BL.l) return null;
         return await BL.l.getDownloadUrl.apply(null, arguments);
-
-        // try {
-        //     let defer = new Defer();
-        //     let api = await BL.Current.getAppApi('net.i-dev.betterlogic', 'Better Logic Library', true);
-        //     //let link = await api.post('/getdownloadurl/', { base64, contentType }); base 64 is to big, send it separate.
-        //     let link = await api.post('/getdownloadurl/', { contentType });
-        //     let type = 'base64';
-        //     if (buffer) type = 'application/octet-stream';
-        //     else if (json) type = 'text/json';
-        //     else if (text) type = 'text/plain';
-
-
-
-        //     let send = buffer || base64 || json || text;
-        //     if (send) {
-        //         var post_options = {
-        //             host: (await BL.homey.cloud.getLocalAddress()).split(':')[0],
-        //             port: link.port,
-        //             path: link.path,
-        //             method: 'POST',
-        //             headers: {
-        //                 'Accept': contentType,
-        //                 'Content-Type': type,
-        //                 'Content-Length': buffer ? Buffer.byteLength(buffer) : send.length
-        //             }
-        //         };
-
-        //         // Set up the request
-        //         var post_req = http.request(post_options, function (res) {
-        //             res.setEncoding('utf8');
-        //             res.on('data', function (chunk) {
-        //                 //console.log('Response: ' + chunk);
-        //             });
-        //             res.on('end', function (chunk) {
-        //                 defer.resolve(link);
-        //                 //console.log('Response: ' + chunk);
-        //             });
-        //         });
-        //         post_req.on('error', (e) => {
-        //             console.error(`problem with request: ${e.message}`);
-        //             defer.reject(e);
-        //           });
-        //         // post the data
-        //         //let typeee = typeof(buffer);
-        //         //let _buffer = Buffer.from(buffer);
-        //         post_req.write(send);
-        //         post_req.end();
-        //         return defer.promise;
-
-        //     } else return link;
-        // } catch (error) {
-        //     throw new Error(error);
-        // }
     }
 
     /**
      * Indicates if the BLL has been loaded before     *
      * @static*/
-    static get isLoaded() { return _isLoaded; }
+    static get isLoaded() { return BL._isLoaded; }
 
     static async isInit() {
         // try {            
@@ -119,27 +67,27 @@ class BL {
     /**
      * @description The lodash library
      * @static*/
-    static get _() { if (_) return _; throw new Error('The Better Logic Library App is not running.'); }//BLL: Lodash has not been loaded.'); }
+    static get _() { if (BL.__) return BL.__; throw new Error('The Better Logic Library App is not running.'); }//BLL: Lodash has not been loaded.'); }
 
     /** @private */
-    static set _(val) { _ = val; }
+    static set _(val) { BL.__ = val; }
 
     /**
      * @description The DateTime library, used for converting date and times to strings formatted for the user.
      * @type {typeof import('../dist/dateTime')} @static*/
-    static get datetime() { if (datetime) return datetime; throw new Error('The Better Logic Library App is not running.'); }//BLL: DateTime has not been loaded.'); }
+    static get datetime() { if (BL._datetime) return BL._datetime; throw new Error('The Better Logic Library App is not running.'); }//BLL: DateTime has not been loaded.'); }
 
 
     /** @private */
-    static set datetime(val) { datetime = val; }
+    static set datetime(val) { BL._datetime = val; }
 
     /**
      * @description The DateTime library, used for converting date and times to strings formatted for the user.
      * @type {typeof import('../dist/proto')} @static*/
-    static get proto() { if (proto) return proto; throw new Error('The Better Logic Library App is not running.'); }//BLL: Proto has not been loaded.'); }
+    static get proto() { if (BL._proto) return BL._proto; throw new Error('The Better Logic Library App is not running.'); }//BLL: Proto has not been loaded.'); }
 
     /** @private */
-    static set proto(val) { proto = val; }
+    static set proto(val) { BL._proto = val; }
 
 
 
@@ -151,7 +99,7 @@ class BL {
      */
     static async init({ homey, modules, silent, waitTime, required } = {}) {
         let bl = new BL({ homey, modules, silent, waitTime, required });
-        
+
         homey.app.__BL_OnUninit = homey.app.onUninit;
         homey.app.onUninit = async function (args) {
 
@@ -179,12 +127,16 @@ class BL {
     }
 
     async realtimeFunction(event) {
-        //BL.homey.log('realtime', event);
+        BL.homey.log('realtime', event);
         let reload = false;
         if ((reload = (BL.homey.app.id !== 'net.i-dev.betterlogic' && event === 'running')) || ((event === 'running_2x' || event === 'running_3x') && !BL.Current.isReady)) {
             //this.runningReceived = true;
             try {
+                //if(!BL.Current.isReady) {
+                BL.homey.log('BL.Current.init reload', reload);
                 BL.Current.init({ reload });
+
+                //}
             } catch (error) {
 
             }
@@ -200,21 +152,30 @@ class BL {
         }
     }
 
+    static clearObj(obj) {
+        for (const key in obj)
+            if (Object.hasOwnProperty.call(obj, key)){
+                try {
+                    delete obj[key];
+                } catch (ex) { }}
+    }
+
+
     static detroy() {
-        BL.homey.settings.set('___TEST___', 'detroy');
+        //BL.homey.settings.set('___TEST___', 'detroy');
         try {
-            BL.homey.settings.set('___TEST___', 'BL.Current' + !!(BL.Current));
+            //BL.homey.settings.set('___TEST___', 'BL.Current' + !!(BL.Current));
             if (!BL.Current) return;
             if (BL.Current.api) {
                 BL.Current.api.off('realtime', BL.Current.realtimeFunction);
-                BL.Current.api.unregister();
+                //BL.Current.api.unregister();
             }
             if (BL.Current.l) {
-                BL.homey.settings.set('___TEST___', 'CLEANING');
-                let clearObj = BL.Current.L.clearObj;            
+                //BL.homey.settings.set('___TEST___', 'CLEANING');
+                //let clearObj = BL.Current.L.clearObj;
                 BL.Current.l.detroy();
-                clearObj(BL.Current);
-                clearObj(BL);
+                BL.clearObj(BL.Current);
+                BL.clearObj(BL);
             }
         } catch (error) { console.log(error); }
         //throw new Error('DONE FINISHED');
@@ -237,21 +198,24 @@ class BL {
         this.waitTime = waitTime;
         this.isReady = false;
 
-        defer = new Defer();
-        ready = defer.promise;
-        BL.ready = ready;
-        ready.then(() => this.isReady = true);
+        BL._defer = new Defer();
+        BL._ready = BL._defer.promise;
+        BL.ready = BL._ready;
+        BL._ready.then(() => {
+            this.isReady = true;
+            BL.clearObj(BL._ready);            
+        });
     }
     async init({ reload } = {}) {
         //BL.homey.log('BL.init');
         if (reload === true) {
-            _isLoaded = false;
-            if (initDefer) initDefer.reject();
-            initDefer = new Defer();
+            BL._isLoaded = false;
+            if (BL._initDefer) BL._initDefer.resolve(this);
+            BL._initDefer = new Defer();
         } else {
-            if (initDefer) return await initDefer.promise;
-            else initDefer = new Defer();
-            if (_isLoaded) return this;
+            if (BL._initDefer) return await BL._initDefer.promise;
+            else BL._initDefer = new Defer();
+            if (BL._isLoaded) return this;
         }
         if (this.homey.app.id !== 'net.i-dev.betterlogic' && !await this.homey.settings.get('notification_bll_supported')) {
             try {
@@ -269,34 +233,34 @@ class BL {
             } catch (error) {
                 this.homey.error('BL.init', error);
                 //initDefer.reject();
-                initDefer.resolve(this);
-                initDefer = null;
+                BL._initDefer.resolve(this);
+                BL._initDefer = null;
                 return this;
             }
         }
         try {
-            _isLoaded = await this.api.getInstalled();
-            if (!_isLoaded) {
+            BL._isLoaded = await this.api.getInstalled();
+            if (!BL._isLoaded) {
                 if (this.required) {
                     if (!await this.homey.settings.get('notification_bll_required')) {
                         this.homey.notifications.createNotification({ excerpt: `Warning: The Better Logic Library App is required for this app (${this.homey.app.id}) (to support BLL Coding and reduce install size).\nPlease install the Better Logic Library App from the Athom Store.` });
                         this.homey.settings.set('notification_bll_required', true);
                     }
                 }
-                initDefer.resolve(this);
-                initDefer = null;
+                BL._initDefer.resolve(this);
+                BL._initDefer = null;
                 return this;
             } else this.homey.settings.set('notification_bll_required', true);
 
         } catch (error) {
-            initDefer.resolve(this);
-            initDefer = null;
+            BL._initDefer.resolve(this);
+            BL._initDefer = null;
             return this;
         }
         try {
-
+            //if(BL.Current.isReady) return this;
             let bll = this.initBll();
-            bll.then(x => { defer.resolve(this); }).catch(x => {
+            bll.then(x => { BL._defer.resolve(this); }).catch(x => {
                 //defer.resolve(this);
 
                 // if (this.silent === false) {
@@ -306,11 +270,11 @@ class BL {
                 // else if (!this.required) defer.resolve(this); else defer.reject(x); 
             });
             let result = await bll;
-            initDefer.resolve(this);
+            BL._initDefer.resolve(this);
 
             return this;
         } catch (error) {
-            initDefer = null;
+            BL._initDefer = null;
             return this;
         }
     }
@@ -319,78 +283,39 @@ class BL {
      * @type {Promise<any>}
      * @memberof BL
      */
-    get ready() { return ready; }
-
-
-    // /** @private */
-    // async _init() {
-    //     this.homey.log('BL._init', 'loading');
-
-
-    //     this.defer = new Defer(1 * 60 * 1000, null, () => {
-    //         if (this.silent === false) {
-    //             this.homey.notifications.createNotification({ excerpt: `Warning: Better Logic Library could not be loaded and is required! Install the Better Logic Library App to continue to use this app (${this.homey.app.id}).` });
-    //             this.defer.reject(new Error('The Better Logic Library could not be loaded.'));
-    //         } else this.defer.resolve(this);
-    //     });
-    //     if (this.homey.app.id !== 'net.i-dev.betterlogic' && !await this.homey.settings.get('notification_bll_supported')) {
-    //         this.homey.notifications.createNotification({ excerpt: `This app (${this.homey.app.id}) now supports BLL coding within flowcards.\nInstall the Better Logic Library App from the Athom Store to use BLL coding.\nSee the BLL App Settings for more information.` });
-    //         this.homey.settings.set('notification_bll_supported', true);
-    //     }
-    //     // if (!this.api) {
-    //     //     try {
-    //     //         this.api = await this.getAppApi('net.i-dev.betterlogic', 'Better Logic Library', true);
-    //     //     } catch (error) {
-    //     //         this.homey.error(error);
-    //     //     }
-
-
-    //     //     if (this.homey.app.id !== 'net.i-dev.betterlogic') this.api.on('realtime', this.realtimeFunction);
-    //     //     _isLoaded = await this.api.getInstalled();
-    //     //     if (!_isLoaded) {
-    //     //         if (this.required) {
-    //     //             if (!await this.homey.settings.get('notification_bll_required')) {
-    //     //                 this.homey.notifications.createNotification({ excerpt: `Warning: The Better Logic Library App is required for this app (${this.homey.app.id}) (to support BLL Coding and reduce install size).\nPlease install the Better Logic Library App from the Athom Store.` });
-    //     //                 this.homey.settings.set('notification_bll_required', true);
-    //     //             }
-    //     //             return this.defer.promise;
-    //     //         }
-    //     //         if (!this.required) this.defer.resolve(this);
-    //     //         return this.defer.promise;
-    //     //     } else this.homey.settings.set('notification_bll_required', true);
-    //     // }
-    //     this.initBll().then(x => { this.defer.resolve(this); }).catch(x => { 
-    //         defer.resolve(this);
-    //         // if (this.silent === false) {
-    //         //     this.homey.notifications.createNotification({ excerpt: `Warning: Better Logic Library could not be loaded and is required! Install the Better Logic Library App to continue to use this app (${this.homey.app.id}).` });
-    //         //     this.defer.reject(new Error('The Better Logic Library could not be loaded.'));
-    //         // } 
-    //         // else if (!this.required) this.defer.resolve(this); else this.defer.reject(x); 
-    //     });
-
-    //     return this.defer.promise;
-
-    // }
+    get ready() { return BL._ready; }
 
     /** @private */
     async initBll({ version } = {}) {
-        //BL.homey.log('initBll');
-        if (version && version === _version && process.env.DEBUG !== '1') return this;
-        let bblFile;
+        BL.homey.log('initBll');
+        if (version && version === BL._version && process.env.DEBUG !== '1') return this;
+        BL.homey.log('initBll version change');
+        //let bllFile = this.bllFile;
         try {
-            bblFile = await this.getLibrary('bll');
+            //if (!this.bllFile) 
+            this.bllFile = await this.getLibrary('bll');
         } catch (error) {
             throw new Error('The Better Logic Library app is not started.');
             //throw error;
         }
-        let bll = this.requireFromString(bblFile.file, 'bll');
+        //this.bllFile = bllFile;
         try {
+            let bll = this.requireFromString(this.bllFile.file, 'bll');
+            delete this.bllFile; //Remove the String for performance
             let old_bll = this.l;
-            _l = await new bll.BLL({ homey: this.homey, modules: this.modules, silent: this.silent });
-            _L = bll.BLL;
-            if (old_bll) old_bll.destroy();
-            _version = version || await this.api.getVersion();
-        } catch (error) { }
+            //if(old_bll) return this;
+            
+            if (true || !old_bll) {
+                this._l = await new bll.BLL({ homey: this.homey, modules: this.modules, silent: this.silent });
+                BL._L = bll.BLL;
+                if (old_bll) old_bll.destroy();
+            } else {
+                await new bll.BLL({ homey: this.homey, modules: this.modules, silent: this.silent });
+            }
+            BL._version = version || await this.api.getVersion();
+        } catch (error) {
+            BL.homey.error('BL.initBll', error);
+        }
         return this;
     }
 
@@ -416,7 +341,7 @@ class BL {
 
     /** @private */
     requireFromString(src, filename) {
-        var m = new module.constructor();
+        let m = new module.constructor();
         m.paths = module.paths;
         m._compile(src, filename || '');
         return m.exports;
@@ -432,8 +357,10 @@ class BL {
         if (onlyApi === true) return this.api;
         if (!this.api) throw new Error(appname + ' is not installed.');
         else {
-            _isLoaded = await this.api.getInstalled();
-            if (!_isLoaded) throw new Error(appname + ' is not installed.');
+            try {             
+                BL._isLoaded = await this.api.getInstalled();   
+            } catch (error) {  }
+            if (!BL._isLoaded) throw new Error(appname + ' is not installed.');
         }
         return this.api;
     }

@@ -46,14 +46,15 @@ class BLL {
     }
 
     destroy() {
+        
         if (BLL.datetime) BLL.datetime.destroy();
-        if (this.api) this.api.unregister();
-        BLL._current = null;
-        BLL.__ = null;
-        BLL._math = null;
-        BLL._datetime = null;
-        BLL._proto = null;
-        BLL._homey = null;
+        //if (this.api) this.api.unregister();
+        // delete BLL._current;
+        // BLL.__ = null;
+        // BLL._math = null;
+        // BLL._datetime = null;
+        // BLL._proto = null;
+        // BLL._homey = null;
         BLL.clearObj(this);
         BLL.clearObj(BLL);
 

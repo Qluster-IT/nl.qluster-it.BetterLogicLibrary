@@ -120,13 +120,13 @@ class DateTime {
     this.bll.api.off('realtime', this.onRealtime);
 
     BL.homey.log('DateTime.destroying');
-    for (const key in this) {
-      if (Object.hasOwnProperty.call(this, key)) {
-        try {
-          delete this[key];
-        } catch (ex) {}
-      }
-    }
+    // for (const key in this) {
+    //   if (Object.hasOwnProperty.call(this, key)) {
+    //     try {
+    //       delete this[key];
+    //     } catch (ex) {}
+    //   }
+    // }
     delete this.bll; // Needed?
     BL.L.clearObj(dateTimeStatics);
     BL.L.clearObj(this);
