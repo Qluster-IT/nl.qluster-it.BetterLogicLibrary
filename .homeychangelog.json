@@ -220,5 +220,8 @@
   },
   "3.0.6": {
     "en": "Version 3.0: Finished the Csv and Excel modules :)"
+  },
+  "3.0.7": {
+    "en": "Version 3.0: Solved another startup bug."
   }
 }
