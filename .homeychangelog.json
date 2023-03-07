@@ -223,5 +223,8 @@
   },
   "3.0.7": {
     "en": "Version 3.0: Solved another startup bug."
+  },
+  "3.0.8": {
+    "en": "Version 3.0: Solved another potential HP2023 startup bug."
   }
 }
