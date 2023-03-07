@@ -491,7 +491,7 @@ class BetterLogic extends Homey.App {
 				
 				// let b = test;
 
-				return {result:BL.L.dateTime.toString(
+				return {result:BL.datetime.toString(
 					args.format.name,
 					args.date && args.date!='undefined' ? args.date:undefined, 
 					args.locale && args.locale.id ? args.locale.id:undefined, 
