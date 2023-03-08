@@ -596,7 +596,7 @@ class BetterLogic extends Homey.App {
 				} catch (error) {
 					this.log('execute_bl_expression_tag:');
 					this.error(error);
-					return new Error(error);
+					throw new Error(error);
 				}
 			});
 
@@ -774,6 +774,7 @@ class BetterLogic extends Homey.App {
 			  msg = msgs.join('\n') + '\n' + pos;
 			  throw new Error(error.message + '\n' + msg );
 			}
+			throw error;
 		  }
 	}
 
