@@ -11,6 +11,7 @@ app.factory('$bl', ['$q', function ($q) {
         set,
         error,
         openURL,
+        __,
         ready: defer.promise
     };
     return factory;
@@ -20,6 +21,10 @@ app.factory('$bl', ['$q', function ($q) {
         $scope = scope;
         factory.homey = homey;
         defer.resolve();
+    }
+
+    function __(str, objs) {
+        return Homey.__(...arguments);
     }
     function api(type, path, data, callback) {
         let defer = $q.defer();
