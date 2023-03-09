@@ -232,5 +232,8 @@
   },
   "3.0.10": {
     "en": "Version 3.0: Solved a bug in the Expression cards: They through an Error when there is an error."
+  },
+  "3.0.11": {
+    "en": "Version 3.0: Added parts for datehandling used in the Simple Log App."
   }
 }

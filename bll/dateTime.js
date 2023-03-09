@@ -197,6 +197,9 @@ class DateTime {
   static fromUTC(date) {
     return !date ? date : new Date(date.setHours(date.getHours() - Number.parseInt(DateTime.toString('z', date))));
   }
+  static toLocale(date) {
+    return !date ? date : new Date(date.setHours(date.getHours() + Number.parseInt(DateTime.toString('z', date))));
+  }
 
 
   /** @private */
