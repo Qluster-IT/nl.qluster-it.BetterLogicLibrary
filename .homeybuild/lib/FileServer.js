@@ -116,8 +116,35 @@ class FileServer {
           try {
             //writeFileSync(`/userdata/getfile/${file.token}/${file.filename}`, file.buffer);
           } catch (exc) { }
-          req.setEncoding('binary');
-          req.pipe(createWriteStream(`/userdata/getfile/${file.token}/${file.filename}`, {encoding:'binary'}));
+          req.setEncoding('utf-8');
+          
+          //req.pipe(createWriteStream(`/userdata/getfile/${file.token}/${file.filename}`, {encoding:'utf8'}));
+          req.on('data', function (_data) {
+            if (typeof (_data) == 'string') data += _data;
+            else bin.push(_data);
+          });
+          req.on('end', function () {
+            try {
+              if (bin && bin.length > 0)
+                defer.resolve(Buffer.concat(bin));
+              else if (type == 'text/json')
+                defer.resolve(JSON.parse(data));
+              else if (type == 'text/plain') {
+                BL.homey.log('received length', data.length);
+                writeFileSync(`/userdata/getfile/${file.token}/${file.filename}`, data, {encoding:'utf-8'});
+                defer.resolve(data);
+              }
+              else if (type == 'base64')
+                defer.resolve(Buffer.from(data, 'base64'));
+              else defer.resolve(data);
+            } catch (error) {
+              defer.reject('Received invalid JSON.');
+            }
+          });
+
+          // req.setEncoding('binary');
+          // req.pipe(createWriteStream(`/userdata/getfile/${file.token}/${file.filename}`, {encoding:'binary'}));
+
           // req.on('data', function (_data) {
           //   if (typeof (_data) == 'string') data += _data;
           //   else bin.push(_data);

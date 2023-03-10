@@ -238,5 +238,8 @@
   },
   "3.0.12": {
     "en": "Version 3.0: Memory improvement."
+  },
+  "3.0.13": {
+    "en": "Version 3.0: BLL decoder improvements."
   }
 }

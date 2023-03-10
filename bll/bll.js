@@ -207,7 +207,7 @@ class BLL {
 
     }
 
-    async getDownloadUrl({ base64, contentType, buffer, json, text, filename } = {}) {
+    async getDownloadUrl({ base64, contentType, buffer, json, text, filename, callback } = {}) {
         try {
             let defer = new Defer();
             let api = BL.Current.api;//('net.i-dev.betterlogic', 'Better Logic Library', true);
@@ -219,6 +219,7 @@ class BLL {
             else if (json !== undefined) type = 'text/json';
             else if (text !== undefined) type = 'text/plain';
             
+            const plain = !buffer;
             //return;
 
             /// If there is a file already handed with the request, send it to the File Server to be cached.
@@ -236,16 +237,18 @@ class BLL {
                         'Content-Length': buffer !== undefined ? Buffer.byteLength(buffer) : send.length
                     }
                 };
+                BL.homey.log('send length', buffer !== undefined ? Buffer.byteLength(buffer) : send.length);
 
                 // Set up the request
-                var post_req = http.request(post_options, function (res) {
-                    res.setEncoding('utf8');
+                var post_req = http.request({post_options}, function (res) {
+                    res.setEncoding('utf-8');
                     res.on('data', function (chunk) {
                     });
                     res.on('end', function (chunk) {
                         defer.resolve(link);
                         post_req.destroy();
                         BL.clearObj(defer);
+                        if(callback) callback(link);
                     });
                 });
                 post_req.on('error', (e) => {
@@ -255,11 +258,17 @@ class BLL {
                     BL.clearObj(defer);
                 });
 
-                post_req.write(send, 'binary', (error) => {
+                if(plain) post_req.write(send, (error) => {
                     if(error) BL.homey.error('Bll.send file error', error);
                     post_req.end();
                 });
-                return defer.promise;
+                else post_req.write(send, 'binary', (error) => {
+                    if(error) BL.homey.error('Bll.send file error', error);
+                    post_req.end();
+                });
+                
+                if(callback) return link;
+                 else return defer.promise;
 
             } 
             else return link;
