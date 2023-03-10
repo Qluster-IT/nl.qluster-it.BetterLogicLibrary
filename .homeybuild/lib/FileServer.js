@@ -70,14 +70,14 @@ class FileServer {
             if (token && this.files[token]) {
               if (this.files[token].base64 === undefined && req.method == 'POST') {
                 this.files[token].defer = new Defer();
-                let body = await getBody();
-                // if (body instanceof Buffer)
-                //   this.homey.log('Buffer');
-                // if (body instanceof String)
-                //   this.homey.log('String');
-                this.files[token].buffer = body;
-                await this.writeFile(this.files[token]);
-                await this.files[token].defer.resolve();
+
+                //let body = 
+                await writeBody(this.files[token]);
+                //let body = await getBody();
+
+                // this.files[token].buffer = body;
+                // await this.writeFile(this.files[token]);
+                if(this.files[token] && this.files[token].defer) await this.files[token].defer.resolve();
                 return returnStatus();
               }
               if (this.files[token] && this.files[token].defer) await this.files[token].defer.promise;
@@ -105,6 +105,37 @@ class FileServer {
 
 
         returnStatus();
+
+
+        async function writeBody(file) {
+          let defer = new Defer(60 * 1000);
+          let data = '';
+          let bin = [];
+          let type = req.headers['content-type'];
+          if (!(existsSync(`/userdata/getfile/${file.token}/`))) mkdirSync(`/userdata/getfile/${file.token}/`, { recursive: true });
+          try {
+            //writeFileSync(`/userdata/getfile/${file.token}/${file.filename}`, file.buffer);
+          } catch (exc) { }
+          req.setEncoding('binary');
+          req.pipe(createWriteStream(`/userdata/getfile/${file.token}/${file.filename}`, {encoding:'binary'}));
+          // req.on('data', function (_data) {
+          //   if (typeof (_data) == 'string') data += _data;
+          //   else bin.push(_data);
+          // });
+          req.on('end', function () {
+            defer.resolve();
+            try {
+              
+            } catch (error) {
+              defer.reject('Received invalid File.');
+            }
+          });
+          req.on('error', function () {
+              defer.reject('Error receiving File.');
+          });
+          return defer.promise;
+        }
+
 
         async function getBody() {
           let defer = new Defer(60 * 1000);
@@ -179,9 +210,9 @@ class FileServer {
     try {
 
       writeFileSync(`/userdata/getfile/${file.token}/${file.filename}`, file.buffer);
-      let a = 'asdsad';
+      //let a = 'asdsad';
     } catch (error) {
-      let b = error;
+      //let b = error;
     }
   }
 
@@ -206,9 +237,14 @@ class FileServer {
     if (base64 || contentType) {
       this.files[token] = { base64, contentType, token };
       this.homey.setTimeout(async () => {
-        if ((existsSync(`/userdata/getfile/${this.files[token].token}/`))) rmSync(`/userdata/getfile/${this.files[token].token}/`, { recursive: true, force: true });
-        delete this.files[token];
+        try {
+          if ((existsSync(`/userdata/getfile/${this.files[token].token}/`))) rmSync(`/userdata/getfile/${this.files[token].token}/`, { recursive: true, force: true });
+        } catch (error) {
+
+        }
+        if (this.files[token] && this.files[token].defer) BL.clearObj(this.files[token].defer);
         BL.clearObj(this.files[token]);
+        delete this.files[token];
         if (!this.files.length && this.autoShutdown) await this.close();
       }, this.fileAvailableDuration * 1000);
     }

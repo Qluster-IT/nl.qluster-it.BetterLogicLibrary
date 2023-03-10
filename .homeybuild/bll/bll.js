@@ -212,12 +212,14 @@ class BLL {
             let defer = new Defer();
             let api = BL.Current.api;//('net.i-dev.betterlogic', 'Better Logic Library', true);
             //let link = await api.post('/getdownloadurl/', { base64, contentType }); base 64 is to big, send it separate.
-            let link = await api.post('/getdownloadurl/', { contentType, filename });
+            //return null;
+            let link =  await api.post('/getdownloadurl/', { contentType, filename });
             let type = 'base64';
             if (buffer !== undefined) type = 'application/octet-stream';
             else if (json !== undefined) type = 'text/json';
             else if (text !== undefined) type = 'text/plain';
-
+            
+            //return;
 
             /// If there is a file already handed with the request, send it to the File Server to be cached.
             /// The Homey AppApi cannot handle large files.
@@ -242,19 +244,26 @@ class BLL {
                     });
                     res.on('end', function (chunk) {
                         defer.resolve(link);
+                        post_req.destroy();
+                        BL.clearObj(defer);
                     });
                 });
                 post_req.on('error', (e) => {
+                    if(e) BL.homey.error('Bll.send file e', e);
                     defer.reject(e);
+                    post_req.destroy();
+                    BL.clearObj(defer);
                 });
 
-                post_req.write(send, (error) => {
-                    BL.homey.log('write error', error);
+                post_req.write(send, 'binary', (error) => {
+                    if(error) BL.homey.error('Bll.send file error', error);
                     post_req.end();
                 });
                 return defer.promise;
 
-            } else return link;
+            } 
+            else return link;
+
         } catch (error) {
             throw new Error(error);
         }
