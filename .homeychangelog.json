@@ -235,5 +235,8 @@
   },
   "3.0.11": {
     "en": "Version 3.0: Added parts for datehandling used in the Simple Log App."
+  },
+  "3.0.12": {
+    "en": "Version 3.0: Memory improvement."
   }
 }
