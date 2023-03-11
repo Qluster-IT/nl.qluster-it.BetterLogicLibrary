@@ -209,21 +209,28 @@ class BLL {
 
     async getDownloadUrl({ base64, contentType, buffer, json, text, filename, callback } = {}) {
         try {
-            const defer = new Defer();
-            const api = BL.Current.api;//('net.i-dev.betterlogic', 'Better Logic Library', true);
-            //let link = await api.post('/getdownloadurl/', { base64, contentType }); base 64 is to big, send it separate.
-            //return null;
+            const api = BL.Current.api;
             const link =  await api.post('/getdownloadurl/', { contentType, filename });
+
+            if( buffer || base64 || json || text) {
+                return await this.setDownloadUrl({ link, base64, contentType, buffer, json, text, filename, callback })
+            }
+            else return link;
+
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+    async setDownloadUrl({ link, base64, contentType, buffer, json, text, filename, callback } = {}) {
+        try {
+            const defer = new Defer();
+            
             let type = 'base64';
             if (buffer !== undefined) type = 'application/octet-stream';
             else if (json !== undefined) type = 'text/json';
             else if (text !== undefined) type = 'text/plain';
             
             const plain = !buffer;
-            //return;
-
-            /// If there is a file already handed with the request, send it to the File Server to be cached.
-            /// The Homey AppApi cannot handle large files.
             
             const send = buffer || base64 || json || text;
             if (send !== undefined) {
@@ -233,7 +240,7 @@ class BLL {
                     path: link.path,
                     method: 'POST',
                     headers: {
-                        'Accept': contentType,
+                        'Accept': contentType || link.contentType,
                         'Content-Type': type,
                         'Content-Length': Buffer.byteLength(send) // buffer !== undefined ? Buffer.byteLength(buffer) : send.length
                     }
@@ -279,7 +286,6 @@ class BLL {
             throw new Error(error);
         }
     }
-
 
 }
 
