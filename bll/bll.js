@@ -209,11 +209,11 @@ class BLL {
 
     async getDownloadUrl({ base64, contentType, buffer, json, text, filename, callback } = {}) {
         try {
-            let defer = new Defer();
-            let api = BL.Current.api;//('net.i-dev.betterlogic', 'Better Logic Library', true);
+            const defer = new Defer();
+            const api = BL.Current.api;//('net.i-dev.betterlogic', 'Better Logic Library', true);
             //let link = await api.post('/getdownloadurl/', { base64, contentType }); base 64 is to big, send it separate.
             //return null;
-            let link =  await api.post('/getdownloadurl/', { contentType, filename });
+            const link =  await api.post('/getdownloadurl/', { contentType, filename });
             let type = 'base64';
             if (buffer !== undefined) type = 'application/octet-stream';
             else if (json !== undefined) type = 'text/json';
@@ -224,24 +224,25 @@ class BLL {
 
             /// If there is a file already handed with the request, send it to the File Server to be cached.
             /// The Homey AppApi cannot handle large files.
-            let send = buffer || base64 || json || text;
+            
+            const send = buffer || base64 || json || text;
             if (send !== undefined) {
-                var post_options = {
-                    host: (await BL.homey.cloud.getLocalAddress()).split(':')[0],
+                const post_options = {
+                    host: link.host,
                     port: link.port,
                     path: link.path,
                     method: 'POST',
                     headers: {
                         'Accept': contentType,
                         'Content-Type': type,
-                        'Content-Length': buffer !== undefined ? Buffer.byteLength(buffer) : send.length
+                        'Content-Length': Buffer.byteLength(send) // buffer !== undefined ? Buffer.byteLength(buffer) : send.length
                     }
                 };
-                BL.homey.log('send length', buffer !== undefined ? Buffer.byteLength(buffer) : send.length);
+                //BL.homey.log('send length', buffer !== undefined ? Buffer.byteLength(buffer) : send.length);
 
                 // Set up the request
-                var post_req = http.request({post_options}, function (res) {
-                    res.setEncoding('utf-8');
+                const post_req = http.request(post_options, function (res) {
+                    res.setEncoding('utf8');
                     res.on('data', function (chunk) {
                     });
                     res.on('end', function (chunk) {
@@ -262,7 +263,8 @@ class BLL {
                     if(error) BL.homey.error('Bll.send file error', error);
                     post_req.end();
                 });
-                else post_req.write(send, 'binary', (error) => {
+                else 
+                post_req.write(send, 'binary', (error) => {
                     if(error) BL.homey.error('Bll.send file error', error);
                     post_req.end();
                 });

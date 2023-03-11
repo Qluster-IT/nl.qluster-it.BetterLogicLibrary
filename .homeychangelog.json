@@ -241,5 +241,8 @@
   },
   "3.0.13": {
     "en": "Version 3.0: BLL decoder improvements."
+  },
+  "3.0.14": {
+    "en": "Version 3.0: File Server improvements (utf8 files and others may have Emoticons now)."
   }
 }
