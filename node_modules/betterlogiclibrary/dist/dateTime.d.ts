@@ -18,11 +18,19 @@ declare class DateTime {
      */
     static toString(format: string | string[], date: string | string[] | number | number[] | Date | Date[], locale: string, timeZone: string): any;
     /**
-     *
+     * This method will return a new Date with the GMT offset removed(minus).
+     * @description Use this when the Date(time) is to be understood as locale time (but is in fact UTC).
      * @param {Date} date
-     * @returns
+     * @returns {Date} Returns a new {@link Date}
      */
-    static fromUTC(date: Date): Date;
+    static asLocale(date: Date): Date;
+    /**
+     * This method will return a new Date with the GMT offset added(plus).
+     * @description Use this when you need the UTC time set to locale time (UTC will have the hours of locale).
+     * @param {Date} date
+     * @returns {Date} Returns a new {@link Date}
+     */
+    static toLocale(date: Date): Date;
     /** @private */
     private static convertToDate;
     /** @private */

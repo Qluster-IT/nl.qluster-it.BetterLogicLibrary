@@ -21,13 +21,28 @@ export class BL {
      * NOT YET PUBLICLY IN USE!
      * @returns
      */
-    static getDownloadUrl({ base64, contentType, buffer, json, text, filename }?: {
+    static getDownloadUrl({ base64, contentType, buffer, json, text, filename, callback }?: {
         base64: any;
         contentType: any;
         buffer: any;
         json: any;
         text: any;
         filename: any;
+        callback: any;
+    }, ...args: any[]): Promise<any>;
+    /**
+         * NOT YET PUBLICLY IN USE!
+         * @returns
+         */
+    static setDownloadUrl({ link, base64, contentType, buffer, json, text, filename, callback }?: {
+        link: any;
+        base64: any;
+        contentType: any;
+        buffer: any;
+        json: any;
+        text: any;
+        filename: any;
+        callback: any;
     }, ...args: any[]): Promise<any>;
     /**
      * Indicates if the BLL has been loaded before     *

@@ -247,5 +247,8 @@
   },
   "3.0.15": {
     "en": "Version 3.0: File Server improvements (utf8 files and others may have Emoticons now)."
+  },
+  "3.0.16": {
+    "en": "Version 3.0: File Server improvements (utf8 files and others may have Emoticons now)."
   }
 }

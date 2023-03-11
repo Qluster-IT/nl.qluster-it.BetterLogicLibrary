@@ -32,19 +32,27 @@ class BL {
         // if (!BL.l) return text;
         if (!this.Current.isReady) return text;
 
-        return await BL.l.decode.apply(null, arguments);
+        return await BL.l.decode.apply(BL.l, arguments);
     }
 
     /**
      * NOT YET PUBLICLY IN USE!
      * @returns 
      */
-    static async getDownloadUrl({ base64, contentType, buffer, json, text, filename } = {}) {
+    static async getDownloadUrl({ base64, contentType, buffer, json, text, filename, callback } = {}) {
         if (!BL.l && BL && BL.Current && !BL.Current.silent) throw new Error('Better Logic Library is not loaded.');
         if (!BL.l) return null;
-        return await BL.l.getDownloadUrl.apply(null, arguments);
+        return await BL.l.getDownloadUrl.apply(BL.l, arguments);
     }
-
+    /**
+         * NOT YET PUBLICLY IN USE!
+         * @returns 
+         */
+    static async setDownloadUrl({ link, base64, contentType, buffer, json, text, filename, callback } = {}) {
+        if (!BL.l && BL && BL.Current && !BL.Current.silent) throw new Error('Better Logic Library is not loaded.');
+        if (!BL.l) return null;
+        return await BL.l.setDownloadUrl.apply(BL.l, arguments);
+    }
     /**
      * Indicates if the BLL has been loaded before     *
      * @static*/
@@ -89,10 +97,10 @@ class BL {
     /** 
      * @description The JSON library, used for converting JSON files into Excel, Csv.
      * @type {typeof import('../dist/json')} @static*/
-     static get json() { if (BL._json) return BL._json; throw new Error('The Better Logic Library App is not running.'); }//BLL: DateTime has not been loaded.'); }
+    static get json() { if (BL._json) return BL._json; throw new Error('The Better Logic Library App is not running.'); }//BLL: DateTime has not been loaded.'); }
 
-     /** @private */
-     static set json(val) { BL._json = val; }
+    /** @private */
+    static set json(val) { BL._json = val; }
 
 
 
@@ -335,11 +343,11 @@ class BL {
     async getLibrary(libraryName) {
         let defer = new Defer();
         defer.promise.then(() => { }).catch(() => { });
-        BL.homey.setTimeout(() => (!defer || defer.isDefered ? null : defer.reject('Timeout: 5000')) & (defer=null), 5000);
+        BL.homey.setTimeout(() => (!defer || defer.isDefered ? null : defer.reject('Timeout: 5000')) & (defer = null), 5000);
         try {
             this.getAppApi('net.i-dev.betterlogic', 'Better Logic Library').then((api) => {
                 try {
-                    api.get('/library/' + libraryName).then((x) => !defer || defer.isDefered ? null : defer.resolve(x) & (defer=null)).catch(err => !defer || defer.isDefered ? null : defer.reject(err) & (defer=null));
+                    api.get('/library/' + libraryName).then((x) => !defer || defer.isDefered ? null : defer.resolve(x) & (defer = null)).catch(err => !defer || defer.isDefered ? null : defer.reject(err) & (defer = null));
                 } catch (err) { // Try once more.                                        
                     defer.reject(new Error(err));
                     // try {
@@ -349,12 +357,12 @@ class BL {
                     //     //throw new Error(error);
                     // }
                 }
-            }).catch(err => !defer || defer.isDefered ? null : defer.reject(err) & (defer=null));
+            }).catch(err => !defer || defer.isDefered ? null : defer.reject(err) & (defer = null));
 
         } catch (err) {
             console.log(err);
-            if(defer) defer.reject(new Error(err));
-            defer=null;
+            if (defer) defer.reject(new Error(err));
+            defer = null;
             //throw new Error(err);
         }
         return defer.promise;
