@@ -259,5 +259,8 @@
   },
   "3.1.2": {
     "en": "Version 3.1: More translations."
+  },
+  "3.1.3": {
+    "en": "Version 3.1: Variables can now be donwload in App Settings as JSON or Excel."
   }
 }
