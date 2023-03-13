@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "3.0.16",
+  "version": "3.1.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -613,6 +613,164 @@
             "title": {
               "en": "Formatted result",
               "nl": "Opgemaakte resultaat"
+            }
+          }
+        ]
+      },
+      {
+        "id": "format_json_csv",
+        "title": {
+          "en": "Format JSON as CSV",
+          "nl": "JSON opmaken als CSV"
+        },
+        "titleFormatted": {
+          "en": "Format [[json]] as [[returnType]] with (unwindArrays: [[unwindArrays]], expandArrayObjects: [[expandArrayObjects]])",
+          "nl": "[[json]] opmaken als [[returnType]] met (unwindArrays: [[unwindArrays]], expandArrayObjects: [[expandArrayObjects]])"
+        },
+        "args": [
+          {
+            "name": "json",
+            "type": "text",
+            "placeholder": {
+              "en": "JSON",
+              "nl": "JSON"
+            },
+            "title": {
+              "en": "JSON",
+              "nl": "JSON"
+            }
+          },
+          
+          {
+            "name": "returnType",
+            "type": "dropdown",
+            "placeholder": {
+              "en": "CSV",
+              "nl": "CSV"
+            },
+            "title": {
+              "en": "CSV",
+              "nl": "CSV"
+            },
+            "value":"csv",
+            "values": [
+              {
+                "id": "csv",
+                "label": {
+                  "en": "CSV"
+                }
+              },
+              {
+                "id": "csv_base64",
+                "label": {
+                  "en": "CSV (base64)"
+                }
+              }
+            ]
+          },          
+          {
+            "name": "unwindArrays",
+            "type": "checkbox",
+            "placeholder": {
+              "en": "Yes/No",
+              "nl": "Ja/Nee"
+            },
+            "title": {
+              "en": "Unwind Arrays",
+              "nl": "Unwind Arrays"
+            },
+            "value":false
+          },          
+          {
+            "name": "expandArrayObjects",
+            "type": "checkbox",
+            "placeholder": {
+              "en": "Yes/No",
+              "nl": "Ja/Nee"
+            },
+            "title": {
+              "en": "Expand Array Objects",
+              "nl": "Expand Array Objects"
+            },
+            "value":false
+          }
+        ],
+        "tokens": [
+          {
+            "name": "result",
+            "type": "string",
+            "title": {
+              "en": "CSV",
+              "nl": "CSV"
+            }
+          }
+        ]
+      },
+      {
+        "id": "format_json_xlsx",
+        "title": {
+          "en": "Format JSON as Excel",
+          "nl": "JSON opmaken als Excel"
+        },
+        "titleFormatted": {
+          "en": "Format [[json]] as [[returnType]] with (defaultDate: [[defaultDate]])",
+          "nl": "[[json]] opmaken als [[returnType]] met (defaultDate: [[defaultDate]])"
+        },
+        "args": [
+          {
+            "name": "json",
+            "type": "text",
+            "placeholder": {
+              "en": "JSON",
+              "nl": "JSON"
+            },
+            "title": {
+              "en": "JSON",
+              "nl": "JSON"
+            }
+          },
+          {
+            "name": "returnType",
+            "type": "dropdown",
+            "placeholder": {
+              "en": "Excel",
+              "nl": "Excel"
+            },
+            "title": {
+              "en": "Excel",
+              "nl": "Excel"
+            },
+            "value":"xlsx_base64",
+            "values": [              
+              {
+                "id": "xlsx_base64",
+                "label": {
+                  "en": "Excel (base64)"
+                }
+              }
+            ]
+          },
+          {
+            "name": "defaultDate",
+            "type": "text",
+            "required":false,
+            "placeholder": {
+              "en": "Default Date",
+              "nl": "Standaard datum"
+            },
+            "title": {
+              "en": "Default Date",
+              "nl": "Standaard datum"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "name": "result",
+            "type": "string",
+            "title": {
+              "en": "Excel",
+              "nl": "Excel"
             }
           }
         ]

@@ -250,5 +250,8 @@
   },
   "3.0.16": {
     "en": "Version 3.0: File Server improvements (utf8 files and others may have Emoticons now)."
+  },
+  "3.1.0": {
+    "en": "Version 3.1: New flowcards to format JSON to CSV or Excel."
   }
 }

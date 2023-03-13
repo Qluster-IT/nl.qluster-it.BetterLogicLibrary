@@ -7,36 +7,36 @@ let timezone;
 
 //const util = require('util');
 
-const {BL} = require('betterlogiclibrary');
+const { BL } = require('betterlogiclibrary');
 const sandbox = require('./lib/sandbox');
 const FileServer = require('./lib/FileServer.js');
 
 
 
-class BetterLogic extends Homey.App {	
-	
+class BetterLogic extends Homey.App {
+
 	static get dateTime() { return this._dateTime; }
 	static set dateTime(v) { this._dateTime = v; }
 
-	getNow (format) {
+	getNow(format) {
 		let r = new Date().toLocaleString('nl',
-		{
-		hour12: false,
-		timeZone: timezone,
-		hour: "2-digit",
-		minute: "2-digit",
-		day: "2-digit",
-		month: "2-digit",
-		second: "2-digit",
-		year: "numeric"
-		});
+			{
+				hour12: false,
+				timeZone: timezone,
+				hour: "2-digit",
+				minute: "2-digit",
+				day: "2-digit",
+				month: "2-digit",
+				second: "2-digit",
+				year: "numeric"
+			});
 
 		switch (format) {
-			case "#DD": return r.substr(0,2);
-			case "#MM": return r.substr(3,2);
-			case "#YYYY": return r.substr(6,4);
-			case "#HH": return r.substr(11,2);
-			case "#mm": return r.substr(14,2);
+			case "#DD": return r.substr(0, 2);
+			case "#MM": return r.substr(3, 2);
+			case "#YYYY": return r.substr(6, 4);
+			case "#HH": return r.substr(11, 2);
+			case "#mm": return r.substr(14, 2);
 			case "#SS": return new Date().getUTCSeconds().toString().padStart(2, "0");
 			default: return r;
 		}
@@ -45,22 +45,22 @@ class BetterLogic extends Homey.App {
 
 	async onInit() {
 
-		
+
 		//BL.json.toExcel([], { schema: [{}]})
 		BetterLogic.homey = this.homey;
 		if (process.env.DEBUG === '1' || false) {
 			try {
-			  require('inspector').waitForDebugger();
+				require('inspector').waitForDebugger();
 			}
 			catch (error) {
-			  require('inspector').open(9216, '0.0.0.0', true);
+				require('inspector').open(9216, '0.0.0.0', true);
 			}
-		  }
+		}
 
 		//require('inspector').open(9216, '0.0.0.0', true);
 		//if (process.env.DEBUG === '1') require('inspector').open(9232, '0.0.0.0', true);
-    	this.log('BetterLogic is running...');
-		
+		this.log('BetterLogic is running...');
+
 		this.timezones = [
 			"Africa/Abidjan",
 			"Africa/Accra",
@@ -413,11 +413,11 @@ class BetterLogic extends Homey.App {
 		];
 
 		this.locale = await this.homey.settings.get('locale');
-		if(!this.locale) {
-			this.locale = {default:await this.homey.i18n.getLanguage()};
+		if (!this.locale) {
+			this.locale = { default: await this.homey.i18n.getLanguage() };
 			await this.homey.settings.set('locale', this.locale);
 		}
-		if(this.locale && this.locale.formats) {
+		if (this.locale && this.locale.formats) {
 			this.locale.dateFormats = this.locale.formats;
 			delete this.locale.formats;
 			await this.homey.settings.set('locale', this.locale);
@@ -425,12 +425,12 @@ class BetterLogic extends Homey.App {
 		this.homey.api.realtime('bllSetLocale', this.locale);
 
 		//await DateTime.init();
-		
+
 		timezone = this.homey.clock.getTimezone();
-			
+
 		let bl = BL.init({
-			homey:this.homey,
-			modules:[
+			homey: this.homey,
+			modules: [
 				"_",
 				"math",
 				"datetime",
@@ -438,28 +438,28 @@ class BetterLogic extends Homey.App {
 				"json"
 			]
 		}).catch(this.error);
-		
-		
-		
+
+
+
 
 		//let timeoutset = false;
-		this.homey.setTimeout(async ()=> {
+		this.homey.setTimeout(async () => {
 			await this.homey.api.realtime("running");
-		}, 5*1000);
-		
-		this.homey.setTimeout(async ()=> {
+		}, 5 * 1000);
+
+		this.homey.setTimeout(async () => {
 			await this.homey.api.realtime("running_2x");
-		}, 10*1000);
-		
-		this.homey.setTimeout(async ()=> {
+		}, 10 * 1000);
+
+		this.homey.setTimeout(async () => {
 			await this.homey.api.realtime("running_3x");
-		}, 20*1000);
-		
-		
+		}, 20 * 1000);
+
+
 
 		//BL.decode()
-		
-		BL.ready.then(async (x)=> {
+
+		BL.ready.then(async (x) => {
 			this.bl = x;
 			await this.initFileServerFromSettings();
 
@@ -472,73 +472,77 @@ class BetterLogic extends Homey.App {
 
 
 
-			
-				
+
+
 			// get_stamp
 			let format_datetime = this.homey.flow.getActionCard('format_datetime');
 			format_datetime
-			.registerRunListener( async (args, state) => {
-				
+				.registerRunListener(async (args, state) => {
 
-				
-				// const DateTime = require('./bll/dateTime.js');        
-				// let datetime = DateTime;
-				// datetime.init(BL.l);
-				// let test = await datetime.toString(args.format.name,
-				// 	args.date && args.date!='undefined' ? args.date:undefined, 
-				// 	args.locale && args.locale.id ? args.locale.id:undefined, 
-				// 	args.timeZone && args.timeZone.id ? args.timeZone.id:undefined);
-				
-				// let b = test;
 
-				return {result:BL.datetime.toString(
-					args.format.name,
-					args.date && args.date!='undefined' ? args.date:undefined, 
-					args.locale && args.locale.id ? args.locale.id:undefined, 
-					args.timeZone && args.timeZone.id ? args.timeZone.id:undefined
-				)};
-			})
-			.getArgument('format')
-			.registerAutocompleteListener((query, args) => {
-				let r = [
-					{name:'shortdate'},
-					{name:'date'},
-					{name:'DATE'},
-					{name:'LONGDATE'},
-					{name:'DATETIME'},
-					{name:'datetime'},
-					{name:'dd-MM-yyyy'},
-					{name:'dd-MM-yyyy HH:mm'},
-					{name:'dd-MM-yyyy HH:mm:ss'},
-					{name:'HH:mm'},
-					{name:'HH:mm:ss'},
-				];
-				BL.L._.each(r, x=>x.description=BL.datetime.toString(x.name, 
-					args.date && args.date!='undefined' ? args.date:undefined, 
-					args.locale && args.locale.id ? args.locale.id:undefined, 
-					args.timeZone && args.timeZone.id ? args.timeZone.id:undefined));
-				if(query && query.length) r.unshift({name:query, description:BL.datetime.toString(query, 
-					args.date && args.date!='undefined' ? args.date:undefined, 
-					args.locale && args.locale.id ? args.locale.id:undefined, 
-					args.timeZone && args.timeZone.id ? args.timeZone.id:undefined)});
-				return r;
-			});
+
+					// const DateTime = require('./bll/dateTime.js');        
+					// let datetime = DateTime;
+					// datetime.init(BL.l);
+					// let test = await datetime.toString(args.format.name,
+					// 	args.date && args.date!='undefined' ? args.date:undefined, 
+					// 	args.locale && args.locale.id ? args.locale.id:undefined, 
+					// 	args.timeZone && args.timeZone.id ? args.timeZone.id:undefined);
+
+					// let b = test;
+
+					return {
+						result: BL.datetime.toString(
+							args.format.name,
+							args.date && args.date != 'undefined' ? args.date : undefined,
+							args.locale && args.locale.id ? args.locale.id : undefined,
+							args.timeZone && args.timeZone.id ? args.timeZone.id : undefined
+						)
+					};
+				})
+				.getArgument('format')
+				.registerAutocompleteListener((query, args) => {
+					let r = [
+						{ name: 'shortdate' },
+						{ name: 'date' },
+						{ name: 'DATE' },
+						{ name: 'LONGDATE' },
+						{ name: 'DATETIME' },
+						{ name: 'datetime' },
+						{ name: 'dd-MM-yyyy' },
+						{ name: 'dd-MM-yyyy HH:mm' },
+						{ name: 'dd-MM-yyyy HH:mm:ss' },
+						{ name: 'HH:mm' },
+						{ name: 'HH:mm:ss' },
+					];
+					BL.L._.each(r, x => x.description = BL.datetime.toString(x.name,
+						args.date && args.date != 'undefined' ? args.date : undefined,
+						args.locale && args.locale.id ? args.locale.id : undefined,
+						args.timeZone && args.timeZone.id ? args.timeZone.id : undefined));
+					if (query && query.length) r.unshift({
+						name: query, description: BL.datetime.toString(query,
+							args.date && args.date != 'undefined' ? args.date : undefined,
+							args.locale && args.locale.id ? args.locale.id : undefined,
+							args.timeZone && args.timeZone.id ? args.timeZone.id : undefined)
+					});
+					return r;
+				});
 			format_datetime.getArgument('locale')
-			.registerAutocompleteListener((query, args) => {
-				query = query && query.length ? query.toLowerCase() : null;
-				let locales = query ? BL._.filter(locale.all, x=>x.name.toLowerCase().indexOf(query)>-1 || x.tag.toLowerCase().indexOf(query)>-1) : locale.all;
-				locales = BL._.map(locales, l=> { return { id:l.tag,  name:l.name, description:l.tag};});
-				return locales;
-			});
+				.registerAutocompleteListener((query, args) => {
+					query = query && query.length ? query.toLowerCase() : null;
+					let locales = query ? BL._.filter(locale.all, x => x.name.toLowerCase().indexOf(query) > -1 || x.tag.toLowerCase().indexOf(query) > -1) : locale.all;
+					locales = BL._.map(locales, l => { return { id: l.tag, name: l.name, description: l.tag }; });
+					return locales;
+				});
 			format_datetime.getArgument('timeZone')
-			.registerAutocompleteListener((query, args) => {
-				query = query && query.length ? query.toLowerCase() : null;
-				let timeZones = query ? BL._.filter(this.timezones, x=>x.toLowerCase().indexOf(query)>-1) : this.timezones;
-				timeZones = BL._.map(timeZones, t=> { return { id:t,  name:t };});
-				return timeZones;
-			});
+				.registerAutocompleteListener((query, args) => {
+					query = query && query.length ? query.toLowerCase() : null;
+					let timeZones = query ? BL._.filter(this.timezones, x => x.toLowerCase().indexOf(query) > -1) : this.timezones;
+					timeZones = BL._.map(timeZones, t => { return { id: t, name: t }; });
+					return timeZones;
+				});
 
-			
+
 			let execute_bl_expression = this.homey.flow.getActionCard('execute_bl_expression');
 			execute_bl_expression.registerRunListener(async (args, state) => {
 				// if(args.code && !args.expression) {
@@ -546,19 +550,19 @@ class BetterLogic extends Homey.App {
 				// 	throw new Error("Result = " + val);
 				// }
 				try {
-				
+
 					var variable = args.variable ? variableManager.getVariable(args.variable.name) : null;
-					
+
 
 					if (args.expression !== undefined && args.expression !== 'undefined') {
-						
-						let value = await this.runSandBox(args.expression, {arg:args.argument});
-						if(!variable) {
-							await variableManager.addVariable(args.variable.name, typeof(value), value, false);
+
+						let value = await this.runSandBox(args.expression, { arg: args.argument });
+						if (!variable) {
+							await variableManager.addVariable(args.variable.name, typeof (value), value, false);
 							variable = args.variable ? variableManager.getVariable(args.variable.name) : null;
 							//return Promise.reject(new Error('Variable not found (' + args.variable.name + ')'));
 						}
-						
+
 						await variableManager.updateVariable(variable.name, value, variable.type);
 
 					}
@@ -569,11 +573,11 @@ class BetterLogic extends Homey.App {
 				}
 			});
 			execute_bl_expression.getArgument('variable').registerAutocompleteListener((query, args) => {
-                return Promise.resolve(variableManager.retrieveVariables(query, args, 'any'));
-            });
+				return Promise.resolve(variableManager.retrieveVariables(query, args, 'any'));
+			});
 
-			
-			
+
+
 			this.homey.flow.getActionCard('execute_bl_expression_tag').registerRunListener(async (args, state) => {
 				try {
 					// if(args.code && !args.expression) {
@@ -582,7 +586,7 @@ class BetterLogic extends Homey.App {
 					// }
 
 					if (args.expression !== undefined && args.expression !== 'undefined') {
-						let value = this.runSandBox(args.expression, {arg:args.argument});
+						let value = this.runSandBox(args.expression, { arg: args.argument });
 						let tokens = { text: '', number: 0, boolean: false };
 						switch (typeof (value)) {
 							case "string": tokens.text = value; break;
@@ -600,9 +604,81 @@ class BetterLogic extends Homey.App {
 				}
 			});
 
+			this.homey.flow.getActionCard('format_json_csv').registerRunListener(async (args, state) => {
+				try {
+					const result = {};
+					switch (args.returnType || 'csv') {
+						case "csv":
+						case "csv_base64":
+							let arr = BL._.toArray(JSON.parse(args.json));
+							result.result = await BL.json.toCsv(arr, {
+								useDateIso8601Format: true, emptyFieldValue: '', expandArrayObjects: args.expandArrayObjects,
+								unwindArrays: args.unwindArrays
+							});
+							if (args.returnType == 'csv_base64') {
+								result.result = Buffer.from(result.csv).toString('base64');
+							}
+							break;
+					}
+
+					return result;
+				} catch (error) {
+					this.log('format_json_csv:');
+					this.error(error);
+					throw new Error(error);
+				}
+			});
+
+			this.homey.flow.getActionCard('format_json_xlsx').registerRunListener(async (args, state) => {
+				try {
+					const result = {};
+					switch (args.returnType || 'xlsx_base64') {
+						//case "csv":
+						case "xlsx_base64":
+							let json =JSON.parse(args.json);
+							let headers={};
+							for (let i = 0; i < json.length; i++) {
+								const row = json[i];
+								if(!BL._.isArray(row)) for (const columnKey in row) {
+									if (Object.hasOwnProperty.call(row, columnKey)) {
+										const column = row[columnKey];
+										if(!headers[columnKey]) headers[columnKey] = {value:columnKey};
+										row[columnKey] = {value: row[columnKey]}
+									}
+									json[i] = BL._.toArray(row);
+								}
+								
+							}
+							headers = BL._.toArray(headers);
+							json.unshift(headers);
+							let xlsxBuffer = await BL.json.toExcel(json, {
+								//schema,
+								sheet: 'Log',// + BL.datetime.toString('datetime'),
+								stickyRowsCount: 1,
+								buffer: true, //returnType == 'xlsx' ? true : false,
+								dateFormat: args.defaultDate || 'yyyy-mm-ddThh:mm:ss'
+							});
+							result.result = xlsxBuffer;
+							if (args.returnType == 'xlsx_base64') {
+								result.result = Buffer.from(result.result).toString('base64');
+							}
+							break;
+					}
+
+					return result;
+				} catch (error) {
+					this.log('format_json_csv:');
+					this.error(error);
+					throw new Error(error);
+				}
+			});
 
 
-			this.homey.settings.on('set', async (settingName)=> {
+
+
+
+
+			this.homey.settings.on('set', async (settingName) => {
 				if (settingName == 'javascript_functions') {
 					this.setFunctions();
 				} else if (settingName == 'locale') {
@@ -612,12 +688,12 @@ class BetterLogic extends Homey.App {
 					await this.initFileServerFromSettings();
 				}
 			});
-	
+
 			await this.setFunctions();
 		});
-		
 
-		
+
+
 
 
 		// Keep these message here to know which one we used.
@@ -626,7 +702,7 @@ class BetterLogic extends Homey.App {
 		// 	this.homey.settings.set('notification_update_variablesinflows', true);
 		// }
 
-		
+
 		// if(!await this.homey.settings.get('notification_update_newsettings')) {
 		// 	this.homey.notifications.createNotification({excerpt : "The Better Logic App has been rebranded to Better Logic Library.\nCheck out the new App Settings for the new features, like BLL coding in supporting apps!" });  
 		// 	this.homey.settings.set('notification_update_newsettings', true);
@@ -638,7 +714,7 @@ class BetterLogic extends Homey.App {
 		// 	}
 		//   });
 		//   this.getSettings();
-	  
+
 		// }
 	}
 
@@ -651,40 +727,40 @@ class BetterLogic extends Homey.App {
 	// 	if (!this.settings.xlsxFilename && (changed=true)) this.settings.xlsxFilename = "Logs_{[date('yyyy-MM-dd_HH-mm-ss')]}.xlsx";
 	// 	if(changed) this.homey.settings.set('settings', this.settings);
 	// }
-	  
 
-	async onUninit() {		
-		if(this.fileServer) await this.fileServer.destroy();
+
+	async onUninit() {
+		if (this.fileServer) await this.fileServer.destroy();
 	}
 
 	async getDownloadUrl(body) {
-		if(!this.fileServer) await this.initFileServer();
+		if (!this.fileServer) await this.initFileServer();
 		return await this.fileServer.getDownloadUrl(body);
 	}
 	async initFileServer() {
-		if(this.fileServer) await this.fileServer.update(this.fileserverSettings);
-		else this.fileServer = await new FileServer().init({homey:this.homey, settings:this.fileserverSettings});
+		if (this.fileServer) await this.fileServer.update(this.fileserverSettings);
+		else this.fileServer = await new FileServer().init({ homey: this.homey, settings: this.fileserverSettings });
 	}
 
-	async initFileServerFromSettings() {	
+	async initFileServerFromSettings() {
 		this.fileserverSettings = await this.homey.settings.get('fileserver');
-		if(!this.fileserverSettings || !Object.keys(this.fileserverSettings).length) {
-			this.fileserverSettings = {port:47330, autoStart:false, autoShutdown:true, fileAvailableDuration:60 };
+		if (!this.fileserverSettings || !Object.keys(this.fileserverSettings).length) {
+			this.fileserverSettings = { port: 47330, autoStart: false, autoShutdown: true, fileAvailableDuration: 60 };
 			await this.homey.settings.set('fileserver', this.fileserverSettings);
 		} //else if(this.fileserverSettings.autoStart) 
-		await this.initFileServer();			
+		await this.initFileServer();
 	}
 
-	
-	
+
+
 	async setFunctions() {
 		this.functions = await this.homey.settings.get('javascript_functions');
 		//this.log('this.functions', typeof(this.functions), this.functions);
 		this.context = {
 			_: BL._,
-			math : BL.math,
+			math: BL.math,
 			//datetime : BL.datetime,
-			date : (coding, date, locale, timeZone) => BL.datetime.toString(coding, date, locale, timeZone)
+			date: (coding, date, locale, timeZone) => BL.datetime.toString(coding, date, locale, timeZone)
 			//d : (s) => new Date(s)
 		};
 		if (this.functions && this.functions.length > 0) for (let i = 0; i < this.functions.length; i++) {
@@ -706,33 +782,33 @@ class BetterLogic extends Homey.App {
 	//		(?'b'(?:{)?){\[(((?!]})(.))+?)\]}(?(R&b)(?<A>(?!})))
 
 	codingRegExp = /(?:(?<!{)){\[(((?!]})(.))+?)\]}(?:(?!}))/gsi;
-	
-	runCoding({ text, locale, arg })  {
+
+	runCoding({ text, locale, arg }) {
 		try {
-				
+
 			let codingsToRun = {};
 			let codings = text.matchAll(this.codingRegExp);
-			let codingsFound = codings? [...codings] : [];
-			
+			let codingsFound = codings ? [...codings] : [];
+
 			for (let i = 0; i < codingsFound.length; i++) {
 				const code = codingsFound[i][1];
-				if(!codingsToRun[code]) codingsToRun[code] = this.runSandBox(code, {locale, arg});
+				if (!codingsToRun[code]) codingsToRun[code] = this.runSandBox(code, { locale, arg });
 			}
 
 
-			text = text.replaceAll(this.codingRegExp, (val, index)=> {
+			text = text.replaceAll(this.codingRegExp, (val, index) => {
 				return codingsToRun[index];
 			});
 
 			// let codings = completeText.matchAll(/\[\{(.*?)\}\]/gmsi);
 			// let codingsFound = codings? [...codings] : [];
-			
+
 			// for (let i = 0; i < codingsFound.length; i++) {
 			// 	const code = Number.parseInt(codingsFound[i][1]);
 
 			// }
 		} catch (error) {
-			
+
 		}
 		return text;
 	}
@@ -752,30 +828,30 @@ class BetterLogic extends Homey.App {
 
 
 
-	runSandBox(code, {locale, date, timeZone, arg}={}) {
+	runSandBox(code, { locale, date, timeZone, arg } = {}) {
 		var context = BL._.clone(this.context);
 		//if(locale) {
-			//context.locale = locale;
-			context.arg = arg;
-			context.date = (coding, _date, _locale, _timeZone) => BL.datetime.toString(coding, _date||date, _locale||locale, _timeZone||timeZone); 
+		//context.locale = locale;
+		context.arg = arg;
+		context.date = (coding, _date, _locale, _timeZone) => BL.datetime.toString(coding, _date || date, _locale || locale, _timeZone || timeZone);
 		//}
-		try {			
-			return sandbox(code, context, {timeout:55*1000}); //55 seconds timeout
+		try {
+			return sandbox(code, context, { timeout: 55 * 1000 }); //55 seconds timeout
 		} catch (error) {
 			let end;
-			if(error && error.stack && (end = error.stack.indexOf('\n\nSyntaxError'))>-1) {
-			  let start = error.stack.indexOf('=')+1;
-			  let startMinus = error.stack.indexOf('\n')+1;
-			  let msg = error.stack.substring(start, end);
-			  let msgs = msg.split('\n');
-			  let pos = msgs[msgs.length-1];
-			  pos = pos.substring(start - startMinus);
-			  msgs.pop();
-			  msg = msgs.join('\n') + '\n' + pos;
-			  throw new Error(error.message + '\n' + msg );
+			if (error && error.stack && (end = error.stack.indexOf('\n\nSyntaxError')) > -1) {
+				let start = error.stack.indexOf('=') + 1;
+				let startMinus = error.stack.indexOf('\n') + 1;
+				let msg = error.stack.substring(start, end);
+				let msgs = msg.split('\n');
+				let pos = msgs[msgs.length - 1];
+				pos = pos.substring(start - startMinus);
+				msgs.pop();
+				msg = msgs.join('\n') + '\n' + pos;
+				throw new Error(error.message + '\n' + msg);
 			}
 			throw error;
-		  }
+		}
 	}
 
 
