@@ -196,6 +196,7 @@ class DateTime {
    * @returns {Date} Returns a new {@link Date}
    */
   static asLocale(date) {
+    if(date && !(date instanceof Date)) date = new Date(date);
     return !date ? date : new Date(date.setHours(date.getHours() - Number.parseInt(DateTime.toString('z', date))));
   }
   /**
@@ -205,6 +206,7 @@ class DateTime {
    * @returns {Date} Returns a new {@link Date}
    */
   static toLocale(date) {
+    if(date && !(date instanceof Date)) date = new Date(date);
     return !date ? date : new Date(date.setHours(date.getHours() + Number.parseInt(DateTime.toString('z', date))));
   }
 

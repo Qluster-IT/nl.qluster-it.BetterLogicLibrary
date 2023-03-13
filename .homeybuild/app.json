@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "3.1.0",
+  "version": "3.1.2",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -713,8 +713,8 @@
           "nl": "JSON opmaken als Excel"
         },
         "titleFormatted": {
-          "en": "Format [[json]] as [[returnType]] with (defaultDate: [[defaultDate]])",
-          "nl": "[[json]] opmaken als [[returnType]] met (defaultDate: [[defaultDate]])"
+          "en": "Format [[json]] as [[returnType]] with (sheetName: [[sheetName]], schema: [[schema]], defaultDate: [[defaultDate]], stickyRows: [[stickyRowsCount]])",
+          "nl": "[[json]] opmaken als [[returnType]] met (sheetName: [[sheetName]], schema: [[schema]], defaultDate: [[defaultDate]], stickyRows: [[stickyRowsCount]])"
         },
         "args": [
           {
@@ -751,6 +751,17 @@
             ]
           },
           {
+            "name": "schema",
+            "type": "text",
+            "required":false,
+            "placeholder": "[{\n\tcolumn: 'Name',\n\ttype: String,\n\tvalue: student => student.name\n},\n{\n\tcolumn: 'Date of Birth',\n\ttype: Date,\n\tformat: 'mm/dd/yyyy',\n\tvalue: student => student.dateOfBirth\n},\n{\n\tcolumn: 'Cost',\n\ttype: Number,\n\tformat: '#,##0.00',\n\tvalue: student => student.cost\n},\n{\n\tcolumn: 'Paid',\n\ttype: Boolean,\n\tvalue: student => student.paid\n}]"
+            ,
+            "title": {
+              "en": "Schema",
+              "nl": "Schema"
+            }
+          },
+          {
             "name": "defaultDate",
             "type": "text",
             "required":false,
@@ -761,6 +772,34 @@
             "title": {
               "en": "Default Date",
               "nl": "Standaard datum"
+            }
+          },
+          {
+            "name": "stickyRowsCount",
+            "type": "text",
+            "placeholder": {
+              "en": "Sticky Rows",
+              "nl": "Sticky Rows"
+            },
+            "title": {
+              "en": "Sticky Rows",
+              "nl": "Sticky Rows"
+            },
+            "value":1,
+            "min":0,
+            "step":1
+          },
+          {
+            "name": "sheetName",
+            "type": "text",
+            "required":false,
+            "placeholder": {
+              "en": "Sheet name",
+              "nl": "Sheet name"
+            },
+            "title": {
+              "en": "Sheet name",
+              "nl": "Sheet name"
             }
           }
         ],
@@ -773,7 +812,8 @@
               "nl": "Excel"
             }
           }
-        ]
+        ],
+        "hint":"Check the App settings --> Exports for more schema examples."
       },
       {
         "id": "execute_bl_expression_tag",
@@ -1303,6 +1343,11 @@
     }
   ],
   "api": {
+    "getVariablesDownloadUrl": {
+      "method": "GET",
+      "path": "/getvariablesdownloadurl/:returnType",
+      "public": true
+    },
     "getLibrary": {
       "method": "GET",
       "path": "/library/:library",
@@ -1321,6 +1366,11 @@
     "getLocale": {
       "method": "GET",
       "path": "/locale",
+      "public": false
+    },
+    "getExports": {
+      "method": "GET",
+      "path": "/exports",
       "public": false
     },
     "getLocales": {

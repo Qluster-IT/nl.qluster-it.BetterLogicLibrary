@@ -4,7 +4,7 @@ const locale = require('locale-codes');
 var variableManager = require('./lib/variablemanager.js');
 
 //var util = require('./lib/util/util.js');
-const { readFile:_readFile } = require('fs');
+const { readFile: _readFile } = require('fs');
 const { promisify } = require('util');
 const { BL } = require("betterlogiclibrary");
 
@@ -18,15 +18,15 @@ module.exports =
         //homey.log('getLibrary', params, __dirname);
         try {
             if (params) switch (params.library) {
-                case "bll": return {file:await readFile(__dirname+'/bll/bll.js', {encoding:'utf8'})};            
-                case "lodash": return {file:await readFile(__dirname+'/assets/js/lodash.min.js', {encoding:'utf8'})};
-                case "mathjs": return {file:await readFile(__dirname+'/lib/util/math.js', {encoding:'utf8'})};
-                case "datetime": return {file:await readFile(__dirname+'/bll/dateTime.js', {encoding:'utf8'})};
-                case "coding": return {file:await readFile(__dirname+'/bll/coding.js', {encoding:'utf8'})};
-                case "proto": return {file:await readFile(__dirname+'/bll/proto.js', {encoding:'utf8'})};
-                case "json": return {file:await readFile(__dirname+'/bll/json.js', {encoding:'utf8'})};
-                case "write-excel-file-min": return {file:await readFile(__dirname+'/lib/write-excel-file-min.js', {encoding:'utf8'})};
-                case "json2csv": return {file:await readFile(__dirname+'/lib/json2csv.js', {encoding:'utf8'})};
+                case "bll": return { file: await readFile(__dirname + '/bll/bll.js', { encoding: 'utf8' }) };
+                case "lodash": return { file: await readFile(__dirname + '/assets/js/lodash.min.js', { encoding: 'utf8' }) };
+                case "mathjs": return { file: await readFile(__dirname + '/lib/util/math.js', { encoding: 'utf8' }) };
+                case "datetime": return { file: await readFile(__dirname + '/bll/dateTime.js', { encoding: 'utf8' }) };
+                case "coding": return { file: await readFile(__dirname + '/bll/coding.js', { encoding: 'utf8' }) };
+                case "proto": return { file: await readFile(__dirname + '/bll/proto.js', { encoding: 'utf8' }) };
+                case "json": return { file: await readFile(__dirname + '/bll/json.js', { encoding: 'utf8' }) };
+                case "write-excel-file-min": return { file: await readFile(__dirname + '/lib/write-excel-file-min.js', { encoding: 'utf8' }) };
+                case "json2csv": return { file: await readFile(__dirname + '/lib/json2csv.js', { encoding: 'utf8' }) };
             }
             return null;
         } catch (error) {
@@ -35,17 +35,125 @@ module.exports =
         }
     },
     async decode({ homey, body }) {
-        return await homey.app.runCoding({text:body.text, date:body.date, locale:body.locale, timeZone:body.timeZone});
+        return await homey.app.runCoding({ text: body.text, date: body.date, locale: body.locale, timeZone: body.timeZone });
     },
 
-    async date({ homey, body }) {        
-        return await BL.datetime.toString(body.format, body.date, body.locale,body.timeZone);
+    async date({ homey, body }) {
+        return await BL.datetime.toString(body.format, body.date, body.locale, body.timeZone);
     },
-    
+
     async getLocale({ homey }) {
         return await homey.app.locale;
     },
 
+    async getExports({ homey }) {
+        return await homey.app.exportsSettings;
+    },
+    async getVariablesDownloadUrl({ homey, params: { returnType } }) {
+        let callback = (link) => {
+            homey.api.realtime('downloadFileReady', link)
+        };
+
+        try {
+            const vars = variableManager.getVariables();
+            switch (returnType) {
+                case 'csv': {
+                    let filename = homey.app.exportsSettings && homey.app.exportsSettings.csvFilename ?
+                        await BL.decode(homey.app.exportsSettings.csvFilename) :
+                        "Vars " + BL.datetime.toString('datetimeshort') + '.csv';
+
+                    const link = await BL.getDownloadUrl({ contentType: 'text/csv', filename });
+                    homey.setTimeout(async () => {
+                        const logs = await homey.app.Log.getLogs({ returnType: 'csv' });
+                        await BL.setDownloadUrl({ link, text: logs.csv, callback });
+                    }, 0);
+                    return link;
+                }
+                    break;
+                case 'xlsx': {
+                    try {
+                        let filename = homey.app.exportsSettings && homey.app.exportsSettings.xlsxFilename ?
+                            await BL.decode(homey.app.exportsSettings.xlsxFilename) :
+                            "Vars " + BL.datetime.toString('datetimeshort') + '.xlsx';
+
+                        const link = await BL.getDownloadUrl({ contentType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', filename });
+                        homey.setTimeout(async () => {
+                            let date = BL.json.exports.excel_defaultdateformat || 'yyyy-mm-dd hh:mm:ss';
+                            let schema = [
+                                {
+                                    column: BL.homey.__('Name'),
+                                    type: String,
+                                    value: v => v.name,
+                                    width: BL._.max([BL._.max(BL._.map(vars, 'name.length')), BL.homey.__('Name').length])
+                                },
+                                {
+                                    column: BL.homey.__('Value'),
+                                    type: String,
+                                    value: v => v.value ? v.value.toString() : undefined,
+                                    width: BL._.max([BL._.max(BL._.map(vars, 'value.length')), BL.homey.__('Value').length])
+                                },
+                                {
+                                    column: BL.homey.__('Type'),
+                                    type: String,
+                                    value: v => v.type,
+                                    width: BL._.max([BL._.max(BL._.map(vars, 'type.length')), BL.homey.__('Type').length])
+                                },
+                                {
+                                    column: BL.homey.__('Last Changed'),
+                                    type: Date,
+                                    format: date,
+                                    value: v => BL.datetime.toLocale(v.lastChanged),
+                                    width: date.length
+                                },
+                                {
+                                    column: BL.homey.__('Auto'),
+                                    type: Boolean,
+                                    value: v => v.auto,
+                                    width: BL._.max(BL.homey.__('Auto').length, 6)
+                                }
+                            ];
+                            if (BL.homey.app.exportsSettings.includeUtcInExcel) schema.unshift({
+                                column: BL.homey.__('Last Changed') + ' (UTC)',
+                                type: String,
+                                value: x => x.lastChanged ? new Date(x.lastChanged).toISOString() : null,
+                                width: new Date().toISOString().length // iso dates
+                            });
+                            let xlsxBuffer = await BL.json.toExcel(vars, {
+                                schema,
+                                sheet: BL.homey.__('Variables'),// + BL.datetime.toString('datetime'),
+                                stickyRowsCount: 1,
+                                buffer: true, //returnType == 'xlsx' ? true : false,
+                                //dateFormat: 'yyyy-mm-ddThh:mm:ss'
+                            });
+                            await BL.setDownloadUrl({ link, buffer: xlsxBuffer, callback });
+                        }, 0);
+                        return link;
+                    } catch (error) {
+                        homey.error(error);
+                    }
+                }
+                    break;
+                case 'json': {
+                    let filename = //false && //LET OP! false weg
+                        homey.app.exportsSettings && homey.app.exportsSettings.jsonFilename ?
+                            await BL.decode(homey.app.exportsSettings.jsonFilename) :
+                            "Vars " + BL.datetime.toString('datetimeshort') + '.json';
+
+                    const link = await BL.getDownloadUrl({ contentType: 'text/json', filename });
+                    homey.setTimeout(async () => {
+                        await BL.setDownloadUrl({ link, text: JSON.stringify(vars), callback });
+                    }, 0);
+                    return link;
+                }
+            }
+            if (returnType === 'csv') {
+            }
+        } catch (error) {
+            //homey.error(error);
+            let msg = error.message || error;
+            if (msg.indexOf('App Not Ready') > -1) throw new Error(homey.__('bllNotRunning'));
+        }
+    },
     async getLocales({ homey }) {
         return await locale.all;
     },
@@ -150,7 +258,7 @@ module.exports =
         }
         throw new Error("Incorect call");
     },
-    async getDownloadUrl({homey, body}) {
+    async getDownloadUrl({ homey, body }) {
         return await homey.app.getDownloadUrl(body);
     }
 };

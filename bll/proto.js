@@ -3,11 +3,19 @@ var zlib = require('zlib');
 
 if (typeof String.prototype.parseFunction != 'function') {
     String.prototype.parseFunction = function () {
-        var funcReg = /function *\(([^()]*)\)[ \n\t]*{(.*)}/gmi;
-        var match = funcReg.exec(this.replace(/\n/g, ' '));
-
+        const funcReg = /function *\(([^()]*)\)[ \n\t]*{(.*)}/gmis;
+        //const match = funcReg.exec(this.replace(/\n/g, ' '));
+        const match = funcReg.exec(this);
         if(match) {
             return new Function(match[1].split(','), match[2]);
+        }
+        const funcInlineReg = /(?:\()?(.*)(?:\))?=>(.*)/gmis;
+        //const match = funcReg.exec(this.replace(/\n/g, ' '));
+        const matchInline = funcInlineReg.exec(this);
+        if(matchInline) {
+          let func = matchInline[2].trim();
+          if(!func.startsWith('{') || !func.startsWith('}')) func = 'return ' + func;
+          return new Function(matchInline[1].replace(')', '').trim().split(','), func);
         }
 
         return null;

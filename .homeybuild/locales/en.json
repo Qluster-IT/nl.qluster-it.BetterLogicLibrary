@@ -63,18 +63,25 @@
 	"Alter_default_datetime_formats":"Here you can alter the definition of any default datetime formats.",
 	"Applies_to_every_app":"This will be applied to every app using the BLL coding or DateTime.",
 	"Save":"Save",
-
 	"Configure_fileserver":"Here you can configure the File Server that can be consumed by other apps, like <a href=\"#\" bl-href=\"https://homey.app/a/nl.nielsdeklerk.log/\">Simple (Sys) LOG</a>, to serve files on you LAN or to download them on the Homey Mobile App or the <a href=\"#\" bl-href=\"https://tools.developer.homey.app/tools/app-settings\">Developertools</a>.",
 	"Auto_start_fileserver":"Automaticly start",
 	"Auto_shutdown_fileserver":"Automaticly shutdown",
 	"Configure_port_fileserver":"Configure the Port for the File Server to use for incoming connections.",
 	"Automaticly_started_fileserver":"The File Server can be automaticly started when BLL is started, speeding up the first File request.",
-	"Automaticly_shutdown_fileserver":"You can close the server automaticly as soon as there are no more files currently waiting for download, saving resources.",
-	
+	"Automaticly_shutdown_fileserver":"You can close the server automaticly as soon as there are no more files currently waiting for download, saving resources.",	
 	"defineFileAvailableDuration":"Define the duration files will be available for download.",
 	"fileAvailableDuration":"Duration availability (in seconds)",
-	"":"",
-	"":"",
+
+
+
+
+	"Exports":"Exports",
+	"Excel":"Excel",
+	"Shema_example":"Here is an example schema to use in the format JSON as Excel flowcard.",
+	"Default Date Format":"Default Date Format",
+	"excel_defaultdateformat_example":"Here you can configure the default datetime format to use in Excel files. Please note that this is Excel formatting, not BLL coding.",
+
+	"Auto":"Auto",
 	"":"",
 	"":"",
 	"":"",

@@ -53,6 +53,7 @@
 </head>
 
 <body ng-controller="VariableSettingsController as vm" class="main-body container-fluid h-100 g-0 d-flex flex-column" ng-class="{'show-buttons':temp.showButtons}">
+    <div class="busyOverlay" ng-show="view.isBusy"></div>
     <nav class="navbar sticky-top navbar-expand font-dark navbar-dark bg-dark">
         <div class="container-fluid p-0">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,6 +70,9 @@
                                     <label class="form-check-label" for="autoupdate">Auto update</label>
                                 </div>
                             </li>
+                            <li><a class="dropdown-item" href="#" ng-click="downloadFile('xlsx')">Export as Excel</a></li>
+                            <li><a class="dropdown-item" href="#" ng-click="downloadFile('csv')">Export as CSV</a></li>
+                            <li><a class="dropdown-item" href="#" ng-click="downloadFile('json')">Export as json</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -88,6 +92,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" ng-class="{active:view.id=='fileserver'}" ng-click="view.id='fileserver'" data-i18n="File Server">File Server</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" ng-class="{active:view.id=='exports'}" ng-click="view.id='exports'" data-i18n="Exports">Exports</a>
                     </li>
 
                 </ul>
@@ -207,9 +214,10 @@
                 <div class="card mt-1">
                     <div class="card-header fw-bolder" data-i18n="File Server">File Server</div>
                     <div class="card-body">
-                        <div class="col-12" data-i18n="Configure_fileserver">Here you can configure the File Server that can be consumed by other apps, like <a href="#" bl-href="https://homey.app/a/nl.nielsdeklerk.log/">Simple (Sys) LOG</a>, to serve files on you LAN or to download them on the Homey Mobile App or the <a href="#" bl-href="https://tools.developer.homey.app/tools/app-settings">Developertools</a>.</div>
+                        <div class="col-12" data-i18n="Configure_fileserver">Here you can configure the File Server that can be consumed by other apps, like <a href="#" bl-href="https://homey.app/a/nl.nielsdeklerk.log/">Simple (Sys) LOG</a>, to serve files on you LAN or to download them on the Homey
+                            Mobile App or the <a href="#" bl-href="https://tools.developer.homey.app/tools/app-settings">Developertools</a>.</div>
 
-                        
+
                         <div class="form-label mb-1 mt-3" data-i18n="Configure_port_fileserver">
                             Configure the Port for the File Server to use for incoming connections.
                         </div>
@@ -230,7 +238,7 @@
                             You can close the server automaticly as soon as there are no more files currently waiting for download.
                         </div>
                         <div class="form-check form-switch">
-                            <input class="form-check-input hy-nostyle" type="checkbox" role="switch" id="autoShutdown" ng-model="vars.fileserver.autoShutdown" ng-disabled="vars.fileserver.autoStart"  />
+                            <input class="form-check-input hy-nostyle" type="checkbox" role="switch" id="autoShutdown" ng-model="vars.fileserver.autoShutdown" ng-disabled="vars.fileserver.autoStart" />
                             <label class="form-check-label" for="autoShutdown" data-i18n="Auto_shutdown_fileserver">Auto Shutdown</label>
                         </div>
 
@@ -245,11 +253,76 @@
                 </div>
             </form>
             <div class="btn-group fixed-bottom">
-                <button type="button" class="btn btn-primary hy-nostyle" ng-click="fileserverForm.$valid && fileserverForm.$dirty ? saveFileServer() : null;" ng-disabled="!fileserverForm.$valid || !fileserverForm.$dirty"  data-i18n="Save">Save</button>
+                <button type="button" class="btn btn-primary hy-nostyle" ng-click="fileserverForm.$valid && fileserverForm.$dirty ? saveFileServer() : null;" ng-disabled="!fileserverForm.$valid || !fileserverForm.$dirty" data-i18n="Save">Save</button>
             </div>
         </div>
     </div>
+    <div class="main-view d-flex flex-column container g-2 flex-grow-1" ng-show="view.id=='exports'">
 
+        <div class="flex-grow-1 overflow-y-auto pt-2 mb-btn">
+            <form role="form" name="exportsForm">
+                <div class="card mt-1">
+                    <div class="card-header fw-bolder" data-i18n="Excel">Excel</div>
+                    <div class="card-body">
+                        <div class="col-12 mb-1" data-i18n="excel_defaultdateformat_example">Here you can configure the default datetime format to use in Excel files. Please note that this is Excel formatting, not BLL coding.</div>
+                        <div class="col-12 form-group form-floating">
+                            <input type="text" class="form-control hy-nostyle" name="excel_defaultdateformat" placeholder="Serverport" ng-model="vars.exports.excel_defaultdateformat" ng-model-options="{ debounce: 300 }" required="true" />
+                            <label class="hy-nostyle" for="excel_defaultdateformat" data-i18n="Default Date Format">Default Date Format</label>
+                        </div>
+                        <div class="col-12 form-label" bl-translate>Set the filenames to use when exporting the variables.</div>
+                        <div class="col-12 form-group form-floating">
+                            <input type="text" class="form-control hy-nostyle" name="xlsxFilename" placeholder="Excel filename (* BLL supported)" ng-model="vars.exports.xlsxFilename" ng-model-options="{ debounce: 300 }" minlength="1" required="true" />
+                            <label class="hy-nostyle" for="xlsxFilename" bl-translate>Excel filename (* BLL supported)</label>
+                        </div>
+                        <div class="col-12 form-group form-check form-switch">
+                            <input class="form-check-input hy-nostyle" type="checkbox" role="switch" id="includeUtcInExcel" checked ng-model="vars.exports.includeUtcInExcel" />
+                            <label class="form-check-label" for="includeUtcInExcel">Include UTC in Excel</label>
+                        </div>
+
+                        <div class="col-12 form-group form-floating mb-2">
+                            <input type="text" class="form-control hy-nostyle" name="csvFilename" placeholder="CSV filename (* BLL supported)" ng-model="vars.exports.csvFilename" ng-model-options="{ debounce: 300 }" minlength="1" required="true" />
+                            <label class="hy-nostyle" for="csvFilename" bl-translate>CSV filename (* BLL supported)</label>
+                        </div>
+
+                        <div class="col-12 form-group form-floating mb-2">
+                            <input type="text" class="form-control hy-nostyle" name="jsonFilename" placeholder="JSON filename (* BLL supported)" ng-model="vars.exports.jsonFilename" ng-model-options="{ debounce: 300 }" minlength="1" required="true" />
+                            <label class="hy-nostyle" for="jsonFilename" bl-translate>JSON filename (* BLL supported)</label>
+                        </div>
+
+                        <div class="col-12 mt-3" data-i18n="Shema_example">Here is an example schema to use in the format JSON as Excel flowcard.</div>
+
+                        <pre class="pre" style="user-select: all;">[
+    {
+        column: 'Name',
+        type: String,
+        value: student => student.name
+    },
+    {
+        column: 'Date of Birth',
+        type: Date,
+        format: 'mm/dd/yyyy',
+        value: student => student.dateOfBirth
+    },
+    {
+        column: 'Cost',
+        type: Number,
+        format: '#,##0.00',
+        value: student => student.cost
+    },
+    {
+        column: 'Paid',
+        type: Boolean,
+        value: student => student.paid
+    }
+]</pre>
+                    </div>
+                </div>
+            </form>
+            <div class="btn-group fixed-bottom">
+                <button type="button" class="btn btn-primary hy-nostyle" ng-click="exportsForm.$valid && exportsForm.$dirty ? saveExports() : null;" ng-disabled="!exportsForm.$valid || !exportsForm.$dirty" data-i18n="Save">Save</button>
+            </div>
+        </div>
+    </div>
     <div class="main-view d-flex flex-column container g-2 flex-grow-1" ng-show="view.id=='coding' || view.id=='locale_timezone' || view.id=='formats'">
 
         <div class="flex-grow-1 overflow-y-auto pt-2" ng-show="view.id=='coding'">

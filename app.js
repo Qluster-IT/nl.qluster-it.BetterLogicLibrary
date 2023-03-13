@@ -441,6 +441,7 @@ class BetterLogic extends Homey.App {
 
 
 
+		await this.setExports();
 
 		//let timeoutset = false;
 		this.homey.setTimeout(async () => {
@@ -461,8 +462,9 @@ class BetterLogic extends Homey.App {
 
 		BL.ready.then(async (x) => {
 			this.bl = x;
+			
 			await this.initFileServerFromSettings();
-
+			
 			variableManager.init(this.homey);
 
 			//if(!timeoutset)(timeoutset=true) | await this.homey.api.realtime("running");
@@ -635,28 +637,47 @@ class BetterLogic extends Homey.App {
 					switch (args.returnType || 'xlsx_base64') {
 						//case "csv":
 						case "xlsx_base64":
-							let json =JSON.parse(args.json);
-							let headers={};
-							for (let i = 0; i < json.length; i++) {
-								const row = json[i];
-								if(!BL._.isArray(row)) for (const columnKey in row) {
-									if (Object.hasOwnProperty.call(row, columnKey)) {
-										const column = row[columnKey];
-										if(!headers[columnKey]) headers[columnKey] = {value:columnKey};
-										row[columnKey] = {value: row[columnKey]}
+							// https://github.com/catamphetamine/write-excel-file/blob/master/README.md
+							let json = JSON.parse(args.json);
+
+							let schema;
+							if (!args.schema) {
+								let headers = {};
+								for (let i = 0; i < json.length; i++) {
+									const row = json[i];
+									if (!BL._.isArray(row)) {
+										for (const columnKey in row) {
+											if (Object.hasOwnProperty.call(row, columnKey)) {
+												const column = row[columnKey];
+												if (!headers[columnKey]) headers[columnKey] = {
+													value: columnKey.substring(0, 1).toUpperCase() + columnKey.substring(1),
+													fontWeight: 'bold'
+												};
+												row[columnKey] = { value: row[columnKey] }
+											}
+										}
+										json[i] = [];
+										for (const key in headers) {
+											if (Object.hasOwnProperty.call(headers, key)) {
+												json[i].push(row[key] || undefined);
+
+											}
+										}
 									}
-									json[i] = BL._.toArray(row);
+
 								}
-								
+								headers = BL._.toArray(headers);
+								json.unshift(headers);
 							}
-							headers = BL._.toArray(headers);
-							json.unshift(headers);
+							else {
+								schema = eval(args.schema);
+							}
 							let xlsxBuffer = await BL.json.toExcel(json, {
-								//schema,
-								sheet: 'Log',// + BL.datetime.toString('datetime'),
-								stickyRowsCount: 1,
+								schema,
+								sheet: args.sheetName || undefined,//: 'Log',// + BL.datetime.toString('datetime'),
+								stickyRowsCount: args.stickyRowsCount !== undefined ? args.stickyRowsCount : 1,
 								buffer: true, //returnType == 'xlsx' ? true : false,
-								dateFormat: args.defaultDate || 'yyyy-mm-ddThh:mm:ss'
+								dateFormat: args.defaultDate //|| 'yyyy-mm-ddThh:mm:ss'
 							});
 							result.result = xlsxBuffer;
 							if (args.returnType == 'xlsx_base64') {
@@ -686,6 +707,9 @@ class BetterLogic extends Homey.App {
 					this.homey.api.realtime('bllSetLocale', this.locale);
 				} else if (settingName == 'fileserver') {
 					await this.initFileServerFromSettings();
+				} else if (settingName == 'exports') {
+					await this.setExports();
+					this.homey.api.realtime('bllSetExports', this.exportsSettings);
 				}
 			});
 
@@ -742,12 +766,30 @@ class BetterLogic extends Homey.App {
 		else this.fileServer = await new FileServer().init({ homey: this.homey, settings: this.fileserverSettings });
 	}
 
+	async setExports() {		
+		this.exportsSettings = await this.homey.settings.get('exports');
+		
+		let changed = false;
+		if (!this.exportsSettings) this.exportsSettings = {};
+		if (!this.exportsSettings.csvFilename && (changed = true)) this.exportsSettings.csvFilename = "Vars_{[date('yyyy-MM-dd_HH-mm-ss')]}.csv";
+		if (!this.exportsSettings.jsonFilename && (changed = true)) this.exportsSettings.jsonFilename = "Vars_{[date('yyyy-MM-dd_HH-mm-ss')]}.json";
+		if (!this.exportsSettings.xlsxFilename && (changed = true)) this.exportsSettings.xlsxFilename = "Vars_{[date('yyyy-MM-dd_HH-mm-ss')]}.xlsx";
+		if (!this.exportsSettings.includeUtcInExcel && (changed = true)) this.exportsSettings.includeUtcInExcel = false;
+		if (changed) this.homey.settings.set('exports', this.exportsSettings);
+
+
+		// if (!this.exportsSettings || !Object.keys(this.exportsSettings).length) {
+		// 	this.exportsSettings = { excel_defaultdateformat: 'yyyy-mm-dd hh:mm:ss' };
+		// 	await this.homey.settings.set('exports', this.exportsSettings);
+		// }
+	}
+
 	async initFileServerFromSettings() {
 		this.fileserverSettings = await this.homey.settings.get('fileserver');
 		if (!this.fileserverSettings || !Object.keys(this.fileserverSettings).length) {
 			this.fileserverSettings = { port: 47330, autoStart: false, autoShutdown: true, fileAvailableDuration: 60 };
 			await this.homey.settings.set('fileserver', this.fileserverSettings);
-		} //else if(this.fileserverSettings.autoStart) 
+		}
 		await this.initFileServer();
 	}
 

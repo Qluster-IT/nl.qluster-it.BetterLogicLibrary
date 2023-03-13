@@ -52,6 +52,7 @@ class BLL {
     destroy() {
 
         if (BLL.datetime) BLL.datetime.destroy();
+        if (BLL.json) BLL.json.destroy();
         //if (this.api) this.api.unregister();
         // delete BLL._current;
         // BLL.__ = null;
@@ -124,7 +125,10 @@ class BLL {
                         }
                         let json = await this.getLibrary('json');
                         BLL._json = this.requireFromString(json.file, 'json');
-                        BL.json = BLL.json;                        
+                        BL.json = BLL.json;
+                        
+
+                        await BLL.json.init(this);
                         break;
                 }
             } catch (error) { BL.homey.error(error); }

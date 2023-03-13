@@ -20,14 +20,23 @@ class Json {
   //   this.asd = "asd";
   // }
 
-  // /** @private */
-  // static async init(bll) {
-  //   let a = writeXlsxFile;
-  //   BL.homey.log(typeof(writeXlsxFile));
-  // }
+  /** @private */
+  static async init(bll) {
+    Json.exports = await bll.get('exports');
+    BL.homey.log('json.init', Json.exports);
 
-  // static destroy() {
-  // }
+    this.onRealtime = (event, data) => {
+      switch (event) {
+        case "bllSetExports": Json.exports=data;
+      }
+    };
+    BL.Current.api.on('realtime', this.onRealtime);
+    //this.bll = bll;
+  }
+
+  static destroy() {
+    BL.Current.api.off('realtime', this.onRealtime);
+  }
 
   /**
    * 
@@ -35,6 +44,7 @@ class Json {
    * @param {import('./d.ts/json.toExcel').WithSchemaOptions|import('./d.ts/json.toExcel').WithSchemaOptionsMultipleSheets} options
    */
   static async toExcel(data, options) {
+    if(options && !options.dateFormat) options.dateFormat = Json.exports.excel_defaultdateformat || 'yyyy-mm-dd hh:mm:ss';
     return await writeXlsxFile(data, options);
 
   }

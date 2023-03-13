@@ -1,5 +1,5 @@
 ﻿angular.module('variableApp', ['smart-table', 'bll', 'ui.codemirror'])
-    .controller('VariableSettingsController', ['$scope', '$bl', '$window', function ($scope, $bl, $window) {
+    .controller('VariableSettingsController', ['$scope', '$bl', '$window', '$http', function ($scope, $bl, $window, $http) {
         var vm = this;
         
         vm.homey = $window.Homey;
@@ -13,7 +13,7 @@
         let __ = $scope.__ = homey.__;
         
 
-        const view = $scope.view = { id: undefined, bottom: undefined, autoUpdate: true };
+        const view = $scope.view = { id: undefined, bottom: undefined, autoUpdate: true, downloadFileLink:undefined };
         const temp = $scope.temp = { dateFormats: {} };
         const vars = $scope.vars = {
             locales: [],
@@ -137,6 +137,13 @@
             });
         };
 
+        $scope.saveExports = async function () {
+            $scope.exportsForm.$setSubmitted();
+            $scope.exportsForm.$setPristine();
+            await $bl.set('exports', vars.exports, () => {
+                
+            });
+        };
         $scope.updateExamples = function () {
             $scope.updateModuleExample();
             $scope.updateDateExample();
@@ -229,7 +236,18 @@
             vm.homey.set('javascript_functions', angular.copy($scope.functions));
         };
 
-
+        $scope.downloadFile = async (type) => {
+            view.isBusy = true;
+            //let opt = { returnType: type };
+            let downloadLink = await $bl.api("GET", "/getvariablesdownloadurl/" + type);
+            if(!downloadLink) {
+                $scope.$apply(() => {
+                    (view.isBusy = false);
+                });
+                return (view.isBusy = false);
+            } else 
+            view.downloadFileLink = downloadLink;
+        };
 
 
         vm.init = async function () {
@@ -244,14 +262,27 @@
                 }
             });
             $bl.api("GET", "/locales", null, (x) => vars.locales = x);
-            $bl.get("fileserver", async (x) => {
-                vars.fileserver = x;
-            });
+            $bl.get("fileserver", async (x) => { vars.fileserver = x; });
+            $bl.get("exports", async (x) => { vars.exports = x; });
             $scope.updateExamples();
             $scope.getFunctionFromSettings();
 
 
             vm.loadVariables();
+
+            homey.on('downloadFileReady', (link)=> {
+                console.log('downloadFileReady');
+                if(!view.downloadFileLink || view.downloadFileLink.token !== link.token) return;
+                $http.get(link.localTestUrl, {timeout:1000}).catch((err) => {
+                    //if(x) $bl.openURL(link.cloudUrl);
+                    if (err) $bl.openURL(link.cloudUrl);
+                    view.isBusy = false;
+                }).then((x) => {
+                    if (x) $bl.openURL(link.localUrl);
+                    view.isBusy = false;
+                });
+            });
+
 
             vm.homey.on('setting_changed', function ({ variable, date }) {
                 if (!view.autoUpdate) return;
