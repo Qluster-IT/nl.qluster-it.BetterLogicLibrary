@@ -788,6 +788,7 @@ class BetterLogic extends Homey.App {
 		if (!this.exportsSettings.jsonFilename && (changed = true)) this.exportsSettings.jsonFilename = "Vars_{[date('yyyy-MM-dd_HH-mm-ss')]}.json";
 		if (!this.exportsSettings.xlsxFilename && (changed = true)) this.exportsSettings.xlsxFilename = "Vars_{[date('yyyy-MM-dd_HH-mm-ss')]}.xlsx";
 		if (!this.exportsSettings.includeUtcInExcel && (changed = true)) this.exportsSettings.includeUtcInExcel = false;
+		if (!this.exportsSettings.excel_defaultdateformat && (changed = true)) this.exportsSettings.excel_defaultdateformat = 'yyyy-mm-dd hh:mm:ss';
 		if (changed) this.homey.settings.set('exports', this.exportsSettings);
 
 

@@ -9,10 +9,14 @@ const { BL } = require("betterlogiclibrary");
 
 //https://www.npmjs.com/package/write-excel-file?activeTab=readme#cdn
 const writeXlsxFile = BL.submodules["write-excel-file-min"];
-const {json2csvAsync} = BL.submodules["json2csv"];
+const { json2csvAsync } = BL.submodules["json2csv"];
 
 
 class Json {
+
+  static get exports() { if (!Json._exports) Json._exports = {}; return Json._exports; }
+
+  static set exports(val) { return Json._exports = val; }
 
 
   // constructor() {
@@ -27,7 +31,7 @@ class Json {
 
     this.onRealtime = (event, data) => {
       switch (event) {
-        case "bllSetExports": Json.exports=data;
+        case "bllSetExports": Json.exports = data || {};
       }
     };
     BL.Current.api.on('realtime', this.onRealtime);
@@ -44,11 +48,11 @@ class Json {
    * @param {import('./d.ts/json.toExcel').WithSchemaOptions|import('./d.ts/json.toExcel').WithSchemaOptionsMultipleSheets} options
    */
   static async toExcel(data, options) {
-    if(options && !options.dateFormat) options.dateFormat = Json.exports.excel_defaultdateformat || 'yyyy-mm-dd hh:mm:ss';
+    if (options && !options.dateFormat) options.dateFormat = Json.exports.excel_defaultdateformat || 'yyyy-mm-dd hh:mm:ss';
     return await writeXlsxFile(data, options);
 
   }
-  
+
   static async toCsv(data, options) {
     return await json2csvAsync(data, options);
 
