@@ -112,10 +112,10 @@ async function updateVariable(name, value, type, remove = false, auto = false) {
 
     if (!remove) {
         variables.unshift(newVariable);
-        homey.api.realtime('setting_changed', {variable : newVariable, date:BL.datetime.toString('datetime', newVariable.lastChanged) });
+        homey.api.realtime('variable_changed', {variable : newVariable, date:BL.datetime.toString('datetime', newVariable.lastChanged) });
     } else {
         oldVariable.remove = true;
-        homey.api.realtime('setting_changed', {variable : oldVariable, date:BL.datetime.toString('datetime', oldVariable.lastChanged) });
+        homey.api.realtime('variable_changed', {variable : oldVariable, date:BL.datetime.toString('datetime', oldVariable.lastChanged) });
     }
 
     return await processValueChanged(variables, oldVariable, newVariable);
@@ -158,7 +158,7 @@ async function processValueChanged(variables, oldVariable, newVariable) {
         }
         //getTrigger('any_variable_changed').trigger({ "variable": newVariable.name, "value": newVariable.value }, tokens);//newVariable, tokens);
         getTrigger('any_variable_changed').trigger(tokens, newVariable);//newVariable, tokens);
-        homey.api.realtime('variable_update', newVariable);
+        //homey.api.realtime('variable_update', newVariable);
     }
 
     if (newVariable && newVariable.type == 'boolean') {

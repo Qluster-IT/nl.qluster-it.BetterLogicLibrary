@@ -284,7 +284,7 @@
             });
 
 
-            vm.homey.on('setting_changed', function ({ variable, date }) {
+            vm.homey.on('variable_changed', function ({ variable, date }) {
                 if (!view.autoUpdate) return;
                 let findIndex = _.findIndex(vm.variables, x => x.name === variable.name);
                 $scope.$apply(function () {
