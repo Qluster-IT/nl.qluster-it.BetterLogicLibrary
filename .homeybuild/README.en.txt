@@ -13,6 +13,7 @@ This apps supplies your Homey with Better Logic and Libraries:
 * A File Server that can be consumed by other apps, like the Simple (Sys) LOG, to serve files on you LAN or to download them on the Homey Mobile App or the Developertools.
 * Libraries for other Apps to consume, reducing app sizes and redundancies and improving management.
 * APIs for variable management, using the File Server or other BLL functions.
+* Flowcards to convert any JSON object/array into CSV or Excel.
 
 Check out the (new) App Settings for all features and explanations, like BLL coding in supported apps!
 

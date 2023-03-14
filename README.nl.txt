@@ -13,6 +13,7 @@ Deze app voorziet je Homey van betere logica en bibliotheken:
 * Een File Server die gebruikt kan worden door andere apps, zoals de Simple (Sys) LOG, om bestanden op je LAN te delen of om ze te downloaden op de Homey Mobiele App of de Developertools.
 * Bibliotheken voor andere apps om te gebruiken, waardoor app-groottes en redundanties worden verkleind en het beheer wordt verbeterd.
 * API's voor variabel beheer, met behulp van de bestandsserver of andere BLL-functies.
+* Flowkaarten om een JSON-object/array om te zetten in CSV of Excel.
 
 Bekijk de (nieuwe) app-instellingen voor alle functies en uitleg, zoals BLL-codering in ondersteunde apps!
 

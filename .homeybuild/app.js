@@ -546,6 +546,7 @@ class BetterLogic extends Homey.App {
 
 
 			let execute_bl_expression = this.homey.flow.getActionCard('execute_bl_expression');
+			
 			execute_bl_expression.registerRunListener(async (args, state) => {
 				// if(args.code && !args.expression) {
 				// 	let val = JSON.stringify(await this.runSandBox(args.code, {arg:args.argument}));

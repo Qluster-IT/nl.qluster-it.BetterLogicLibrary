@@ -5,7 +5,7 @@ const Homey = require('homey');
 var math = require('../util/math.js');
 var util = require('../util/util.js');
 
-const {BL } = require('betterlogiclibrary');
+const { BL } = require('betterlogiclibrary');
 
 let homey;
 let lastQuery;
@@ -15,10 +15,10 @@ module.exports = {
     if (variableManager === undefined) {
       return;
     }
-    
-		this.variableManager = variableManager;
+
+    this.variableManager = variableManager;
     this.homey = variableManager.homey;
-    
+
     homey = variableManager.homey;
 
 
@@ -59,7 +59,7 @@ module.exports = {
     };
     this.setArgumentNames = async (card) => {
       let args = await card.card.getArgumentValues();
-      args = BL._.filter(args, x=>x.variable);
+      args = BL._.filter(args, x => x.variable);
       card.type = this.getTypeFromCardId(card.id);
       card.names = BL._.uniq(args.map(x => x.variable.name));
       //console.log(args);      
@@ -67,13 +67,13 @@ module.exports = {
 
     this.setVariablesFromArguments = async () => {
       let types = BL._.uniqBy(BL._.map(this.cards, c => { return { type: c.type }; }), 'type');
-      types = BL._.filter(types, t=>t.type!='any');
+      types = BL._.filter(types, t => t.type != 'any');
       BL._.each(types, t => t.names = BL._.uniq(BL._.flatMap(BL._.filter(this.cards, c => c.type == t.type), x => x.names)));
 
 
       let variables = variableManager.getVariables();
       for (const type of types) {
-        
+
         for (const name of type.names) {
           if (!BL._.find(variables, v => v.name === name)) {
             variableManager.addVariable(name, type.type);
@@ -82,7 +82,7 @@ module.exports = {
         }
 
         for (const variable of variables) {
-          if(variable.type!==type.type) continue;
+          if (variable.type !== type.type) continue;
           if (!BL._.find(type.names, v => v === variable.name)) {
             let vari = variableManager.getVariable(variable.name);
             if (vari && vari.auto === true) {
@@ -92,7 +92,7 @@ module.exports = {
           }
         }
       }
-      
+
       //this.homey.api.realtime('setting_changed'); // Not needed, will trigger for each change.
 
     };
@@ -106,7 +106,7 @@ module.exports = {
     // if_variable_changed
     let if_variable_changed = this.homey.flow.getTriggerCard('if_variable_changed');
     if_variable_changed
-      .registerRunListener( async (args, state) => {
+      .registerRunListener(async (args, state) => {
         if (args.variable && state.name && args.variable.name == state.name) {
           return true; // true to make the flow continue, or false to abort
         }
@@ -120,7 +120,7 @@ module.exports = {
     // if_variable_set
     let if_variable_set = this.homey.flow.getTriggerCard('if_variable_set');
     if_variable_set
-      .registerRunListener( async (args, state) => {
+      .registerRunListener(async (args, state) => {
         if (args.variable && state.name && args.variable.name == state.name) {
           return true; // true to make the flow continue, or false to abort
         }
@@ -134,7 +134,7 @@ module.exports = {
     // if_one_of_variable_changed
     let if_one_of_variable_changed = this.homey.flow.getTriggerCard('if_one_of_variable_changed');
     if_one_of_variable_changed
-      .registerRunListener( async (args, state) => {
+      .registerRunListener(async (args, state) => {
         if (args.variable && state.name) {
           try {
             var selectedVariables = args.variable.replace(/^\s+|\s+$/g, "").split(/\s*,\s*/);
@@ -149,7 +149,7 @@ module.exports = {
     // if_number_variable_changed
     let if_number_variable_changed = this.homey.flow.getTriggerCard('if_number_variable_changed');
     if_number_variable_changed
-      .registerRunListener( async (args, state) => {
+      .registerRunListener(async (args, state) => {
         if (args.variable && state && state.oldVariable && state.newVariable) {
           if (args.variable.name === state.newVariable.name) {
             if (args.action === 'changed') {
@@ -181,8 +181,15 @@ module.exports = {
     // debug_any_variable_changed
     let debug_any_variable_changed = this.homey.flow.getTriggerCard('debug_any_variable_changed');
     debug_any_variable_changed
-      .registerRunListener( async (args, state) => {
+      .registerRunListener(async (args, state) => {
         return false; // true to make the flow continue, or false to abort
       });
+
+    let any_variable_changed = this.homey.flow.getTriggerCard('any_variable_changed');
+    any_variable_changed
+      .registerRunListener(async (args, state) => {
+        return false; // true to make the flow continue, or false to abort
+      });
+
   }
 };

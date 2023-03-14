@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "3.1.4",
+  "version": "3.1.7",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -245,6 +245,55 @@
           "en": "Any variable changed (DEBUG)",
           "nl": "Enige variabele gewijzigd (DEBUG)"
         }
+      },
+      {
+        "id": "any_variable_changed",
+        "title": {
+          "en": "Any variable changed",
+          "nl": "Enige variabele gewijzigd"
+        },
+        "tokens": [
+          {
+            "name": "variableName",
+            "type": "string",
+            "title": {
+              "en": "Variable Name",
+              "nl": "Variabele naam"
+            }
+          },          
+          {
+            "name": "variableType",
+            "type": "string",
+            "title": {
+              "en": "Variable Type",
+              "nl": "Variabele Type"
+            }
+          },
+          {
+            "name": "variableValueString",
+            "type": "string",
+            "title": {
+              "en": "Variable Value (String)",
+              "nl": "Variabele waarde (String)"
+            }
+          },
+          {
+            "name": "variableValueNumber",
+            "type": "number",
+            "title": {
+              "en": "Variable Value (Number)",
+              "nl": "Variabele waarde (Number)"
+            }
+          },
+          {
+            "name": "variableValueBoolean",
+            "type": "boolean",
+            "title": {
+              "en": "Variable Value (Yes/No)",
+              "nl": "Variabele waarde (Ja/Nee)"
+            }
+          }
+        ]
       }
     ],
     "conditions": [
@@ -535,6 +584,10 @@
           {
             "name": "expression",
             "type": "text",
+            "title": {
+              "en": "BLL expression",
+              "nl": "BLL-expressie"
+            },
             "placeholder": {
               "en": "\"test\"=== \"test\" && 1 < 2"
             }
