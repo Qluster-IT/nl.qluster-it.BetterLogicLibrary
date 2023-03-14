@@ -13,7 +13,7 @@
         let __ = $scope.__ = homey.__;
         
 
-        const view = $scope.view = { id: undefined, bottom: undefined, autoUpdate: true, downloadFileLink:undefined };
+        const view = $scope.view = { id: undefined, bottom: undefined, autoUpdate: true, downloadFileLink:undefined, isBusy:false };
         const temp = $scope.temp = { dateFormats: {} };
         const vars = $scope.vars = {
             locales: [],

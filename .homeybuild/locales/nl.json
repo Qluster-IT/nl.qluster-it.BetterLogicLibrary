@@ -26,7 +26,7 @@
 	"Name":"Naam",
 	"Value":"Waarde",
 	"Type":"Type",
-	"Last set":"Laatste ingesteld",
+	"Last set":"Laatst ingesteld",
 	"BLL Coding":"BLL-codering",
 	"BLL_codings_are_expressions":"BLL-coderingen zijn expressies in tekstargumenten van flowkaarten.",
 	"In_every_app_that_supports":"In elke app die BLL-codering ondersteunt, kunt u voor elk tekstargument in flowkaarten dat door de BLL-decoder gaat <pre class=\"d-inline\">{[ expression ]}</pre> gebruiken.",

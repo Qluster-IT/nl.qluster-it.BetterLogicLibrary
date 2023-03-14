@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "3.1.3",
+  "version": "3.1.4",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -1230,6 +1230,72 @@
               "en": "Trigger",
               "nl": "Trigger"
             }
+          }
+        ]
+      },
+      {
+        "id": "get_variables",
+        "title": {
+          "en": "Get all variables",
+          "nl": "Ontvang alle variabelen"
+        },
+        "titleFormatted": {
+          "en": "Get all variables as [[returnType]]",
+          "nl": "Ontvang alle variabelen als [[returnType]]"
+        },
+        "args": [
+          {
+            "type": "dropdown",
+            "name": "returnType",      
+            "placeholder": {
+              "en": "Choose the Format",
+              "nl": "Kies het format"
+            },      
+            "title": {
+              "en": "Format",
+              "nl": "Format"
+            },
+            "values": [
+              {
+                "id": "json",
+                "label": {
+                  "en": "JSON"
+                }
+              },
+              {
+                "id": "json_base64",
+                "label": {
+                  "en": "JSON (base64)"
+                }
+              },
+              {
+                "id": "csv",
+                "label": {
+                  "en": "CSV"
+                }
+              },
+              {
+                "id": "csv_base64",
+                "label": {
+                  "en": "CSV (base64)"
+                }
+              },
+              {
+                "id": "xlsx_base64",
+                "label": {
+                  "en": "Excel (base64)"
+                }
+              }
+            ]
+          }
+        ],
+        "tokens": [
+          {
+            "name": "variables",
+            "type": "string",
+            "title": {
+              "en": "Variables"
+            }            
           }
         ]
       }

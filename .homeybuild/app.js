@@ -462,9 +462,9 @@ class BetterLogic extends Homey.App {
 
 		BL.ready.then(async (x) => {
 			this.bl = x;
-			
+
 			await this.initFileServerFromSettings();
-			
+
 			variableManager.init(this.homey);
 
 			//if(!timeoutset)(timeoutset=true) | await this.homey.api.realtime("running");
@@ -695,6 +695,18 @@ class BetterLogic extends Homey.App {
 			});
 
 
+			// FLOW Action Card, get_log
+			let actionGetLog = this.homey.flow.getActionCard("get_variables");
+			actionGetLog.registerRunListener(async (args, state) => {
+				try {
+					return { variables: await this.getVariables(args) };
+				} catch (error) {
+					throw new Error(error);
+				}
+
+			});
+
+
 
 
 
@@ -766,9 +778,9 @@ class BetterLogic extends Homey.App {
 		else this.fileServer = await new FileServer().init({ homey: this.homey, settings: this.fileserverSettings });
 	}
 
-	async setExports() {		
+	async setExports() {
 		this.exportsSettings = await this.homey.settings.get('exports');
-		
+
 		let changed = false;
 		if (!this.exportsSettings) this.exportsSettings = {};
 		if (!this.exportsSettings.csvFilename && (changed = true)) this.exportsSettings.csvFilename = "Vars_{[date('yyyy-MM-dd_HH-mm-ss')]}.csv";
@@ -818,6 +830,95 @@ class BetterLogic extends Homey.App {
 			}
 		}
 	}
+
+
+	async getVariables({ returnType, maxSizeKb }) {
+		const vars = await variableManager.getVariables();
+		let result;
+		switch (returnType) {
+			case 'csv':
+			case 'csv_base64':
+				{
+					result = await BL.json.toCsv(vars, { useDateIso8601Format: true, emptyFieldValue: '' });
+					if (maxSizeKb && result.length > maxSizeKb) result = substring(result, 0, (maxSizeKb * 1000));
+					if (returnType == 'csv_base64') {
+						result = Buffer.from(result).toString('base64');
+					}
+					break;
+				}
+			case 'xlsx':
+			case 'xlsx_base64':
+				{
+					try {
+						let date = BL.json.exports.excel_defaultdateformat || 'yyyy-mm-dd hh:mm:ss';
+						let schema = [
+							{
+								column: BL.homey.__('Name'),
+								type: String,
+								value: v => v.name,
+								width: BL._.max([BL._.max(BL._.map(vars, 'name.length')), BL.homey.__('Name').length])
+							},
+							{
+								column: BL.homey.__('Value'),
+								type: String,
+								value: v => v.value !== undefined && v.value !== null ? v.value.toString() : undefined,
+								width: BL._.max([BL._.max(BL._.map(vars, 'value.length')), BL.homey.__('Value').length])
+							},
+							{
+								column: BL.homey.__('Type'),
+								type: String,
+								value: v => v.type,
+								width: BL._.max([BL._.max(BL._.map(vars, 'type.length')), BL.homey.__('Type').length])
+							},
+							{
+								column: BL.homey.__('Last set'),
+								type: Date,
+								format: date,
+								value: v => BL.datetime.toLocale(v.lastChanged),
+								width: date.length
+							},
+							{
+								column: BL.homey.__('Auto'),
+								type: Boolean,
+								value: v => v.auto,
+								width: BL._.max(BL.homey.__('Auto').length, 6)
+							}
+						];
+						if (BL.homey.app.exportsSettings.includeUtcInExcel) schema.unshift({
+							column: BL.homey.__('Last set') + ' (UTC)',
+							type: String,
+							value: x => x.lastChanged ? new Date(x.lastChanged).toISOString() : null,
+							width: new Date().toISOString().length // iso dates
+						});
+						let xlsxBuffer = await BL.json.toExcel(vars, {
+							schema,
+							sheet: BL.homey.__('Variables'),// + BL.datetime.toString('datetime'),
+							stickyRowsCount: 1,
+							buffer: true, //returnType == 'xlsx' ? true : false,
+							//dateFormat: 'yyyy-mm-ddThh:mm:ss'
+						});
+						result = xlsxBuffer;
+						if (returnType == 'xlsx_base64') {
+							result = Buffer.from(result).toString('base64');
+						}
+						return result;
+					} catch (error) {
+						homey.error(error);
+					}
+				}
+				break;
+			case 'json':
+			case 'json_base64': {
+				result = JSON.stringify(vars);
+				if (returnType == 'json_base64') {
+					result = Buffer.from(result).toString('base64');
+				}
+				return result;
+			}
+		}
+		return result;
+	}
+
 	//		(?'Before'(?:[^{])?)\{\[(.*?)\]\}(?(R&Before)(?'After'(?:[^}])))(?(R&After)(?:.))
 	//		(?:[^{])?\{\[(.*?)\]\}(?:[^}])?
 	//		(?<B>(?:{)?){\[(((?!]})(.))+?)\]}(?(R&B)|(?!}))
