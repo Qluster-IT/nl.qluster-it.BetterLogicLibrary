@@ -283,5 +283,8 @@
   },
   "3.1.10": {
     "en": "Version 3.1: Improved performance for the BLL decoder."
+  },
+  "3.1.11": {
+    "en": "Version 3.1: Variable updates are now pushed to client-apps if needed."
   }
 }

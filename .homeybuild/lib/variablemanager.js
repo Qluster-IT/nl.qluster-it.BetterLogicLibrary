@@ -158,6 +158,7 @@ async function processValueChanged(variables, oldVariable, newVariable) {
         }
         //getTrigger('any_variable_changed').trigger({ "variable": newVariable.name, "value": newVariable.value }, tokens);//newVariable, tokens);
         getTrigger('any_variable_changed').trigger(tokens, newVariable);//newVariable, tokens);
+        homey.api.realtime('variable_update', newVariable);
     }
 
     if (newVariable && newVariable.type == 'boolean') {
