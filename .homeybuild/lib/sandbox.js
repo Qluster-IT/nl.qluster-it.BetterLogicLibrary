@@ -22,21 +22,24 @@
 // SOFTWARE.
 
 
-var vm = require('vm');
+const vm = require('vm');
 
-module.exports = function sandbox (code, context, opts, {timeout}={}) {
-  let newContext = {};
-  if (context) {
-    Object.keys(context).forEach(function (key) {
-      newContext[key] = context[key];
-      
-    });
-  }
-  const vmContext = vm.createContext(newContext);
+module.exports = function sandbox(code, context, opts, { timeout } = {}) {
+  // const newContext = {};
+  // if (context) {
+  //   Object.keys(context).forEach(function (key) {
+  //     newContext[key] = context[key];
+
+  //   });
+  // }
+
+  return new vm.Script(code).runInNewContext(context, { timeout: timeout || 15000 }); //Doing it like this resolves the memory issues on Homey's.
+
+  const vmContext = vm.createContext(context || {});
   // Create the Sandbox
   const resultKey = 'SAFE_VALUE_' + Math.floor(Math.random() * 1000000);
-  
-   var clearContext = '';
+
+  const clearContext = '';
   //   `
   //   (function(){
   //     const keys = Object.getOwnPropertyNames(this);
@@ -46,16 +49,19 @@ module.exports = function sandbox (code, context, opts, {timeout}={}) {
   //     });
   //   })();
   // `;
-  code = clearContext + resultKey + '=' + code;
-  const script = new vm.Script(code);
-  
+  const scriptCode = clearContext + resultKey + '=' + code;
+  const script = new vm.Script(scriptCode);
+
   script.runInNewContext(vmContext, {
     timeout: timeout || 15000//,
     //microtaskMode: 'afterEvaluate' // from Node 14 should properly timeout async script
   });
-  
 
-  return vmContext[resultKey];
+
+  let result = vmContext[resultKey];
+  //script.destroy();
+  return result;
+  
 
 
   // var sandbox = {};

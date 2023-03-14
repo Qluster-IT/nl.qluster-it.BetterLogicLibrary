@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "3.1.9",
+  "version": "3.1.10",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -596,6 +596,13 @@
       }
     ],
     "actions": [
+      {
+        "id": "__dummy_card",
+        "deprecated":true,
+        "title": {
+          "en": "Dummy"
+        }
+      },
       {
         "id": "format_datetime",
         "title": {

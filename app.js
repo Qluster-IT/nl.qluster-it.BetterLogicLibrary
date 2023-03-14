@@ -8,9 +8,12 @@ let timezone;
 //const util = require('util');
 
 const { BL } = require('betterlogiclibrary');
-const sandbox = require('./lib/sandbox');
+//const sandbox = require('./lib/sandbox');
 const FileServer = require('./lib/FileServer.js');
 
+
+
+const vm = require('vm');
 
 
 class BetterLogic extends Homey.App {
@@ -579,7 +582,9 @@ class BetterLogic extends Homey.App {
 				return Promise.resolve(variableManager.retrieveVariables(query, args, 'any'));
 			});
 
-
+			this.homey.flow.getActionCard('__dummy_card').registerRunListener(async (args, state) => {
+				return ;
+			});
 
 			this.homey.flow.getActionCard('execute_bl_expression_tag').registerRunListener(async (args, state) => {
 				try {
@@ -587,10 +592,17 @@ class BetterLogic extends Homey.App {
 					// 	let val = JSON.stringify(await this.runSandBox(args.code, {arg:args.argument}));
 					// 	throw new Error("Result = " + val);
 					// }
+					//return { text: '', number: 0, boolean: false };
+					
+					//const a = new vm.Script(args.expression).runInNewContext({date:(x)=>x}, { timeout: 55 * 1000 });
+
+					//return { text: new vm.Script(args.expression).runInNewContext({date:(x)=>x}, { timeout: 55 * 1000 }), number: 0, boolean: false };
+
+					//return { text: sandbox(args.expression, {date:(x)=>x}, { timeout: 55 * 1000 }), number: 0, boolean: false };
 
 					if (args.expression !== undefined && args.expression !== 'undefined') {
-						let value = this.runSandBox(args.expression, { arg: args.argument });
-						let tokens = { text: '', number: 0, boolean: false };
+						const value = this.runSandBox(args.expression, { arg: args.argument });
+						const tokens = { text: '', number: 0, boolean: false };
 						switch (typeof (value)) {
 							case "string": tokens.text = value; break;
 							case "number": tokens.number = value; break;
@@ -974,14 +986,16 @@ class BetterLogic extends Homey.App {
 
 
 	runSandBox(code, { locale, date, timeZone, arg } = {}) {
-		var context = BL._.clone(this.context);
+		const context = BL._.clone(this.context);
 		//if(locale) {
 		//context.locale = locale;
 		context.arg = arg;
 		context.date = (coding, _date, _locale, _timeZone) => BL.datetime.toString(coding, _date || date, _locale || locale, _timeZone || timeZone);
 		//}
 		try {
-			return sandbox(code, context, { timeout: 55 * 1000 }); //55 seconds timeout
+			
+  			return new vm.Script(code).runInNewContext(context, { timeout: 55 * 1000 });
+			//return sandbox(code, context, { timeout: 55 * 1000 }); //55 seconds timeout
 		} catch (error) {
 			let end;
 			if (error && error.stack && (end = error.stack.indexOf('\n\nSyntaxError')) > -1) {

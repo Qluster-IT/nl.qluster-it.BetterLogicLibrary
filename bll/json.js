@@ -27,7 +27,7 @@ class Json {
   /** @private */
   static async init(bll) {
     Json.exports = await bll.get('exports');
-    BL.homey.log('json.init', Json.exports);
+    //BL.homey.log('json.init', Json.exports);
 
     this.onRealtime = (event, data) => {
       switch (event) {
