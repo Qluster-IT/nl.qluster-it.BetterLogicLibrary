@@ -172,6 +172,7 @@ class BLL {
             let api = await this.getApi();
             return await api.post(url, opt);
         } catch (error) {
+            throw error;
             //BL.homey.error(error);
             throw new Error('Better Logic is not installed or running.');
         }
@@ -182,6 +183,7 @@ class BLL {
             let api = await this.getApi();
             return await api.get(url);
         } catch (error) {
+            throw error;
             //BL.homey.error(error);
             throw new Error('Better Logic is not installed or running.');
         }

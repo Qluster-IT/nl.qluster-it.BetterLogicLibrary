@@ -12,6 +12,8 @@ const readFileAsync = promisify(_readFile);
 
 async function readFile(path, ops) { return await readFileAsync(path, ops); }
 
+const utcDate = "2023-03-15T12:13:27.952Z";
+
 module.exports =
 {
     async getLibrary({ homey, params }) {
@@ -38,6 +40,11 @@ module.exports =
         return await homey.app.runCoding({ text: body.text, date: body.date, locale: body.locale, timeZone: body.timeZone });
     },
     async express({ homey, body:{expression, contextProperties} }) {
+        for (const key in contextProperties) {
+            if (Object.hasOwnProperty.call(contextProperties, key)) {
+                if(contextProperties[key] && typeof(contextProperties[key])=='string' && contextProperties[key].match(/\d{4}-[0-1]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-6]\d.\d{3}Z/)) contextProperties[key]=new Date(contextProperties[key]);                
+            }
+        }
         return await homey.app.runSandBox(expression, contextProperties );
     },
 
