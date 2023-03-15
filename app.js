@@ -985,11 +985,12 @@ class BetterLogic extends Homey.App {
 
 
 
-	runSandBox(code, { locale, date, timeZone, arg } = {}) {
+	runSandBox(code, { locale, date, timeZone, arg } = {}, contextProperties) {
 		const context = BL._.clone(this.context);
 		//if(locale) {
 		//context.locale = locale;
-		context.arg = arg;
+		if(arg) context.arg = arg;
+		if(contextProperties) BL._.merge(context, contextProperties);
 		context.date = (coding, _date, _locale, _timeZone) => BL.datetime.toString(coding, _date || date, _locale || locale, _timeZone || timeZone);
 		//}
 		try {
