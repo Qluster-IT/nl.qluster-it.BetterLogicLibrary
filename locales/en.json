@@ -71,19 +71,17 @@
 	"Automaticly_shutdown_fileserver":"You can close the server automaticly as soon as there are no more files currently waiting for download, saving resources.",	
 	"defineFileAvailableDuration":"Define the duration files will be available for download.",
 	"fileAvailableDuration":"Duration availability (in seconds)",
-
-
-
-
 	"Exports":"Exports",
 	"Excel":"Excel",
 	"Shema_example":"Here is an example schema to use in the format JSON as Excel flowcard.",
 	"Default Date Format":"Default Date Format",
 	"excel_defaultdateformat_example":"Here you can configure the default datetime format to use in Excel files. Please note that this is Excel formatting, not BLL coding.",
 
+
+
 	"Auto":"Auto",
-	"":"",
-	"":"",
+	"It_took_days":"It took {[ time(\"D\", 1000000000) ]} days.",
+	"Method_time_explanation":"This method will return the given time in the entered format.",
 	"":"",
 	"":"",
 	"":"",
