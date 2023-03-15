@@ -81,7 +81,7 @@
 
 	"Auto":"Auto",
 	"It_took_days":"It took {[ time(\"D\", 1000000000) ]} days.",
-	"":"",
+	"Method_time_explanation":"This method will return the given time in the entered format.",
 	"":"",
 	"":"",
 	"":"",
