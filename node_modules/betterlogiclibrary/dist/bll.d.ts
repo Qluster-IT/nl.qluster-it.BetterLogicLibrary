@@ -31,6 +31,7 @@ export class BLL {
         locale: any;
         timeZone: any;
     }): Promise<any>;
+    express(expression: any, contextProperties: any): Promise<any>;
     getDownloadUrl({ base64, contentType, buffer, json, text, filename, callback }?: {
         base64: any;
         contentType: any;
