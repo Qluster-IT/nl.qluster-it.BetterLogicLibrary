@@ -549,7 +549,7 @@ class BetterLogic extends Homey.App {
 
 
 			let execute_bl_expression = this.homey.flow.getActionCard('execute_bl_expression');
-			
+
 			execute_bl_expression.registerRunListener(async (args, state) => {
 				// if(args.code && !args.expression) {
 				// 	let val = JSON.stringify(await this.runSandBox(args.code, {arg:args.argument}));
@@ -583,7 +583,7 @@ class BetterLogic extends Homey.App {
 			});
 
 			this.homey.flow.getActionCard('__dummy_card').registerRunListener(async (args, state) => {
-				return ;
+				return;
 			});
 
 			this.homey.flow.getActionCard('execute_bl_expression_tag').registerRunListener(async (args, state) => {
@@ -593,7 +593,7 @@ class BetterLogic extends Homey.App {
 					// 	throw new Error("Result = " + val);
 					// }
 					//return { text: '', number: 0, boolean: false };
-					
+
 					//const a = new vm.Script(args.expression).runInNewContext({date:(x)=>x}, { timeout: 55 * 1000 });
 
 					//return { text: new vm.Script(args.expression).runInNewContext({date:(x)=>x}, { timeout: 55 * 1000 }), number: 0, boolean: false };
@@ -985,17 +985,25 @@ class BetterLogic extends Homey.App {
 
 
 
-	runSandBox(code, { locale, date, timeZone, arg } = {}, contextProperties) {
+	runSandBox(code, contextProperties) {
 		const context = BL._.clone(this.context);
+		if (!contextProperties) contextProperties = {};
+		const date = contextProperties.date; //delete contextProperties.date;
+		const locale = contextProperties.locale; //delete contextProperties.locale;
+		const timeZone = contextProperties.timeZone; //delete contextProperties.timeZone;
+		const arg = contextProperties.arg;
 		//if(locale) {
 		//context.locale = locale;
-		if(arg) context.arg = arg;
-		if(contextProperties) BL._.merge(context, contextProperties);
+
+		//if (arg) context.arg = arg;
+		if (contextProperties) for (const key in contextProperties)
+			if (Object.hasOwnProperty.call(contextProperties, key)) context['$'+key] = contextProperties[key];
+
 		context.date = (coding, _date, _locale, _timeZone) => BL.datetime.toString(coding, _date || date, _locale || locale, _timeZone || timeZone);
 		//}
 		try {
-			
-  			return new vm.Script(code).runInNewContext(context, { timeout: 55 * 1000 });
+
+			return new vm.Script(code).runInNewContext(context, { timeout: 55 * 1000 });
 			//return sandbox(code, context, { timeout: 55 * 1000 }); //55 seconds timeout
 		} catch (error) {
 			let end;

@@ -210,7 +210,6 @@ class BLL {
     }
     async express(expression, contextProperties) {
         try {
-
             return await BL.l.post('express', { expression, contextProperties });
         } catch (error) {
             throw error;

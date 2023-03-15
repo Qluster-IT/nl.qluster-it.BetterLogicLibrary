@@ -201,12 +201,18 @@ class BLL {
         try {
 
             if (!text || typeof (text) !== 'string' || text.indexOf('{[') === -1 || text.indexOf(']}') === -1) return text;
-            //BL.homey.log('decode: ', arguments);
-            //BL.homey.log('decode options: ', options);
             return await BL.l.post('decode', { text, locale, timeZone });
         } catch (error) {
             if (BL.l.silent === true) return text;
             else throw error;
+        }
+
+    }
+    async express(expression, contextProperties) {
+        try {
+            return await BL.l.post('express', { expression, contextProperties });
+        } catch (error) {
+            throw error;
         }
 
     }

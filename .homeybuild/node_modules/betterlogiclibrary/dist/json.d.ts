@@ -1,5 +1,10 @@
 export = Json;
 declare class Json {
+    static set exports(arg: any);
+    static get exports(): any;
+    /** @private */
+    private static init;
+    static destroy(): void;
     /**
      *
      * @param {import('./d.ts/json.toExcel').SheetData|import('./d.ts/json.toExcel').SheetData[]} data

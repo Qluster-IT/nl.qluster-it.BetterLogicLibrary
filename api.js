@@ -38,7 +38,7 @@ module.exports =
         return await homey.app.runCoding({ text: body.text, date: body.date, locale: body.locale, timeZone: body.timeZone });
     },
     async express({ homey, body:{expression, contextProperties} }) {
-        return await homey.app.runSandbox(expression, null, contextProperties);
+        return await homey.app.runSandBox(expression, contextProperties );
     },
 
     async date({ homey, body }) {

@@ -1484,6 +1484,11 @@
       "path": "/decode",
       "public": false
     },
+    "express": {
+      "method": "POST",
+      "path": "/express",
+      "public": false
+    },
     "date": {
       "method": "POST",
       "path": "/date",
