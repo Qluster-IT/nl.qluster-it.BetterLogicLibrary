@@ -70,14 +70,17 @@
 	"Automaticly_started_fileserver":"De bestandsserver kan automatisch worden gestart wanneer BLL wordt gestart, waardoor het eerste downloadverzoek wordt versneld.",
 	"Automaticly_shutdown_fileserver":"U kunt de server automatisch sluiten zodra er geen bestanden meer wachten om te downloaden, waardoor bronnen worden bespaard.",
 	"defineFileAvailableDuration":"Definieer de duur dat bestanden beschikbaar zijn om te downloaden.",
-	"fileAvailableDuration":"Duur beschikbaarheid (in seconden)",
-
-	
+	"fileAvailableDuration":"Duur beschikbaarheid (in seconden)",	
 	"Exports":"Export",
 	"Excel":"Excel",
 	"Shema_example":"Hier is een voorbeeldschema om te gebruiken in de JSON opmaken als Excel flowkaart.",
 	"Default Date Format":"Standaard datumnotatie",
 	"excel_defaultdateformat_example":"Hier kunt u de standaard datum/tijd-notatie configureren voor gebruik in Excel-bestanden. Houd er rekening mee dat dit Excel-opmaak is, geen BLL-codering.",
+
+	
+	"Auto":"Auto",
+	"It_took_days":"Het duurde {[ time(\"D\", 1000000000) ]} dagen.",
+	"Method_time_explanation":"Deze methode retourneert de opgegeven tijd in het ingevoerde formaat.",
 
 
 	"settings":{

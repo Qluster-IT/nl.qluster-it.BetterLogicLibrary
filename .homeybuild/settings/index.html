@@ -356,12 +356,19 @@
                         <div class="col-12 fw-bold" data-i18n="Build-in functions">Build-in functions</div>
                         <ul>
                             <li>
-                                <pre class="mb-0 pre-wrap">date(format, date?, locale?, timeZone?)</pre>
+                                <pre class="mb-0 pre-wrap fw-bolder fs-6">date(format, date?, locale?, timeZone?)</pre>
                                 <div class="col-12" data-i18n="Method_date_explanation">This method will return the current date(time) in the entered format, with respect to the users defined locale (language) en timezone.</div>
                                 <div class="col-12" data-i18n="Method_date_optionally">Optionally you can supply the date(time), locale and/or timeZone.</div>
                                 <div class="col-12 mt-1 mb-1 fw-bold" data-i18n="Example">Example</div>
                                 <div class="col-12 mb-1"><input class="form-control hy-nostyle" type="text" value="" ng-model="vars.dateExampleValue" ng-change="updateDateExample();" ng-model-options="{ debounce: 300 }" /></div>
                                 <div class="col-12" ng-bind="vars.dateExampleResult"></div>
+                            </li>
+                            <li>
+                                <pre class="mb-0 pre-wrap fw-bolder fs-6">time(format, timeMs?, timeSec?)</pre>
+                                <div class="col-12" data-i18n="Method_time_explanation">This method will return the given time in the entered format.</div>
+                                <div class="col-12 mt-1 mb-1 fw-bold" data-i18n="Example">Example</div>
+                                <div class="col-12 mb-1"><input class="form-control hy-nostyle" type="text" value="" ng-model="vars.timeExampleValue" ng-change="updateTimeExample();" ng-model-options="{ debounce: 300 }" /></div>
+                                <div class="col-12" ng-bind="vars.timeExampleResult"></div>
                             </li>
                         </ul>
                     </form>
@@ -445,6 +452,15 @@
                         <div class="row" ng-repeat="format in type.formats">
                             <div class="col-5">{{format}}</div>
                             <div class="col-7">{{vars.datesExampleResult[format]}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mt-1" ng-repeat="type in vars.timeOptions">
+                    <div class="card-header fw-bolder" ng-bind="type.label"></div>
+                    <div class="card-body container">
+                        <div class="row" ng-repeat="format in type.formats">
+                            <div class="col-5">{{format}}</div>
+                            <div class="col-7">{{vars.timesExampleResult[format]}}</div>
                         </div>
                     </div>
                 </div>

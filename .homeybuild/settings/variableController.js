@@ -1,19 +1,19 @@
 ﻿angular.module('variableApp', ['smart-table', 'bll', 'ui.codemirror'])
     .controller('VariableSettingsController', ['$scope', '$bl', '$window', '$http', function ($scope, $bl, $window, $http) {
         var vm = this;
-        
+
         vm.homey = $window.Homey;
         let homey = this.homey = $window.Homey;
-        
+
         vm.errorMessage = '';
         vm.showExportToggle = false;
         vm.showImportToggle = false;
         vm.importJson = '';
         vm.selected = null;
         let __ = $scope.__ = homey.__;
-        
 
-        const view = $scope.view = { id: undefined, bottom: undefined, autoUpdate: true, downloadFileLink:undefined, isBusy:false };
+
+        const view = $scope.view = { id: undefined, bottom: undefined, autoUpdate: true, downloadFileLink: undefined, isBusy: false };
         const temp = $scope.temp = { dateFormats: {} };
         const vars = $scope.vars = {
             locales: [],
@@ -26,6 +26,12 @@
             dateExampleResult: 'Today is a donderdag',
             datesExampleValue: undefined,
             datesExampleResult: { "DATETIMELONG": "donderdag 10 november 2022 om 13:53:48 Midden-Europese standaardtijd", "DATETIME": "10 november 2022 om 13:53:48 CET", "datetime": "10 nov. 2022 13:53:48", "datetimeshort": "10-11-2022 13:53", "DATELONG": "donderdag 10 november 2022", "DATE": "10 november 2022", "date": "10 nov. 2022", "dateshort": "10-11-2022", "TIMELONG": "13:53:48 Midden-Europese standaardtijd", "TIME": "13:53:48 CET", "time": "13:53:48", "timeshort": "13:53", "yy": "22", "yyyy": "2022", "M": "11", "MM": "11", "MMM": "nov.", "MMMM": "november", "d": "10", "dd": "10", "ddd": "do", "dddd": "donderdag", "H": "13", "HH": "13", "m": "53", "mm": "53", "s": "48", "ss": "48", "f": "8", "ff": "89", "fff": "898", "PERIOD": "’s middags", "period": "’s middags", "ERA": "na Christus", "era": "n.Chr." },
+            
+            timeExampleValue: __('It_took_days'),
+            timeExampleResult: 'Today is a donderdag',
+            timesExampleValue: undefined,
+            timesExampleResult: {},
+            timesExampleTimeMs:1012323311,
 
             dateOptions: [
                 {
@@ -81,15 +87,45 @@
                     formats: ['PERIOD', 'period', 'ERA', 'era', 'ISO', 'dd "text" yy', '""']
                 }
             ],
+            timeOptions: [
+                {
+                    id: 'Time formatting',
+                    formats: ['D:hh:mm:ss.fff', 'HHH:mm:ss.fff', 'MMM:ss.ff', 'SSSSS.fff', 'H:m:s.f']
+                },
+                {
+                    id: 'Days',
+                    formats: ['D', 'DD', 'DDD', 'DDDD', 'DDDDD']
+                },
+                {
+                    id: 'Hours',
+                    formats: ['h', 'hh', 'H', 'HH', 'HHH', 'HHHH', 'HHHHH']
+                },
+                {
+                    id: 'Minutes',
+                    formats: ['m', 'mm', 'M', 'MM', 'MMM', 'MMMM', 'MMMMM']
+                },
+                {
+                    id: 'Seconds',
+                    formats: ['s', 'ss', 'S', 'SS', 'SSS', 'SSSS', 'SSSSS',]
+                },
+                {
+                    id: 'Fractional seconds',
+                    formats: ['f', 'ff', 'fff', 'F', 'FF', 'FFF']
+                }
+            ],
             formats: undefined,
-            filserver:undefined
+            filserver: undefined
         };
-        
+
         vars.datesExampleValue = _.flatMap(vars.dateOptions, 'formats');
         vars.dateFormats = _.filter(vars.dateOptions, (v, i) => i <= 2);
+
+        vars.timesExampleValue = _.flatMap(vars.timeOptions, 'formats');
+
         $scope.editorOptions = getEditorOptions();
 
-        for (let i = 0; i < vars.dateOptions.length; i++) vars.dateOptions[i].label = __(vars.dateOptions[i].id) ;
+        for (let i = 0; i < vars.dateOptions.length; i++) vars.dateOptions[i].label = __(vars.dateOptions[i].id);
+        for (let i = 0; i < vars.timeOptions.length; i++) vars.timeOptions[i].label = __(vars.timeOptions[i].id);
         //for (let i = 0; i < vars.dateFormats.length; i++) vars.dateFormats[i].label = __(vars.dateFormats[i].id) ;
 
         $scope.updateModuleExample = async function () {
@@ -102,6 +138,13 @@
 
         $scope.updateDatesExample = async function () {
             await $bl.api("POST", "/date", { format: vars.datesExampleValue }, (x) => vars.datesExampleResult = x);
+        };
+        
+        $scope.updateTimeExample = async function () {
+            await $bl.api("POST", "/decode", { text: vars.timeExampleValue }, (x) => vars.timeExampleResult = x);
+        };
+        $scope.updateTimesExample = async function () {
+            await $bl.api("POST", "/time", { format: vars.timesExampleValue, timeMs: vars.timesExampleTimeMs }, (x) => vars.timesExampleResult = x);
         };
         $scope.setFormatExample = async function (format) {
             if (!vars.locale.dateFormats[format] || !vars.locale.dateFormats[format].length) temp.dateFormats[format] = undefined;
@@ -128,12 +171,12 @@
                 $bl.api("POST", "/date", { date: dates, format: 'datetime' }, (x) => vars.variableDates = x);
             });
         };
-        
+
         $scope.saveFileServer = async function () {
             $scope.fileserverForm.$setSubmitted();
             $scope.fileserverForm.$setPristine();
             await $bl.set('fileserver', vars.fileserver, () => {
-                
+
             });
         };
 
@@ -141,13 +184,15 @@
             $scope.exportsForm.$setSubmitted();
             $scope.exportsForm.$setPristine();
             await $bl.set('exports', vars.exports, () => {
-                
+
             });
         };
         $scope.updateExamples = function () {
             $scope.updateModuleExample();
             $scope.updateDateExample();
             $scope.updateDatesExample();
+            $scope.updateTimeExample();
+            $scope.updateTimesExample();
         };
         $scope.addCustomFormat = function () {
             if (!vars.locale.customDateFormats) vars.locale.customDateFormats = [];
@@ -240,13 +285,13 @@
             view.isBusy = true;
             //let opt = { returnType: type };
             let downloadLink = await $bl.api("GET", "/getvariablesdownloadurl/" + type);
-            if(!downloadLink) {
+            if (!downloadLink) {
                 $scope.$apply(() => {
                     (view.isBusy = false);
                 });
                 return (view.isBusy = false);
-            } else 
-            view.downloadFileLink = downloadLink;
+            } else
+                view.downloadFileLink = downloadLink;
         };
 
 
@@ -270,10 +315,10 @@
 
             vm.loadVariables();
 
-            homey.on('downloadFileReady', (link)=> {
+            homey.on('downloadFileReady', (link) => {
                 console.log('downloadFileReady');
-                if(!view.downloadFileLink || view.downloadFileLink.token !== link.token) return;
-                $http.get(link.localTestUrl, {timeout:1000}).catch((err) => {
+                if (!view.downloadFileLink || view.downloadFileLink.token !== link.token) return;
+                $http.get(link.localTestUrl, { timeout: 1000 }).catch((err) => {
                     //if(x) $bl.openURL(link.cloudUrl);
                     if (err) $bl.openURL(link.cloudUrl);
                     view.isBusy = false;

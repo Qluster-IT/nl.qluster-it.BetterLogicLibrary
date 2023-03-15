@@ -992,14 +992,17 @@ class BetterLogic extends Homey.App {
 		const locale = contextProperties.locale; //delete contextProperties.locale;
 		const timeZone = contextProperties.timeZone; //delete contextProperties.timeZone;
 		const arg = contextProperties.arg;
+		const timeMs = contextProperties.timeMs; //delete contextProperties.date;
+		const timeSec = contextProperties.timeSec; //delete contextProperties.date;
 		//if(locale) {
 		//context.locale = locale;
 
 		//if (arg) context.arg = arg;
 		if (contextProperties) for (const key in contextProperties)
-			if (Object.hasOwnProperty.call(contextProperties, key)) context['$'+key] = contextProperties[key];
+			if (Object.hasOwnProperty.call(contextProperties, key)) context['$' + key] = contextProperties[key];
 
 		context.date = (coding, _date, _locale, _timeZone) => BL.datetime.toString(coding, _date || date, _locale || locale, _timeZone || timeZone);
+		context.time = (format, _timeMs, _timeSec) => BL.datetime.toTimeString(format, _timeMs || timeMs, _timeSec || timeSec );
 		//}
 		try {
 

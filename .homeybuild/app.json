@@ -1494,6 +1494,11 @@
       "path": "/date",
       "public": false
     },
+    "time": {
+      "method": "POST",
+      "path": "/time",
+      "public": false
+    },
     "getLocale": {
       "method": "GET",
       "path": "/locale",

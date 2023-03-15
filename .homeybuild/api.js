@@ -52,6 +52,10 @@ module.exports =
         return await BL.datetime.toString(body.format, body.date, body.locale, body.timeZone);
     },
 
+    async time({ homey, body }) {
+        return await BL.datetime.toTimeString(body.format, body.timeMs, body.timeSec);
+    },
+
     async getLocale({ homey }) {
         return await homey.app.locale;
     },
