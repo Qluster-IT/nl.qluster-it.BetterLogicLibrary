@@ -458,6 +458,14 @@ class BetterLogic extends Homey.App {
 		this.homey.setTimeout(async () => {
 			await this.homey.api.realtime("running_3x");
 		}, 20 * 1000);
+		
+		this.homey.setTimeout(async () => {
+			await this.homey.api.realtime("running_3x");
+		}, 60 * 1000);
+
+		this.homey.setTimeout(async () => {
+			await this.homey.api.realtime("running_3x");
+		}, 180 * 1000);
 
 
 

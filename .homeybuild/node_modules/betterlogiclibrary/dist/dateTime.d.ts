@@ -8,6 +8,7 @@ declare class DateTime {
     /** @private */
     private static init;
     static destroy(): void;
+    static toTimeString(format: any, timeMs: any, timeSec: any): any;
     /**
      *
      * @param {String|String[]} format
@@ -68,7 +69,17 @@ declare class DateTime {
     private static fractionalSecondCodes;
     /** @private */
     private static isoCodes;
-    constructor(locale: any, timeZone: any, date: any);
+    /** @private */
+    private static timeDayCodes;
+    /** @private */
+    private static timeHourCodes;
+    /** @private */
+    private static timeMinuteCodes;
+    /** @private */
+    private static timeSecondCodes;
+    /** @private */
+    private static timeFractionalSecondCodes;
+    constructor(locale: any, timeZone: any, date: any, timeMs: any);
     set locale(arg: any);
     get locale(): any;
     _locale: any;
@@ -80,6 +91,7 @@ declare class DateTime {
     _date: any;
     /** @private */
     private get;
+    timeMs: any;
     /** @private */
     private getString;
     /**
@@ -206,6 +218,27 @@ declare class DateTime {
      * @param {"ISO"} format * @returns {String}
      */
     getIso(code: any): string;
+    /**
+     * @param {"HH"|"H"} format * @returns {String}
+     */
+    getTimeDay(code: any): string;
+    /**
+     * @param {"HH"|"H"} format * @returns {String}
+     */
+    getTimeHour(code: any): string;
+    /**
+     * @param {"mm"|"m"} format * @returns {String}
+     */
+    getTimeMinute(code: any): string;
+    /**
+     * @param {"ss"|"s"} format * @returns {String}
+     */
+    getTimeSecond(code: any): string;
+    /**
+     * @param {"fff"|"ff"|"f"} format * @returns {String}
+     */
+    getTimeFractionalSecond(code: any): string;
+    toTimeString(format: any): any;
     toString(format: any): any;
     /** @private */
     private formatCustom;

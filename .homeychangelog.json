@@ -289,5 +289,14 @@
   },
   "3.1.12": {
     "en": "Added: new BLL expression/coding function: time. Convert a number into a timestamp. See the App Settings for examples. Also, extensive testing on HP2023."
+  },
+  "3.1.13": {
+    "en": "Bufixed: Error message in App Settings."
+  },
+  "3.1.14": {
+    "en": "Bufixed: Improved startup for older models."
+  },
+  "3.1.15": {
+    "en": "Bufixed: Improved startup for older models."
   }
 }
