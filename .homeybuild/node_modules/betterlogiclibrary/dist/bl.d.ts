@@ -18,6 +18,17 @@ export class BL {
         timeZone: any;
     }, ...args: any[]): Promise<string>;
     /**
+     * @description Run the given expression {@link String}.
+     * @static
+     * @async
+     * @param {string} expression The expression to be executed.
+     * @param {object} contextProperties The properties to inject into the expression.
+     * @return {Promise<object>} A {@link Object} if BLL is running, otherwise it will throw an error.
+     * @memberof BL
+     * @throws An Error when BLL is not running
+     */
+    static express(expression: string, contextProperties: object, ...args: any[]): Promise<object>;
+    /**
      * NOT YET PUBLICLY IN USE!
      * @returns
      */
@@ -77,16 +88,16 @@ export class BL {
      *     *
      * @static
      * @param {*} [{ homey, modules, silent, waitTime, required }={}]
-     * @return {*}
      */
-    static init({ homey, modules, silent, waitTime, required }?: any): any;
+    static init({ homey, modules, silent, waitTime, required }?: any): Promise<any>;
     static clearObj(obj: any): void;
     static detroy(): void;
     /**
-     * @describtion Setable member, when set, will be activated on any variable update.
+     * @decription Setable member, when set, will be activated on any variable update.
      * @param {Object} param0.variable
      */
-    static onVariableUpdate({ variable, date }: any): Promise<void>;
+    static onVariableUpdate({ variable, formattedDate }: any): Promise<void>;
+    static getVariables(): Promise<any>;
     constructor({ homey, modules, silent, waitTime, required }?: {
         homey: any;
         modules: any;
@@ -122,6 +133,7 @@ export class BL {
     private requireFromString;
     /** @private */
     private getAppApi;
+    getVariables(): Promise<any>;
 }
 export class Defer {
     /**
