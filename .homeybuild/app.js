@@ -795,17 +795,8 @@ class BetterLogic extends Homey.App {
 		return await this.fileServer.getDownloadUrl(body);
 	}
 	async initFileServer() {
-		try {			
-			if (this.fileServer) await this.fileServer.update(this.fileserverSettings);
-			else this.fileServer = await new FileServer().init({ homey: this.homey, settings: this.fileserverSettings });
-		} catch (error) {
-			this.homey.notifications.createNotification({excerpt : "Error while initializing the BLL File Server:" + (error.message || error) });
-			try {			
-				if (this.fileServer) await this.fileServer.destroy();	
-			} catch (innerError) {
-				
-			}
-		}
+		if (this.fileServer) await this.fileServer.update(this.fileserverSettings);
+		else this.fileServer = await new FileServer().init({ homey: this.homey, settings: this.fileserverSettings });
 	}
 
 	async setExports() {

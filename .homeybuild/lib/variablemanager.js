@@ -130,35 +130,47 @@ async function processValueChanged(variables, oldVariable, newVariable) {
     homey.settings.set('variables', variables);
 
     if (newVariable && newVariable.remove) {
-        removeInsights(newVariable.name);
-        //homey.insights.deleteLog(newVariable.name, function(err, state) {});
-        removeToken(newVariable.name);
+        try {
+            removeInsights(newVariable.name);
+            removeToken(newVariable.name);
+        } catch (error) {            
+            homey.notifications.createNotification({excerpt : `Error while removing variable ${newVariable.name}:` + (error.message || error) });
+        }
         return;
     }
 
     if (newVariable && !oldVariable) {
-        createOrUpdateInsights(newVariable.name, newVariable.value, newVariable.type);
-        createToken(newVariable.name, newVariable.value, newVariable.type);
+        try {                
+            createOrUpdateInsights(newVariable.name, newVariable.value, newVariable.type);
+            createToken(newVariable.name, newVariable.value, newVariable.type);
+        } catch (error) {
+            homey.notifications.createNotification({excerpt : `Error while creating new variable ${newVariable.name}:` + (error.message || error) });
+        }
 
     }
 
     if (newVariable && oldVariable && oldVariable.value !== newVariable.value) {
-        createOrUpdateInsights(newVariable.name, newVariable.value, newVariable.type);
-        await updateToken(newVariable.name, newVariable.value);
+        try {
+            createOrUpdateInsights(newVariable.name, newVariable.value, newVariable.type);
+            await updateToken(newVariable.name, newVariable.value);
 
-        getTrigger('if_variable_changed').trigger({ "variable": newVariable.name, "value": newVariable.value }, newVariable);
-        getTrigger('debug_any_variable_changed').trigger({ "variable": newVariable.name, "value": newVariable.value }, newVariable);
-        getTrigger('if_one_of_variable_changed').trigger({ "variable": newVariable.name, "value": newVariable.value }, newVariable);
-        let tokens = {variableName:newVariable.name, variableType:newVariable.type, variableValueString:'', variableValueNumber:0, variableValueBoolean:false };
-        switch (newVariable.type) {
-            case "string":tokens.variableValueString = newVariable.value;break;
-            case "number":tokens.variableValueNumber = newVariable.value;break;
-            case "boolean":tokens.variableValueBoolean = newVariable.value;break;
-            case "trigger":tokens.variableValueString = newVariable.value;break;
+            getTrigger('if_variable_changed').trigger({ "variable": newVariable.name, "value": newVariable.value }, newVariable);
+            getTrigger('debug_any_variable_changed').trigger({ "variable": newVariable.name, "value": newVariable.value }, newVariable);
+            getTrigger('if_one_of_variable_changed').trigger({ "variable": newVariable.name, "value": newVariable.value }, newVariable);
+            let tokens = {variableName:newVariable.name, variableType:newVariable.type, variableValueString:'', variableValueNumber:0, variableValueBoolean:false };
+            switch (newVariable.type) {
+                case "string":tokens.variableValueString = newVariable.value;break;
+                case "number":tokens.variableValueNumber = newVariable.value;break;
+                case "boolean":tokens.variableValueBoolean = newVariable.value;break;
+                case "trigger":tokens.variableValueString = newVariable.value;break;
+            }
+            //getTrigger('any_variable_changed').trigger({ "variable": newVariable.name, "value": newVariable.value }, tokens);//newVariable, tokens);
+            getTrigger('any_variable_changed').trigger(tokens, newVariable);//newVariable, tokens);
+            //homey.api.realtime('variable_update', newVariable);
+        } catch (error) {
+            homey.notifications.createNotification({excerpt : `Error while updating changed variable ${newVariable.name}:` + (error.message || error) });
         }
-        //getTrigger('any_variable_changed').trigger({ "variable": newVariable.name, "value": newVariable.value }, tokens);//newVariable, tokens);
-        getTrigger('any_variable_changed').trigger(tokens, newVariable);//newVariable, tokens);
-        //homey.api.realtime('variable_update', newVariable);
+        
     }
 
     if (newVariable && newVariable.type == 'boolean') {
