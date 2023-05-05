@@ -223,7 +223,7 @@
                             Configure the Port for the File Server to use for incoming connections.
                         </div>
                         <div class="col-12 form-group form-floating">
-                            <input type="number" class="form-control hy-nostyle" name="serverport" placeholder="Serverport" ng-model="vars.fileserver.port" ng-model-options="{ debounce: 300 }" minlength="4" required="true" />
+                            <input type="number" class="form-control hy-nostyle" name="serverport" placeholder="Serverport" ng-model="vars.fileserver.port" ng-model-options="{ debounce: 300 }" minlength="4" required="true" min="1024" max="65536" />
                             <label class="hy-nostyle" for="serverport" data-i18n="Serverport">Serverport</label>
                         </div>
 

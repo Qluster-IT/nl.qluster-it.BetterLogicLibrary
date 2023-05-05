@@ -307,5 +307,8 @@
   },
   "3.2.0": {
     "en": "Bugfixed: Ready for full release of dependend apps (FTP Client and SImple Sys Log)."
+  },
+  "3.2.1": {
+    "en": "Bugfixed: Minimum port of 1024 for the fileserver."
   }
 }
