@@ -84,7 +84,7 @@
                 },
                 {
                     id: 'Other',
-                    formats: ['PERIOD', 'period', 'ERA', 'era', 'ISO', 'UTC', 'dd "text" yy', '""']
+                    formats: ['PERIOD', 'period', 'ERA', 'era', 'ISO', 'ISOZ', 'dd "text" yy', '""']
                 }
             ],
             timeOptions: [

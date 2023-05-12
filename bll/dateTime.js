@@ -441,6 +441,7 @@ class DateTime {
    */
   getHourByFormat(format) {
     let r = this.getString({ hour: format || 'numeric', hour12: false });
+    r = r.substring(0,2).trim();
     return format == '2-digit' ? r.padStart(2, '0') : r;
   }
 
@@ -624,7 +625,7 @@ class DateTime {
   }
 
   /** @private */
-  static isoCodes = { 'ISO': 'ISO', 'UTC':'UTC' };
+  static isoCodes = { 'ISO': 'ISO', 'ISOZ':'ISOZ' };
   /**
    * @param {"ISO"} format * @returns {String}
    */
@@ -633,7 +634,8 @@ class DateTime {
     switch (code) {
       case 'ISO':
         return date.toISOString();
-      case 'UTC':
+        case 'ISOZ':
+        //case 'UTC':
         
 				let zz = this.getTimeZone('zz', date);
 				let utc = BL.datetime.toString('yyyy-MM-ddTHH:mm:ss.fff', date);

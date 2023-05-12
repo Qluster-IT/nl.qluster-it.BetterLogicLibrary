@@ -313,5 +313,14 @@
   },
   "3.2.2": {
     "en": "Added: UTC timestamp with timezone; code: UTC, result: 2023-05-12:09:14:12.334+02:00."
+  },
+  "3.2.4": {
+    "en": "Change: UTC code to ISOZ: UTC timestamp with timezone; code: ISOZ, result: 2023-05-12:09:14:12.334+02:00."
+  },
+  "3.2.5": {
+    "en": "Change: UTC code to ISOZ: UTC timestamp with timezone; code: ISOZ, result: 2023-05-12:09:14:12.334+02:00.\nRemoved UTC code."
+  },
+  "3.2.6": {
+    "en": "Resolved: DateTime format issues."
   }
 }
