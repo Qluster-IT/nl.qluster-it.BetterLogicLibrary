@@ -593,7 +593,8 @@ class DateTime {
    * @param {"tt"} format * @returns {String}
    */
   getAmPm(code) {
-    return removeNumeric(this.getHour12ByFormat('numeric'));
+    let tt= removeNumeric(this.getHour12ByFormat('numeric')).split(' ');
+    return tt[tt.length-1];
   }
 
   /** @private */
