@@ -624,12 +624,24 @@ class DateTime {
   }
 
   /** @private */
-  static isoCodes = { 'ISO': 'ISO' };
+  static isoCodes = { 'ISO': 'ISO', 'UTC':'UTC' };
   /**
    * @param {"ISO"} format * @returns {String}
    */
   getIso(code) {
-    return (this.date || new Date()).toISOString();
+    let date = (this.date || new Date());
+    switch (code) {
+      case 'ISO':
+        return date.toISOString();
+      case 'UTC':
+        
+				let zz = this.getTimeZone('zz', date);
+				let utc = BL.datetime.toString('yyyy-MM-ddTHH:mm:ss.fff', date);
+				return utc + zz + (zz.indexOf(':')==-1 ? ':00' : '');
+        default:
+        break;
+    }
+    
   }
 
   /*

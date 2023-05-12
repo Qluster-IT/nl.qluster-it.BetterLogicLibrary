@@ -310,5 +310,8 @@
   },
   "3.2.1": {
     "en": "Bugfixed: Minimum port of 1024 for the fileserver."
+  },
+  "3.2.2": {
+    "en": "Added: UTC timestamp with timezone; code: UTC, result: 2023-05-12:09:14:12.334+02:00."
   }
 }
