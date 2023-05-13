@@ -16,6 +16,20 @@ const utcDate = "2023-03-15T12:13:27.952Z";
 
 module.exports =
 {
+    async internal({ homey, body: { action } }) {
+        switch (action) {
+            case 'isLoaded':
+                if (BL.isReady) return true;
+                else {
+                    try {
+                        await BL.ready;
+                        return true;
+                    } catch (error) {
+                        return false;
+                    }
+                }
+        }
+    },
     async getLibrary({ homey, params }) {
         //homey.log('getLibrary', params, __dirname);
         try {
@@ -39,13 +53,13 @@ module.exports =
     async decode({ homey, body }) {
         return await homey.app.runCoding({ text: body.text, date: body.date, locale: body.locale, timeZone: body.timeZone });
     },
-    async express({ homey, body:{expression, contextProperties} }) {
+    async express({ homey, body: { expression, contextProperties } }) {
         for (const key in contextProperties) {
             if (Object.hasOwnProperty.call(contextProperties, key)) {
-                if(contextProperties[key] && typeof(contextProperties[key])=='string' && contextProperties[key].match(/\d{4}-[0-1]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-6]\d.\d{3}Z/)) contextProperties[key]=new Date(contextProperties[key]);                
+                if (contextProperties[key] && typeof (contextProperties[key]) == 'string' && contextProperties[key].match(/\d{4}-[0-1]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-6]\d.\d{3}Z/)) contextProperties[key] = new Date(contextProperties[key]);
             }
         }
-        return await homey.app.runSandBox(expression, contextProperties );
+        return await homey.app.runSandBox(expression, contextProperties);
     },
 
     async date({ homey, body }) {
@@ -81,7 +95,7 @@ module.exports =
 
                         const link = await BL.getDownloadUrl({ contentType: 'text/csv', filename });
                         homey.setTimeout(async () => {
-                            await BL.setDownloadUrl({ link, text: await homey.app.getVariables({returnType}), callback });
+                            await BL.setDownloadUrl({ link, text: await homey.app.getVariables({ returnType }), callback });
                         }, 0);
                         return link;
                     }
@@ -96,7 +110,7 @@ module.exports =
 
                             const link = await BL.getDownloadUrl({ contentType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', filename });
                             homey.setTimeout(async () => {
-                                await BL.setDownloadUrl({ link, buffer: await homey.app.getVariables({returnType}), callback });
+                                await BL.setDownloadUrl({ link, buffer: await homey.app.getVariables({ returnType }), callback });
                             }, 0);
                             return link;
                         } catch (error) {
@@ -112,7 +126,7 @@ module.exports =
 
                     const link = await BL.getDownloadUrl({ contentType: 'text/json', filename });
                     homey.setTimeout(async () => {
-                        await BL.setDownloadUrl({ link, text: await homey.app.getVariables({returnType}), callback });
+                        await BL.setDownloadUrl({ link, text: await homey.app.getVariables({ returnType }), callback });
                     }, 0);
                     return link;
                 }

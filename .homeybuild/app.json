@@ -1468,7 +1468,11 @@
       ]
     }
   ],
-  "api": {
+  "api": {    
+    "internal": {
+      "method": "POST",
+      "path": "/internal/"
+    },
     "getVariablesDownloadUrl": {
       "method": "GET",
       "path": "/getvariablesdownloadurl/:returnType",

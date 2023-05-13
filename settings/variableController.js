@@ -26,12 +26,12 @@
             dateExampleResult: 'Today is a donderdag',
             datesExampleValue: undefined,
             datesExampleResult: { "DATETIMELONG": "donderdag 10 november 2022 om 13:53:48 Midden-Europese standaardtijd", "DATETIME": "10 november 2022 om 13:53:48 CET", "datetime": "10 nov. 2022 13:53:48", "datetimeshort": "10-11-2022 13:53", "DATELONG": "donderdag 10 november 2022", "DATE": "10 november 2022", "date": "10 nov. 2022", "dateshort": "10-11-2022", "TIMELONG": "13:53:48 Midden-Europese standaardtijd", "TIME": "13:53:48 CET", "time": "13:53:48", "timeshort": "13:53", "yy": "22", "yyyy": "2022", "M": "11", "MM": "11", "MMM": "nov.", "MMMM": "november", "d": "10", "dd": "10", "ddd": "do", "dddd": "donderdag", "H": "13", "HH": "13", "m": "53", "mm": "53", "s": "48", "ss": "48", "f": "8", "ff": "89", "fff": "898", "PERIOD": "’s middags", "period": "’s middags", "ERA": "na Christus", "era": "n.Chr." },
-            
+
             timeExampleValue: __('It_took_days'),
             timeExampleResult: 'Today is a donderdag',
             timesExampleValue: undefined,
             timesExampleResult: {},
-            timesExampleTimeMs:1012323311,
+            timesExampleTimeMs: 1012323311,
 
             dateOptions: [
                 {
@@ -139,7 +139,7 @@
         $scope.updateDatesExample = async function () {
             await $bl.api("POST", "/date", { format: vars.datesExampleValue }, (x) => vars.datesExampleResult = x);
         };
-        
+
         $scope.updateTimeExample = async function () {
             await $bl.api("POST", "/decode", { text: vars.timeExampleValue }, (x) => vars.timeExampleResult = x);
         };
@@ -298,52 +298,56 @@
         vm.init = async function () {
             vm.homey = homey;
             $bl.init(homey, $scope);
-            $bl.get("locale", async (x) => {
-                vars.locale = x;
-                if (x && !x.dateFormats) x.dateFormats = {};
-                if (x && x.customDateFormats && x.customDateFormats.length) {
-                    let formats = _.uniqBy(_.flatMap(x.customDateFormats, 'format'));
-                    await $bl.api("POST", "/date", { format: formats }, (x) => temp.dateFormats = x);//temp.dateFormats[format] = x);
-                }
-            });
-            $bl.api("GET", "/locales", null, (x) => vars.locales = x);
-            $bl.get("fileserver", async (x) => { vars.fileserver = x; });
-            $bl.get("exports", async (x) => { vars.exports = x; });
-            $scope.updateExamples();
-            $scope.getFunctionFromSettings();
 
-
-            vm.loadVariables();
-
-            homey.on('downloadFileReady', (link) => {
-                console.log('downloadFileReady');
-                if (!view.downloadFileLink || view.downloadFileLink.token !== link.token) return;
-                $http.get(link.localTestUrl, { timeout: 1000 }).catch((err) => {
-                    //if(x) $bl.openURL(link.cloudUrl);
-                    if (err) $bl.openURL(link.cloudUrl);
-                    view.isBusy = false;
-                }).then((x) => {
-                    if (x) $bl.openURL(link.localUrl);
-                    view.isBusy = false;
-                });
-            });
-
-
-            vm.homey.on('variable_changed', function ({ variable, date }) {
-                if (!view.autoUpdate) return;
-                let findIndex = _.findIndex(vm.variables, x => x.name === variable.name);
-                $scope.$apply(function () {
-                    if (variable.remove && findIndex > -1) vm.variables.splice(findIndex, 1);
-                    else if (!variable.remove) {
-                        if (findIndex > -1) vm.variables.splice(findIndex, 1);
-                        vm.variables.unshift(variable);
+            $bl.api("POST", "/internal", { action: 'isLoaded' }, (x) => {
+                $bl.get("locale", async (x) => {
+                    vars.locale = x;
+                    if (x && !x.dateFormats) x.dateFormats = {};
+                    if (x && x.customDateFormats && x.customDateFormats.length) {
+                        let formats = _.uniqBy(_.flatMap(x.customDateFormats, 'format'));
+                        await $bl.api("POST", "/date", { format: formats }, (x) => temp.dateFormats = x);//temp.dateFormats[format] = x);
                     }
-                    vars.variableDates[variable.lastChanged] = date;
                 });
-            });
+                $bl.api("GET", "/locales", null, (x) => vars.locales = x);
+                $bl.get("fileserver", async (x) => { vars.fileserver = x; });
+                $bl.get("exports", async (x) => { vars.exports = x; });
+                $scope.updateExamples();
+                $scope.getFunctionFromSettings();
 
-            $scope.updateDateExample();
-            $scope.updateDatesExample();
+
+                vm.loadVariables();
+
+                homey.on('downloadFileReady', (link) => {
+                    console.log('downloadFileReady');
+                    if (!view.downloadFileLink || view.downloadFileLink.token !== link.token) return;
+                    $http.get(link.localTestUrl, { timeout: 1000 }).catch((err) => {
+                        //if(x) $bl.openURL(link.cloudUrl);
+                        if (err) $bl.openURL(link.cloudUrl);
+                        view.isBusy = false;
+                    }).then((x) => {
+                        if (x) $bl.openURL(link.localUrl);
+                        view.isBusy = false;
+                    });
+                });
+
+
+                vm.homey.on('variable_changed', function ({ variable, date }) {
+                    if (!view.autoUpdate) return;
+                    let findIndex = _.findIndex(vm.variables, x => x.name === variable.name);
+                    $scope.$apply(function () {
+                        if (variable.remove && findIndex > -1) vm.variables.splice(findIndex, 1);
+                        else if (!variable.remove) {
+                            if (findIndex > -1) vm.variables.splice(findIndex, 1);
+                            vm.variables.unshift(variable);
+                        }
+                        vars.variableDates[variable.lastChanged] = date;
+                    });
+                });
+
+                $scope.updateDateExample();
+                $scope.updateDatesExample();
+
+            });
         };
 
         vm.loadVariables = function () {

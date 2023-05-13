@@ -328,5 +328,8 @@
   },
   "3.2.8": {
     "en": "Info: More debugging info and better BLL startup. Please report issues through Tickets or the Forum. Thanks!"
+  },
+  "3.2.9": {
+    "en": "Improved: App Settings waits a seconds after restarting the App so you do not get an error that BLL is not loaded yet."
   }
 }
