@@ -327,6 +327,6 @@
     "en": "Resolved: DateTime hour format issues for German."
   },
   "3.2.8": {
-    "en": "Info: More debugging info and better BLL startup."
+    "en": "Info: More debugging info and better BLL startup. Please report issues through Tickets or the Forum. Thanks!"
   }
 }
