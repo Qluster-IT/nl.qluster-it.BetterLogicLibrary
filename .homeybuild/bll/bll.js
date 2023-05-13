@@ -17,7 +17,7 @@ class BLL {
     //static get dateTime() {  return this._datetime; }
 
     static get proto() { return this._proto; }
-    
+
     static get json() { return this._json; }
 
 
@@ -65,7 +65,14 @@ class BLL {
 
         BL.homey.log('BLL destroyed');
     }
+    sleep(ms) {
+        return new Promise((resolve) => {
+            setTimeout(resolve, ms);
+        });
+    }
+
     async init({ modules } = { modules: [] }) {
+        if(BL.homey.app.id === 'net.i-dev.betterlogic') await this.sleep(2000);
 
         //BL.homey.log('BLL.init');
         //let api = await this.getApi();
@@ -126,7 +133,7 @@ class BLL {
                         let json = await this.getLibrary('json');
                         BLL._json = this.requireFromString(json.file, 'json');
                         BL.json = BLL.json;
-                        
+
 
                         await BLL.json.init(this);
                         break;
@@ -151,7 +158,7 @@ class BLL {
             let api = await this.getApi();
             return await api.get('/library/' + libraryName);
         } catch (error) {
-            //BL.homey.error(error);
+            BL.homey.error('getLibrary error', libraryName, '\n', error);
         }
     }
 
@@ -222,9 +229,9 @@ class BLL {
     async getDownloadUrl({ base64, contentType, buffer, json, text, filename, callback } = {}) {
         try {
             const api = BL.Current.api;
-            const link =  await api.post('/getdownloadurl/', { contentType, filename });
+            const link = await api.post('/getdownloadurl/', { contentType, filename });
 
-            if( buffer || base64 || json || text) {
+            if (buffer || base64 || json || text) {
                 return await this.setDownloadUrl({ link, base64, contentType, buffer, json, text, filename, callback })
             }
             else return link;
@@ -236,14 +243,14 @@ class BLL {
     async setDownloadUrl({ link, base64, contentType, buffer, json, text, filename, callback } = {}) {
         try {
             const defer = new Defer();
-            
+
             let type = 'base64';
             if (buffer !== undefined) type = 'application/octet-stream';
             else if (json !== undefined) type = 'text/json';
             else if (text !== undefined) type = 'text/plain';
-            
+
             const plain = !buffer;
-            
+
             const send = buffer || base64 || json || text;
             if (send !== undefined) {
                 const post_options = {
@@ -268,30 +275,30 @@ class BLL {
                         defer.resolve(link);
                         post_req.destroy();
                         BL.clearObj(defer);
-                        if(callback) callback(link);
+                        if (callback) callback(link);
                     });
                 });
                 post_req.on('error', (e) => {
-                    if(e) BL.homey.error('Bll.send file e', e);
+                    if (e) BL.homey.error('Bll.send file e', e);
                     defer.reject(e);
                     post_req.destroy();
                     BL.clearObj(defer);
                 });
 
-                if(plain) post_req.write(send, (error) => {
-                    if(error) BL.homey.error('Bll.send file error', error);
+                if (plain) post_req.write(send, (error) => {
+                    if (error) BL.homey.error('Bll.send file error', error);
                     post_req.end();
                 });
-                else 
-                post_req.write(send, 'binary', (error) => {
-                    if(error) BL.homey.error('Bll.send file error', error);
-                    post_req.end();
-                });
-                
-                if(callback) return link;
-                 else return defer.promise;
+                else
+                    post_req.write(send, 'binary', (error) => {
+                        if (error) BL.homey.error('Bll.send file error', error);
+                        post_req.end();
+                    });
 
-            } 
+                if (callback) return link;
+                else return defer.promise;
+
+            }
             else return link;
 
         } catch (error) {

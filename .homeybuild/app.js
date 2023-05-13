@@ -425,7 +425,7 @@ class BetterLogic extends Homey.App {
 			delete this.locale.formats;
 			await this.homey.settings.set('locale', this.locale);
 		}
-		this.homey.api.realtime('bllSetLocale', this.locale);
+		//this.homey.api.realtime('bllSetLocale', this.locale);
 
 		//await DateTime.init();
 
@@ -447,32 +447,34 @@ class BetterLogic extends Homey.App {
 		await this.setExports();
 
 		//let timeoutset = false;
-		this.homey.setTimeout(async () => {
-			await this.homey.api.realtime("running");
-		}, 5 * 1000);
-
-		this.homey.setTimeout(async () => {
-			await this.homey.api.realtime("running_2x");
-		}, 10 * 1000);
-
-		this.homey.setTimeout(async () => {
-			await this.homey.api.realtime("running_3x");
-		}, 20 * 1000);
-		
-		this.homey.setTimeout(async () => {
-			await this.homey.api.realtime("running_3x");
-		}, 60 * 1000);
-
-		this.homey.setTimeout(async () => {
-			await this.homey.api.realtime("running_3x");
-		}, 180 * 1000);
 
 
 
 		//BL.decode()
 
+		// if (BL.homey.app.id === 'net.i-dev.betterlogic') {
+		// 	this.homey.setTimeout(async () => {
+		// 		await BL.realtimeFunction('running')
+		// 	}, 5 * 1000);
+
+		// 	this.homey.setTimeout(async () => {
+		// 		await BL.realtimeFunction('running_2x')
+		// 	}, 10 * 1000);
+
+		// 	this.homey.setTimeout(async () => {
+		// 		await this.homey.api.realtime("running_3x");
+		// 	}, 20 * 1000);
+
+		// 	this.homey.setTimeout(async () => {
+		// 		await this.homey.api.realtime("running_3x");
+		// 	}, 60 * 1000);
+		// }
+
 		BL.ready.then(async (x) => {
 			this.bl = x;
+
+			this.homey.api.realtime('bllSetLocale', this.locale);
+
 
 			await this.initFileServerFromSettings();
 
@@ -747,6 +749,29 @@ class BetterLogic extends Homey.App {
 			});
 
 			await this.setFunctions();
+
+
+			this.homey.setTimeout(async () => {
+				await this.homey.api.realtime("running");
+			}, 5 * 1000);
+
+			this.homey.setTimeout(async () => {
+				await this.homey.api.realtime("running_2x");
+			}, 10 * 1000);
+
+			this.homey.setTimeout(async () => {
+				await this.homey.api.realtime("running_3x");
+			}, 20 * 1000);
+
+			this.homey.setTimeout(async () => {
+				await this.homey.api.realtime("running_3x");
+			}, 60 * 1000);
+
+			this.homey.setTimeout(async () => {
+				await this.homey.api.realtime("running_3x");
+			}, 180 * 1000);
+
+
 		});
 
 
@@ -765,25 +790,8 @@ class BetterLogic extends Homey.App {
 		// 	this.homey.settings.set('notification_update_newsettings', true);
 		// }
 
-		// this.homey.settings.on('set', async (settingName) => {
-		// 	switch (settingName) {
-		// 	  case 'settings': this.getSettings(); break;
-		// 	}
-		//   });
-		//   this.getSettings();
-
-		// }
 	}
 
-	// getSettings() {
-	// 	this.settings = this.homey.settings.get('settings');
-	// 	let changed=false;
-	// 	if (!this.settings) this.settings = {};
-	// 	if (!this.settings.csvFilename && (changed=true)) this.settings.csvFilename = "Logs_{[date('yyyy-MM-dd_HH-mm-ss')]}.csv";
-	// 	if (!this.settings.jsonFilename && (changed=true)) this.settings.jsonFilename = "Logs_{[date('yyyy-MM-dd_HH-mm-ss')]}.json";
-	// 	if (!this.settings.xlsxFilename && (changed=true)) this.settings.xlsxFilename = "Logs_{[date('yyyy-MM-dd_HH-mm-ss')]}.xlsx";
-	// 	if(changed) this.homey.settings.set('settings', this.settings);
-	// }
 
 
 	async onUninit() {
@@ -1010,7 +1018,7 @@ class BetterLogic extends Homey.App {
 			if (Object.hasOwnProperty.call(contextProperties, key)) context['$' + key] = contextProperties[key];
 
 		context.date = (coding, _date, _locale, _timeZone) => BL.datetime.toString(coding, _date || date, _locale || locale, _timeZone || timeZone);
-		context.time = (format, _timeMs, _timeSec) => BL.datetime.toTimeString(format, _timeMs || timeMs, _timeSec || timeSec );
+		context.time = (format, _timeMs, _timeSec) => BL.datetime.toTimeString(format, _timeMs || timeMs, _timeSec || timeSec);
 		//}
 		try {
 
