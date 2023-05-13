@@ -25,7 +25,7 @@ module.exports =
                         await BL.ready;
                         return true;
                     } catch (error) {
-                        return false;
+                        return BL.isReady;
                     }
                 }
         }

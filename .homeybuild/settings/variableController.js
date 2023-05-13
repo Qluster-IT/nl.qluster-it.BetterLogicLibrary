@@ -300,8 +300,6 @@
             $bl.init(homey, $scope);
 
             $bl.api("POST", "/internal", { action: 'isLoaded' }, (x) => {
-
-
                 $bl.get("locale", async (x) => {
                     vars.locale = x;
                     if (x && !x.dateFormats) x.dateFormats = {};
