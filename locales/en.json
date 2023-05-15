@@ -47,6 +47,7 @@
 	"Day":"Day",
 	"Hour":"Hour",
 	"Hour 12-hour cycle":"Hour 12-hour cycle",
+	"Hour 24-hour cycle (24:xx)" :"Hour 24-hour cycle (24:xx)",
 	"Minute":"Minute",
 	"Second":"Second",
 	"Fractional second":"Fractional second",

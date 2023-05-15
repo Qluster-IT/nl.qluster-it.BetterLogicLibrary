@@ -47,6 +47,7 @@
 	"Day":"Dag",
 	"Hour":"Uur",
 	"Hour 12-hour cycle":"Uur cyclus van 12 uur",
+	"Hour 24-hour cycle (24:xx)" :"Uur cyclus van 24 uur (24:xx)",
 	"Minute":"Minuut",
 	"Second":"Seconde",
 	"Fractional second":"Fractionele seconde",

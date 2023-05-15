@@ -48,6 +48,8 @@ class Codes {
     /** @private */
     this.hour12CodesArr = BL._.sortBy(BL._.map(DateTime.hour12Codes, (x, key) => { return { key, val: x }; }, 'key.length'));
     /** @private */
+    this.hour24CodesArr = BL._.sortBy(BL._.map(DateTime.hour24Codes, (x, key) => { return { key, val: x }; }, 'key.length'));
+    /** @private */
     this.amPmCodesArr = BL._.sortBy(BL._.map(DateTime.amPmCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
     /** @private */
     this.minuteCodesArr = BL._.sortBy(BL._.map(DateTime.minuteCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
@@ -70,14 +72,14 @@ class Codes {
     this.arrays['dayCodesArr'] = 'getDay';
     this.arrays['hourCodesArr'] = 'getHour';
     this.arrays['hour12CodesArr'] = 'getHour12';
+    this.arrays['hour24CodesArr'] = 'getHour24';
     this.arrays['amPmCodesArr'] = 'getAmPm';
     this.arrays['minuteCodesArr'] = 'getMinute';
     this.arrays['secondCodesArr'] = 'getSecond';
     this.arrays['fractionalSecondCodesArr'] = 'getFractionalSecond';
     /** @private */
     this.array = BL._.sortBy(BL._.flatMap(this.arrays, (val, key) => { return BL._.map(this[key], (code, format) => { return { code: code.key, format: code.val, func: val, customisable: code.customisable }; }); }), (x) => -x.code.length); //return { name:key, func:val, list:this[key]}; });
-
-
+    
     /** @private */
     this.timeDayCodesArr = BL._.sortBy(BL._.map(DateTime.timeDayCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
     /** @private */
@@ -177,7 +179,7 @@ class DateTime {
     if (!(timeSec === undefined || timeSec === null)) {
       if (timeMs === undefined || timeMs === null)
         timeMs = timeSec * 1000;
-        else timeMs += (timeSec * 1000);
+      else timeMs += (timeSec * 1000);
     }
     if (!BL._.isArray(timeMs))
       return new DateTime(null, null, null, timeMs).toTimeString(format, true, DateTime.codes.timeArray);
@@ -440,11 +442,18 @@ class DateTime {
    * @param {"numeric"|"2-digit"} format * @returns {String}
    */
   getHourByFormat(format) {
-    let r = this.getString({ hour: format || 'numeric', hour12: false });
-    r = r.substring(0,2).trim();
+    let r = this.getString({ hour: format || 'numeric', hourCycle: 'h23' });
+    r = r.substring(0, 2).trim();
     return format == '2-digit' ? r.padStart(2, '0') : r;
   }
-
+  /**
+     * @param {"numeric"|"2-digit"} format * @returns {String}
+     */
+  getHour24ByFormat(format) {
+    let r = this.getString({ hour: format || 'numeric', hourCycle: 'h24' });
+    r = r.substring(0, 2).trim();
+    return format == '2-digit' ? r.padStart(2, '0') : r;
+  }
   /**
    * @param {"numeric"|"2-digit"} format * @returns {String}
    */
@@ -577,7 +586,14 @@ class DateTime {
   getHour(code) {
     return this.getHourByFormat(code && DateTime.hourCodes[code] ? DateTime.hourCodes[code] : 'numeric');
   }
-
+  /** @private */
+  static hour24Codes = { 'HH24': '2-digit', 'H24': 'numeric' };
+  /**
+   * @param {"HH24"|"H24"} format * @returns {String}
+   */
+  getHour24(code) {
+    return this.getHour24ByFormat(code && DateTime.hour24Codes[code] ? DateTime.hour24Codes[code] : 'numeric');
+  }
   /** @private */
   static hour12Codes = { 'hh': '2-digit', 'h': 'numeric' };
   /**
@@ -593,8 +609,8 @@ class DateTime {
    * @param {"tt"} format * @returns {String}
    */
   getAmPm(code) {
-    let tt= removeNumeric(this.getHour12ByFormat('numeric')).split(' ');
-    return tt[tt.length-1];
+    let tt = removeNumeric(this.getHour12ByFormat('numeric')).split(' ');
+    return tt[tt.length - 1];
   }
 
   /** @private */
@@ -626,7 +642,7 @@ class DateTime {
   }
 
   /** @private */
-  static isoCodes = { 'ISO': 'ISO', 'ISOZ':'ISOZ' };
+  static isoCodes = { 'ISO': 'ISO', 'ISOZ': 'ISOZ' };
   /**
    * @param {"ISO"} format * @returns {String}
    */
@@ -635,16 +651,16 @@ class DateTime {
     switch (code) {
       case 'ISO':
         return date.toISOString();
-        case 'ISOZ':
+      case 'ISOZ':
         //case 'UTC':
-        
-				let zz = this.getTimeZone('zz', date);
-				let utc = BL.datetime.toString('yyyy-MM-ddTHH:mm:ss.fff', date);
-				return utc + zz + (zz.indexOf(':')==-1 ? ':00' : '');
-        default:
+
+        let zz = this.getTimeZone('zz', date);
+        let utc = BL.datetime.toString('yyyy-MM-ddTHH:mm:ss.fff', date);
+        return utc + zz + (zz.indexOf(':') == -1 ? ':00' : '');
+      default:
         break;
     }
-    
+
   }
 
   /*

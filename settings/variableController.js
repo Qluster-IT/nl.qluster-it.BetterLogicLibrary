@@ -65,6 +65,9 @@
                 {
                     id: 'Hour 12-hour cycle',
                     formats: ['h', 'hh', 'tt']
+                },{
+                    id: 'Hour 24-hour cycle (24:xx)',
+                    formats: ['H24', 'HH24']
                 },
                 {
                     id: 'Minute',
