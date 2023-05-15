@@ -337,5 +337,11 @@
   },
   "3.2.11": {
     "en": "Added: Definitions for other apps for AngularJS."
+  },
+  "3.2.12": {
+    "en": "Fix: Hours would for some languages/locales show as 24:xx instead of 00:xx."
+  },
+  "3.2.13": {
+    "en": "Added: 24-hour cycle defenition: H24 and HH24 giving f.i. 24:57 instead of 00:57."
   }
 }
