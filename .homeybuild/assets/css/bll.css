@@ -6,6 +6,9 @@
     right:0;
     background-color:white;
     opacity: 0.3;
-    z-index:2000;
-    
+    z-index:2000;    
+}
+
+input.ng-invalid {
+    border-color: var(--bs-danger)!important;
 }

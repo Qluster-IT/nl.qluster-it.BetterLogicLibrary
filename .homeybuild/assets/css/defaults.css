@@ -18,7 +18,5 @@
 
 input.ng-invalid {
     border-color: var(--bs-danger)!important;
-    /* background-color: var(--bs-danger);
-    filter: brightness(60%); */
 }
 

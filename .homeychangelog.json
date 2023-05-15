@@ -331,5 +331,8 @@
   },
   "3.2.9": {
     "en": "Improved: App Settings waits a seconds after restarting the App so you do not get an error that BLL is not loaded yet."
+  },
+  "3.2.10": {
+    "en": "Added: Definitions for other apps."
   }
 }
