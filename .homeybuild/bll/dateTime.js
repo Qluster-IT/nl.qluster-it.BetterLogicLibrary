@@ -428,14 +428,14 @@ class DateTime {
    * @param {"numeric"|"2-digit"|"long"|"short"|"narrow"} format * @returns {String}
    */
   getMonthByFormat(format) {
-    return this.getString({ month: format || 'numeric' });
+    return this.getString({ month: format || 'numeric' }).replace('.','');
   }
 
   /**
    * @param {"numeric"|"2-digit"} format * @returns {String}
    */
   getDayByFormat(format) {
-    return this.getString({ day: format || 'numeric' });
+    return this.getString({ day: format || 'numeric' }).replace('.','');
   }
 
   /**
