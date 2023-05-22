@@ -1,6 +1,7 @@
 'use strict';
 
 const locale = require('locale-codes');
+
 var variableManager = require('./lib/variablemanager.js');
 const Homey = require('homey');
 let timezone;
@@ -11,6 +12,7 @@ const { BL } = require('betterlogiclibrary');
 //const sandbox = require('./lib/sandbox');
 const FileServer = require('./lib/FileServer.js');
 
+//const number = require('./bll/number.js')
 
 
 const vm = require('vm');
@@ -414,6 +416,7 @@ class BetterLogic extends Homey.App {
 			"Pacific/Wake",
 			"Pacific/Wallis"
 		];
+		this.currencies = [{ "name": "AED", "description": "UAE Dirham" }, { "name": "AFN", "description": "Afghani" }, { "name": "ALL", "description": "Lek" }, { "name": "AMD", "description": "Armenian Dram" }, { "name": "ANG", "description": "Netherlands Antillean Guilder" }, { "name": "AOA", "description": "Kwanza" }, { "name": "ARS", "description": "Argentine Peso" }, { "name": "AUD", "description": "Australian Dollar" }, { "name": "AWG", "description": "Aruban Florin" }, { "name": "AZN", "description": "Azerbaijan Manat" }, { "name": "BAM", "description": "Convertible Mark" }, { "name": "BBD", "description": "Barbados Dollar" }, { "name": "BDT", "description": "Taka" }, { "name": "BGN", "description": "Bulgarian Lev" }, { "name": "BHD", "description": "Bahraini Dinar" }, { "name": "BIF", "description": "Burundi Franc" }, { "name": "BMD", "description": "Bermudian Dollar" }, { "name": "BND", "description": "Brunei Dollar" }, { "name": "BOB", "description": "Boliviano" }, { "name": "BOV", "description": "Mvdol" }, { "name": "BRL", "description": "Brazilian Real" }, { "name": "BSD", "description": "Bahamian Dollar" }, { "name": "BTN", "description": "Ngultrum" }, { "name": "BWP", "description": "Pula" }, { "name": "BYN", "description": "Belarusian Ruble" }, { "name": "BZD", "description": "Belize Dollar" }, { "name": "CAD", "description": "Canadian Dollar" }, { "name": "CDF", "description": "Congolese Franc" }, { "name": "CHE", "description": "WIR Euro" }, { "name": "CHF", "description": "Swiss Franc" }, { "name": "CHW", "description": "WIR Franc" }, { "name": "CLF", "description": "Unidad de Fomento" }, { "name": "CLP", "description": "Chilean Peso" }, { "name": "CNY", "description": "Yuan Renminbi" }, { "name": "COP", "description": "Colombian Peso" }, { "name": "COU", "description": "Unidad de Valor Real" }, { "name": "CRC", "description": "Costa Rican Colon" }, { "name": "CUC", "description": "Peso Convertible" }, { "name": "CUP", "description": "Cuban Peso" }, { "name": "CVE", "description": "Cabo Verde Escudo" }, { "name": "CZK", "description": "Czech Koruna" }, { "name": "DJF", "description": "Djibouti Franc" }, { "name": "DKK", "description": "Danish Krone" }, { "name": "DOP", "description": "Dominican Peso" }, { "name": "DZD", "description": "Algerian Dinar" }, { "name": "EGP", "description": "Egyptian Pound" }, { "name": "ERN", "description": "Nakfa" }, { "name": "ETB", "description": "Ethiopian Birr" }, { "name": "EUR", "description": "Euro" }, { "name": "FJD", "description": "Fiji Dollar" }, { "name": "FKP", "description": "Falkland Islands Pound" }, { "name": "GBP", "description": "Pound Sterling" }, { "name": "GEL", "description": "Lari" }, { "name": "GHS", "description": "Ghana Cedi" }, { "name": "GIP", "description": "Gibraltar Pound" }, { "name": "GMD", "description": "Dalasi" }, { "name": "GNF", "description": "Guinean Franc" }, { "name": "GTQ", "description": "Quetzal" }, { "name": "GYD", "description": "Guyana Dollar" }, { "name": "HKD", "description": "Hong Kong Dollar" }, { "name": "HNL", "description": "Lempira" }, { "name": "HRK", "description": "Kuna" }, { "name": "HTG", "description": "Gourde" }, { "name": "HUF", "description": "Forint" }, { "name": "IDR", "description": "Rupiah" }, { "name": "ILS", "description": "New Israeli Sheqel" }, { "name": "INR", "description": "Indian Rupee" }, { "name": "IQD", "description": "Iraqi Dinar" }, { "name": "IRR", "description": "Iranian Rial" }, { "name": "ISK", "description": "Iceland Krona" }, { "name": "JMD", "description": "Jamaican Dollar" }, { "name": "JOD", "description": "Jordanian Dinar" }, { "name": "JPY", "description": "Yen" }, { "name": "KES", "description": "Kenyan Shilling" }, { "name": "KGS", "description": "Som" }, { "name": "KHR", "description": "Riel" }, { "name": "KMF", "description": "Comorian Franc " }, { "name": "KPW", "description": "North Korean Won" }, { "name": "KRW", "description": "Won" }, { "name": "KWD", "description": "Kuwaiti Dinar" }, { "name": "KYD", "description": "Cayman Islands Dollar" }, { "name": "KZT", "description": "Tenge" }, { "name": "LAK", "description": "Lao Kip" }, { "name": "LBP", "description": "Lebanese Pound" }, { "name": "LKR", "description": "Sri Lanka Rupee" }, { "name": "LRD", "description": "Liberian Dollar" }, { "name": "LSL", "description": "Loti" }, { "name": "LYD", "description": "Libyan Dinar" }, { "name": "MAD", "description": "Moroccan Dirham" }, { "name": "MDL", "description": "Moldovan Leu" }, { "name": "MGA", "description": "Malagasy Ariary" }, { "name": "MKD", "description": "Denar" }, { "name": "MMK", "description": "Kyat" }, { "name": "MNT", "description": "Tugrik" }, { "name": "MOP", "description": "Pataca" }, { "name": "MRU", "description": "Ouguiya" }, { "name": "MUR", "description": "Mauritius Rupee" }, { "name": "MVR", "description": "Rufiyaa" }, { "name": "MWK", "description": "Malawi Kwacha" }, { "name": "MXN", "description": "Mexican Peso" }, { "name": "MXV", "description": "Mexican Unidad de Inversion (UDI)" }, { "name": "MYR", "description": "Malaysian Ringgit" }, { "name": "MZN", "description": "Mozambique Metical" }, { "name": "NAD", "description": "Namibia Dollar" }, { "name": "NGN", "description": "Naira" }, { "name": "NIO", "description": "Cordoba Oro" }, { "name": "NOK", "description": "Norwegian Krone" }, { "name": "NPR", "description": "Nepalese Rupee" }, { "name": "NZD", "description": "New Zealand Dollar" }, { "name": "OMR", "description": "Rial Omani" }, { "name": "PAB", "description": "Balboa" }, { "name": "PEN", "description": "Sol" }, { "name": "PGK", "description": "Kina" }, { "name": "PHP", "description": "Philippine Peso" }, { "name": "PKR", "description": "Pakistan Rupee" }, { "name": "PLN", "description": "Zloty" }, { "name": "PYG", "description": "Guarani" }, { "name": "QAR", "description": "Qatari Rial" }, { "name": "RON", "description": "Romanian Leu" }, { "name": "RSD", "description": "Serbian Dinar" }, { "name": "RUB", "description": "Russian Ruble" }, { "name": "RWF", "description": "Rwanda Franc" }, { "name": "SAR", "description": "Saudi Riyal" }, { "name": "SBD", "description": "Solomon Islands Dollar" }, { "name": "SCR", "description": "Seychelles Rupee" }, { "name": "SDG", "description": "Sudanese Pound" }, { "name": "SEK", "description": "Swedish Krona" }, { "name": "SGD", "description": "Singapore Dollar" }, { "name": "SHP", "description": "Saint Helena Pound" }, { "name": "SLL", "description": "Leone" }, { "name": "SOS", "description": "Somali Shilling" }, { "name": "SRD", "description": "Surinam Dollar" }, { "name": "SSP", "description": "South Sudanese Pound" }, { "name": "STN", "description": "Dobra" }, { "name": "SVC", "description": "El Salvador Colon" }, { "name": "SYP", "description": "Syrian Pound" }, { "name": "SZL", "description": "Lilangeni" }, { "name": "THB", "description": "Baht" }, { "name": "TJS", "description": "Somoni" }, { "name": "TMT", "description": "Turkmenistan New Manat" }, { "name": "TND", "description": "Tunisian Dinar" }, { "name": "TOP", "description": "Pa’anga" }, { "name": "TRY", "description": "Turkish Lira" }, { "name": "TTD", "description": "Trinidad and Tobago Dollar" }, { "name": "TWD", "description": "New Taiwan Dollar" }, { "name": "TZS", "description": "Tanzanian Shilling" }, { "name": "UAH", "description": "Hryvnia" }, { "name": "UGX", "description": "Uganda Shilling" }, { "name": "USD", "description": "US Dollar" }, { "name": "USN", "description": "US Dollar (Next day)" }, { "name": "UYI", "description": "Uruguay Peso en Unidades Indexadas (UI)" }, { "name": "UYU", "description": "Peso Uruguayo" }, { "name": "UYW", "description": "Unidad Previsional" }, { "name": "UZS", "description": "Uzbekistan Sum" }, { "name": "VES", "description": "Bolívar Soberano" }, { "name": "VND", "description": "Dong" }, { "name": "VUV", "description": "Vatu" }, { "name": "WST", "description": "Tala" }, { "name": "XAF", "description": "CFA Franc BEAC" }, { "name": "XAG", "description": "Silver" }, { "name": "XAU", "description": "Gold" }, { "name": "XBA", "description": "Bond Markets Unit European Composite Unit (EURCO)" }, { "name": "XBB", "description": "Bond Markets Unit European Monetary Unit (E.M.U.-6)" }, { "name": "XBC", "description": "Bond Markets Unit European Unit of Account 9 (E.U.A.-9)" }, { "name": "XBD", "description": "Bond Markets Unit European Unit of Account 17 (E.U.A.-17)" }, { "name": "XCD", "description": "East Caribbean Dollar" }, { "name": "XDR", "description": "SDR (Special Drawing Right)" }, { "name": "XOF", "description": "CFA Franc BCEAO" }, { "name": "XPD", "description": "Palladium" }, { "name": "XPF", "description": "CFP Franc" }, { "name": "XPT", "description": "Platinum" }, { "name": "XSU", "description": "Sucre" }, { "name": "XTS", "description": "Codes specifically reserved for testing purposes" }, { "name": "XUA", "description": "ADB Unit of Account" }, { "name": "XXX", "description": "The codes assigned for transactions where no currency is involved" }, { "name": "YER", "description": "Yemeni Rial" }, { "name": "ZAR", "description": "Rand" }, { "name": "ZMW", "description": "Zambian Kwacha" }, { "name": "ZWL", "description": "Zimbabwe Dollar" }];
 
 		this.locale = await this.homey.settings.get('locale');
 		if (!this.locale) {
@@ -430,6 +433,7 @@ class BetterLogic extends Homey.App {
 		//await DateTime.init();
 
 		timezone = this.homey.clock.getTimezone();
+		//let a = number.toString(1.5);
 
 		let bl = BL.init({
 			homey: this.homey,
@@ -437,6 +441,7 @@ class BetterLogic extends Homey.App {
 				"_",
 				"math",
 				"datetime",
+				"number",
 				"proto",
 				"json"
 			]
@@ -557,6 +562,117 @@ class BetterLogic extends Homey.App {
 					return timeZones;
 				});
 
+
+			let format_number = this.homey.flow.getActionCard('format_number');
+			format_number
+				.registerRunListener(async (args, state) => {
+					return {
+						result: BL.number.toString(
+							args.number,
+							args.style,
+							args.styleOption1,
+							args.styleOption2,
+							args.decimals,
+							args.locale && args.locale.id ? args.locale.id : undefined
+						)
+					};
+				})
+				.getArgument('styleOption1')
+				.registerAutocompleteListener((query, args) => {
+					if (query) query = query.toLowerCase();
+					switch (args.style) {
+						case 'decimal':
+							//case 'percent':
+							return [
+								{ id: 'standard', name: 'Standard' },
+								{ id: 'scientific', name: 'Scientific' },
+								{ id: 'engineering', name: 'Engineering' },
+								{ id: 'compact_short', name: 'Compact Short' },
+								{ id: 'compact_long', name: 'Compact Long' }
+							];
+						case 'currency':
+							return this.currencies.filter(x => !query || (x.description.toLowerCase().indexOf(query) > -1 || x.name.toLowerCase().indexOf(query) > -1));
+						case 'unit':
+							return [
+								{ id: 'acre', name: 'acre' },
+								{ id: 'bit', name: 'bit' },
+								{ id: 'byte', name: 'byte' },
+								{ id: 'celsius', name: 'celsius' },
+								{ id: 'centimeter', name: 'centimeter' },
+								{ id: 'day', name: 'day' },
+								{ id: 'degree', name: 'degree' },
+								{ id: 'fahrenheit', name: 'fahrenheit' },
+								{ id: 'fluid-ounce', name: 'fluid-ounce' },
+								{ id: 'foot', name: 'foot' },
+								{ id: 'gallon', name: 'gallon' },
+								{ id: 'gigabit', name: 'gigabit' },
+								{ id: 'gigabyte', name: 'gigabyte' },
+								{ id: 'gram', name: 'gram' },
+								{ id: 'hectare', name: 'hectare' },
+								{ id: 'hour', name: 'hour' },
+								{ id: 'inch', name: 'inch' },
+								{ id: 'kilobit', name: 'kilobit' },
+								{ id: 'kilobyte', name: 'kilobyte' },
+								{ id: 'kilogram', name: 'kilogram' },
+								{ id: 'kilometer', name: 'kilometer' },
+								{ id: 'liter', name: 'liter' },
+								{ id: 'megabit', name: 'megabit' },
+								{ id: 'megabyte', name: 'megabyte' },
+								{ id: 'meter', name: 'meter' },
+								{ id: 'mile', name: 'mile' },
+								{ id: 'mile-scandinavian', name: 'mile-scandinavian' },
+								{ id: 'milliliter', name: 'milliliter' },
+								{ id: 'millimeter', name: 'millimeter' },
+								{ id: 'millisecond', name: 'millisecond' },
+								{ id: 'minute', name: 'minute' },
+								{ id: 'month', name: 'month' },
+								{ id: 'ounce', name: 'ounce' },
+								{ id: 'percent', name: 'percent' },
+								{ id: 'petabyte', name: 'petabyte' },
+								{ id: 'pound', name: 'pound' },
+								{ id: 'second', name: 'second' },
+								{ id: 'stone', name: 'stone' },
+								{ id: 'terabit', name: 'terabit' },
+								{ id: 'terabyte', name: 'terabyte' },
+								{ id: 'week', name: 'week' },
+								{ id: 'yard', name: 'yard' },
+								{ id: 'year', name: 'year' }
+							].filter(x => !query || (x.id.toLowerCase().indexOf(query) > -1 || x.name.toLowerCase().indexOf(query) > -1));;
+					}
+				});
+			format_number.getArgument('styleOption2')
+				.registerAutocompleteListener((query, args) => {
+					switch (args.style) {
+						// case 'decimal':
+						// 	return [
+						// 		{ id: 'standard', name: 'standard' },
+						// 		{ id: 'scientific', name: 'scientific' },
+						// 		{ id: 'engineering', name: 'engineering' },
+						// 		{ id: 'compact_short', name: 'compact short' },
+						// 		{ id: 'compact_long', name: 'compact long' }
+						// 	];
+						case 'currency':
+							return [
+								{ id: 'symbol', name: 'Symbol' },
+								{ id: 'narrowSymbol', name: 'Narrow Symbol' },
+								{ id: 'code', name: 'Code' },
+								{ id: 'name', name: 'Name' }
+							];
+						case 'unit':
+							return [
+								{ id: 'long', name: 'Long' },
+								{ id: 'short', name: 'Short' },
+								{ id: 'narrow', name: 'Narrow' }
+							];
+					}
+				});
+			format_number.getArgument('locale')
+				.registerAutocompleteListener((query, args) => {
+					query = query && query.length ? query.toLowerCase() : null;
+					let locales = query ? BL._.filter(locale.all, x => x.name.toLowerCase().indexOf(query) > -1 || x.tag.toLowerCase().indexOf(query) > -1) : locale.all;
+					locales = BL._.map(locales, l => { return { id: l.tag, name: l.name, description: l.tag }; });
+					return locales;
+				});
 
 			let execute_bl_expression = this.homey.flow.getActionCard('execute_bl_expression');
 

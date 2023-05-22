@@ -38,6 +38,7 @@ module.exports =
                 case "lodash": return { file: await readFile(__dirname + '/assets/js/lodash.min.js', { encoding: 'utf8' }) };
                 case "mathjs": return { file: await readFile(__dirname + '/lib/util/math.js', { encoding: 'utf8' }) };
                 case "datetime": return { file: await readFile(__dirname + '/bll/dateTime.js', { encoding: 'utf8' }) };
+                case "number": return { file: await readFile(__dirname + '/bll/number.js', { encoding: 'utf8' }) };
                 case "coding": return { file: await readFile(__dirname + '/bll/coding.js', { encoding: 'utf8' }) };
                 case "proto": return { file: await readFile(__dirname + '/bll/proto.js', { encoding: 'utf8' }) };
                 case "json": return { file: await readFile(__dirname + '/bll/json.js', { encoding: 'utf8' }) };

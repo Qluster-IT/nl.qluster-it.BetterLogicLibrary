@@ -346,5 +346,8 @@
   },
   "3.2.14": {
     "en": "Resolved: Norwegian day and month formats showed a trailing dot."
+  },
+  "3.3.0": {
+    "en": "Added: Format number as decimal/currency/percent/unit card."
   }
 }

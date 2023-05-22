@@ -73,6 +73,12 @@ export class BL {
      * @type {typeof import('../dist/dateTime')} @static*/
     static get datetime(): typeof import("../dist/dateTime");
     /** @private */
+    static set number(arg: typeof import("../dist/number"));
+    /**
+     * @description The DateTime library, used for converting date and times to strings formatted for the user.
+     * @type {typeof import('../dist/number')} @static*/
+    static get number(): typeof import("../dist/number");
+    /** @private */
     static set proto(arg: typeof import("../dist/proto"));
     /**
      * @description The Proto library.

@@ -4,6 +4,7 @@ export class BLL {
     static get _(): any;
     static get math(): any;
     static get datetime(): any;
+    static get number(): any;
     static get proto(): any;
     static get json(): any;
     /**@type {Object} */
@@ -17,6 +18,7 @@ export class BLL {
     get homey(): any;
     silent: any;
     destroy(): void;
+    sleep(ms: any): Promise<any>;
     init({ modules }?: {
         modules: any[];
     }): Promise<BLL>;

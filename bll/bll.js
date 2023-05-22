@@ -15,6 +15,8 @@ class BLL {
 
     static get datetime() { return this._datetime; }
     //static get dateTime() {  return this._datetime; }
+    
+    static get number() { return this._number; }
 
     static get proto() { return this._proto; }
 
@@ -52,6 +54,7 @@ class BLL {
     destroy() {
 
         if (BLL.datetime) BLL.datetime.destroy();
+        if (BLL.number) BLL.number.destroy();
         if (BLL.json) BLL.json.destroy();
         //if (this.api) this.api.unregister();
         // delete BLL._current;
@@ -72,7 +75,7 @@ class BLL {
     }
 
     async init({ modules } = { modules: [] }) {
-        if(BL.homey.app.id === 'net.i-dev.betterlogic') await this.sleep(2000);
+        if (BL.homey.app.id === 'net.i-dev.betterlogic') await this.sleep(2000);
 
         //BL.homey.log('BLL.init');
         //let api = await this.getApi();
@@ -110,6 +113,18 @@ class BLL {
                         BL.datetime = BLL.datetime;
 
                         await dateTimeObj.init(this);
+
+                        break;
+
+                    case "number":
+                        let number = await this.getLibrary('number');
+                        let numberObj = this.requireFromString(number.file, 'number');
+
+
+                        BLL._number = numberObj;//new dateTimeObj();
+                        BL.number = BLL.number;
+
+                        await numberObj.init(this);
 
                         break;
                     case "proto":

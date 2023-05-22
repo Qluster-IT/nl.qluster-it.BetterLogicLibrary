@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "3.2.14",
+  "version": "3.3.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -663,6 +663,133 @@
             "title": {
               "en": "TimeZone",
               "nl": "Tijdzone"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "name": "result",
+            "type": "string",
+            "title": {
+              "en": "Formatted result",
+              "nl": "Opgemaakte resultaat"
+            }
+          }
+        ]
+      },
+      {
+        "id": "format_number",
+        "title": {
+          "en": "Format number",
+          "nl": "Formateer nummer"
+        },
+        "titleFormatted": {
+          "en": "Format [[number]] as [[style]] (optional: [[styleOption1]], [[styleOption2]], [[decimals]], [[locale]])",
+          "nl": "[[number]] opmaken als [[style]] (optioneel: [[styleOption1]], [[styleOption2]], [[decimals]], [[locale]])"
+        },
+        "args": [
+          {
+            "name": "number",
+            "type": "number",
+            "placeholder": {
+              "en": "Number",
+              "nl": "Nummer"
+            },
+            "title": {
+              "en": "Number",
+              "nl": "Nummer"
+            }
+          },
+          {
+            "name": "style",
+            "type": "dropdown",
+            "placeholder": {
+              "en": "Style",
+              "nl": "Style"
+            },
+            "title": {
+              "en": "Style",
+              "nl": "Style"
+            },
+            "value":"decimal",
+            "values": [
+              {
+                "id": "decimal",
+                "label": {
+                  "en": "Decimal"
+                }
+              },
+              {
+                "id": "currency",
+                "label": {
+                  "en": "Currency"
+                }
+              },
+              {
+                "id": "percent",
+                "label": {
+                  "en": "Percent"
+                }
+              },
+              {
+                "id": "unit",
+                "label": {
+                  "en": "Unit"
+                }
+              }
+            ]
+          },          
+          {
+            "name": "styleOption1",
+            "type": "autocomplete",
+            "required": false,
+            "placeholder": {
+              "en": "Style Option 1",
+              "nl": "Style Option 1"
+            },
+            "title": {
+              "en": "Style Option 1",
+              "nl": "Style Option 1"
+            }
+          },          
+          {
+            "name": "styleOption2",
+            "type": "autocomplete",
+            "required": false,
+            "placeholder": {
+              "en": "Style Option 2",
+              "nl": "Style Option 2"
+            },
+            "title": {
+              "en": "Style Option 2",
+              "nl": "Style Option 2"
+            }
+          },
+          {
+            "name": "decimals",
+            "type": "number",
+            "required": false,
+            "placeholder": {
+              "en": "Decimals",
+              "nl": "Decimalen"
+            },
+            "title": {
+              "en": "Decimals",
+              "nl": "Decimalen"
+            }
+          },
+
+          {
+            "name": "locale",
+            "type": "autocomplete",
+            "required": false,
+            "placeholder": {
+              "en": "Select a locale from the list",
+              "nl": "Selecteer een locale uit de lijst"
+            },
+            "title": {
+              "en": "Locale",
+              "nl": "Locale"
             }
           }
         ],
