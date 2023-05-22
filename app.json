@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -770,8 +770,8 @@
             "type": "number",
             "required": false,
             "placeholder": {
-              "en": "Decimals",
-              "nl": "Decimalen"
+              "en": "Decimals (-1 for auto)",
+              "nl": "Decimalen (-1 for auto)"
             },
             "title": {
               "en": "Decimals",

@@ -349,5 +349,8 @@
   },
   "3.3.0": {
     "en": "Added: Format number as decimal/currency/percent/unit card."
+  },
+  "3.3.1": {
+    "en": "Added: Format number as decimal/currency/percent/unit card."
   }
 }

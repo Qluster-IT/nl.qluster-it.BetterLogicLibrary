@@ -130,14 +130,17 @@ class clsNumber {
         case 'currency':
           if (styleOption1) opts.currency = styleOption1.name;
           if (styleOption2) opts.currencyDisplay = styleOption2.id;
+          break;
         case 'unit':
           if (styleOption1) opts.unit = styleOption1.id;
-          if (styleOption2) opts.unitDisplay = styleOption2.id;
-        default:
+          if (styleOption2) opts.unitDisplay = styleOption2.id;          
           break;
       }
     }
-    if (decimals !== undefined && decimals !== null) opts.minimumFractionDigits = opts.maximumFractionDigits = decimals;
+    if (decimals !== undefined && decimals !== null) {
+      if (decimals >= 0)
+        opts.minimumFractionDigits = opts.maximumFractionDigits = decimals;
+    }
     else opts.minimumFractionDigits = opts.maximumFractionDigits = this.countDecimals(this.number);
 
     return this.number.toLocaleString(this.locale || clsNumber.locale, opts);
