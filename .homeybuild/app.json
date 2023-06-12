@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "3.3.1",
+  "version": "3.3.2",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -663,6 +663,67 @@
             "title": {
               "en": "TimeZone",
               "nl": "Tijdzone"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "name": "result",
+            "type": "string",
+            "title": {
+              "en": "Formatted result",
+              "nl": "Opgemaakte resultaat"
+            }
+          }
+        ]
+      },
+      {
+        "id": "format_time",
+        "title": {
+          "en": "Format time",
+          "nl": "Formaat tijd"
+        },
+        "titleFormatted": {
+          "en": "Format [[timeMs]] or [[timeSec]] as [[format]]",
+          "nl": "[[timeMs]] of [[timeSec]] opmaken als [[format]]"
+        },
+        "args": [
+          {
+            "name": "format",
+            "type": "autocomplete",
+            "placeholder": {
+              "en": "Type your own format or select from the list",
+              "nl": "Typ uw eigen formaat of kies een uit de lijst"
+            },
+            "title": {
+              "en": "Format",
+              "nl": "Opmaak"
+            }
+          },
+          {
+            "name": "timeMs",
+            "type": "number",
+            "required": false,
+            "placeholder": {
+              "en": "Time in milliseconds",
+              "nl": "Tijd in milliseconden"
+            },
+            "title": {
+              "en": "TimeMs",
+              "nl": "TijdMs"
+            }
+          },
+          {
+            "name": "timeSec",
+            "type": "number",
+            "required": false,
+            "placeholder": {
+              "en": "Time in seconds",
+              "nl": "Tijd in seconden"
+            },
+            "title": {
+              "en": "TimeSec",
+              "nl": "TijdSec"
             }
           }
         ],

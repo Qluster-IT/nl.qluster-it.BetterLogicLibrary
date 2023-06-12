@@ -498,19 +498,6 @@ class BetterLogic extends Homey.App {
 			let format_datetime = this.homey.flow.getActionCard('format_datetime');
 			format_datetime
 				.registerRunListener(async (args, state) => {
-
-
-
-					// const DateTime = require('./bll/dateTime.js');        
-					// let datetime = DateTime;
-					// datetime.init(BL.l);
-					// let test = await datetime.toString(args.format.name,
-					// 	args.date && args.date!='undefined' ? args.date:undefined, 
-					// 	args.locale && args.locale.id ? args.locale.id:undefined, 
-					// 	args.timeZone && args.timeZone.id ? args.timeZone.id:undefined);
-
-					// let b = test;
-
 					return {
 						result: BL.datetime.toString(
 							args.format.name,
@@ -562,6 +549,41 @@ class BetterLogic extends Homey.App {
 					return timeZones;
 				});
 
+			let format_time = this.homey.flow.getActionCard('format_time');
+			format_time
+				.registerRunListener(async (args, state) => {
+					return {
+						result: BL.datetime.toString(
+							args.format.name,
+							args.timeMs && args.timeMs != 'undefined' ? args.timeMs : undefined,
+							args.timeSec && args.timeSec != 'undefined' ? args.timeSec : undefined
+						)
+					};
+				})
+				.getArgument('format')
+				.registerAutocompleteListener((query, args) => {
+					let r = [
+						{ name: 'D"d" hh"h" mm"m" ss"s"' },
+						{ name: 'D hh:mm:ss.fff' },
+						{ name: 'D hh:mm:ss' },
+						{ name: 'H:mm:ss.fff' },
+						{ name: 'H:mm:ss' },
+						{ name: 'M:ss.fff' },
+						{ name: 'M:ss' }
+					];
+					let timeMs = args.timeMs && args.timeMs != 'undefined' ? args.timeMs : undefined;
+					let timeSec = args.timeSec && args.timeSec != 'undefined' ? args.timeSec : undefined;
+					if (timeMs === undefined && timeSec === undefined) timeMs = 1012323012;
+					BL.L._.each(r, x => x.description = BL.datetime.toTimeString(x.name,
+						timeMs,
+						timeSec));
+					if (query && query.length) r.unshift({
+						name: query, description: BL.datetime.toTimeString(query,
+							timeMs,
+							timeSec)
+					});
+					return r;
+				});
 
 			let format_number = this.homey.flow.getActionCard('format_number');
 			format_number
@@ -1131,7 +1153,8 @@ class BetterLogic extends Homey.App {
 
 		//if (arg) context.arg = arg;
 		if (contextProperties) for (const key in contextProperties)
-			if (Object.hasOwnProperty.call(contextProperties, key)) context['$' + key] = contextProperties[key];
+			if (Object.hasOwnProperty.call(contextProperties, key)) context[(key.startsWith('$') ? '' : '$') + key] = contextProperties[key];
+		//Remove the added $ ??? Or not?
 
 		context.date = (coding, _date, _locale, _timeZone) => BL.datetime.toString(coding, _date || date, _locale || locale, _timeZone || timeZone);
 		context.time = (format, _timeMs, _timeSec) => BL.datetime.toTimeString(format, _timeMs || timeMs, _timeSec || timeSec);

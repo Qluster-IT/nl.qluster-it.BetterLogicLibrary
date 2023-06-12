@@ -697,7 +697,7 @@ class DateTime {
    */
   getTimeHour(code) {
     let hours = Math.floor((this.timeMs / (1000 * 60 * 60)));
-    if (code[0] === 'h' && hours > 24) hours %= 24;
+    if (code[0] === 'h' && hours >= 24) hours %= 24;
     return hours.toString().padStart(code.length, '0');
   }
 
@@ -708,7 +708,7 @@ class DateTime {
    */
   getTimeMinute(code) {
     let minutes = Math.floor((this.timeMs / (1000 * 60)));
-    if (code[0] === 'm' && minutes > 60) minutes %= 60;
+    if (code[0] === 'm' && minutes >= 60) minutes %= 60;
     return minutes.toString().padStart(code.length, '0');
   }
 
@@ -719,7 +719,7 @@ class DateTime {
    */
   getTimeSecond(code) {
     let seconds = Math.floor((this.timeMs / 1000))
-    if (code[0] === 's' && seconds > 60) seconds %= 60;
+    if (code[0] === 's' && seconds >= 60) seconds %= 60;
     return seconds.toString().padStart(code.length, '0');
   }
 
@@ -732,7 +732,7 @@ class DateTime {
   getTimeFractionalSecond(code) {
 
     let milliseconds = this.timeMs;//;
-    if (code[0] === 'f' && milliseconds > 1000) milliseconds = Math.floor((milliseconds % 1000) / 100);
+    if (code[0] === 'f' && milliseconds >= 1000) milliseconds = Math.floor((milliseconds % 1000));
     return milliseconds.toString().padStart(code.length, '0');
   }
 

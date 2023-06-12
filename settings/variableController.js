@@ -31,7 +31,7 @@
             timeExampleResult: 'Today is a donderdag',
             timesExampleValue: undefined,
             timesExampleResult: {},
-            timesExampleTimeMs: 1012323311,
+            timesExampleTimeMs: 1012323012,
 
             dateOptions: [
                 {
@@ -93,7 +93,7 @@
             timeOptions: [
                 {
                     id: 'Time formatting',
-                    formats: ['D:hh:mm:ss.fff', 'HHH:mm:ss.fff', 'MMM:ss.ff', 'SSSSS.fff', 'H:m:s.f']
+                    formats: ['D"d" hh"h" mm"m" ss"s"', 'D:hh:mm:ss.fff', 'HHH:mm:ss.fff', 'MMM:ss.ff', 'SSSSS.fff', 'H:m:s.f']
                 },
                 {
                     id: 'Days',
