@@ -364,5 +364,8 @@
   },
   "3.3.6": {
     "en": "Improved: A few style changes in the App Settings and some more time formatting examples."
+  },
+  "3.3.7": {
+    "en": "Improved: A few style changes in the App Settings and more time formatting examples and more formatting options (FFFF and FFFFF)."
   }
 }

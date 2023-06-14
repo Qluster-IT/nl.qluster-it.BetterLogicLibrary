@@ -725,7 +725,7 @@ class DateTime {
 
 
   /** @private */
-  static timeFractionalSecondCodes = { 'FFF': 'FFF', 'FF': 'FF', 'F': 'F', 'fff': 'fff', 'ff': 'ff', 'f': 'f' };
+  static timeFractionalSecondCodes = { 'FFFFF': 'FFFFF', 'FFFF': 'FFFF', 'FFF': 'FFF', 'FF': 'FF', 'F': 'F', 'fff': 'fff', 'ff': 'ff', 'f': 'f' };
   /**
    * @param {"fff"|"ff"|"f"} format * @returns {String}
    */

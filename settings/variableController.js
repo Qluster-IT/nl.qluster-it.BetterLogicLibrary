@@ -113,7 +113,7 @@
                 },
                 {
                     id: 'Fractional seconds',
-                    formats: ['f', 'ff', 'fff', 'F', 'FF', 'FFF']
+                    formats: ['f', 'ff', 'fff', 'F', 'FF', 'FFF', 'FFFF', 'FFFFF']
                 }
             ],
             formats: undefined,
