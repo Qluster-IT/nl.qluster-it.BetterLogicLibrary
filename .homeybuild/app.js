@@ -1046,7 +1046,7 @@ class BetterLogic extends Homey.App {
 								width: date.length
 							},
 							{
-								column: BL.homey.__('Auto'),
+								column: BL.homey.__('Auto created'),
 								type: Boolean,
 								value: v => v.auto,
 								width: BL._.max(BL.homey.__('Auto').length, 6)

@@ -80,6 +80,7 @@
 
 	
 	"Auto":"Auto",
+	"Auto created":"Automatisch aangemaakt",
 	"It_took_days":"Het duurde {[ time(\"D\", 1000000000) ]} dagen.",
 	"Method_time_explanation":"Deze methode retourneert de opgegeven tijd in het ingevoerde formaat.",
 
