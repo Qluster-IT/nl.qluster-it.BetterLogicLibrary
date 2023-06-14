@@ -354,6 +354,9 @@
     "en": "Added: Format number as decimal/currency/percent/unit card."
   },
   "3.3.2": {
-    "en": "Added: New flowcard: format time.\nBugfixed: Roundings of time wend wrong (hh could be 24 hours, instead of 00)."
+    "en": "Added: New flowcard: format time.\nBugfixed: Rounding of time went wrong (hh could be 24 hours, instead of 00)."
+  },
+  "3.3.4": {
+    "en": "Resolved: Typo in changelog."
   }
 }
