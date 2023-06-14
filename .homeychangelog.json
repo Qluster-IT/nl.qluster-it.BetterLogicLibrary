@@ -358,5 +358,11 @@
   },
   "3.3.4": {
     "en": "Resolved: Typo in changelog."
+  },
+  "3.3.5": {
+    "en": "Improved: A few style changes in the App Settings."
+  },
+  "3.3.6": {
+    "en": "Improved: A few style changes in the App Settings and some more time formatting examples."
   }
 }

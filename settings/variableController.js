@@ -93,7 +93,7 @@
             timeOptions: [
                 {
                     id: 'Time formatting',
-                    formats: ['D"d" hh"h" mm"m" ss"s"', 'D:hh:mm:ss.fff', 'HHH:mm:ss.fff', 'MMM:ss.ff', 'SSSSS.fff', 'H:m:s.f']
+                    formats: ['D"d" hh"h" mm"m" ss"s"', 'D:hh:mm:ss.fff', 'HHH:mm:ss.fff', 'MMM:ss.ff', 'SSSSS.fff', 'H:m:s.f', 'FFF']
                 },
                 {
                     id: 'Days',
