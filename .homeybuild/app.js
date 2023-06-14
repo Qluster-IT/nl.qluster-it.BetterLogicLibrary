@@ -50,7 +50,6 @@ class BetterLogic extends Homey.App {
 
 	async onInit() {
 
-
 		//BL.json.toExcel([], { schema: [{}]})
 		BetterLogic.homey = this.homey;
 		if (process.env.DEBUG === '1' || false) {
@@ -61,7 +60,8 @@ class BetterLogic extends Homey.App {
 				require('inspector').open(9216, '0.0.0.0', true);
 			}
 		}
-
+		// this.allLocales = locale.all.map(l => { return { id: l.tag, name: l.name, description: l.tag }; });
+		
 		//require('inspector').open(9216, '0.0.0.0', true);
 		//if (process.env.DEBUG === '1') require('inspector').open(9232, '0.0.0.0', true);
 		this.log('BetterLogic is running...');
@@ -1158,6 +1158,10 @@ class BetterLogic extends Homey.App {
 
 		context.date = (coding, _date, _locale, _timeZone) => BL.datetime.toString(coding, _date || date, _locale || locale, _timeZone || timeZone);
 		context.time = (format, _timeMs, _timeSec) => BL.datetime.toTimeString(format, _timeMs || timeMs, _timeSec || timeSec);
+		context.number = (number, style, styleOption1, styleOption2, decimals, _locale) => BL.number.toString(number, style, styleOption1, styleOption2, decimals, _locale || locale);
+		context.now = Date.now();
+		//context.int = (val)=> Number.parseInt(val);
+
 		//}
 		try {
 

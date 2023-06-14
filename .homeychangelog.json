@@ -370,5 +370,8 @@
   },
   "3.3.8": {
     "en": "Dependency updated: Write-excel-file package."
+  },
+  "3.4.0": {
+    "en": "Improved: The date method has overloading and the number method has been added. Check the App settings for more details."
   }
 }

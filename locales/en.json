@@ -34,6 +34,7 @@
 	"Modules":"Modules",
 	"Example":"Example",
 	"Build-in functions":"Build-in functions",
+	"Build-in constants":"Build-in constants",
 	"Method_date_explanation":"This method will return the current date(time) in the entered format, with respect to the users defined locale (language) en timezone.",
 	"Method_date_optionally":"Optionally you can supply the date(time), locale and/or timeZone.",
 	"Variable value":"Variable value",
@@ -77,17 +78,18 @@
 	"Shema_example":"Here is an example schema to use in the format JSON as Excel flowcard.",
 	"Default Date Format":"Default Date Format",
 	"excel_defaultdateformat_example":"Here you can configure the default datetime format to use in Excel files. Please note that this is Excel formatting, not BLL coding.",
-
-
-
 	"Auto":"Auto",
 	"Auto created":"Automatically created",
 	"It_took_days":"It took {[ time(\"D\", 1000000000) ]} days.",
 	"Method_time_explanation":"This method will return the given time in the entered format.",
-	"":"",
-	"":"",
-	"":"",
 
+	"Contant_now_explanation":"Contains the value of Date.now(), a numeric value representing the current moment in milliseconds, set once at the start of the expression.",
+	"Method_number_explanation":"This method will return the given number in the given style.",
+	"":"",
+	"":"",
+	"":"",
+	"":"",
+	
 
 
 

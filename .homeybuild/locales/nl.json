@@ -34,6 +34,7 @@
 	"Modules":"Modules",
 	"Example":"Voorbeeld",
 	"Build-in functions":"Ingebouwde functies",
+	"Build-in constants":"Ingebouwde constanten",
 	"Method_date_explanation":"Deze methode retourneert de huidige datum(tijd) in het ingevoerde formaat, met betrekking tot de door de gebruiker gedefinieerde locale (taal) en tijdzone.",
 	"Method_date_optionally":"Optioneel kunt u de datum(tijd), locale en/of timeZone opgeven.",
 	"Variable value":"Variabel waarde",
@@ -83,7 +84,9 @@
 	"Auto created":"Automatisch aangemaakt",
 	"It_took_days":"Het duurde {[ time(\"D\", 1000000000) ]} dagen.",
 	"Method_time_explanation":"Deze methode retourneert de opgegeven tijd in het ingevoerde formaat.",
-
+	"Contant_now_explanation":"Bevat de waarde van Date.now(), een numerieke waarde die het huidige moment in milliseconden vertegenwoordigt, eenmalig ingesteld aan het begin van de expressie.",
+	"Method_number_explanation":"Deze methode retourneert het getal in de gegeven stijl.",
+	
 
 	"settings":{
 		"delete": "Verwijderen",

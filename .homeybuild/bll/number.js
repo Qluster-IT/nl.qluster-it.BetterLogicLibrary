@@ -47,6 +47,32 @@ class clsNumber {
   static toString(number, style, styleOption1, styleOption2, decimals, locale) {// format, 
     //if (!format) throw new Error("format is required.");
     if (number === undefined || number === null) throw new Error("number is required.");
+    
+    if(styleOption1 === null ) {
+      locale = styleOption2;
+      decimals = null;
+      styleOption2 = null;
+      styleOption1 = null;
+    } else if(typeof(decimals)=='string') {
+      locale = decimals;
+      decimals = null;
+    } else if(typeof(style)=='number') {
+      locale = styleOption1;
+      decimals = style;
+      style='decimal';
+      styleOption1 = null;
+    } else if(typeof(styleOption1)=='number') {
+      locale = styleOption2;
+      decimals = styleOption1;
+      styleOption2 = null;
+      styleOption1 = null;
+    } else if(typeof(styleOption2)=='number') {
+      locale = decimals;
+      decimals = styleOption2;
+      styleOption2 = null;
+    }
+    if(!style) style='decimal';
+
     if (!BL._.isArray(number)) {
       return new clsNumber(locale, clsNumber.convertToNumber(number), decimals).toString(style, styleOption1, styleOption2, decimals);
     } else if (BL._.isArray(number)) {
@@ -112,28 +138,29 @@ class clsNumber {
 
 
   format(style, styleOption1, styleOption2, decimals) {
+   
     let opts = {};
     if (style) {
       opts.style = style;
       switch (style) {
         case 'decimal':
           if (styleOption1) {
-            if (styleOption1.id == 'compact_short') {
+            if ((styleOption1.id || styleOption1) == 'compact_short') {
               opts.notation = 'compact';
               opts.compactDisplay = 'short';
-            } else if (styleOption1.id == 'compact_long') {
+            } else if ((styleOption1.id || styleOption1) == 'compact_long') {
               opts.notation = 'compact';
               opts.compactDisplay = 'long';
-            } else opts.notation = styleOption1.id;
+            } else opts.notation = styleOption1.id || styleOption1;
           }
           break;
         case 'currency':
-          if (styleOption1) opts.currency = styleOption1.name;
-          if (styleOption2) opts.currencyDisplay = styleOption2.id;
+          if (styleOption1) opts.currency = styleOption1.name || styleOption1;
+          if (styleOption2) opts.currencyDisplay = styleOption2.id || styleOption2;
           break;
         case 'unit':
-          if (styleOption1) opts.unit = styleOption1.id;
-          if (styleOption2) opts.unitDisplay = styleOption2.id;          
+          if (styleOption1) opts.unit = styleOption1.id || styleOption1;
+          if (styleOption2) opts.unitDisplay = styleOption2.id || styleOption2;          
           break;
       }
     }

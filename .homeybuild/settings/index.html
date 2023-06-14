@@ -356,6 +356,7 @@
                         <div class="col-12 fw-bold" data-i18n="Build-in functions">Build-in functions</div>
                         <ul>
                             <li>
+                                <pre class="mb-0 pre-wrap fw-bolder fs-6">date(format, locale?, timeZone?)</pre>
                                 <pre class="mb-0 pre-wrap fw-bolder fs-6">date(format, date?, locale?, timeZone?)</pre>
                                 <div class="col-12" data-i18n="Method_date_explanation">This method will return the current date(time) in the entered format, with respect to the users defined locale (language) en timezone.</div>
                                 <div class="col-12" data-i18n="Method_date_optionally">Optionally you can supply the date(time), locale and/or timeZone.</div>
@@ -369,6 +370,32 @@
                                 <div class="col-12 mt-1 mb-1 fw-bold" data-i18n="Example">Example</div>
                                 <div class="col-12 mb-1"><input class="form-control hy-nostyle" type="text" value="" ng-model="vars.timeExampleValue" ng-change="updateTimeExample();" ng-model-options="{ debounce: 300 }" /></div>
                                 <div class="col-12" ng-bind="vars.timeExampleResult"></div>
+                            </li>
+                            <li>
+                                <pre class="mb-0 mt-3 pre-wrap fw-bolder fs-6">number(number, decimals?, locale?)</pre>
+                                <pre class="mb-0 pre-wrap fw-bolder fs-6">number(number, style?, decimals?, locale?)</pre>
+                                <pre class="mb-0 pre-wrap fw-bolder fs-6">number(number, style?, styleOption1?, decimals?, locale?)</pre>
+                                <pre class="mb-0 pre-wrap fw-bolder fs-6">number(number, style?, styleOption1?, styleOption2?, locale?)</pre>
+                                <pre class="mb-0 pre-wrap fw-bolder fs-6">number(number, style?, styleOption1?, styleOption2?, decimals?, locale?)</pre>
+                                <div class="col-12" data-i18n="Method_number_explanation">This method will return the given number in the given style.</div>
+                                <div class="col-12 pre-wrap "><a href="#" bl-href="https://community.homey.app/t/app-pro-better-logic-library-for-users/71876/5">Click here for more explanation on the styleoptions</a></div>
+                                <div class="col-12 mt-1 mb-1 fw-bold" data-i18n="Example">Example</div>
+                                <div class="col-12 pre-wrap ">number(1.45, 2)</div>
+                                <div class="col-12 pre-wrap ">number(1.45, 2, 'nl')</div>
+                                <div class="col-12 pre-wrap ">number(1.45, 'percent')</div>
+                                <div class="col-12 pre-wrap ">number(1.45, 'percent', null, 'nl')</div>
+                                <div class="col-12 pre-wrap ">number(1.45, 'currency', 'EUR', null, 'nl')</div>
+                                <div class="col-12 pre-wrap ">number(1.45, 'currency', 'eur', 'name', 'nl')</div>
+                                <div class="col-12 pre-wrap ">number(1.45, 'unit', 'kilometer', 'narrow', 'nl')</div>
+                                <!-- <div class="col-12 mb-1"><input class="form-control hy-nostyle" type="text" value="" ng-model="vars.timeExampleValue" ng-change="updateTimeExample();" ng-model-options="{ debounce: 300 }" /></div>
+                                <div class="col-12" ng-bind="vars.timeExampleResult"></div> -->
+                            </li>
+                        </ul>
+                        <div class="col-12 fw-bold" data-i18n="Build-in constants">Build-in constants</div>
+                        <ul>
+                            <li>
+                                <pre class="mb-0 pre-wrap fw-bolder fs-6">now</pre>
+                                <div class="col-12" data-i18n="Contant_now_explanation">Contains the value of Date.now(), a numeric value representing the current moment in milliseconds, set once at the start of the script.</div>
                             </li>
                         </ul>
                     </form>
