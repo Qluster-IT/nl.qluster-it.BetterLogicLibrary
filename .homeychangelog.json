@@ -373,5 +373,8 @@
   },
   "3.4.0": {
     "en": "Improved: The date method has overloading and the number method has been added. Check the App settings for more details."
+  },
+  "3.4.1": {
+    "en": "Resolved: Some insights bugs on HP2023\nAdded: FLowcard to retrieve properties of an variable, currently the last set datetime."
   }
 }

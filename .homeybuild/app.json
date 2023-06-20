@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "3.4.0",
+  "version": "3.4.1",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -1543,6 +1543,50 @@
             "type": "string",
             "title": {
               "en": "Variables"
+            }            
+          }
+        ]
+      },
+      
+      {
+        "id": "get_variable_properties",
+        "title": {
+          "en": "Get variable properties",
+          "nl": "Ontvang variabele eigenschapen"
+        },
+        "titleFormatted": {
+          "en": "Get properties of [[variable]]",
+          "nl": "Ontvang eigenschappen van [[variable]]"
+        },
+        "args": [
+          {
+            "name": "variable",
+            "type": "autocomplete",
+            "title": {
+              "en": "Variable",
+              "nl": "Variabele"
+            },
+            "placeholder": {
+              "en": "Variable",
+              "nl": "Variabele"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "name": "lastChangedTick",
+            "type": "number",
+            "title": {
+              "en": "Last Changed (UTC tick)",
+              "nl": "Laatst ingesteld (UTC tick)"
+            }            
+          },
+          {
+            "name": "lastChanged",
+            "type": "string",
+            "title": {
+              "en": "Last Changed (datetime)",
+              "nl": "Laatst ingesteld (datetime)"
             }            
           }
         ]

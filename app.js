@@ -61,7 +61,7 @@ class BetterLogic extends Homey.App {
 			}
 		}
 		// this.allLocales = locale.all.map(l => { return { id: l.tag, name: l.name, description: l.tag }; });
-		
+
 		//require('inspector').open(9216, '0.0.0.0', true);
 		//if (process.env.DEBUG === '1') require('inspector').open(9232, '0.0.0.0', true);
 		this.log('BetterLogic is running...');
@@ -696,6 +696,36 @@ class BetterLogic extends Homey.App {
 					return locales;
 				});
 
+
+			let get_variable_properties = this.homey.flow.getActionCard('get_variable_properties');
+			get_variable_properties
+				.registerRunListener(async (args, state) => {
+					
+					let arr = await variableManager.getVariables()
+					let variable = arr.find(x=>x.name==args.variable.id);
+					if(!variable) throw new Error('Variable not found');
+					return {lastChangedTick:new Date(variable.lastChanged).getTime(), lastChanged:BL.datetime.toString('datetime', variable.lastChanged)}
+				})
+				.getArgument('variable')
+				.registerAutocompleteListener(async (query, args) => {
+					let arr = await variableManager.getVariables()
+
+					if (query) {
+						query = query.toLowerCase();
+						arr = arr.filter(x=>x.name.toLowerCase().indexOf(query)>-1);
+					}
+
+					return BL._.sortBy(arr, x=>x.name.toLowerCase()).map(x=>{
+						return {
+							id:x.name,
+							name:x.name,
+							description:x.type
+						};
+					})
+
+
+				});
+			
 			let execute_bl_expression = this.homey.flow.getActionCard('execute_bl_expression');
 
 			execute_bl_expression.registerRunListener(async (args, state) => {
