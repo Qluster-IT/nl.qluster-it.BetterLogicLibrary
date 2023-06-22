@@ -376,5 +376,8 @@
   },
   "3.4.1": {
     "en": "Resolved: Some insights bugs on HP2023\nAdded: FLowcard to retrieve properties of an variable, currently the last set datetime."
+  },
+  "3.4.2": {
+    "en": "Resolved: Some errors from the developer-log, now handled and shown to the user as notifications instead of crashing the app."
   }
 }

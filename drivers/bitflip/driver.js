@@ -8,60 +8,66 @@ var variableManager = require('../../lib/variablemanager.js');
 var devices = [];
 
 class BitFlipDriver extends Homey.Driver {
-  onInit() {
-    this.log('BitFlipDriver initialized');
-    devices = this.getDevices();
+    onInit() {
+        this.log('BitFlipDriver initialized');
+        devices = this.getDevices();
 
-    this.homey.settings.on('set',
-        function (action) {
-            if (action == 'boolValueChanged') {
-                const changedVariable = this.homey.settings.get('boolValueChanged');
+        this.homey.settings.on('set',
+            function (action) {
+                if (action == 'boolValueChanged') {
+                    const changedVariable = this.homey.settings.get('boolValueChanged');
 
-                if (changedVariable.type == 'boolean') {
-                    var device = devices.find(function (dev) {                        
-                        if(dev.getData) return dev.getData().id == changedVariable.name;
-                        else return dev.data.id == changedVariable.name;
-                    });
+                    if (changedVariable.type == 'boolean') {
+                        var device = devices.find(function (dev) {
+                            if (dev.getData) return dev.getData().id == changedVariable.name;
+                            else return dev.data.id == changedVariable.name;
+                        });
 
-                    if (device) {
-                        device.setCapabilityValue('onoff', changedVariable.value);
+                        if (device) {
+                            try {
+                                device.setCapabilityValue('onoff', changedVariable.value);
+                            } catch (error) {
+                                try {
+                                    homey.notifications.createNotification({ excerpt: `Error while setting device ${changedVariable.name}:` + (error.message || error) });
+                                } catch (errorInner) { }
+                            }
+                        }
                     }
                 }
-            }
-            Promise.resolve();
+                Promise.resolve();
+            });
+    }
+
+
+
+    async onPair(session) {
+
+        session.setHandler('list_devices', (data) => {
+            var vars = variableManager.getVariables();
+            //var bools = variableManager.retrieveVariables('query', null, 'boolean');
+            var booleans = variableManager.retrieveVariables(null, null, 'boolean');
+
+            var devices = [];
+
+            booleans.forEach(function (variable) {
+                console.log(variable);
+                var device = {
+                    name: variable.name,
+                    data: {
+                        id: variable.name,
+                        type: variable.type,
+                        value: variable.value
+                    }
+                };
+                devices.push(device);
+            });
+
+            return devices;
         });
-  }
 
-
-
-  async onPair( session ) {
-
-    session.setHandler('list_devices', ( data )=> {
-        var vars = variableManager.getVariables();
-        //var bools = variableManager.retrieveVariables('query', null, 'boolean');
-        var booleans = variableManager.retrieveVariables(null, null, 'boolean');
-        
-        var devices = [];
-
-        booleans.forEach(function (variable) {
-            console.log(variable);
-            var device = {
-                name: variable.name,
-                data: {
-                    id: variable.name,
-                    type: variable.type,
-                    value: variable.value
-                }
-            };
-            devices.push(device);
+        session.setHandler("add_devices", (device) => {
+            return devices.push(device);
         });
-
-        return devices;
-    });
-
-    session.setHandler("add_devices", (device)=> {
-        return devices.push(device);
-    });
-  }
+    }
 }
 module.exports = BitFlipDriver;
