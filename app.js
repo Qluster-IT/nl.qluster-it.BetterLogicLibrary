@@ -480,8 +480,12 @@ class BetterLogic extends Homey.App {
 
 			this.homey.api.realtime('bllSetLocale', this.locale);
 
+			try {
 
-			await this.initFileServerFromSettings();
+				await this.initFileServerFromSettings();
+			} catch (error) {
+				this.error('initFileServerFromSettings error:', error);
+			}
 
 			variableManager.init(this.homey);
 
@@ -700,11 +704,11 @@ class BetterLogic extends Homey.App {
 			let get_variable_properties = this.homey.flow.getActionCard('get_variable_properties');
 			get_variable_properties
 				.registerRunListener(async (args, state) => {
-					
+
 					let arr = await variableManager.getVariables()
-					let variable = arr.find(x=>x.name==args.variable.id);
-					if(!variable) throw new Error('Variable not found');
-					return {lastChangedTick:new Date(variable.lastChanged).getTime(), lastChanged:BL.datetime.toString('datetime', variable.lastChanged)}
+					let variable = arr.find(x => x.name == args.variable.id);
+					if (!variable) throw new Error('Variable not found');
+					return { lastChangedTick: new Date(variable.lastChanged).getTime(), lastChanged: BL.datetime.toString('datetime', variable.lastChanged) }
 				})
 				.getArgument('variable')
 				.registerAutocompleteListener(async (query, args) => {
@@ -712,20 +716,20 @@ class BetterLogic extends Homey.App {
 
 					if (query) {
 						query = query.toLowerCase();
-						arr = arr.filter(x=>x.name.toLowerCase().indexOf(query)>-1);
+						arr = arr.filter(x => x.name.toLowerCase().indexOf(query) > -1);
 					}
 
-					return BL._.sortBy(arr, x=>x.name.toLowerCase()).map(x=>{
+					return BL._.sortBy(arr, x => x.name.toLowerCase()).map(x => {
 						return {
-							id:x.name,
-							name:x.name,
-							description:x.type
+							id: x.name,
+							name: x.name,
+							description: x.type
 						};
 					})
 
 
 				});
-			
+
 			let execute_bl_expression = this.homey.flow.getActionCard('execute_bl_expression');
 
 			execute_bl_expression.registerRunListener(async (args, state) => {
@@ -943,8 +947,21 @@ class BetterLogic extends Homey.App {
 		});
 
 
+		// try {
+		// 	let log = await this.homey.insights.getLog('test2').catch((error) => {
+		// 		this.log(error)
+		// 		return null;
+		// 	});
 
+		// 	if (log == null) {
+		// 		log = await this.homey.insights.createLog('test2', { type: 'number', title: { en: "Test2" }, units: { en: "W", decimals: 2 } })
+		// 	}
 
+		// 	await log.createEntry(Math.random() * 10);
+
+		// } catch (error) {
+		// 	this.error(error);
+		// }
 
 		// Keep these message here to know which one we used.
 		// if(!await this.homey.settings.get('notification_update_variablesinflows')) {

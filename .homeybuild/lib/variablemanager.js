@@ -43,6 +43,9 @@ let variableManager = module.exports = {
                     }
                 }
             });
+
+
+            
     },
     getVariables: function () {
         return getVariables();
@@ -121,6 +124,12 @@ async function updateVariable(name, value, type, remove = false, auto = false) {
     return await processValueChanged(variables, oldVariable, newVariable);
 }
 
+function notify(tag, error) {
+    try {
+        homey.notifications.createNotification({ excerpt: tag + (error.message || error) });
+    } catch (errorInner) { }
+}
+
 function findVariable(variables, variable) {
     return variables.filter(function (item) {
         return item.name === variable;
@@ -130,37 +139,24 @@ async function processValueChanged(variables, oldVariable, newVariable) {
     homey.settings.set('variables', variables);
 
     if (newVariable && newVariable.remove) {
-        try {
-            removeInsights(newVariable.name);
-            removeToken(newVariable.name);
-        } catch (error) {
-            try {
-                homey.notifications.createNotification({ excerpt: `Error while removing variable ${newVariable.name}:` + (error.message || error) });
-            } catch (errorInner) { }
-        }
+        removeInsights(newVariable.name).catch(error => notify(`Error while removing insights for variable ${newVariable.name}: `, error));
+        removeToken(newVariable.name).catch(error => notify(`Error while removing token for variable ${newVariable.name}: `, error));
         return;
     }
 
     if (newVariable && !oldVariable) {
-        try {
-            createOrUpdateInsights(newVariable.name, newVariable.value, newVariable.type);
-            createToken(newVariable.name, newVariable.value, newVariable.type);
-        } catch (error) {
-            try {
-                homey.notifications.createNotification({ excerpt: `Error while creating new variable ${newVariable.name}:` + (error.message || error) });
-            } catch (errorInner) { }
-        }
-
+        await createOrUpdateInsights(newVariable.name, newVariable.value, newVariable.type).catch(error => notify(`Error while creating insights for new variable ${newVariable.name}: `, error));
+        await createToken(newVariable.name, newVariable.value, newVariable.type).catch(error => notify(`Error while creating token for new variable ${newVariable.name}: `, error));
     }
 
     if (newVariable && oldVariable && oldVariable.value !== newVariable.value) {
         try {
-            createOrUpdateInsights(newVariable.name, newVariable.value, newVariable.type);
-            await updateToken(newVariable.name, newVariable.value);
+            await createOrUpdateInsights(newVariable.name, newVariable.value, newVariable.type).catch(error=>notify(`Error while updating insights for variable ${newVariable.name}: `, error));
+            await updateToken(newVariable.name, newVariable.value).catch(error=>notify(`Error while updating token for variable ${newVariable.name}: `, error));;;;
 
-            getTrigger('if_variable_changed').trigger({ "variable": newVariable.name, "value": newVariable.value }, newVariable);
-            getTrigger('debug_any_variable_changed').trigger({ "variable": newVariable.name, "value": newVariable.value }, newVariable);
-            getTrigger('if_one_of_variable_changed').trigger({ "variable": newVariable.name, "value": newVariable.value }, newVariable);
+            getTrigger('if_variable_changed').trigger({ "variable": newVariable.name, "value": newVariable.value }, newVariable).catch(error=>notify(`Error triggering if_variable_changed for variable ${newVariable.name}: `, error));
+            getTrigger('debug_any_variable_changed').trigger({ "variable": newVariable.name, "value": newVariable.value }, newVariable).catch(error=>notify(`Error triggering debug_any_variable_changed for variable ${newVariable.name}: `, error));
+            getTrigger('if_one_of_variable_changed').trigger({ "variable": newVariable.name, "value": newVariable.value }, newVariable).catch(error=>notify(`Error triggering if_one_of_variable_changed for variable ${newVariable.name}: `, error));
             let tokens = { variableName: newVariable.name, variableType: newVariable.type, variableValueString: '', variableValueNumber: 0, variableValueBoolean: false };
             switch (newVariable.type) {
                 case "string": tokens.variableValueString = newVariable.value; break;
@@ -168,9 +164,7 @@ async function processValueChanged(variables, oldVariable, newVariable) {
                 case "boolean": tokens.variableValueBoolean = newVariable.value; break;
                 case "trigger": tokens.variableValueString = newVariable.value; break;
             }
-            //getTrigger('any_variable_changed').trigger({ "variable": newVariable.name, "value": newVariable.value }, tokens);//newVariable, tokens);
-            getTrigger('any_variable_changed').trigger(tokens, newVariable);//newVariable, tokens);
-            //homey.api.realtime('variable_update', newVariable);
+            getTrigger('any_variable_changed').trigger(tokens, newVariable).catch(error=>notify(`Error triggering any_variable_changed for variable ${newVariable.name}: `, error));
         } catch (error) {
             try {
                 homey.notifications.createNotification({ excerpt: `Error while updating changed variable ${newVariable.name}:` + (error.message || error) });
@@ -185,11 +179,11 @@ async function processValueChanged(variables, oldVariable, newVariable) {
 
     if (newVariable && newVariable.type == 'number') {
         homey.settings.set('numValueChanged', newVariable);
-        getTrigger('if_number_variable_changed').trigger({ "variable": newVariable.name, "value": newVariable.value }, { oldVariable: oldVariable, newVariable: newVariable });
+        getTrigger('if_number_variable_changed').trigger({ "variable": newVariable.name, "value": newVariable.value }, { oldVariable: oldVariable, newVariable: newVariable }).catch(error=>notify(`Error triggering if_number_variable_changed for variable ${newVariable.name}: `, error));
     }
 
     if (newVariable) {
-        getTrigger('if_variable_set').trigger({ "variable": newVariable.name, "value": newVariable.value }, newVariable);
+        getTrigger('if_variable_set').trigger({ "variable": newVariable.name, "value": newVariable.value }, newVariable).catch(error=>notify(`Error triggering if_variable_set for variable ${newVariable.name}: `, error));
     }
 }
 
@@ -199,7 +193,7 @@ function getTrigger(name) {
 
 async function createOrUpdateInsights(name, value, type) {
     // no insights for string
-    if (type == 'string' || type == 'trigger') {
+    if (type == 'string' || type == 'trigger' || type == 'boolean') {
         return;
     }
 
@@ -213,6 +207,7 @@ async function createOrUpdateInsights(name, value, type) {
             console.log("if createLog > createEntry > " + value);
         } catch (error) {
             console.log("if createLog > createEntry > " + value + " -- ERROR ");
+            homey.error(error);
         }
     }
 
@@ -298,11 +293,12 @@ async function createToken(name, value, type) {
     }
 }
 
-function removeToken(name) {
+async function removeToken(name) {
     for (var i = tokens.length - 1; i >= 0; i--) {
         if (tokens[i].id === name) {
-            tokens[i].unregister().then(() => { }).catch(err => { console.log(err); });
+            let t = tokens[i];            
             tokens.splice(i, 1);
+            await t.unregister();
         }
     }
 }
