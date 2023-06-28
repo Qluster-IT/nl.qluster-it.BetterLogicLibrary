@@ -379,5 +379,8 @@
   },
   "3.4.2": {
     "en": "Resolved: Some errors from the developer-log, now handled and shown to the user as notifications instead of crashing the app."
+  },
+  "3.4.3": {
+    "en": "Resolved: Some more errors from the developer-log, now handled and shown to the user as notifications instead of crashing the app."
   }
 }

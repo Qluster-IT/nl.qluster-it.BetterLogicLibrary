@@ -24,13 +24,11 @@ class BitFlipDriver extends Homey.Driver {
                         });
 
                         if (device) {
-                            try {
-                                device.setCapabilityValue('onoff', changedVariable.value);
-                            } catch (error) {
+                            device.setCapabilityValue('onoff', changedVariable.value).catch(error => {
                                 try {
                                     homey.notifications.createNotification({ excerpt: `Error while setting device ${changedVariable.name}:` + (error.message || error) });
                                 } catch (errorInner) { }
-                            }
+                            });
                         }
                     }
                 }
