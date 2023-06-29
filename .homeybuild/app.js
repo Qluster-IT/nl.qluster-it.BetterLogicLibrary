@@ -962,6 +962,7 @@ class BetterLogic extends Homey.App {
 		// } catch (error) {
 		// 	this.error(error);
 		// }
+		
 
 		// Keep these message here to know which one we used.
 		// if(!await this.homey.settings.get('notification_update_variablesinflows')) {
