@@ -1548,6 +1548,8 @@ class DateTime {
   getTimeMinute(code) {
     let minutes = Math.floor((this.timeMs / (1000 * 60)));
     if (code[0] === 'm' && minutes >= 60) minutes %= 60;
+    // BL.homey.log('code[0]', code[0]);
+    // BL.homey.log('minutes', minutes);
     return minutes.toString().padStart(code.length, '0');
   }
 

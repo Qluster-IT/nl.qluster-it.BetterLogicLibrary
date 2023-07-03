@@ -382,5 +382,8 @@
   },
   "3.4.3": {
     "en": "Resolved: Some more errors from the developer-log, now handled and shown to the user as notifications instead of crashing the app."
+  },
+  "3.4.4": {
+    "en": "Resolved: Format as time/duration card didn't function correctly."
   }
 }

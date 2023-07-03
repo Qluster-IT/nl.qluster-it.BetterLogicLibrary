@@ -557,7 +557,7 @@ class BetterLogic extends Homey.App {
 			format_time
 				.registerRunListener(async (args, state) => {
 					return {
-						result: BL.datetime.toString(
+						result: BL.datetime.toTimeString(
 							args.format.name,
 							args.timeMs && args.timeMs != 'undefined' ? args.timeMs : undefined,
 							args.timeSec && args.timeSec != 'undefined' ? args.timeSec : undefined
@@ -952,6 +952,7 @@ class BetterLogic extends Homey.App {
 		// 		this.log(error)
 		// 		return null;
 		// 	});
+		// 	this.log(log);
 
 		// 	if (log == null) {
 		// 		log = await this.homey.insights.createLog('test2', { type: 'number', title: { en: "Test2" }, units: { en: "W", decimals: 2 } })
