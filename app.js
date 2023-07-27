@@ -475,7 +475,9 @@ class BetterLogic extends Homey.App {
 		// 	}, 60 * 1000);
 		// }
 
+		BL.homey.log('BL.ready.then set');
 		BL.ready.then(async (x) => {
+			BL.homey.log('BL.ready.then executed');
 			this.bl = x;
 
 			this.homey.api.realtime('bllSetLocale', this.locale);
@@ -487,7 +489,14 @@ class BetterLogic extends Homey.App {
 				this.error('initFileServerFromSettings error:', error);
 			}
 
-			variableManager.init(this.homey);
+			BL.homey.log('variableManager.init(this.homey)');
+
+			try {
+
+				variableManager.init(this.homey);
+			} catch (error) {
+				BL.homey.error('variableManager.init(this.homey)', error);
+			}
 
 			//if(!timeoutset)(timeoutset=true) | await this.homey.api.realtime("running");
 
@@ -963,7 +972,7 @@ class BetterLogic extends Homey.App {
 		// } catch (error) {
 		// 	this.error(error);
 		// }
-		
+
 
 		// Keep these message here to know which one we used.
 		// if(!await this.homey.settings.get('notification_update_variablesinflows')) {
