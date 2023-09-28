@@ -320,7 +320,9 @@ class BLL {
             else return link;
 
         } catch (error) {
-            throw new Error(error);
+            BL.homey.error('BLL.setDownloadUrl error:\n', error);
+            //throw new Error(error);
+            return link;
         }
     }
 

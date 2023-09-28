@@ -391,5 +391,8 @@
   },
   "3.4.6": {
     "en": "Testversion: Resolving a bug."
+  },
+  "3.4.7": {
+    "en": "Resolved: Errors when downloading files with Homey with non-fixed ip address."
   }
 }
