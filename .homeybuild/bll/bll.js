@@ -75,9 +75,10 @@ class BLL {
     }
 
     async init({ modules } = { modules: [] }) {
+        BL.homey.log('BLL.init');
         if (BL.homey.app.id === 'net.i-dev.betterlogic') await this.sleep(2000);
-
-        //BL.homey.log('BLL.init');
+        BL.homey.log('BLL.init continue after sleep');
+        
         //let api = await this.getApi();
         if (modules && modules.length && ((modules.indexOf('datetime') > -1 || modules.indexOf('dateTime') > -1) && modules.indexOf('_') == -1)) modules.unshift('_');
         // modules = modules.sort((a,b)=> a -b );
@@ -155,6 +156,8 @@ class BLL {
                 }
             } catch (error) { BL.homey.error(error); }
         }
+        BL.homey.log('BLL.init done');
+        
         // let coding = await this.getLibrary('coding'); 
         // let codingClass = this.requireFromString(coding.file, '');
         // BL.coding = BLL.coding = new codingClass();        
