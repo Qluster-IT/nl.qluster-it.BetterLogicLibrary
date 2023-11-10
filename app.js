@@ -678,14 +678,11 @@ class BetterLogic extends Homey.App {
 			format_number.getArgument('styleOption2')
 				.registerAutocompleteListener((query, args) => {
 					switch (args.style) {
-						// case 'decimal':
-						// 	return [
-						// 		{ id: 'standard', name: 'standard' },
-						// 		{ id: 'scientific', name: 'scientific' },
-						// 		{ id: 'engineering', name: 'engineering' },
-						// 		{ id: 'compact_short', name: 'compact short' },
-						// 		{ id: 'compact_long', name: 'compact long' }
-						// 	];
+						case 'decimal':
+							return [
+								{ id: 'standard', name: 'Standard' },
+								{ id: 'noGrouping', name: 'No Grouping' }
+							];
 						case 'currency':
 							return [
 								{ id: 'symbol', name: 'Symbol' },

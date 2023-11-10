@@ -394,5 +394,8 @@
   },
   "3.4.7": {
     "en": "Resolved: Errors when downloading files with Homey with non-fixed ip address."
+  },
+  "3.4.8": {
+    "en": "Added: Format number styleoption2 NoGrouping."
   }
 }

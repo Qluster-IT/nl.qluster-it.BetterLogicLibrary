@@ -153,6 +153,11 @@ class clsNumber {
               opts.compactDisplay = 'long';
             } else opts.notation = styleOption1.id || styleOption1;
           }
+          if(styleOption2) {
+            if(styleOption2.id==='noGrouping') {
+              opts.useGrouping = false;
+            }
+          }
           break;
         case 'currency':
           if (styleOption1) opts.currency = styleOption1.name || styleOption1;
