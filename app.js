@@ -807,6 +807,21 @@ class BetterLogic extends Homey.App {
 				}
 			});
 
+			this.homey.flow.getActionCard('execute_text_tag').registerRunListener(async (args, state) => {
+				try {
+
+					if (args.text !== undefined && args.text !== 'undefined') {
+
+						if (args && args.text) args.text = await this.runCoding({ text: args.text });
+						return { text: args.text };
+					}
+				} catch (error) {
+					this.log('execute_text_tag:');
+					this.error(error);
+					throw new Error(error);
+				}
+			});
+
 			this.homey.flow.getActionCard('format_json_csv').registerRunListener(async (args, state) => {
 				try {
 					const result = {};

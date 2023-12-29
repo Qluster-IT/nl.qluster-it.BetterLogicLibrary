@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "3.4.8",
+  "version": "3.4.9",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -1112,6 +1112,45 @@
               "en": "Expression value (Yes/No)",
               "nl": "Expressie waarde (Ja/Nee)",
               "de": "Ja/Nein"
+            }
+          }
+        ]
+      },{
+        "id": "execute_text_tag",
+        "title": {
+          "en": "Execute Text (as Tag)",
+          "nl": "Tekst uitvoeren (als Tag)",
+          "de": "Text ausführen (als Tag)"
+        },
+        "titleFormatted": {
+          "en": "Execute [[text]] (as Tag)",
+          "nl": "Voer [[text]] uit (als Tag)",
+          "de": "Führen Sie [[text]] aus (als Tag)"
+        },
+        "args": [
+          {
+            "name": "text",
+            "type": "text",
+            "placeholder": {
+              "en": "Text (* BLL supported)",
+              "nl": "Tekst (* BLL ondersteund)",
+              "de": "Text (* BLL unterstützt)"
+            },
+            "title": {
+              "en": "Text",
+              "nl": "Tekst",
+              "de": "Text"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "name": "text",
+            "type": "string",
+            "title": {
+              "en": "Value",
+              "nl": "Waarde",
+              "de": "Wert"
             }
           }
         ]

@@ -397,5 +397,8 @@
   },
   "3.4.8": {
     "en": "Added: Format number styleoption2 NoGrouping."
+  },
+  "3.4.9": {
+    "en": "Added: Execute Text (as Tag) flowcard which supports BLL Coding."
   }
 }
