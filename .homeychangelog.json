@@ -400,5 +400,11 @@
   },
   "3.4.9": {
     "en": "Added: Execute Text (as Tag) flowcard which supports BLL Coding."
+  },
+  "3.4.10": {
+    "en": "Added: Execute BLL Expression (as Tag) now has a JSON token, which allowes for returning objects or arrays."
+  },
+  "3.4.11": {
+    "en": "Improved: Set [variable] to [yes/no] now accepts a (boolean) tag."
   }
 }

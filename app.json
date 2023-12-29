@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "3.4.9",
+  "version": "3.4.11",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -1083,6 +1083,11 @@
               "en": "BLL Expression",
               "nl": "BLL Expression",
               "de": "BLL Bezeichnung"
+            },
+            "title": {
+              "en": "BLL Expression",
+              "nl": "BLL Expression",
+              "de": "BLL Bezeichnung"
             }
           }
         ],
@@ -1093,7 +1098,7 @@
             "title": {
               "en": "Expression value (Text)",
               "nl": "Expressie waarde (Tekst)",
-              "de": "Text"
+              "de": "Ausdruckswert (Text)"
             }
           },
           {
@@ -1112,6 +1117,15 @@
               "en": "Expression value (Yes/No)",
               "nl": "Expressie waarde (Ja/Nee)",
               "de": "Ja/Nein"
+            }
+          },
+          {
+            "name": "json",
+            "type": "string",
+            "title": {
+              "en": "JSON value",
+              "nl": "JSON waarde",
+              "de": "JSON-Wert"
             }
           }
         ]
@@ -1310,6 +1324,58 @@
             }
           }
         ]
+      },{
+        "id": "set_boolean_variable",
+        "title": {
+          "en": "Set boolean variable"
+        },
+        "titleFormatted": {
+          "en": "Set [[variable]] to [[boolean_value]]",
+          "nl": "Zet [[variable]] naar [[boolean_value]]",
+          "de": "Setze [[variable]] auf [[boolean_value]]"
+        },
+        "args": [
+          {
+            "name": "variable",
+            "type": "autocomplete",
+            "title": {
+              "en": "Variable",
+              "nl": "Variabele"
+            },
+            "placeholder": {
+              "en": "Variable",
+              "nl": "Variabele"
+            }
+          },
+          {
+            "name": "boolean_value",
+            "type": "checkbox",
+            "values": [
+              {
+                "id": "true",
+                "label": {
+                  "en": "True",
+                  "nl": "Waar"
+                }
+              },
+              {
+                "id": "false",
+                "label": {
+                  "en": "False",
+                  "nl": "Niet waar"
+                }
+              }
+            ],
+            "placeholder": {
+              "en": "Yes/No",
+              "nl": "Ja/Nee"
+            },
+            "title": {
+              "en": "Yes/No",
+              "nl": "Ja/Nee"
+            }
+          }
+        ]
       },
       {
         "id": "increment_number_variable",
@@ -1417,59 +1483,7 @@
           }
         ]
       },
-      {
-        "id": "set_boolean_variable",
-        "title": {
-          "en": "Set boolean variable"
-        },
-        "titleFormatted": {
-          "en": "Set [[variable]] to [[boolean_value]]",
-          "nl": "Zet [[variable]] naar [[boolean_value]]",
-          "de": "Setze [[variable]] auf [[boolean_value]]"
-        },
-        "args": [
-          {
-            "name": "variable",
-            "type": "autocomplete",
-            "title": {
-              "en": "Variable",
-              "nl": "Variabele"
-            },
-            "placeholder": {
-              "en": "Variable",
-              "nl": "Variabele"
-            }
-          },
-          {
-            "name": "boolean_value",
-            "type": "dropdown",
-            "values": [
-              {
-                "id": "true",
-                "label": {
-                  "en": "True",
-                  "nl": "Waar"
-                }
-              },
-              {
-                "id": "false",
-                "label": {
-                  "en": "False",
-                  "nl": "Niet waar"
-                }
-              }
-            ],
-            "placeholder": {
-              "en": "Yes/No",
-              "nl": "Ja/Nee"
-            },
-            "title": {
-              "en": "Yes/No",
-              "nl": "Ja/Nee"
-            }
-          }
-        ]
-      },
+      
       {
         "id": "flip_boolean_variable",
         "title": {
