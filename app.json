@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "3.4.11",
+  "version": "3.4.12",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -1349,23 +1349,7 @@
           },
           {
             "name": "boolean_value",
-            "type": "checkbox",
-            "values": [
-              {
-                "id": "true",
-                "label": {
-                  "en": "True",
-                  "nl": "Waar"
-                }
-              },
-              {
-                "id": "false",
-                "label": {
-                  "en": "False",
-                  "nl": "Niet waar"
-                }
-              }
-            ],
+            "type": "checkbox",            
             "placeholder": {
               "en": "Yes/No",
               "nl": "Ja/Nee"
