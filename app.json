@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "3.4.12",
+  "version": "3.4.13",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -1324,8 +1324,10 @@
             }
           }
         ]
-      },{
+      },
+      {
         "id": "set_boolean_variable",
+        "deprecated":true,
         "title": {
           "en": "Set boolean variable"
         },
@@ -1349,7 +1351,60 @@
           },
           {
             "name": "boolean_value",
-            "type": "checkbox",            
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "true",
+                "label": {
+                  "en": "True",
+                  "nl": "Waar"
+                }
+              },
+              {
+                "id": "false",
+                "label": {
+                  "en": "False",
+                  "nl": "Niet waar"
+                }
+              }
+            ],         
+            "placeholder": {
+              "en": "Yes/No",
+              "nl": "Ja/Nee"
+            },
+            "title": {
+              "en": "Yes/No",
+              "nl": "Ja/Nee"
+            }
+          }
+        ]
+      },
+      {
+        "id": "set_boolean_variable_v2",
+        "title": {
+          "en": "Set boolean variable"
+        },
+        "titleFormatted": {
+          "en": "Set [[variable]] to [[value]]",
+          "nl": "Zet [[variable]] naar [[value]]",
+          "de": "Setze [[variable]] auf [[value]]"
+        },
+        "args": [
+          {
+            "name": "variable",
+            "type": "autocomplete",
+            "title": {
+              "en": "Variable",
+              "nl": "Variabele"
+            },
+            "placeholder": {
+              "en": "Variable",
+              "nl": "Variabele"
+            }
+          },
+          {
+            "name": "value",
+            "type": "checkbox",       
             "placeholder": {
               "en": "Yes/No",
               "nl": "Ja/Nee"
