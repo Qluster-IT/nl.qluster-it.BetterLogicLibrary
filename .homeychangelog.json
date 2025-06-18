@@ -409,5 +409,8 @@
   },
   "3.4.13": {
     "en": "Improved: New Set [variable] to [yes/no] now accepts a (boolean) tag. Old one is deprecated."
+  },
+  "3.4.14": {
+    "en": "Bugfixed: Fixed various bugs that could crash the app."
   }
 }

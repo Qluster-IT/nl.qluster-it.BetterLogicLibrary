@@ -50,6 +50,7 @@ class BetterLogic extends Homey.App {
 
 	async onInit() {
 
+		try {
 		//BL.json.toExcel([], { schema: [{}]})
 		BetterLogic.homey = this.homey;
 		if (process.env.DEBUG === '1' || false) {
@@ -986,7 +987,9 @@ class BetterLogic extends Homey.App {
 		// 	this.homey.notifications.createNotification({excerpt : "The Better Logic App has been rebranded to Better Logic Library.\nCheck out the new App Settings for the new features, like BLL coding in supporting apps!" });  
 		// 	this.homey.settings.set('notification_update_newsettings', true);
 		// }
-
+		} catch (ex) {
+			await homey.notifications.createNotification({ excerpt: `Error while starting the app:` + (ex.message || ex) });
+		}
 	}
 
 

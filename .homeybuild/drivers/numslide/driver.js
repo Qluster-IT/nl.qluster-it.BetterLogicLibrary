@@ -24,9 +24,9 @@ class NumSlideDriver extends Homey.Driver {
                         });
 
                         if (device) {
-                            device.setCapabilityValue('dim', changedVariable.value).catch(error => {
+                            device.setCapabilityValue('dim', changedVariable.value).catch(async (error) => {
                                 try {
-                                    homey.notifications.createNotification({ excerpt: `Error while setting device ${changedVariable.name}:` + (error.message || error) });
+                                    await homey.notifications.createNotification({ excerpt: `Error while setting device ${changedVariable.name}:` + (error.message || error) });
                                 } catch (errorInner) { }
                             });
 

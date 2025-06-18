@@ -124,9 +124,9 @@ async function updateVariable(name, value, type, remove = false, auto = false) {
     return await processValueChanged(variables, oldVariable, newVariable);
 }
 
-function notify(tag, error) {
+async function notify(tag, error) {
     try {
-        homey.notifications.createNotification({ excerpt: tag + (error.message || error) });
+        await homey.notifications.createNotification({ excerpt: tag + (error.message || error) });//.then(()=>{}).catch(()=>{});
     } catch (errorInner) { }
 }
 
@@ -167,7 +167,7 @@ async function processValueChanged(variables, oldVariable, newVariable) {
             getTrigger('any_variable_changed').trigger(tokens, newVariable).catch(error=>notify(`Error triggering any_variable_changed for variable ${newVariable.name}: `, error));
         } catch (error) {
             try {
-                homey.notifications.createNotification({ excerpt: `Error while updating changed variable ${newVariable.name}:` + (error.message || error) });
+                await homey.notifications.createNotification({ excerpt: `Error while updating changed variable ${newVariable.name}:` + (error.message || error) });
             } catch (errorInner) { }
         }
 
