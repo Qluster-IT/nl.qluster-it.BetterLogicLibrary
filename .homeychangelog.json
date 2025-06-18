@@ -412,5 +412,8 @@
   },
   "3.4.14": {
     "en": "Bugfixed: Fixed various bugs that could crash the app."
+  },
+  "3.4.15": {
+    "en": "Bugfixed: Fixed various bugs that could crash the app."
   }
 }

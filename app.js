@@ -988,7 +988,11 @@ class BetterLogic extends Homey.App {
 		// 	this.homey.settings.set('notification_update_newsettings', true);
 		// }
 		} catch (ex) {
-			await homey.notifications.createNotification({ excerpt: `Error while starting the app:` + (ex.message || ex) });
+			try {				
+				await homey.notifications.createNotification({ excerpt: `Error while starting the app:` + (ex.message || ex) });
+			} catch (error) {
+				
+			}
 		}
 	}
 
