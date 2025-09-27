@@ -1206,6 +1206,7 @@ class BetterLogic extends Homey.App {
 
 
 	runSandBox(code, contextProperties) {
+		if(code!==undefined && code!==null) code = code.replace('⨯', 'false').replace('✓', 'true');
 		const context = BL._.clone(this.context);
 		if (!contextProperties) contextProperties = {};
 		const date = contextProperties.date; //delete contextProperties.date;

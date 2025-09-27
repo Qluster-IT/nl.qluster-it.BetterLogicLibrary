@@ -415,5 +415,8 @@
   },
   "3.4.15": {
     "en": "Bugfixed: Fixed various bugs that could crash the app."
+  },
+  "3.4.16": {
+    "en": "Resolved: When using Yes/No on HP2023 within coding, the yes/no icon is replaced with true/false."
   }
 }
