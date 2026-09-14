@@ -1,6 +1,7 @@
 .scripts/*
 .translation/*
 .vscode/*
+.homeybuild/*
 docs/*
 
 manager/*
