@@ -5,17 +5,14 @@
   "1.4.0": {
     "en": "Improvement: Variables can be created directly in flows: Just start typing and select."
   },
-  "1.4.1": {
-    "en": "Improvement: Variables can be created directly in flows: Just start typing and select (notification)."
-  },
   "1.4.2": {
     "en": "Improvement: Variables can be created directly in flows: Just start typing and select (notification)."
   },
   "1.4.3": {
-    "en": "Added: Contribution options: Patreon and GithubSponsors (with PayPal already available)."
+    "en": "Added: Contribution options: Patreon and Github Sponsors (with PayPal already available)."
   },
   "1.4.4": {
-    "en": "Bugfixed: Device Creation SDk3 error."
+    "en": "Bugfixed: Device Creation SDK3 error."
   },
   "1.4.5": {
     "en": "Improved: Description."
@@ -66,33 +63,6 @@
     "en": "New: App Settings - Formats, all are overridable, immediately updated."
   },
   "2.0.0": {
-    "en": "Rebrand: The Better Logic App has been rebranded to Better Logic Library.\nCheck out the new App Settings for the new features, like BLL coding in supported apps!"
-  },
-  "2.0.1": {
-    "en": "Rebrand: The Better Logic App has been rebranded to Better Logic Library.\nCheck out the new App Settings for the new features, like BLL coding in supported apps!"
-  },
-  "2.0.2": {
-    "en": "Rebrand: The Better Logic App has been rebranded to Better Logic Library.\nCheck out the new App Settings for the new features, like BLL coding in supported apps!"
-  },
-  "2.0.3": {
-    "en": "Rebrand: The Better Logic App has been rebranded to Better Logic Library.\nCheck out the new App Settings for the new features, like BLL coding in supported apps!"
-  },
-  "2.0.4": {
-    "en": "Rebrand: The Better Logic App has been rebranded to Better Logic Library.\nCheck out the new App Settings for the new features, like BLL coding in supported apps!"
-  },
-  "2.0.5": {
-    "en": "Rebrand: The Better Logic App has been rebranded to Better Logic Library.\nCheck out the new App Settings for the new features, like BLL coding in supported apps!"
-  },
-  "2.1.0": {
-    "en": "Rebrand: The Better Logic App has been rebranded to Better Logic Library.\nCheck out the new App Settings for the new features, like BLL coding in supported apps!"
-  },
-  "2.1.1": {
-    "en": "Rebrand: The Better Logic App has been rebranded to Better Logic Library.\nCheck out the new App Settings for the new features, like BLL coding in supported apps!"
-  },
-  "2.1.2": {
-    "en": "Rebrand: The Better Logic App has been rebranded to Better Logic Library.\nCheck out the new App Settings for the new features, like BLL coding in supported apps!"
-  },
-  "2.1.3": {
     "en": "Rebrand: The Better Logic App has been rebranded to Better Logic Library.\nCheck out the new App Settings for the new features, like BLL coding in supported apps!"
   },
   "2.1.4": {
@@ -173,9 +143,6 @@
   "2.4.2": {
     "en": "Bugfixed: Wrong notifications."
   },
-  "2.4.3": {
-    "en": "Bugfixed: Wrong notifications."
-  },
   "2.4.4": {
     "en": "Improved: Translation injections, Modules for Simple (Sys) LOG and the File Server."
   },
@@ -201,12 +168,6 @@
     "en": "Translation: Dutch."
   },
   "3.0.0": {
-    "en": "Version 3.0"
-  },
-  "3.0.1": {
-    "en": "Version 3.0"
-  },
-  "3.0.2": {
     "en": "Version 3.0"
   },
   "3.0.3": {
@@ -278,9 +239,6 @@
   "3.1.8": {
     "en": "Version 3.1: Fix a setting."
   },
-  "3.1.9": {
-    "en": "Version 3.1: Fix a setting."
-  },
   "3.1.10": {
     "en": "Version 3.1: Improved performance for the BLL decoder."
   },
@@ -293,14 +251,8 @@
   "3.1.13": {
     "en": "Bufixed: Error message in App Settings."
   },
-  "3.1.14": {
-    "en": "Bufixed: Improved startup for older models."
-  },
   "3.1.15": {
     "en": "Bufixed: Improved startup for older models."
-  },
-  "3.1.16": {
-    "en": "Updated: Dependencies."
   },
   "3.1.17": {
     "en": "Updated: Dependencies."
@@ -421,5 +373,8 @@
   },
   "3.4.18": {
     "en": "Resolved: When using Yes/No on HP2023 within coding, the yes/no icon is replaced (all) with true/false."
+  },
+  "3.5.0": {
+    "en": "Translated: Translated into all supported languages."
   }
 }

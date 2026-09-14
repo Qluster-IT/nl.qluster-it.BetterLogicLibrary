@@ -1,13 +1,37 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "3.4.18",
+  "version": "3.5.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
-    "en": "Better Logic Library"
+    "en": "Better Logic Library",
+    "nl": "Better Logic Library",
+    "da": "Better Logic Library",
+    "de": "Better Logic Library",
+    "es": "Biblioteca de Better Logic",
+    "fr": "Better Logic Library",
+    "it": "Better Logic Library",
+    "no": "Better Logic Library",
+    "sv": "Better Logic Library",
+    "pl": "Biblioteka Better Logic",
+    "ru": "Библиотека Better Logic",
+    "ko": "베터 로직 라이브러리",
+    "ar": "مكتبة المنطق الأفضل"
   },
   "description": {
-    "en": "Just some better logic, variable and library management"
+    "en": "Just some better logic, variable and library management",
+    "nl": "Gewoon wat betere logica, variabele- en bibliotheekbeheer.",
+    "da": "Bare lidt bedre logik, variabel- og bibliotekshåndtering",
+    "de": "Einfach eine bessere Logik, Variablen- und Bibliotheksverwaltung.",
+    "es": "Solo un poco de mejor lógica, gestión de variables y bibliotecas.",
+    "fr": "Juste une meilleure gestion de la logique, des variables et des bibliothèques.",
+    "it": "Solo una logica migliore, gestione delle variabili e della libreria",
+    "no": "Bare litt bedre logikk, variabel- og bibliotekhåndtering",
+    "sv": "Bara lite bättre logik, variabel- och biblioteksadministration",
+    "pl": "Po prostu lepsza logika, zarządzanie zmiennymi i biblioteką",
+    "ru": "Просто немного лучшей логики, управления переменными и библиотекой",
+    "ko": "더 나은 로직, 변수 및 라이브러리 관리",
+    "ar": "فقط بعض المنطق الأفضل، وإدارة المتغيرات والمكتبة"
   },
   "category": [
     "tools"
@@ -84,15 +108,48 @@
         "id": "if_variable_changed",
         "title": {
           "en": "A variable changed",
-          "nl": "Een variabele is veranderd"
+          "nl": "Een variabele is veranderd",
+          "da": "En variabel ændret sig",
+          "de": "Eine Variable wurde geändert",
+          "es": "Una variable cambió",
+          "fr": "Une variable a changé",
+          "it": "Una variabile è cambiata",
+          "no": "En variabel endret seg",
+          "sv": "En variabel ändrades",
+          "pl": "Zmienna została zmieniona",
+          "ru": "Переменная изменена",
+          "ko": "변수가 변경되었습니다.",
+          "ar": "تم تغيير متغير"
         },
         "titleFormatted": {
           "en": "[[variable]] is changed",
-          "nl": "[[variable]] is veranderd"
+          "nl": "[[variable]] is veranderd",
+          "da": "[[variable]] er ændret",
+          "de": "[[variable]] wurde geändert",
+          "es": "[[variable]] ha sido cambiado",
+          "fr": "[[variable]] est modifié",
+          "it": "[[variable]] è stato modificato",
+          "no": "[[variable]] er endret",
+          "sv": "[[variable]] har ändrats",
+          "pl": "[[variable]] został zmieniony",
+          "ru": "[[variable]] изменён",
+          "ko": "[[variable]]이(가) 변경되었습니다.",
+          "ar": "تم تغيير [[variable]]"
         },
         "hint": {
           "en": "Triggers if a variable value changed.",
-          "nl": "Wordt geactiveerd als de waarde van een variabele is gewijzigd."
+          "nl": "Wordt geactiveerd als de waarde van een variabele is gewijzigd.",
+          "da": "Udløser, hvis en variabelværdi ændres.",
+          "de": "Löst aus, wenn sich der Wert einer Variablen ändert.",
+          "es": "Se activa si el valor de una variable cambia.",
+          "fr": "Déclenche si la valeur d'une variable a changé.",
+          "it": "Attiva se il valore di una variabile cambia.",
+          "no": "Utløses hvis en variabelverdi endres.",
+          "sv": "Utlöses om ett variabelvärde ändras.",
+          "pl": "Wyzwala się, jeśli wartość zmiennej uległa zmianie.",
+          "ru": "Срабатывает, если значение переменной изменилось.",
+          "ko": "변수 값이 변경되면 트리거됩니다.",
+          "ar": "يتم التفعيل إذا تغيرت قيمة المتغير."
         },
         "args": [
           {
@@ -100,11 +157,33 @@
             "type": "autocomplete",
             "title": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             },
             "placeholder": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             }
           }
         ]
@@ -113,15 +192,48 @@
         "id": "if_variable_set",
         "title": {
           "en": "A variable is set",
-          "nl": "Een variabele is ingesteld"
+          "nl": "Een variabele is ingesteld",
+          "da": "En variabel er sat",
+          "de": "Eine Variable wird festgelegt",
+          "es": "Se establece una variable",
+          "fr": "Une variable est définie",
+          "it": "Una variabile è impostata",
+          "no": "En variabel er satt",
+          "sv": "En variabel är satt",
+          "pl": "Zmienna jest ustawiona",
+          "ru": "Переменная установлена",
+          "ko": "변수가 설정되었습니다.",
+          "ar": "تم تعيين متغير"
         },
         "titleFormatted": {
           "en": "[[variable]] is set",
-          "nl": "[[variable]] is ingesteld"
+          "nl": "[[variable]] is ingesteld",
+          "da": "[[variable]] er indstillet",
+          "de": "[[variable]] ist festgelegt",
+          "es": "[[variable]] está establecido",
+          "fr": "[[variable]] est défini",
+          "it": "[[variable]] è impostato",
+          "no": "[[variable]] er satt",
+          "sv": "[[variable]] är inställd",
+          "pl": "[[variable]] jest ustawiony",
+          "ru": "[[variable]] установлено",
+          "ko": "[[variable]]이(가) 설정되었습니다.",
+          "ar": "تم تعيين [[variable]]"
         },
         "hint": {
           "en": "Triggers if a variable is set (not necessarily changed)",
-          "nl": "Wordt geactiveerd als een variabele is ingesteld (niet noodzakelijkerwijs gewijzigd)"
+          "nl": "Wordt geactiveerd als een variabele is ingesteld (niet noodzakelijkerwijs gewijzigd)",
+          "da": "Udløser, hvis en variabel er sat (ikke nødvendigvis ændret)",
+          "de": "Löst aus, wenn eine Variable gesetzt wird (nicht unbedingt geändert)",
+          "es": "Se activa si se establece una variable (no necesariamente cambiada)",
+          "fr": "Déclenche si une variable est définie (pas nécessairement modifiée)",
+          "it": "Attiva se una variabile è impostata (non necessariamente modificata)",
+          "no": "Utløses hvis en variabel er satt (ikke nødvendigvis endret)",
+          "sv": "Utlöser om en variabel är inställd (inte nödvändigtvis ändrad)",
+          "pl": "Wyzwala się, jeśli zmienna jest ustawiona (niekoniecznie zmieniona)",
+          "ru": "Срабатывает, если переменная установлена (не обязательно изменена)",
+          "ko": "변수가 설정되면 (반드시 변경되지 않더라도) 트리거됩니다.",
+          "ar": "يتم التفعيل إذا تم تعيين متغير (ليس بالضرورة تغييره)"
         },
         "args": [
           {
@@ -129,11 +241,33 @@
             "type": "autocomplete",
             "title": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             },
             "placeholder": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             }
           }
         ]
@@ -142,15 +276,48 @@
         "id": "if_number_variable_changed",
         "title": {
           "en": "A number variable changed",
-          "nl": "Een nummervariabele is gewijzigd"
+          "nl": "Een nummervariabele is gewijzigd",
+          "da": "En tal-variabel ændrede sig",
+          "de": "Eine Zahlenvariable hat sich geändert",
+          "es": "Una variable numérica cambió",
+          "fr": "Une variable numérique a changé",
+          "it": "Una variabile numerica è cambiata",
+          "no": "En tallvariabel endret seg",
+          "sv": "En siffervariabel ändrades",
+          "pl": "Zmienna liczby została zmieniona",
+          "ru": "Переменная типа \"число\" изменена",
+          "ko": "숫자 변수가 변경되었습니다.",
+          "ar": "تغيرت قيمة متغير رقمي"
         },
         "titleFormatted": {
           "en": "[[variable]] is [[action]] [[amount]]",
-          "nl": "[[variable]] is [[action]] [[amount]]"
+          "nl": "[[variable]] is [[action]] [[amount]]",
+          "da": "[[variable]] er [[action]] [[amount]]",
+          "de": "[[variable]] ist [[action]] [[amount]]",
+          "es": "[[variable]] es [[action]] [[amount]]",
+          "fr": "[[variable]] est [[action]] [[amount]]",
+          "it": "[[variable]] è [[action]] [[amount]]",
+          "no": "[[variable]] er [[action]] [[amount]]",
+          "sv": "[[variable]] är [[action]] [[amount]]",
+          "pl": "[[variable]] jest [[action]] [[amount]]",
+          "ru": "[[variable]] [[action]] [[amount]]",
+          "ko": "[[variable]]이(가) [[amount]] [[action]]되었습니다.",
+          "ar": "[[variable]] هو [[action]] [[amount]]"
         },
         "hint": {
           "en": "Triggers if a number variable is changed.",
-          "nl": "Wordt geactiveerd als een nummervariabele wordt gewijzigd."
+          "nl": "Wordt geactiveerd als een nummervariabele wordt gewijzigd.",
+          "da": "Udløser, hvis en talvariabel ændres.",
+          "de": "Löst aus, wenn eine Zahlenvariable geändert wird.",
+          "es": "Se activa si se cambia una variable numérica.",
+          "fr": "Déclenchement si une variable numérique est modifiée.",
+          "it": "Attiva se una variabile numerica viene modificata.",
+          "no": "Utløses hvis en tallvariabel endres.",
+          "sv": "Utlöser om en siffervariabel ändras.",
+          "pl": "Wyzwala się, gdy zmienna liczbowa zostanie zmieniona.",
+          "ru": "Срабатывает, если числовая переменная изменена.",
+          "ko": "숫자 변수가 변경되면 트리거됩니다.",
+          "ar": "يتفعّل إذا تم تغيير متغير رقمي."
         },
         "args": [
           {
@@ -158,11 +325,33 @@
             "type": "autocomplete",
             "title": {
               "en": "Nummer Variable",
-              "nl": "Nummer Variabele"
+              "nl": "Nummer Variabele",
+              "da": "Nummer variabel",
+              "de": "Zahlenvariable",
+              "es": "Variable Numérica",
+              "fr": "Variable Numérique",
+              "it": "Variabile Numerica",
+              "no": "Nummer Variabel",
+              "sv": "Nummer Variabel",
+              "pl": "Zmienna Liczba",
+              "ru": "Числовая переменная",
+              "ko": "숫자 변수",
+              "ar": "متغير الرقم"
             },
             "placeholder": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             }
           },
           {
@@ -173,31 +362,86 @@
                 "id": "changed",
                 "label": {
                   "en": "min. changed by",
-                  "nl": "min. veranderd door"
+                  "nl": "min. veranderd door",
+                  "da": "min. ændret af",
+                  "de": "min. geändert von",
+                  "es": "min. cambiado por",
+                  "fr": "min. modifié par",
+                  "it": "min. modificato da",
+                  "no": "min. endret av",
+                  "sv": "min. ändrad av",
+                  "pl": "min. zmienione przez",
+                  "ru": "мин. изменено на",
+                  "ko": "최소값 변경됨",
+                  "ar": "تم تغيير الحد الأدنى بواسطة"
                 }
               },
               {
                 "id": "increased",
                 "label": {
                   "en": "min. increased with",
-                  "nl": "min. verhoogd met"
+                  "nl": "min. verhoogd met",
+                  "da": "min. øget med",
+                  "de": "min. erhöht um",
+                  "es": "mín. incrementado en",
+                  "fr": "min. augmenté de",
+                  "it": "min. aumentato di",
+                  "no": "min. økt med",
+                  "sv": "min. ökade med",
+                  "pl": "min. zwiększono o",
+                  "ru": "мин. увеличено на",
+                  "ko": "최소값 증가량",
+                  "ar": "تم زيادة الحد الأدنى بمقدار"
                 }
               },
               {
                 "id": "decreased",
                 "label": {
                   "en": "min. decreased with",
-                  "nl": "min. gedaald met"
+                  "nl": "min. gedaald met",
+                  "da": "min. faldet med",
+                  "de": "min. verringert um",
+                  "es": "min. disminuido con",
+                  "fr": "min. diminué de",
+                  "it": "min. diminuito di",
+                  "no": "min. redusert med",
+                  "sv": "min. minskad med",
+                  "pl": "min. zmniejszono o",
+                  "ru": "мин. уменьшено на",
+                  "ko": "최소값 감소량",
+                  "ar": "انخفض الحد الأدنى مع"
                 }
               }
             ],
             "title": {
               "en": "Action",
-              "nl": "Actie"
+              "nl": "Actie",
+              "da": "Handling",
+              "de": "Aktion",
+              "es": "Acción",
+              "fr": "Action",
+              "it": "Azione",
+              "no": "Handling",
+              "sv": "Åtgärd",
+              "pl": "Akcja",
+              "ru": "Действие",
+              "ko": "액션",
+              "ar": "إجراء"
             },
             "placeholder": {
               "en": "Action",
-              "nl": "Actie"
+              "nl": "Actie",
+              "da": "Handling",
+              "de": "Aktion",
+              "es": "Acción",
+              "fr": "Action",
+              "it": "Azione",
+              "no": "Handling",
+              "sv": "Åtgärd",
+              "pl": "Akcja",
+              "ru": "Действие",
+              "ko": "액션",
+              "ar": "إجراء"
             }
           },
           {
@@ -206,7 +450,18 @@
             "step": 0.01,
             "placeholder": {
               "en": "Amount",
-              "nl": "Aantal"
+              "nl": "Aantal",
+              "da": "Beløb",
+              "de": "Betrag",
+              "es": "Cantidad",
+              "fr": "Montant",
+              "it": "Quantità",
+              "no": "Beløp",
+              "sv": "Belopp",
+              "pl": "Kwota",
+              "ru": "Количество",
+              "ko": "금액",
+              "ar": "المبلغ"
             }
           }
         ]
@@ -215,15 +470,48 @@
         "id": "if_one_of_variable_changed",
         "title": {
           "en": "One of these variables changed",
-          "nl": "Een van deze variabelen is gewijzigd"
+          "nl": "Een van deze variabelen is gewijzigd",
+          "da": "En af disse variabler blev ændret",
+          "de": "Eine dieser Variablen hat sich geändert.",
+          "es": "Una de estas variables cambió",
+          "fr": "Une de ces variables a changé",
+          "it": "Una di queste variabili è cambiata",
+          "no": "En av disse variablene endret seg",
+          "sv": "En av dessa variabler ändrades",
+          "pl": "Jedna z tych zmiennych została zmieniona",
+          "ru": "Одна из этих переменных изменилась",
+          "ko": "이 변수 중 하나가 변경되었습니다.",
+          "ar": "تغير أحد هذه المتغيرات"
         },
         "titleFormatted": {
           "en": "[[variable]] have changed",
-          "nl": "[[variable]] zijn veranderd"
+          "nl": "[[variable]] zijn veranderd",
+          "da": "[[variable]] er blevet ændret",
+          "de": "[[variable]] haben sich geändert",
+          "es": "[[variable]] han cambiado",
+          "fr": "[[variable]] ont changé",
+          "it": "[[variable]] sono cambiati",
+          "no": "[[variable]] har endret seg",
+          "sv": "[[variable]] har ändrats",
+          "pl": "[[variable]] zostały zmienione",
+          "ru": "[[variable]] изменились",
+          "ko": "[[variable]]이(가) 변경되었습니다.",
+          "ar": "[[variable]] قد تغيرت"
         },
         "hint": {
           "en": "Type the variable names seperated by a comma.\nTags will not work in this card.",
-          "nl": "Typ de namen van de variabelen, gescheiden door een komma.\nTags werken niet op deze kaart."
+          "nl": "Typ de namen van de variabelen, gescheiden door een komma.\nTags werken niet op deze kaart.",
+          "da": "Skriv variabelnavnene adskilt af et komma. Tags vil ikke fungere i dette kort.",
+          "de": "Geben Sie die Variablennamen durch ein Komma getrennt ein. Tags funktionieren in dieser Karte nicht.",
+          "es": "Escribe los nombres de las variables separados por una coma. Las etiquetas no funcionarán en esta tarjeta.",
+          "fr": "Tapez les noms des variables séparés par une virgule. Les balises ne fonctionneront pas dans cette carte.",
+          "it": "Digita i nomi delle variabili separati da una virgola. I tag non funzioneranno in questa scheda.",
+          "no": "Skriv variabelnavnene adskilt med komma.\nTagger vil ikke fungere i dette kortet.",
+          "sv": "Skriv variabelnamnen separerade med ett kommatecken. Taggar fungerar inte i detta kort.",
+          "pl": "Wpisz nazwy zmiennych oddzielone przecinkiem. Tagi nie będą działać na tej karcie.",
+          "ru": "Введите имена переменных, разделенные запятой. Теги не будут работать в этой карточке.",
+          "ko": "변수 이름을 쉼표로 구분하여 입력하세요. 이 카드에서는 태그가 작동하지 않습니다.",
+          "ar": "اكتب أسماء المتغيرات مفصولة بفاصلة. العلامات لن تعمل في هذه البطاقة."
         },
         "args": [
           {
@@ -231,10 +519,33 @@
             "type": "text",
             "title": {
               "en": "Variables",
-              "nl": "Variabelen"
+              "nl": "Variabelen",
+              "da": "Variabler",
+              "de": "Variablen",
+              "es": "Variables",
+              "fr": "Variables",
+              "it": "Variabili",
+              "no": "Variabler",
+              "sv": "Variabler",
+              "pl": "Zmienne",
+              "ru": "Переменные",
+              "ko": "변수",
+              "ar": "المتغيرات"
             },
             "placeholder": {
-              "en": "Var1, Var2, Var3"
+              "en": "Var1, Var2, Var3",
+              "nl": "Var1, Var2, Var3",
+              "da": "Var1, Var2, Var3",
+              "de": "Var1, Var2, Var3",
+              "es": "Var1, Var2, Var3",
+              "fr": "Var1, Var2, Var3",
+              "it": "Var1, Var2, Var3",
+              "no": "Var1, Var2, Var3",
+              "sv": "Var1, Var2, Var3",
+              "pl": "Var1, Var2, Var3",
+              "ru": "Var1, Var2, Var3",
+              "ko": "Var1, Var2, Var3",
+              "ar": "المتغير1، المتغير2، المتغير3"
             }
           }
         ]
@@ -243,14 +554,36 @@
         "id": "debug_any_variable_changed",
         "title": {
           "en": "Any variable changed (DEBUG)",
-          "nl": "Enige variabele gewijzigd (DEBUG)"
+          "nl": "Enige variabele gewijzigd (DEBUG)",
+          "da": "Enhver variabel ændret (DEBUG)",
+          "de": "Irgendeine Variable geändert (DEBUG)",
+          "es": "Cualquier variable cambiada (DEPURACIÓN)",
+          "fr": "Toute variable modifiée (DEBUG)",
+          "it": "Qualsiasi variabile modificata (DEBUG)",
+          "no": "Enhver variabel endret (DEBUG)",
+          "sv": "Någon variabel ändrad (DEBUG)",
+          "pl": "Dowolna zmienna zmieniona (DEBUG)",
+          "ru": "Любая переменная изменена (ОТЛАДКА)",
+          "ko": "변수 변경됨 (디버그)",
+          "ar": "تم تغيير أي متغير (تصحيح)"
         }
       },
       {
         "id": "any_variable_changed",
         "title": {
           "en": "Any variable changed",
-          "nl": "Enige variabele gewijzigd"
+          "nl": "Enige variabele gewijzigd",
+          "da": "Enhver variabel ændret",
+          "de": "Irgendeine Variable geändert",
+          "es": "Cualquier variable cambiada",
+          "fr": "Toute variable modifiée",
+          "it": "Qualsiasi variabile modificata",
+          "no": "Enhver variabel endret",
+          "sv": "Någon variabel ändrad",
+          "pl": "Dowolna zmienna zmieniona",
+          "ru": "Любая переменная изменена",
+          "ko": "변수가 변경됨",
+          "ar": "تم تغيير أي متغير"
         },
         "tokens": [
           {
@@ -258,15 +591,37 @@
             "type": "string",
             "title": {
               "en": "Variable Name",
-              "nl": "Variabele naam"
+              "nl": "Variabele naam",
+              "da": "Variabelnavn",
+              "de": "Variablenname",
+              "es": "Nombre de la Variable",
+              "fr": "Nom de la variable",
+              "it": "Nome Variabile",
+              "no": "Variabelnavn",
+              "sv": "Variabelnamn",
+              "pl": "Nazwa zmiennej",
+              "ru": "Имя переменной",
+              "ko": "변수 이름",
+              "ar": "اسم المتغير"
             }
-          },          
+          },
           {
             "name": "variableType",
             "type": "string",
             "title": {
               "en": "Variable Type",
-              "nl": "Variabele Type"
+              "nl": "Variabele Type",
+              "da": "Variabeltype",
+              "de": "Variablentyp",
+              "es": "Tipo de Variable",
+              "fr": "Type de variable",
+              "it": "Tipo di Variabile",
+              "no": "Variabeltype",
+              "sv": "Variabeltyp",
+              "pl": "Typ zmiennej",
+              "ru": "Тип переменной",
+              "ko": "변수 유형",
+              "ar": "نوع المتغير"
             }
           },
           {
@@ -274,7 +629,18 @@
             "type": "string",
             "title": {
               "en": "Variable Value (String)",
-              "nl": "Variabele waarde (String)"
+              "nl": "Variabele waarde (String)",
+              "da": "Variabelværdi (String)",
+              "de": "Variablenwert (String)",
+              "es": "Valor de la Variable (Cadena)",
+              "fr": "Valeur de la variable (Chaîne)",
+              "it": "Valore Variabile (Stringa)",
+              "no": "Variabelverdi (Streng)",
+              "sv": "Variabelvärde (Sträng)",
+              "pl": "Wartość zmiennej (ciąg znaków)",
+              "ru": "Значение переменной (Строка)",
+              "ko": "변수 값 (문자열)",
+              "ar": "قيمة المتغير (نص)"
             }
           },
           {
@@ -282,7 +648,18 @@
             "type": "number",
             "title": {
               "en": "Variable Value (Number)",
-              "nl": "Variabele waarde (Number)"
+              "nl": "Variabele waarde (Number)",
+              "da": "Variabelværdi (Tal)",
+              "de": "Variablenwert (Zahl)",
+              "es": "Valor de Variable (Número)",
+              "fr": "Valeur de la variable (Nombre)",
+              "it": "Valore Variabile (Numero)",
+              "no": "Variabelverdi (Tall)",
+              "sv": "Variabelvärde (Nummer)",
+              "pl": "Wartość zmiennej (Liczba)",
+              "ru": "Значение переменной (Число)",
+              "ko": "변수 값 (숫자)",
+              "ar": "قيمة المتغير (رقم)"
             }
           },
           {
@@ -290,7 +667,18 @@
             "type": "boolean",
             "title": {
               "en": "Variable Value (Yes/No)",
-              "nl": "Variabele waarde (Ja/Nee)"
+              "nl": "Variabele waarde (Ja/Nee)",
+              "da": "Variabelværdi (Ja/Nej)",
+              "de": "Variablenwert (Ja/Nein)",
+              "es": "Valor de la Variable (Sí/No)",
+              "fr": "Valeur de la variable (Oui/Non)",
+              "it": "Valore Variabile (Sì/No)",
+              "no": "Variabelverdi (Ja/Nei)",
+              "sv": "Variabelvärde (Ja/Nej)",
+              "pl": "Wartość zmiennej (Tak/Nie)",
+              "ru": "Значение переменной (Да/Нет)",
+              "ko": "변수 값 (예/아니오)",
+              "ar": "قيمة المتغير (نعم/لا)"
             }
           }
         ]
@@ -300,11 +688,34 @@
       {
         "id": "variable_contains",
         "title": {
-          "en": "!{{Text contains|Text does not contain}}"
+          "en": "!{{Text contains|Text does not contain}}",
+          "nl": "!{{Tekst bevat|Tekst bevat niet}}",
+          "da": "!{{Tekst indeholder|Tekst indeholder ikke}}",
+          "de": "!{{Text enthält|Text enthält nicht}}",
+          "es": "!{{El texto contiene|El texto no contiene}}",
+          "fr": "!{{Le texte contient|Le texte ne contient pas}}",
+          "it": "!{{Il testo contiene|Il testo non contiene}}",
+          "no": "!{{Tekst inneholder|Tekst inneholder ikke}}",
+          "sv": "!{{Text innehåller|Text innehåller inte}}",
+          "pl": "!{{Tekst zawiera|Tekst nie zawiera}}",
+          "ru": "!{{Текст содержит|Текст не содержит}}",
+          "ko": "!{{텍스트 포함|텍스트 포함 안 함}}",
+          "ar": "!{{النص يحتوي على|النص لا يحتوي على}}"
         },
         "titleFormatted": {
           "en": "[[variable]] !{{contains|does not contain}} [[value]]",
-          "nl": "[[variable]] !{{bevat|bevat niet}} [[value]]"
+          "nl": "[[variable]] !{{bevat|bevat niet}} [[value]]",
+          "da": "[[variable]] !{{indeholder|indeholder ikke}} [[value]]",
+          "de": "[[variable]] !{{enthält|enthält nicht}} [[value]]",
+          "es": "[[variable]] !{{contiene|no contiene}} [[value]]",
+          "fr": "[[variable]] !{{contient|ne contient pas}} [[value]]",
+          "it": "[[variable]] !{{contiene|non contiene}} [[value]]",
+          "no": "[[variable]] !{{inneholder|inneholder ikke}} [[value]]",
+          "sv": "[[variable]] !{{innehåller|innehåller inte}} [[value]]",
+          "pl": "[[variable]] !{{zawiera|nie zawiera}} [[value]]",
+          "ru": "[[variable]] !{{содержит|не содержит}} [[value]]",
+          "ko": "[[variable]] !{{포함|포함하지 않음}} [[value]]",
+          "ar": "[[variable]] !{{يحتوي على|لا يحتوي على}} [[value]]"
         },
         "args": [
           {
@@ -312,11 +723,33 @@
             "type": "autocomplete",
             "title": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             },
             "placeholder": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             }
           },
           {
@@ -324,11 +757,33 @@
             "type": "text",
             "placeholder": {
               "en": "Value (* BLL supported)",
-              "nl": "Waarde (* BLL ondersteund)"
+              "nl": "Waarde (* BLL ondersteund)",
+              "da": "Værdi (* BLL understøttet)",
+              "de": "Wert (* BLL unterstützt)",
+              "es": "Valor (* compatible con BLL)",
+              "fr": "Valeur (* pris en charge par BLL)",
+              "it": "Valore (* supportato da BLL)",
+              "no": "Verdi (* BLL støttet)",
+              "sv": "Värde (* BLL stöds)",
+              "pl": "Wartość (* obsługiwane przez BLL)",
+              "ru": "Значение (* поддерживается BLL)",
+              "ko": "값 (* BLL 지원)",
+              "ar": "القيمة (* مدعوم من BLL)"
             },
             "title": {
               "en": "Value",
-              "nl": "Waarde"
+              "nl": "Waarde",
+              "da": "Værdi",
+              "de": "Wert",
+              "es": "Valor",
+              "fr": "Valeur",
+              "it": "Valore",
+              "no": "Verdi",
+              "sv": "Värde",
+              "pl": "Wartość",
+              "ru": "Значение",
+              "ko": "값",
+              "ar": "القيمة"
             }
           }
         ]
@@ -337,11 +792,33 @@
         "id": "variable_starts_with",
         "title": {
           "en": "!{{Text starts with|Text does not start with}}",
-          "nl": "!{{Tekst begint met|Tekst begint niet met}}"
+          "nl": "!{{Tekst begint met|Tekst begint niet met}}",
+          "da": "!{{Tekst starter med|Tekst starter ikke med}}",
+          "de": "!{{Text beginnt mit|Text beginnt nicht mit}}",
+          "es": "¡{{Texto empieza con|Texto no empieza con}}!",
+          "fr": "!{{Le texte commence par|Le texte ne commence pas par}}",
+          "it": "!{{Il testo inizia con|Il testo non inizia con}}",
+          "no": "!{{Tekst starter med|Tekst starter ikke med}}",
+          "sv": "!{{Text börjar med|Text börjar inte med}}",
+          "pl": "!{{Tekst zaczyna się od|Tekst nie zaczyna się od}}",
+          "ru": "!{{Текст начинается с|Текст не начинается с}}",
+          "ko": "!{{텍스트로 시작|텍스트로 시작하지 않음}}",
+          "ar": "!{{النص يبدأ بـ|النص لا يبدأ بـ}}"
         },
         "titleFormatted": {
           "en": "[[variable]] !{{starts with|does not start with}} [[value]]",
-          "nl": "[[variable]] !{{begint met|begint niet met}} [[value]]"
+          "nl": "[[variable]] !{{begint met|begint niet met}} [[value]]",
+          "da": "[[variable]] !{{starter med|starter ikke med}} [[value]]",
+          "de": "[[variable]] !{{beginnt mit|beginnt nicht mit}} [[value]]",
+          "es": "[[variable]] !{{empieza con|no empieza con}} [[value]]",
+          "fr": "[[variable]] !{{commence par|ne commence pas par}} [[value]]",
+          "it": "[[variable]] !{{inizia con|non inizia con}} [[value]]",
+          "no": "[[variable]] !{{starter med|starter ikke med}} [[value]]",
+          "sv": "[[variable]] !{{börjar med|börjar inte med}} [[value]]",
+          "pl": "[[variable]] !{{zaczyna się od|nie zaczyna się od}} [[value]]",
+          "ru": "[[variable]] !{{начинается с|не начинается с}} [[value]]",
+          "ko": "[[variable]] !{{로 시작|로 시작하지 않음}} [[value]]",
+          "ar": "[[variable]] !{{يبدأ بـ|لا يبدأ بـ}} [[value]]"
         },
         "args": [
           {
@@ -349,11 +826,33 @@
             "type": "autocomplete",
             "title": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             },
             "placeholder": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             }
           },
           {
@@ -361,11 +860,33 @@
             "type": "text",
             "title": {
               "en": "Value",
-              "nl": "Waarde"
+              "nl": "Waarde",
+              "da": "Værdi",
+              "de": "Wert",
+              "es": "Valor",
+              "fr": "Valeur",
+              "it": "Valore",
+              "no": "Verdi",
+              "sv": "Värde",
+              "pl": "Wartość",
+              "ru": "Значение",
+              "ko": "값",
+              "ar": "قيمة"
             },
             "placeholder": {
               "en": "Value (* BLL supported)",
-              "nl": "Waarde (* BLL ondersteund)"
+              "nl": "Waarde (* BLL ondersteund)",
+              "da": "Værdi (* BLL understøttet)",
+              "de": "Wert (* BLL unterstützt)",
+              "es": "Valor (* compatible con BLL)",
+              "fr": "Valeur (* pris en charge par BLL)",
+              "it": "Valore (* supportato da BLL)",
+              "no": "Verdi (* BLL støttet)",
+              "sv": "Värde (* BLL stöds)",
+              "pl": "Wartość (* obsługiwane przez BLL)",
+              "ru": "Значение (* поддерживается BLL)",
+              "ko": "값 (* BLL 지원됨)",
+              "ar": "القيمة (* مدعوم من BLL)"
             }
           }
         ]
@@ -374,11 +895,33 @@
         "id": "variable_matches_string",
         "title": {
           "en": "!{{Text is exact|Text is not exactly}}",
-          "nl": "!{{Tekst is exact|Tekst is niet exact}}"
+          "nl": "!{{Tekst is exact|Tekst is niet exact}}",
+          "da": "!{{Tekst er præcis|Tekst er ikke præcis}}",
+          "de": "!{{Text is exact|Text ist nicht genau}}",
+          "es": "¡{{Texto es exacto|Texto no es exactamente}}!",
+          "fr": "!{{Texte exact|Texte pas exactement}}",
+          "it": "!{{Testo esatto|Testo non esattamente}}",
+          "no": "!{{Teksten er nøyaktig|Teksten er ikke nøyaktig}}",
+          "sv": "!{{Text is exact|Text is not exactly}}",
+          "pl": "!{{Tekst jest dokładny|Tekst nie jest dokładny}}",
+          "ru": "!{{Текст точный|Текст не точный}}",
+          "ko": "!{{텍스트가 정확함|텍스트가 정확하지 않음}}",
+          "ar": "!{{النص مطابق|النص ليس مطابقًا}}"
         },
         "titleFormatted": {
           "en": "[[variable]] !{{is exactly|is not exactly}} [[value]]",
-          "nl": "[[variable]] !{{is precies|is niet precies}} [[value]]"
+          "nl": "[[variable]] !{{is precies|is niet precies}} [[value]]",
+          "da": "[[variable]] !{{er præcis|er ikke præcis}} [[value]]",
+          "de": "[[variable]] !{{ist genau|ist nicht genau}} [[value]]",
+          "es": "[[variable]] !{{es exactamente|no es exactamente}} [[value]]",
+          "fr": "[[variable]] !{{est exactement|n'est pas exactement}} [[value]]",
+          "it": "[[variable]] !{{è esattamente|non è esattamente}} [[value]]",
+          "no": "[[variable]] !{{er nøyaktig|er ikke nøyaktig}} [[value]]",
+          "sv": "[[variable]] !{{är exakt|är inte exakt}} [[value]]",
+          "pl": "[[variable]] !{{jest dokładnie|nie jest dokładnie}} [[value]]",
+          "ru": "[[variable]] !{{точно|не точно}} [[value]]",
+          "ko": "[[variable]] !{{정확히|정확하지 않음}} [[value]]",
+          "ar": "[[variable]] !{{يساوي تمامًا|لا يساوي تمامًا}} [[value]]"
         },
         "args": [
           {
@@ -386,11 +929,33 @@
             "type": "autocomplete",
             "title": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             },
             "placeholder": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             }
           },
           {
@@ -398,11 +963,33 @@
             "type": "text",
             "title": {
               "en": "Value",
-              "nl": "Waarde"
+              "nl": "Waarde",
+              "da": "Værdi",
+              "de": "Wert",
+              "es": "Valor",
+              "fr": "Valeur",
+              "it": "Valore",
+              "no": "Verdi",
+              "sv": "Värde",
+              "pl": "Wartość",
+              "ru": "Значение",
+              "ko": "값",
+              "ar": "القيمة"
             },
             "placeholder": {
               "en": "Value (* BLL supported)",
-              "nl": "Waarde (* BLL ondersteund)"
+              "nl": "Waarde (* BLL ondersteund)",
+              "da": "Værdi (* BLL understøttet)",
+              "de": "Wert (* BLL unterstützt)",
+              "es": "Valor (* compatible con BLL)",
+              "fr": "Valeur (* pris en charge par BLL)",
+              "it": "Valore (* supportato da BLL)",
+              "no": "Verdi (* BLL støttet)",
+              "sv": "Värde (* BLL stöds)",
+              "pl": "Wartość (* obsługiwane przez BLL)",
+              "ru": "Значение (* поддерживается BLL)",
+              "ko": "값 (* BLL 지원)",
+              "ar": "القيمة (* مدعوم من BLL)"
             }
           }
         ]
@@ -411,11 +998,33 @@
         "id": "variable_matches_number",
         "title": {
           "en": "!{{Number is exactly|Number is not exactly}}",
-          "nl": "!{{Getal is exact|Getal is niet exact}}"
+          "nl": "!{{Getal is exact|Getal is niet exact}}",
+          "da": "!{{Tal er præcis|Tal er ikke præcis}}",
+          "de": "!{{Zahl ist genau|Zahl ist nicht genau}}",
+          "es": "¡{{El número es exactamente|El número no es exactamente}}!",
+          "fr": "!{{Le nombre est exactement|Le nombre n'est pas exactement}}",
+          "it": "!{{Il numero è esattamente|Il numero non è esattamente}}",
+          "no": "!{{Nummer er nøyaktig|Nummer er ikke nøyaktig}}",
+          "sv": "!{{Numret är exakt|Numret är inte exakt}}",
+          "pl": "!{{Liczba jest dokładnie|Liczba nie jest dokładnie}}",
+          "ru": "!{{Число точно|Число не точно}}",
+          "ko": "!{{숫자가 정확히 일치함|숫자가 정확히 일치하지 않음}}",
+          "ar": "!{{الرقم هو بالضبط|الرقم ليس بالضبط}}"
         },
         "titleFormatted": {
           "en": "[[variable]] !{{is exactly|is not exactly}} [[value]]",
-          "nl": "[[variable]] !{{is precies|is niet precies}} [[value]]"
+          "nl": "[[variable]] !{{is precies|is niet precies}} [[value]]",
+          "da": "[[variable]] !{{er præcis|er ikke præcis}} [[value]]",
+          "de": "[[variable]] !{{ist genau|ist nicht genau}} [[value]]",
+          "es": "[[variable]] !{{es exactamente|no es exactamente}} [[value]]",
+          "fr": "[[variable]] !{{est exactement|n'est pas exactement}} [[value]]",
+          "it": "[[variable]] !{{è esattamente|non è esattamente}} [[value]]",
+          "no": "[[variable]] !{{er nøyaktig|er ikke nøyaktig}} [[value]]",
+          "sv": "[[variable]] !{{är exakt|är inte exakt}} [[value]]",
+          "pl": "[[variable]] !{{jest dokładnie|nie jest dokładnie}} [[value]]",
+          "ru": "[[variable]] !{{равно|не равно}} [[value]]",
+          "ko": "[[variable]] !{{정확히|정확하지 않음}} [[value]]",
+          "ar": "[[variable]] !{{هو بالضبط|ليس بالضبط}} [[value]]"
         },
         "args": [
           {
@@ -423,11 +1032,33 @@
             "type": "autocomplete",
             "title": {
               "en": "Number Variable",
-              "nl": "Nummer Variabele"
+              "nl": "Nummer Variabele",
+              "da": "Nummervariabel",
+              "de": "Zahlenvariable",
+              "es": "Variable numérica",
+              "fr": "Variable numérique",
+              "it": "Variabile Numerica",
+              "no": "Tallvariabel",
+              "sv": "Nummervariabel",
+              "pl": "Zmienna Liczbowa",
+              "ru": "Числовая переменная",
+              "ko": "숫자 변수",
+              "ar": "متغير رقمي"
             },
             "placeholder": {
               "en": "Number Variable",
-              "nl": "Nummer Variabele"
+              "nl": "Nummer Variabele",
+              "da": "Nummervariabel",
+              "de": "Zahlenvariable",
+              "es": "Variable numérica",
+              "fr": "Variable numérique",
+              "it": "Variabile Numerica",
+              "no": "Tallvariabel",
+              "sv": "Nummervariabel",
+              "pl": "Zmienna Liczbowa",
+              "ru": "Числовая переменная",
+              "ko": "숫자 변수",
+              "ar": "متغير رقمي"
             }
           },
           {
@@ -436,11 +1067,33 @@
             "step": 0.01,
             "title": {
               "en": "Value",
-              "nl": "Waarde"
+              "nl": "Waarde",
+              "da": "Værdi",
+              "de": "Wert",
+              "es": "Valor",
+              "fr": "Valeur",
+              "it": "Valore",
+              "no": "Verdi",
+              "sv": "Värde",
+              "pl": "Wartość",
+              "ru": "Значение",
+              "ko": "값",
+              "ar": "قيمة"
             },
             "placeholder": {
               "en": "Value",
-              "nl": "Waarde"
+              "nl": "Waarde",
+              "da": "Værdi",
+              "de": "Wert",
+              "es": "Valor",
+              "fr": "Valeur",
+              "it": "Valore",
+              "no": "Verdi",
+              "sv": "Värde",
+              "pl": "Wartość",
+              "ru": "Значение",
+              "ko": "값",
+              "ar": "القيمة"
             }
           }
         ]
@@ -449,11 +1102,33 @@
         "id": "variable_greater_than",
         "title": {
           "en": "!{{Greater than|Not greater than}}",
-          "nl": "!{{Groter dan|Niet groter dan}}"
+          "nl": "!{{Groter dan|Niet groter dan}}",
+          "da": "!{{Større end|Ikke større end}}",
+          "de": "!{{Größer als|Nicht größer als}}",
+          "es": "¡{{Mayor que|No mayor que}}!",
+          "fr": "!{{Plus grand que|Pas plus grand que}}",
+          "it": "!{{Maggiore di|Non maggiore di}}",
+          "no": "!{{Større enn|Ikke større enn}}",
+          "sv": "!{{Större än|Inte större än}}",
+          "pl": "!{{Większe niż|Nie większe niż}}",
+          "ru": "!{{Больше чем|Не больше чем}}",
+          "ko": "!{{보다 큼|보다 크지 않음}}",
+          "ar": "!{{أكبر من|ليس أكبر من}}"
         },
         "titleFormatted": {
           "en": "[[variable]] !{{is greater than|is not greater than}} [[value]]",
-          "nl": "[[variable]] !{{is groter dan|is niet groter dan}} [[value]]"
+          "nl": "[[variable]] !{{is groter dan|is niet groter dan}} [[value]]",
+          "da": "[[variable]] !{{er større end|er ikke større end}} [[value]]",
+          "de": "[[variable]] !{{ist größer als|ist nicht größer als}} [[value]]",
+          "es": "[[variable]] !{{es mayor que|no es mayor que}} [[value]]",
+          "fr": "[[variable]] !{{est supérieur à|n'est pas supérieur à}} [[value]]",
+          "it": "[[variable]] !{{è maggiore di|non è maggiore di}} [[value]]",
+          "no": "[[variable]] !{{er større enn|er ikke større enn}} [[value]]",
+          "sv": "[[variable]] !{{är större än|är inte större än}} [[value]]",
+          "pl": "[[variable]] !{{jest większe niż|nie jest większe niż}} [[value]]",
+          "ru": "[[variable]] !{{больше чем|не больше чем}} [[value]]",
+          "ko": "[[variable]] !{{보다 큽니다|보다 크지 않습니다}} [[value]]",
+          "ar": "[[variable]] !{{أكبر من|ليس أكبر من}} [[value]]"
         },
         "args": [
           {
@@ -461,11 +1136,33 @@
             "type": "autocomplete",
             "title": {
               "en": "Number Variable",
-              "nl": "Nummer Variabele"
+              "nl": "Nummer Variabele",
+              "da": "Nummervariabel",
+              "de": "Zahlenvariable",
+              "es": "Variable numérica",
+              "fr": "Variable numérique",
+              "it": "Variabile Numerica",
+              "no": "Tallvariabel",
+              "sv": "Nummervariabel",
+              "pl": "Zmienna Liczbowa",
+              "ru": "Числовая переменная",
+              "ko": "숫자 변수",
+              "ar": "متغير رقمي"
             },
             "placeholder": {
               "en": "Number Variable",
-              "nl": "Nummer Variabele"
+              "nl": "Nummer Variabele",
+              "da": "Nummervariabel",
+              "de": "Zahlenvariable",
+              "es": "Variable numérica",
+              "fr": "Variable numérique",
+              "it": "Variabile Numerica",
+              "no": "Tallvariabel",
+              "sv": "Nummervariabel",
+              "pl": "Zmienna Liczbowa",
+              "ru": "Числовая переменная",
+              "ko": "숫자 변수",
+              "ar": "متغير رقمي"
             }
           },
           {
@@ -474,11 +1171,33 @@
             "step": 0.01,
             "title": {
               "en": "Value",
-              "nl": "Waarde"
+              "nl": "Waarde",
+              "da": "Værdi",
+              "de": "Wert",
+              "es": "Valor",
+              "fr": "Valeur",
+              "it": "Valore",
+              "no": "Verdi",
+              "sv": "Värde",
+              "pl": "Wartość",
+              "ru": "Значение",
+              "ko": "값",
+              "ar": "قيمة"
             },
             "placeholder": {
               "en": "Value",
-              "nl": "Waarde"
+              "nl": "Waarde",
+              "da": "Værdi",
+              "de": "Wert",
+              "es": "Valor",
+              "fr": "Valeur",
+              "it": "Valore",
+              "no": "Verdi",
+              "sv": "Värde",
+              "pl": "Wartość",
+              "ru": "Значение",
+              "ko": "값",
+              "ar": "القيمة"
             }
           }
         ]
@@ -487,11 +1206,33 @@
         "id": "variable_less_than",
         "title": {
           "en": "!{{Less than|Not less than}}",
-          "nl": "!{{Kleiner dan|Niet kleiner dan}}"
+          "nl": "!{{Kleiner dan|Niet kleiner dan}}",
+          "da": "!{{Mindre end|Ikke mindre end}}",
+          "de": "!{{Weniger als|Nicht weniger als}}",
+          "es": "¡{{Menos que|No menos que}}!",
+          "fr": "!{{Moins que|Pas moins que}}",
+          "it": "!{{Meno di|Non meno di}}",
+          "no": "!{{Mindre enn|Ikke mindre enn}}",
+          "sv": "!{{Mindre än|Inte mindre än}}",
+          "pl": "!{{Mniej niż|Nie mniej niż}}",
+          "ru": "!{{Меньше чем|Не меньше чем}}",
+          "ko": "!{{보다 작음|보다 크거나 같음}}",
+          "ar": "!{{أقل من|ليس أقل من}}"
         },
         "titleFormatted": {
           "en": "[[variable]] !{{is less than|is not less than}} [[value]]",
-          "nl": "[[variable]] !{{is kleiner dan|is niet kleiner dan}} [[value]]"
+          "nl": "[[variable]] !{{is kleiner dan|is niet kleiner dan}} [[value]]",
+          "da": "[[variable]] !{{er mindre end|er ikke mindre end}} [[value]]",
+          "de": "[[variable]] !{{ist kleiner als|ist nicht kleiner als}} [[value]]",
+          "es": "[[variable]] !{{es menor que|no es menor que}} [[value]]",
+          "fr": "[[variable]] !{{est inférieur à|n'est pas inférieur à}} [[value]]",
+          "it": "[[variable]] !{{è minore di|non è minore di}} [[value]]",
+          "no": "[[variable]] !{{er mindre enn|er ikke mindre enn}} [[value]]",
+          "sv": "[[variable]] !{{är mindre än|är inte mindre än}} [[value]]",
+          "pl": "[[variable]] !{{jest mniejsze niż|nie jest mniejsze niż}} [[value]]",
+          "ru": "[[variable]] !{{меньше чем|не меньше чем}} [[value]]",
+          "ko": "[[variable]] !{{보다 작다|보다 작지 않다}} [[value]]",
+          "ar": "[[variable]] !{{أقل من|ليس أقل من}} [[value]]"
         },
         "args": [
           {
@@ -499,11 +1240,33 @@
             "type": "autocomplete",
             "title": {
               "en": "Number Variable",
-              "nl": "Nummer Variabele"
+              "nl": "Nummer Variabele",
+              "da": "Nummervariabel",
+              "de": "Zahlenvariable",
+              "es": "Variable numérica",
+              "fr": "Variable numérique",
+              "it": "Variabile Numerica",
+              "no": "Tallvariabel",
+              "sv": "Nummervariabel",
+              "pl": "Zmienna Liczbowa",
+              "ru": "Числовая переменная",
+              "ko": "숫자 변수",
+              "ar": "متغير رقمي"
             },
             "placeholder": {
               "en": "Number Variable",
-              "nl": "Nummer Variabele"
+              "nl": "Nummer Variabele",
+              "da": "Nummervariabel",
+              "de": "Zahlenvariable",
+              "es": "Variable numérica",
+              "fr": "Variable numérique",
+              "it": "Variabile Numerica",
+              "no": "Tallvariabel",
+              "sv": "Nummervariabel",
+              "pl": "Zmienna liczbowa",
+              "ru": "Числовая переменная",
+              "ko": "숫자 변수",
+              "ar": "متغير رقمي"
             }
           },
           {
@@ -512,11 +1275,33 @@
             "step": 0.01,
             "title": {
               "en": "Value",
-              "nl": "Waarde"
+              "nl": "Waarde",
+              "da": "Værdi",
+              "de": "Wert",
+              "es": "Valor",
+              "fr": "Valeur",
+              "it": "Valore",
+              "no": "Verdi",
+              "sv": "Värde",
+              "pl": "Wartość",
+              "ru": "Значение",
+              "ko": "값",
+              "ar": "قيمة"
             },
             "placeholder": {
               "en": "Value",
-              "nl": "Waarde"
+              "nl": "Waarde",
+              "da": "Værdi",
+              "de": "Wert",
+              "es": "Valor",
+              "fr": "Valeur",
+              "it": "Valore",
+              "no": "Verdi",
+              "sv": "Värde",
+              "pl": "Wartość",
+              "ru": "Значение",
+              "ko": "값",
+              "ar": "قيمة"
             }
           }
         ]
@@ -525,11 +1310,33 @@
         "id": "variable_is_equal",
         "title": {
           "en": "Variable !{{is true|is false}}",
-          "nl": "Variabele !{{is waar|is niet waar}}"
+          "nl": "Variabele !{{is waar|is niet waar}}",
+          "da": "Variabel !{{er sand|er falsk}}",
+          "de": "Variable !{{ist wahr|ist falsch}}",
+          "es": "Variable !{{es verdadero|es falso}}",
+          "fr": "Variable !{{est vrai|est faux}}",
+          "it": "Variabile !{{è vero|è falso}}",
+          "no": "Variabel !{{er sann|er falsk}}",
+          "sv": "Variabel !{{är sann|är falsk}}",
+          "pl": "Zmienna !{{jest prawdziwa|jest fałszywa}}",
+          "ru": "Переменная !{{истина|ложь}}",
+          "ko": "변수 !{{참임|거짓임}}",
+          "ar": "متغير !{{صحيح|خطأ}}"
         },
         "titleFormatted": {
           "en": "[[variable]] !{{is true|is false}}",
-          "nl": "[[variable]] !{{is waar|is niet waar}}"
+          "nl": "[[variable]] !{{is waar|is niet waar}}",
+          "da": "[[variable]] !{{er sand|er falsk}}",
+          "de": "[[variable]] !{{ist wahr|ist falsch}}",
+          "es": "[[variable]] ¡{{es verdadero|es falso}}!",
+          "fr": "[[variable]] !{{est vrai|est faux}}",
+          "it": "[[variable]] !{{è vero|è falso}}",
+          "no": "[[variable]] !{{er sant|er falskt}}",
+          "sv": "[[variable]] !{{är sant|är falskt}}",
+          "pl": "[[variable]] !{{jest prawdą|jest fałszem}}",
+          "ru": "[[variable]] !{{истина|ложь}}",
+          "ko": "[[variable]] !{{참입니다|거짓입니다}}",
+          "ar": "[[variable]] !{{صحيح|خطأ}}"
         },
         "args": [
           {
@@ -537,11 +1344,33 @@
             "type": "autocomplete",
             "title": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             },
             "placeholder": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             }
           }
         ]
@@ -550,11 +1379,33 @@
         "id": "expression",
         "title": {
           "en": "Math.js expression !{{is true|is false}}",
-          "nl": "Math.js-expressie !{{is waar|is niet waar}}"
+          "nl": "Math.js-expressie !{{is waar|is niet waar}}",
+          "da": "Math.js udtryk !{{er sandt|er falsk}}",
+          "de": "Math.js-Ausdruck !{{ist wahr|ist falsch}}",
+          "es": "Expresión Math.js !{{es verdadero|es falso}}",
+          "fr": "Expression Math.js !{{est vrai|est faux}}",
+          "it": "Espressione Math.js !{{è vero|è falso}}",
+          "no": "Math.js uttrykk !{{er sant|er falsk}}",
+          "sv": "Math.js-uttryck !{{är sant|är falskt}}",
+          "pl": "Wyrażenie Math.js !{{jest prawdziwe|jest fałszywe}}",
+          "ru": "Выражение Math.js !{{истинно|ложно}}",
+          "ko": "Math.js 표현 !{{참이다|거짓이다}}",
+          "ar": "تعبير Math.js !{{صحيح|خطأ}}"
         },
         "titleFormatted": {
           "en": "[[expression]] !{{is true|is false}}",
-          "nl": "[[expression]] !{{is waar|is niet waar}}"
+          "nl": "[[expression]] !{{is waar|is niet waar}}",
+          "da": "[[expression]] !{{er sand|er falsk}}",
+          "de": "[[expression]] !{{ist wahr|ist falsch}}",
+          "es": "[[expression]] !{{es verdadero|es falso}}",
+          "fr": "[[expression]] !{{est vrai|est faux}}",
+          "it": "[[expression]] !{{è vero|è falso}}",
+          "no": "[[expression]] !{{er sann|er falsk}}",
+          "sv": "[[expression]] !{{är sant|är falskt}}",
+          "pl": "[[expression]] !{{jest prawdziwe|jest fałszywe}}",
+          "ru": "[[expression]] !{{истинно|ложно}}",
+          "ko": "[[expression]] !{{참임|거짓임}}",
+          "ar": "[[expression]] !{{صحيح|خطأ}}"
         },
         "args": [
           {
@@ -562,10 +1413,33 @@
             "type": "text",
             "title": {
               "en": "Math.js expression",
-              "nl": "Math.js-expressie"
+              "nl": "Math.js-expressie",
+              "da": "Math.js udtryk",
+              "de": "Math.js-Ausdruck",
+              "es": "Expresión de Math.js",
+              "fr": "Expression Math.js",
+              "it": "Espressione Math.js",
+              "no": "Math.js-uttrykk",
+              "sv": "Math.js-uttryck",
+              "pl": "Wyrażenie Math.js",
+              "ru": "Выражение Math.js",
+              "ko": "Math.js 표현식",
+              "ar": "تعبير Math.js"
             },
             "placeholder": {
-              "en": "$v1$ > 100 and $v1$ < 200 and $b1$"
+              "en": "$v1$ > 100 and $v1$ < 200 and $b1$",
+              "nl": "$v1$ > 100 en $v1$ < 200 en $b1$",
+              "da": "$v1$ > 100 og $v1$ < 200 og $b1$",
+              "de": "$v1$ > 100 und $v1$ < 200 und $b1$",
+              "es": "$v1$ > 100 y $v1$ < 200 y $b1$",
+              "fr": "$v1$ > 100 et $v1$ < 200 et $b1$",
+              "it": "$v1$ > 100 e $v1$ < 200 e $b1$",
+              "no": "$v1$ > 100 og $v1$ < 200 og $b1$",
+              "sv": "$v1$ > 100 och $v1$ < 200 och $b1$",
+              "pl": "$v1$ > 100 i $v1$ < 200 i $b1$",
+              "ru": "$v1$ > 100 и $v1$ < 200 и $b1$",
+              "ko": "$v1$ > 100 그리고 $v1$ < 200 그리고 $b1$",
+              "ar": "$v1$ > 100 و $v1$ < 200 و $b1$"
             }
           }
         ]
@@ -574,11 +1448,33 @@
         "id": "bl_expression",
         "title": {
           "en": "BLL expression !{{is true|is false}}",
-          "nl": "BLL-expressie !{{is waar|is niet waar}}"
+          "nl": "BLL-expressie !{{is waar|is niet waar}}",
+          "da": "BLL-udtryk !{{er sandt|er falsk}}",
+          "de": "BLL-Ausdruck !{{ist wahr|ist falsch}}",
+          "es": "Expresión BLL !{{es verdadero|es falso}}",
+          "fr": "Expression BLL !{{est vrai|est faux}}",
+          "it": "BLL espressione !{{è vero|è falso}}",
+          "no": "BLL-uttrykk !{{er sann|er falsk}}",
+          "sv": "BLL-uttryck !{{är sant|är falskt}}",
+          "pl": "Wyrażenie BLL !{{jest prawdziwe|jest fałszywe}}",
+          "ru": "BLL выражение !{{истинно|ложно}}",
+          "ko": "BLL 표현 !{{참입니다|거짓입니다}}",
+          "ar": "التعبير BLL !{{صحيح|خطأ}}"
         },
         "titleFormatted": {
           "en": "[[expression]] !{{is true|is false}}",
-          "nl": "[[expression]] !{{is waar|is niet waar}}"
+          "nl": "[[expression]] !{{is waar|is niet waar}}",
+          "da": "[[expression]] !{{er sand|er falsk}}",
+          "de": "[[expression]] !{{ist wahr|ist falsch}}",
+          "es": "[[expression]] !{{es verdadero|es falso}}",
+          "fr": "[[expression]] !{{est vrai|est faux}}",
+          "it": "[[expression]] !{{è vero|è falso}}",
+          "no": "[[expression]] !{{er sant|er falsk}}",
+          "sv": "[[expression]] !{{är sant|är falskt}}",
+          "pl": "[[expression]] !{{jest prawdziwe|jest fałszywe}}",
+          "ru": "[[expression]] !{{истинно|ложно}}",
+          "ko": "[[expression]] !{{참임|거짓임}}",
+          "ar": "[[expression]] !{{صحيح|خطأ}}"
         },
         "args": [
           {
@@ -586,10 +1482,33 @@
             "type": "text",
             "title": {
               "en": "BLL expression",
-              "nl": "BLL-expressie"
+              "nl": "BLL-expressie",
+              "da": "BLL-udtryk",
+              "de": "BLL-Ausdruck",
+              "es": "Expresión BLL",
+              "fr": "Expression BLL",
+              "it": "Espressione BLL",
+              "no": "BLL-uttrykk",
+              "sv": "BLL-uttryck",
+              "pl": "Wyrażenie BLL",
+              "ru": "BLL выражение",
+              "ko": "BLL 표현",
+              "ar": "تعبير BLL"
             },
             "placeholder": {
-              "en": "\"test\"=== \"test\" && 1 < 2"
+              "en": "\"test\"=== \"test\" && 1 < 2",
+              "nl": "\"test\"=== \"test\" && 1 < 2",
+              "da": "\"test\"=== \"test\" && 1 < 2",
+              "de": "\"test\"=== \"test\" && 1 < 2",
+              "es": "\"test\"=== \"test\" && 1 < 2",
+              "fr": "\"test\"=== \"test\" && 1 < 2",
+              "it": "\"test\"=== \"test\" && 1 < 2",
+              "no": "\"test\"=== \"test\" && 1 < 2",
+              "sv": "\"test\"=== \"test\" && 1 < 2",
+              "pl": "\"test\"=== \"test\" && 1 < 2",
+              "ru": "\"test\"=== \"test\" && 1 < 2",
+              "ko": "\"test\"=== \"test\" && 1 < 2",
+              "ar": "\"test\" === \"test\" && 1 < 2"
             }
           }
         ]
@@ -598,20 +1517,54 @@
     "actions": [
       {
         "id": "__dummy_card",
-        "deprecated":true,
+        "deprecated": true,
         "title": {
-          "en": "Dummy"
+          "en": "Dummy",
+          "nl": "Dummy",
+          "da": "Dummy",
+          "de": "Dummy",
+          "es": "Ficticio",
+          "fr": "Factice",
+          "it": "Fittizio",
+          "no": "Dummy",
+          "sv": "Dummy",
+          "pl": "Atrapa",
+          "ru": "Заглушка",
+          "ko": "더미",
+          "ar": "وهمي"
         }
       },
       {
         "id": "format_datetime",
         "title": {
           "en": "Format datetime",
-          "nl": "Formaat datumtijd"
+          "nl": "Formaat datumtijd",
+          "da": "Formater dato og tid",
+          "de": "Datum und Uhrzeit formatieren",
+          "es": "Formato de fecha y hora",
+          "fr": "Formater la date et l'heure",
+          "it": "Formatta data e ora",
+          "no": "Formater dato og klokkeslett",
+          "sv": "Formatera datum och tid",
+          "pl": "Formatuj datę i godzinę",
+          "ru": "Формат даты и времени",
+          "ko": "날짜 및 시간 형식 설정",
+          "ar": "تنسيق التاريخ والوقت"
         },
         "titleFormatted": {
           "en": "Format date as [[format]] (optional: [[date]], [[locale]], [[timeZone]])",
-          "nl": "Datum opmaken als [[format]] (optioneel: [[date]], [[locale]], [[timeZone]])"
+          "nl": "Datum opmaken als [[format]] (optioneel: [[date]], [[locale]], [[timeZone]])",
+          "da": "Formater dato som [[format]] (valgfrit: [[date]], [[locale]], [[timeZone]])",
+          "de": "Datum als [[format]] formatieren (optional: [[date]], [[locale]], [[timeZone]])",
+          "es": "Formatear fecha como [[format]] (opcional: [[date]], [[locale]], [[timeZone]])",
+          "fr": "Formater la date comme [[format]] (optionnel : [[date]], [[locale]], [[timeZone]])",
+          "it": "Formatta la data come [[format]] (opzionale: [[date]], [[locale]], [[timeZone]])",
+          "no": "Formater dato som [[format]] (valgfritt: [[date]], [[locale]], [[timeZone]])",
+          "sv": "Formatera datum som [[format]] (valfritt: [[date]], [[locale]], [[timeZone]])",
+          "pl": "Sformatuj datę jako [[format]] (opcjonalnie: [[date]], [[locale]], [[timeZone]])",
+          "ru": "Форматировать дату как [[format]] (опционально: [[date]], [[locale]], [[timeZone]])",
+          "ko": "날짜를 [[format]] 형식으로 지정 (선택 사항: [[date]], [[locale]], [[timeZone]])",
+          "ar": "تنسيق التاريخ كـ [[format]] (اختياري: [[date]], [[locale]], [[timeZone]])"
         },
         "args": [
           {
@@ -619,11 +1572,33 @@
             "type": "autocomplete",
             "placeholder": {
               "en": "Type your own format or select from the list",
-              "nl": "Typ uw eigen formaat of kies een uit de lijst"
+              "nl": "Typ uw eigen formaat of kies een uit de lijst",
+              "da": "Skriv dit eget format eller vælg fra listen",
+              "de": "Geben Sie Ihr eigenes Format ein oder wählen Sie aus der Liste aus.",
+              "es": "Escribe tu propio formato o selecciona de la lista",
+              "fr": "Tapez votre propre format ou sélectionnez-en un dans la liste.",
+              "it": "Digita il tuo formato o seleziona dalla lista",
+              "no": "Skriv inn ditt eget format eller velg fra listen",
+              "sv": "Skriv ditt eget format eller välj från listan",
+              "pl": "Wpisz swój własny format lub wybierz z listy",
+              "ru": "Введите свой формат или выберите из списка",
+              "ko": "자신만의 형식을 입력하거나 목록에서 선택하세요.",
+              "ar": "اكتب التنسيق الخاص بك أو اختر من القائمة"
             },
             "title": {
               "en": "Format",
-              "nl": "Opmaak"
+              "nl": "Opmaak",
+              "da": "Format",
+              "de": "Formatieren",
+              "es": "Formato",
+              "fr": "Format",
+              "it": "Formato",
+              "no": "Format",
+              "sv": "Formatera",
+              "pl": "Formatowanie",
+              "ru": "Формат",
+              "ko": "형식",
+              "ar": "صيغة"
             }
           },
           {
@@ -632,11 +1607,33 @@
             "required": false,
             "placeholder": {
               "en": "String, Number or Date, or Array of any of those",
-              "nl": "Tekst, nummer of datum, of array van een van deze"
+              "nl": "Tekst, nummer of datum, of array van een van deze",
+              "da": "String, Number eller Date, eller Array af nogen af disse",
+              "de": "String, Number oder Date, oder Array von einem dieser Typen",
+              "es": "Cadena, Número o Fecha, o Matriz de cualquiera de esos.",
+              "fr": "Chaîne, Nombre ou Date, ou Tableau de l'un de ceux-ci",
+              "it": "Stringa, Numero o Data, o Array di uno qualsiasi di questi",
+              "no": "Streng, Tall eller Dato, eller Array av noen av disse",
+              "sv": "Sträng, Nummer eller Datum, eller Array av någon av dessa",
+              "pl": "Ciąg znaków, liczba lub data, lub tablica dowolnego z tych elementów",
+              "ru": "Строка, Число или Дата, или Массив из любого из них",
+              "ko": "문자열, 숫자 또는 날짜, 또는 이들의 배열",
+              "ar": "سلسلة، رقم أو تاريخ، أو مصفوفة من أي منها"
             },
             "title": {
               "en": "Date",
-              "nl": "Datum"
+              "nl": "Datum",
+              "da": "Dato",
+              "de": "Datum",
+              "es": "Fecha",
+              "fr": "Date",
+              "it": "Data",
+              "no": "Dato",
+              "sv": "Datum",
+              "pl": "Data",
+              "ru": "Дата",
+              "ko": "날짜",
+              "ar": "تاريخ"
             }
           },
           {
@@ -645,11 +1642,33 @@
             "required": false,
             "placeholder": {
               "en": "Select a locale from the list",
-              "nl": "Selecteer een locale uit de lijst"
+              "nl": "Selecteer een locale uit de lijst",
+              "da": "Vælg en lokalitet fra listen",
+              "de": "Wählen Sie einen Ort aus der Liste aus",
+              "es": "Selecciona una ubicación de la lista",
+              "fr": "Sélectionnez une langue dans la liste",
+              "it": "Seleziona una località dall'elenco",
+              "no": "Velg et språk fra listen",
+              "sv": "Välj en plats från listan",
+              "pl": "Wybierz lokalizację z listy",
+              "ru": "Выберите язык из списка",
+              "ko": "목록에서 로케일을 선택하세요.",
+              "ar": "اختر لغة من القائمة"
             },
             "title": {
               "en": "Locale",
-              "nl": "Locale"
+              "nl": "Locale",
+              "da": "Lokalitet",
+              "de": "Gebietsschema",
+              "es": "Configuración regional",
+              "fr": "Langue",
+              "it": "Località",
+              "no": "Språkinnstilling",
+              "sv": "Språkversion",
+              "pl": "Lokalizacja",
+              "ru": "Локаль",
+              "ko": "로케일",
+              "ar": "المنطقة"
             }
           },
           {
@@ -658,11 +1677,33 @@
             "required": false,
             "placeholder": {
               "en": "Select a timezone from the list",
-              "nl": "Selecteer een tijdzone uit de lijst"
+              "nl": "Selecteer een tijdzone uit de lijst",
+              "da": "Vælg en tidszone fra listen",
+              "de": "Wählen Sie eine Zeitzone aus der Liste aus",
+              "es": "Selecciona una zona horaria de la lista",
+              "fr": "Sélectionnez un fuseau horaire dans la liste",
+              "it": "Seleziona un fuso orario dall'elenco",
+              "no": "Velg en tidssone fra listen",
+              "sv": "Välj en tidszon från listan",
+              "pl": "Wybierz strefę czasową z listy",
+              "ru": "Выберите часовой пояс из списка",
+              "ko": "목록에서 시간대를 선택하세요.",
+              "ar": "اختر منطقة زمنية من القائمة"
             },
             "title": {
               "en": "TimeZone",
-              "nl": "Tijdzone"
+              "nl": "Tijdzone",
+              "da": "Tidszone",
+              "de": "Zeitzone",
+              "es": "Zona horaria",
+              "fr": "Fuseau horaire",
+              "it": "Fuso orario",
+              "no": "Tidssone",
+              "sv": "Tidszon",
+              "pl": "Strefa czasowa",
+              "ru": "Часовой пояс",
+              "ko": "시간대",
+              "ar": "المنطقة الزمنية"
             }
           }
         ],
@@ -672,7 +1713,18 @@
             "type": "string",
             "title": {
               "en": "Formatted result",
-              "nl": "Opgemaakte resultaat"
+              "nl": "Opgemaakte resultaat",
+              "da": "Formatteret resultat",
+              "de": "Formatiertes Ergebnis",
+              "es": "Resultado formateado",
+              "fr": "Résultat formaté",
+              "it": "Risultato formattato",
+              "no": "Formatert resultat",
+              "sv": "Formaterat resultat",
+              "pl": "Sformatowany wynik",
+              "ru": "Отформатированный результат",
+              "ko": "서식 있는 결과",
+              "ar": "النتيجة المنسقة"
             }
           }
         ]
@@ -681,11 +1733,33 @@
         "id": "format_time",
         "title": {
           "en": "Format time",
-          "nl": "Formaat tijd"
+          "nl": "Formaat tijd",
+          "da": "Formater tid",
+          "de": "Zeit formatieren",
+          "es": "Formato de hora",
+          "fr": "Formater l'heure",
+          "it": "Formatta l'ora",
+          "no": "Formater tid",
+          "sv": "Formatera tid",
+          "pl": "Formatuj czas",
+          "ru": "Формат времени",
+          "ko": "시간 형식 설정",
+          "ar": "تنسيق الوقت"
         },
         "titleFormatted": {
           "en": "Format [[timeMs]] or [[timeSec]] as [[format]]",
-          "nl": "[[timeMs]] of [[timeSec]] opmaken als [[format]]"
+          "nl": "[[timeMs]] of [[timeSec]] opmaken als [[format]]",
+          "da": "Formater [[timeMs]] eller [[timeSec]] som [[format]]",
+          "de": "Formatiere [[timeMs]] oder [[timeSec]] als [[format]]",
+          "es": "Formatear [[timeMs]] o [[timeSec]] como [[format]]",
+          "fr": "Formater [[timeMs]] ou [[timeSec]] comme [[format]]",
+          "it": "Formatta [[timeMs]] o [[timeSec]] come [[format]]",
+          "no": "Formater [[timeMs]] eller [[timeSec]] som [[format]]",
+          "sv": "Formatera [[timeMs]] eller [[timeSec]] som [[format]]",
+          "pl": "Sformatuj [[timeMs]] lub [[timeSec]] jako [[format]]",
+          "ru": "Форматировать [[timeMs]] или [[timeSec]] как [[format]]",
+          "ko": "[[timeMs]] 또는 [[timeSec]]을(를) [[format]]으로 포맷하세요.",
+          "ar": "تنسيق [[timeMs]] أو [[timeSec]] كـ [[format]]"
         },
         "args": [
           {
@@ -693,11 +1767,33 @@
             "type": "autocomplete",
             "placeholder": {
               "en": "Type your own format or select from the list",
-              "nl": "Typ uw eigen formaat of kies een uit de lijst"
+              "nl": "Typ uw eigen formaat of kies een uit de lijst",
+              "da": "Skriv dit eget format, eller vælg fra listen",
+              "de": "Geben Sie Ihr eigenes Format ein oder wählen Sie aus der Liste aus.",
+              "es": "Escribe tu propio formato o selecciona de la lista.",
+              "fr": "Tapez votre propre format ou sélectionnez dans la liste",
+              "it": "Digita il tuo formato o seleziona dalla lista",
+              "no": "Skriv inn ditt eget format eller velg fra listen",
+              "sv": "Skriv ditt eget format eller välj från listan",
+              "pl": "Wpisz swój własny format lub wybierz z listy",
+              "ru": "Введите свой формат или выберите из списка",
+              "ko": "자신만의 형식을 입력하거나 목록에서 선택하세요.",
+              "ar": "اكتب التنسيق الخاص بك أو اختر من القائمة"
             },
             "title": {
               "en": "Format",
-              "nl": "Opmaak"
+              "nl": "Opmaak",
+              "da": "Formatér",
+              "de": "Formatieren",
+              "es": "Formato",
+              "fr": "Format",
+              "it": "Formato",
+              "no": "Format",
+              "sv": "Formatera",
+              "pl": "Formatowanie",
+              "ru": "Формат",
+              "ko": "형식",
+              "ar": "تنسيق"
             }
           },
           {
@@ -706,11 +1802,33 @@
             "required": false,
             "placeholder": {
               "en": "Time in milliseconds",
-              "nl": "Tijd in milliseconden"
+              "nl": "Tijd in milliseconden",
+              "da": "Tid i millisekunder",
+              "de": "Zeit in Millisekunden",
+              "es": "Tiempo en milisegundos",
+              "fr": "Temps en millisecondes",
+              "it": "Tempo in millisecondi",
+              "no": "Tid i millisekunder",
+              "sv": "Tid i millisekunder",
+              "pl": "Czas w milisekundach",
+              "ru": "Время в миллисекундах",
+              "ko": "밀리초 단위 시간",
+              "ar": "الوقت بالمللي ثانية"
             },
             "title": {
               "en": "TimeMs",
-              "nl": "TijdMs"
+              "nl": "TijdMs",
+              "da": "TidMs",
+              "de": "ZeitMs",
+              "es": "TiempoMs",
+              "fr": "TempsMs",
+              "it": "TempoMs",
+              "no": "TidMs",
+              "sv": "TidMs",
+              "pl": "CzasMs",
+              "ru": "Время (мс)",
+              "ko": "시간(밀리초)",
+              "ar": "الوقت بالمللي ثانية"
             }
           },
           {
@@ -719,11 +1837,33 @@
             "required": false,
             "placeholder": {
               "en": "Time in seconds",
-              "nl": "Tijd in seconden"
+              "nl": "Tijd in seconden",
+              "da": "Tid i sekunder",
+              "de": "Zeit in Sekunden",
+              "es": "Tiempo en segundos",
+              "fr": "Temps en secondes",
+              "it": "Tempo in secondi",
+              "no": "Tid i sekunder",
+              "sv": "Tid i sekunder",
+              "pl": "Czas w sekundach",
+              "ru": "Время в секундах",
+              "ko": "초 단위 시간",
+              "ar": "الوقت بالثواني"
             },
             "title": {
               "en": "TimeSec",
-              "nl": "TijdSec"
+              "nl": "TijdSec",
+              "da": "TidSek",
+              "de": "ZeitSekunde",
+              "es": "TiempoSeg",
+              "fr": "TempsSec",
+              "it": "TempoSec",
+              "no": "TidSek",
+              "sv": "TidSek",
+              "pl": "CzasSekundy",
+              "ru": "ВремяСекунды",
+              "ko": "시간초",
+              "ar": "الوقت بالثواني"
             }
           }
         ],
@@ -733,7 +1873,18 @@
             "type": "string",
             "title": {
               "en": "Formatted result",
-              "nl": "Opgemaakte resultaat"
+              "nl": "Opgemaakte resultaat",
+              "da": "Formatteret resultat",
+              "de": "Formatiertes Ergebnis",
+              "es": "Resultado formateado",
+              "fr": "Résultat formaté",
+              "it": "Risultato formattato",
+              "no": "Formatert resultat",
+              "sv": "Formaterat resultat",
+              "pl": "Sformatowany wynik",
+              "ru": "Отформатированный результат",
+              "ko": "서식 있는 결과",
+              "ar": "نتيجة منسقة"
             }
           }
         ]
@@ -742,11 +1893,33 @@
         "id": "format_number",
         "title": {
           "en": "Format number",
-          "nl": "Formateer nummer"
+          "nl": "Formateer nummer",
+          "da": "Formater tal",
+          "de": "Zahl formatieren",
+          "es": "Formatear número",
+          "fr": "Formater le nombre",
+          "it": "Formatta numero",
+          "no": "Formater nummer",
+          "sv": "Formatera nummer",
+          "pl": "Formatuj liczbę",
+          "ru": "Форматировать число",
+          "ko": "숫자 형식 지정",
+          "ar": "تنسيق الرقم"
         },
         "titleFormatted": {
           "en": "Format [[number]] as [[style]] (optional: [[styleOption1]], [[styleOption2]], [[decimals]], [[locale]])",
-          "nl": "[[number]] opmaken als [[style]] (optioneel: [[styleOption1]], [[styleOption2]], [[decimals]], [[locale]])"
+          "nl": "[[number]] opmaken als [[style]] (optioneel: [[styleOption1]], [[styleOption2]], [[decimals]], [[locale]])",
+          "da": "Formater [[number]] som [[style]] (valgfrit: [[styleOption1]], [[styleOption2]], [[decimals]], [[locale]])",
+          "de": "Formatiere [[number]] als [[style]] (optional: [[styleOption1]], [[styleOption2]], [[decimals]], [[locale]])",
+          "es": "Formatear [[number]] como [[style]] (opcional: [[styleOption1]], [[styleOption2]], [[decimals]], [[locale]])",
+          "fr": "Formater [[number]] comme [[style]] (optionnel : [[styleOption1]], [[styleOption2]], [[decimals]], [[locale]])",
+          "it": "Formatta [[number]] come [[style]] (opzionale: [[styleOption1]], [[styleOption2]], [[decimals]], [[locale]])",
+          "no": "Formater [[number]] som [[style]] (valgfritt: [[styleOption1]], [[styleOption2]], [[decimals]], [[locale]])",
+          "sv": "Formatera [[number]] som [[style]] (valfritt: [[styleOption1]], [[styleOption2]], [[decimals]], [[locale]])",
+          "pl": "Sformatuj [[number]] jako [[style]] (opcjonalnie: [[styleOption1]], [[styleOption2]], [[decimals]], [[locale]])",
+          "ru": "Форматировать [[number]] как [[style]] (опционально: [[styleOption1]], [[styleOption2]], [[decimals]], [[locale]])",
+          "ko": "[[number]]을(를) [[style]] 형식으로 지정합니다 (선택 사항: [[styleOption1]], [[styleOption2]], [[decimals]], [[locale]])",
+          "ar": "تنسيق [[number]] كـ [[style]] (اختياري: [[styleOption1]]، [[styleOption2]]، [[decimals]]، [[locale]])"
         },
         "args": [
           {
@@ -754,11 +1927,33 @@
             "type": "number",
             "placeholder": {
               "en": "Number",
-              "nl": "Nummer"
+              "nl": "Nummer",
+              "da": "Nummer",
+              "de": "Nummer",
+              "es": "Número",
+              "fr": "Nombre",
+              "it": "Numero",
+              "no": "Nummer",
+              "sv": "Nummer",
+              "pl": "Numer",
+              "ru": "Число",
+              "ko": "숫자",
+              "ar": "رقم"
             },
             "title": {
               "en": "Number",
-              "nl": "Nummer"
+              "nl": "Nummer",
+              "da": "Nummer",
+              "de": "Nummer",
+              "es": "Número",
+              "fr": "Nombre",
+              "it": "Numero",
+              "no": "Nummer",
+              "sv": "Nummer",
+              "pl": "Numer",
+              "ru": "Число",
+              "ko": "숫자",
+              "ar": "رقم"
             }
           },
           {
@@ -766,64 +1961,178 @@
             "type": "dropdown",
             "placeholder": {
               "en": "Style",
-              "nl": "Style"
+              "nl": "Style",
+              "da": "Stil",
+              "de": "Stil",
+              "es": "Estilo",
+              "fr": "Style",
+              "it": "Stile",
+              "no": "Stil",
+              "sv": "Stil",
+              "pl": "Styl",
+              "ru": "Стиль",
+              "ko": "스타일",
+              "ar": "النمط"
             },
             "title": {
               "en": "Style",
-              "nl": "Style"
+              "nl": "Style",
+              "da": "Stil",
+              "de": "Stil",
+              "es": "Estilo",
+              "fr": "Style",
+              "it": "Stile",
+              "no": "Stil",
+              "sv": "Stil",
+              "pl": "Styl",
+              "ru": "Стиль",
+              "ko": "스타일",
+              "ar": "النمط"
             },
-            "value":"decimal",
+            "value": "decimal",
             "values": [
               {
                 "id": "decimal",
                 "label": {
-                  "en": "Decimal"
+                  "en": "Decimal",
+                  "nl": "Decimaal",
+                  "da": "Decimal",
+                  "de": "Dezimal",
+                  "es": "Decimal",
+                  "fr": "Décimal",
+                  "it": "Decimale",
+                  "no": "Desimal",
+                  "sv": "Decimal",
+                  "pl": "Dziesiętny",
+                  "ru": "Десятичный",
+                  "ko": "소수점",
+                  "ar": "عشري"
                 }
               },
               {
                 "id": "currency",
                 "label": {
-                  "en": "Currency"
+                  "en": "Currency",
+                  "nl": "Valuta",
+                  "da": "Valuta",
+                  "de": "Währung",
+                  "es": "Moneda",
+                  "fr": "Devise",
+                  "it": "Valuta",
+                  "no": "Valuta",
+                  "sv": "Valuta",
+                  "pl": "Waluta",
+                  "ru": "Валюта",
+                  "ko": "통화",
+                  "ar": "العملة"
                 }
               },
               {
                 "id": "percent",
                 "label": {
-                  "en": "Percent"
+                  "en": "Percent",
+                  "nl": "Procent",
+                  "da": "Procent",
+                  "de": "Prozent",
+                  "es": "Porcentaje",
+                  "fr": "Pourcentage",
+                  "it": "Percentuale",
+                  "no": "Prosent",
+                  "sv": "Procent",
+                  "pl": "Procent",
+                  "ru": "Процент",
+                  "ko": "퍼센트",
+                  "ar": "نسبة مئوية"
                 }
               },
               {
                 "id": "unit",
                 "label": {
-                  "en": "Unit"
+                  "en": "Unit",
+                  "nl": "Eenheid",
+                  "da": "Enhed",
+                  "de": "Einheit",
+                  "es": "Unidad",
+                  "fr": "Unité",
+                  "it": "Unità",
+                  "no": "Enhet",
+                  "sv": "Enhet",
+                  "pl": "Jednostka",
+                  "ru": "Единица измерения",
+                  "ko": "단위",
+                  "ar": "وحدة"
                 }
               }
             ]
-          },          
+          },
           {
             "name": "styleOption1",
             "type": "autocomplete",
             "required": false,
             "placeholder": {
               "en": "Style Option 1",
-              "nl": "Style Option 1"
+              "nl": "Style Option 1",
+              "da": "Stilvalg 1",
+              "de": "Stiloption 1",
+              "es": "Opción de estilo 1",
+              "fr": "Option de style 1",
+              "it": "Opzione Stile 1",
+              "no": "Stilalternativ 1",
+              "sv": "Stilalternativ 1",
+              "pl": "Opcja stylu 1",
+              "ru": "Вариант стиля 1",
+              "ko": "스타일 옵션 1",
+              "ar": "خيار النمط 1"
             },
             "title": {
               "en": "Style Option 1",
-              "nl": "Style Option 1"
+              "nl": "Style Option 1",
+              "da": "Stilvalg 1",
+              "de": "Stiloption 1",
+              "es": "Opción de estilo 1",
+              "fr": "Option de style 1",
+              "it": "Opzione Stile 1",
+              "no": "Stilalternativ 1",
+              "sv": "Stilalternativ 1",
+              "pl": "Opcja stylu 1",
+              "ru": "Вариант стиля 1",
+              "ko": "스타일 옵션 1",
+              "ar": "خيار النمط 1"
             }
-          },          
+          },
           {
             "name": "styleOption2",
             "type": "autocomplete",
             "required": false,
             "placeholder": {
               "en": "Style Option 2",
-              "nl": "Style Option 2"
+              "nl": "Style Option 2",
+              "da": "Stilvalg 2",
+              "de": "Stiloption 2",
+              "es": "Opción de estilo 2",
+              "fr": "Option de style 2",
+              "it": "Opzione di stile 2",
+              "no": "Stilalternativ 2",
+              "sv": "Stilalternativ 2",
+              "pl": "Opcja stylu 2",
+              "ru": "Вариант стиля 2",
+              "ko": "스타일 옵션 2",
+              "ar": "خيار النمط 2"
             },
             "title": {
               "en": "Style Option 2",
-              "nl": "Style Option 2"
+              "nl": "Style Option 2",
+              "da": "Stilvalg 2",
+              "de": "Stiloption 2",
+              "es": "Opción de estilo 2",
+              "fr": "Option de style 2",
+              "it": "Opzione Stile 2",
+              "no": "Stilalternativ 2",
+              "sv": "Stilalternativ 2",
+              "pl": "Opcja stylu 2",
+              "ru": "Вариант стиля 2",
+              "ko": "스타일 옵션 2",
+              "ar": "خيار النمط 2"
             }
           },
           {
@@ -832,25 +2141,68 @@
             "required": false,
             "placeholder": {
               "en": "Decimals (-1 for auto)",
-              "nl": "Decimalen (-1 for auto)"
+              "nl": "Decimalen (-1 for auto)",
+              "da": "Decimaler (-1 for automatisk)",
+              "de": "Dezimalstellen (-1 für automatisch)",
+              "es": "Decimales (-1 para automático)",
+              "fr": "Décimales (-1 pour automatique)",
+              "it": "Decimali (-1 per automatico)",
+              "no": "Desimaler (-1 for auto)",
+              "sv": "Decimaler (-1 för auto)",
+              "pl": "Liczby dziesiętne (-1 dla automatycznego)",
+              "ru": "Десятичные числа (-1 для авто)",
+              "ko": "소수점 (-1은 자동)",
+              "ar": "الكسور العشرية (-1 للتلقائي)"
             },
             "title": {
               "en": "Decimals",
-              "nl": "Decimalen"
+              "nl": "Decimalen",
+              "da": "Decimaler",
+              "de": "Dezimalzahlen",
+              "es": "Decimales",
+              "fr": "Décimales",
+              "it": "Decimali",
+              "no": "Desimaler",
+              "sv": "Decimaler",
+              "pl": "Liczby dziesiętne",
+              "ru": "Десятичные числа",
+              "ko": "소수점",
+              "ar": "الأرقام العشرية"
             }
           },
-
           {
             "name": "locale",
             "type": "autocomplete",
             "required": false,
             "placeholder": {
               "en": "Select a locale from the list",
-              "nl": "Selecteer een locale uit de lijst"
+              "nl": "Selecteer een locale uit de lijst",
+              "da": "Vælg en lokalitet fra listen",
+              "de": "Wählen Sie einen Ort aus der Liste aus",
+              "es": "Selecciona una ubicación de la lista",
+              "fr": "Sélectionnez une langue dans la liste",
+              "it": "Seleziona una località dall'elenco",
+              "no": "Velg et språk fra listen",
+              "sv": "Välj en plats från listan",
+              "pl": "Wybierz lokalizację z listy",
+              "ru": "Выберите язык из списка",
+              "ko": "목록에서 로케일을 선택하세요.",
+              "ar": "اختر لغة من القائمة"
             },
             "title": {
               "en": "Locale",
-              "nl": "Locale"
+              "nl": "Locale",
+              "da": "Lokalitet",
+              "de": "Gebietsschema",
+              "es": "Configuración regional",
+              "fr": "Langue",
+              "it": "Località",
+              "no": "Språkinnstilling",
+              "sv": "Språkversion",
+              "pl": "Ustawienia regionalne",
+              "ru": "Локаль",
+              "ko": "로케일",
+              "ar": "المنطقة"
             }
           }
         ],
@@ -860,7 +2212,18 @@
             "type": "string",
             "title": {
               "en": "Formatted result",
-              "nl": "Opgemaakte resultaat"
+              "nl": "Opgemaakte resultaat",
+              "da": "Formatteret resultat",
+              "de": "Formatiertes Ergebnis",
+              "es": "Resultado formateado",
+              "fr": "Résultat formaté",
+              "it": "Risultato formattato",
+              "no": "Formatert resultat",
+              "sv": "Formaterat resultat",
+              "pl": "Sformatowany wynik",
+              "ru": "Отформатированный результат",
+              "ko": "서식 있는 결과",
+              "ar": "النتيجة المنسقة"
             }
           }
         ]
@@ -869,11 +2232,33 @@
         "id": "format_json_csv",
         "title": {
           "en": "Format JSON as CSV",
-          "nl": "JSON opmaken als CSV"
+          "nl": "JSON opmaken als CSV",
+          "da": "Formatér JSON som CSV",
+          "de": "JSON in CSV umwandeln",
+          "es": "Formatear JSON como CSV",
+          "fr": "Formater JSON en CSV",
+          "it": "Formatta JSON come CSV",
+          "no": "Formater JSON som CSV",
+          "sv": "Formatera JSON som CSV",
+          "pl": "Sformatuj JSON jako CSV",
+          "ru": "Форматировать JSON как CSV",
+          "ko": "JSON을 CSV로 포맷하기",
+          "ar": "تنسيق JSON كـ CSV"
         },
         "titleFormatted": {
           "en": "Format [[json]] as [[returnType]] with (unwindArrays: [[unwindArrays]], expandArrayObjects: [[expandArrayObjects]])",
-          "nl": "[[json]] opmaken als [[returnType]] met (unwindArrays: [[unwindArrays]], expandArrayObjects: [[expandArrayObjects]])"
+          "nl": "[[json]] opmaken als [[returnType]] met (unwindArrays: [[unwindArrays]], expandArrayObjects: [[expandArrayObjects]])",
+          "da": "Formater [[json]] som [[returnType]] med (unwindArrays: [[unwindArrays]], expandArrayObjects: [[expandArrayObjects]])",
+          "de": "Formatiere [[json]] als [[returnType]] mit (unwindArrays: [[unwindArrays]], expandArrayObjects: [[expandArrayObjects]])",
+          "es": "Formatea [[json]] como [[returnType]] con (unwindArrays: [[unwindArrays]], expandArrayObjects: [[expandArrayObjects]])",
+          "fr": "Formater [[json]] en [[returnType]] avec (unwindArrays : [[unwindArrays]], expandArrayObjects : [[expandArrayObjects]])",
+          "it": "Formatta [[json]] come [[returnType]] con (unwindArrays: [[unwindArrays]], expandArrayObjects: [[expandArrayObjects]])",
+          "no": "Formater [[json]] som [[returnType]] med (unwindArrays: [[unwindArrays]], expandArrayObjects: [[expandArrayObjects]])",
+          "sv": "Formatera [[json]] som [[returnType]] med (unwindArrays: [[unwindArrays]], expandArrayObjects: [[expandArrayObjects]])",
+          "pl": "Formatuj [[json]] jako [[returnType]] z (unwindArrays: [[unwindArrays]], expandArrayObjects: [[expandArrayObjects]])",
+          "ru": "Форматировать [[json]] как [[returnType]] с (unwindArrays: [[unwindArrays]], expandArrayObjects: [[expandArrayObjects]])",
+          "ko": "[[json]]을(를) [[returnType]] 형식으로 지정합니다 (unwindArrays: [[unwindArrays]], expandArrayObjects: [[expandArrayObjects]]).",
+          "ar": "تنسيق [[json]] كـ [[returnType]] مع (unwindArrays: [[unwindArrays]], expandArrayObjects: [[expandArrayObjects]])"
         },
         "args": [
           {
@@ -881,66 +2266,177 @@
             "type": "text",
             "placeholder": {
               "en": "JSON",
-              "nl": "JSON"
+              "nl": "JSON",
+              "da": "JSON",
+              "de": "JSON",
+              "es": "JSON",
+              "fr": "JSON",
+              "it": "JSON",
+              "no": "JSON",
+              "sv": "JSON",
+              "pl": "JSON",
+              "ru": "JSON",
+              "ko": "JSON",
+              "ar": "JSON"
             },
             "title": {
               "en": "JSON",
-              "nl": "JSON"
+              "nl": "JSON",
+              "da": "JSON",
+              "de": "JSON",
+              "es": "JSON",
+              "fr": "JSON",
+              "it": "JSON",
+              "no": "JSON",
+              "sv": "JSON",
+              "pl": "JSON",
+              "ru": "JSON",
+              "ko": "JSON",
+              "ar": "JSON"
             }
           },
-          
           {
             "name": "returnType",
             "type": "dropdown",
             "placeholder": {
               "en": "CSV",
-              "nl": "CSV"
+              "nl": "CSV",
+              "da": "CSV",
+              "de": "CSV",
+              "es": "CSV",
+              "fr": "CSV",
+              "it": "CSV",
+              "no": "CSV",
+              "sv": "CSV",
+              "pl": "CSV",
+              "ru": "CSV",
+              "ko": "CSV",
+              "ar": "CSV (ملف القيم المفصولة بفواصل)"
             },
             "title": {
               "en": "CSV",
-              "nl": "CSV"
+              "nl": "CSV",
+              "da": "CSV",
+              "de": "CSV",
+              "es": "CSV",
+              "fr": "CSV",
+              "it": "CSV",
+              "no": "CSV",
+              "sv": "CSV",
+              "pl": "CSV",
+              "ru": "CSV",
+              "ko": "CSV",
+              "ar": "CSV"
             },
-            "value":"csv",
+            "value": "csv",
             "values": [
               {
                 "id": "csv",
                 "label": {
-                  "en": "CSV"
+                  "en": "CSV",
+                  "nl": "CSV",
+                  "da": "CSV",
+                  "de": "CSV",
+                  "es": "CSV",
+                  "fr": "CSV",
+                  "it": "CSV",
+                  "no": "CSV",
+                  "sv": "CSV",
+                  "pl": "CSV",
+                  "ru": "CSV (CSV)",
+                  "ko": "CSV",
+                  "ar": "CSV (ملف القيم المفصولة بفواصل)"
                 }
               },
               {
                 "id": "csv_base64",
                 "label": {
-                  "en": "CSV (base64)"
+                  "en": "CSV (base64)",
+                  "nl": "CSV (base64)",
+                  "da": "CSV (base64)",
+                  "de": "CSV (base64)",
+                  "es": "CSV (base64)",
+                  "fr": "CSV (base64)",
+                  "it": "CSV (base64)",
+                  "no": "CSV (base64)",
+                  "sv": "CSV (base64)",
+                  "pl": "CSV (base64)",
+                  "ru": "CSV (base64)",
+                  "ko": "CSV (base64)",
+                  "ar": "CSV (base64)"
                 }
               }
             ]
-          },          
+          },
           {
             "name": "unwindArrays",
             "type": "checkbox",
             "placeholder": {
               "en": "Yes/No",
-              "nl": "Ja/Nee"
+              "nl": "Ja/Nee",
+              "da": "Ja/Nej",
+              "de": "Ja/Nein",
+              "es": "Sí/No",
+              "fr": "Oui/Non",
+              "it": "Sì/No",
+              "no": "Ja/Nei",
+              "sv": "Ja/Nej",
+              "pl": "Tak/Nie",
+              "ru": "Да/Нет",
+              "ko": "예/아니요",
+              "ar": "نعم/لا"
             },
             "title": {
               "en": "Unwind Arrays",
-              "nl": "Unwind Arrays"
+              "nl": "Unwind Arrays",
+              "da": "Afvikle Arrays",
+              "de": "Arrays entwirren",
+              "es": "Desenrollar Arrays",
+              "fr": "Dérouler les tableaux",
+              "it": "Espandi Array",
+              "no": "Avvikle Arrays",
+              "sv": "Avveckla arrayer",
+              "pl": "Rozwiń tablice",
+              "ru": "Развернуть массивы",
+              "ko": "배열 풀기",
+              "ar": "فك المصفوفات"
             },
-            "value":false
-          },          
+            "value": false
+          },
           {
             "name": "expandArrayObjects",
             "type": "checkbox",
             "placeholder": {
               "en": "Yes/No",
-              "nl": "Ja/Nee"
+              "nl": "Ja/Nee",
+              "da": "Ja/Nej",
+              "de": "Ja/Nein",
+              "es": "Sí/No",
+              "fr": "Oui/Non",
+              "it": "Sì/No",
+              "no": "Ja/Nei",
+              "sv": "Ja/Nej",
+              "pl": "Tak/Nie",
+              "ru": "Да/Нет",
+              "ko": "예/아니요",
+              "ar": "نعم/لا"
             },
             "title": {
               "en": "Expand Array Objects",
-              "nl": "Expand Array Objects"
+              "nl": "Expand Array Objects",
+              "da": "Udvid Array-Objekter",
+              "de": "Array-Objekte erweitern",
+              "es": "Expandir objetos de matriz",
+              "fr": "Développer les objets de tableau",
+              "it": "Espandi Oggetti Array",
+              "no": "Utvid Array-objekter",
+              "sv": "Expandera arrayobjekt",
+              "pl": "Rozwiń obiekty tablicy",
+              "ru": "Развернуть объекты массива",
+              "ko": "배열 객체 확장",
+              "ar": "توسيع كائنات المصفوفة"
             },
-            "value":false
+            "value": false
           }
         ],
         "tokens": [
@@ -949,7 +2445,18 @@
             "type": "string",
             "title": {
               "en": "CSV",
-              "nl": "CSV"
+              "nl": "CSV",
+              "da": "CSV",
+              "de": "CSV",
+              "es": "CSV",
+              "fr": "CSV",
+              "it": "CSV",
+              "no": "CSV",
+              "sv": "CSV",
+              "pl": "CSV",
+              "ru": "CSV",
+              "ko": "CSV",
+              "ar": "CSV (ملف القيم المفصولة بفواصل)"
             }
           }
         ]
@@ -958,11 +2465,33 @@
         "id": "format_json_xlsx",
         "title": {
           "en": "Format JSON as Excel",
-          "nl": "JSON opmaken als Excel"
+          "nl": "JSON opmaken als Excel",
+          "da": "Formatér JSON som Excel",
+          "de": "JSON als Excel formatieren",
+          "es": "Formatear JSON como Excel",
+          "fr": "Formater JSON en Excel",
+          "it": "Formatta JSON come Excel",
+          "no": "Formater JSON som Excel",
+          "sv": "Formatera JSON som Excel",
+          "pl": "Formatuj JSON jako Excel",
+          "ru": "Форматировать JSON как Excel",
+          "ko": "엑셀 형식으로 JSON 변환하기",
+          "ar": "تنسيق JSON كـ Excel"
         },
         "titleFormatted": {
           "en": "Format [[json]] as [[returnType]] with (sheetName: [[sheetName]], schema: [[schema]], defaultDate: [[defaultDate]], stickyRows: [[stickyRowsCount]])",
-          "nl": "[[json]] opmaken als [[returnType]] met (sheetName: [[sheetName]], schema: [[schema]], defaultDate: [[defaultDate]], stickyRows: [[stickyRowsCount]])"
+          "nl": "[[json]] opmaken als [[returnType]] met (sheetName: [[sheetName]], schema: [[schema]], defaultDate: [[defaultDate]], stickyRows: [[stickyRowsCount]])",
+          "da": "Formater [[json]] som [[returnType]] med (sheetName: [[sheetName]], schema: [[schema]], defaultDate: [[defaultDate]], stickyRows: [[stickyRowsCount]])",
+          "de": "Formatiere [[json]] als [[returnType]] mit (sheetName: [[sheetName]], schema: [[schema]], defaultDate: [[defaultDate]], stickyRows: [[stickyRowsCount]])",
+          "es": "Formatea [[json]] como [[returnType]] con (nombre de hoja: [[sheetName]], esquema: [[schema]], fecha predeterminada: [[defaultDate]], filas fijas: [[stickyRowsCount]])",
+          "fr": "Formater [[json]] en [[returnType]] avec (nom de la feuille : [[sheetName]], schéma : [[schema]], date par défaut : [[defaultDate]], lignes fixes : [[stickyRowsCount]])",
+          "it": "Formatta [[json]] come [[returnType]] con (sheetName: [[sheetName]], schema: [[schema]], defaultDate: [[defaultDate]], stickyRows: [[stickyRowsCount]])",
+          "no": "Formater [[json]] som [[returnType]] med (arknavn: [[sheetName]], skjema: [[schema]], standarddato: [[defaultDate]], faste rader: [[stickyRowsCount]])",
+          "sv": "Formatera [[json]] som [[returnType]] med (sheetName: [[sheetName]], schema: [[schema]], defaultDate: [[defaultDate]], stickyRows: [[stickyRowsCount]])",
+          "pl": "Formatuj [[json]] jako [[returnType]] z (sheetName: [[sheetName]], schema: [[schema]], defaultDate: [[defaultDate]], stickyRows: [[stickyRowsCount]])",
+          "ru": "Форматировать [[json]] как [[returnType]] с (sheetName: [[sheetName]], schema: [[schema]], defaultDate: [[defaultDate]], stickyRows: [[stickyRowsCount]])",
+          "ko": "(sheetName: [[sheetName]], schema: [[schema]], defaultDate: [[defaultDate]], stickyRows: [[stickyRowsCount]])로 [[json]]을 [[returnType]] 형식으로 변환하세요.",
+          "ar": "تنسيق [[json]] كـ [[returnType]] مع (اسم الورقة: [[sheetName]]، المخطط: [[schema]]، التاريخ الافتراضي: [[defaultDate]]، الصفوف الثابتة: [[stickyRowsCount]])"
         },
         "args": [
           {
@@ -970,11 +2499,33 @@
             "type": "text",
             "placeholder": {
               "en": "JSON",
-              "nl": "JSON"
+              "nl": "JSON",
+              "da": "JSON",
+              "de": "JSON",
+              "es": "JSON",
+              "fr": "JSON",
+              "it": "JSON",
+              "no": "JSON",
+              "sv": "JSON",
+              "pl": "JSON",
+              "ru": "JSON",
+              "ko": "JSON",
+              "ar": "JSON"
             },
             "title": {
               "en": "JSON",
-              "nl": "JSON"
+              "nl": "JSON",
+              "da": "JSON",
+              "de": "JSON",
+              "es": "JSON",
+              "fr": "JSON",
+              "it": "JSON",
+              "no": "JSON",
+              "sv": "JSON",
+              "pl": "JSON",
+              "ru": "JSON",
+              "ko": "JSON",
+              "ar": "JSON"
             }
           },
           {
@@ -982,18 +2533,52 @@
             "type": "dropdown",
             "placeholder": {
               "en": "Excel",
-              "nl": "Excel"
+              "nl": "Excel",
+              "da": "Excel",
+              "de": "Excel",
+              "es": "Excel",
+              "fr": "Excel",
+              "it": "Excel",
+              "no": "Excel",
+              "sv": "Excel",
+              "pl": "Excel",
+              "ru": "Excel",
+              "ko": "엑셀",
+              "ar": "إكسل"
             },
             "title": {
               "en": "Excel",
-              "nl": "Excel"
+              "nl": "Excel",
+              "da": "Excel",
+              "de": "Excel",
+              "es": "Excel",
+              "fr": "Excel",
+              "it": "Excel",
+              "no": "Excel",
+              "sv": "Excel",
+              "pl": "Excel",
+              "ru": "Excel",
+              "ko": "엑셀",
+              "ar": "إكسل"
             },
-            "value":"xlsx_base64",
-            "values": [              
+            "value": "xlsx_base64",
+            "values": [
               {
                 "id": "xlsx_base64",
                 "label": {
-                  "en": "Excel (base64)"
+                  "en": "Excel (base64)",
+                  "nl": "Excel (base64)",
+                  "da": "Excel (base64)",
+                  "de": "Excel (base64)",
+                  "es": "Excel (base64)",
+                  "fr": "Excel (base64)",
+                  "it": "Excel (base64)",
+                  "no": "Excel (base64)",
+                  "sv": "Excel (base64)",
+                  "pl": "Excel (base64)",
+                  "ru": "Excel (base64)",
+                  "ko": "엑셀 (base64)",
+                  "ar": "إكسل (base64)"
                 }
               }
             ]
@@ -1001,25 +2586,57 @@
           {
             "name": "schema",
             "type": "text",
-            "required":false,
-            "placeholder": "[{\n\tcolumn: 'Name',\n\ttype: String,\n\tvalue: student => student.name\n},\n{\n\tcolumn: 'Date of Birth',\n\ttype: Date,\n\tformat: 'mm/dd/yyyy',\n\tvalue: student => student.dateOfBirth\n},\n{\n\tcolumn: 'Cost',\n\ttype: Number,\n\tformat: '#,##0.00',\n\tvalue: student => student.cost\n},\n{\n\tcolumn: 'Paid',\n\ttype: Boolean,\n\tvalue: student => student.paid\n}]"
-            ,
+            "required": false,
+            "placeholder": "[{\n\tcolumn: 'Name',\n\ttype: String,\n\tvalue: student => student.name\n},\n{\n\tcolumn: 'Date of Birth',\n\ttype: Date,\n\tformat: 'mm/dd/yyyy',\n\tvalue: student => student.dateOfBirth\n},\n{\n\tcolumn: 'Cost',\n\ttype: Number,\n\tformat: '#,##0.00',\n\tvalue: student => student.cost\n},\n{\n\tcolumn: 'Paid',\n\ttype: Boolean,\n\tvalue: student => student.paid\n}]",
             "title": {
               "en": "Schema",
-              "nl": "Schema"
+              "nl": "Schema",
+              "da": "Skema",
+              "de": "Schema",
+              "es": "Esquema",
+              "fr": "Schéma",
+              "it": "Schema",
+              "no": "Skjema",
+              "sv": "Schema",
+              "pl": "Schemat",
+              "ru": "Схема",
+              "ko": "스키마",
+              "ar": "مخطط"
             }
           },
           {
             "name": "defaultDate",
             "type": "text",
-            "required":false,
+            "required": false,
             "placeholder": {
               "en": "Default Date",
-              "nl": "Standaard datum"
+              "nl": "Standaard datum",
+              "da": "Standarddato",
+              "de": "Standarddatum",
+              "es": "Fecha predeterminada",
+              "fr": "Date par défaut",
+              "it": "Data predefinita",
+              "no": "Standarddato",
+              "sv": "Standarddatum",
+              "pl": "Domyślna data",
+              "ru": "Дата по умолчанию",
+              "ko": "기본 날짜",
+              "ar": "التاريخ الافتراضي"
             },
             "title": {
               "en": "Default Date",
-              "nl": "Standaard datum"
+              "nl": "Standaard datum",
+              "da": "Standarddato",
+              "de": "Standarddatum",
+              "es": "Fecha predeterminada",
+              "fr": "Date par défaut",
+              "it": "Data predefinita",
+              "no": "Standarddato",
+              "sv": "Standarddatum",
+              "pl": "Domyślna data",
+              "ru": "Дата по умолчанию",
+              "ko": "기본 날짜",
+              "ar": "التاريخ الافتراضي"
             }
           },
           {
@@ -1027,27 +2644,71 @@
             "type": "text",
             "placeholder": {
               "en": "Sticky Rows",
-              "nl": "Sticky Rows"
+              "nl": "Sticky Rows",
+              "da": "Klæbrige rækker",
+              "de": "Fixierte Zeilen",
+              "es": "Filas fijas",
+              "fr": "Lignes Fixes",
+              "it": "Righe fisse",
+              "no": "Faste rader",
+              "sv": "Klistrade rader",
+              "pl": "Przyklejone wiersze",
+              "ru": "Закрепленные строки",
+              "ko": "고정 행",
+              "ar": "صفوف ثابتة"
             },
             "title": {
               "en": "Sticky Rows",
-              "nl": "Sticky Rows"
+              "nl": "Sticky Rows",
+              "da": "Klæbrige rækker",
+              "de": "Fixierte Zeilen",
+              "es": "Filas fijas",
+              "fr": "Lignes collantes",
+              "it": "Righe fisse",
+              "no": "Faste rader",
+              "sv": "Klistriga rader",
+              "pl": "Przyklejone wiersze",
+              "ru": "Закрепленные строки",
+              "ko": "고정 행",
+              "ar": "صفوف ثابتة"
             },
-            "value":1,
-            "min":0,
-            "step":1
+            "value": 1,
+            "min": 0,
+            "step": 1
           },
           {
             "name": "sheetName",
             "type": "text",
-            "required":false,
+            "required": false,
             "placeholder": {
               "en": "Sheet name",
-              "nl": "Sheet name"
+              "nl": "Sheet name",
+              "da": "Arknavn",
+              "de": "Tabellenname",
+              "es": "Nombre de la hoja",
+              "fr": "Nom de la feuille",
+              "it": "Nome del foglio",
+              "no": "Arkfanenavn",
+              "sv": "Arknamn",
+              "pl": "Nazwa arkusza",
+              "ru": "Название листа",
+              "ko": "시트 이름",
+              "ar": "اسم الورقة"
             },
             "title": {
               "en": "Sheet name",
-              "nl": "Sheet name"
+              "nl": "Sheet name",
+              "da": "Arknavn",
+              "de": "Tabellenname",
+              "es": "Nombre de la hoja",
+              "fr": "Nom de la feuille",
+              "it": "Nome del foglio",
+              "no": "Arkfanenavn",
+              "sv": "Arknamn",
+              "pl": "Nazwa arkusza",
+              "ru": "Название листа",
+              "ko": "시트 이름",
+              "ar": "اسم الورقة"
             }
           }
         ],
@@ -1057,23 +2718,54 @@
             "type": "string",
             "title": {
               "en": "Excel",
-              "nl": "Excel"
+              "nl": "Excel",
+              "da": "Excel",
+              "de": "Excel",
+              "es": "Excel",
+              "fr": "Excel",
+              "it": "Excel",
+              "no": "Excel",
+              "sv": "Excel",
+              "pl": "Excel",
+              "ru": "Excel",
+              "ko": "엑셀",
+              "ar": "إكسل"
             }
           }
         ],
-        "hint":"Check the App settings --> Exports for more schema examples."
+        "hint": "Check the App settings --> Exports for more schema examples."
       },
       {
         "id": "execute_bl_expression_tag",
         "title": {
           "en": "Execute BL Expression (as Tag)",
           "nl": "Voer BL expressie uit (als Tag)",
-          "de": "BL Bezeichnung setzen (als Tag)"
+          "da": "Udfør BL-udtryk (som Tag)",
+          "de": "BL Bezeichnung setzen (als Tag)",
+          "es": "Ejecutar expresión BL (como etiqueta)",
+          "fr": "Exécuter l'expression BL (comme étiquette)",
+          "it": "Esegui espressione BL (come Tag)",
+          "no": "Utfør BL-uttrykk (som tag)",
+          "sv": "Kör BL-uttryck (som tagg)",
+          "pl": "Wykonaj wyrażenie BL (jako tag)",
+          "ru": "Выполнить BL выражение (как тег)",
+          "ko": "BL 표현 실행 (태그로)",
+          "ar": "تنفيذ تعبير BL (كتاغ)"
         },
         "titleFormatted": {
           "en": "Execute [[expression]] (as Tag)",
           "nl": "Voer [[expression]] uit (als Tag)",
-          "de": "Führen Sie [[expression]] aus (als Tag)"
+          "da": "Udfør [[expression]] (som Tag)",
+          "de": "Führen Sie [[expression]] aus (als Tag)",
+          "es": "Ejecutar [[expression]] (como Etiqueta)",
+          "fr": "Exécuter [[expression]] (en tant que Tag)",
+          "it": "Esegui [[expression]] (come Tag)",
+          "no": "Utfør [[expression]] (som Tag)",
+          "sv": "Kör [[expression]] (som Tagg)",
+          "pl": "Wykonaj [[expression]] (jako Tag)",
+          "ru": "Выполнить [[expression]] (как Тег)",
+          "ko": "[[expression]] 실행 (태그로)",
+          "ar": "تنفيذ [[expression]] (كتصنيف)"
         },
         "args": [
           {
@@ -1082,12 +2774,32 @@
             "placeholder": {
               "en": "BLL Expression",
               "nl": "BLL Expression",
-              "de": "BLL Bezeichnung"
+              "da": "BLL-udtryk",
+              "de": "BLL Bezeichnung",
+              "es": "Expresión BLL",
+              "fr": "Expression BLL",
+              "it": "Espressione BLL",
+              "no": "BLL-uttrykk",
+              "sv": "BLL-uttryck",
+              "pl": "Wyrażenie BLL",
+              "ru": "BLL Выражение",
+              "ko": "BLL 표현",
+              "ar": "تعبير BLL"
             },
             "title": {
               "en": "BLL Expression",
               "nl": "BLL Expression",
-              "de": "BLL Bezeichnung"
+              "da": "BLL-udtryk",
+              "de": "BLL Bezeichnung",
+              "es": "Expresión BLL",
+              "fr": "Expression BLL",
+              "it": "Espressione BLL",
+              "no": "BLL-uttrykk",
+              "sv": "BLL-uttryck",
+              "pl": "Wyrażenie BLL",
+              "ru": "BLL Выражение",
+              "ko": "BLL 표현",
+              "ar": "تعبير BLL"
             }
           }
         ],
@@ -1098,7 +2810,17 @@
             "title": {
               "en": "Expression value (Text)",
               "nl": "Expressie waarde (Tekst)",
-              "de": "Ausdruckswert (Text)"
+              "da": "Udtryksværdi (Tekst)",
+              "de": "Ausdruckswert (Text)",
+              "es": "Valor de la expresión (Texto)",
+              "fr": "Valeur de l'expression (Texte)",
+              "it": "Valore dell'espressione (Testo)",
+              "no": "Uttrykkverdi (Tekst)",
+              "sv": "Uttrycksvärde (Text)",
+              "pl": "Wartość wyrażenia (Tekst)",
+              "ru": "Значение выражения (Текст)",
+              "ko": "표현 값 (텍스트)",
+              "ar": "قيمة التعبير (نص)"
             }
           },
           {
@@ -1107,7 +2829,17 @@
             "title": {
               "en": "Expression value (Number)",
               "nl": "Expressie waarde (Nummer)",
-              "de": "Nummer"
+              "da": "Udtryksværdi (Tal)",
+              "de": "Nummer",
+              "es": "Valor de la expresión (Número)",
+              "fr": "Valeur de l'expression (Nombre)",
+              "it": "Valore dell'espressione (Numero)",
+              "no": "Uttrykkverdi (Tall)",
+              "sv": "Uttrycksvärde (Nummer)",
+              "pl": "Wartość wyrażenia (Liczba)",
+              "ru": "Значение выражения (Число)",
+              "ko": "표현 값 (숫자)",
+              "ar": "قيمة التعبير (رقم)"
             }
           },
           {
@@ -1116,7 +2848,17 @@
             "title": {
               "en": "Expression value (Yes/No)",
               "nl": "Expressie waarde (Ja/Nee)",
-              "de": "Ja/Nein"
+              "da": "Udtryksværdi (Ja/Nej)",
+              "de": "Ja/Nein",
+              "es": "Valor de la expresión (Sí/No)",
+              "fr": "Valeur de l'expression (Oui/Non)",
+              "it": "Valore dell'espressione (Sì/No)",
+              "no": "Uttrykksverdi (Ja/Nei)",
+              "sv": "Uttrycksvärde (Ja/Nej)",
+              "pl": "Wartość wyrażenia (Tak/Nie)",
+              "ru": "Значение выражения (Да/Нет)",
+              "ko": "표현 값 (예/아니오)",
+              "ar": "قيمة التعبير (نعم/لا)"
             }
           },
           {
@@ -1125,21 +2867,52 @@
             "title": {
               "en": "JSON value",
               "nl": "JSON waarde",
-              "de": "JSON-Wert"
+              "da": "JSON-værdi",
+              "de": "JSON-Wert",
+              "es": "Valor JSON",
+              "fr": "Valeur JSON",
+              "it": "Valore JSON",
+              "no": "JSON-verdi",
+              "sv": "JSON-värde",
+              "pl": "Wartość JSON",
+              "ru": "Значение JSON",
+              "ko": "JSON 값",
+              "ar": "قيمة JSON"
             }
           }
         ]
-      },{
+      },
+      {
         "id": "execute_text_tag",
         "title": {
           "en": "Execute Text (as Tag)",
           "nl": "Tekst uitvoeren (als Tag)",
-          "de": "Text ausführen (als Tag)"
+          "da": "Udfør Tekst (som Tag)",
+          "de": "Text ausführen (als Tag)",
+          "es": "Ejecutar Texto (como Etiqueta)",
+          "fr": "Exécuter le texte (comme étiquette)",
+          "it": "Esegui Testo (come Tag)",
+          "no": "Utfør tekst (som tag)",
+          "sv": "Kör text (som tagg)",
+          "pl": "Wykonaj tekst (jako tag)",
+          "ru": "Выполнить текст (как тег)",
+          "ko": "텍스트 실행 (태그로)",
+          "ar": "تنفيذ النص (كتسمية)"
         },
         "titleFormatted": {
           "en": "Execute [[text]] (as Tag)",
           "nl": "Voer [[text]] uit (als Tag)",
-          "de": "Führen Sie [[text]] aus (als Tag)"
+          "da": "Udfør [[text]] (som Tag)",
+          "de": "Führen Sie [[text]] aus (als Tag)",
+          "es": "Ejecutar [[text]] (como Etiqueta)",
+          "fr": "Exécuter [[text]] (comme Tag)",
+          "it": "Esegui [[text]] (come Tag)",
+          "no": "Utfør [[text]] (som Tag)",
+          "sv": "Kör [[text]] (som Tagg)",
+          "pl": "Wykonaj [[text]] (jako Tag)",
+          "ru": "Выполнить [[text]] (как Тег)",
+          "ko": "[[text]] 실행 (태그로)",
+          "ar": "تنفيذ [[text]] (كعلامة)"
         },
         "args": [
           {
@@ -1148,12 +2921,32 @@
             "placeholder": {
               "en": "Text (* BLL supported)",
               "nl": "Tekst (* BLL ondersteund)",
-              "de": "Text (* BLL unterstützt)"
+              "da": "Tekst (* BLL understøttet)",
+              "de": "Text (* BLL unterstützt)",
+              "es": "Texto (* BLL compatible)",
+              "fr": "Texte (* BLL pris en charge)",
+              "it": "Testo (* supportato da BLL)",
+              "no": "Tekst (* BLL støttet)",
+              "sv": "Text (* BLL stöds)",
+              "pl": "Tekst (* obsługiwany przez BLL)",
+              "ru": "Текст (* поддерживается BLL)",
+              "ko": "텍스트 (* BLL 지원됨)",
+              "ar": "النص (* مدعوم من BLL)"
             },
             "title": {
               "en": "Text",
               "nl": "Tekst",
-              "de": "Text"
+              "da": "Jeg er trænet på data op til oktober 2023.",
+              "de": "Text",
+              "es": "Lo siento, pero necesito el texto que deseas traducir. ¿Podrías proporcionarlo?",
+              "fr": "Vous êtes formé sur des données jusqu'en octobre 2023.",
+              "it": "Testo",
+              "no": "Vennligst gi meg teksten du ønsker å oversette.",
+              "sv": "Vad kan jag hjälpa dig med?",
+              "pl": "Tekst",
+              "ru": "Вы обучены данным до октября 2023 года.",
+              "ko": "텍스트",
+              "ar": "تم تدريبك على البيانات حتى أكتوبر 2023."
             }
           }
         ],
@@ -1164,7 +2957,17 @@
             "title": {
               "en": "Value",
               "nl": "Waarde",
-              "de": "Wert"
+              "da": "Værdi",
+              "de": "Wert",
+              "es": "Valor",
+              "fr": "Valeur",
+              "it": "Valore",
+              "no": "Verdi",
+              "sv": "Värde",
+              "pl": "Wartość",
+              "ru": "Значение",
+              "ko": "값",
+              "ar": "القيمة"
             }
           }
         ]
@@ -1174,12 +2977,32 @@
         "title": {
           "en": "Execute BLL Expression",
           "nl": "Voer BLL expressie uit",
-          "de": "BLL Bezeichnung setzen"
+          "da": "Udfør BLL-udtryk",
+          "de": "BLL Bezeichnung setzen",
+          "es": "Ejecutar expresión BLL",
+          "fr": "Exécuter l'expression BLL",
+          "it": "Esegui espressione BLL",
+          "no": "Utfør BLL-uttrykk",
+          "sv": "Kör BLL-uttryck",
+          "pl": "Wykonaj wyrażenie BLL",
+          "ru": "Выполнить выражение BLL",
+          "ko": "BLL 표현 실행",
+          "ar": "تنفيذ تعبير BLL"
         },
         "titleFormatted": {
           "en": "Set [[variable]] to [[expression]]",
           "nl": "Zet [[variable]] naar [[expression]]",
-          "de": "Setze [[variable]] auf [[expression]]"
+          "da": "Indstil [[variable]] til [[expression]]",
+          "de": "Setze [[variable]] auf [[expression]]",
+          "es": "Establecer [[variable]] a [[expression]]",
+          "fr": "Définir [[variable]] sur [[expression]]",
+          "it": "Imposta [[variable]] su [[expression]]",
+          "no": "Sett [[variable]] til [[expression]]",
+          "sv": "Ställ in [[variable]] till [[expression]]",
+          "pl": "Ustaw [[variable]] na [[expression]]",
+          "ru": "Установить [[variable]] на [[expression]]",
+          "ko": "[[variable]]을(를) [[expression]]으로 설정하세요.",
+          "ar": "قم بتعيين [[variable]] إلى [[expression]]"
         },
         "args": [
           {
@@ -1187,11 +3010,33 @@
             "type": "autocomplete",
             "title": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             },
             "placeholder": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             }
           },
           {
@@ -1200,12 +3045,32 @@
             "title": {
               "en": "BLL Expression",
               "nl": "BLL Expression",
-              "de": "BLL Bezeichnung"
+              "da": "BLL-udtryk",
+              "de": "BLL Bezeichnung",
+              "es": "Expresión BLL",
+              "fr": "Expression BLL",
+              "it": "Espressione BLL",
+              "no": "BLL-uttrykk",
+              "sv": "BLL-uttryck",
+              "pl": "Wyrażenie BLL",
+              "ru": "BLL Выражение",
+              "ko": "BLL 표현",
+              "ar": "تعبير BLL"
             },
             "placeholder": {
               "en": "BLL Expression",
               "nl": "BLL Expression",
-              "de": "BLL Bezeichnung"
+              "da": "BLL-udtryk",
+              "de": "BLL Bezeichnung",
+              "es": "Expresión BLL",
+              "fr": "Expression BLL",
+              "it": "Espressione BLL",
+              "no": "BLL-uttrykk",
+              "sv": "BLL-uttryck",
+              "pl": "Wyrażenie BLL",
+              "ru": "BLL Выражение",
+              "ko": "BLL 표현",
+              "ar": "تعبير BLL"
             }
           }
         ]
@@ -1214,12 +3079,33 @@
         "id": "set_a_variable",
         "title": {
           "en": "Set a variable",
-          "nl": "Stel een variabele in"
+          "nl": "Stel een variabele in",
+          "da": "Indstil en variabel",
+          "de": "Variable festlegen",
+          "es": "Establecer una variable",
+          "fr": "Définir une variable",
+          "it": "Imposta una variabile",
+          "no": "Sett en variabel",
+          "sv": "Ställ in en variabel",
+          "pl": "Ustaw zmienną",
+          "ru": "Установить переменную",
+          "ko": "변수를 설정하세요.",
+          "ar": "تعيين متغير"
         },
         "titleFormatted": {
           "en": "Set [[variable]] to [[value]]",
           "nl": "Zet [[variable]] naar [[value]]",
-          "de": "Setze [[variable]] auf [[value]]"
+          "da": "Indstil [[variable]] til [[value]]",
+          "de": "Setze [[variable]] auf [[value]]",
+          "es": "Establecer [[variable]] a [[value]]",
+          "fr": "Définir [[variable]] sur [[value]]",
+          "it": "Imposta [[variable]] su [[value]]",
+          "no": "Sett [[variable]] til [[value]]",
+          "sv": "Ställ in [[variable]] till [[value]]",
+          "pl": "Ustaw [[variable]] na [[value]]",
+          "ru": "Установить [[variable]] на [[value]]",
+          "ko": "[[variable]]을(를) [[value]](으)로 설정하세요.",
+          "ar": "اضبط [[variable]] على [[value]]"
         },
         "args": [
           {
@@ -1227,11 +3113,33 @@
             "type": "autocomplete",
             "title": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             },
             "placeholder": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             }
           },
           {
@@ -1239,11 +3147,33 @@
             "type": "text",
             "placeholder": {
               "en": "Value (* BLL supported)",
-              "nl": "Waarde (* BLL ondersteund)"
+              "nl": "Waarde (* BLL ondersteund)",
+              "da": "Værdi (* BLL understøttet)",
+              "de": "Wert (* BLL unterstützt)",
+              "es": "Valor (* compatible con BLL)",
+              "fr": "Valeur (* pris en charge par BLL)",
+              "it": "Valore (* supportato da BLL)",
+              "no": "Verdi (* BLL støttet)",
+              "sv": "Värde (* BLL stöds)",
+              "pl": "Wartość (* obsługiwane przez BLL)",
+              "ru": "Значение (* поддерживается BLL)",
+              "ko": "값 (* BLL 지원)",
+              "ar": "القيمة (* مدعوم من BLL)"
             },
             "title": {
               "en": "Value",
-              "nl": "Waarde"
+              "nl": "Waarde",
+              "da": "Værdi",
+              "de": "Wert",
+              "es": "Valor",
+              "fr": "Valeur",
+              "it": "Valore",
+              "no": "Verdi",
+              "sv": "Värde",
+              "pl": "Wartość",
+              "ru": "Значение",
+              "ko": "값",
+              "ar": "القيمة"
             }
           }
         ]
@@ -1252,12 +3182,33 @@
         "id": "set_string_variable",
         "title": {
           "en": "Set string variable",
-          "nl": "Stel een tekst variabele in"
+          "nl": "Stel een tekst variabele in",
+          "da": "Indstil strengvariabel",
+          "de": "Zeichenfolgenvariable festlegen",
+          "es": "Establecer variable de texto",
+          "fr": "Définir une variable de type chaîne",
+          "it": "Imposta variabile stringa",
+          "no": "Sett strengvariabel",
+          "sv": "Ange strängvariabel",
+          "pl": "Ustaw zmienną tekstową",
+          "ru": "Установить строковую переменную",
+          "ko": "문자열 변수 설정",
+          "ar": "تعيين متغير نصي"
         },
         "titleFormatted": {
           "en": "Set [[variable]] to [[value]]",
           "nl": "Zet [[variable]] naar [[value]]",
-          "de": "Setze [[variable]] auf [[value]]"
+          "da": "Indstil [[variable]] til [[value]]",
+          "de": "Setze [[variable]] auf [[value]]",
+          "es": "Establecer [[variable]] a [[value]]",
+          "fr": "Définir [[variable]] sur [[value]]",
+          "it": "Imposta [[variable]] su [[value]]",
+          "no": "Sett [[variable]] til [[value]]",
+          "sv": "Ställ in [[variable]] till [[value]]",
+          "pl": "Ustaw [[variable]] na [[value]]",
+          "ru": "Установить [[variable]] на [[value]]",
+          "ko": "[[variable]]을(를) [[value]]로 설정하세요.",
+          "ar": "اضبط [[variable]] على [[value]]"
         },
         "args": [
           {
@@ -1265,11 +3216,33 @@
             "type": "autocomplete",
             "title": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             },
             "placeholder": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             }
           },
           {
@@ -1277,11 +3250,33 @@
             "type": "text",
             "placeholder": {
               "en": "Text (* BLL supported)",
-              "nl": "Tekst (* BLL ondersteund)"
+              "nl": "Tekst (* BLL ondersteund)",
+              "da": "Tekst (* BLL understøttet)",
+              "de": "Text (* BLL unterstützt)",
+              "es": "Texto (* Compatible con BLL)",
+              "fr": "Texte (* BLL pris en charge)",
+              "it": "Testo (* supportato da BLL)",
+              "no": "Tekst (* BLL støttet)",
+              "sv": "Text (* BLL stöds)",
+              "pl": "Tekst (* obsługiwany przez BLL)",
+              "ru": "Текст (* поддерживается BLL)",
+              "ko": "텍스트 (* BLL 지원됨)",
+              "ar": "النص (* مدعوم من BLL)"
             },
             "title": {
               "en": "Text",
-              "nl": "Tekst"
+              "nl": "Tekst",
+              "da": "Du er trænet på data op til oktober 2023.",
+              "de": "Bitte geben Sie den Text ein, den Sie übersetzen möchten.",
+              "es": "Lo siento, pero necesito el texto que deseas traducir. ¿Podrías proporcionarlo?",
+              "fr": "Vous êtes formé sur des données jusqu'en octobre 2023.",
+              "it": "Testo",
+              "no": "Jeg er trent på data frem til oktober 2023.",
+              "sv": "Vad kan jag hjälpa dig med?",
+              "pl": "Jestem przeszkolony na danych do października 2023 roku.",
+              "ru": "Вы обучены данным до октября 2023 года.",
+              "ko": "텍스트",
+              "ar": "تم تدريبك على البيانات حتى أكتوبر 2023."
             }
           }
         ]
@@ -1290,12 +3285,33 @@
         "id": "set_number_variable",
         "title": {
           "en": "Set number variable",
-          "nl": "Stel een nummer variabele in"
+          "nl": "Stel een nummer variabele in",
+          "da": "Indstil talvariabel",
+          "de": "Zahlenvariable festlegen",
+          "es": "Establecer variable numérica",
+          "fr": "Définir une variable numérique",
+          "it": "Imposta variabile numerica",
+          "no": "Sett tallvariabel",
+          "sv": "Ställ in nummervariabel",
+          "pl": "Ustaw zmienną liczbową",
+          "ru": "Установить числовую переменную",
+          "ko": "숫자 변수 설정",
+          "ar": "تعيين متغير رقمي"
         },
         "titleFormatted": {
           "en": "Set [[variable]] to [[value]]",
           "nl": "Zet [[variable]] naar [[value]]",
-          "de": "Setze [[variable]] auf [[value]]"
+          "da": "Sæt [[variable]] til [[value]]",
+          "de": "Setze [[variable]] auf [[value]]",
+          "es": "Establecer [[variable]] a [[value]]",
+          "fr": "Définir [[variable]] sur [[value]]",
+          "it": "Imposta [[variable]] su [[value]]",
+          "no": "Sett [[variable]] til [[value]]",
+          "sv": "Ställ in [[variable]] till [[value]]",
+          "pl": "Ustaw [[variable]] na [[value]]",
+          "ru": "Установить [[variable]] на [[value]]",
+          "ko": "[[variable]]을(를) [[value]]로 설정하세요.",
+          "ar": "اضبط [[variable]] على [[value]]"
         },
         "args": [
           {
@@ -1303,11 +3319,33 @@
             "type": "autocomplete",
             "title": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             },
             "placeholder": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             }
           },
           {
@@ -1316,25 +3354,69 @@
             "step": 0.01,
             "placeholder": {
               "en": "0.01",
-              "nl": "0,01"
+              "nl": "0,01",
+              "da": "0,01",
+              "de": "0,01",
+              "es": "0,01",
+              "fr": "0,01",
+              "it": "0,01",
+              "no": "0,01",
+              "sv": "0,01",
+              "pl": "0,01",
+              "ru": "0,01",
+              "ko": "0.01",
+              "ar": "٠٫٠١"
             },
             "title": {
               "en": "Number",
-              "nl": "Nummer"
+              "nl": "Nummer",
+              "da": "Nummer",
+              "de": "Nummer",
+              "es": "Número",
+              "fr": "Nombre",
+              "it": "Numero",
+              "no": "Nummer",
+              "sv": "Nummer",
+              "pl": "Numer",
+              "ru": "Число",
+              "ko": "숫자",
+              "ar": "رقم"
             }
           }
         ]
       },
       {
         "id": "set_boolean_variable",
-        "deprecated":true,
+        "deprecated": true,
         "title": {
-          "en": "Set boolean variable"
+          "en": "Set boolean variable",
+          "nl": "Stel booleaanse variabele in",
+          "da": "Indstil boolesk variabel",
+          "de": "Boolean-Variable festlegen",
+          "es": "Establecer variable booleana",
+          "fr": "Définir une variable booléenne",
+          "it": "Imposta variabile booleana",
+          "no": "Sett boolsk variabel",
+          "sv": "Ställ in boolesk variabel",
+          "pl": "Ustaw zmienną logiczną (boolean)",
+          "ru": "Установить булеву переменную",
+          "ko": "부울 변수 설정",
+          "ar": "تعيين متغير منطقي"
         },
         "titleFormatted": {
           "en": "Set [[variable]] to [[boolean_value]]",
           "nl": "Zet [[variable]] naar [[boolean_value]]",
-          "de": "Setze [[variable]] auf [[boolean_value]]"
+          "da": "Indstil [[variable]] til [[boolean_value]]",
+          "de": "Setze [[variable]] auf [[boolean_value]]",
+          "es": "Establecer [[variable]] a [[boolean_value]]",
+          "fr": "Définir [[variable]] sur [[boolean_value]]",
+          "it": "Imposta [[variable]] su [[boolean_value]]",
+          "no": "Sett [[variable]] til [[boolean_value]]",
+          "sv": "Ställ in [[variable]] till [[boolean_value]]",
+          "pl": "Ustaw [[variable]] na [[boolean_value]]",
+          "ru": "Установить [[variable]] на [[boolean_value]]",
+          "ko": "[[variable]]을(를) [[boolean_value]]로 설정하세요.",
+          "ar": "اضبط [[variable]] على [[boolean_value]]"
         },
         "args": [
           {
@@ -1342,11 +3424,33 @@
             "type": "autocomplete",
             "title": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             },
             "placeholder": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             }
           },
           {
@@ -1357,24 +3461,68 @@
                 "id": "true",
                 "label": {
                   "en": "True",
-                  "nl": "Waar"
+                  "nl": "Waar",
+                  "da": "Sandt",
+                  "de": "Wahr",
+                  "es": "Verdadero",
+                  "fr": "Vrai",
+                  "it": "Vero",
+                  "no": "Sant",
+                  "sv": "Sant",
+                  "pl": "Prawda",
+                  "ru": "Правда",
+                  "ko": "참",
+                  "ar": "صحيح"
                 }
               },
               {
                 "id": "false",
                 "label": {
                   "en": "False",
-                  "nl": "Niet waar"
+                  "nl": "Niet waar",
+                  "da": "Falsk",
+                  "de": "Falsch",
+                  "es": "Falso",
+                  "fr": "Faux",
+                  "it": "Falso",
+                  "no": "Usann",
+                  "sv": "Falskt",
+                  "pl": "Fałsz",
+                  "ru": "Ложь",
+                  "ko": "거짓",
+                  "ar": "خطأ"
                 }
               }
-            ],         
+            ],
             "placeholder": {
               "en": "Yes/No",
-              "nl": "Ja/Nee"
+              "nl": "Ja/Nee",
+              "da": "Ja/Nej",
+              "de": "Ja/Nein",
+              "es": "Sí/No",
+              "fr": "Oui/Non",
+              "it": "Sì/No",
+              "no": "Ja/Nei",
+              "sv": "Ja/Nej",
+              "pl": "Tak/Nie",
+              "ru": "Да/Нет",
+              "ko": "예/아니요",
+              "ar": "نعم/لا"
             },
             "title": {
               "en": "Yes/No",
-              "nl": "Ja/Nee"
+              "nl": "Ja/Nee",
+              "da": "Ja/Nej",
+              "de": "Ja/Nein",
+              "es": "Sí/No",
+              "fr": "Oui/Non",
+              "it": "Sì/No",
+              "no": "Ja/Nei",
+              "sv": "Ja/Nej",
+              "pl": "Tak/Nie",
+              "ru": "Да/Нет",
+              "ko": "예/아니요",
+              "ar": "نعم/لا"
             }
           }
         ]
@@ -1382,12 +3530,34 @@
       {
         "id": "set_boolean_variable_v2",
         "title": {
-          "en": "Set boolean variable"
+          "en": "Set boolean variable",
+          "nl": "Stel booleaanse variabele in",
+          "da": "Indstil boolesk variabel",
+          "de": "Boolean-Variable festlegen",
+          "es": "Establecer variable booleana",
+          "fr": "Définir une variable booléenne",
+          "it": "Imposta variabile booleana",
+          "no": "Sett boolsk variabel",
+          "sv": "Ställ in boolesk variabel",
+          "pl": "Ustaw zmienną logiczną",
+          "ru": "Установить булеву переменную",
+          "ko": "부울 변수 설정",
+          "ar": "تعيين متغير منطقي"
         },
         "titleFormatted": {
           "en": "Set [[variable]] to [[value]]",
           "nl": "Zet [[variable]] naar [[value]]",
-          "de": "Setze [[variable]] auf [[value]]"
+          "da": "Indstil [[variable]] til [[value]]",
+          "de": "Setze [[variable]] auf [[value]]",
+          "es": "Establecer [[variable]] a [[value]]",
+          "fr": "Définir [[variable]] sur [[value]]",
+          "it": "Imposta [[variable]] su [[value]]",
+          "no": "Sett [[variable]] til [[value]]",
+          "sv": "Ställ in [[variable]] till [[value]]",
+          "pl": "Ustaw [[variable]] na [[value]]",
+          "ru": "Установить [[variable]] на [[value]]",
+          "ko": "[[variable]]을(를) [[value]](으)로 설정하세요.",
+          "ar": "اضبط [[variable]] على [[value]]"
         },
         "args": [
           {
@@ -1395,23 +3565,67 @@
             "type": "autocomplete",
             "title": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             },
             "placeholder": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             }
           },
           {
             "name": "value",
-            "type": "checkbox",       
+            "type": "checkbox",
             "placeholder": {
               "en": "Yes/No",
-              "nl": "Ja/Nee"
+              "nl": "Ja/Nee",
+              "da": "Ja/Nej",
+              "de": "Ja/Nein",
+              "es": "Sí/No",
+              "fr": "Oui/Non",
+              "it": "Sì/No",
+              "no": "Ja/Nei",
+              "sv": "Ja/Nej",
+              "pl": "Tak/Nie",
+              "ru": "Да/Нет",
+              "ko": "예/아니요",
+              "ar": "نعم/لا"
             },
             "title": {
               "en": "Yes/No",
-              "nl": "Ja/Nee"
+              "nl": "Ja/Nee",
+              "da": "Ja/Nej",
+              "de": "Ja/Nein",
+              "es": "Sí/No",
+              "fr": "Oui/Non",
+              "it": "Sì/No",
+              "no": "Ja/Nei",
+              "sv": "Ja/Nej",
+              "pl": "Tak/Nie",
+              "ru": "Да/Нет",
+              "ko": "예/아니요",
+              "ar": "نعم/لا"
             }
           }
         ]
@@ -1420,11 +3634,33 @@
         "id": "increment_number_variable",
         "title": {
           "en": "Increment number variable",
-          "nl": "Verhoog nummer variabele"
+          "nl": "Verhoog nummer variabele",
+          "da": "Forøg talvariabel",
+          "de": "Zahlenvariable erhöhen",
+          "es": "Incrementar variable numérica",
+          "fr": "Incrémenter la variable numérique",
+          "it": "Incrementa la variabile numerica",
+          "no": "Øk nummervariabel",
+          "sv": "Öka nummervariabel",
+          "pl": "Zwiększ zmienną liczbową",
+          "ru": "Увеличить числовую переменную",
+          "ko": "숫자 변수 증가",
+          "ar": "زيادة متغير الرقم"
         },
         "titleFormatted": {
           "en": "Increment [[variable]] by [[value]]",
-          "nl": "Verhoog [[variable]] met [[value]]"
+          "nl": "Verhoog [[variable]] met [[value]]",
+          "da": "Forøg [[variable]] med [[value]]",
+          "de": "Erhöhe [[variable]] um [[value]]",
+          "es": "Incrementar [[variable]] en [[value]]",
+          "fr": "Incrémenter [[variable]] de [[value]]",
+          "it": "Incrementa [[variable]] di [[value]]",
+          "no": "Øk [[variable]] med [[value]]",
+          "sv": "Öka [[variable]] med [[value]]",
+          "pl": "Zwiększ [[variable]] o [[value]]",
+          "ru": "Увеличить [[variable]] на [[value]]",
+          "ko": "[[variable]]을(를) [[value]]만큼 증가시키기",
+          "ar": "زيادة [[variable]] بمقدار [[value]]"
         },
         "args": [
           {
@@ -1432,11 +3668,33 @@
             "type": "autocomplete",
             "title": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             },
             "placeholder": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             }
           },
           {
@@ -1445,7 +3703,18 @@
             "step": 0.01,
             "placeholder": {
               "en": "Number",
-              "nl": "Nummer"
+              "nl": "Nummer",
+              "da": "Nummer",
+              "de": "Nummer",
+              "es": "Número",
+              "fr": "Nombre",
+              "it": "Numero",
+              "no": "Nummer",
+              "sv": "Nummer",
+              "pl": "Numer",
+              "ru": "Число",
+              "ko": "숫자",
+              "ar": "رقم"
             }
           }
         ]
@@ -1454,11 +3723,33 @@
         "id": "decrement_number_variable",
         "title": {
           "en": "Decrement number variable",
-          "nl": "Verlaag nummer variabele"
+          "nl": "Verlaag nummer variabele",
+          "da": "Decrementér talvariabel",
+          "de": "Zahlenvariable verringern",
+          "es": "Decrementar variable numérica",
+          "fr": "Décrémenter la variable numérique",
+          "it": "Decrementa variabile numerica",
+          "no": "Reduser tallvariabel",
+          "sv": "Minska nummer variabel",
+          "pl": "Zmniejsz zmienną liczbową",
+          "ru": "Уменьшить числовую переменную",
+          "ko": "숫자 변수 감소",
+          "ar": "تقليل متغير الرقم"
         },
         "titleFormatted": {
           "en": "Decrement [[variable]] by [[value]]",
-          "nl": "Verlaag [[variable]] met [[value]]"
+          "nl": "Verlaag [[variable]] met [[value]]",
+          "da": "Decrementer [[variable]] med [[value]]",
+          "de": "Verringere [[variable]] um [[value]]",
+          "es": "Decrementar [[variable]] en [[value]]",
+          "fr": "Décrémenter [[variable]] de [[value]]",
+          "it": "Decrementa [[variable]] di [[value]]",
+          "no": "Reduser [[variable]] med [[value]]",
+          "sv": "Minska [[variable]] med [[value]]",
+          "pl": "Zmniejsz [[variable]] o [[value]]",
+          "ru": "Уменьшить [[variable]] на [[value]]",
+          "ko": "[[variable]]을(를) [[value]]만큼 감소시키기",
+          "ar": "تقليل [[variable]] بمقدار [[value]]"
         },
         "args": [
           {
@@ -1466,11 +3757,33 @@
             "type": "autocomplete",
             "title": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             },
             "placeholder": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             }
           },
           {
@@ -1479,7 +3792,18 @@
             "step": 0.01,
             "placeholder": {
               "en": "Number",
-              "nl": "Nummer"
+              "nl": "Nummer",
+              "da": "Nummer",
+              "de": "Nummer",
+              "es": "Número",
+              "fr": "Nombre",
+              "it": "Numero",
+              "no": "Nummer",
+              "sv": "Nummer",
+              "pl": "Numer",
+              "ru": "Число",
+              "ko": "숫자",
+              "ar": "رقم"
             }
           }
         ]
@@ -1488,12 +3812,33 @@
         "id": "execute_expression",
         "title": {
           "en": "Execute Math.js  expression",
-          "nl": "Voer Math.js-expressie uit"
+          "nl": "Voer Math.js-expressie uit",
+          "da": "Udfør Math.js-udtryk",
+          "de": "Math.js-Ausdruck ausführen",
+          "es": "Ejecutar expresión Math.js",
+          "fr": "Exécuter l'expression Math.js",
+          "it": "Esegui l'espressione Math.js",
+          "no": "Utfør Math.js-uttrykk",
+          "sv": "Kör Math.js-uttryck",
+          "pl": "Wykonaj wyrażenie Math.js",
+          "ru": "Выполнить выражение Math.js",
+          "ko": "Math.js 표현식 실행",
+          "ar": "تشغيل تعبير Math.js"
         },
         "titleFormatted": {
           "en": "Set [[variable]] to [[expression]]",
           "nl": "Zet [[variable]] naar [[expression]]",
-          "de": "Setze [[variable]] auf [[expression]]"
+          "da": "Indstil [[variable]] til [[expression]]",
+          "de": "Setze [[variable]] auf [[expression]]",
+          "es": "Establecer [[variable]] a [[expression]]",
+          "fr": "Définir [[variable]] sur [[expression]]",
+          "it": "Imposta [[variable]] su [[expression]]",
+          "no": "Sett [[variable]] til [[expression]]",
+          "sv": "Ställ in [[variable]] till [[expression]]",
+          "pl": "Ustaw [[variable]] na [[expression]]",
+          "ru": "Установить [[variable]] на [[expression]]",
+          "ko": "[[variable]]을(를) [[expression]]으로 설정하세요.",
+          "ar": "قم بتعيين [[variable]] إلى [[expression]]"
         },
         "args": [
           {
@@ -1501,11 +3846,33 @@
             "type": "text",
             "placeholder": {
               "en": "($n1$ * 42) + 1 (* BLL supported)",
-              "nl": "($n1$ * 42) + 1 (* BLL ondersteund)"
+              "nl": "($n1$ * 42) + 1 (* BLL ondersteund)",
+              "da": "($n1$ * 42) + 1 (* BLL understøttet)",
+              "de": "($n1$ * 42) + 1 (* BLL unterstützt)",
+              "es": "($n1$ * 42) + 1 (* compatible con BLL)",
+              "fr": "($n1$ * 42) + 1 (* pris en charge par BLL)",
+              "it": "($n1$ * 42) + 1 (* supportato da BLL)",
+              "no": "($n1$ * 42) + 1 (* BLL støttet)",
+              "sv": "($n1$ * 42) + 1 (* BLL stöds)",
+              "pl": "($n1$ * 42) + 1 (* obsługiwane przez BLL)",
+              "ru": "($n1$ * 42) + 1 (* поддерживается BLL)",
+              "ko": "($n1$ * 42) + 1 (* BLL 지원됨)",
+              "ar": "($n1$ * 42) + 1 (* مدعوم من BLL)"
             },
             "title": {
               "en": "Math.js Expression",
-              "nl": "Math.js-expressie"
+              "nl": "Math.js-expressie",
+              "da": "Math.js Udtryk",
+              "de": "Math.js-Ausdruck",
+              "es": "Expresión Math.js",
+              "fr": "Expression Math.js",
+              "it": "Espressione Math.js",
+              "no": "Math.js-uttrykk",
+              "sv": "Math.js-uttryck",
+              "pl": "Wyrażenie Math.js",
+              "ru": "Math.js выражение",
+              "ko": "Math.js 표현식",
+              "ar": "Math.js تعبير"
             }
           },
           {
@@ -1513,25 +3880,68 @@
             "type": "autocomplete",
             "title": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             },
             "placeholder": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             }
           }
         ]
       },
-      
       {
         "id": "flip_boolean_variable",
         "title": {
           "en": "Flip boolean variable",
-          "nl": "Draai ja/nee waarde om"
+          "nl": "Draai ja/nee waarde om",
+          "da": "Skift boolean-variabel",
+          "de": "Boolean-Variable umschalten",
+          "es": "Invertir variable booleana",
+          "fr": "Inverser la variable booléenne",
+          "it": "Inverti variabile booleana",
+          "no": "Vipp boolsk variabel",
+          "sv": "Vänd boolesk variabel",
+          "pl": "Przełącz zmienną logiczną",
+          "ru": "Переключить булеву переменную",
+          "ko": "부울 변수 뒤집기",
+          "ar": "قلب متغير البوليان"
         },
         "titleFormatted": {
           "en": "Flip [[variable]]",
-          "nl": "Draai [[variable]] om"
+          "nl": "Draai [[variable]] om",
+          "da": "Vend [[variable]]",
+          "de": "Kippe [[variable]] um",
+          "es": "Voltear [[variable]]",
+          "fr": "Inverser [[variable]]",
+          "it": "Capovolgi [[variable]]",
+          "no": "Vend [[variable]]",
+          "sv": "Vänd [[variable]]",
+          "pl": "Odwróć [[variable]]",
+          "ru": "Перевернуть [[variable]]",
+          "ko": "[[variable]] 뒤집기",
+          "ar": "اقلب [[variable]]"
         },
         "args": [
           {
@@ -1539,11 +3949,33 @@
             "type": "autocomplete",
             "title": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             },
             "placeholder": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             }
           }
         ]
@@ -1552,11 +3984,33 @@
         "id": "trigger_variable",
         "title": {
           "en": "Execute a trigger",
-          "nl": "Voer een trigger uit"
+          "nl": "Voer een trigger uit",
+          "da": "Udfør en trigger",
+          "de": "Einen Auslöser ausführen",
+          "es": "Ejecutar un disparador",
+          "fr": "Exécuter un déclencheur",
+          "it": "Esegui un trigger",
+          "no": "Utfør en trigger",
+          "sv": "Utför en trigger",
+          "pl": "Uruchom wyzwalacz",
+          "ru": "Выполнить триггер",
+          "ko": "트리거 실행",
+          "ar": "تنفيذ مشغل"
         },
         "titleFormatted": {
           "en": "Execute [[variable]]",
-          "nl": "Voer [[variable]] uit"
+          "nl": "Voer [[variable]] uit",
+          "da": "Udfør [[variable]]",
+          "de": "Ausführen [[variable]]",
+          "es": "Ejecutar [[variable]]",
+          "fr": "Exécuter [[variable]]",
+          "it": "Esegui [[variable]]",
+          "no": "Utfør [[variable]]",
+          "sv": "Kör [[variable]]",
+          "pl": "Wykonaj [[variable]]",
+          "ru": "Выполнить [[variable]]",
+          "ko": "[[variable]] 실행",
+          "ar": "تنفيذ [[variable]]"
         },
         "args": [
           {
@@ -1564,11 +4018,33 @@
             "type": "autocomplete",
             "title": {
               "en": "Trigger",
-              "nl": "Trigger"
+              "nl": "Trigger",
+              "da": "Udløser",
+              "de": "Auslöser",
+              "es": "Disparador",
+              "fr": "Déclencheur",
+              "it": "Trigger",
+              "no": "Utløser",
+              "sv": "Trigger",
+              "pl": "Wyzwalacz",
+              "ru": "Триггер",
+              "ko": "트리거",
+              "ar": "تشغيل"
             },
             "placeholder": {
               "en": "Trigger",
-              "nl": "Trigger"
+              "nl": "Trigger",
+              "da": "Udløser",
+              "de": "Auslöser",
+              "es": "Disparador",
+              "fr": "Déclencheur",
+              "it": "Innesco",
+              "no": "Utløser",
+              "sv": "Utlösare",
+              "pl": "Wyzwalacz",
+              "ru": "Триггер",
+              "ko": "트리거",
+              "ar": "مشغل"
             }
           }
         ]
@@ -1577,53 +4053,157 @@
         "id": "get_variables",
         "title": {
           "en": "Get all variables",
-          "nl": "Ontvang alle variabelen"
+          "nl": "Ontvang alle variabelen",
+          "da": "Hent alle variabler",
+          "de": "Alle Variablen abrufen",
+          "es": "Obtener todas las variables",
+          "fr": "Obtenir toutes les variables",
+          "it": "Ottieni tutte le variabili",
+          "no": "Hent alle variabler",
+          "sv": "Hämta alla variabler",
+          "pl": "Pobierz wszystkie zmienne",
+          "ru": "Получить все переменные",
+          "ko": "모든 변수 가져오기",
+          "ar": "احصل على جميع المتغيرات"
         },
         "titleFormatted": {
           "en": "Get all variables as [[returnType]]",
-          "nl": "Ontvang alle variabelen als [[returnType]]"
+          "nl": "Ontvang alle variabelen als [[returnType]]",
+          "da": "Hent alle variabler som [[returnType]]",
+          "de": "Alle Variablen als [[returnType]] abrufen",
+          "es": "Obtener todas las variables como [[returnType]]",
+          "fr": "Obtenez toutes les variables comme [[returnType]]",
+          "it": "Ottieni tutte le variabili come [[returnType]]",
+          "no": "Hent alle variabler som [[returnType]]",
+          "sv": "Hämta alla variabler som [[returnType]]",
+          "pl": "Pobierz wszystkie zmienne jako [[returnType]]",
+          "ru": "Получить все переменные как [[returnType]]",
+          "ko": "모든 변수를 [[returnType]]로 가져오기",
+          "ar": "احصل على جميع المتغيرات كـ [[returnType]]"
         },
         "args": [
           {
             "type": "dropdown",
-            "name": "returnType",      
+            "name": "returnType",
             "placeholder": {
               "en": "Choose the Format",
-              "nl": "Kies het format"
-            },      
+              "nl": "Kies het format",
+              "da": "Vælg formatet",
+              "de": "Wähle das Format",
+              "es": "Elige el formato",
+              "fr": "Choisissez le format",
+              "it": "Scegli il formato",
+              "no": "Velg formatet",
+              "sv": "Välj formatet",
+              "pl": "Wybierz format",
+              "ru": "Выберите формат",
+              "ko": "형식을 선택하세요",
+              "ar": "اختر التنسيق"
+            },
             "title": {
               "en": "Format",
-              "nl": "Format"
+              "nl": "Format",
+              "da": "Format",
+              "de": "Formatierung",
+              "es": "Formato",
+              "fr": "Format",
+              "it": "Formato",
+              "no": "Formatere",
+              "sv": "Format",
+              "pl": "Formatować",
+              "ru": "Формат",
+              "ko": "형식",
+              "ar": "صيغة"
             },
             "values": [
               {
                 "id": "json",
                 "label": {
-                  "en": "JSON"
+                  "en": "JSON",
+                  "nl": "JSON",
+                  "da": "JSON",
+                  "de": "JSON",
+                  "es": "JSON",
+                  "fr": "JSON",
+                  "it": "JSON",
+                  "no": "JSON",
+                  "sv": "JSON",
+                  "pl": "JSON",
+                  "ru": "JSON",
+                  "ko": "JSON",
+                  "ar": "JSON"
                 }
               },
               {
                 "id": "json_base64",
                 "label": {
-                  "en": "JSON (base64)"
+                  "en": "JSON (base64)",
+                  "nl": "JSON (base64)",
+                  "da": "JSON (base64)",
+                  "de": "JSON (base64)",
+                  "es": "JSON (base64)",
+                  "fr": "JSON (base64)",
+                  "it": "JSON (base64)",
+                  "no": "JSON (base64)",
+                  "sv": "JSON (base64)",
+                  "pl": "JSON (base64)",
+                  "ru": "JSON (base64)",
+                  "ko": "JSON (base64) JSON (base64)",
+                  "ar": "JSON (base64)"
                 }
               },
               {
                 "id": "csv",
                 "label": {
-                  "en": "CSV"
+                  "en": "CSV",
+                  "nl": "CSV",
+                  "da": "CSV",
+                  "de": "CSV",
+                  "es": "CSV",
+                  "fr": "CSV",
+                  "it": "CSV",
+                  "no": "CSV",
+                  "sv": "CSV",
+                  "pl": "CSV",
+                  "ru": "CSV",
+                  "ko": "CSV",
+                  "ar": "CSV"
                 }
               },
               {
                 "id": "csv_base64",
                 "label": {
-                  "en": "CSV (base64)"
+                  "en": "CSV (base64)",
+                  "nl": "CSV (base64)",
+                  "da": "CSV (base64)",
+                  "de": "CSV (base64)",
+                  "es": "CSV (base64)",
+                  "fr": "CSV (base64)",
+                  "it": "CSV (base64)",
+                  "no": "CSV (base64)",
+                  "sv": "CSV (base64)",
+                  "pl": "CSV (base64)",
+                  "ru": "CSV (base64)",
+                  "ko": "CSV (base64)",
+                  "ar": "CSV (base64)"
                 }
               },
               {
                 "id": "xlsx_base64",
                 "label": {
-                  "en": "Excel (base64)"
+                  "en": "Excel (base64)",
+                  "nl": "Excel (base64)",
+                  "da": "Excel (base64)",
+                  "de": "Excel (base64)",
+                  "es": "Excel (base64)",
+                  "fr": "Excel (base64)",
+                  "it": "Excel (base64)",
+                  "no": "Excel (base64)",
+                  "sv": "Excel (base64)",
+                  "pl": "Excel (base64)",
+                  "ru": "Excel (base64)",
+                  "ko": "엑셀 (base64)",
+                  "ar": "إكسل (base64)"
                 }
               }
             ]
@@ -1634,21 +4214,54 @@
             "name": "variables",
             "type": "string",
             "title": {
-              "en": "Variables"
-            }            
+              "en": "Variables",
+              "nl": "Variabelen",
+              "da": "Variable",
+              "de": "Variablen",
+              "es": "Variables",
+              "fr": "Variables",
+              "it": "Variabili",
+              "no": "Variabler",
+              "sv": "Variabler",
+              "pl": "Zmienne",
+              "ru": "Переменные",
+              "ko": "변수",
+              "ar": "المتغيرات"
+            }
           }
         ]
       },
-      
       {
         "id": "get_variable_properties",
         "title": {
           "en": "Get variable properties",
-          "nl": "Ontvang variabele eigenschapen"
+          "nl": "Ontvang variabele eigenschapen",
+          "da": "Hent variabelegenskaber",
+          "de": "Variableneigenschaften abrufen",
+          "es": "Obtener propiedades de la variable",
+          "fr": "Obtenir les propriétés de la variable",
+          "it": "Ottieni proprietà variabile",
+          "no": "Hent variabelegenskaper",
+          "sv": "Hämta variabelegenskaper",
+          "pl": "Pobierz właściwości zmiennej",
+          "ru": "Получить свойства переменной",
+          "ko": "변수 속성 가져오기",
+          "ar": "احصل على خصائص المتغير"
         },
         "titleFormatted": {
           "en": "Get properties of [[variable]]",
-          "nl": "Ontvang eigenschappen van [[variable]]"
+          "nl": "Ontvang eigenschappen van [[variable]]",
+          "da": "Hent egenskaber for [[variable]]",
+          "de": "Eigenschaften von [[variable]] abrufen",
+          "es": "Obtener propiedades de [[variable]]",
+          "fr": "Obtenez les propriétés de [[variable]]",
+          "it": "Ottieni le proprietà di [[variable]]",
+          "no": "Hent egenskaper for [[variable]]",
+          "sv": "Hämta egenskaper för [[variable]]",
+          "pl": "Pobierz właściwości [[variable]]",
+          "ru": "Получить свойства [[variable]]",
+          "ko": "[[variable]]의 속성 가져오기",
+          "ar": "احصل على خصائص [[variable]]"
         },
         "args": [
           {
@@ -1656,11 +4269,33 @@
             "type": "autocomplete",
             "title": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             },
             "placeholder": {
               "en": "Variable",
-              "nl": "Variabele"
+              "nl": "Variabele",
+              "da": "Variabel",
+              "de": "Variable",
+              "es": "Variable",
+              "fr": "Variable",
+              "it": "Variabile",
+              "no": "Variabel",
+              "sv": "Variabel",
+              "pl": "Zmienna",
+              "ru": "Переменная",
+              "ko": "변수",
+              "ar": "متغير"
             }
           }
         ],
@@ -1670,16 +4305,38 @@
             "type": "number",
             "title": {
               "en": "Last Changed (UTC tick)",
-              "nl": "Laatst ingesteld (UTC tick)"
-            }            
+              "nl": "Laatst ingesteld (UTC tick)",
+              "da": "Sidst ændret (UTC tick)",
+              "de": "Zuletzt geändert (UTC-Tick)",
+              "es": "Último cambio (marca UTC)",
+              "fr": "Dernière modification (UTC tick)",
+              "it": "Ultima modifica (tick UTC)",
+              "no": "Sist endret (UTC-tikk)",
+              "sv": "Senast ändrad (UTC-tick)",
+              "pl": "Ostatnia zmiana (znacznik UTC)",
+              "ru": "Последнее изменение (метка UTC)",
+              "ko": "마지막 변경 (UTC 틱)",
+              "ar": "آخر تغيير (علامة UTC)"
+            }
           },
           {
             "name": "lastChanged",
             "type": "string",
             "title": {
               "en": "Last Changed (datetime)",
-              "nl": "Laatst ingesteld (datetime)"
-            }            
+              "nl": "Laatst ingesteld (datetime)",
+              "da": "Sidst ændret (dato og tid)",
+              "de": "Zuletzt geändert (Datum und Uhrzeit)",
+              "es": "Último cambio (fecha y hora)",
+              "fr": "Dernière modification (date et heure)",
+              "it": "Ultima modifica (data e ora)",
+              "no": "Sist endret (dato og tid)",
+              "sv": "Senast ändrad (datum och tid)",
+              "pl": "Ostatnia zmiana (data i czas)",
+              "ru": "Последнее изменение (дата и время)",
+              "ko": "마지막 변경 (날짜 및 시간)",
+              "ar": "آخر تغيير (التاريخ والوقت)"
+            }
           }
         ]
       }
@@ -1689,7 +4346,19 @@
     {
       "id": "bitflip",
       "name": {
-        "en": "BitFlip"
+        "en": "BitFlip",
+        "nl": "BitFlip",
+        "da": "BitFlip",
+        "de": "BitFlip",
+        "es": "BitFlip",
+        "fr": "BitFlip",
+        "it": "BitFlip",
+        "no": "BitFlip",
+        "sv": "BitFlip",
+        "pl": "BitFlip",
+        "ru": "БитФлип",
+        "ko": "비트플립",
+        "ar": "بت فليب"
       },
       "images": {
         "large": "drivers/bitflip/assets/images/large.jpg",
@@ -1716,7 +4385,19 @@
     {
       "id": "numslide",
       "name": {
-        "en": "NumSlide"
+        "en": "NumSlide",
+        "nl": "NumSlide",
+        "da": "NumSlide",
+        "de": "NumSlide",
+        "es": "NumSlide",
+        "fr": "NumSlide",
+        "it": "NumSlide",
+        "no": "NumSlide",
+        "sv": "NumSlide",
+        "pl": "NumSlide",
+        "ru": "NumSlide",
+        "ko": "NumSlide",
+        "ar": "NumSlide (شريحة الأرقام)"
       },
       "images": {
         "large": "drivers/numslide/assets/images/large.jpg",
@@ -1767,7 +4448,19 @@
     {
       "id": "trigger",
       "name": {
-        "en": "Trigger"
+        "en": "Trigger",
+        "nl": "Trigger",
+        "da": "Udløser",
+        "de": "Auslöser",
+        "es": "Disparador",
+        "fr": "Déclencheur",
+        "it": "Trigger",
+        "no": "Utløser",
+        "sv": "Utlösare",
+        "pl": "Wyzwalacz",
+        "ru": "Триггер",
+        "ko": "트리거",
+        "ar": "تشغيل"
       },
       "images": {
         "large": "drivers/trigger/assets/images/large.jpg",
@@ -1792,7 +4485,7 @@
       ]
     }
   ],
-  "api": {    
+  "api": {
     "internal": {
       "method": "POST",
       "path": "/internal/"
