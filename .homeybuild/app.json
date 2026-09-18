@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "3.5.0",
+  "version": "3.5.1",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -8,15 +8,15 @@
     "nl": "Better Logic Library",
     "da": "Better Logic Library",
     "de": "Better Logic Library",
-    "es": "Biblioteca de Better Logic",
+    "es": "Better Logic Library",
     "fr": "Better Logic Library",
     "it": "Better Logic Library",
     "no": "Better Logic Library",
     "sv": "Better Logic Library",
-    "pl": "Biblioteka Better Logic",
-    "ru": "Библиотека Better Logic",
-    "ko": "베터 로직 라이브러리",
-    "ar": "مكتبة المنطق الأفضل"
+    "pl": "Better Logic Library",
+    "ru": "Better Logic Library",
+    "ko": "Better Logic Library",
+    "ar": "Better Logic Library"
   },
   "description": {
     "en": "Just some better logic, variable and library management",
