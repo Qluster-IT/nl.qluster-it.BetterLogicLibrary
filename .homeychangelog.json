@@ -1903,5 +1903,20 @@
     "ru": "Переведено на все поддерживаемые языки.",
     "ko": "번역됨: 모든 지원 언어로 번역되었습니다.",
     "ar": "مترجم: مترجم إلى جميع اللغات المدعومة."
+  },
+  "3.5.2": {
+    "en": "Bugfixing: Resolving a bug.",
+    "nl": "Bugfixen: Een bug oplossen.",
+    "da": "Fejlretning: Løse en fejl.",
+    "de": "Fehlerbehebung: Ein Problem lösen.",
+    "es": "Corrección de errores: Resolviendo un error.",
+    "fr": "Correction de bug : Résolution d'un bug.",
+    "it": "Correzione bug: Risoluzione di un bug.",
+    "no": "Feilretting: Løse en feil.",
+    "sv": "Buggfix: Åtgärdar en bugg.",
+    "pl": "Poprawki błędów: Rozwiązywanie błędu.",
+    "ru": "Исправление ошибок: Решение проблемы.",
+    "ko": "버그 수정: 버그 해결 중.",
+    "ar": "إصلاح الأخطاء: حل مشكلة."
   }
 }
