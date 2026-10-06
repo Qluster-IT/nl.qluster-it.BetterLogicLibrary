@@ -1,42 +1,32 @@
-Witamy w Bibliotece Better Logic.
+Witamy w Better Logic Library.
 
 Zaawansowana biblioteka logiki z zarządzaniem zmiennymi i bibliotekami dla Homey.
 
-Ta aplikacja dostarcza Twojemu Homey Better Logic i Biblioteki:
-* Zarządzanie zmiennymi w inteligentny, zintegrowany sposób.
-* Zaawansowane karty akcji i warunków z Better Logic, takie jak Math.js.
+Ta aplikacja dostarcza Twojemu Homey lepszą logikę i biblioteki:
+* Zarządzanie zmiennymi w sposób inteligentny i zintegrowany.
+* Zaawansowane karty akcji i warunków z lepszą logiką, takie jak Math.js.
 * Urządzenia do bezpośredniego zarządzania zmiennymi.
-* Formatowanie daty i czasu, w pełni konfigurowalne, udostępniane z innymi aplikacjami.
-* Pisanie i wyrazy BLL do bezpośredniego użycia w innych kartach przepływów aplikacji.
-* Funkcje niestandardowe do użycia w pisaniu i wyrażeniach BLL.
-* Biblioteki do użycia w pisaniu i wyrażeniach BLL, takie jak Math.js i Lodash.
-* Serwer plików, który może być wykorzystywany przez inne aplikacje, takie jak Simple (Sys) LOG, do serwowania plików w Twojej sieci LAN lub do ich pobierania na aplikację mobilną Homey lub narzędzia deweloperskie.
-* Biblioteki do wykorzystania przez inne aplikacje, zmniejszając rozmiary aplikacji i redundancje oraz poprawiając zarządzanie.
-* API do zarządzania zmiennymi, używając serwera plików lub innych funkcji BLL.
+* Formatowanie daty i czasu, w pełni konfigurowalne, współdzielone z innymi aplikacjami.
+* Kodowanie BLL i wyrażenia BLL do użycia bezpośrednio w kartach przepływu innych aplikacji.
+* Funkcje niestandardowe do użycia w kodowaniu BLL i wyrażeniach BLL.
+* Biblioteki do użycia w kodowaniu BLL i wyrażeniach BLL, takie jak Math.js i Lodash.
+* Serwer plików, który może być używany przez inne aplikacje, takie jak Simple (Sys) LOG, do serwowania plików w Twojej sieci LAN lub pobierania ich w Homey Mobile App lub Developertools.
+* Biblioteki do wykorzystania przez inne aplikacje, redukujące rozmiary aplikacji i nadmiarowości oraz poprawiające zarządzanie.
+* API do zarządzania zmiennymi, używając Serwera Plików lub innych funkcji BLL.
+* Karty przepływu do konwertowania obiektu/array JSON na CSV lub Excel.
 
-Sprawdź (nowe) ustawienia aplikacji, aby poznać wszystkie funkcje i wyjaśnienia, takie jak pisanie BLL w obsługiwanych aplikacjach!
+Sprawdź (nowe) ustawienia aplikacji, aby uzyskać wszystkie funkcje i wyjaśnienia, takie jak kodowanie BLL w obsługiwanych aplikacjach!
 
-Przykład pisania BLL: Kiedy umieścisz to w argumencie tekstowym: - Cześć, dzisiaj jest {[date("dddd")]}, - BLL automatycznie znajdzie te wyrażenia w tekstach i je zdekoduje, skutkując - Cześć, dzisiaj jest poniedziałek -.
+Przykład kodowania BLL: Kiedy umieścisz to w argumencie tekstowym: - Witaj, dziś jest {[date("dddd")]} -, BLL automatycznie znajdzie te wyrażenia w tekstach i zdekoduje je, co daje - Witaj, dziś jest poniedziałek -.
 
 Dalej: Zarządzaj zmiennymi bezpośrednio w przepływach!
 
-Po prostu wpisz nazwę zmiennej w dowolnej karcie "kiedy" i "następnie" i wybierz ją z listy: zmienna zostanie automatycznie utworzona. Jeśli chcesz użyć tagu, najpierw naciśnij zapisz.
-Zmienny, które zostały automatycznie utworzone w przepływach, zostaną również automatycznie usunięte, gdy nie będą już używane w kartach przepływów.
-Zmiennymi można również zarządzać z poziomu ekranu ustawień. Te zmienne nie zostaną automatycznie usunięte, jeśli nie będą używane, ale trzeba je usunąć ręcznie.
+Wystarczy wpisać nazwę zmiennej w dowolnym przypadku "when-" i "then-", a następnie wybrać ją z listy: zmienna zostanie automatycznie utworzona. 
+Jeśli chcesz użyć tagu, najpierw naciśnij zapisz.
+Zmienna, która została automatycznie utworzona w przepływach, zostanie również automatycznie usunięta, jeśli nie będzie już używana w kartach przepływu.
+Zmiennymi można także nadal zarządzać z poziomu ekranu ustawień. Te zmienne nie zostaną automatycznie usunięte, jeśli nie są używane, ale muszą być usuwane ręcznie.
 
-I przycisk Usuń wszystko ma teraz potwierdzenie!
+Funkcja: Dodaj $timenow$ jako specjalną zmienną dla mathjs. Pobierze to aktualny czas w sekundach od epoki. Ta zmienna nie jest przechowywana w przeglądzie, ale używana w wyrażeniach.
+Funkcja: Dodano #DD (dzień), #MM (miesiąc), #YYYY (rok), #HH (godziny), #mm (minuty), #SS (sekundy) jako zastrzeżone słowa obok timenow w flowach mathjs. Możesz teraz na przykład przypisać #HH do zmiennej, aby uzyskać godziny. Ponadto zmieniłem timenow na #timenow dla spójności.
 
-* Funkcja: Dodano wsparcie dla API do GET, GET wszystkich zmiennych i SET (post) wartości.
-    * GET: HTTP://HOMEYADDRES/api/app/net.i-dev.betterlogic/VARIABLENAME
-    * GET: HTTP://HOMEYADDRES/api/app/net.i-dev.betterlogic/ALL (Pobierz wszystkie zmienne)
-    * PUT: HTTP://HOMEYADDRES/api/app/net.i-dev.betterlogic/VARIABLENAME/VALUE  // Upewnij się, że wartość pasuje do typu, w przeciwnym razie nie zostanie ustawiona.
-* Funkcja: Wyzwalacz dla API. Wywołanie
-    * PUT dla inkrementacji: HTTP://HOMEYADDRES/api/app/net.i-dev.betterlogic/trigger/VARIABLENAME To wywoła daną zmienną
-* Funkcja: Dodaj zwiększanie lub zmniejszanie do API. Wywołanie
-    * PUT dla inkrementacji: HTTP://HOMEYADDRES/api/app/net.i-dev.betterlogic/VARIABLENAME/i/VALUE  Zwiększa zmienną o podaną wartość
-    * PUT dla dekrementacji: HTTP://HOMEYADDRES/api/app/net.i-dev.betterlogic/VARIABLENAME/d/VALUE  Zmniejsza zmienną o podaną wartość
-* Funkcja: Dodaj włączanie/wyłączanie booleana (true->false lub false->true) do wsparcia API
-    * PUT: HTTP://HOMEYADDRES/api/app/net.i-dev.betterlogic/VARIABLENAME/toggle To wymusi odwrócenie wartości boolean
-
-* Funkcja: Dodaj $timenow$ jako specjalną zmienną dla mathjs. To pobierze aktualny czas w sekundach od początku epoki. Ta zmienna nie jest przechowywana w przeglądzie, ale używana w wyrażeniach.
-* Funkcja: Dodano #DD (dzień), #MM (miesiąc), #YYYY (rok), #HH (godziny), #mm (minuty) #SS (sekundy) jako zarezerwowane słowa obok timenow w przepływach mathjs. Teraz możesz na przykład przypisać #HH do zmiennej, aby uzyskać godziny. Zmieniłem timenow na #timenow dla spójności.
+Zobacz forum społecznościowe, aby uzyskać więcej informacji!
