@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "3.5.2",
+  "version": "4.0.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -60,6 +60,7 @@
     "homey:app:net.i-dev.betterlogic"
   ],
   "images": {
+    "xlarge": "/assets/images/xlarge.png",
     "large": "/assets/images/large.png",
     "small": "/assets/images/small.png"
   },
@@ -97,7 +98,7 @@
       }
     }
   },
-  "homeyCommunityTopicId": 5568,
+  "homeyCommunityTopicId": 71876,
   "source": "https://bitbucket.org/QlusterIT/nl.qluster-it.BetterLogic/",
   "bugs": {
     "url": "https://bitbucket.org/QlusterIT/nl.qluster-it.BetterLogic/issues"
@@ -4361,8 +4362,9 @@
         "ar": "بت فليب"
       },
       "images": {
-        "large": "drivers/bitflip/assets/images/large.jpg",
-        "small": "drivers/bitflip/assets/images/small.jpg"
+        "xlarge": "drivers/bitflip/assets/images/xlarge.png",
+        "large": "drivers/bitflip/assets/images/large.png",
+        "small": "drivers/bitflip/assets/images/small.png"
       },
       "class": "socket",
       "capabilities": [
@@ -4400,8 +4402,9 @@
         "ar": "NumSlide (شريحة الأرقام)"
       },
       "images": {
-        "large": "drivers/numslide/assets/images/large.jpg",
-        "small": "drivers/numslide/assets/images/small.jpg"
+        "xlarge": "drivers/numslide/assets/images/xlarge.png",
+        "large": "drivers/numslide/assets/images/large.png",
+        "small": "drivers/numslide/assets/images/small.png"
       },
       "class": "windowcoverings",
       "capabilities": [
@@ -4416,7 +4419,7 @@
             ],
             "options": {
               "icons": {
-                "dim": "./drivers/numslide/assets/icons/icon.svg"
+                "dim": "./drivers/numslide/assets/icon.svg"
               }
             }
           },
@@ -4463,8 +4466,9 @@
         "ar": "تشغيل"
       },
       "images": {
-        "large": "drivers/trigger/assets/images/large.jpg",
-        "small": "drivers/trigger/assets/images/small.jpg"
+        "xlarge": "drivers/trigger/assets/images/xlarge.png",
+        "large": "drivers/trigger/assets/images/large.png",
+        "small": "drivers/trigger/assets/images/small.png"
       },
       "class": "button",
       "capabilities": [
@@ -4548,22 +4552,22 @@
     "getVariable": {
       "method": "GET",
       "path": "/:variable",
-      "public": false
+      "public": true
     },
     "triggerVariable": {
       "method": "PUT",
       "path": "/trigger/:variable",
-      "public": false
+      "public": true
     },
     "setVariableAction": {
       "method": "PUT",
       "path": "/:variable/:action/:value",
-      "public": false
+      "public": true
     },
     "setVariable": {
       "method": "PUT",
       "path": "/:variable/:value",
-      "public": false
+      "public": true
     }
   }
 }

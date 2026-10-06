@@ -21,25 +21,13 @@ Voorbeeld BLL-codering: Wanneer u dit in een tekstargument plaatst: - Hallo, van
 
 Verder: Beheer variabelen direct in flows!
 
-Typ gewoon een variabelenaam binnen een wanneer- en dankaart en selecteer deze in de lijst: de variabele wordt automatisch aangemaakt.
+Typ gewoon een variabelenaam binnen een als- en dan-kaart en selecteer deze in de lijst: de variabele wordt automatisch aangemaakt.
 Als u de tag wilt gebruiken, drukt u eerst op opslaan.
 Variabelen die automatisch zijn gemaakt vanuit flows, worden ook automatisch verwijderd wanneer ze niet langer worden gebruikt in flowkaarten.
 Variabelen kunnen ook nog steeds worden beheerd vanuit het instellingenscherm. Deze variabelen worden niet automatisch verwijderd als ze niet worden gebruikt, maar moeten handmatig worden verwijderd.
 
-En de knop Alles verwijderen heeft nu een bevestiging!
+Toegevoegd: voeg $timenow$ toe als een speciale variabele voor mathjs. Hiermee wordt de huidige tijd in seconden sinds epoch opgehaald. Deze variabele wordt niet in het overzicht opgeslagen, maar gebruikt in uitdrukkingen.
+Toegevoegd: #DD (dag), #MM (maand), #JJJJ (jaar), #HH (uren), #mm (minuten) #SS (seconden) toegevoegd als gereserveerde woorden naast timenow in de wiskundestromen. U kunt nu bijvoorbeeld #HH toekennen aan een variabele om de uren te krijgen. Ook heb ik timenow veranderd in #timenow voor consistentie.
 
 
-* Toegevoegd: API-ondersteuning toegevoegd voor GET, GET alle variabelen en SET (post) een waarde.
-* GET: HTTP://HOMEYADDRES/api/app/net.i-dev.betterlogic/VARIABLENAME
-* GET: HTTP://HOMEYADDRES/api/app/net.i-dev.betterlogic/ALL (alle variabelen ophalen)
-* PUT: HTTP://HOMEYADDRES/api/app/net.i-dev.betterlogic/VARIABLENAME/VALUE // Zorg ervoor dat de waarde overeenkomt met het type, anders wordt deze niet ingesteld.
-* Toegevoegd: trigger naar API. call.
-* PUT voor increment: HTTP://HOMEYADDRES/api/app/net.i-dev.betterlogic/trigger/VARIABLENAME Dit activeert de gegeven variabele
-* Toegevoegd: verhoging of verlaging toevoegen aan API. call
-* PUT voor increment: HTTP://HOMEYADDRES/api/app/net.i-dev.betterlogic/VARIABLENAME/i/VALUE Verhoogt de variabele met de opgegeven waarde
-* PUT voor verlaging: HTTP://HOMEYADDRES/api/app/net.i-dev.betterlogic/VARIABLENAME/d/VALUE Verlaagt de variabele met de gegeven waarde
-* Toegevoegd: schakelaar van boolean (true->false of false->true) toegevoegd aan API.
-    * PUT: HTTP://HOMEYADDRES/api/app/net.i-dev.betterlogic/VARIABLENAME/toggle Dit zal de Booleaanse waarde omdraaien
-
-* Toegevoegd: voeg $timenow$ toe als een speciale variabele voor mathjs. Hiermee wordt de huidige tijd in seconden sinds epoch opgehaald. Deze variabele wordt niet in het overzicht opgeslagen, maar gebruikt in uitdrukkingen.
-* Toegevoegd: #DD (dag), #MM (maand), #JJJJ (jaar), #HH (uren), #mm (minuten) #SS (seconden) toegevoegd als gereserveerde woorden naast timenow in de wiskundestromen. U kunt nu bijvoorbeeld #HH toekennen aan een variabele om de uren te krijgen. Ook heb ik timenow veranderd in #timenow voor consistentie.
+Bekijk het communityforum voor meer informatie!
