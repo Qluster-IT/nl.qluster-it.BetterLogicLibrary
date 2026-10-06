@@ -714,7 +714,7 @@ class BetterLogic extends Homey.App {
 						let arr = await variableManager.getVariables()
 						let variable = arr.find(x => x.name == args.variable.id);
 						if (!variable) throw new Error('Variable not found');
-						return { lastChangedTick: new Date(variable.lastChanged).getTime(), lastChanged: BL.datetime.toString('datetime', variable.lastChanged) }
+						return { lastChangedTick: variable.lastChangedTick || new Date(variable.lastChanged).getTime(), lastChanged: BL.datetime.toString('datetime', variable.lastChanged) }
 					})
 					.getArgument('variable')
 					.registerAutocompleteListener(async (query, args) => {
@@ -910,9 +910,6 @@ class BetterLogic extends Homey.App {
 					}
 
 				});
-
-
-
 
 
 

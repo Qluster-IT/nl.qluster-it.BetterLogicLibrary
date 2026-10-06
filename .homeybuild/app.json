@@ -683,6 +683,406 @@
             }
           }
         ]
+      },
+      {
+        "highlight": true,
+        "id": "variable_number_sustained",
+        "title": {
+          "en": "When a number variable has been a certain value for a period"
+        },
+        "titleFormatted": {
+          "en": "When [[variable]] is [[condition]] [[value]] for [[time]] [[unit]], execute [[trigger]]"
+        },
+        "hint": {
+          "en": "This card will execute when a certain capability from a device has been a certain value for a specific period."
+        },
+        "args": [
+          {
+            "name": "variable",
+            "type": "autocomplete",
+            "title": {
+              "en": "Number Variable",
+              "nl": "Nummer Variabele",
+              "da": "Nummervariabel",
+              "de": "Zahlenvariable",
+              "es": "Variable numérica",
+              "fr": "Variable numérique",
+              "it": "Variabile Numerica",
+              "no": "Tallvariabel",
+              "sv": "Nummervariabel",
+              "pl": "Zmienna Liczbowa",
+              "ru": "Числовая переменная",
+              "ko": "숫자 변수",
+              "ar": "متغير رقمي"
+            },
+            "placeholder": {
+              "en": "Number Variable",
+              "nl": "Nummer Variabele",
+              "da": "Nummervariabel",
+              "de": "Zahlenvariable",
+              "es": "Variable numérica",
+              "fr": "Variable numérique",
+              "it": "Variabile Numerica",
+              "no": "Tallvariabel",
+              "sv": "Nummervariabel",
+              "pl": "Zmienna Liczbowa",
+              "ru": "Числовая переменная",
+              "ko": "숫자 변수",
+              "ar": "متغير رقمي"
+            }
+          },
+          {
+            "name": "condition",
+            "title": {
+              "en": "Condition",
+              "nl": "Conditie",
+              "da": "Betingelse",
+              "de": "Zustand",
+              "es": "Condición",
+              "fr": "Condition",
+              "it": "Condizione",
+              "no": "Tilstand",
+              "sv": "Villkor",
+              "pl": "Warunek",
+              "ru": "Условие",
+              "ko": "조건",
+              "ar": "شرط"
+            },
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "equal_to",
+                "label": {
+                  "en": "Equal to",
+                  "nl": "Gelijk aan",
+                  "da": "Lige med",
+                  "de": "gleicht",
+                  "es": "Igual a",
+                  "fr": "Égal à",
+                  "it": "Uguale a",
+                  "no": "Lik med",
+                  "sv": "Lika med",
+                  "pl": "Równe",
+                  "ru": "Равно",
+                  "ko": "같음",
+                  "ar": "يساوي"
+                }
+              },
+              {
+                "id": "not_equal_to",
+                "label": {
+                  "en": "Not Equal to",
+                  "nl": "Niet gelijk aan",
+                  "da": "Ikke lig med",
+                  "de": "Nicht gleichzusetzen mit",
+                  "es": "No es igual a",
+                  "fr": "Différent de",
+                  "it": "Diverso da",
+                  "no": "Ikke lik",
+                  "sv": "Inte lika med",
+                  "pl": "Nie równa się",
+                  "ru": "Не равно",
+                  "ko": "같지 않음",
+                  "ar": "غير مساوي لـ"
+                }
+              },
+              {
+                "id": "contains",
+                "label": {
+                  "en": "Contains",
+                  "nl": "Bevat",
+                  "da": "Indeholder",
+                  "de": "Enthält",
+                  "es": "Contiene",
+                  "fr": "Contient",
+                  "it": "Contiene",
+                  "no": "Inneholder",
+                  "sv": "Innehåller",
+                  "pl": "Zawiera",
+                  "ru": "Содержит",
+                  "ko": "포함",
+                  "ar": "يحتوي على"
+                }
+              },
+              {
+                "id": "greater_than",
+                "label": {
+                  "en": "Greater than",
+                  "nl": "Groter dan",
+                  "da": "Større end",
+                  "de": "Größer als",
+                  "es": "Mayor que",
+                  "fr": "Supérieur à",
+                  "it": "Maggiore di",
+                  "no": "Større enn",
+                  "sv": "Större än",
+                  "pl": "Większe niż",
+                  "ru": "Больше чем",
+                  "ko": "보다 큼",
+                  "ar": "أكبر من"
+                }
+              },
+              {
+                "id": "greater_than_equal",
+                "label": {
+                  "en": "Greater than or Equal to",
+                  "nl": "Groter dan of gelijk aan",
+                  "da": "Større end eller lig med",
+                  "de": "Größer als oder gleich wie",
+                  "es": "Mayor o igual que",
+                  "fr": "Supérieur ou égal à",
+                  "it": "Maggiore o uguale a",
+                  "no": "Større enn eller lik",
+                  "sv": "Större än eller lika med",
+                  "pl": "Większe lub równe",
+                  "ru": "Больше или равно",
+                  "ko": "크거나 같음",
+                  "ar": "أكبر من أو يساوي"
+                }
+              },
+              {
+                "id": "less_than",
+                "label": {
+                  "en": "Less than",
+                  "nl": "Minder dan",
+                  "da": "Mindre end",
+                  "de": "Weniger als",
+                  "es": "Menos de",
+                  "fr": "Moins de",
+                  "it": "Meno di",
+                  "no": "Mindre enn",
+                  "sv": "Mindre än",
+                  "pl": "Mniej niż",
+                  "ru": "Меньше чем",
+                  "ko": "미만",
+                  "ar": "أقل من"
+                }
+              },
+              {
+                "id": "less_than_equal",
+                "label": {
+                  "en": "Less than or Equal to",
+                  "nl": "Minder dan of gelijk aan",
+                  "da": "Mindre end eller lig med",
+                  "de": "Gleich oder kleiner als",
+                  "es": "Menor o igual que",
+                  "fr": "Inférieur ou égal à",
+                  "it": "Minore o uguale a",
+                  "no": "Mindre enn eller lik",
+                  "sv": "Mindre än eller lika med",
+                  "pl": "Mniejsze lub równe",
+                  "ru": "Меньше или равно",
+                  "ko": "작거나 같음",
+                  "ar": "أقل من أو يساوي"
+                }
+              }
+            ]
+          },
+          {
+            "name": "value",
+            "type": "number",
+            "title": {
+              "en": "Value",
+              "nl": "Waarde",
+              "da": "Værdi",
+              "de": "Wert",
+              "es": "Valor",
+              "fr": "Valeur",
+              "it": "Valore",
+              "no": "Verdi",
+              "sv": "Värde",
+              "pl": "Wartość",
+              "ru": "Значение",
+              "ko": "값",
+              "ar": "القيمة"
+            },
+            "placeholder": {
+              "en": "Value - No tags!",
+              "nl": "Waarde - Geen tags!",
+              "da": "Værdi - Ingen tags!",
+              "de": "Wert – Keine Tags!",
+              "es": "Valor - ¡Sin etiquetas!",
+              "fr": "Valeur - Pas de tags !",
+              "it": "Valore - Nessun tag!",
+              "no": "Verdi - Ingen merkelapper!",
+              "sv": "Värde - Inga taggar!",
+              "pl": "Wartość - Brak tagów!",
+              "ru": "Значение - Без тегов!",
+              "ko": "값 - 태그 없음!",
+              "ar": "القيمة - بدون علامات!"
+            }
+          },
+          {
+            "name": "time",
+            "title": {
+              "en": "Duration",
+              "nl": "Looptijd",
+              "da": "Varighed",
+              "de": "Dauer",
+              "es": "Duración",
+              "fr": "Durée",
+              "it": "Durata",
+              "no": "Varighet",
+              "sv": "Varaktighet",
+              "pl": "Czas trwania",
+              "ru": "Продолжительность",
+              "ko": "지속 시간",
+              "ar": "المدة الزمنية"
+            },
+            "type": "number"
+          },
+          {
+            "name": "unit",
+            "title": {
+              "en": "Unit",
+              "nl": "Eenheid",
+              "da": "Enhed",
+              "de": "Einheit",
+              "es": "Unidad",
+              "fr": "Unité",
+              "it": "Unità",
+              "no": "Enhet",
+              "sv": "Enhet",
+              "pl": "Jednostka",
+              "ru": "Единица",
+              "ko": "단위",
+              "ar": "وحدة"
+            },
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "seconds",
+                "label": {
+                  "en": "seconds",
+                  "nl": "seconden",
+                  "da": "sekunder",
+                  "de": "Sekunden",
+                  "es": "segundos",
+                  "fr": "secondes",
+                  "it": "secondi",
+                  "no": "sekunder",
+                  "sv": "sekunder",
+                  "pl": "sekundy",
+                  "ru": "секунды",
+                  "ko": "초",
+                  "ar": "ثوانٍ"
+                }
+              },
+              {
+                "id": "minutes",
+                "label": {
+                  "en": "minutes",
+                  "nl": "minuten",
+                  "da": "minutter",
+                  "de": "Minuten",
+                  "es": "minutos",
+                  "fr": "minutes",
+                  "it": "minuti",
+                  "no": "minutter",
+                  "sv": "minuter",
+                  "pl": "minuty",
+                  "ru": "минуты",
+                  "ko": "분",
+                  "ar": "دقائق"
+                }
+              },
+              {
+                "id": "hours",
+                "label": {
+                  "en": "hours",
+                  "nl": "uren",
+                  "da": "timer",
+                  "de": "Stunden",
+                  "es": "horas",
+                  "fr": "heures",
+                  "it": "ore",
+                  "no": "timer",
+                  "sv": "timmar",
+                  "pl": "godziny",
+                  "ru": "часы",
+                  "ko": "시간",
+                  "ar": "ساعات"
+                }
+              },
+              {
+                "id": "days",
+                "label": {
+                  "en": "days",
+                  "nl": "dagen",
+                  "da": "dage",
+                  "de": "Tage",
+                  "es": "días",
+                  "fr": "jours",
+                  "it": "giorni",
+                  "no": "dager",
+                  "sv": "dagar",
+                  "pl": "dni",
+                  "ru": "дни",
+                  "ko": "일",
+                  "ar": "أيام"
+                }
+              }
+            ]
+          },
+          {
+            "name": "trigger",
+            "title": {
+              "en": "Mode",
+              "nl": "Modus",
+              "da": "Tilstand",
+              "de": "Modus",
+              "es": "Modo",
+              "fr": "Mode",
+              "it": "Modalità",
+              "no": "Modus",
+              "sv": "Läge",
+              "pl": "Tryb",
+              "ru": "Режим",
+              "ko": "모드",
+              "ar": "الوضع"
+            },
+            "type": "dropdown",
+            "value": "one_time",
+            "values": [
+              {
+                "id": "one_time",
+                "label": {
+                  "en": "Once after each change to true",
+                  "nl": "Eén na elke wijziging in waar",
+                  "da": "En gang efter hver ændring til sand",
+                  "de": "Einer ist nach jeder Änderung auf true",
+                  "es": "Una vez después de cada cambio a verdadero",
+                  "fr": "Une fois après chaque changement à vrai",
+                  "it": "Una volta dopo ogni modifica a vero",
+                  "no": "En gang etter hver endring til sann",
+                  "sv": "En gång efter varje ändring till sant",
+                  "pl": "Raz po każdej zmianie na prawdę",
+                  "ru": "Один раз после каждого изменения на true",
+                  "ko": "참으로 변경될 때마다 한 번",
+                  "ar": "مرة واحدة بعد كل تغيير إلى صحيح"
+                }
+              },
+              {
+                "id": "every_time",
+                "label": {
+                  "en": "Continuously while true",
+                  "nl": "Voortdurend terwijl het waar is",
+                  "da": "Kontinuerligt mens sandt",
+                  "de": "Kontinuierlich solange wahr",
+                  "es": "Continuamente mientras sea verdadero",
+                  "fr": "En continu tant que vrai",
+                  "it": "Continuamente mentre vero",
+                  "no": "Kontinuerlig mens sant",
+                  "sv": "Kontinuerligt medan sant",
+                  "pl": "Ciągle, gdy prawda",
+                  "ru": "Постоянно, пока истинно",
+                  "ko": "계속해서 참일 때",
+                  "ar": "بشكل مستمر بينما صحيح"
+                }
+              }
+            ]
+          }
+        ]
       }
     ],
     "conditions": [
