@@ -3866,20 +3866,21 @@
       },
       {
         "id": "execute_bl_expression_tag",
+        "highlight": true,
         "title": {
-          "en": "Execute BL Expression (as Tag)",
-          "nl": "Voer BL expressie uit (als Tag)",
-          "da": "Udfør BL-udtryk (som Tag)",
-          "de": "BL Bezeichnung setzen (als Tag)",
-          "es": "Ejecutar expresión BL (como etiqueta)",
-          "fr": "Exécuter l'expression BL (comme étiquette)",
-          "it": "Esegui espressione BL (come Tag)",
-          "no": "Utfør BL-uttrykk (som tag)",
-          "sv": "Kör BL-uttryck (som tagg)",
-          "pl": "Wykonaj wyrażenie BL (jako tag)",
-          "ru": "Выполнить BL выражение (как тег)",
-          "ko": "BL 표현 실행 (태그로)",
-          "ar": "تنفيذ تعبير BL (كتاغ)"
+          "en": "Execute BLL-expression (as Tag)",
+          "nl": "Voer BLL-expressie uit (als Tag)",
+          "da": "Udfør BLL-udtryk (som Tag)",
+          "de": "BLL-Ausdruck ausführen (als Tag)",
+          "es": "Ejecutar expresión BLL (como Etiqueta)",
+          "fr": "Exécuter l'expression BLL (comme Tag)",
+          "it": "Esegui espressione BLL (come Tag)",
+          "no": "Utfør BLL-uttrykk (som Tag)",
+          "sv": "Kör BLL-uttryck (som Tagg)",
+          "pl": "Wykonaj wyrażenie BLL (jako Tag)",
+          "ru": "Выполнить BLL-выражение (как Тег)",
+          "ko": "BLL-표현 실행 (태그로)",
+          "ar": "تنفيذ تعبير BLL (كعلامة)"
         },
         "titleFormatted": {
           "en": "Execute [[expression]] (as Tag)",
@@ -4028,6 +4029,7 @@
       },
       {
         "id": "execute_text_tag",
+        "highlight": true,
         "title": {
           "en": "Execute Text (as Tag)",
           "nl": "Tekst uitvoeren (als Tag)",
@@ -4095,19 +4097,19 @@
           }
         ],
         "hint": {
-          "en": "Supports BLL-Coding (with {[...]}) and returns it as a tag.",
-          "nl": "Ondersteunt BLL-Coding (met {[...]}) en geeft het terug als een tag.",
+          "en": "Supports BLL-coding (with {[...]}) and returns it as a tag.",
+          "nl": "Ondersteunt BLL-codering (met {[...]}) en geeft het terug als een tag.",
           "da": "Understøtter BLL-kodning (med {[...]}) og returnerer det som et tag.",
-          "de": "Unterstützt BLL-Coding (mit {[...]}) und gibt es als Tag zurück.",
-          "es": "Admite BLL-Coding (con {[...]}) y lo devuelve como una etiqueta.",
+          "de": "Unterstützt BLL-Codierung (mit {[...]}) und gibt es als Tag zurück.",
+          "es": "Admite la codificación BLL (con {[...]}) y la devuelve como una etiqueta.",
           "fr": "Prend en charge le codage BLL (avec {[...]}) et le renvoie sous forme de balise.",
-          "it": "Supporta la codifica BLL (con {[...]}) e la restituisce come un tag.",
+          "it": "Supporta la codifica BLL (con {[...]}) e la restituisce come tag.",
           "no": "Støtter BLL-koding (med {[...]}) og returnerer det som en tag.",
           "sv": "Stöder BLL-kodning (med {[...]}) och returnerar det som en tagg.",
           "pl": "Obsługuje kodowanie BLL (z {[...]}) i zwraca je jako tag.",
-          "ru": "Поддерживает BLL-кодирование (с {[...]}) и возвращает его как тег.",
-          "ko": "BLL-Coding({[...]})을 지원하며 이를 태그로 반환합니다.",
-          "ar": "يدعم BLL-Coding (مع {[...]}) ويعيده كعلامة."
+          "ru": "Поддерживает кодирование BLL (с {[...]}) и возвращает его в виде тега.",
+          "ko": "BLL-코딩({[...]})을 지원하며 이를 태그로 반환합니다.",
+          "ar": "يدعم ترميز BLL (مع {[...]}) ويعيده كعلامة."
         },
         "tokens": [
           {
@@ -4284,11 +4286,11 @@
           "ar": "اضبط [[variable]] على [[value]]"
         },
         "hint": {
-          "en": "You can set any variable with this card and it supports BLL Coding.",
+          "en": "You can set any variable with this card and it supports BLL-coding.",
           "nl": "Je kunt met deze kaart elke variabele instellen en het ondersteunt BLL-codering.",
           "da": "Du kan indstille enhver variabel med dette kort, og det understøtter BLL-kodning.",
-          "de": "Mit dieser Karte kannst du jede Variable festlegen und sie unterstützt BLL-Codierung.",
-          "es": "Puedes establecer cualquier variable con esta tarjeta y es compatible con la codificación BLL.",
+          "de": "Du kannst mit dieser Karte jede Variable festlegen und sie unterstützt BLL-Codierung.",
+          "es": "Puedes establecer cualquier variable con esta tarjeta y admite codificación BLL.",
           "fr": "Vous pouvez définir n'importe quelle variable avec cette carte et elle prend en charge le codage BLL.",
           "it": "Puoi impostare qualsiasi variabile con questa scheda e supporta la codifica BLL.",
           "no": "Du kan sette hvilken som helst variabel med dette kortet, og det støtter BLL-koding.",
