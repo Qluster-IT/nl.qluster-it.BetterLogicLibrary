@@ -70,7 +70,7 @@ class BLL {
     }
     sleep(ms) {
         return new Promise((resolve) => {
-            setTimeout(resolve, ms);
+            this.homey.setTimeout(resolve, ms);
         });
     }
 

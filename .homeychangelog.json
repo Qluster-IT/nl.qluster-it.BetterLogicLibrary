@@ -1934,7 +1934,19 @@
     "ko": "개선됨: 새로운 디자인, 이미지 및 로고.",
     "ar": "محسّن: تصميم جديد، صور وشعارات."
   },
-  "4.1.0": {
-    "en": "Improved: New Sustained When flowcards for text, number and yes/no variables\nBetter flowcard descriptions, titles, arguments and hints.\nThe Return as Tag flowcards will always try to fill all tags (text, number and yes/no) if possible."
+  "4.1.1": {
+    "en": "Improved: New Sustained When flowcards for text, number and yes/no variables\nBetter flowcard descriptions, titles, arguments and hints.\nThe Return as Tag flowcards will always try to fill all tags (text, number and yes/no) if possible.",
+    "nl": "Verbeterd: Nieuwe Aanhoudend Wanneer flowkaarten voor tekst-, nummer- en ja/nee-variabelen. Betere beschrijvingen, titels, argumenten en hints voor flowkaarten. De Terugkeer als Tag flowkaarten zullen altijd proberen om alle tags (tekst, nummer en ja/nee) in te vullen indien mogelijk.",
+    "da": "Forbedret: Nye Vedvarende Når flowkort til tekst, tal og ja/nej-variabler\nBedre flowkortbeskrivelser, titler, argumenter og hints.\nReturner som Tag flowkort vil altid forsøge at udfylde alle tags (tekst, tal og ja/nej), hvis det er muligt.",
+    "de": "Verbessert: Neue \"Sustained When\"-Flowkarten für Text-, Zahlen- und Ja/Nein-Variablen\nBessere Flowkarten-Beschreibungen, Titel, Argumente und Hinweise.\nDie \"Return as Tag\"-Flowkarten werden immer versuchen, alle Tags (Text, Zahl und Ja/Nein) auszufüllen, wenn möglich.",
+    "es": "Mejorado: Nuevas tarjetas de flujo \"Sustained When\" para variables de texto, número y sí/no. \nMejores descripciones, títulos, argumentos y sugerencias en las tarjetas de flujo. \nLas tarjetas de flujo \"Return as Tag\" siempre intentarán llenar todas las etiquetas (texto, número y sí/no) si es posible.",
+    "fr": "Amélioré : Nouvelles cartes de flux \"Sustained When\" pour les variables texte, nombre et oui/non. Descriptions, titres, arguments et indices des cartes de flux améliorés. Les cartes de flux \"Return as Tag\" essaieront toujours de remplir tous les tags (texte, nombre et oui/non) si possible.",
+    "it": "Migliorato: Nuove schede di flusso \"Sostenuto Quando\" per variabili di testo, numeriche e sì/no. Descrizioni, titoli, argomenti e suggerimenti delle schede di flusso migliorati. Le schede di flusso \"Ritorna come Tag\" cercheranno sempre di riempire tutti i tag (testo, numerico e sì/no) se possibile.",
+    "no": "Forbedret: Nye Vedvarende Når flytkort for tekst-, tall- og ja/nei-variabler\nBedre beskrivelser, titler, argumenter og tips for flytkort.\nReturner som Tag flytkort vil alltid forsøke å fylle alle tagger (tekst, tall og ja/nei) hvis mulig.",
+    "sv": "Förbättrad: Nya \"Sustained When\"-flödeskort för text-, siffer- och ja/nej-variabler.  \nBättre beskrivningar, titlar, argument och tips för flödeskort.  \nFlödeskorten \"Return as Tag\" kommer alltid att försöka fylla alla taggar (text, siffra och ja/nej) om möjligt.",
+    "pl": "Ulepszone: Nowe karty przepływu \"Sustained When\" dla zmiennych tekstowych, liczbowych i tak/nie. Lepsze opisy kart przepływu, tytuły, argumenty i wskazówki. Karty przepływu \"Return as Tag\" zawsze będą próbowały wypełnić wszystkie tagi (tekstowe, liczbowe i tak/nie), jeśli to możliwe.",
+    "ru": "Улучшено: Новые карточки потока \"Sustained When\" для текстовых, числовых и да/нет переменных. Улучшены описания карточек потока, заголовки, аргументы и подсказки. Карточки потока \"Return as Tag\" всегда будут пытаться заполнить все теги (текстовые, числовые и да/нет), если это возможно.",
+    "ko": "개선 사항: 텍스트, 숫자 및 예/아니오 변수에 대한 새로운 지속적 흐름 카드\n더 나은 흐름 카드 설명, 제목, 인수 및 힌트.\n가능한 경우, 태그로 반환 흐름 카드는 항상 모든 태그(텍스트, 숫자 및 예/아니오)를 채우려고 합니다.",
+    "ar": "محسّن: بطاقات تدفق جديدة مستدامة للمتغيرات النصية والرقمية ومتغيرات نعم/لا\nتحسين أوصاف بطاقات التدفق، العناوين، الحجج والتلميحات.\nبطاقات تدفق العودة كعلامة ستحاول دائمًا ملء جميع العلامات (نص، رقم ونعم/لا) إذا كان ذلك ممكنًا."
   }
 }

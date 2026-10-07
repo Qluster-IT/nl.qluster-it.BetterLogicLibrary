@@ -979,27 +979,25 @@ class BetterLogic extends Homey.App {
 
 
 			if(!await this.homey.settings.get('notification_update_sustained_flowcards')) {
-				this.homey.notifications.createNotification({excerpt : "New: Sustained flowcards: When variable is equal/larger than/contains/etc. 'x' for 'x' seconds/minutes/hours/days.\nSee the Forum Topic for more info or to request a feature." });  
 				this.homey.settings.set('notification_update_sustained_flowcards', true);
+				await this.homey.notifications.createNotification({excerpt : "New: Sustained flowcards: When variable is equal/larger than/contains/etc. 'x' for 'x' seconds/minutes/hours/days.\nSee the Forum Topic for more info or to request a feature." });  
 			}
 
 			// Keep these message here to know which one we used.
 			// if(!await this.homey.settings.get('notification_update_variablesinflows')) {
-			// 	this.homey.notifications.createNotification({excerpt : "The Better Logic App has been transferred to a new developer and rewriten to SDK3.\nVariables can now be created directly from within AND and THEN cards!\nJust type a name and select it from the list!\nAnd also, the Delete All button now has a Confirm before all are variables deleted.\nSee the Forum Topic for more info or to request a feature." });  
 			// 	this.homey.settings.set('notification_update_variablesinflows', true);
+			// 	await this.homey.notifications.createNotification({excerpt : "The Better Logic App has been transferred to a new developer and rewriten to SDK3.\nVariables can now be created directly from within AND and THEN cards!\nJust type a name and select it from the list!\nAnd also, the Delete All button now has a Confirm before all are variables deleted.\nSee the Forum Topic for more info or to request a feature." });  
 			// }
 
 
 			// if(!await this.homey.settings.get('notification_update_newsettings')) {
-			// 	this.homey.notifications.createNotification({excerpt : "The Better Logic App has been rebranded to Better Logic Library.\nCheck out the new App Settings for the new features, like BLL coding in supporting apps!" });  
 			// 	this.homey.settings.set('notification_update_newsettings', true);
+			// 	await this.homey.notifications.createNotification({excerpt : "The Better Logic App has been rebranded to Better Logic Library.\nCheck out the new App Settings for the new features, like BLL coding in supporting apps!" });  
 			// }
 		} catch (ex) {
 			try {
 				await homey.notifications.createNotification({ excerpt: `Error while starting the app:` + (ex.message || ex) });
-			} catch (error) {
-
-			}
+			} catch (error) { }
 		}
 	}
 
