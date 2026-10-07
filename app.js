@@ -780,11 +780,29 @@ class BetterLogic extends Homey.App {
 							const value = this.runSandBox(args.expression, { arg: args.argument });
 							const tokens = { text: '', number: 0, boolean: false, json: '' };
 							switch (typeof (value)) {
-								case "string": tokens.text = value; break;
-								case "number": tokens.number = value; break;
-								case "boolean": tokens.boolean = value; break;
+								case "string": 
+									tokens.text = value;
+									tokens.boolean = value==='true' || value==='yes' || value==='1';
+									tokens.number = Number.parseFloat(value) || 0;
+									tokens.json = value;//JSON.stringify(value);
+								break;
+								case "number": 
+									tokens.number = value;
+									tokens.text = value.toString();
+									tokens.boolean = value>=1;
+									tokens.json = JSON.stringify(value);
+									break;
+								case "boolean": 
+									tokens.boolean = value;
+									tokens.text = value.toString();
+									tokens.number = value ? 1 : 0;
+									tokens.json = JSON.stringify(value);
+									break;
 								default:
 									tokens.json = JSON.stringify(value);
+									tokens.text = tokens.json;//value?.toString() || '';
+									tokens.boolean = value==='true' || value==='yes' || value==='1';
+									tokens.number = Number.parseFloat(value) || 0;
 									break;
 							}
 							return tokens;
@@ -801,8 +819,14 @@ class BetterLogic extends Homey.App {
 
 						if (args.text !== undefined && args.text !== 'undefined') {
 
-							if (args && args.text) args.text = await this.runCoding({ text: args.text });
-							return { text: args.text };
+							let value = args.text;
+							if (args && args.text) value = this.runCoding({ text: args.text });
+							
+							const tokens = { text: value || '', number: 0, boolean: false, json: '' };							
+							tokens.json = value;//JSON.stringify(value);							
+							tokens.boolean = value==='true' || value==='yes' || value==='1';
+							tokens.number = Number.parseFloat(value) || 0;
+							return tokens;
 						}
 					} catch (error) {
 						this.log('execute_text_tag:');
@@ -1031,7 +1055,7 @@ class BetterLogic extends Homey.App {
 			_: BL._,
 			math: BL.math,
 			//datetime : BL.datetime,
-			date: (coding, date, locale, timeZone) => BL.datetime.toString(coding, date, locale, timeZone)
+			//date: (coding, date, locale, timeZone) => BL.datetime.toString(coding, date, locale, timeZone)
 			//d : (s) => new Date(s)
 		};
 		if (this.functions && this.functions.length > 0) for (let i = 0; i < this.functions.length; i++) {
@@ -1157,7 +1181,10 @@ class BetterLogic extends Homey.App {
 
 
 			text = text.replaceAll(this.codingRegExp, (val, index) => {
-				return codingsToRun[index];
+				let value = codingsToRun[index];
+				if(BL._.isArray(value)) value = value?.toString() || '';
+				else if(typeof(value)==='object') value = JSON.stringify(value);
+				return value;
 			});
 
 			// let codings = completeText.matchAll(/\[\{(.*?)\}\]/gmsi);
@@ -1213,9 +1240,11 @@ class BetterLogic extends Homey.App {
 		//context.int = (val)=> Number.parseInt(val);
 
 		//}
+		
+		code = '( ' + code + ' )';
 		try {
 
-			return new vm.Script(code).runInNewContext(context, { timeout: 55 * 1000 });
+			return new vm.Script(code).runInNewContext(vm.createContext(context), { timeout: 55 * 1000 });
 			//return sandbox(code, context, { timeout: 55 * 1000 }); //55 seconds timeout
 		} catch (error) {
 			let end;
