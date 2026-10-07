@@ -1001,17 +1001,26 @@ class DateTime {
     BL.homey.log('DateTime.destroyed');
   }
 
+  /**
+   * 
+   * @param {String} format 
+   * @param {Number|Number[]} timeMs 
+   * @param {Number} timeSec 
+   * @returns {String|String[]}
+   */
   static toTimeString(format, timeMs, timeSec) {
     if (timeMs)
       if (!format) throw new Error("format is required.");
     if ((timeMs === undefined || timeMs === null) && (timeSec === undefined || timeSec === null)) throw new Error("timeMs or timeSec is required.");
-    if (!(timeSec === undefined || timeSec === null)) {
-      if (timeMs === undefined || timeMs === null)
-        timeMs = timeSec * 1000;
-      else timeMs += (timeSec * 1000);
-    }
-    if (!BL._.isArray(timeMs))
+
+    if (!BL._.isArray(timeMs)) {
+      if (!(timeSec === undefined || timeSec === null)) {
+        if (timeMs === undefined || timeMs === null)
+          timeMs = timeSec * 1000;
+        else timeMs += (timeSec * 1000);
+      }
       return new DateTime(null, null, null, timeMs).toTimeString(format, true, DateTime.codes.timeArray);
+    }
     else if (BL._.isArray(timeMs)) {
       let r = {};
       for (const _timeMs of timeMs) {
@@ -1040,20 +1049,22 @@ class DateTime {
   // }
 
   /**
+   * @overload
    * @param {String|String[]} format 
    * @param {String} locale 
    * @param {String} timeZone 
-   * @returns 
+   * @returns {String|String[]}
    *//**
+   * @overload
    * @param {String|String[]} format 
    * @param {String|String[]|Number|Number[]|Date|Date[]} date 
    * @param {String} locale 
    * @param {String} timeZone 
-   * @returns 
+   * @returns {String|String[]}
    */
   static toString(format, date, locale, timeZone) {
     if (!format) throw new Error("format is required.");
-    if(typeof(date)=='string' && date.length<=12 && localesTags.indexOf(date)>-1) {
+    if (typeof (date) == 'string' && date.length <= 12 && localesTags.indexOf(date) > -1) {
       timeZone = locale;
       locale = date;
       date = undefined;

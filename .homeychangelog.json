@@ -1934,7 +1934,7 @@
     "ko": "개선됨: 새로운 디자인, 이미지 및 로고.",
     "ar": "محسّن: تصميم جديد، صور وشعارات."
   },
-  "4.1.1": {
+  "4.1.2": {
     "en": "Improved: New Sustained When flowcards for text, number and yes/no variables\nBetter flowcard descriptions, titles, arguments and hints.\nThe Return as Tag flowcards will always try to fill all tags (text, number and yes/no) if possible.",
     "nl": "Verbeterd: Nieuwe Aanhoudend Wanneer flowkaarten voor tekst-, nummer- en ja/nee-variabelen. Betere beschrijvingen, titels, argumenten en hints voor flowkaarten. De Terugkeer als Tag flowkaarten zullen altijd proberen om alle tags (tekst, nummer en ja/nee) in te vullen indien mogelijk.",
     "da": "Forbedret: Nye Vedvarende Når flowkort til tekst, tal og ja/nej-variabler\nBedre flowkortbeskrivelser, titler, argumenter og hints.\nReturner som Tag flowkort vil altid forsøge at udfylde alle tags (tekst, tal og ja/nej), hvis det er muligt.",
