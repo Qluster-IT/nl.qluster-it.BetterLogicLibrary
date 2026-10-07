@@ -976,7 +976,7 @@ class BetterLogic extends Homey.App {
 
 
 			});
-BL.datetime.toString()
+
 
 			if(!await this.homey.settings.get('notification_update_sustained_flowcards')) {
 				this.homey.settings.set('notification_update_sustained_flowcards', true);
