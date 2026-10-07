@@ -11,4 +11,3 @@ Done:
 * Better naming of flowcards titles, arguments and hints.
 * BLL Expression (as Tag)
     * Returns as Number, Yes/No and Text if possible.
-    * Hints
