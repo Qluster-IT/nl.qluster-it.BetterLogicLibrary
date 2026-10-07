@@ -688,13 +688,49 @@
         "highlight": true,
         "id": "variable_number_sustained",
         "title": {
-          "en": "When a number variable has been a certain value for a period"
+          "en": "When a number variable has been a certain value for a period",
+          "nl": "Wanneer een numerieke variabele gedurende een bepaalde periode een bepaalde waarde heeft gehad",
+          "da": "Når en talvariabel har haft en bestemt værdi i en periode",
+          "de": "Wenn eine Zahlenvariable für einen bestimmten Zeitraum einen bestimmten Wert hatte",
+          "es": "Cuando una variable numérica ha tenido un cierto valor durante un período",
+          "fr": "Lorsqu'une variable numérique a eu une certaine valeur pendant une période",
+          "it": "Quando una variabile numerica ha avuto un certo valore per un periodo di tempo",
+          "no": "Når en tallvariabel har hatt en bestemt verdi i en periode",
+          "sv": "När en siffervariabel har haft ett visst värde under en period",
+          "pl": "Gdy zmienna liczbowa ma określoną wartość przez pewien okres czasu",
+          "ru": "Когда числовая переменная имеет определенное значение в течение некоторого времени",
+          "ko": "숫자 변수가 일정 기간 동안 특정 값이었을 때",
+          "ar": "عندما يكون متغير الرقم قيمة معينة لفترة زمنية معينة"
         },
         "titleFormatted": {
-          "en": "When [[variable]] is [[condition]] [[value]] for [[time]] [[unit]], execute [[trigger]]"
+          "en": "When [[variable]] is [[condition]] [[value]] for [[time]] [[unit]], execute [[execute]]",
+          "nl": "Wanneer [[variable]] [[condition]] [[value]] is gedurende [[time]] [[unit]], voer [[execute]] uit.",
+          "da": "Når [[variable]] er [[condition]] [[value]] i [[time]] [[unit]], udfør [[execute]]",
+          "de": "Wenn [[variable]] [[condition]] [[value]] für [[time]] [[unit]] ist, führe [[execute]] aus.",
+          "es": "Cuando [[variable]] es [[condition]] [[value]] durante [[time]] [[unit]], ejecuta [[execute]]",
+          "fr": "Quand [[variable]] est [[condition]] [[value]] pendant [[time]] [[unit]], exécuter [[execute]]",
+          "it": "Quando [[variable]] è [[condition]] [[value]] per [[time]] [[unit]], esegui [[execute]]",
+          "no": "Når [[variable]] er [[condition]] [[value]] i [[time]] [[unit]], utfør [[execute]]",
+          "sv": "När [[variable]] är [[condition]] [[value]] i [[time]] [[unit]], kör [[execute]]",
+          "pl": "Kiedy [[variable]] jest [[condition]] [[value]] przez [[time]] [[unit]], wykonaj [[execute]]",
+          "ru": "Когда [[variable]] [[condition]] [[value]] в течение [[time]] [[unit]], выполните [[execute]]",
+          "ko": "[[variable]]이(가) [[time]] [[unit]] 동안 [[value]] [[condition]]일 때, [[execute]] 실행",
+          "ar": "عندما يكون [[variable]] [[condition]] [[value]] لمدة [[time]] [[unit]]، قم بتنفيذ [[execute]]"
         },
         "hint": {
-          "en": "This card will execute when a certain capability from a device has been a certain value for a specific period."
+          "en": "This card will execute when a variable has been a certain value for a specific period.\nWhen f.i. using a condition of 'equal to 5 for 5 seconds' Execute once means this card will be triggered once after the condition has been met and stays true for 5 seconds. Repeatedly means, as long as the condition is met, this card will be executed every 5 seconds.",
+          "nl": "Deze kaart wordt uitgevoerd wanneer een variabele een bepaalde waarde heeft gedurende een specifieke periode. Als je bijvoorbeeld een voorwaarde gebruikt van 'gelijk aan 5 voor 5 seconden', betekent Uitvoeren eenmaal dat deze kaart één keer wordt geactiveerd nadat aan de voorwaarde is voldaan en deze 5 seconden waar blijft. Herhaaldelijk betekent dat, zolang aan de voorwaarde wordt voldaan, deze kaart elke 5 seconden wordt uitgevoerd.",
+          "da": "Dette kort vil blive udført, når en variabel har haft en bestemt værdi i en specifik periode. Når du f.eks. bruger en betingelse som 'lig med 5 i 5 sekunder', betyder Udfør én gang, at dette kort vil blive udløst én gang, efter at betingelsen er opfyldt og forbliver sand i 5 sekunder. Gentagne gange betyder, at så længe betingelsen er opfyldt, vil dette kort blive udført hver 5. sekund.",
+          "de": "Diese Karte wird ausgeführt, wenn eine Variable für einen bestimmten Zeitraum einen bestimmten Wert hat. Wenn Sie z.B. eine Bedingung von 'gleich 5 für 5 Sekunden' verwenden, bedeutet \"Einmal ausführen\", dass diese Karte einmal ausgelöst wird, nachdem die Bedingung erfüllt ist und 5 Sekunden lang wahr bleibt. \"Wiederholt\" bedeutet, dass diese Karte alle 5 Sekunden ausgeführt wird, solange die Bedingung erfüllt ist.",
+          "es": "Esta tarjeta se ejecutará cuando una variable haya tenido un cierto valor durante un período específico. Por ejemplo, al usar una condición de 'igual a 5 durante 5 segundos', Ejecutar una vez significa que esta tarjeta se activará una vez después de que se cumpla la condición y se mantenga verdadera durante 5 segundos. Repetidamente significa que, mientras se cumpla la condición, esta tarjeta se ejecutará cada 5 segundos.",
+          "fr": "Cette carte s'exécutera lorsqu'une variable aura une certaine valeur pendant une période spécifique. Par exemple, en utilisant une condition de 'égal à 5 pendant 5 secondes', Exécuter une fois signifie que cette carte sera déclenchée une fois après que la condition ait été remplie et reste vraie pendant 5 secondes. Répéter signifie que tant que la condition est remplie, cette carte sera exécutée toutes les 5 secondes.",
+          "it": "Questa scheda verrà eseguita quando una variabile avrà un determinato valore per un periodo specifico. Ad esempio, utilizzando una condizione di 'uguale a 5 per 5 secondi', Esegui una volta significa che questa scheda verrà attivata una volta dopo che la condizione è stata soddisfatta e rimane vera per 5 secondi. Ripetutamente significa che, finché la condizione è soddisfatta, questa scheda verrà eseguita ogni 5 secondi.",
+          "no": "Dette kortet vil utføres når en variabel har hatt en bestemt verdi i en spesifikk periode. Når du for eksempel bruker en betingelse som 'lik 5 i 5 sekunder', betyr Utfør én gang at dette kortet vil bli utløst én gang etter at betingelsen er oppfylt og forblir sann i 5 sekunder. Gjentatte ganger betyr at så lenge betingelsen er oppfylt, vil dette kortet bli utført hvert 5. sekund.",
+          "sv": "Detta kort kommer att köras när en variabel har haft ett visst värde under en specifik tidsperiod. När du t.ex. använder ett villkor som 'lika med 5 i 5 sekunder' betyder Kör en gång att detta kort kommer att utlösas en gång efter att villkoret har uppfyllts och förblir sant i 5 sekunder. Upprepade gånger betyder att så länge villkoret är uppfyllt, kommer detta kort att köras var 5:e sekund.",
+          "pl": "Ta karta zostanie wykonana, gdy zmienna będzie miała określoną wartość przez określony czas. Na przykład, używając warunku 'równe 5 przez 5 sekund', Wykonaj raz oznacza, że karta zostanie uruchomiona raz po spełnieniu warunku i pozostaniu prawdziwym przez 5 sekund. Powtarzaj oznacza, że tak długo, jak warunek jest spełniony, karta będzie wykonywana co 5 sekund.",
+          "ru": "Эта карта будет выполняться, когда переменная имеет определенное значение в течение заданного периода времени. Например, при использовании условия 'равно 5 в течение 5 секунд' Выполнить один раз означает, что эта карта будет срабатывать один раз после того, как условие выполнено и остается истинным в течение 5 секунд. Повторно означает, что пока условие выполняется, эта карта будет выполняться каждые 5 секунд.",
+          "ko": "변수가 특정 값으로 일정 기간 동안 유지될 때 이 카드는 실행됩니다. 예를 들어, '5와 같음 5초 동안'이라는 조건을 사용할 때, '한 번 실행'은 조건이 충족되고 5초 동안 유지된 후 이 카드가 한 번 트리거된다는 의미입니다. '반복 실행'은 조건이 충족되는 한 이 카드가 매 5초마다 실행된다는 의미입니다.",
+          "ar": "سيتم تنفيذ هذه البطاقة عندما يكون للمتغير قيمة معينة لفترة محددة. عند استخدام شرط مثل \"يساوي 5 لمدة 5 ثوانٍ\"، فإن \"تنفيذ مرة واحدة\" يعني أن هذه البطاقة ستُفعّل مرة واحدة بعد تحقق الشرط وبقائه صحيحًا لمدة 5 ثوانٍ. \"بشكل متكرر\" يعني أنه طالما تحقق الشرط، سيتم تنفيذ هذه البطاقة كل 5 ثوانٍ."
         },
         "args": [
           {
@@ -787,24 +823,6 @@
                 }
               },
               {
-                "id": "contains",
-                "label": {
-                  "en": "Contains",
-                  "nl": "Bevat",
-                  "da": "Indeholder",
-                  "de": "Enthält",
-                  "es": "Contiene",
-                  "fr": "Contient",
-                  "it": "Contiene",
-                  "no": "Inneholder",
-                  "sv": "Innehåller",
-                  "pl": "Zawiera",
-                  "ru": "Содержит",
-                  "ko": "포함",
-                  "ar": "يحتوي على"
-                }
-              },
-              {
                 "id": "greater_than",
                 "label": {
                   "en": "Greater than",
@@ -882,34 +900,34 @@
             "name": "value",
             "type": "number",
             "title": {
-              "en": "Value",
-              "nl": "Waarde",
-              "da": "Værdi",
-              "de": "Wert",
-              "es": "Valor",
-              "fr": "Valeur",
-              "it": "Valore",
-              "no": "Verdi",
-              "sv": "Värde",
-              "pl": "Wartość",
-              "ru": "Значение",
-              "ko": "값",
-              "ar": "القيمة"
+              "en": "Number",
+              "nl": "Nummer",
+              "da": "Nummer",
+              "de": "Nummer",
+              "es": "Número",
+              "fr": "Nombre",
+              "it": "Numero",
+              "no": "Nummer",
+              "sv": "Nummer",
+              "pl": "Numer",
+              "ru": "Число",
+              "ko": "숫자",
+              "ar": "رقم"
             },
             "placeholder": {
-              "en": "Value - No tags!",
-              "nl": "Waarde - Geen tags!",
-              "da": "Værdi - Ingen tags!",
-              "de": "Wert – Keine Tags!",
-              "es": "Valor - ¡Sin etiquetas!",
-              "fr": "Valeur - Pas de tags !",
-              "it": "Valore - Nessun tag!",
-              "no": "Verdi - Ingen merkelapper!",
-              "sv": "Värde - Inga taggar!",
-              "pl": "Wartość - Brak tagów!",
-              "ru": "Значение - Без тегов!",
-              "ko": "값 - 태그 없음!",
-              "ar": "القيمة - بدون علامات!"
+              "en": "Number - No tags!",
+              "nl": "Nummer - Geen tags!",
+              "da": "Nummer - Ingen tags!",
+              "de": "Nummer – Keine Tags!",
+              "es": "Número - ¡Sin etiquetas!",
+              "fr": "Nombre - Pas de tags !",
+              "it": "Numero - Nessun tag!",
+              "no": "Nummer - Ingen merkelapper!",
+              "sv": "Nummer - Inga taggar!",
+              "pl": "Numer - Brak tagów!",
+              "ru": "Число - Без тегов!",
+              "ko": "숫자 - 태그 없음!",
+              "ar": "رقم - بدون علامات!"
             }
           },
           {
@@ -1025,21 +1043,21 @@
             ]
           },
           {
-            "name": "trigger",
+            "name": "execute",
             "title": {
-              "en": "Mode",
-              "nl": "Modus",
-              "da": "Tilstand",
-              "de": "Modus",
-              "es": "Modo",
-              "fr": "Mode",
-              "it": "Modalità",
-              "no": "Modus",
-              "sv": "Läge",
-              "pl": "Tryb",
-              "ru": "Режим",
-              "ko": "모드",
-              "ar": "الوضع"
+              "en": "once or repeatedly",
+              "nl": "eenmalig of herhaaldelijk",
+              "da": "en gang eller gentagne gange",
+              "de": "einmal oder wiederholt",
+              "es": "una vez o repetidamente",
+              "fr": "une fois ou à plusieurs reprises",
+              "it": "una volta o ripetutamente",
+              "no": "en gang eller gjentatte ganger",
+              "sv": "en gång eller upprepade gånger",
+              "pl": "jednorazowo lub wielokrotnie",
+              "ru": "один раз или многократно",
+              "ko": "한 번 또는 반복적으로",
+              "ar": "مرة واحدة أو بشكل متكرر"
             },
             "type": "dropdown",
             "value": "one_time",
@@ -1047,37 +1065,747 @@
               {
                 "id": "one_time",
                 "label": {
-                  "en": "Once after each change to true",
-                  "nl": "Eén na elke wijziging in waar",
-                  "da": "En gang efter hver ændring til sand",
-                  "de": "Einer ist nach jeder Änderung auf true",
-                  "es": "Una vez después de cada cambio a verdadero",
-                  "fr": "Une fois après chaque changement à vrai",
-                  "it": "Una volta dopo ogni modifica a vero",
-                  "no": "En gang etter hver endring til sann",
-                  "sv": "En gång efter varje ändring till sant",
-                  "pl": "Raz po każdej zmianie na prawdę",
-                  "ru": "Один раз после каждого изменения на true",
-                  "ko": "참으로 변경될 때마다 한 번",
-                  "ar": "مرة واحدة بعد كل تغيير إلى صحيح"
+                  "en": "once",
+                  "nl": "eenmaal",
+                  "da": "én gang",
+                  "de": "einmal",
+                  "es": "una vez",
+                  "fr": "une fois",
+                  "it": "una volta",
+                  "no": "én gang",
+                  "sv": "en gång",
+                  "pl": "raz",
+                  "ru": "однажды",
+                  "ko": "한 번",
+                  "ar": "مرة واحدة"
                 }
               },
               {
                 "id": "every_time",
                 "label": {
-                  "en": "Continuously while true",
-                  "nl": "Voortdurend terwijl het waar is",
-                  "da": "Kontinuerligt mens sandt",
-                  "de": "Kontinuierlich solange wahr",
-                  "es": "Continuamente mientras sea verdadero",
-                  "fr": "En continu tant que vrai",
-                  "it": "Continuamente mentre vero",
-                  "no": "Kontinuerlig mens sant",
-                  "sv": "Kontinuerligt medan sant",
-                  "pl": "Ciągle, gdy prawda",
-                  "ru": "Постоянно, пока истинно",
-                  "ko": "계속해서 참일 때",
-                  "ar": "بشكل مستمر بينما صحيح"
+                  "en": "repeatedly",
+                  "nl": "herhaaldelijk",
+                  "da": "gentagne gange",
+                  "de": "wiederholt",
+                  "es": "repetidamente",
+                  "fr": "à plusieurs reprises",
+                  "it": "ripetutamente",
+                  "no": "gjentatte ganger",
+                  "sv": "upprepade gånger",
+                  "pl": "wielokrotnie",
+                  "ru": "неоднократно",
+                  "ko": "반복적으로",
+                  "ar": "بشكل متكرر"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "highlight": true,
+        "id": "variable_string_sustained",
+        "title": {
+          "en": "When a text variable has been a certain value for a period",
+          "nl": "Wanneer een tekstvariabele gedurende een bepaalde periode een bepaalde waarde heeft gehad",
+          "da": "Når en tekstvariabel har haft en bestemt værdi i en periode",
+          "de": "Wenn eine Textvariable für einen bestimmten Zeitraum einen bestimmten Wert hatte",
+          "es": "Cuando una variable de texto ha tenido un cierto valor durante un período",
+          "fr": "Lorsqu'une variable texte a eu une certaine valeur pendant une période",
+          "it": "Quando una variabile di testo ha avuto un certo valore per un periodo di tempo",
+          "no": "Når en tekstvariabel har hatt en bestemt verdi i en periode",
+          "sv": "När en textvariabel har haft ett visst värde under en period",
+          "pl": "Gdy zmienna tekstowa ma określoną wartość przez pewien okres czasu",
+          "ru": "Когда текстовая переменная имеет определенное значение в течение периода времени",
+          "ko": "텍스트 변수가 일정 기간 동안 특정 값이었을 때",
+          "ar": "عندما يكون للمتغير النصي قيمة معينة لفترة معينة"
+        },
+        "titleFormatted": {
+          "en": "When [[variable]] is [[condition]] [[value]] for [[time]] [[unit]], execute [[execute]]",
+          "nl": "Wanneer [[variable]] [[condition]] [[value]] is gedurende [[time]] [[unit]], voer [[execute]] uit.",
+          "da": "Når [[variable]] er [[condition]] [[value]] i [[time]] [[unit]], udfør [[execute]]",
+          "de": "Wenn [[variable]] [[condition]] [[value]] für [[time]] [[unit]] ist, führe [[execute]] aus.",
+          "es": "Cuando [[variable]] sea [[condition]] [[value]] durante [[time]] [[unit]], ejecuta [[execute]]",
+          "fr": "Quand [[variable]] est [[condition]] [[value]] pendant [[time]] [[unit]], exécuter [[execute]]",
+          "it": "Quando [[variable]] è [[condition]] [[value]] per [[time]] [[unit]], esegui [[execute]]",
+          "no": "Når [[variable]] er [[condition]] [[value]] i [[time]] [[unit]], utfør [[execute]]",
+          "sv": "När [[variable]] är [[condition]] [[value]] i [[time]] [[unit]], kör [[execute]]",
+          "pl": "Kiedy [[variable]] jest [[condition]] [[value]] przez [[time]] [[unit]], wykonaj [[execute]]",
+          "ru": "Когда [[variable]] [[condition]] [[value]] в течение [[time]] [[unit]], выполните [[execute]]",
+          "ko": "[[variable]]이(가) [[time]] [[unit]] 동안 [[value]] [[condition]]일 때, [[execute]] 실행",
+          "ar": "عندما يكون [[variable]] [[condition]] [[value]] لمدة [[time]] [[unit]]، قم بتنفيذ [[execute]]"
+        },
+        "hint": {
+          "en": "This card will execute when a variable has been a certain value for a specific period.\nWhen f.i. using a condition of 'equal to text for 5 seconds' Execute once means this card will be triggered once after the condition has been met and stays true for 5 seconds. Repeatedly means, as long as the condition is met, this card will be executed every 5 seconds.",
+          "nl": "Deze kaart wordt uitgevoerd wanneer een variabele een bepaalde waarde heeft gedurende een specifieke periode. Bijv. bij gebruik van een voorwaarde 'gelijk aan tekst voor 5 seconden' betekent Uitvoeren eenmaal dat deze kaart één keer wordt geactiveerd nadat aan de voorwaarde is voldaan en deze 5 seconden waar blijft. Herhaaldelijk betekent dat, zolang aan de voorwaarde wordt voldaan, deze kaart elke 5 seconden wordt uitgevoerd.",
+          "da": "Dette kort vil blive udført, når en variabel har haft en bestemt værdi i en specifik periode. Når man f.eks. bruger en betingelse som 'lig med tekst i 5 sekunder', betyder Udfør én gang, at dette kort vil blive udløst én gang, efter betingelsen er opfyldt og forbliver sand i 5 sekunder. Gentagne gange betyder, at så længe betingelsen er opfyldt, vil dette kort blive udført hvert 5. sekund.",
+          "de": "Diese Karte wird ausgeführt, wenn eine Variable für einen bestimmten Zeitraum einen bestimmten Wert hat. Wenn du z.B. eine Bedingung von 'gleich Text für 5 Sekunden' verwendest, bedeutet \"Einmal ausführen\", dass diese Karte einmal ausgelöst wird, nachdem die Bedingung erfüllt ist und 5 Sekunden lang wahr bleibt. \"Wiederholt\" bedeutet, dass diese Karte alle 5 Sekunden ausgeführt wird, solange die Bedingung erfüllt ist.",
+          "es": "Esta tarjeta se ejecutará cuando una variable haya tenido un cierto valor durante un período específico. Por ejemplo, al usar una condición de 'igual a texto durante 5 segundos', Ejecutar una vez significa que esta tarjeta se activará una vez después de que se cumpla la condición y se mantenga verdadera durante 5 segundos. Repetidamente significa que, mientras se cumpla la condición, esta tarjeta se ejecutará cada 5 segundos.",
+          "fr": "Cette carte s'exécutera lorsqu'une variable aura une certaine valeur pendant une période spécifique. Par exemple, en utilisant une condition de 'égal à texte pendant 5 secondes', Exécuter une fois signifie que cette carte sera déclenchée une fois après que la condition ait été remplie et reste vraie pendant 5 secondes. Répétée signifie que tant que la condition est remplie, cette carte sera exécutée toutes les 5 secondes.",
+          "it": "Questa scheda verrà eseguita quando una variabile avrà avuto un determinato valore per un periodo specifico. Ad esempio, utilizzando una condizione di 'uguale a testo per 5 secondi', Esegui una volta significa che questa scheda verrà attivata una volta dopo che la condizione è stata soddisfatta e rimane vera per 5 secondi. Ripetutamente significa che, finché la condizione è soddisfatta, questa scheda verrà eseguita ogni 5 secondi.",
+          "no": "Dette kortet vil utføres når en variabel har hatt en bestemt verdi i en spesifikk periode. Når du for eksempel bruker en betingelse som 'lik tekst i 5 sekunder', betyr Utfør én gang at dette kortet vil bli utløst én gang etter at betingelsen er oppfylt og forblir sann i 5 sekunder. Gjentatte ganger betyr at så lenge betingelsen er oppfylt, vil dette kortet bli utført hvert 5. sekund.",
+          "sv": "Detta kort kommer att köras när en variabel har haft ett visst värde under en specifik tidsperiod. När du t.ex. använder ett villkor som 'lika med text i 5 sekunder' innebär Kör en gång att detta kort kommer att utlösas en gång efter att villkoret har uppfyllts och förblir sant i 5 sekunder. Upprepade gånger innebär att så länge villkoret är uppfyllt, kommer detta kort att köras var 5:e sekund.",
+          "pl": "Ta karta zostanie wykonana, gdy zmienna będzie miała określoną wartość przez określony czas. Na przykład, używając warunku 'równe tekstowi przez 5 sekund', Wykonaj raz oznacza, że karta zostanie uruchomiona raz po spełnieniu warunku i pozostaniu prawdziwym przez 5 sekund. Powtarzaj oznacza, że tak długo, jak warunek jest spełniony, karta będzie wykonywana co 5 sekund.",
+          "ru": "Эта карта будет выполняться, когда переменная имеет определенное значение в течение заданного периода времени. Например, при использовании условия 'равно тексту в течение 5 секунд' Выполнить один раз означает, что эта карта будет срабатывать один раз после того, как условие будет выполнено и останется истинным в течение 5 секунд. Повторно означает, что пока условие выполняется, эта карта будет выполняться каждые 5 секунд.",
+          "ko": "변수가 특정 기간 동안 특정 값이었을 때 이 카드는 실행됩니다. 예를 들어, '텍스트와 같음 5초 동안'이라는 조건을 사용할 때, '한 번 실행'은 조건이 충족되고 5초 동안 유지된 후 이 카드가 한 번 트리거된다는 것을 의미합니다. '반복 실행'은 조건이 충족되는 한 이 카드가 5초마다 실행된다는 것을 의미합니다.",
+          "ar": "سيتم تنفيذ هذه البطاقة عندما يكون للمتغير قيمة معينة لفترة محددة. عند استخدام شرط مثل \"يساوي النص لمدة 5 ثوانٍ\"، فإن \"تنفيذ مرة واحدة\" يعني أن هذه البطاقة سيتم تفعيلها مرة واحدة بعد تحقق الشرط وبقائه صحيحًا لمدة 5 ثوانٍ. \"بشكل متكرر\" يعني أنه طالما تم تحقيق الشرط، سيتم تنفيذ هذه البطاقة كل 5 ثوانٍ."
+        },
+        "args": [
+          {
+            "name": "variable",
+            "type": "autocomplete",
+            "title": {
+              "en": "Text Variable",
+              "nl": "Tekstvariabele",
+              "da": "Tekstvariabel",
+              "de": "Textvariable",
+              "es": "Variable de texto",
+              "fr": "Variable de texte",
+              "it": "Variabile di Testo",
+              "no": "Tekstvariabel",
+              "sv": "Textvariabel",
+              "pl": "Zmienna tekstowa",
+              "ru": "Текстовая переменная",
+              "ko": "텍스트 변수",
+              "ar": "متغير النص"
+            },
+            "placeholder": {
+              "en": "Text Variable",
+              "nl": "Tekstvariabele",
+              "da": "Tekstvariabel",
+              "de": "Textvariable",
+              "es": "Variable de texto",
+              "fr": "Variable de texte",
+              "it": "Variabile di Testo",
+              "no": "Tekstvariabel",
+              "sv": "Textvariabel",
+              "pl": "Zmienna tekstowa",
+              "ru": "Текстовая переменная",
+              "ko": "텍스트 변수",
+              "ar": "متغير النص"
+            }
+          },
+          {
+            "name": "condition",
+            "title": {
+              "en": "Condition",
+              "nl": "Conditie",
+              "da": "Betingelse",
+              "de": "Zustand",
+              "es": "Condición",
+              "fr": "Condition",
+              "it": "Condizione",
+              "no": "Tilstand",
+              "sv": "Villkor",
+              "pl": "Warunek",
+              "ru": "Условие",
+              "ko": "조건",
+              "ar": "شرط"
+            },
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "equal_to",
+                "label": {
+                  "en": "Equal to",
+                  "nl": "Gelijk aan",
+                  "da": "Lige med",
+                  "de": "gleicht",
+                  "es": "Igual a",
+                  "fr": "Égal à",
+                  "it": "Uguale a",
+                  "no": "Lik med",
+                  "sv": "Lika med",
+                  "pl": "Równe",
+                  "ru": "Равно",
+                  "ko": "같음",
+                  "ar": "يساوي"
+                }
+              },
+              {
+                "id": "not_equal_to",
+                "label": {
+                  "en": "Not Equal to",
+                  "nl": "Niet gelijk aan",
+                  "da": "Ikke lig med",
+                  "de": "Nicht gleichzusetzen mit",
+                  "es": "No es igual a",
+                  "fr": "Différent de",
+                  "it": "Diverso da",
+                  "no": "Ikke lik",
+                  "sv": "Inte lika med",
+                  "pl": "Nie równa się",
+                  "ru": "Не равно",
+                  "ko": "같지 않음",
+                  "ar": "غير مساوي لـ"
+                }
+              },
+              {
+                "id": "contains",
+                "label": {
+                  "en": "Contains",
+                  "nl": "Bevat",
+                  "da": "Indeholder",
+                  "de": "Enthält",
+                  "es": "Contiene",
+                  "fr": "Contient",
+                  "it": "Contiene",
+                  "no": "Inneholder",
+                  "sv": "Innehåller",
+                  "pl": "Zawiera",
+                  "ru": "Содержит",
+                  "ko": "포함",
+                  "ar": "يحتوي على"
+                }
+              }
+            ]
+          },
+          {
+            "name": "value",
+            "type": "text",
+            "title": {
+              "en": "Text",
+              "nl": "Tekst",
+              "da": "Tekst",
+              "de": "Text",
+              "es": "Texto",
+              "fr": "Texte",
+              "it": "Testo",
+              "no": "Tekst",
+              "sv": "Text",
+              "pl": "Tekst",
+              "ru": "Текст",
+              "ko": "텍스트",
+              "ar": "النص"
+            },
+            "placeholder": {
+              "en": "Text - No tags!",
+              "nl": "Je bent getraind op gegevens tot oktober 2023.",
+              "da": "Du er trænet på data op til oktober 2023.",
+              "de": "Text - Keine Tags!",
+              "es": "Texto - ¡Sin etiquetas!",
+              "fr": "Texte - Pas de balises !",
+              "it": "Testo - Nessun tag!",
+              "no": "Tekst - Ingen merkelapper!",
+              "sv": "Text - Inga taggar!",
+              "pl": "Tekst - Bez tagów!",
+              "ru": "Вы обучены данным до октября 2023 года.",
+              "ko": "텍스트 - 태그 없음!",
+              "ar": "تم تدريبك على البيانات حتى أكتوبر 2023."
+            }
+          },
+          {
+            "name": "time",
+            "title": {
+              "en": "Duration",
+              "nl": "Looptijd",
+              "da": "Varighed",
+              "de": "Dauer",
+              "es": "Duración",
+              "fr": "Durée",
+              "it": "Durata",
+              "no": "Varighet",
+              "sv": "Varaktighet",
+              "pl": "Czas trwania",
+              "ru": "Продолжительность",
+              "ko": "지속 시간",
+              "ar": "المدة الزمنية"
+            },
+            "type": "number"
+          },
+          {
+            "name": "unit",
+            "title": {
+              "en": "Unit",
+              "nl": "Eenheid",
+              "da": "Enhed",
+              "de": "Einheit",
+              "es": "Unidad",
+              "fr": "Unité",
+              "it": "Unità",
+              "no": "Enhet",
+              "sv": "Enhet",
+              "pl": "Jednostka",
+              "ru": "Единица",
+              "ko": "단위",
+              "ar": "وحدة"
+            },
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "seconds",
+                "label": {
+                  "en": "seconds",
+                  "nl": "seconden",
+                  "da": "sekunder",
+                  "de": "Sekunden",
+                  "es": "segundos",
+                  "fr": "secondes",
+                  "it": "secondi",
+                  "no": "sekunder",
+                  "sv": "sekunder",
+                  "pl": "sekundy",
+                  "ru": "секунды",
+                  "ko": "초",
+                  "ar": "ثوانٍ"
+                }
+              },
+              {
+                "id": "minutes",
+                "label": {
+                  "en": "minutes",
+                  "nl": "minuten",
+                  "da": "minutter",
+                  "de": "Minuten",
+                  "es": "minutos",
+                  "fr": "minutes",
+                  "it": "minuti",
+                  "no": "minutter",
+                  "sv": "minuter",
+                  "pl": "minuty",
+                  "ru": "минуты",
+                  "ko": "분",
+                  "ar": "دقائق"
+                }
+              },
+              {
+                "id": "hours",
+                "label": {
+                  "en": "hours",
+                  "nl": "uren",
+                  "da": "timer",
+                  "de": "Stunden",
+                  "es": "horas",
+                  "fr": "heures",
+                  "it": "ore",
+                  "no": "timer",
+                  "sv": "timmar",
+                  "pl": "godziny",
+                  "ru": "часы",
+                  "ko": "시간",
+                  "ar": "ساعات"
+                }
+              },
+              {
+                "id": "days",
+                "label": {
+                  "en": "days",
+                  "nl": "dagen",
+                  "da": "dage",
+                  "de": "Tage",
+                  "es": "días",
+                  "fr": "jours",
+                  "it": "giorni",
+                  "no": "dager",
+                  "sv": "dagar",
+                  "pl": "dni",
+                  "ru": "дни",
+                  "ko": "일",
+                  "ar": "أيام"
+                }
+              }
+            ]
+          },
+          {
+            "name": "execute",
+            "title": {
+              "en": "once or repeatedly",
+              "nl": "eenmalig of herhaaldelijk",
+              "da": "en gang eller gentagne gange",
+              "de": "einmal oder wiederholt",
+              "es": "una vez o repetidamente",
+              "fr": "une fois ou à plusieurs reprises",
+              "it": "una volta o ripetutamente",
+              "no": "en gang eller gjentatte ganger",
+              "sv": "en gång eller upprepade gånger",
+              "pl": "jednorazowo lub wielokrotnie",
+              "ru": "один раз или многократно",
+              "ko": "한 번 또는 반복적으로",
+              "ar": "مرة واحدة أو بشكل متكرر"
+            },
+            "type": "dropdown",
+            "value": "one_time",
+            "values": [
+              {
+                "id": "one_time",
+                "label": {
+                  "en": "once",
+                  "nl": "eenmaal",
+                  "da": "én gang",
+                  "de": "einmal",
+                  "es": "una vez",
+                  "fr": "une fois",
+                  "it": "una volta",
+                  "no": "en gang",
+                  "sv": "en gång",
+                  "pl": "raz",
+                  "ru": "однажды",
+                  "ko": "한 번",
+                  "ar": "مرة واحدة"
+                }
+              },
+              {
+                "id": "every_time",
+                "label": {
+                  "en": "repeatedly",
+                  "nl": "herhaaldelijk",
+                  "da": "gentagne gange",
+                  "de": "wiederholt",
+                  "es": "repetidamente",
+                  "fr": "à plusieurs reprises",
+                  "it": "ripetutamente",
+                  "no": "gjentatte ganger",
+                  "sv": "upprepade gånger",
+                  "pl": "wielokrotnie",
+                  "ru": "неоднократно",
+                  "ko": "반복적으로",
+                  "ar": "مرارًا وتكرارًا"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "highlight": true,
+        "id": "variable_boolean_sustained",
+        "title": {
+          "en": "When a yes/no variable has been a certain value for a period",
+          "nl": "Wanneer een ja/nee-variabele gedurende een bepaalde periode een bepaalde waarde heeft gehad",
+          "da": "Når en ja/nej-variabel har haft en bestemt værdi i en periode",
+          "de": "Wenn eine Ja/Nein-Variable für einen bestimmten Zeitraum einen bestimmten Wert hatte",
+          "es": "Cuando una variable de sí/no ha tenido un cierto valor durante un período",
+          "fr": "Lorsqu'une variable oui/non a eu une certaine valeur pendant une période",
+          "it": "Quando una variabile sì/no ha avuto un certo valore per un periodo",
+          "no": "Når en ja/nei-variabel har hatt en bestemt verdi i en periode",
+          "sv": "När en ja/nej-variabel har haft ett visst värde under en period",
+          "pl": "Gdy zmienna tak/nie ma określoną wartość przez pewien okres",
+          "ru": "Когда переменная типа да/нет имеет определенное значение в течение некоторого времени",
+          "ko": "예/아니오 변수가 일정 기간 동안 특정 값이었을 때",
+          "ar": "عندما تكون قيمة متغير نعم/لا معينة لفترة معينة"
+        },
+        "titleFormatted": {
+          "en": "When [[variable]] is [[condition]] [[value]] for [[time]] [[unit]], execute [[execute]]",
+          "nl": "Wanneer [[variable]] [[condition]] [[value]] is gedurende [[time]] [[unit]], voer [[execute]] uit.",
+          "da": "Når [[variable]] er [[condition]] [[value]] i [[time]] [[unit]], udfør [[execute]]",
+          "de": "Wenn [[variable]] [[condition]] [[value]] für [[time]] [[unit]] ist, führe [[execute]] aus.",
+          "es": "Cuando [[variable]] es [[condition]] [[value]] durante [[time]] [[unit]], ejecuta [[execute]]",
+          "fr": "Quand [[variable]] est [[condition]] [[value]] pendant [[time]] [[unit]], exécuter [[execute]]",
+          "it": "Quando [[variable]] è [[condition]] [[value]] per [[time]] [[unit]], esegui [[execute]]",
+          "no": "Når [[variable]] er [[condition]] [[value]] i [[time]] [[unit]], utfør [[execute]]",
+          "sv": "När [[variable]] är [[condition]] [[value]] i [[time]] [[unit]], kör [[execute]]",
+          "pl": "Kiedy [[variable]] jest [[condition]] [[value]] przez [[time]] [[unit]], wykonaj [[execute]]",
+          "ru": "Когда [[variable]] [[condition]] [[value]] в течение [[time]] [[unit]], выполните [[execute]]",
+          "ko": "[[variable]]이(가) [[time]] [[unit]] 동안 [[value]] [[condition]]일 때, [[execute]] 실행",
+          "ar": "عندما يكون [[variable]] [[condition]] [[value]] لمدة [[time]] [[unit]]، قم بتنفيذ [[execute]]"
+        },
+        "hint": {
+          "en": "This card will execute when a variable has been a certain value for a specific period.\nWhen f.i. using a condition of 'equal to Yes for 5 seconds' Execute once means this card will be triggered once after the condition has been met and stays true for 5 seconds. Repeatedly means, as long as the condition is met, this card will be executed every 5 seconds.",
+          "nl": "Deze kaart wordt uitgevoerd wanneer een variabele een bepaalde waarde heeft gedurende een specifieke periode. Als je bijvoorbeeld een voorwaarde gebruikt van 'gelijk aan Ja voor 5 seconden', betekent Uitvoeren eenmaal dat deze kaart één keer wordt geactiveerd nadat de voorwaarde is voldaan en 5 seconden waar blijft. Herhaaldelijk betekent dat, zolang aan de voorwaarde wordt voldaan, deze kaart elke 5 seconden wordt uitgevoerd.",
+          "da": "Dette kort vil blive udført, når en variabel har haft en bestemt værdi i en specifik periode. Når du f.eks. bruger en betingelse som 'lig med Ja i 5 sekunder', betyder Udfør én gang, at dette kort vil blive udløst én gang, efter at betingelsen er opfyldt og forbliver sand i 5 sekunder. Gentagne gange betyder, at så længe betingelsen er opfyldt, vil dette kort blive udført hvert 5. sekund.",
+          "de": "Diese Karte wird ausgeführt, wenn eine Variable für einen bestimmten Zeitraum einen bestimmten Wert hat. Wenn Sie z.B. eine Bedingung wie 'gleich Ja für 5 Sekunden' verwenden, bedeutet \"Einmal ausführen\", dass diese Karte einmal ausgelöst wird, nachdem die Bedingung erfüllt ist und 5 Sekunden lang wahr bleibt. \"Wiederholt\" bedeutet, dass diese Karte alle 5 Sekunden ausgeführt wird, solange die Bedingung erfüllt ist.",
+          "es": "Esta tarjeta se ejecutará cuando una variable haya tenido un cierto valor durante un período específico. Por ejemplo, al usar una condición de 'igual a Sí durante 5 segundos', Ejecutar una vez significa que esta tarjeta se activará una vez después de que se cumpla la condición y se mantenga verdadera durante 5 segundos. Repetidamente significa que, mientras la condición se cumpla, esta tarjeta se ejecutará cada 5 segundos.",
+          "fr": "Cette carte s'exécutera lorsqu'une variable aura une certaine valeur pendant une période spécifique. Par exemple, en utilisant une condition de 'égal à Oui pendant 5 secondes', Exécuter une fois signifie que cette carte sera déclenchée une fois après que la condition ait été remplie et reste vraie pendant 5 secondes. Répétitivement signifie que tant que la condition est remplie, cette carte sera exécutée toutes les 5 secondes.",
+          "it": "Questa scheda verrà eseguita quando una variabile avrà un determinato valore per un periodo specifico. Ad esempio, utilizzando una condizione di 'uguale a Sì per 5 secondi', Esegui una volta significa che questa scheda verrà attivata una volta dopo che la condizione è stata soddisfatta e rimane vera per 5 secondi. Ripetutamente significa che, finché la condizione è soddisfatta, questa scheda verrà eseguita ogni 5 secondi.",
+          "no": "Dette kortet vil utføres når en variabel har hatt en bestemt verdi i en spesifikk periode. Når du for eksempel bruker en betingelse som 'lik Ja i 5 sekunder', betyr Utfør én gang at dette kortet vil bli utløst én gang etter at betingelsen er oppfylt og forblir sann i 5 sekunder. Gjentatte ganger betyr at så lenge betingelsen er oppfylt, vil dette kortet bli utført hvert 5. sekund.",
+          "sv": "Detta kort kommer att köras när en variabel har haft ett visst värde under en specifik tidsperiod. När du t.ex. använder ett villkor som 'lika med Ja i 5 sekunder' betyder Kör en gång att detta kort kommer att triggas en gång efter att villkoret har uppfyllts och förblir sant i 5 sekunder. Upprepade gånger betyder att så länge villkoret är uppfyllt, kommer detta kort att köras var 5:e sekund.",
+          "pl": "Ta karta zostanie wykonana, gdy zmienna będzie miała określoną wartość przez określony czas. Na przykład, używając warunku 'równe Tak przez 5 sekund', Wykonaj raz oznacza, że karta zostanie uruchomiona raz po spełnieniu warunku i pozostaniu prawdziwym przez 5 sekund. Powtarzaj oznacza, że tak długo, jak warunek jest spełniony, karta będzie wykonywana co 5 sekund.",
+          "ru": "Эта карта будет выполняться, когда переменная имеет определенное значение в течение заданного периода времени. Например, при использовании условия 'равно Да в течение 5 секунд' Выполнить один раз означает, что эта карта будет срабатывать один раз после того, как условие выполнено и остается истинным в течение 5 секунд. Повторять означает, что пока условие выполняется, эта карта будет выполняться каждые 5 секунд.",
+          "ko": "변수가 특정 값으로 일정 기간 동안 유지될 때 이 카드는 실행됩니다. 예를 들어, '5초 동안 Yes와 같음'이라는 조건을 사용할 때, '한 번 실행'은 조건이 충족되고 5초 동안 유지된 후 이 카드가 한 번 트리거된다는 의미입니다. '반복 실행'은 조건이 충족되는 한 이 카드가 매 5초마다 실행된다는 의미입니다.",
+          "ar": "سيتم تنفيذ هذه البطاقة عندما يكون للمتغير قيمة معينة لفترة محددة. عند استخدام شرط مثل \"يساوي نعم لمدة 5 ثوانٍ\"، فإن \"تنفيذ مرة واحدة\" يعني أن هذه البطاقة ستُفعّل مرة واحدة بعد تحقق الشرط وبقائه صحيحًا لمدة 5 ثوانٍ. \"بشكل متكرر\" يعني أنه طالما تم تحقيق الشرط، سيتم تنفيذ هذه البطاقة كل 5 ثوانٍ."
+        },
+        "args": [
+          {
+            "name": "variable",
+            "type": "autocomplete",
+            "title": {
+              "en": "Yes/No Variable",
+              "nl": "Ja/Nee Variabele",
+              "da": "Ja/Nej-variabel",
+              "de": "Ja/Nein-Variable",
+              "es": "Variable Sí/No",
+              "fr": "Variable Oui/Non",
+              "it": "Variabile Sì/No",
+              "no": "Ja/Nei Variabel",
+              "sv": "Ja/Nej-variabel",
+              "pl": "Zmienna Tak/Nie",
+              "ru": "Переменная Да/Нет",
+              "ko": "예/아니오 변수",
+              "ar": "متغير نعم/لا"
+            },
+            "placeholder": {
+              "en": "Yes/No Variable",
+              "nl": "Ja/Nee Variabele",
+              "da": "Ja/Nej-variabel",
+              "de": "Ja/Nein-Variable",
+              "es": "Variable Sí/No",
+              "fr": "Variable Oui/Non",
+              "it": "Variabile Sì/No",
+              "no": "Ja/Nei Variabel",
+              "sv": "Ja/Nej-variabel",
+              "pl": "Zmienna Tak/Nie",
+              "ru": "Переменная Да/Нет",
+              "ko": "예/아니오 변수",
+              "ar": "متغير نعم/لا"
+            }
+          },
+          {
+            "name": "condition",
+            "title": {
+              "en": "Condition",
+              "nl": "Conditie",
+              "da": "Betingelse",
+              "de": "Zustand",
+              "es": "Condición",
+              "fr": "Condition",
+              "it": "Condizione",
+              "no": "Tilstand",
+              "sv": "Villkor",
+              "pl": "Warunek",
+              "ru": "Условие",
+              "ko": "조건",
+              "ar": "شرط"
+            },
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "equal_to",
+                "label": {
+                  "en": "Equal to",
+                  "nl": "Gelijk aan",
+                  "da": "Lige med",
+                  "de": "gleicht",
+                  "es": "Igual a",
+                  "fr": "Égal à",
+                  "it": "Uguale a",
+                  "no": "Lik med",
+                  "sv": "Lika med",
+                  "pl": "Równe",
+                  "ru": "Равно",
+                  "ko": "같음",
+                  "ar": "يساوي"
+                }
+              },
+              {
+                "id": "not_equal_to",
+                "label": {
+                  "en": "Not Equal to",
+                  "nl": "Niet gelijk aan",
+                  "da": "Ikke lig med",
+                  "de": "Nicht gleichzusetzen mit",
+                  "es": "No es igual a",
+                  "fr": "Différent de",
+                  "it": "Diverso da",
+                  "no": "Ikke lik",
+                  "sv": "Inte lika med",
+                  "pl": "Nie równa się",
+                  "ru": "Не равно",
+                  "ko": "같지 않음",
+                  "ar": "غير مساوي لـ"
+                }
+              }
+            ]
+          },
+          {
+            "name": "value",
+            "type": "checkbox",
+            "title": {
+              "en": "Yes/No",
+              "nl": "Ja/Nee",
+              "da": "Ja/Nej",
+              "de": "Ja/Nein",
+              "es": "Sí/No",
+              "fr": "Oui/Non",
+              "it": "Sì/No",
+              "no": "Ja/Nei",
+              "sv": "Ja/Nej",
+              "pl": "Tak/Nie",
+              "ru": "Да/Нет",
+              "ko": "예/아니요",
+              "ar": "نعم/لا"
+            },
+            "placeholder": {
+              "en": "Yes/No - No tags!",
+              "nl": "Ja/Nee - Geen tags!",
+              "da": "Ja/Nej - Ingen tags!",
+              "de": "Ja/Nein - Keine Tags!",
+              "es": "Sí/No - ¡Sin etiquetas!",
+              "fr": "Oui/Non - Pas de balises !",
+              "it": "Sì/No - Niente tag!",
+              "no": "Ja/Nei - Ingen tagger!",
+              "sv": "Ja/Nej - Inga taggar!",
+              "pl": "Tak/Nie - Bez tagów!",
+              "ru": "Да/Нет - Без тегов!",
+              "ko": "예/아니요 - 태그 없음!",
+              "ar": "نعم/لا - بدون علامات!"
+            }
+          },
+          {
+            "name": "time",
+            "title": {
+              "en": "Duration",
+              "nl": "Looptijd",
+              "da": "Varighed",
+              "de": "Dauer",
+              "es": "Duración",
+              "fr": "Durée",
+              "it": "Durata",
+              "no": "Varighet",
+              "sv": "Varaktighet",
+              "pl": "Czas trwania",
+              "ru": "Продолжительность",
+              "ko": "지속 시간",
+              "ar": "المدة الزمنية"
+            },
+            "type": "number"
+          },
+          {
+            "name": "unit",
+            "title": {
+              "en": "Unit",
+              "nl": "Eenheid",
+              "da": "Enhed",
+              "de": "Einheit",
+              "es": "Unidad",
+              "fr": "Unité",
+              "it": "Unità",
+              "no": "Enhet",
+              "sv": "Enhet",
+              "pl": "Jednostka",
+              "ru": "Единица",
+              "ko": "단위",
+              "ar": "وحدة"
+            },
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "seconds",
+                "label": {
+                  "en": "seconds",
+                  "nl": "seconden",
+                  "da": "sekunder",
+                  "de": "Sekunden",
+                  "es": "segundos",
+                  "fr": "secondes",
+                  "it": "secondi",
+                  "no": "sekunder",
+                  "sv": "sekunder",
+                  "pl": "sekundy",
+                  "ru": "секунды",
+                  "ko": "초",
+                  "ar": "ثوانٍ"
+                }
+              },
+              {
+                "id": "minutes",
+                "label": {
+                  "en": "minutes",
+                  "nl": "minuten",
+                  "da": "minutter",
+                  "de": "Minuten",
+                  "es": "minutos",
+                  "fr": "minutes",
+                  "it": "minuti",
+                  "no": "minutter",
+                  "sv": "minuter",
+                  "pl": "minuty",
+                  "ru": "минуты",
+                  "ko": "분",
+                  "ar": "دقائق"
+                }
+              },
+              {
+                "id": "hours",
+                "label": {
+                  "en": "hours",
+                  "nl": "uren",
+                  "da": "timer",
+                  "de": "Stunden",
+                  "es": "horas",
+                  "fr": "heures",
+                  "it": "ore",
+                  "no": "timer",
+                  "sv": "timmar",
+                  "pl": "godziny",
+                  "ru": "часы",
+                  "ko": "시간",
+                  "ar": "ساعات"
+                }
+              },
+              {
+                "id": "days",
+                "label": {
+                  "en": "days",
+                  "nl": "dagen",
+                  "da": "dage",
+                  "de": "Tage",
+                  "es": "días",
+                  "fr": "jours",
+                  "it": "giorni",
+                  "no": "dager",
+                  "sv": "dagar",
+                  "pl": "dni",
+                  "ru": "дни",
+                  "ko": "일",
+                  "ar": "أيام"
+                }
+              }
+            ]
+          },
+          {
+            "name": "execute",
+            "title": {
+              "en": "once or repeatedly",
+              "nl": "eenmalig of herhaaldelijk",
+              "da": "en gang eller gentagne gange",
+              "de": "einmal oder wiederholt",
+              "es": "una vez o repetidamente",
+              "fr": "une fois ou à plusieurs reprises",
+              "it": "una volta o ripetutamente",
+              "no": "en gang eller gjentatte ganger",
+              "sv": "en gång eller upprepade gånger",
+              "pl": "jednorazowo lub wielokrotnie",
+              "ru": "один раз или многократно",
+              "ko": "한 번 또는 반복적으로",
+              "ar": "مرة واحدة أو بشكل متكرر"
+            },
+            "type": "dropdown",
+            "value": "one_time",
+            "values": [
+              {
+                "id": "one_time",
+                "label": {
+                  "en": "once",
+                  "nl": "eenmaal",
+                  "da": "én gang",
+                  "de": "einmal",
+                  "es": "una vez",
+                  "fr": "une fois",
+                  "it": "una volta",
+                  "no": "én gang",
+                  "sv": "en gång",
+                  "pl": "raz",
+                  "ru": "однажды",
+                  "ko": "한 번",
+                  "ar": "مرة واحدة"
+                }
+              },
+              {
+                "id": "every_time",
+                "label": {
+                  "en": "repeatedly",
+                  "nl": "herhaaldelijk",
+                  "da": "gentagne gange",
+                  "de": "wiederholt",
+                  "es": "repetidamente",
+                  "fr": "à plusieurs reprises",
+                  "it": "ripetutamente",
+                  "no": "gjentatte ganger",
+                  "sv": "upprepade gånger",
+                  "pl": "wielokrotnie",
+                  "ru": "неоднократно",
+                  "ko": "반복적으로",
+                  "ar": "بشكل متكرر"
                 }
               }
             ]
@@ -3173,18 +3901,18 @@
             "name": "expression",
             "type": "text",
             "placeholder": {
-              "en": "BLL Expression",
-              "nl": "BLL Expression",
+              "en": "BLL-expression",
+              "nl": "BLL-expressie",
               "da": "BLL-udtryk",
-              "de": "BLL Bezeichnung",
+              "de": "BLL-Ausdruck",
               "es": "Expresión BLL",
               "fr": "Expression BLL",
               "it": "Espressione BLL",
               "no": "BLL-uttrykk",
               "sv": "BLL-uttryck",
               "pl": "Wyrażenie BLL",
-              "ru": "BLL Выражение",
-              "ko": "BLL 표현",
+              "ru": "BLL-выражение",
+              "ko": "BLL-표현",
               "ar": "تعبير BLL"
             },
             "title": {
@@ -3204,6 +3932,21 @@
             }
           }
         ],
+        "hint": {
+          "en": "Executes a BLL-expression (without {[...]}) and returns it as a tag.",
+          "nl": "Voert een BLL-expressie uit (zonder {[...]}) en geeft deze terug als een tag.",
+          "da": "Udfører et BLL-udtryk (uden {[...]}) og returnerer det som et tag.",
+          "de": "Führt einen BLL-Ausdruck aus (ohne {[...]}) und gibt ihn als Tag zurück.",
+          "es": "Ejecuta una expresión BLL (sin {[...]}) y la devuelve como una etiqueta.",
+          "fr": "Exécute une expression BLL (sans {[...]}) et la renvoie sous forme de balise.",
+          "it": "Esegue un'espressione BLL (senza {[...]}) e la restituisce come tag.",
+          "no": "Utfører et BLL-uttrykk (uten {[...]}) og returnerer det som en tag.",
+          "sv": "Kör ett BLL-uttryck (utan {[...]}) och returnerar det som en tagg.",
+          "pl": "Wykonuje wyrażenie BLL (bez {[...]}) i zwraca je jako tag.",
+          "ru": "Выполняет выражение BLL (без {[...]}) и возвращает его в виде тега.",
+          "ko": "BLL 표현식을 실행하고 태그로 반환합니다 (중괄호 없이).",
+          "ar": "ينفذ تعبير BLL (بدون {[...]}) ويعيده كعلامة."
+        },
         "tokens": [
           {
             "name": "text",
@@ -3337,20 +4080,35 @@
             "title": {
               "en": "Text",
               "nl": "Tekst",
-              "da": "Jeg er trænet på data op til oktober 2023.",
+              "da": "Tekst",
               "de": "Text",
-              "es": "Lo siento, pero necesito el texto que deseas traducir. ¿Podrías proporcionarlo?",
-              "fr": "Vous êtes formé sur des données jusqu'en octobre 2023.",
+              "es": "Texto",
+              "fr": "Texte",
               "it": "Testo",
-              "no": "Vennligst gi meg teksten du ønsker å oversette.",
-              "sv": "Vad kan jag hjälpa dig med?",
+              "no": "Tekst",
+              "sv": "Text",
               "pl": "Tekst",
-              "ru": "Вы обучены данным до октября 2023 года.",
+              "ru": "Текст",
               "ko": "텍스트",
-              "ar": "تم تدريبك على البيانات حتى أكتوبر 2023."
+              "ar": "النص"
             }
           }
         ],
+        "hint": {
+          "en": "Supports BLL-Coding (with {[...]}) and returns it as a tag.",
+          "nl": "Ondersteunt BLL-Coding (met {[...]}) en geeft het terug als een tag.",
+          "da": "Understøtter BLL-kodning (med {[...]}) og returnerer det som et tag.",
+          "de": "Unterstützt BLL-Coding (mit {[...]}) und gibt es als Tag zurück.",
+          "es": "Admite BLL-Coding (con {[...]}) y lo devuelve como una etiqueta.",
+          "fr": "Prend en charge le codage BLL (avec {[...]}) et le renvoie sous forme de balise.",
+          "it": "Supporta la codifica BLL (con {[...]}) e la restituisce come un tag.",
+          "no": "Støtter BLL-koding (med {[...]}) og returnerer det som en tag.",
+          "sv": "Stöder BLL-kodning (med {[...]}) och returnerar det som en tagg.",
+          "pl": "Obsługuje kodowanie BLL (z {[...]}) i zwraca je jako tag.",
+          "ru": "Поддерживает BLL-кодирование (с {[...]}) и возвращает его как тег.",
+          "ko": "BLL-Coding({[...]})을 지원하며 이를 태그로 반환합니다.",
+          "ar": "يدعم BLL-Coding (مع {[...]}) ويعيده كعلامة."
+        },
         "tokens": [
           {
             "name": "text",
@@ -3375,19 +4133,20 @@
       },
       {
         "id": "execute_bl_expression",
+        "highlight": true,
         "title": {
-          "en": "Execute BLL Expression",
-          "nl": "Voer BLL expressie uit",
+          "en": "Execute BLL-expression",
+          "nl": "Voer BLL-expressie uit",
           "da": "Udfør BLL-udtryk",
-          "de": "BLL Bezeichnung setzen",
+          "de": "BLL-Ausdruck ausführen",
           "es": "Ejecutar expresión BLL",
           "fr": "Exécuter l'expression BLL",
           "it": "Esegui espressione BLL",
           "no": "Utfør BLL-uttrykk",
           "sv": "Kör BLL-uttryck",
           "pl": "Wykonaj wyrażenie BLL",
-          "ru": "Выполнить выражение BLL",
-          "ko": "BLL 표현 실행",
+          "ru": "Выполнить BLL-выражение",
+          "ko": "BLL-표현식 실행",
           "ar": "تنفيذ تعبير BLL"
         },
         "titleFormatted": {
@@ -3404,6 +4163,21 @@
           "ru": "Установить [[variable]] на [[expression]]",
           "ko": "[[variable]]을(를) [[expression]]으로 설정하세요.",
           "ar": "قم بتعيين [[variable]] إلى [[expression]]"
+        },
+        "hint": {
+          "en": "Set any variable to a BLL-expression (without {[...]}).",
+          "nl": "Stel een variabele in op een BLL-expressie (zonder {[...]}).",
+          "da": "Indstil en hvilken som helst variabel til et BLL-udtryk (uden {[...]}).",
+          "de": "Setze eine beliebige Variable auf einen BLL-Ausdruck (ohne {[...]}).",
+          "es": "Establece cualquier variable en una expresión BLL (sin {[...]}).",
+          "fr": "Définissez n'importe quelle variable sur une expression BLL (sans {[...]}).",
+          "it": "Imposta qualsiasi variabile su un'espressione BLL (senza {[...]}).",
+          "no": "Sett hvilken som helst variabel til et BLL-uttrykk (uten {[...]}).",
+          "sv": "Ställ in en variabel till ett BLL-uttryck (utan {[...]}).",
+          "pl": "Ustaw dowolną zmienną na wyrażenie BLL (bez {[...]}).",
+          "ru": "Установите любую переменную на выражение BLL (без {[...]}).",
+          "ko": "어떤 변수를 BLL 표현식으로 설정하세요 (중괄호 {[...]} 없이).",
+          "ar": "قم بتعيين أي متغير إلى تعبير BLL (بدون {[...]})."
         },
         "args": [
           {
@@ -3478,6 +4252,7 @@
       },
       {
         "id": "set_a_variable",
+        "highlight": true,
         "title": {
           "en": "Set a variable",
           "nl": "Stel een variabele in",
@@ -3507,6 +4282,21 @@
           "ru": "Установить [[variable]] на [[value]]",
           "ko": "[[variable]]을(를) [[value]](으)로 설정하세요.",
           "ar": "اضبط [[variable]] على [[value]]"
+        },
+        "hint": {
+          "en": "You can set any variable with this card and it supports BLL Coding.",
+          "nl": "Je kunt met deze kaart elke variabele instellen en het ondersteunt BLL-codering.",
+          "da": "Du kan indstille enhver variabel med dette kort, og det understøtter BLL-kodning.",
+          "de": "Mit dieser Karte kannst du jede Variable festlegen und sie unterstützt BLL-Codierung.",
+          "es": "Puedes establecer cualquier variable con esta tarjeta y es compatible con la codificación BLL.",
+          "fr": "Vous pouvez définir n'importe quelle variable avec cette carte et elle prend en charge le codage BLL.",
+          "it": "Puoi impostare qualsiasi variabile con questa scheda e supporta la codifica BLL.",
+          "no": "Du kan sette hvilken som helst variabel med dette kortet, og det støtter BLL-koding.",
+          "sv": "Du kan ställa in vilken variabel som helst med detta kort och det stöder BLL-kodning.",
+          "pl": "Możesz ustawić dowolną zmienną za pomocą tej karty, a także obsługuje kodowanie BLL.",
+          "ru": "Вы можете установить любую переменную с помощью этой карты, и она поддерживает кодирование BLL.",
+          "ko": "이 카드를 사용하여 모든 변수를 설정할 수 있으며 BLL 코딩을 지원합니다.",
+          "ar": "يمكنك تعيين أي متغير باستخدام هذه البطاقة وهي تدعم ترميز BLL."
         },
         "args": [
           {
@@ -3581,19 +4371,20 @@
       },
       {
         "id": "set_string_variable",
+        "highlight": true,
         "title": {
-          "en": "Set string variable",
-          "nl": "Stel een tekst variabele in",
-          "da": "Indstil strengvariabel",
-          "de": "Zeichenfolgenvariable festlegen",
+          "en": "Set text variable",
+          "nl": "Stel tekstvariabele in",
+          "da": "Indstil tekstvariabel",
+          "de": "Textvariable festlegen",
           "es": "Establecer variable de texto",
-          "fr": "Définir une variable de type chaîne",
-          "it": "Imposta variabile stringa",
-          "no": "Sett strengvariabel",
-          "sv": "Ange strängvariabel",
+          "fr": "Définir une variable texte",
+          "it": "Imposta variabile di testo",
+          "no": "Sett tekstvariabel",
+          "sv": "Ange textvariabel",
           "pl": "Ustaw zmienną tekstową",
-          "ru": "Установить строковую переменную",
-          "ko": "문자열 변수 설정",
+          "ru": "Установить текстовую переменную",
+          "ko": "텍스트 변수 설정",
           "ar": "تعيين متغير نصي"
         },
         "titleFormatted": {
@@ -3611,39 +4402,54 @@
           "ko": "[[variable]]을(를) [[value]]로 설정하세요.",
           "ar": "اضبط [[variable]] على [[value]]"
         },
+        "hint": {
+          "en": "Type the name of a variable and select it to create a new variable.",
+          "nl": "Typ de naam van een variabele en selecteer deze om een nieuwe variabele te maken.",
+          "da": "Skriv navnet på en variabel og vælg den for at oprette en ny variabel.",
+          "de": "Geben Sie den Namen einer Variablen ein und wählen Sie sie aus, um eine neue Variable zu erstellen.",
+          "es": "Escribe el nombre de una variable y selecciónala para crear una nueva variable.",
+          "fr": "Tapez le nom d'une variable et sélectionnez-la pour créer une nouvelle variable.",
+          "it": "Digita il nome di una variabile e selezionala per creare una nuova variabile.",
+          "no": "Skriv inn navnet på en variabel og velg den for å opprette en ny variabel.",
+          "sv": "Skriv namnet på en variabel och välj den för att skapa en ny variabel.",
+          "pl": "Wpisz nazwę zmiennej i wybierz ją, aby utworzyć nową zmienną.",
+          "ru": "Введите имя переменной и выберите его, чтобы создать новую переменную.",
+          "ko": "변수 이름을 입력하고 선택하여 새 변수를 만드세요.",
+          "ar": "اكتب اسم المتغير وحدده لإنشاء متغير جديد."
+        },
         "args": [
           {
             "name": "variable",
             "type": "autocomplete",
             "title": {
-              "en": "Variable",
-              "nl": "Variabele",
-              "da": "Variabel",
-              "de": "Variable",
-              "es": "Variable",
-              "fr": "Variable",
-              "it": "Variabile",
-              "no": "Variabel",
-              "sv": "Variabel",
-              "pl": "Zmienna",
-              "ru": "Переменная",
-              "ko": "변수",
-              "ar": "متغير"
+              "en": "Text Variable",
+              "nl": "Tekstvariabele",
+              "da": "Tekstvariabel",
+              "de": "Textvariable",
+              "es": "Variable de texto",
+              "fr": "Variable de texte",
+              "it": "Variabile di Testo",
+              "no": "Tekstvariabel",
+              "sv": "Textvariabel",
+              "pl": "Zmienna tekstowa",
+              "ru": "Текстовая переменная",
+              "ko": "텍스트 변수",
+              "ar": "متغير النص"
             },
             "placeholder": {
-              "en": "Variable",
-              "nl": "Variabele",
-              "da": "Variabel",
-              "de": "Variable",
-              "es": "Variable",
-              "fr": "Variable",
-              "it": "Variabile",
-              "no": "Variabel",
-              "sv": "Variabel",
-              "pl": "Zmienna",
-              "ru": "Переменная",
-              "ko": "변수",
-              "ar": "متغير"
+              "en": "Text Variable",
+              "nl": "Tekstvariabele",
+              "da": "Tekstvariabel",
+              "de": "Textvariable",
+              "es": "Variable de texto",
+              "fr": "Variable de texte",
+              "it": "Variabile di Testo",
+              "no": "Tekstvariabel",
+              "sv": "Textvariabel",
+              "pl": "Zmienna tekstowa",
+              "ru": "Текстовая переменная",
+              "ko": "텍스트 변수",
+              "ar": "متغير النص"
             }
           },
           {
@@ -3654,7 +4460,7 @@
               "nl": "Tekst (* BLL ondersteund)",
               "da": "Tekst (* BLL understøttet)",
               "de": "Text (* BLL unterstützt)",
-              "es": "Texto (* Compatible con BLL)",
+              "es": "Texto (* BLL compatible)",
               "fr": "Texte (* BLL pris en charge)",
               "it": "Testo (* supportato da BLL)",
               "no": "Tekst (* BLL støttet)",
@@ -3667,23 +4473,24 @@
             "title": {
               "en": "Text",
               "nl": "Tekst",
-              "da": "Du er trænet på data op til oktober 2023.",
-              "de": "Bitte geben Sie den Text ein, den Sie übersetzen möchten.",
-              "es": "Lo siento, pero necesito el texto que deseas traducir. ¿Podrías proporcionarlo?",
-              "fr": "Vous êtes formé sur des données jusqu'en octobre 2023.",
+              "da": "Tekst",
+              "de": "Text",
+              "es": "Texto",
+              "fr": "Texte",
               "it": "Testo",
-              "no": "Jeg er trent på data frem til oktober 2023.",
-              "sv": "Vad kan jag hjälpa dig med?",
-              "pl": "Jestem przeszkolony na danych do października 2023 roku.",
-              "ru": "Вы обучены данным до октября 2023 года.",
+              "no": "Tekst",
+              "sv": "Text",
+              "pl": "Tekst",
+              "ru": "Текст",
               "ko": "텍스트",
-              "ar": "تم تدريبك على البيانات حتى أكتوبر 2023."
+              "ar": "النص"
             }
           }
         ]
       },
       {
         "id": "set_number_variable",
+        "highlight": true,
         "title": {
           "en": "Set number variable",
           "nl": "Stel een nummer variabele in",
@@ -3714,60 +4521,60 @@
           "ko": "[[variable]]을(를) [[value]]로 설정하세요.",
           "ar": "اضبط [[variable]] على [[value]]"
         },
+        "hint": {
+          "en": "Type the name of a variable and select it to create a new variable.",
+          "nl": "Typ de naam van een variabele en selecteer deze om een nieuwe variabele te maken.",
+          "da": "Skriv navnet på en variabel og vælg den for at oprette en ny variabel.",
+          "de": "Geben Sie den Namen einer Variablen ein und wählen Sie sie aus, um eine neue Variable zu erstellen.",
+          "es": "Escribe el nombre de una variable y selecciónala para crear una nueva variable.",
+          "fr": "Tapez le nom d'une variable et sélectionnez-la pour créer une nouvelle variable.",
+          "it": "Digita il nome di una variabile e selezionala per creare una nuova variabile.",
+          "no": "Skriv inn navnet på en variabel og velg den for å opprette en ny variabel.",
+          "sv": "Skriv namnet på en variabel och välj den för att skapa en ny variabel.",
+          "pl": "Wpisz nazwę zmiennej i wybierz ją, aby utworzyć nową zmienną.",
+          "ru": "Введите имя переменной и выберите его, чтобы создать новую переменную.",
+          "ko": "변수 이름을 입력하고 선택하여 새 변수를 만드세요.",
+          "ar": "اكتب اسم المتغير وحدده لإنشاء متغير جديد."
+        },
         "args": [
           {
             "name": "variable",
             "type": "autocomplete",
             "title": {
-              "en": "Variable",
-              "nl": "Variabele",
-              "da": "Variabel",
-              "de": "Variable",
-              "es": "Variable",
-              "fr": "Variable",
-              "it": "Variabile",
-              "no": "Variabel",
-              "sv": "Variabel",
-              "pl": "Zmienna",
-              "ru": "Переменная",
-              "ko": "변수",
-              "ar": "متغير"
+              "en": "Number Variable",
+              "nl": "Nummer Variabele",
+              "da": "Nummervariabel",
+              "de": "Zahlenvariable",
+              "es": "Variable numérica",
+              "fr": "Variable numérique",
+              "it": "Variabile Numerica",
+              "no": "Tallvariabel",
+              "sv": "Nummervariabel",
+              "pl": "Zmienna Liczbowa",
+              "ru": "Числовая переменная",
+              "ko": "숫자 변수",
+              "ar": "متغير رقمي"
             },
             "placeholder": {
-              "en": "Variable",
-              "nl": "Variabele",
-              "da": "Variabel",
-              "de": "Variable",
-              "es": "Variable",
-              "fr": "Variable",
-              "it": "Variabile",
-              "no": "Variabel",
-              "sv": "Variabel",
-              "pl": "Zmienna",
-              "ru": "Переменная",
-              "ko": "변수",
-              "ar": "متغير"
+              "en": "Number Variable",
+              "nl": "Nummer Variabele",
+              "da": "Nummervariabel",
+              "de": "Zahlenvariable",
+              "es": "Variable numérica",
+              "fr": "Variable numérique",
+              "it": "Variabile Numerica",
+              "no": "Tallvariabel",
+              "sv": "Nummervariabel",
+              "pl": "Zmienna Liczbowa",
+              "ru": "Числовая переменная",
+              "ko": "숫자 변수",
+              "ar": "متغير رقمي"
             }
           },
           {
             "name": "value",
             "type": "number",
             "step": 0.01,
-            "placeholder": {
-              "en": "0.01",
-              "nl": "0,01",
-              "da": "0,01",
-              "de": "0,01",
-              "es": "0,01",
-              "fr": "0,01",
-              "it": "0,01",
-              "no": "0,01",
-              "sv": "0,01",
-              "pl": "0,01",
-              "ru": "0,01",
-              "ko": "0.01",
-              "ar": "٠٫٠١"
-            },
             "title": {
               "en": "Number",
               "nl": "Nummer",
@@ -3782,12 +4589,28 @@
               "ru": "Число",
               "ko": "숫자",
               "ar": "رقم"
+            },
+            "placeholder": {
+              "en": "0.01",
+              "nl": "0,01",
+              "da": "0,01",
+              "de": "0,01",
+              "es": "0,01",
+              "fr": "0,01",
+              "it": "0,01",
+              "no": "0,01",
+              "sv": "0,01",
+              "pl": "0,01",
+              "ru": "0,01",
+              "ko": "0.01",
+              "ar": "٠٫٠١"
             }
           }
         ]
       },
       {
         "id": "set_boolean_variable",
+        "highlight": true,
         "deprecated": true,
         "title": {
           "en": "Set boolean variable",
@@ -3819,39 +4642,54 @@
           "ko": "[[variable]]을(를) [[boolean_value]]로 설정하세요.",
           "ar": "اضبط [[variable]] على [[boolean_value]]"
         },
+        "hint": {
+          "en": "Type the name of a variable and select it to create a new variable.",
+          "nl": "Typ de naam van een variabele en selecteer deze om een nieuwe variabele te maken.",
+          "da": "Skriv navnet på en variabel og vælg den for at oprette en ny variabel.",
+          "de": "Geben Sie den Namen einer Variablen ein und wählen Sie sie aus, um eine neue Variable zu erstellen.",
+          "es": "Escribe el nombre de una variable y selecciónala para crear una nueva variable.",
+          "fr": "Tapez le nom d'une variable et sélectionnez-la pour créer une nouvelle variable.",
+          "it": "Digita il nome di una variabile e selezionala per creare una nuova variabile.",
+          "no": "Skriv inn navnet på en variabel og velg den for å opprette en ny variabel.",
+          "sv": "Skriv namnet på en variabel och välj den för att skapa en ny variabel.",
+          "pl": "Wpisz nazwę zmiennej i wybierz ją, aby utworzyć nową zmienną.",
+          "ru": "Введите имя переменной и выберите его, чтобы создать новую переменную.",
+          "ko": "변수 이름을 입력하고 선택하여 새 변수를 만드세요.",
+          "ar": "اكتب اسم المتغير وحدده لإنشاء متغير جديد."
+        },
         "args": [
           {
             "name": "variable",
             "type": "autocomplete",
             "title": {
-              "en": "Variable",
-              "nl": "Variabele",
-              "da": "Variabel",
-              "de": "Variable",
-              "es": "Variable",
-              "fr": "Variable",
-              "it": "Variabile",
-              "no": "Variabel",
-              "sv": "Variabel",
-              "pl": "Zmienna",
-              "ru": "Переменная",
-              "ko": "변수",
-              "ar": "متغير"
+              "en": "Yes/No Variable",
+              "nl": "Ja/Nee Variabele",
+              "da": "Ja/Nej-variabel",
+              "de": "Ja/Nein-Variable",
+              "es": "Variable Sí/No",
+              "fr": "Variable Oui/Non",
+              "it": "Variabile Sì/No",
+              "no": "Ja/Nei Variabel",
+              "sv": "Ja/Nej-variabel",
+              "pl": "Zmienna Tak/Nie",
+              "ru": "Переменная Да/Нет",
+              "ko": "예/아니오 변수",
+              "ar": "متغير نعم/لا"
             },
             "placeholder": {
-              "en": "Variable",
-              "nl": "Variabele",
-              "da": "Variabel",
-              "de": "Variable",
-              "es": "Variable",
-              "fr": "Variable",
-              "it": "Variabile",
-              "no": "Variabel",
-              "sv": "Variabel",
-              "pl": "Zmienna",
-              "ru": "Переменная",
-              "ko": "변수",
-              "ar": "متغير"
+              "en": "Yes/No Variable",
+              "nl": "Ja/Nee Variabele",
+              "da": "Ja/Nej-variabel",
+              "de": "Ja/Nein-Variable",
+              "es": "Variable Sí/No",
+              "fr": "Variable Oui/Non",
+              "it": "Variabile Sì/No",
+              "no": "Ja/Nei Variabel",
+              "sv": "Ja/Nej-variabel",
+              "pl": "Zmienna Tak/Nie",
+              "ru": "Переменная Да/Нет",
+              "ko": "예/아니오 변수",
+              "ar": "متغير نعم/لا"
             }
           },
           {
@@ -3930,6 +4768,7 @@
       },
       {
         "id": "set_boolean_variable_v2",
+        "highlight": true,
         "title": {
           "en": "Set boolean variable",
           "nl": "Stel booleaanse variabele in",
@@ -3960,39 +4799,54 @@
           "ko": "[[variable]]을(를) [[value]](으)로 설정하세요.",
           "ar": "اضبط [[variable]] على [[value]]"
         },
+        "hint": {
+          "en": "Type the name of a variable and select it to create a new variable.",
+          "nl": "Typ de naam van een variabele en selecteer deze om een nieuwe variabele te maken.",
+          "da": "Skriv navnet på en variabel og vælg den for at oprette en ny variabel.",
+          "de": "Geben Sie den Namen einer Variablen ein und wählen Sie sie aus, um eine neue Variable zu erstellen.",
+          "es": "Escribe el nombre de una variable y selecciónala para crear una nueva variable.",
+          "fr": "Tapez le nom d'une variable et sélectionnez-la pour créer une nouvelle variable.",
+          "it": "Digita il nome di una variabile e selezionala per creare una nuova variabile.",
+          "no": "Skriv inn navnet på en variabel og velg den for å opprette en ny variabel.",
+          "sv": "Skriv namnet på en variabel och välj den för att skapa en ny variabel.",
+          "pl": "Wpisz nazwę zmiennej i wybierz ją, aby utworzyć nową zmienną.",
+          "ru": "Введите имя переменной и выберите его, чтобы создать новую переменную.",
+          "ko": "변수 이름을 입력하고 선택하여 새 변수를 만드세요.",
+          "ar": "اكتب اسم المتغير وحدده لإنشاء متغير جديد."
+        },
         "args": [
           {
             "name": "variable",
             "type": "autocomplete",
             "title": {
-              "en": "Variable",
-              "nl": "Variabele",
-              "da": "Variabel",
-              "de": "Variable",
-              "es": "Variable",
-              "fr": "Variable",
-              "it": "Variabile",
-              "no": "Variabel",
-              "sv": "Variabel",
-              "pl": "Zmienna",
-              "ru": "Переменная",
-              "ko": "변수",
-              "ar": "متغير"
+              "en": "Yes/No Variable",
+              "nl": "Ja/Nee Variabele",
+              "da": "Ja/Nej-variabel",
+              "de": "Ja/Nein-Variable",
+              "es": "Variable Sí/No",
+              "fr": "Variable Oui/Non",
+              "it": "Variabile Sì/No",
+              "no": "Ja/Nei Variabel",
+              "sv": "Ja/Nej-variabel",
+              "pl": "Zmienna Tak/Nie",
+              "ru": "Переменная Да/Нет",
+              "ko": "예/아니오 변수",
+              "ar": "متغير نعم/لا"
             },
             "placeholder": {
-              "en": "Variable",
-              "nl": "Variabele",
-              "da": "Variabel",
-              "de": "Variable",
-              "es": "Variable",
-              "fr": "Variable",
-              "it": "Variabile",
-              "no": "Variabel",
-              "sv": "Variabel",
-              "pl": "Zmienna",
-              "ru": "Переменная",
-              "ko": "변수",
-              "ar": "متغير"
+              "en": "Yes/No Variable",
+              "nl": "Ja/Nee Variabele",
+              "da": "Ja/Nej-variabel",
+              "de": "Ja/Nein-Variable",
+              "es": "Variable Sí/No",
+              "fr": "Variable Oui/Non",
+              "it": "Variabile Sì/No",
+              "no": "Ja/Nei Variabel",
+              "sv": "Ja/Nej-variabel",
+              "pl": "Zmienna Tak/Nie",
+              "ru": "Переменная Да/Нет",
+              "ko": "예/아니오 변수",
+              "ar": "متغير نعم/لا"
             }
           },
           {
@@ -4063,46 +4917,61 @@
           "ko": "[[variable]]을(를) [[value]]만큼 증가시키기",
           "ar": "زيادة [[variable]] بمقدار [[value]]"
         },
+        "hint": {
+          "en": "Type the name of a variable and select it to create a new variable.",
+          "nl": "Typ de naam van een variabele en selecteer deze om een nieuwe variabele te maken.",
+          "da": "Skriv navnet på en variabel og vælg den for at oprette en ny variabel.",
+          "de": "Geben Sie den Namen einer Variablen ein und wählen Sie sie aus, um eine neue Variable zu erstellen.",
+          "es": "Escribe el nombre de una variable y selecciónala para crear una nueva variable.",
+          "fr": "Tapez le nom d'une variable et sélectionnez-la pour créer une nouvelle variable.",
+          "it": "Digita il nome di una variabile e selezionala per creare una nuova variabile.",
+          "no": "Skriv inn navnet på en variabel og velg den for å opprette en ny variabel.",
+          "sv": "Skriv namnet på en variabel och välj den för att skapa en ny variabel.",
+          "pl": "Wpisz nazwę zmiennej i wybierz ją, aby utworzyć nową zmienną.",
+          "ru": "Введите имя переменной и выберите его, чтобы создать новую переменную.",
+          "ko": "변수 이름을 입력하고 선택하여 새 변수를 만드세요.",
+          "ar": "اكتب اسم المتغير وحدده لإنشاء متغير جديد."
+        },
         "args": [
           {
             "name": "variable",
             "type": "autocomplete",
             "title": {
-              "en": "Variable",
-              "nl": "Variabele",
-              "da": "Variabel",
-              "de": "Variable",
-              "es": "Variable",
-              "fr": "Variable",
-              "it": "Variabile",
-              "no": "Variabel",
-              "sv": "Variabel",
-              "pl": "Zmienna",
-              "ru": "Переменная",
-              "ko": "변수",
-              "ar": "متغير"
+              "en": "Number Variable",
+              "nl": "Nummer Variabele",
+              "da": "Nummervariabel",
+              "de": "Zahlenvariable",
+              "es": "Variable numérica",
+              "fr": "Variable numérique",
+              "it": "Variabile Numerica",
+              "no": "Tallvariabel",
+              "sv": "Nummervariabel",
+              "pl": "Zmienna Liczbowa",
+              "ru": "Числовая переменная",
+              "ko": "숫자 변수",
+              "ar": "متغير رقمي"
             },
             "placeholder": {
-              "en": "Variable",
-              "nl": "Variabele",
-              "da": "Variabel",
-              "de": "Variable",
-              "es": "Variable",
-              "fr": "Variable",
-              "it": "Variabile",
-              "no": "Variabel",
-              "sv": "Variabel",
-              "pl": "Zmienna",
-              "ru": "Переменная",
-              "ko": "변수",
-              "ar": "متغير"
+              "en": "Number Variable",
+              "nl": "Nummer Variabele",
+              "da": "Nummervariabel",
+              "de": "Zahlenvariable",
+              "es": "Variable numérica",
+              "fr": "Variable numérique",
+              "it": "Variabile Numerica",
+              "no": "Tallvariabel",
+              "sv": "Nummervariabel",
+              "pl": "Zmienna Liczbowa",
+              "ru": "Числовая переменная",
+              "ko": "숫자 변수",
+              "ar": "متغير رقمي"
             }
           },
           {
             "name": "value",
             "type": "number",
             "step": 0.01,
-            "placeholder": {
+            "title": {
               "en": "Number",
               "nl": "Nummer",
               "da": "Nummer",
@@ -4116,6 +4985,21 @@
               "ru": "Число",
               "ko": "숫자",
               "ar": "رقم"
+            },
+            "placeholder": {
+              "en": "0.01",
+              "nl": "0,01",
+              "da": "0,01",
+              "de": "0,01",
+              "es": "0,01",
+              "fr": "0,01",
+              "it": "0,01",
+              "no": "0,01",
+              "sv": "0,01",
+              "pl": "0,01",
+              "ru": "0,01",
+              "ko": "0.01",
+              "ar": "٠٫٠١"
             }
           }
         ]
@@ -4152,46 +5036,61 @@
           "ko": "[[variable]]을(를) [[value]]만큼 감소시키기",
           "ar": "تقليل [[variable]] بمقدار [[value]]"
         },
+        "hint": {
+          "en": "Type the name of a variable and select it to create a new variable.",
+          "nl": "Typ de naam van een variabele en selecteer deze om een nieuwe variabele te maken.",
+          "da": "Skriv navnet på en variabel og vælg den for at oprette en ny variabel.",
+          "de": "Geben Sie den Namen einer Variablen ein und wählen Sie sie aus, um eine neue Variable zu erstellen.",
+          "es": "Escribe el nombre de una variable y selecciónala para crear una nueva variable.",
+          "fr": "Tapez le nom d'une variable et sélectionnez-la pour créer une nouvelle variable.",
+          "it": "Digita il nome di una variabile e selezionala per creare una nuova variabile.",
+          "no": "Skriv inn navnet på en variabel og velg den for å opprette en ny variabel.",
+          "sv": "Skriv namnet på en variabel och välj den för att skapa en ny variabel.",
+          "pl": "Wpisz nazwę zmiennej i wybierz ją, aby utworzyć nową zmienną.",
+          "ru": "Введите имя переменной и выберите его, чтобы создать новую переменную.",
+          "ko": "변수 이름을 입력하고 선택하여 새 변수를 만드세요.",
+          "ar": "اكتب اسم المتغير وحدده لإنشاء متغير جديد."
+        },
         "args": [
           {
             "name": "variable",
             "type": "autocomplete",
             "title": {
-              "en": "Variable",
-              "nl": "Variabele",
-              "da": "Variabel",
-              "de": "Variable",
-              "es": "Variable",
-              "fr": "Variable",
-              "it": "Variabile",
-              "no": "Variabel",
-              "sv": "Variabel",
-              "pl": "Zmienna",
-              "ru": "Переменная",
-              "ko": "변수",
-              "ar": "متغير"
+              "en": "Number Variable",
+              "nl": "Nummer Variabele",
+              "da": "Nummervariabel",
+              "de": "Zahlenvariable",
+              "es": "Variable numérica",
+              "fr": "Variable numérique",
+              "it": "Variabile Numerica",
+              "no": "Tallvariabel",
+              "sv": "Nummervariabel",
+              "pl": "Zmienna Liczbowa",
+              "ru": "Числовая переменная",
+              "ko": "숫자 변수",
+              "ar": "متغير رقمي"
             },
             "placeholder": {
-              "en": "Variable",
-              "nl": "Variabele",
-              "da": "Variabel",
-              "de": "Variable",
-              "es": "Variable",
-              "fr": "Variable",
-              "it": "Variabile",
-              "no": "Variabel",
-              "sv": "Variabel",
-              "pl": "Zmienna",
-              "ru": "Переменная",
-              "ko": "변수",
-              "ar": "متغير"
+              "en": "Number Variable",
+              "nl": "Nummer Variabele",
+              "da": "Nummervariabel",
+              "de": "Zahlenvariable",
+              "es": "Variable numérica",
+              "fr": "Variable numérique",
+              "it": "Variabile Numerica",
+              "no": "Tallvariabel",
+              "sv": "Nummervariabel",
+              "pl": "Zmienna Liczbowa",
+              "ru": "Числовая переменная",
+              "ko": "숫자 변수",
+              "ar": "متغير رقمي"
             }
           },
           {
             "name": "value",
             "type": "number",
             "step": 0.01,
-            "placeholder": {
+            "title": {
               "en": "Number",
               "nl": "Nummer",
               "da": "Nummer",
@@ -4205,6 +5104,21 @@
               "ru": "Число",
               "ko": "숫자",
               "ar": "رقم"
+            },
+            "placeholder": {
+              "en": "0.01",
+              "nl": "0,01",
+              "da": "0,01",
+              "de": "0,01",
+              "es": "0,01",
+              "fr": "0,01",
+              "it": "0,01",
+              "no": "0,01",
+              "sv": "0,01",
+              "pl": "0,01",
+              "ru": "0,01",
+              "ko": "0.01",
+              "ar": "٠٫٠١"
             }
           }
         ]
@@ -4243,40 +5157,6 @@
         },
         "args": [
           {
-            "name": "expression",
-            "type": "text",
-            "placeholder": {
-              "en": "($n1$ * 42) + 1 (* BLL supported)",
-              "nl": "($n1$ * 42) + 1 (* BLL ondersteund)",
-              "da": "($n1$ * 42) + 1 (* BLL understøttet)",
-              "de": "($n1$ * 42) + 1 (* BLL unterstützt)",
-              "es": "($n1$ * 42) + 1 (* compatible con BLL)",
-              "fr": "($n1$ * 42) + 1 (* pris en charge par BLL)",
-              "it": "($n1$ * 42) + 1 (* supportato da BLL)",
-              "no": "($n1$ * 42) + 1 (* BLL støttet)",
-              "sv": "($n1$ * 42) + 1 (* BLL stöds)",
-              "pl": "($n1$ * 42) + 1 (* obsługiwane przez BLL)",
-              "ru": "($n1$ * 42) + 1 (* поддерживается BLL)",
-              "ko": "($n1$ * 42) + 1 (* BLL 지원됨)",
-              "ar": "($n1$ * 42) + 1 (* مدعوم من BLL)"
-            },
-            "title": {
-              "en": "Math.js Expression",
-              "nl": "Math.js-expressie",
-              "da": "Math.js Udtryk",
-              "de": "Math.js-Ausdruck",
-              "es": "Expresión Math.js",
-              "fr": "Expression Math.js",
-              "it": "Espressione Math.js",
-              "no": "Math.js-uttrykk",
-              "sv": "Math.js-uttryck",
-              "pl": "Wyrażenie Math.js",
-              "ru": "Math.js выражение",
-              "ko": "Math.js 표현식",
-              "ar": "Math.js تعبير"
-            }
-          },
-          {
             "name": "variable",
             "type": "autocomplete",
             "title": {
@@ -4308,6 +5188,40 @@
               "ru": "Переменная",
               "ko": "변수",
               "ar": "متغير"
+            }
+          },
+          {
+            "name": "expression",
+            "type": "text",
+            "placeholder": {
+              "en": "($n1$ * 42) + 1 (* BLL supported)",
+              "nl": "($n1$ * 42) + 1 (* BLL ondersteund)",
+              "da": "($n1$ * 42) + 1 (* BLL understøttet)",
+              "de": "($n1$ * 42) + 1 (* BLL unterstützt)",
+              "es": "($n1$ * 42) + 1 (* compatible con BLL)",
+              "fr": "($n1$ * 42) + 1 (* pris en charge par BLL)",
+              "it": "($n1$ * 42) + 1 (* supportato da BLL)",
+              "no": "($n1$ * 42) + 1 (* BLL støttet)",
+              "sv": "($n1$ * 42) + 1 (* BLL stöds)",
+              "pl": "($n1$ * 42) + 1 (* obsługiwane przez BLL)",
+              "ru": "($n1$ * 42) + 1 (* поддерживается BLL)",
+              "ko": "($n1$ * 42) + 1 (* BLL 지원됨)",
+              "ar": "($n1$ * 42) + 1 (* مدعوم من BLL)"
+            },
+            "title": {
+              "en": "Math.js Expression",
+              "nl": "Math.js-expressie",
+              "da": "Math.js Udtryk",
+              "de": "Math.js-Ausdruck",
+              "es": "Expresión Math.js",
+              "fr": "Expression Math.js",
+              "it": "Espressione Math.js",
+              "no": "Math.js-uttrykk",
+              "sv": "Math.js-uttryck",
+              "pl": "Wyrażenie Math.js",
+              "ru": "Math.js выражение",
+              "ko": "Math.js 표현식",
+              "ar": "Math.js تعبير"
             }
           }
         ]
@@ -4344,39 +5258,54 @@
           "ko": "[[variable]] 뒤집기",
           "ar": "اقلب [[variable]]"
         },
+        "hint": {
+          "en": "Type the name of a variable and select it to create a new variable.",
+          "nl": "Typ de naam van een variabele en selecteer deze om een nieuwe variabele te maken.",
+          "da": "Skriv navnet på en variabel og vælg den for at oprette en ny variabel.",
+          "de": "Geben Sie den Namen einer Variablen ein und wählen Sie sie aus, um eine neue Variable zu erstellen.",
+          "es": "Escribe el nombre de una variable y selecciónala para crear una nueva variable.",
+          "fr": "Tapez le nom d'une variable et sélectionnez-la pour créer une nouvelle variable.",
+          "it": "Digita il nome di una variabile e selezionala per creare una nuova variabile.",
+          "no": "Skriv inn navnet på en variabel og velg den for å opprette en ny variabel.",
+          "sv": "Skriv namnet på en variabel och välj den för att skapa en ny variabel.",
+          "pl": "Wpisz nazwę zmiennej i wybierz ją, aby utworzyć nową zmienną.",
+          "ru": "Введите имя переменной и выберите его, чтобы создать новую переменную.",
+          "ko": "변수 이름을 입력하고 선택하여 새 변수를 만드세요.",
+          "ar": "اكتب اسم المتغير وحدده لإنشاء متغير جديد."
+        },
         "args": [
           {
             "name": "variable",
             "type": "autocomplete",
             "title": {
-              "en": "Variable",
-              "nl": "Variabele",
-              "da": "Variabel",
-              "de": "Variable",
-              "es": "Variable",
-              "fr": "Variable",
-              "it": "Variabile",
-              "no": "Variabel",
-              "sv": "Variabel",
-              "pl": "Zmienna",
-              "ru": "Переменная",
-              "ko": "변수",
-              "ar": "متغير"
+              "en": "Yes/No Variable",
+              "nl": "Ja/Nee Variabele",
+              "da": "Ja/Nej-variabel",
+              "de": "Ja/Nein-Variable",
+              "es": "Variable Sí/No",
+              "fr": "Variable Oui/Non",
+              "it": "Variabile Sì/No",
+              "no": "Ja/Nei Variabel",
+              "sv": "Ja/Nej-variabel",
+              "pl": "Zmienna Tak/Nie",
+              "ru": "Переменная Да/Нет",
+              "ko": "예/아니오 변수",
+              "ar": "متغير نعم/لا"
             },
             "placeholder": {
-              "en": "Variable",
-              "nl": "Variabele",
-              "da": "Variabel",
-              "de": "Variable",
-              "es": "Variable",
-              "fr": "Variable",
-              "it": "Variabile",
-              "no": "Variabel",
-              "sv": "Variabel",
-              "pl": "Zmienna",
-              "ru": "Переменная",
-              "ko": "변수",
-              "ar": "متغير"
+              "en": "Yes/No Variable",
+              "nl": "Ja/Nee Variabele",
+              "da": "Ja/Nej-variabel",
+              "de": "Ja/Nein-Variable",
+              "es": "Variable Sí/No",
+              "fr": "Variable Oui/Non",
+              "it": "Variabile Sì/No",
+              "no": "Ja/Nei Variabel",
+              "sv": "Ja/Nej-variabel",
+              "pl": "Zmienna Tak/Nie",
+              "ru": "Переменная Да/Нет",
+              "ko": "예/아니오 변수",
+              "ar": "متغير نعم/لا"
             }
           }
         ]
@@ -4412,6 +5341,21 @@
           "ru": "Выполнить [[variable]]",
           "ko": "[[variable]] 실행",
           "ar": "تنفيذ [[variable]]"
+        },
+        "hint": {
+          "en": "Type the name of a variable and select it to create a new variable.",
+          "nl": "Typ de naam van een variabele en selecteer deze om een nieuwe variabele te maken.",
+          "da": "Skriv navnet på en variabel og vælg den for at oprette en ny variabel.",
+          "de": "Geben Sie den Namen einer Variablen ein und wählen Sie sie aus, um eine neue Variable zu erstellen.",
+          "es": "Escribe el nombre de una variable y selecciónala para crear una nueva variable.",
+          "fr": "Tapez le nom d'une variable et sélectionnez-la pour créer une nouvelle variable.",
+          "it": "Digita il nome di una variabile e selezionala per creare una nuova variabile.",
+          "no": "Skriv inn navnet på en variabel og velg den for å opprette en ny variabel.",
+          "sv": "Skriv namnet på en variabel och välj den för att skapa en ny variabel.",
+          "pl": "Wpisz nazwę zmiennej i wybierz ją, aby utworzyć nową zmienną.",
+          "ru": "Введите имя переменной и выберите его, чтобы создать новую переменную.",
+          "ko": "변수 이름을 입력하고 선택하여 새 변수를 만드세요.",
+          "ar": "اكتب اسم المتغير وحدده لإنشاء متغير جديد."
         },
         "args": [
           {

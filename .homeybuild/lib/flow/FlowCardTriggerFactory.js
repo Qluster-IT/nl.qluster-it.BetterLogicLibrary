@@ -22,6 +22,7 @@ module.exports = {
 
     homey = variableManager.homey;
 
+    const sustainedTypes = ['number', 'string', 'boolean'];
     this.sustainedCards = {
       number: { card: null },
       boolean: { card: null },
@@ -209,61 +210,65 @@ module.exports = {
     /* Sustained Start */
     this.oldSustained = {};
 
-    this.homey.settings.unset('Sustained_undefined');
-    
+    this.homey.settings.unset('Sustained_trigger');
 
 
-    this.oldSustained['number'] = this.homey.settings.get('Sustained_number');
-    
-    const variable_number_sustained = this.homey.flow.getTriggerCard('variable_number_sustained');
-    this.sustainedCards['number'].card = variable_number_sustained;
-    variable_number_sustained
-      .on('update', (() => {
-        refreshSustained('number');
-      }))
-      .registerRunListener((args, state) => {
-        let r = args.variable && args.variable.name && state.variable && state.variable.name && args.variable.name === state.variable.name &&
-          args.condition === state.condition &&
-          args.value === state.value &&
-          args.time === state.time &&
-          args.unit === state.unit &&
-          args.trigger === state.trigger
-          ;
-        return Promise.resolve(r);
-      })
-      .getArgument('variable').registerAutocompleteListener((query, args) => {
-        return Promise.resolve(variableManager.retrieveVariables(query, args, 'number'));
-      });
-    refreshSustained('number');
+    sustainedTypes.forEach(sustainedType => {
+      this.oldSustained[sustainedType] = this.homey.settings.get(`Sustained_${sustainedType}`);
+
+      const sustained_card = this.homey.flow.getTriggerCard(`variable_${sustainedType}_sustained`);
+      this.sustainedCards[sustainedType].card = sustained_card;
+      sustained_card
+        .on('update', (() => {
+          refreshSustained(sustainedType);
+        }))
+        .registerRunListener((args, state) => {
+          let r = args.variable && args.variable.name && state.variable && state.variable.name && args.variable.name === state.variable.name &&
+            args.condition === state.condition &&
+            args.value === state.value &&
+            args.time === state.time &&
+            args.unit === state.unit &&
+            args.execute === state.execute
+            ;
+          return Promise.resolve(r);
+        })
+        .getArgument('variable').registerAutocompleteListener((query, args) => {
+          return Promise.resolve(variableManager.retrieveVariables(query, args, sustainedType));
+        });
+      refreshSustained(sustainedType);
+    });
+
 
     /* Sustained End */
 
-    this.updateSustained = function(variable) {
-      if(_this.sustained && _this.sustained[variable.type] &&  _this.sustained[variable.type].variables[variable.name] && _this.sustained[variable.type].variables[variable.name].sustained) {
+    this.updateSustained = function (variable) {
+      if (_this.sustained && _this.sustained[variable.type] && _this.sustained[variable.type].variables[variable.name] && _this.sustained[variable.type].variables[variable.name].sustained) {
         for (let iSustained = 0; iSustained < _this.sustained[variable.type].variables[variable.name].sustained.length; iSustained++) {
           const sustained = _this.sustained[variable.type].variables[variable.name].sustained[iSustained];
-          _this.sustained[variable.type].variables[variable.name].type = variable?.type;
-          _this.sustained[variable.type].variables[variable.name].value = variable?.value;
-          _this.sustained[variable.type].variables[variable.name].valueSet = variable?.lastChangedTick;
           updateSustained(sustained, _this.sustained[variable.type], variable);
         }
       }
-      saveSustained(variable.type);
     }
 
     function updateSustained(sustained, sustainedType, variable) {
-      if (!validateSustained(sustained, sustainedType.variables[variable.name])) {
+      if (!validateSustained(sustained, variable.value)) {
         clearTimeoutSustained(sustained);
         delete sustained.triggered;
+        delete sustained.valueTrue;
+        delete sustained.valueTrueSet;
+        saveSustained(variable.type);
         //delete sustained.nextTimeout;
       } else if (!sustained.timeoutId) {
-        if (!(sustained.triggered && sustained.triggered >= sustained.nextTimeout && sustained.trigger === 'one_time')) {
+        sustained.valueTrue = variable?.value;
+        sustained.valueTrueSet = variable?.lastChangedTick;
+        if (!(sustained.triggered && sustained.triggered >= sustained.nextTimeout && sustained.execute === 'one_time')) {
           let time = calculateDuration(sustained.time, sustained.unit);
-          sustained.nextTimeout = (sustainedType.variables[variable.name].valueSet || Date.now()) + time;        
+          sustained.nextTimeout = (sustained.valueTrueSet || Date.now()) + time;
         }
         let timeout = sustained.nextTimeout - Date.now();
         if (timeout <= 0) timeout = 1;
         setTimeoutSustained(sustained, sustainedType.variables[variable.name], timeout);
+        saveSustained(variable.type);
       }
     }
 
@@ -271,17 +276,10 @@ module.exports = {
       const sustainedType = _this.sustained[type];
       _this.sustainedCards[type].card.getArgumentValues()
         .then(args => {
-          let variablesArgs = args;// BL._.map(BL._.uniqBy(args, arg => { return arg.variable.name; }), arg => { return arg; });
+          let variablesArgs = args;
 
           for (let iVariable = 0; iVariable < variablesArgs.length; iVariable++) {
             const variableArg = variablesArgs[iVariable];
-            //_.each(devices, device => {
-            //if (!_this.Tracking2.devices[variable.name]) _this.Tracking2.devices[variable.name] = variable;
-            // let deviceToSet = _this.Tracking2.devices[variable.name];
-            // if (!deviceToSet) return;
-            // if (!deviceToSet.capabilities) deviceToSet.capabilities = {};
-            // if (!deviceToSet.capabilities[variableArg.capability.id]) deviceToSet.capabilities[variableArg.capability.id] = { id: variableArg.capability.id };
-            // deviceToSet.capabilities[variableArg.capability.id].hasBeen = true;
 
             if (!sustainedType.variables[variableArg.variable.name]) sustainedType.variables[variableArg.variable.name] = { sustained: [] };
             let sustained;
@@ -290,92 +288,94 @@ module.exports = {
               x.value === variableArg.value &&
               x.time === variableArg.time &&
               x.unit === variableArg.unit &&
-              x.trigger === variableArg.trigger
+              x.execute === variableArg.execute
             )))
               sustainedType.variables[variableArg.variable.name].sustained.push((sustained = {
                 condition: variableArg.condition,
                 value: variableArg.value,
                 time: variableArg.time,
                 unit: variableArg.unit,
-                trigger: variableArg.trigger,
+                execute: variableArg.execute,
               }));
-            let oldSustained = _this.oldSustained && _this.oldSustained[type] && _this.oldSustained[type].variables && _this.oldSustained[type].variables[variableArg.variable.name] ? _this.oldSustained[type].variables[variableArg.variable.name] : null;
-            if (!sustainedType.variables[variableArg.variable.name].hasOwnProperty('value')) {
-              if (oldSustained) {
-                sustainedType.variables[variableArg.variable.name].value = oldSustained.value;
-                sustainedType.variables[variableArg.variable.name].valueSet = oldSustained.valueSet;
-                sustainedType.variables[variableArg.variable.name].type = oldSustained.type;
-              } else {
-                try {
-                  const variable = variableManager.getVariable(variableArg.variable.name);
-
-                  //if(variable) {
-                    sustainedType.variables[variableArg.variable.name].type = type;// variable.type;
-                    sustainedType.variables[variableArg.variable.name].value = variable?.value;
-                    sustainedType.variables[variableArg.variable.name].valueSet = variable?.lastChangedTick;
-                  //}
-
-                } catch (error) {
-
-                }
-
-              }
+            let oldSustained = _this.oldSustained && _this.oldSustained[type] && _this.oldSustained[type].variables && _this.oldSustained[type].variables[variableArg.variable.name] && _this.oldSustained[type].variables[variableArg.variable.name].sustained
+              ? _this.oldSustained[type].variables[variableArg.variable.name].sustained.find(x =>
+                x.condition === variableArg.condition &&
+                x.value === variableArg.value &&
+                x.time === variableArg.time &&
+                x.unit === variableArg.unit &&
+                x.execute === variableArg.execute
+              ) : null;
+            //if (!sustained.hasOwnProperty('valueTrue')) {
+            
+            sustainedType.variables[variableArg.variable.name].type = type;
+            if (oldSustained) {
+              sustained.valueTrue = oldSustained.valueTrue;
+              sustained.valueTrueSet = oldSustained.valueTrueSet;
+            } else {
+              try {
+                const variable = variableManager.getVariable(variableArg.variable.name);
+                sustained.valueTrue = variable?.value;
+                sustained.valueTrueSet = variable?.lastChangedTick;
+              } catch (error) { }
             }
+            //}
 
             //Add get values from device
-            if (!validateSustained(sustained, sustainedType.variables[variableArg.variable.name])) {
+            if (!validateSustained(sustained, sustained.valueTrue)) {
               clearTimeoutSustained(sustained);
               delete sustained.triggered;
-            } else if (!sustained.timeoutId) {
-              let oldSustained;
-              if (_this.oldSustained && _this.oldSustained[type] && _this.oldSustained[type].variables && _this.oldSustained[type].variables[variableArg.variable.name] &&
-                (oldSustained = _this.oldSustained[type].variables[variableArg.variable.name].sustained.find(x =>
-                  x.condition === variableArg.condition &&
-                  x.value === variableArg.value &&
-                  x.time === variableArg.time &&
-                  x.unit === variableArg.unit &&
-                  x.trigger === variableArg.trigger
-                ))) {
-                sustained.triggered = oldSustained.triggered;
-                sustained.nextTimeout = oldSustained.nextTimeout;
-              } else if (!sustained.nextTimeout) {
-                let time = calculateDuration(sustained.time, sustained.unit);
-                sustained.nextTimeout = (sustainedType.variables[variableArg.variable.name].valueSet || Date.now()) + time;
+              delete sustained.valueTrue;
+              delete sustained.valueTrueSet;
+            } else {
+              if (!sustained.timeoutId) {
+                let oldSustained;
+                if (_this.oldSustained && _this.oldSustained[type] && _this.oldSustained[type].variables && _this.oldSustained[type].variables[variableArg.variable.name] &&
+                  (oldSustained = _this.oldSustained[type].variables[variableArg.variable.name].sustained.find(x =>
+                    x.condition === variableArg.condition &&
+                    x.value === variableArg.value &&
+                    x.time === variableArg.time &&
+                    x.unit === variableArg.unit &&
+                    x.execute === variableArg.execute
+                  ))) {
+                  sustained.triggered = oldSustained.triggered;
+                  sustained.nextTimeout = oldSustained.nextTimeout;
+                } else if (!sustained.nextTimeout) {
+                  let time = calculateDuration(sustained.time, sustained.unit);
+                  sustained.nextTimeout = (sustained.valueTrueSet || Date.now()) + time;
+                }
+
+                let timeout = sustained.nextTimeout - Date.now();
+                if (timeout <= 0) timeout = 1;
+                setTimeoutSustained(sustained, sustainedType.variables[variableArg.variable.name], timeout);
               }
-
-
-              let timeout = sustained.nextTimeout - Date.now();
-              if (timeout <= 0) timeout = 1;
-              setTimeoutSustained(sustained, sustainedType.variables[variableArg.variable.name], timeout);
             }
-
           }
 
-          if(sustainedType && sustainedType.variables)
+          if (sustainedType && sustainedType.variables)
             for (const variableKey in sustainedType.variables) {
-              if (!Object.hasOwn(sustainedType.variables, variableKey)) continue;              
+              if (!Object.hasOwn(sustainedType.variables, variableKey)) continue;
               const variable = sustainedType.variables[variableKey];
-              
+
               for (let iSustained = 0; iSustained < variable.sustained.length; iSustained++) {
                 const sustained = variable.sustained[iSustained];
-                const sustainedArgs = BL._.filter(args, arg=> 
-                  arg.variable.name===variableKey &&
+                const sustainedArgs = BL._.filter(args, arg =>
+                  arg.variable.name === variableKey &&
                   arg.condition === sustained.condition &&
                   arg.value === sustained.value &&
                   arg.time === sustained.time &&
                   arg.unit === sustained.unit &&
-                  arg.trigger === sustained.trigger
+                  arg.execute === sustained.execute
                 );
-                if(sustainedArgs.length===0) {
+                if (sustainedArgs.length === 0) {
                   // removetimeout.
                   clearTimeoutSustained(sustained);
-                  variable.sustained.splice(iSustained,1);
+                  variable.sustained.splice(iSustained, 1);
                   iSustained--;
                 }
               }
-              if(variable.sustained.length===0) delete sustainedType.variables[variableKey];
-              
-              
+              if (variable.sustained.length === 0) delete sustainedType.variables[variableKey];
+
+
             }
 
           saveSustained(type);
@@ -386,40 +386,35 @@ module.exports = {
 
     function saveSustained(type) {
       _this.homey.log(`Sustained_${type}`, JSON.stringify(_this.sustained[type]));
-      _this.homey.settings.set(`Sustained_${type}`, _this.sustained[type] );
+      _this.homey.settings.set(`Sustained_${type}`, _this.sustained[type]);
     }
 
-    function validateSustained(sustained, variable) {
-      if (variable.value === null || variable.value === undefined) return false;
+    function validateSustained(sustained, variableValue) {
+      if (variableValue === null || variableValue === undefined) return false;
       let value = sustained.value;
-      // switch (variable.type) {
-      //   case 'number': value = Number.parseFloat(hasBeen.value);
-      //     break;
-      //   case 'boolean': value = hasBeen.value === 'true';
-      //     break;
-      // }
+
       try {
         switch (sustained.condition) {
           case 'equal_to':
-            if (variable.value === value) return true;
+            if (variableValue === value) return true;
             break;
           case 'not_equal_to':
-            if (variable.value !== value) return true;
+            if (variableValue !== value) return true;
             break;
           case 'contains':
-            if (variable.value.toLowerCase().indexOf(value.toLowerCase()) > -1) return true;
+            if (variableValue.indexOf(value) > -1) return true;
             break;
           case 'greater_than':
-            if (variable.value > value) return true;
+            if (variableValue > value) return true;
             break;
           case 'greater_than_equal':
-            if (variable.value >= value) return true;
+            if (variableValue >= value) return true;
             break;
           case 'less_than':
-            if (variable.value < value) return true;
+            if (variableValue < value) return true;
             break;
           case 'less_than_equal':
-            if (variable.value <= value) return true;
+            if (variableValue <= value) return true;
             break;
           default:
             break;
@@ -437,7 +432,10 @@ module.exports = {
     }
     function setTimeoutSustained(sustained, variable, time) {
       clearTimeoutSustained(sustained);
-      //if (hasBeen.timeoutId) _this.homey.clearTimeout(hasBeen.timeoutId);
+      if (sustained.triggered && sustained.triggered >= sustained.nextTimeout && sustained.execute === 'one_time') {
+        return;
+      }
+      
       let timeOuter = _this.homey.setTimeout(() => {
         timeoutSustained(sustained, variable);
       }, time);
@@ -445,20 +443,19 @@ module.exports = {
       sustained.timeoutId = timeoutId;
     }
     function timeoutSustained(sustained, variable) {
-      if (sustained.triggered && sustained.triggered >= sustained.nextTimeout && sustained.trigger === 'one_time') {
+      if (sustained.triggered && sustained.triggered >= sustained.nextTimeout && sustained.execute === 'one_time') {
         clearTimeoutSustained(sustained);
         return;
       }
       let time = calculateDuration(sustained.time, sustained.unit);
       let state = BL._.clone(sustained);
-      //state.variable = { name: variable.name };
       let executed = false;
-      if (validateSustained(sustained, variable)) {
+      if (validateSustained(sustained, sustained.valueTrue)) {
         executed = true;
         sustained.triggered = Date.now();
         _this.sustainedCards[variable.type].card.trigger(null, state);
       }
-      if (sustained.trigger === 'every_time' || !executed) {
+      if (sustained.execute === 'every_time' || !executed) {
         sustained.nextTimeout = Date.now() + time;
 
         setTimeoutSustained(sustained, variable, time);

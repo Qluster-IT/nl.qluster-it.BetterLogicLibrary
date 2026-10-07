@@ -1,2 +1,14 @@
 Todo:
 * Remove lastChanged from variables.
+* Settings -> Fileserver -> developertools = WebApp
+* Settings -> popup for changes a variable
+* Settings -> edit variable -> Auto, No Tag, Hidden from lists (const)
+* Add variables to expressions
+
+
+Done:
+* Sustained cards.
+* Better naming of flowcards titles, arguments and hints.
+* BLL Expression (as Tag)
+    * Returns as Number, Yes/No and Text if possible.
+    * Hints
