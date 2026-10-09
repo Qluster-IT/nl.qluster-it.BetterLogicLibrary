@@ -68,6 +68,7 @@ class BLL {
 
         BL.homey.log('BLL destroyed');
     }
+    
     sleep(ms) {
         return new Promise((resolve) => {
             this.homey.setTimeout(resolve, ms);
@@ -76,8 +77,8 @@ class BLL {
 
     async init({ modules } = { modules: [] }) {
         BL.homey.log('BLL.init');
-        if (BL.homey.app.id === 'net.i-dev.betterlogic') await this.sleep(2000);
-        BL.homey.log('BLL.init continue after sleep');
+        //if (BL.homey.app.id === 'net.i-dev.betterlogic') await this.sleep(2000);
+        //BL.homey.log('BLL.init continue after sleep');
         
         //let api = await this.getApi();
         if (modules && modules.length && ((modules.indexOf('datetime') > -1 || modules.indexOf('dateTime') > -1) && modules.indexOf('_') == -1)) modules.unshift('_');
@@ -172,7 +173,8 @@ class BLL {
     }
 
     async getLibrary(libraryName) {
-        try {
+        try {            
+            if(BL.homey.app.id === 'net.i-dev.betterlogic') return BL.homey.app.getLibrary(libraryName);
             let api = await this.getApi();
             return await api.get('/library/' + libraryName);
         } catch (error) {
@@ -204,6 +206,12 @@ class BLL {
     }
 
     async get(url, opt) {
+        if(BL.homey.app.id === 'net.i-dev.betterlogic') {
+            switch (url) {
+                case 'locale': return BL.homey.app.locale;            
+                case 'exports': return BL.homey.app.exportsSettings;            
+            }
+        }
         try {
             let api = await this.getApi();
             return await api.get(url);

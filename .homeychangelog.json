@@ -1963,5 +1963,20 @@
     "ru": "Исправление ошибок: Решение проблемы.",
     "ko": "버그 수정: 버그 해결 중.",
     "ar": "إصلاح الأخطاء: حل مشكلة."
+  },
+  "4.2.0": {
+    "en": "Resolved: Completly rebuild and resolved the app-startup issue that sometimes happened after app update.",
+    "nl": "Opgelost: De app volledig opnieuw opgebouwd en het opstartprobleem opgelost dat soms optrad na een app-update.",
+    "da": "Løst: Fuldt genopbygget og løst problemet med app-start, der nogle gange opstod efter en app-opdatering.",
+    "de": "Behoben: Die App wurde komplett neu aufgebaut und das Problem beim App-Start behoben, das manchmal nach einem App-Update auftrat.",
+    "es": "Resuelto: Reconstrucción completa y solución del problema de inicio de la aplicación que a veces ocurría después de actualizar la aplicación.",
+    "fr": "Résolu : Reconstruction complète et résolution du problème de démarrage de l'application qui survenait parfois après une mise à jour de l'application.",
+    "it": "Risolto: Ricostruito completamente e risolto il problema di avvio dell'app che a volte si verificava dopo l'aggiornamento dell'app.",
+    "no": "Løst: Fullstendig gjenoppbygd og løst problemet med app-oppstart som noen ganger oppstod etter app-oppdatering.",
+    "sv": "Löst: Fullständigt ombyggd och löste problemet med app-start som ibland inträffade efter appuppdatering.",
+    "pl": "Rozwiązano: Całkowicie przebudowano i rozwiązano problem z uruchamianiem aplikacji, który czasami występował po aktualizacji aplikacji.",
+    "ru": "Решено: Полностью перестроено и устранена проблема с запуском приложения, которая иногда возникала после обновления приложения.",
+    "ko": "해결됨: 앱 업데이트 후 가끔 발생하던 앱 시작 문제를 완전히 재구축하고 해결했습니다.",
+    "ar": "تم الحل: إعادة بناء كاملة وحل مشكلة بدء تشغيل التطبيق التي كانت تحدث أحيانًا بعد تحديث التطبيق."
   }
 }

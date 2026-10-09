@@ -13,6 +13,11 @@ const { BL } = require('betterlogiclibrary');
 const FileServer = require('./lib/FileServer.js');
 
 //const number = require('./bll/number.js')
+const { readFile: _readFile } = require('fs');
+const { promisify } = require('util');
+const readFileAsync = promisify(_readFile);
+
+async function readFile(path, ops) { return await readFileAsync(path, ops); }
 
 
 const vm = require('vm');
@@ -423,6 +428,9 @@ class BetterLogic extends Homey.App {
 				this.locale = { default: await this.homey.i18n.getLanguage() };
 				await this.homey.settings.set('locale', this.locale);
 			}
+			
+			
+			//For old verions, can be removed?
 			if (this.locale && this.locale.formats) {
 				this.locale.dateFormats = this.locale.formats;
 				delete this.locale.formats;
@@ -433,9 +441,11 @@ class BetterLogic extends Homey.App {
 			//await DateTime.init();
 
 			timezone = this.homey.clock.getTimezone();
+
+			await this.setExports();
 			//let a = number.toString(1.5);
 
-			let bl = BL.init({
+			let bl = await BL.init({
 				homey: this.homey,
 				modules: [
 					"_",
@@ -445,40 +455,14 @@ class BetterLogic extends Homey.App {
 					"proto",
 					"json"
 				]
-			}).catch(this.error);
+			});//.catch(this.error);
 
 
-
-			await this.setExports();
-
-			//let timeoutset = false;
-
-
-
-			//BL.decode()
-
-			// if (BL.homey.app.id === 'net.i-dev.betterlogic') {
-			// 	this.homey.setTimeout(async () => {
-			// 		await BL.realtimeFunction('running')
-			// 	}, 5 * 1000);
-
-			// 	this.homey.setTimeout(async () => {
-			// 		await BL.realtimeFunction('running_2x')
-			// 	}, 10 * 1000);
-
-			// 	this.homey.setTimeout(async () => {
-			// 		await this.homey.api.realtime("running_3x");
-			// 	}, 20 * 1000);
-
-			// 	this.homey.setTimeout(async () => {
-			// 		await this.homey.api.realtime("running_3x");
-			// 	}, 60 * 1000);
-			// }
-
-			BL.homey.log('BL.ready.then set');
-			BL.ready.then(async (x) => {
-				BL.homey.log('BL.ready.then executing');
-				this.bl = x;
+			BL.homey.log('BL loading normally');
+			//BL.homey.log('BL.ready.then set');
+			//BL.ready.then(async (x) => {
+			//	BL.homey.log('BL.ready.then executing');
+				//this.bl = x;
 
 				this.homey.api.realtime('bllSetLocale', this.locale);
 
@@ -975,7 +959,7 @@ class BetterLogic extends Homey.App {
 				}, 180 * 1000);
 
 
-			});
+			//});
 
 
 			if(!await this.homey.settings.get('notification_update_sustained_flowcards')) {
@@ -1162,6 +1146,24 @@ class BetterLogic extends Homey.App {
 	//		(?:[^{])?\{\[(.*?)\]\}(?:[^}])?
 	//		(?<B>(?:{)?){\[(((?!]})(.))+?)\]}(?(R&B)|(?!}))
 	//		(?'b'(?:{)?){\[(((?!]})(.))+?)\]}(?(R&b)(?<A>(?!})))
+
+	async getLibrary(libraryName) {
+		switch (libraryName) {
+			case "bll": return { file: await readFile(__dirname + '/bll/bll.js', { encoding: 'utf8' }) };
+			case "lodash": return { file: await readFile(__dirname + '/assets/js/lodash.min.js', { encoding: 'utf8' }) };
+			case "mathjs": return { file: await readFile(__dirname + '/lib/util/math.js', { encoding: 'utf8' }) };
+			case "datetime": return { file: await readFile(__dirname + '/bll/dateTime.js', { encoding: 'utf8' }) };
+			case "number": return { file: await readFile(__dirname + '/bll/number.js', { encoding: 'utf8' }) };
+			case "coding": return { file: await readFile(__dirname + '/bll/coding.js', { encoding: 'utf8' }) };
+			case "proto": return { file: await readFile(__dirname + '/bll/proto.js', { encoding: 'utf8' }) };
+			case "json": return { file: await readFile(__dirname + '/bll/json.js', { encoding: 'utf8' }) };
+			case "write-excel-file-min": return { file: await readFile(__dirname + '/lib/write-excel-file-min.js', { encoding: 'utf8' }) };
+			case "json2csv": return { file: await readFile(__dirname + '/lib/json2csv.js', { encoding: 'utf8' }) };
+		}
+
+	}
+
+
 
 	codingRegExp = /(?:(?<!{)){\[(((?!]})(.))+?)\]}(?:(?!}))/gsi;
 

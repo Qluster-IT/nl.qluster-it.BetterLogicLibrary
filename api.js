@@ -33,7 +33,8 @@ module.exports =
     async getLibrary({ homey, params }) {
         //homey.log('getLibrary', params, __dirname);
         try {
-            if (params) switch (params.library) {
+            if (params) return await homey.app.getLibrary(params.library);
+            /*if (params) switch (params.library) {
                 case "bll": return { file: await readFile(__dirname + '/bll/bll.js', { encoding: 'utf8' }) };
                 case "lodash": return { file: await readFile(__dirname + '/assets/js/lodash.min.js', { encoding: 'utf8' }) };
                 case "mathjs": return { file: await readFile(__dirname + '/lib/util/math.js', { encoding: 'utf8' }) };
@@ -44,7 +45,7 @@ module.exports =
                 case "json": return { file: await readFile(__dirname + '/bll/json.js', { encoding: 'utf8' }) };
                 case "write-excel-file-min": return { file: await readFile(__dirname + '/lib/write-excel-file-min.js', { encoding: 'utf8' }) };
                 case "json2csv": return { file: await readFile(__dirname + '/lib/json2csv.js', { encoding: 'utf8' }) };
-            }
+            }*/
             return null;
         } catch (error) {
             homey.error(error);
