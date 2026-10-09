@@ -477,7 +477,7 @@ class BetterLogic extends Homey.App {
 
 			BL.homey.log('BL.ready.then set');
 			BL.ready.then(async (x) => {
-				BL.homey.log('BL.ready.then executed');
+				BL.homey.log('BL.ready.then executing');
 				this.bl = x;
 
 				this.homey.api.realtime('bllSetLocale', this.locale);
