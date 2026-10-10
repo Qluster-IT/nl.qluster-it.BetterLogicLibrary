@@ -1978,5 +1978,20 @@
     "ru": "Решено: Полностью перестроено и устранена проблема с запуском приложения, которая иногда возникала после обновления приложения.",
     "ko": "해결됨: 앱 업데이트 후 가끔 발생하던 앱 시작 문제를 완전히 재구축하고 해결했습니다.",
     "ar": "تم الحل: إعادة بناء كاملة وحل مشكلة بدء تشغيل التطبيق التي كانت تحدث أحيانًا بعد تحديث التطبيق."
+  },
+  "4.2.1": {
+    "en": "Improved: Startup speed.",
+    "nl": "Verbeterd: Opstartsnelheid.",
+    "da": "Forbedret: Opstartshastighed.",
+    "de": "Verbessert: Startgeschwindigkeit.",
+    "es": "Mejorado: Velocidad de inicio.",
+    "fr": "Amélioré : Vitesse de démarrage.",
+    "it": "Migliorato: Velocità di avvio.",
+    "no": "Forbedret: Oppstartshastighet.",
+    "sv": "Förbättrad: Starttid.",
+    "pl": "Ulepszono: Szybkość uruchamiania.",
+    "ru": "Улучшено: Скорость запуска.",
+    "ko": "개선됨: 시작 속도.",
+    "ar": "تحسين: سرعة بدء التشغيل."
   }
 }

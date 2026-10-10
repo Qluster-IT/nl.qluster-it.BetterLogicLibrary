@@ -1241,7 +1241,7 @@ class BetterLogic extends Homey.App {
 
 		//}
 		
-		code = '( ' + code + ' )';
+		//code = '( ' + code + ' )';
 		try {
 
 			return new vm.Script(code).runInNewContext(vm.createContext(context), { timeout: 55 * 1000 });
