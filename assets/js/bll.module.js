@@ -1,5 +1,5 @@
-var app = angular.module('bll', []);
-app.factory('$bl', ['$q', function ($q) {
+const blModule = angular.module('bll', []);
+blModule.factory('$bl', ['$q', function ($q) {
     let Homey;
     let $scope;
     let defer = $q.defer();
@@ -86,14 +86,15 @@ app.factory('$bl', ['$q', function ($q) {
     }
 }]);
 
-app.directive('blHref', function () {
+blModule.directive('blHref', function () {
     return function (scope, element, attrs) {
+        element.attr('href', '#');
         element.bind('click', function (event) {
             Homey.openURL(attrs.blHref);
         });
     };
 });
-app.filter('__', ['$bl', function ($bl) {
+blModule.filter('__', ['$bl', function ($bl) {
     //let ready = false;
     let strings = {};
     let fn = function (input) {
@@ -111,12 +112,12 @@ app.filter('__', ['$bl', function ($bl) {
 
 }]);
 
-app.directive('blTranslate', ['$bl', function ($bl) {
+blModule.directive('blTranslate', ['$bl', function ($bl) {
     return {
         restrict: 'A',
         replace: true,        
         link: function compile(scope, element, attrs, controller) {
-            let html = element.html();
+            let html = attrs.blTranslate || element.html();
             html = $bl.homey.__(html) || html;            
             element.html(html);
         
@@ -124,7 +125,7 @@ app.directive('blTranslate', ['$bl', function ($bl) {
     };
 }]);
 
-app.directive('ngIgnoreDirty', [function() {
+blModule.directive('ngIgnoreDirty', [function() {
     return {
     restrict: 'A',
     require: 'ngModel',
