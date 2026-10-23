@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "4.2.2",
+  "version": "4.2.3",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -99,9 +99,9 @@
     }
   },
   "homeyCommunityTopicId": 71876,
-  "source": "https://bitbucket.org/QlusterIT/nl.qluster-it.BetterLogic/",
+  "source": "https://github.com/Qluster-IT/nl.qluster-it.BetterLogicLibrary/",
   "bugs": {
-    "url": "https://bitbucket.org/QlusterIT/nl.qluster-it.BetterLogic/issues"
+    "url": "https://github.com/Qluster-IT/nl.qluster-it.BetterLogicLibrary/issues"
   },
   "flow": {
     "triggers": [
