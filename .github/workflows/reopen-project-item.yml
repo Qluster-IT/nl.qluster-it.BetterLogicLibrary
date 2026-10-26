@@ -1,0 +1,82 @@
+name: Project Item Unarchiveren en Status naar Ready
+
+on:
+  issues:
+    types: [reopened]
+  pull_request:
+    types: [reopened]
+
+jobs:
+  unarchive-and-move:
+    runs-on: ubuntu-latest
+    env:
+      # Hier splitsen we de URL op om de CLI-fout te voorkomen
+      PROJECT_OWNER: "Qluster-IT"
+      PROJECT_NUMBER: 1
+      GITHUB_TOKEN: ${{ secrets.PAT }}
+      ISSUE_NODE_ID: ${{ github.event.issue.node_id }}
+
+    steps:
+      - name: Zoek gekoppeld Project en Item via GraphQL
+        id: item_info
+        run: |
+          RESPONSE=$(gh api graphql -f query='
+            query($issueId: ID!) {
+              node(id: $issueId) {
+                ... on Issue {
+                  projectItems(first: 10) {
+                    nodes {
+                      id
+                      isArchived
+                      project {
+                        id
+                        number
+                        owner {
+                          ... on Organization { login }
+                          ... on User { login }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ' -f issueId="$ISSUE_NODE_ID")
+
+          # Filter de data voor het juiste project
+          ITEM_DATA=$(echo "$RESPONSE" | jq -r --argjson num "${{ env.PROJECT_NUMBER }}" --arg owner "${{ env.PROJECT_OWNER }}" \
+            '.data.node.projectItems.nodes[] | select(.project.number == $num and (.project.owner.login | ascii_downcase) == ($owner | ascii_downcase))')
+
+          ITEM_ID=$(echo "$ITEM_DATA" | jq -r '.id // empty')
+          PROJECT_ID=$(echo "$ITEM_DATA" | jq -r '.project.id // empty')
+          IS_ARCHIVED=$(echo "$ITEM_DATA" | jq -r '.isArchived // false')
+
+          echo "Gevonden Item ID: $ITEM_ID"
+          echo "Gevonden Project ID: $PROJECT_ID"
+          echo "Is gearchiveerd: $IS_ARCHIVED"
+
+          echo "item_id=$ITEM_ID" >> $GITHUB_OUTPUT
+          echo "project_id=$PROJECT_ID" >> $GITHUB_OUTPUT
+          echo "is_archived=$IS_ARCHIVED" >> $GITHUB_OUTPUT
+
+      - name: Unarchive het projectitem
+        if: steps.item_info.outputs.item_id != '' && steps.item_info.outputs.is_archived == 'true'
+        run: |
+          # We sturen nu verplicht projectId én itemId mee, en vragen 'item { id }' op als return
+          gh api graphql -f query='
+            mutation($projectId: ID!, $itemId: ID!) {
+              unarchiveProjectV2Item(input: {projectId: $projectId, itemId: $itemId}) {
+                item { id }
+              }
+            }
+          ' -f projectId="${{ steps.item_info.outputs.project_id }}" -f itemId="${{ steps.item_info.outputs.item_id }}"
+
+      - name: Zet status op Ready
+        if: steps.item_info.outputs.item_id != ''
+        run: |
+          # We gebruiken nu de URL van het issue in plaats van de --id vlag
+          gh project item-edit ${{ env.PROJECT_NUMBER }} \
+            --owner "${{ env.PROJECT_OWNER }}" \
+            --url "https://github.com/${{ env.PROJECT_OWNER }}/${{ github.event.repository.name }}/issues/${{ github.event.issue.number }}" \
+            --field "Status" \
+            --value "Ready"
