@@ -761,7 +761,7 @@ class BetterLogic extends Homey.App {
 				this.homey.flow.getActionCard('execute_bl_expression_tag').registerRunListener(async (args, state) => {
 					try {
 						if (args.expression !== undefined && args.expression !== 'undefined') {
-							const value = this.runSandBox(args.expression, { arg: args.argument });
+							const value = await this.runSandBox(args.expression, { arg: args.argument });
 							const tokens = { text: '', number: 0, boolean: false, json: '' };
 							switch (typeof (value)) {
 								case "string": 
@@ -804,7 +804,7 @@ class BetterLogic extends Homey.App {
 						if (args.text !== undefined && args.text !== 'undefined') {
 
 							let value = args.text;
-							if (args && args.text) value = this.runCoding({ text: args.text });
+							if (args && args.text) value = await this.runCoding({ text: args.text });
 							
 							const tokens = { text: value || '', number: 0, boolean: false, json: '' };							
 							tokens.json = value;//JSON.stringify(value);							
@@ -1171,18 +1171,17 @@ class BetterLogic extends Homey.App {
 		try {
 
 			const codingsToRun = new Map();
+			let pending = false;
 			for (const match of text.matchAll(this.codingRegExp)) {
 				const code = match[1];
-				if (!codingsToRun.has(code)) codingsToRun.set(code, this.runSandBox(code, { locale, arg }));
+				if (codingsToRun.has(code)) continue;
+				const value = this.runSandBox(code, { locale, arg });
+				if (value && typeof value.then === 'function') pending = true;
+				codingsToRun.set(code, value);
 			}
-
-
-			text = text.replaceAll(this.codingRegExp, (val, index) => {
-				let value = codingsToRun.get(index);
-				if(BL._.isArray(value)) value = value?.toString() || '';
-				else if(typeof(value)==='object') value = JSON.stringify(value);
-				return value;
-			});
+			// Stay synchronous unless a coding returned a promise (e.g. an async custom function).
+			if (pending) return this.replaceCodingsAsync(text, codingsToRun);
+			text = this.replaceCodings(text, codingsToRun);
 
 			// let codings = completeText.matchAll(/\[\{(.*?)\}\]/gmsi);
 			// let codingsFound = codings? [...codings] : [];
@@ -1195,6 +1194,26 @@ class BetterLogic extends Homey.App {
 
 		}
 		return text;
+	}
+
+	replaceCodings(text, codingsToRun) {
+		return text.replaceAll(this.codingRegExp, (val, index) => {
+			let value = codingsToRun.get(index);
+			if(BL._.isArray(value)) value = value?.toString() || '';
+			else if(typeof(value)==='object') value = JSON.stringify(value);
+			return value;
+		});
+	}
+
+	async replaceCodingsAsync(text, codingsToRun) {
+		try {
+			const codes = [...codingsToRun.keys()];
+			const values = await Promise.all(codingsToRun.values());
+			codes.forEach((code, i) => codingsToRun.set(code, values[i]));
+			return this.replaceCodings(text, codingsToRun);
+		} catch (error) {
+			return text;
+		}
 	}
 
 	// async runTempCode(code) {

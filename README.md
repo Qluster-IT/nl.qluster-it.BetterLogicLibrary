@@ -30,7 +30,12 @@ Example BLL coding: When you place this within a textargument:  - Hello, today i
 
 Each distinct expression is evaluated once per decoded text, including expressions
 returning `0`, `false`, or an empty string. Results are not cached between calls;
-separate evaluations continue to use isolated JavaScript contexts.
+separate evaluations continue to use fresh JavaScript contexts.
+
+Math.js uses one shared instance within the BLL app to reduce memory usage.
+Calling `math.config(...)` or `math.import(...)` changes that shared instance
+and affects subsequent mathjs evaluations, not just the current JavaScript
+expression. Other Homey apps that load the math module keep their own instances.
 
 The bundled Excel writer avoids an extra full-workbook buffer copy on Node.js
 while preserving its `Uint8Array` result and browser fallback. Shared strings

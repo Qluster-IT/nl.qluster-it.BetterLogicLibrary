@@ -32,6 +32,100 @@ function createApp(context = {}) {
   return app;
 }
 
+function createExpressionCards() {
+  const bridge = {};
+  const actions = new Map();
+  const conditions = new Map();
+  const updates = [];
+  const requests = [];
+  function card(listeners, id) {
+    return {
+      registerRunListener(listener) { listeners.set(id, listener); return this; },
+      getArgument() { return this; },
+      registerAutocompleteListener() { return this; }
+    };
+  }
+  const variableManager = {
+    homey: {
+      flow: {
+        getActionCard: id => card(actions, id),
+        getConditionCard: id => card(conditions, id)
+      },
+      __: key => key
+    },
+    getVariable: name => ({ name, value: 4 }),
+    updateVariable: async (name, value, type) => { updates.push({ name, value, type }); return true; }
+  };
+  for (const kind of ['Action', 'Condition', 'Trigger']) {
+    const filename = path.resolve(__dirname, '..', 'lib', 'flow', `FlowCard${kind}Factory.js`);
+    const m = new Module(filename, module);
+    m.filename = filename;
+    m.paths = module.paths;
+    m.require = function (id) {
+      requests.push(id);
+      if (id === 'homey') return {};
+      if (id === 'betterlogiclibrary') return { BL: bridge };
+      if (id === '../util/util.js') {
+        return { buildExpression: expression => expression.replaceAll('$input$', '4') };
+      }
+      return Module.prototype.require.call(this, id);
+    };
+    m._compile(fs.readFileSync(filename, 'utf8'), filename);
+    if (kind !== 'Trigger') m.exports[`CreateFlowCard${kind}s`](variableManager);
+  }
+  return { bridge, actions, conditions, updates, requests };
+}
+
+test('flow factories register without loading a second mathjs bundle', () => {
+  const { requests } = createExpressionCards();
+  assert.equal(requests.includes('../util/math.js'), false);
+});
+
+test('math expression cards share VM imports and preserve results and errors', async () => {
+  const { bridge, actions, conditions, updates } = createExpressionCards();
+  bridge.math = require('../lib/util/math.js').create();
+  const app = createApp({ math: bridge.math });
+  app.runSandBox('math.import({ scaled: value => value * 3, failCalculation: () => { throw new Error("calculation failed"); } })');
+
+  assert.equal(await actions.get('execute_expression')({ variable: { name: 'output' }, expression: 'scaled($input$) + 1' }), true);
+  assert.deepEqual(updates, [{ name: 'output', value: 13, type: 'number' }]);
+  assert.equal(await conditions.get('expression')({ expression: 'scaled($input$) == 12' }), true);
+  assert.equal(await conditions.get('expression')({ expression: 'scaled($input$) == 13' }), false);
+  await assert.rejects(actions.get('execute_expression')({ variable: { name: 'output' }, expression: 'failCalculation()' }), /Error executing expression: calculation failed/);
+  await assert.rejects(conditions.get('expression')({ expression: 'failCalculation()' }), /calculation failed/);
+  assert.equal(updates.length, 1);
+});
+
+test('math expression cards observe shared configuration changes after registration', async () => {
+  const { bridge, actions, conditions, updates } = createExpressionCards();
+  bridge.math = require('../lib/util/math.js').create();
+  const app = createApp({ math: bridge.math });
+  app.runSandBox('math.config({ number: "BigNumber", precision: 80 })');
+
+  await actions.get('execute_expression')({ variable: { name: 'output' }, expression: '0.1 + 0.2' });
+  assert.equal(updates[0].value.isBigNumber, true);
+  assert.equal(updates[0].value.toString(), '0.3');
+  assert.equal((await conditions.get('expression')({ expression: '1 + 1' })).isBigNumber, true);
+  app.runSandBox('math.config({ number: "number" })');
+  assert.equal(await conditions.get('expression')({ expression: '1 + 1' }), 2);
+});
+
+test('remote express failures return the expression in silent mode and throw otherwise', async () => {
+  const { BLL } = require('../bll/bll.js');
+  const previous = BL._L;
+  const failure = new Error('Better Logic is not installed or running.');
+  const current = { post: async () => { throw failure; } };
+  BL._L = { Current: current };
+  try {
+    current.silent = true;
+    assert.equal(await BLL.prototype.express.call(current, '1 + 1'), '1 + 1');
+    current.silent = false;
+    await assert.rejects(BLL.prototype.express.call(current, '1 + 1'), error => error === failure);
+  } finally {
+    BL._L = previous;
+  }
+});
+
 test('decode evaluates duplicate falsy and prototype-named expressions only once', () => {
   const app = createApp();
   for (const value of [0, false, '', null, undefined, NaN]) {
@@ -60,6 +154,13 @@ test('decode preserves evaluation order, result conversion, escaping, and per-ca
   assert.equal(calls, 1);
   assert.equal(app.runCoding({ text: '{[next()]} {[next()]}' }), '2 2');
   assert.equal(calls, 2);
+});
+
+test('decode resolves codings that return promises instead of inserting {}', async () => {
+  const app = createApp({ later: async value => value * 2, fail: async () => { throw new Error('boom'); } });
+  assert.equal(await app.runCoding({ text: 'a {[later(2)]} b {[later(2)]} {[1 + 1]} {[[1, 2]]}' }), 'a 4 b 4 2 1,2');
+  assert.equal(await app.runCoding({ text: 'x {[fail()]} {[later(1)]}' }), 'x {[fail()]} {[later(1)]}');
+  assert.equal(typeof app.runCoding({ text: '{[1 + 1]}' }), 'string', 'synchronous codings stay synchronous');
 });
 
 test('express preserves argument aliases and helper defaults without mutating caller properties', () => {

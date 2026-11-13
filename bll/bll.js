@@ -252,7 +252,7 @@ class BLL {
         try {
             return await BL.l.post('express', { expression, contextProperties });
         } catch (error) {            
-            if (BL.l.silent === true) return text;
+            if (BL.l.silent === true) return expression;
             else throw error;
         }
 
