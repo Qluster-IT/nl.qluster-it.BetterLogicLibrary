@@ -1,4 +1,14 @@
 const { BL } = require("betterlogiclibrary");
+const numberFormatters = new Map();
+const MAX_NUMBER_FORMATTERS = 32;
+const nativeToLocaleString = Number.prototype.toLocaleString;
+const numberFormatOptions = [
+  'localeMatcher', 'numberingSystem', 'style', 'currency', 'currencyDisplay',
+  'currencySign', 'unit', 'unitDisplay', 'notation', 'compactDisplay',
+  'useGrouping', 'signDisplay', 'minimumIntegerDigits', 'minimumFractionDigits',
+  'maximumFractionDigits', 'minimumSignificantDigits', 'maximumSignificantDigits',
+  'roundingPriority', 'roundingIncrement', 'roundingMode', 'trailingZeroDisplay'
+];
 
 
 class numberStatics {
@@ -13,6 +23,8 @@ class clsNumber {
 
   /** @private */
   static async init(bll) {
+    numberFormatters.clear();
+    numberStatics.api = BL.Current.api;
     let locale = await bll.get('locale');
     BL.homey.log('locale', locale);
 
@@ -20,15 +32,20 @@ class clsNumber {
 
     this.onRealtime = (event, data) => {
       switch (event) {
-        case "bllSetLocale": numberStatics.locale = data.default;
+        case "bllSetLocale":
+          numberStatics.locale = data.default;
+          numberFormatters.clear();
+          break;
       }
     };
-    BL.Current.api.on('realtime', this.onRealtime);
+    numberStatics.api.on('realtime', this.onRealtime);
   }
 
   static destroy() {
+    numberFormatters.clear();
     BL.homey.log('Number.destroy()');
-    BL.Current.api.off('realtime', this.onRealtime);
+    if (numberStatics.api && this.onRealtime) numberStatics.api.off('realtime', this.onRealtime);
+    delete numberStatics.api;
 
     BL.homey.log('Number.destroying');
     BL.L.clearObj(this);
@@ -175,14 +192,32 @@ class clsNumber {
     }
     else opts.minimumFractionDigits = opts.maximumFractionDigits = this.countDecimals(this.number);
 
-    return this.number.toLocaleString(this.locale || clsNumber.locale, opts);
+    const locale = this.locale || clsNumber.locale;
+    const number = this.number;
+    if (typeof number !== 'number' || number.toLocaleString !== nativeToLocaleString
+      || (locale !== undefined && typeof locale !== 'string')
+      || numberFormatOptions.some(key => !Object.hasOwn(opts, key) && key in opts)
+      || Object.values(opts).some(value => value !== undefined && typeof value !== 'string'
+        && typeof value !== 'boolean' && !(typeof value === 'number' && Number.isFinite(value)))) {
+      return number.toLocaleString(locale, opts);
+    }
+    const key = JSON.stringify([locale, opts]);
+    let formatter = numberFormatters.get(key);
+    if (!formatter) {
+      formatter = new Intl.NumberFormat(locale, opts);
+      if (numberFormatters.size >= MAX_NUMBER_FORMATTERS) {
+        numberFormatters.delete(numberFormatters.keys().next().value);
+      }
+      numberFormatters.set(key, formatter);
+    }
+    return formatter.format(number);
   }
 
 
   countDecimals(value) {
-    if (Math.floor(value) !== value)
-      return value.toString().split(".")[1].length || 0;
-    return 0;
+    if ((typeof value === 'number' && !Number.isFinite(value)) || Math.floor(value) === value) return 0;
+    const [coefficient, exponent = '0'] = value.toString().split('e');
+    return Math.max(0, (coefficient.split('.')[1] || '').length - Number(exponent));
   }
 }
 

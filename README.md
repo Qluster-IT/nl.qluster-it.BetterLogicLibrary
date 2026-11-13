@@ -16,7 +16,34 @@ This apps supplies your Homey with Better Logic and Libraries:
 
 Check out the (new) App Settings for all features and explanations, like BLL coding in supported apps!
 
+Datetime formatting reuses up to 32 Intl formatters per loaded datetime module,
+keyed by locale, time zone, and formatting options. Dates and formatted results
+are not cached. Locale/format settings changes and module shutdown clear the
+cache. This reduces repeated formatter construction in apps that display many
+timestamps without changing their date-format settings or Excel generation.
+Number formatting similarly reuses at most 32 Intl formatters per loaded
+number module, without caching values or formatted results. Locale changes and
+module shutdown clear the cache. Default precision handles scientific notation
+such as `1e-7`, as well as `NaN` and infinity, without a decimal-parsing error.
+
 Example BLL coding: When you place this within a textargument:  - Hello, today is {[date("dddd")]} -, BLL will automaticly find those expressions within the texts and decode them, resulting in - Hello, today is monday - .
+
+Each distinct expression is evaluated once per decoded text, including expressions
+returning `0`, `false`, or an empty string. Results are not cached between calls;
+separate evaluations continue to use isolated JavaScript contexts.
+
+The bundled Excel writer avoids an extra full-workbook buffer copy on Node.js
+while preserving its `Uint8Array` result and browser fallback. Shared strings
+such as `constructor` and `__proto__` are stored as ordinary cell text.
+
+Download expiry releases its payload, upload stream, and timer. Other downloads
+remain available until their own expiry, and upload success is returned only
+after the file has finished writing. Closing the server also clears pending
+downloads and their timers and cancels unfinished request bodies.
+Sustained-condition timers retain their original
+Homey handles for cancellation without storing those handles in settings.
+Datetime, number, and JSON modules detach their listeners from the original API
+even when an older npm bridge has already cleared or replaced its API reference.
 
 Further: Manage variables directly in flows!
 

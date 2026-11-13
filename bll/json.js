@@ -10,6 +10,7 @@ const { BL } = require("betterlogiclibrary");
 //https://www.npmjs.com/package/write-excel-file?activeTab=readme#cdn
 const writeXlsxFile = BL.submodules["write-excel-file-min"];
 const { json2csvAsync } = BL.submodules["json2csv"];
+let realtimeApi;
 
 
 class Json {
@@ -26,6 +27,7 @@ class Json {
 
   /** @private */
   static async init(bll) {
+    realtimeApi = BL.Current.api;
     Json.exports = await bll.get('exports');
     //BL.homey.log('json.init', Json.exports);
 
@@ -34,12 +36,14 @@ class Json {
         case "bllSetExports": Json.exports = data || {};
       }
     };
-    BL.Current.api.on('realtime', this.onRealtime);
+    realtimeApi.on('realtime', this.onRealtime);
     //this.bll = bll;
   }
 
   static destroy() {
-    BL.Current.api.off('realtime', this.onRealtime);
+    if (realtimeApi && this.onRealtime) realtimeApi.off('realtime', this.onRealtime);
+    realtimeApi = null;
+    delete this.onRealtime;
   }
 
   /**

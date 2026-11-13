@@ -835,6 +835,9 @@ const localesTags = [
   "zu-ZA"
 ];
 
+const MAX_DATE_TIME_FORMATTERS = 32;
+const dateTimeFormatters = new Map();
+
 class dateTimeStatics { }
 
 /**
@@ -955,6 +958,7 @@ class DateTime {
 
   /** @private */
   static async init(bll) {
+    dateTimeStatics.api = BL.Current.api;
     let locale = await bll.get('locale');
 
     dateTimeStatics.formats = locale ? locale.dateFormats : undefined;
@@ -967,13 +971,14 @@ class DateTime {
         case "bllSetLocale": dateTimeStatics.locale = data.default; dateTimeStatics.formats = data.dateFormats; dateTimeStatics.customFormats = data.customDateFormats; DateTime.updateFormats();
       }
     };
-    BL.Current.api.on('realtime', this.onRealtime);
+    dateTimeStatics.api.on('realtime', this.onRealtime);
     //this.bll = bll;
   }
 
   static destroy() {
+    dateTimeFormatters.clear();
     BL.homey.log('DateTime.destroy()');
-    BL.Current.api.off('realtime', this.onRealtime);
+    if (dateTimeStatics.api && this.onRealtime) dateTimeStatics.api.off('realtime', this.onRealtime);
 
     BL.homey.log('DateTime.destroying');
     // for (const key in this) {
@@ -1119,6 +1124,7 @@ class DateTime {
 
   /** @private */
   static updateFormats() {
+    dateTimeFormatters.clear();
     this.codes.init();
     if (dateTimeStatics.formats) for (const format in dateTimeStatics.formats) {
       if (Object.hasOwnProperty.call(dateTimeStatics.formats, format)) {
@@ -1187,8 +1193,46 @@ class DateTime {
   /** @private */
   getString(options) {
     options.timeZone = this.timeZone || DateTime.timeZone;
-    //BL.homey.log('getString', this.locale, (this.date || new Date()).toLocaleString(this.locale, options));
-    return (this.date || new Date()).toLocaleString(options.locale || this.locale || DateTime.locale, options);
+    const date = this.date || new Date();
+    const locale = options.locale || this.locale || DateTime.locale;
+    if (!(date instanceof Date) || date.toLocaleString !== Date.prototype.toLocaleString
+      || typeof locale !== 'string' || typeof options.timeZone !== 'string'
+      || Object.getPrototypeOf(options) !== Object.prototype) {
+      return date.toLocaleString(locale, options);
+    }
+    const timestamp = Date.prototype.getTime.call(date);
+    if (Number.isNaN(timestamp)) return date.toLocaleString(locale, options);
+    for (const key of Object.getOwnPropertyNames(options)) {
+      const descriptor = Object.getOwnPropertyDescriptor(options, key);
+      if (!descriptor || !descriptor.enumerable || !Object.hasOwn(descriptor, 'value')) {
+        return date.toLocaleString(locale, options);
+      }
+      const value = descriptor.value;
+      if (value !== undefined && typeof value !== 'string' && typeof value !== 'boolean'
+        && !(typeof value === 'number' && Number.isFinite(value))) {
+        return date.toLocaleString(locale, options);
+      }
+    }
+
+    const key = JSON.stringify([locale, options]);
+    let formatter = dateTimeFormatters.get(key);
+    if (!formatter) {
+      const formatOptions = { ...options };
+      // Date#toLocaleString supplies both date and time defaults, unlike Intl directly.
+      if (['weekday', 'year', 'month', 'day', 'dayPeriod', 'hour', 'minute', 'second',
+        'fractionalSecondDigits', 'dateStyle', 'timeStyle'].every(field => formatOptions[field] === undefined)) {
+        Object.assign(formatOptions, {
+          year: 'numeric', month: 'numeric', day: 'numeric',
+          hour: 'numeric', minute: 'numeric', second: 'numeric'
+        });
+      }
+      formatter = new Intl.DateTimeFormat(locale, formatOptions);
+      if (dateTimeFormatters.size >= MAX_DATE_TIME_FORMATTERS) {
+        dateTimeFormatters.delete(dateTimeFormatters.keys().next().value);
+      }
+      dateTimeFormatters.set(key, formatter);
+    }
+    return formatter.format(timestamp);
   }
 
   /**

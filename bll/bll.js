@@ -51,6 +51,11 @@ class BLL {
             }
     }
 
+    // Older npm releases call the original misspelled method.
+    detroy() {
+        return this.destroy();
+    }
+
     destroy() {
 
         if (BLL.datetime) BLL.datetime.destroy();

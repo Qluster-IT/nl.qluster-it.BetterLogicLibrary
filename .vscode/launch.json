@@ -14,7 +14,7 @@
       ]
     },
     {
-      "name": "Select Homey Pro Early 2023",
+      "name": "Select HP2026",
       "type": "node",
       "request": "launch",
       "cwd": "${workspaceFolder}",
@@ -52,7 +52,7 @@
       "remoteRoot": "/"
     },
     {
-      "name": "Launch app on Homey Pro Early 2023",
+      "name": "Launch app on HP2026",
       "type": "node",
       "request": "launch",
       "cwd": "${workspaceFolder}",
@@ -66,11 +66,11 @@
       "serverReadyAction": {
         "pattern": "Debugger listening on",
         "action": "startDebugging",
-        "name": "Attach to Homey Pro Early 2023"
+        "name": "Attach to HP2026"
       }
     },
     {
-      "name": "Attach to Homey Pro Early 2023",
+      "name": "Attach to HP2026",
       "type": "node",
       "request": "attach",
       "address": "192.168.1.17",

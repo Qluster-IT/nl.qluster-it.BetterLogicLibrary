@@ -2,6 +2,7 @@
 .translation/*
 .vscode/*
 docs/*
+test/*
 
 manager/*
 bll_notyet/*

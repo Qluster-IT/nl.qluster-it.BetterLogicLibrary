@@ -1170,18 +1170,15 @@ class BetterLogic extends Homey.App {
 	runCoding({ text, locale, arg }) {
 		try {
 
-			let codingsToRun = {};
-			let codings = text.matchAll(this.codingRegExp);
-			let codingsFound = codings ? [...codings] : [];
-
-			for (let i = 0; i < codingsFound.length; i++) {
-				const code = codingsFound[i][1];
-				if (!codingsToRun[code]) codingsToRun[code] = this.runSandBox(code, { locale, arg });
+			const codingsToRun = new Map();
+			for (const match of text.matchAll(this.codingRegExp)) {
+				const code = match[1];
+				if (!codingsToRun.has(code)) codingsToRun.set(code, this.runSandBox(code, { locale, arg }));
 			}
 
 
 			text = text.replaceAll(this.codingRegExp, (val, index) => {
-				let value = codingsToRun[index];
+				let value = codingsToRun.get(index);
 				if(BL._.isArray(value)) value = value?.toString() || '';
 				else if(typeof(value)==='object') value = JSON.stringify(value);
 				return value;
