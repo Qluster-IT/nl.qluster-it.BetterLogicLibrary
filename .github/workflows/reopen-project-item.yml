@@ -3,7 +3,7 @@ name: Project Item Unarchiveren en Status naar Ready
 on:
   issues:
     types: [reopened]
-  pull_request:
+  pull_request_target:
     types: [reopened]
 
 jobs:

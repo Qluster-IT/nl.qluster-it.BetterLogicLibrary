@@ -3,7 +3,7 @@ name: Issue/PR assignment
 on:
     issues:
         types: [opened]
-    pull_request:
+    pull_request_target:
         types: [opened] #edited, synchronize, reopened
 
 jobs:
