@@ -1,5 +1,4 @@
 ﻿"use strict";
-const locale = require('locale-codes');
 
 var variableManager = require('./lib/variablemanager.js');
 
@@ -13,6 +12,17 @@ const readFileAsync = promisify(_readFile);
 async function readFile(path, ops) { return await readFileAsync(path, ops); }
 
 const utcDate = "2023-03-15T12:13:27.952Z";
+
+function fillVariablesDownload(homey, link, returnType, contentKey) {
+    homey.setTimeout(async () => {
+        try {
+            const content = await homey.app.getVariables({ returnType });
+            await BL.setDownloadUrl({ link, [contentKey]: content, callback: ready => homey.api.realtime('downloadFileReady', ready) });
+        } catch (error) {
+            homey.error(`Variables download (${returnType}) could not be generated`, error);
+        }
+    }, 0);
+}
 
 module.exports =
 {
@@ -80,13 +90,8 @@ module.exports =
         return await homey.app.exportsSettings;
     },
     async getVariablesDownloadUrl({ homey, params: { returnType } }) {
-        let callback = (link) => {
-            homey.api.realtime('downloadFileReady', link)
-        };
-
         try {
 
-            const vars = variableManager.getVariables();
             switch (returnType) {
                 case 'csv':
                 case 'csv_base64':
@@ -96,9 +101,7 @@ module.exports =
                             "Vars " + BL.datetime.toString('datetimeshort') + '.csv';
 
                         const link = await BL.getDownloadUrl({ contentType: 'text/csv', filename });
-                        homey.setTimeout(async () => {
-                            await BL.setDownloadUrl({ link, text: await homey.app.getVariables({ returnType }), callback });
-                        }, 0);
+                        fillVariablesDownload(homey, link, returnType, 'text');
                         return link;
                     }
                     break;
@@ -111,9 +114,7 @@ module.exports =
                                 "Vars " + BL.datetime.toString('datetimeshort') + '.xlsx';
 
                             const link = await BL.getDownloadUrl({ contentType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', filename });
-                            homey.setTimeout(async () => {
-                                await BL.setDownloadUrl({ link, buffer: await homey.app.getVariables({ returnType }), callback });
-                            }, 0);
+                            fillVariablesDownload(homey, link, returnType, 'buffer');
                             return link;
                         } catch (error) {
                             homey.error(error);
@@ -127,9 +128,7 @@ module.exports =
                             "Vars " + BL.datetime.toString('datetimeshort') + '.json';
 
                     const link = await BL.getDownloadUrl({ contentType: 'text/json', filename });
-                    homey.setTimeout(async () => {
-                        await BL.setDownloadUrl({ link, text: await homey.app.getVariables({ returnType }), callback });
-                    }, 0);
+                    fillVariablesDownload(homey, link, returnType, 'text');
                     return link;
                 }
             }
@@ -143,7 +142,8 @@ module.exports =
         }
     },
     async getLocales({ homey }) {
-        return await locale.all;
+        // Required on first use; locale-codes costs ~0.7 MB heap.
+        return require('locale-codes').all;
     },
 
     async getTimeZones({ homey }) {

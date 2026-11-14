@@ -1,6 +1,7 @@
 'use strict';
 
-const locale = require('locale-codes');
+// locale-codes costs ~0.7 MB heap and is only needed for locale lists, so it is required on first use.
+const getLocales = () => require('locale-codes').all;
 
 var variableManager = require('./lib/variablemanager.js');
 const Homey = require('homey');
@@ -534,7 +535,8 @@ class BetterLogic extends Homey.App {
 				format_datetime.getArgument('locale')
 					.registerAutocompleteListener((query, args) => {
 						query = query && query.length ? query.toLowerCase() : null;
-						let locales = query ? BL._.filter(locale.all, x => x.name.toLowerCase().indexOf(query) > -1 || x.tag.toLowerCase().indexOf(query) > -1) : locale.all;
+						const all = getLocales();
+						let locales = query ? BL._.filter(all, x => x.name.toLowerCase().indexOf(query) > -1 || x.tag.toLowerCase().indexOf(query) > -1) : all;
 						locales = BL._.map(locales, l => { return { id: l.tag, name: l.name, description: l.tag }; });
 						return locales;
 					});
@@ -685,7 +687,8 @@ class BetterLogic extends Homey.App {
 				format_number.getArgument('locale')
 					.registerAutocompleteListener((query, args) => {
 						query = query && query.length ? query.toLowerCase() : null;
-						let locales = query ? BL._.filter(locale.all, x => x.name.toLowerCase().indexOf(query) > -1 || x.tag.toLowerCase().indexOf(query) > -1) : locale.all;
+						const all = getLocales();
+						let locales = query ? BL._.filter(all, x => x.name.toLowerCase().indexOf(query) > -1 || x.tag.toLowerCase().indexOf(query) > -1) : all;
 						locales = BL._.map(locales, l => { return { id: l.tag, name: l.name, description: l.tag }; });
 						return locales;
 					});
@@ -979,8 +982,9 @@ class BetterLogic extends Homey.App {
 			// 	await this.homey.notifications.createNotification({excerpt : "The Better Logic App has been rebranded to Better Logic Library.\nCheck out the new App Settings for the new features, like BLL coding in supporting apps!" });  
 			// }
 		} catch (ex) {
+			this.error('Error while starting the app', ex);
 			try {
-				await homey.notifications.createNotification({ excerpt: `Error while starting the app:` + (ex.message || ex) });
+				await this.homey.notifications.createNotification({ excerpt: `Error while starting the app:` + (ex.message || ex) });
 			} catch (error) { }
 		}
 	}

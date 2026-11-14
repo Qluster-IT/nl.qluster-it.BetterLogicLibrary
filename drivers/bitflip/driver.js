@@ -10,30 +10,32 @@ var devices = [];
 class BitFlipDriver extends Homey.Driver {
     onInit() {
         this.log('BitFlipDriver initialized');
-        devices = this.getDevices();
 
         this.homey.settings.on('set',
-            function (action) {
+            (action) => {
                 if (action == 'boolValueChanged') {
                     const changedVariable = this.homey.settings.get('boolValueChanged');
 
                     if (changedVariable.type == 'boolean') {
-                        var device = devices.find(function (dev) {
-                            if (dev.getData) return dev.getData().id == changedVariable.name;
-                            else return dev.data.id == changedVariable.name;
+                        // Look up the current devices, so devices paired or deleted after startup are handled.
+                        var device = this.getDevices().find(function (dev) {
+                            return dev.getData().id == changedVariable.name;
                         });
 
                         if (device) {
-                            device.setCapabilityValue('onoff', changedVariable.value).catch(async (error) => {
-                                try {
-                                    await homey.notifications.createNotification({ excerpt: `Error while setting device ${changedVariable.name}:` + (error.message || error) });
-                                } catch (errorInner) { }
-                            });
+                            device.setCapabilityValue('onoff', changedVariable.value)
+                                .catch(error => this.reportDeviceError(changedVariable.name, error));
                         }
                     }
                 }
                 Promise.resolve();
             });
+    }
+
+    reportDeviceError(name, error) {
+        this.error(`Error while setting device ${name}:`, error);
+        this.homey.notifications.createNotification({ excerpt: `Error while setting device ${name}: ` + (error.message || error) })
+            .catch(notificationError => this.error('Notification failed', notificationError));
     }
 
 

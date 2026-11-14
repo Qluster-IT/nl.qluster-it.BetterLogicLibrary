@@ -15,6 +15,7 @@ async function createServer(t, { autoShutdown = true, writable, removalError } =
   const directories = new Set();
   const removed = [];
   const errors = [];
+  const network = { address: '127.0.0.1' };
   let closed = 0;
   const fakeHttp = {
     createServer() {
@@ -46,7 +47,7 @@ async function createServer(t, { autoShutdown = true, writable, removalError } =
   m._compile(fs.readFileSync(filename, 'utf8'), filename);
   const server = new m.exports();
   const homey = {
-    cloud: { getLocalAddress: async () => '127.0.0.1', getHomeyId: async () => 'test' },
+    cloud: { getLocalAddress: async () => `${network.address}:80`, getHomeyId: async () => 'test' },
     log() {},
     error(...args) { errors.push(args); },
     setTimeout(callback) {
@@ -63,7 +64,7 @@ async function createServer(t, { autoShutdown = true, writable, removalError } =
   await server.init({ homey, settings: { port: 0, autoStart: false, autoShutdown, fileAvailableDuration: 60 } });
   t.after(() => server.close());
   return {
-    server, timers, directories, removed, errors,
+    server, timers, directories, removed, errors, network,
     closed: () => closed,
     async expire(token) {
       const handle = server.files[token].timeout;
@@ -140,11 +141,11 @@ test('expiry still shuts down an empty server when disk cleanup fails', async t 
   assert.ok(fixture.errors.some(args => args[1] === failure));
 });
 
-async function upload(server, token, body) {
+async function upload(server, token, body, headers) {
   return new Promise((resolve, reject) => {
     const request = http.request({
       host: '127.0.0.1', port: server.port,
-      path: `/getfile/${token}/file.bin`, method: 'POST'
+      path: `/getfile/${token}/file.bin`, method: 'POST', headers
     }, response => {
       response.resume();
       response.on('end', () => resolve(response.statusCode));
@@ -173,6 +174,33 @@ test('binary uploads report success only after the output stream finishes', asyn
   assert.equal(fixture.timers.size, 1, 'Only the download expiry timer should remain');
   assert.equal(fixture.server.files[file.token].uploadController, undefined);
   assert.deepEqual(fixture.errors, []);
+});
+
+test('an upload addressed to another host is answered once and not stored', async t => {
+  let opened = 0;
+  const fixture = await createServer(t, {
+    writable: () => {
+      opened++;
+      return new Writable({ write(chunk, encoding, callback) { callback(); } });
+    }
+  });
+  const file = await fixture.server.getDownloadUrl({ filename: 'file.bin' });
+  if (!fixture.server.server.listening) await once(fixture.server.server, 'listening');
+  fixture.server.port = fixture.server.server.address().port;
+  assert.equal(await upload(fixture.server, file.token, Buffer.from('data'), { Host: 'other.example' }), 200);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(opened, 0);
+  assert.equal(fixture.server.files[file.token].defer, undefined);
+  assert.deepEqual(fixture.errors, []);
+});
+
+test('a download link uses the Homey address that is current when the link is created', async t => {
+  const fixture = await createServer(t);
+  fixture.network.address = '192.168.1.99';
+  const file = await fixture.server.getDownloadUrl({ base64: 'dGVzdA==', filename: 'file.txt' });
+  assert.equal(file.host, '192.168.1.99');
+  assert.equal(file.url, `http://192.168.1.99:${fixture.server.port}${file.path}`);
+  assert.equal(file.localUrl.startsWith('https://192-168-1-99.homey.homeylocal.com/'), true);
 });
 
 test('a rejected overlapping upload does not announce that the original file is ready', { timeout: 5000 }, async t => {
