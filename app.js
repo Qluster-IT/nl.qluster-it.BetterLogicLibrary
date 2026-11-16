@@ -56,6 +56,7 @@ class BetterLogic extends Homey.App {
 
 	async onInit() {
 
+		this.apiReady = false;
 		try {
 			BetterLogic.homey = this.homey;
 			if (process.env.DEBUG === '1' || false) {
@@ -981,7 +982,11 @@ class BetterLogic extends Homey.App {
 			// 	this.homey.settings.set('notification_update_newsettings', true);
 			// 	await this.homey.notifications.createNotification({excerpt : "The Better Logic App has been rebranded to Better Logic Library.\nCheck out the new App Settings for the new features, like BLL coding in supporting apps!" });  
 			// }
+
+			this.apiReady = true;
+			await this.homey.api.realtime('api-ready', { ready: true });
 		} catch (ex) {
+			this.apiReady = false;
 			this.error('Error while starting the app', ex);
 			try {
 				await this.homey.notifications.createNotification({ excerpt: `Error while starting the app:` + (ex.message || ex) });
@@ -992,6 +997,7 @@ class BetterLogic extends Homey.App {
 
 
 	async onUninit() {
+		this.apiReady = false;
 		if (this.fileServer) await this.fileServer.destroy();
 	}
 

@@ -1,6 +1,7 @@
 .scripts/*
 .translation/*
 .vscode/*
+.github/*
 docs/*
 test/*
 
@@ -12,6 +13,7 @@ todo.js
 bugs.txt
 CODE_OF_CONDUCT.md
 CONTRIBUTING.md
+AGENTS.md
 LICENSE
 README.md
 

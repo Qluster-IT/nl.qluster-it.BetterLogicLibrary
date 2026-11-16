@@ -52,8 +52,26 @@ test('a startup failure is logged and reported in a notification', async () => {
 
   await app.onInit();
 
+  assert.equal(app.apiReady, false);
   assert.equal(errors[0]?.[1], failure);
   assert.deepEqual(notifications, [{ excerpt: 'Error while starting the app:startup failure' }]);
+});
+
+test('the api-ready endpoint reflects the startup lifecycle', async () => {
+  const filename = require.resolve('../api');
+  const m = new Module(filename, module);
+  m.filename = filename;
+  m.paths = module.paths;
+  m.require = id => id === './lib/variablemanager.js' ? {} : Module.prototype.require.call(m, id);
+  m._compile(fs.readFileSync(filename, 'utf8'), filename);
+  const { getApiReady } = m.exports;
+  const homey = { app: { apiReady: false } };
+
+  assert.deepEqual(await getApiReady({ homey }), { ready: false });
+  homey.app.apiReady = true;
+  assert.deepEqual(await getApiReady({ homey }), { ready: true });
+  homey.app.apiReady = undefined;
+  assert.deepEqual(await getApiReady({ homey }), { ready: false });
 });
 
 test('a variables download that cannot be generated is logged for every file type', async t => {

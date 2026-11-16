@@ -94,7 +94,10 @@
         "username": "QlusterIT"
       },
       "githubSponsors": {
-        "username": "XeroxQ"
+        "username": "Qluster-IT"
+      },
+      "bunq": {
+        "username": "QlusterIT"
       }
     }
   },
@@ -5894,6 +5897,10 @@
     }
   ],
   "api": {
+    "getApiReady": {
+      "method": "GET",
+      "path": "/api-ready"
+    },
     "internal": {
       "method": "POST",
       "path": "/internal/"

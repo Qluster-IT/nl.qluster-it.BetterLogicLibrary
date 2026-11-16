@@ -26,6 +26,10 @@ function fillVariablesDownload(homey, link, returnType, contentKey) {
 
 module.exports =
 {
+    async getApiReady({ homey }) {
+        return { ready: homey.app.apiReady === true };
+    },
+
     async internal({ homey, body: { action } }) {
         switch (action) {
             case 'isLoaded':
