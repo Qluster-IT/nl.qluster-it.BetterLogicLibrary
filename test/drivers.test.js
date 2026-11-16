@@ -6,7 +6,7 @@ const fs = require('node:fs');
 const Module = require('node:module');
 const test = require('node:test');
 
-function loadDriver(name) {
+function loadDriver(name, variableManager = {}) {
   const filename = require.resolve(`../drivers/${name}/driver.js`);
   const m = new Module(filename, module);
   m.filename = filename;
@@ -19,7 +19,8 @@ function loadDriver(name) {
         getDevices() { return this.devices; }
       }
     };
-    if (id === '../../lib/util/util.js' || id === '../../lib/variablemanager.js') return {};
+    if (id === '../../lib/util/util.js') return {};
+    if (id === '../../lib/variablemanager.js') return variableManager;
     return Module.prototype.require.call(m, id);
   };
   m._compile(fs.readFileSync(filename, 'utf8'), filename);
@@ -32,6 +33,35 @@ function createDevice(id, updates) {
     async setCapabilityValue(capability, value) { updates.push([id, capability, value]); }
   };
 }
+
+for (const [driver, type, capability, values] of [
+  ['bitflip', 'boolean', 'onoff', [true, false]],
+  ['numslide', 'number', 'dim', [11, 0]]
+]) test(`${driver} initializes its capability from the current variable`, async () => {
+  const filename = require.resolve(`../drivers/${driver}/device.js`);
+  const m = new Module(filename, module);
+  m.filename = filename;
+  m.paths = module.paths;
+  let value;
+  m.require = id => {
+    if (id === 'homey') return { Device: class {
+      getData() { return { id: 'test', type }; }
+      registerCapabilityListener() {}
+      async setCapabilityValue(capability, current) { this.state = [capability, current]; }
+    } };
+    if (id === '../../lib/variablemanager.js') return {
+      getVariable: () => ({ name: 'test', type, value })
+    };
+    return Module.prototype.require.call(m, id);
+  };
+  m._compile(fs.readFileSync(filename, 'utf8'), filename);
+
+  for (value of values) {
+    const device = new m.exports();
+    await device.onInit();
+    assert.deepEqual(device.state, [capability, value]);
+  }
+});
 
 for (const [name, key, capability, type, value] of [
   ['numslide', 'numValueChanged', 'dim', 'number', 5],

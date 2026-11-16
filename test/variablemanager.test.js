@@ -113,3 +113,61 @@ test('delete all removes every Insights log through the promise API', async () =
   assert.equal(calls.entries.at(-1), 3);
   assert.deepEqual(homey.settings.get('variables').map(variable => variable.name), ['a'], 'deleted variables must not be saved back');
 });
+
+test('import validates the entire input before changing existing variables', async () => {
+  const { homey } = createHomey();
+  const manager = loadVariableManager();
+  manager.init(homey);
+  await manager.addVariable('existing', 'number', 7);
+  await assert.rejects(manager.importVariables([
+    { name: 'new', type: 'number', value: 1 },
+    { name: 'bad', type: 'number', value: null }
+  ]), /Invalid value/);
+  await assert.rejects(manager.importVariables([
+    { name: 'duplicate', type: 'string', value: '' },
+    { name: 'duplicate', type: 'boolean', value: true }
+  ]), /unique/);
+  assert.deepEqual(manager.getVariables().map(({ name, value }) => ({ name, value })), [{ name: 'existing', value: 7 }]);
+});
+
+test('import replaces cached variables and cleans up old tokens and insights before recreating names', async () => {
+  const { homey, logs, registeredTokens } = createHomey();
+  const manager = loadVariableManager();
+  manager.init(homey);
+  await manager.addVariable('same', 'number', 1);
+  await manager.addVariable('old', 'number', 2);
+  const oldToken = registeredTokens.get('same');
+  await manager.importVariables([
+    { name: 'same', type: 'boolean', value: true },
+    { name: 'new', type: 'string', value: '' }
+  ]);
+  assert.deepEqual(manager.getVariables().map(({ name, type, value }) => ({ name, type, value })).sort((a, b) => a.name.localeCompare(b.name)), [
+    { name: 'new', type: 'string', value: '' },
+    { name: 'same', type: 'boolean', value: true }
+  ]);
+  assert.equal(registeredTokens.has('old'), false);
+  assert.notEqual(registeredTokens.get('same'), oldToken);
+  assert.equal(logs.has('same'), false);
+  assert.equal(logs.has('old'), false);
+  assert.deepEqual(homey.settings.get('variables'), manager.getVariables());
+});
+
+test('a second import cannot overlap an import already removing variables', async () => {
+  const { homey, registeredTokens } = createHomey();
+  const manager = loadVariableManager();
+  manager.init(homey);
+  await manager.addVariable('existing', 'number', 1);
+  let release;
+  const token = registeredTokens.get('existing');
+  const unregister = token.unregister;
+  token.unregister = async () => {
+    await new Promise(resolve => { release = resolve; });
+    await unregister();
+  };
+  const first = manager.importVariables([{ name: 'new', type: 'number', value: 2 }]);
+  while (!release) await flush();
+  await assert.rejects(manager.importVariables([]), /already in progress/);
+  release();
+  await first;
+  assert.equal(manager.getVariable('new').value, 2);
+});

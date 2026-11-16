@@ -1,6 +1,6 @@
 {
   "id": "net.i-dev.betterlogic",
-  "version": "4.2.3",
+  "version": "4.3.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -142,19 +142,19 @@
           "ar": "تم تغيير [[variable]]"
         },
         "hint": {
-          "en": "Triggers if a variable value changed.",
-          "nl": "Wordt geactiveerd als de waarde van een variabele is gewijzigd.",
-          "da": "Udløser, hvis en variabelværdi ændres.",
-          "de": "Löst aus, wenn sich der Wert einer Variablen ändert.",
-          "es": "Se activa si el valor de una variable cambia.",
-          "fr": "Déclenche si la valeur d'une variable a changé.",
-          "it": "Attiva se il valore di una variabile cambia.",
-          "no": "Utløses hvis en variabelverdi endres.",
-          "sv": "Utlöses om ett variabelvärde ändras.",
-          "pl": "Wyzwala się, jeśli wartość zmiennej uległa zmianie.",
-          "ru": "Срабатывает, если значение переменной изменилось.",
-          "ko": "변수 값이 변경되면 트리거됩니다.",
-          "ar": "يتم التفعيل إذا تغيرت قيمة المتغير."
+          "en": "Variable card.\n\nTriggers if a variable value changed.",
+          "nl": "Variabelekaart.\n\nWordt geactiveerd als de waarde van een variabele is gewijzigd.",
+          "da": "Variabelkort.\n\nUdløser, hvis en variabelværdi ændres.",
+          "de": "Variablenkarte.\n\nLöst aus, wenn sich der Wert einer Variablen ändert.",
+          "es": "Tarjeta de variable.\n\nSe activa si el valor de una variable cambia.",
+          "fr": "Carte de variable.\n\nDéclenche si la valeur d'une variable a changé.",
+          "it": "Scheda variabile.\n\nAttiva se il valore di una variabile cambia.",
+          "no": "Variabelkort.\n\nUtløses hvis en variabelverdi endres.",
+          "sv": "Variabelkort.\n\nUtlöses om ett variabelvärde ändras.",
+          "pl": "Karta zmiennej.\n\nWyzwala się, jeśli wartość zmiennej uległa zmianie.",
+          "ru": "Карточка переменной.\n\nСрабатывает, если значение переменной изменилось.",
+          "ko": "변수 카드.\n\n변수 값이 변경되면 트리거됩니다.",
+          "ar": "بطاقة متغير.\n\nيتم التفعيل إذا تغيرت قيمة المتغير."
         },
         "args": [
           {
@@ -226,19 +226,19 @@
           "ar": "تم تعيين [[variable]]"
         },
         "hint": {
-          "en": "Triggers if a variable is set (not necessarily changed)",
-          "nl": "Wordt geactiveerd als een variabele is ingesteld (niet noodzakelijkerwijs gewijzigd)",
-          "da": "Udløser, hvis en variabel er sat (ikke nødvendigvis ændret)",
-          "de": "Löst aus, wenn eine Variable gesetzt wird (nicht unbedingt geändert)",
-          "es": "Se activa si se establece una variable (no necesariamente cambiada)",
-          "fr": "Déclenche si une variable est définie (pas nécessairement modifiée)",
-          "it": "Attiva se una variabile è impostata (non necessariamente modificata)",
-          "no": "Utløses hvis en variabel er satt (ikke nødvendigvis endret)",
-          "sv": "Utlöser om en variabel är inställd (inte nödvändigtvis ändrad)",
-          "pl": "Wyzwala się, jeśli zmienna jest ustawiona (niekoniecznie zmieniona)",
-          "ru": "Срабатывает, если переменная установлена (не обязательно изменена)",
-          "ko": "변수가 설정되면 (반드시 변경되지 않더라도) 트리거됩니다.",
-          "ar": "يتم التفعيل إذا تم تعيين متغير (ليس بالضرورة تغييره)"
+          "en": "Variable card.\n\nTriggers if a variable is set (not necessarily changed)",
+          "nl": "Variabelekaart.\n\nWordt geactiveerd als een variabele is ingesteld (niet noodzakelijkerwijs gewijzigd)",
+          "da": "Variabelkort.\n\nUdløser, hvis en variabel er sat (ikke nødvendigvis ændret)",
+          "de": "Variablenkarte.\n\nLöst aus, wenn eine Variable gesetzt wird (nicht unbedingt geändert)",
+          "es": "Tarjeta de variable.\n\nSe activa si se establece una variable (no necesariamente cambiada)",
+          "fr": "Carte de variable.\n\nDéclenche si une variable est définie (pas nécessairement modifiée)",
+          "it": "Scheda variabile.\n\nAttiva se una variabile è impostata (non necessariamente modificata)",
+          "no": "Variabelkort.\n\nUtløses hvis en variabel er satt (ikke nødvendigvis endret)",
+          "sv": "Variabelkort.\n\nUtlöser om en variabel är inställd (inte nödvändigtvis ändrad)",
+          "pl": "Karta zmiennej.\n\nWyzwala się, jeśli zmienna jest ustawiona (niekoniecznie zmieniona)",
+          "ru": "Карточка переменной.\n\nСрабатывает, если переменная установлена (не обязательно изменена)",
+          "ko": "변수 카드.\n\n변수가 설정되면 (반드시 변경되지 않더라도) 트리거됩니다.",
+          "ar": "بطاقة متغير.\n\nيتم التفعيل إذا تم تعيين متغير (ليس بالضرورة تغييره)"
         },
         "args": [
           {
@@ -310,19 +310,19 @@
           "ar": "[[variable]] هو [[action]] [[amount]]"
         },
         "hint": {
-          "en": "Triggers if a number variable is changed.",
-          "nl": "Wordt geactiveerd als een nummervariabele wordt gewijzigd.",
-          "da": "Udløser, hvis en talvariabel ændres.",
-          "de": "Löst aus, wenn eine Zahlenvariable geändert wird.",
-          "es": "Se activa si se cambia una variable numérica.",
-          "fr": "Déclenchement si une variable numérique est modifiée.",
-          "it": "Attiva se una variabile numerica viene modificata.",
-          "no": "Utløses hvis en tallvariabel endres.",
-          "sv": "Utlöser om en siffervariabel ändras.",
-          "pl": "Wyzwala się, gdy zmienna liczbowa zostanie zmieniona.",
-          "ru": "Срабатывает, если числовая переменная изменена.",
-          "ko": "숫자 변수가 변경되면 트리거됩니다.",
-          "ar": "يتفعّل إذا تم تغيير متغير رقمي."
+          "en": "Number variable card.\n\nTriggers if a number variable is changed.",
+          "nl": "Getalvariabelekaart.\n\nWordt geactiveerd als een nummervariabele wordt gewijzigd.",
+          "da": "Talvariabelkort.\n\nUdløser, hvis en talvariabel ændres.",
+          "de": "Zahlenvariablenkarte.\n\nLöst aus, wenn eine Zahlenvariable geändert wird.",
+          "es": "Tarjeta de variable numérica.\n\nSe activa si se cambia una variable numérica.",
+          "fr": "Carte de variable numérique.\n\nDéclenchement si une variable numérique est modifiée.",
+          "it": "Scheda variabile numerica.\n\nAttiva se una variabile numerica viene modificata.",
+          "no": "Tallvariabelkort.\n\nUtløses hvis en tallvariabel endres.",
+          "sv": "Talvariabelkort.\n\nUtlöser om en siffervariabel ändras.",
+          "pl": "Karta zmiennej liczbowej.\n\nWyzwala się, gdy zmienna liczbowa zostanie zmieniona.",
+          "ru": "Карточка числовой переменной.\n\nСрабатывает, если числовая переменная изменена.",
+          "ko": "숫자 변수 카드.\n\n숫자 변수가 변경되면 트리거됩니다.",
+          "ar": "بطاقة متغير رقمي.\n\nيتفعّل إذا تم تغيير متغير رقمي."
         },
         "args": [
           {
@@ -504,19 +504,19 @@
           "ar": "[[variable]] قد تغيرت"
         },
         "hint": {
-          "en": "Type the variable names seperated by a comma.\nTags will not work in this card.",
-          "nl": "Typ de namen van de variabelen, gescheiden door een komma.\nTags werken niet op deze kaart.",
-          "da": "Skriv variabelnavnene adskilt af et komma. Tags vil ikke fungere i dette kort.",
-          "de": "Geben Sie die Variablennamen durch ein Komma getrennt ein. Tags funktionieren in dieser Karte nicht.",
-          "es": "Escribe los nombres de las variables separados por una coma. Las etiquetas no funcionarán en esta tarjeta.",
-          "fr": "Tapez les noms des variables séparés par une virgule. Les balises ne fonctionneront pas dans cette carte.",
-          "it": "Digita i nomi delle variabili separati da una virgola. I tag non funzioneranno in questa scheda.",
-          "no": "Skriv variabelnavnene adskilt med komma.\nTagger vil ikke fungere i dette kortet.",
-          "sv": "Skriv variabelnamnen separerade med ett kommatecken. Taggar fungerar inte i detta kort.",
-          "pl": "Wpisz nazwy zmiennych oddzielone przecinkiem. Tagi nie będą działać na tej karcie.",
-          "ru": "Введите имена переменных, разделенные запятой. Теги не будут работать в этой карточке.",
-          "ko": "변수 이름을 쉼표로 구분하여 입력하세요. 이 카드에서는 태그가 작동하지 않습니다.",
-          "ar": "اكتب أسماء المتغيرات مفصولة بفاصلة. العلامات لن تعمل في هذه البطاقة."
+          "en": "Variable card.\n\nType the variable names seperated by a comma.\nTags will not work in this card.",
+          "nl": "Variabelekaart.\n\nTyp de namen van de variabelen, gescheiden door een komma.\nTags werken niet op deze kaart.",
+          "da": "Variabelkort.\n\nSkriv variabelnavnene adskilt af et komma. Tags vil ikke fungere i dette kort.",
+          "de": "Variablenkarte.\n\nGeben Sie die Variablennamen durch ein Komma getrennt ein. Tags funktionieren in dieser Karte nicht.",
+          "es": "Tarjeta de variable.\n\nEscribe los nombres de las variables separados por una coma. Las etiquetas no funcionarán en esta tarjeta.",
+          "fr": "Carte de variable.\n\nTapez les noms des variables séparés par une virgule. Les balises ne fonctionneront pas dans cette carte.",
+          "it": "Scheda variabile.\n\nDigita i nomi delle variabili separati da una virgola. I tag non funzioneranno in questa scheda.",
+          "no": "Variabelkort.\n\nSkriv variabelnavnene adskilt med komma.\nTagger vil ikke fungere i dette kortet.",
+          "sv": "Variabelkort.\n\nSkriv variabelnamnen separerade med ett kommatecken. Taggar fungerar inte i detta kort.",
+          "pl": "Karta zmiennej.\n\nWpisz nazwy zmiennych oddzielone przecinkiem. Tagi nie będą działać na tej karcie.",
+          "ru": "Карточка переменной.\n\nВведите имена переменных, разделенные запятой. Теги не будут работать в этой карточке.",
+          "ko": "변수 카드.\n\n변수 이름을 쉼표로 구분하여 입력하세요. 이 카드에서는 태그가 작동하지 않습니다.",
+          "ar": "بطاقة متغير.\n\nاكتب أسماء المتغيرات مفصولة بفاصلة. العلامات لن تعمل في هذه البطاقة."
         },
         "args": [
           {
@@ -571,6 +571,21 @@
           "ru": "Любая переменная изменена (ОТЛАДКА)",
           "ko": "변수 변경됨 (디버그)",
           "ar": "تم تغيير أي متغير (تصحيح)"
+        },
+        "hint": {
+          "en": "Variable card.",
+          "nl": "Variabelekaart.",
+          "da": "Variabelkort.",
+          "de": "Variablenkarte.",
+          "es": "Tarjeta de variable.",
+          "fr": "Carte de variable.",
+          "it": "Scheda variabile.",
+          "no": "Variabelkort.",
+          "sv": "Variabelkort.",
+          "pl": "Karta zmiennej.",
+          "ru": "Карточка переменной.",
+          "ko": "변수 카드.",
+          "ar": "بطاقة متغير."
         }
       },
       {
@@ -686,7 +701,22 @@
               "ar": "قيمة المتغير (نعم/لا)"
             }
           }
-        ]
+        ],
+        "hint": {
+          "en": "Variable card.",
+          "nl": "Variabelekaart.",
+          "da": "Variabelkort.",
+          "de": "Variablenkarte.",
+          "es": "Tarjeta de variable.",
+          "fr": "Carte de variable.",
+          "it": "Scheda variabile.",
+          "no": "Variabelkort.",
+          "sv": "Variabelkort.",
+          "pl": "Karta zmiennej.",
+          "ru": "Карточка переменной.",
+          "ko": "변수 카드.",
+          "ar": "بطاقة متغير."
+        }
       },
       {
         "highlight": true,
@@ -722,19 +752,19 @@
           "ar": "عندما يكون [[variable]] [[condition]] [[value]] لمدة [[time]] [[unit]]، قم بتنفيذ [[execute]]"
         },
         "hint": {
-          "en": "This card will execute when a variable has been a certain value for a specific period.\n\nWhen f.i. using a condition of 'equal to 5 for 5 seconds' Execute once means this card will be triggered once after the condition has been met and stays true for 5 seconds. Repeatedly means, as long as the condition is met, this card will be executed every 5 seconds.\n\nKeeps working after Homey/App Restart.",
-          "nl": "Deze kaart wordt uitgevoerd wanneer een variabele een bepaalde waarde heeft gedurende een specifieke periode.\n\nBijvoorbeeld, bij gebruik van een voorwaarde 'gelijk aan 5 voor 5 seconden' betekent Uitvoeren eenmaal dat deze kaart één keer wordt geactiveerd nadat aan de voorwaarde is voldaan en deze 5 seconden waar blijft. Herhaaldelijk betekent dat, zolang aan de voorwaarde wordt voldaan, deze kaart elke 5 seconden wordt uitgevoerd.\n\nBlijft werken na een Homey/App herstart.",
-          "da": "Dette kort vil blive udført, når en variabel har haft en bestemt værdi i en specifik periode.\n\nNår man f.eks. bruger en betingelse som 'lig med 5 i 5 sekunder', betyder Udfør én gang, at dette kort vil blive udløst én gang, efter at betingelsen er opfyldt og forbliver sand i 5 sekunder. Gentagne gange betyder, at så længe betingelsen er opfyldt, vil dette kort blive udført hver 5. sekund.\n\nFortsætter med at fungere efter Homey/App-genstart.",
-          "de": "Diese Karte wird ausgeführt, wenn eine Variable für einen bestimmten Zeitraum einen bestimmten Wert hat.\n\nWenn Sie z.B. eine Bedingung von 'gleich 5 für 5 Sekunden' verwenden, bedeutet \"Einmal ausführen\", dass diese Karte einmal ausgelöst wird, nachdem die Bedingung erfüllt ist und 5 Sekunden lang wahr bleibt. \"Wiederholt\" bedeutet, dass diese Karte alle 5 Sekunden ausgeführt wird, solange die Bedingung erfüllt ist.\n\nFunktioniert weiterhin nach einem Neustart von Homey/App.",
-          "es": "Esta tarjeta se ejecutará cuando una variable haya tenido un cierto valor durante un período específico.\n\nPor ejemplo, al usar una condición de 'igual a 5 durante 5 segundos', Ejecutar una vez significa que esta tarjeta se activará una vez después de que se cumpla la condición y se mantenga verdadera durante 5 segundos. Repetidamente significa que, mientras se cumpla la condición, esta tarjeta se ejecutará cada 5 segundos.\n\nSigue funcionando después de reiniciar Homey/Aplicación.",
-          "fr": "Cette carte s'exécutera lorsqu'une variable aura une certaine valeur pendant une période spécifique.\n\nPar exemple, en utilisant une condition de 'égal à 5 pendant 5 secondes', Exécuter une fois signifie que cette carte sera déclenchée une fois après que la condition a été remplie et reste vraie pendant 5 secondes. Répéter signifie que, tant que la condition est remplie, cette carte sera exécutée toutes les 5 secondes.\n\nContinue de fonctionner après le redémarrage de Homey/App.",
-          "it": "Questa scheda verrà eseguita quando una variabile avrà un determinato valore per un periodo specifico.\n\nAd esempio, utilizzando una condizione di 'uguale a 5 per 5 secondi', Esegui una volta significa che questa scheda verrà attivata una volta dopo che la condizione è stata soddisfatta e rimane vera per 5 secondi. Ripetutamente significa che, finché la condizione è soddisfatta, questa scheda verrà eseguita ogni 5 secondi.\n\nContinua a funzionare dopo il riavvio di Homey/App.",
-          "no": "Dette kortet vil utføres når en variabel har hatt en bestemt verdi i en spesifikk periode.\n\nNår du for eksempel bruker en betingelse som 'lik 5 i 5 sekunder', betyr Utfør én gang at dette kortet vil bli utløst én gang etter at betingelsen er oppfylt og forblir sann i 5 sekunder. Gjentatte ganger betyr at så lenge betingelsen er oppfylt, vil dette kortet bli utført hvert 5. sekund.\n\nFortsetter å fungere etter omstart av Homey/App.",
-          "sv": "Detta kort kommer att köras när en variabel har haft ett visst värde under en specifik tidsperiod.\n\nNär du t.ex. använder ett villkor som 'lika med 5 i 5 sekunder' betyder Kör en gång att detta kort kommer att utlösas en gång efter att villkoret har uppfyllts och förblir sant i 5 sekunder. Upprepande betyder att så länge villkoret är uppfyllt, kommer detta kort att köras var 5:e sekund.\n\nFortsätter att fungera efter omstart av Homey/App.",
-          "pl": "Ta karta zostanie wykonana, gdy zmienna będzie miała określoną wartość przez określony czas.\n\nNa przykład, używając warunku 'równe 5 przez 5 sekund', Wykonaj raz oznacza, że karta zostanie uruchomiona raz po spełnieniu warunku i pozostaniu prawdziwym przez 5 sekund. Powtarzaj oznacza, że tak długo, jak warunek jest spełniony, karta będzie wykonywana co 5 sekund.\n\nDziała nadal po ponownym uruchomieniu Homey/Aplikacji.",
-          "ru": "Эта карта будет выполняться, когда переменная имеет определенное значение в течение заданного периода времени.\n\nНапример, при использовании условия 'равно 5 в течение 5 секунд' Выполнить один раз означает, что эта карта будет срабатывать один раз после того, как условие выполнено и остается истинным в течение 5 секунд. Повторять означает, что пока условие выполняется, эта карта будет выполняться каждые 5 секунд.\n\nПродолжает работать после перезапуска Homey/приложения.",
-          "ko": "변수가 특정 값으로 일정 기간 동안 유지될 때 이 카드는 실행됩니다.\n\n예를 들어, '5초 동안 5와 같음'이라는 조건을 사용할 때, '한 번 실행'은 조건이 충족되고 5초 동안 유지된 후 이 카드가 한 번 트리거된다는 의미입니다. '반복 실행'은 조건이 충족되는 한 이 카드가 5초마다 실행된다는 의미입니다.\n\nHomey/앱 재시작 후에도 계속 작동합니다.",
-          "ar": "سيتم تنفيذ هذه البطاقة عندما يكون للمتغير قيمة معينة لفترة محددة.\n\nعند استخدام شرط مثل 'يساوي 5 لمدة 5 ثوانٍ'، فإن \"تنفيذ مرة واحدة\" يعني أن هذه البطاقة ستُفعّل مرة واحدة بعد تحقق الشرط وبقائه صحيحًا لمدة 5 ثوانٍ. \"بشكل متكرر\" يعني أنه طالما تحقق الشرط، سيتم تنفيذ هذه البطاقة كل 5 ثوانٍ.\n\nتستمر في العمل بعد إعادة تشغيل Homey/التطبيق."
+          "en": "Number variable card.\n\nThis card will execute when a variable has been a certain value for a specific period.\n\nWhen f.i. using a condition of 'equal to 5 for 5 seconds' Execute once means this card will be triggered once after the condition has been met and stays true for 5 seconds. Repeatedly means, as long as the condition is met, this card will be executed every 5 seconds.\n\nKeeps working after Homey/App Restart.",
+          "nl": "Getalvariabelekaart.\n\nDeze kaart wordt uitgevoerd wanneer een variabele een bepaalde waarde heeft gedurende een specifieke periode.\n\nBijvoorbeeld, bij gebruik van een voorwaarde 'gelijk aan 5 voor 5 seconden' betekent Uitvoeren eenmaal dat deze kaart één keer wordt geactiveerd nadat aan de voorwaarde is voldaan en deze 5 seconden waar blijft. Herhaaldelijk betekent dat, zolang aan de voorwaarde wordt voldaan, deze kaart elke 5 seconden wordt uitgevoerd.\n\nBlijft werken na een Homey/App herstart.",
+          "da": "Talvariabelkort.\n\nDette kort vil blive udført, når en variabel har haft en bestemt værdi i en specifik periode.\n\nNår man f.eks. bruger en betingelse som 'lig med 5 i 5 sekunder', betyder Udfør én gang, at dette kort vil blive udløst én gang, efter at betingelsen er opfyldt og forbliver sand i 5 sekunder. Gentagne gange betyder, at så længe betingelsen er opfyldt, vil dette kort blive udført hver 5. sekund.\n\nFortsætter med at fungere efter Homey/App-genstart.",
+          "de": "Zahlenvariablenkarte.\n\nDiese Karte wird ausgeführt, wenn eine Variable für einen bestimmten Zeitraum einen bestimmten Wert hat.\n\nWenn Sie z.B. eine Bedingung von 'gleich 5 für 5 Sekunden' verwenden, bedeutet \"Einmal ausführen\", dass diese Karte einmal ausgelöst wird, nachdem die Bedingung erfüllt ist und 5 Sekunden lang wahr bleibt. \"Wiederholt\" bedeutet, dass diese Karte alle 5 Sekunden ausgeführt wird, solange die Bedingung erfüllt ist.\n\nFunktioniert weiterhin nach einem Neustart von Homey/App.",
+          "es": "Tarjeta de variable numérica.\n\nEsta tarjeta se ejecutará cuando una variable haya tenido un cierto valor durante un período específico.\n\nPor ejemplo, al usar una condición de 'igual a 5 durante 5 segundos', Ejecutar una vez significa que esta tarjeta se activará una vez después de que se cumpla la condición y se mantenga verdadera durante 5 segundos. Repetidamente significa que, mientras se cumpla la condición, esta tarjeta se ejecutará cada 5 segundos.\n\nSigue funcionando después de reiniciar Homey/Aplicación.",
+          "fr": "Carte de variable numérique.\n\nCette carte s'exécutera lorsqu'une variable aura une certaine valeur pendant une période spécifique.\n\nPar exemple, en utilisant une condition de 'égal à 5 pendant 5 secondes', Exécuter une fois signifie que cette carte sera déclenchée une fois après que la condition a été remplie et reste vraie pendant 5 secondes. Répéter signifie que, tant que la condition est remplie, cette carte sera exécutée toutes les 5 secondes.\n\nContinue de fonctionner après le redémarrage de Homey/App.",
+          "it": "Scheda variabile numerica.\n\nQuesta scheda verrà eseguita quando una variabile avrà un determinato valore per un periodo specifico.\n\nAd esempio, utilizzando una condizione di 'uguale a 5 per 5 secondi', Esegui una volta significa che questa scheda verrà attivata una volta dopo che la condizione è stata soddisfatta e rimane vera per 5 secondi. Ripetutamente significa che, finché la condizione è soddisfatta, questa scheda verrà eseguita ogni 5 secondi.\n\nContinua a funzionare dopo il riavvio di Homey/App.",
+          "no": "Tallvariabelkort.\n\nDette kortet vil utføres når en variabel har hatt en bestemt verdi i en spesifikk periode.\n\nNår du for eksempel bruker en betingelse som 'lik 5 i 5 sekunder', betyr Utfør én gang at dette kortet vil bli utløst én gang etter at betingelsen er oppfylt og forblir sann i 5 sekunder. Gjentatte ganger betyr at så lenge betingelsen er oppfylt, vil dette kortet bli utført hvert 5. sekund.\n\nFortsetter å fungere etter omstart av Homey/App.",
+          "sv": "Talvariabelkort.\n\nDetta kort kommer att köras när en variabel har haft ett visst värde under en specifik tidsperiod.\n\nNär du t.ex. använder ett villkor som 'lika med 5 i 5 sekunder' betyder Kör en gång att detta kort kommer att utlösas en gång efter att villkoret har uppfyllts och förblir sant i 5 sekunder. Upprepande betyder att så länge villkoret är uppfyllt, kommer detta kort att köras var 5:e sekund.\n\nFortsätter att fungera efter omstart av Homey/App.",
+          "pl": "Karta zmiennej liczbowej.\n\nTa karta zostanie wykonana, gdy zmienna będzie miała określoną wartość przez określony czas.\n\nNa przykład, używając warunku 'równe 5 przez 5 sekund', Wykonaj raz oznacza, że karta zostanie uruchomiona raz po spełnieniu warunku i pozostaniu prawdziwym przez 5 sekund. Powtarzaj oznacza, że tak długo, jak warunek jest spełniony, karta będzie wykonywana co 5 sekund.\n\nDziała nadal po ponownym uruchomieniu Homey/Aplikacji.",
+          "ru": "Карточка числовой переменной.\n\nЭта карта будет выполняться, когда переменная имеет определенное значение в течение заданного периода времени.\n\nНапример, при использовании условия 'равно 5 в течение 5 секунд' Выполнить один раз означает, что эта карта будет срабатывать один раз после того, как условие выполнено и остается истинным в течение 5 секунд. Повторять означает, что пока условие выполняется, эта карта будет выполняться каждые 5 секунд.\n\nПродолжает работать после перезапуска Homey/приложения.",
+          "ko": "숫자 변수 카드.\n\n변수가 특정 값으로 일정 기간 동안 유지될 때 이 카드는 실행됩니다.\n\n예를 들어, '5초 동안 5와 같음'이라는 조건을 사용할 때, '한 번 실행'은 조건이 충족되고 5초 동안 유지된 후 이 카드가 한 번 트리거된다는 의미입니다. '반복 실행'은 조건이 충족되는 한 이 카드가 5초마다 실행된다는 의미입니다.\n\nHomey/앱 재시작 후에도 계속 작동합니다.",
+          "ar": "بطاقة متغير رقمي.\n\nسيتم تنفيذ هذه البطاقة عندما يكون للمتغير قيمة معينة لفترة محددة.\n\nعند استخدام شرط مثل 'يساوي 5 لمدة 5 ثوانٍ'، فإن \"تنفيذ مرة واحدة\" يعني أن هذه البطاقة ستُفعّل مرة واحدة بعد تحقق الشرط وبقائه صحيحًا لمدة 5 ثوانٍ. \"بشكل متكرر\" يعني أنه طالما تحقق الشرط، سيتم تنفيذ هذه البطاقة كل 5 ثوانٍ.\n\nتستمر في العمل بعد إعادة تشغيل Homey/التطبيق."
         },
         "args": [
           {
@@ -1140,19 +1170,19 @@
           "ar": "عندما يكون [[variable]] [[condition]] [[value]] لمدة [[time]] [[unit]]، قم بتنفيذ [[execute]]"
         },
         "hint": {
-          "en": "This card will execute when a variable has been a certain value for a specific period.\n\nWhen f.i. using a condition of 'equal to text for 5 seconds' Execute once means this card will be triggered once after the condition has been met and stays true for 5 seconds. Repeatedly means, as long as the condition is met, this card will be executed every 5 seconds.\n\nKeeps working after Homey/App Restart.",
-          "nl": "Deze kaart wordt uitgevoerd wanneer een variabele gedurende een bepaalde periode een bepaalde waarde heeft gehad.\n\nBijvoorbeeld, als je een voorwaarde gebruikt van 'gelijk aan tekst voor 5 seconden', betekent Uitvoeren eenmaal dat deze kaart één keer wordt geactiveerd nadat aan de voorwaarde is voldaan en deze 5 seconden waar blijft. Herhaaldelijk betekent dat, zolang aan de voorwaarde wordt voldaan, deze kaart elke 5 seconden wordt uitgevoerd.\n\nBlijft werken na een Homey/App herstart.",
-          "da": "Dette kort vil blive udført, når en variabel har haft en bestemt værdi i en specifik periode.\n\nNår man f.eks. bruger en betingelse som 'lig med tekst i 5 sekunder', betyder Udfør én gang, at dette kort vil blive udløst én gang, efter at betingelsen er opfyldt og forbliver sand i 5 sekunder. Gentagne gange betyder, at så længe betingelsen er opfyldt, vil dette kort blive udført hver 5. sekund.\n\nFortsætter med at fungere efter Homey/App-genstart.",
-          "de": "Diese Karte wird ausgeführt, wenn eine Variable für einen bestimmten Zeitraum einen bestimmten Wert hat.\n\nWenn z.B. eine Bedingung von 'gleich Text für 5 Sekunden' verwendet wird, bedeutet \"Einmal ausführen\", dass diese Karte einmal ausgelöst wird, nachdem die Bedingung erfüllt ist und 5 Sekunden lang wahr bleibt. \"Wiederholt\" bedeutet, dass diese Karte alle 5 Sekunden ausgeführt wird, solange die Bedingung erfüllt ist.\n\nFunktioniert weiterhin nach einem Neustart von Homey/App.",
-          "es": "Esta tarjeta se ejecutará cuando una variable haya tenido un cierto valor durante un período específico.\n\nPor ejemplo, al usar una condición de 'igual a texto durante 5 segundos', Ejecutar una vez significa que esta tarjeta se activará una vez después de que se cumpla la condición y se mantenga verdadera durante 5 segundos. Repetidamente significa que, mientras se cumpla la condición, esta tarjeta se ejecutará cada 5 segundos.\n\nSigue funcionando después de reiniciar Homey/App.",
-          "fr": "Cette carte s'exécutera lorsqu'une variable aura une certaine valeur pendant une période spécifique.\n\nPar exemple, en utilisant une condition de 'égal à texte pendant 5 secondes', Exécuter une fois signifie que cette carte sera déclenchée une fois après que la condition ait été remplie et reste vraie pendant 5 secondes. Répéter signifie que, tant que la condition est remplie, cette carte sera exécutée toutes les 5 secondes.\n\nContinue de fonctionner après le redémarrage de Homey/App.",
-          "it": "Questa scheda verrà eseguita quando una variabile avrà un determinato valore per un periodo specifico.\n\nAd esempio, utilizzando una condizione di 'uguale a testo per 5 secondi', Esegui una volta significa che questa scheda verrà attivata una volta dopo che la condizione è stata soddisfatta e rimane vera per 5 secondi. Ripetutamente significa che, finché la condizione è soddisfatta, questa scheda verrà eseguita ogni 5 secondi.\n\nContinua a funzionare dopo il riavvio di Homey/App.",
-          "no": "Dette kortet vil utføres når en variabel har hatt en bestemt verdi i en spesifikk periode.\n\nNår du for eksempel bruker en betingelse som 'lik tekst i 5 sekunder', betyr Utfør én gang at dette kortet vil bli utløst én gang etter at betingelsen er oppfylt og forblir sann i 5 sekunder. Gjentatte ganger betyr at så lenge betingelsen er oppfylt, vil dette kortet bli utført hvert 5. sekund.\n\nFortsetter å fungere etter omstart av Homey/App.",
-          "sv": "Detta kort kommer att köras när en variabel har haft ett visst värde under en specifik tidsperiod.\n\nNär du t.ex. använder ett villkor som 'lika med text i 5 sekunder' betyder Kör en gång att detta kort kommer att triggas en gång efter att villkoret har uppfyllts och förblir sant i 5 sekunder. Upprepade gånger betyder att så länge villkoret är uppfyllt, kommer detta kort att köras var 5:e sekund.\n\nFortsätter att fungera efter omstart av Homey/App.",
-          "pl": "Ta karta zostanie wykonana, gdy zmienna będzie miała określoną wartość przez określony czas.\n\nNa przykład, używając warunku 'równe tekstowi przez 5 sekund', Wykonaj raz oznacza, że karta zostanie uruchomiona raz po spełnieniu warunku i pozostaniu prawdziwym przez 5 sekund. Powtarzaj oznacza, że tak długo, jak warunek jest spełniony, karta będzie wykonywana co 5 sekund.\n\nDziała nadal po ponownym uruchomieniu Homey/Aplikacji.",
-          "ru": "Эта карта будет выполняться, когда переменная имеет определенное значение в течение заданного периода времени.\n\nНапример, при использовании условия 'равно тексту в течение 5 секунд' Выполнить один раз означает, что эта карта будет срабатывать один раз после того, как условие выполнено и остается истинным в течение 5 секунд. Повторно означает, что пока условие выполняется, эта карта будет выполняться каждые 5 секунд.\n\nПродолжает работать после перезапуска Homey/приложения.",
-          "ko": "변수가 특정 값으로 일정 기간 동안 유지될 때 이 카드는 실행됩니다.\n\n예를 들어, '텍스트와 같음 5초 동안'이라는 조건을 사용할 때, '한 번 실행'은 조건이 충족되고 5초 동안 유지된 후 이 카드가 한 번 트리거된다는 의미입니다. '반복 실행'은 조건이 충족되는 한 이 카드가 5초마다 실행된다는 의미입니다.\n\nHomey/앱 재시작 후에도 계속 작동합니다.",
-          "ar": "سيتم تنفيذ هذه البطاقة عندما يكون للمتغير قيمة معينة لفترة محددة.\n\nعند استخدام شرط مثل \"يساوي النص لمدة 5 ثوانٍ\" يعني التنفيذ مرة واحدة أن هذه البطاقة ستُفعّل مرة واحدة بعد تحقق الشرط وبقائه صحيحًا لمدة 5 ثوانٍ. أما \"بشكل متكرر\" فيعني أنه طالما تحقق الشرط، سيتم تنفيذ هذه البطاقة كل 5 ثوانٍ.\n\nتستمر في العمل بعد إعادة تشغيل Homey/التطبيق."
+          "en": "Text variable card.\n\nThis card will execute when a variable has been a certain value for a specific period.\n\nWhen f.i. using a condition of 'equal to text for 5 seconds' Execute once means this card will be triggered once after the condition has been met and stays true for 5 seconds. Repeatedly means, as long as the condition is met, this card will be executed every 5 seconds.\n\nKeeps working after Homey/App Restart.",
+          "nl": "Tekstvariabelekaart.\n\nDeze kaart wordt uitgevoerd wanneer een variabele gedurende een bepaalde periode een bepaalde waarde heeft gehad.\n\nBijvoorbeeld, als je een voorwaarde gebruikt van 'gelijk aan tekst voor 5 seconden', betekent Uitvoeren eenmaal dat deze kaart één keer wordt geactiveerd nadat aan de voorwaarde is voldaan en deze 5 seconden waar blijft. Herhaaldelijk betekent dat, zolang aan de voorwaarde wordt voldaan, deze kaart elke 5 seconden wordt uitgevoerd.\n\nBlijft werken na een Homey/App herstart.",
+          "da": "Tekstvariabelkort.\n\nDette kort vil blive udført, når en variabel har haft en bestemt værdi i en specifik periode.\n\nNår man f.eks. bruger en betingelse som 'lig med tekst i 5 sekunder', betyder Udfør én gang, at dette kort vil blive udløst én gang, efter at betingelsen er opfyldt og forbliver sand i 5 sekunder. Gentagne gange betyder, at så længe betingelsen er opfyldt, vil dette kort blive udført hver 5. sekund.\n\nFortsætter med at fungere efter Homey/App-genstart.",
+          "de": "Textvariablenkarte.\n\nDiese Karte wird ausgeführt, wenn eine Variable für einen bestimmten Zeitraum einen bestimmten Wert hat.\n\nWenn z.B. eine Bedingung von 'gleich Text für 5 Sekunden' verwendet wird, bedeutet \"Einmal ausführen\", dass diese Karte einmal ausgelöst wird, nachdem die Bedingung erfüllt ist und 5 Sekunden lang wahr bleibt. \"Wiederholt\" bedeutet, dass diese Karte alle 5 Sekunden ausgeführt wird, solange die Bedingung erfüllt ist.\n\nFunktioniert weiterhin nach einem Neustart von Homey/App.",
+          "es": "Tarjeta de variable de texto.\n\nEsta tarjeta se ejecutará cuando una variable haya tenido un cierto valor durante un período específico.\n\nPor ejemplo, al usar una condición de 'igual a texto durante 5 segundos', Ejecutar una vez significa que esta tarjeta se activará una vez después de que se cumpla la condición y se mantenga verdadera durante 5 segundos. Repetidamente significa que, mientras se cumpla la condición, esta tarjeta se ejecutará cada 5 segundos.\n\nSigue funcionando después de reiniciar Homey/App.",
+          "fr": "Carte de variable texte.\n\nCette carte s'exécutera lorsqu'une variable aura une certaine valeur pendant une période spécifique.\n\nPar exemple, en utilisant une condition de 'égal à texte pendant 5 secondes', Exécuter une fois signifie que cette carte sera déclenchée une fois après que la condition ait été remplie et reste vraie pendant 5 secondes. Répéter signifie que, tant que la condition est remplie, cette carte sera exécutée toutes les 5 secondes.\n\nContinue de fonctionner après le redémarrage de Homey/App.",
+          "it": "Scheda variabile di testo.\n\nQuesta scheda verrà eseguita quando una variabile avrà un determinato valore per un periodo specifico.\n\nAd esempio, utilizzando una condizione di 'uguale a testo per 5 secondi', Esegui una volta significa che questa scheda verrà attivata una volta dopo che la condizione è stata soddisfatta e rimane vera per 5 secondi. Ripetutamente significa che, finché la condizione è soddisfatta, questa scheda verrà eseguita ogni 5 secondi.\n\nContinua a funzionare dopo il riavvio di Homey/App.",
+          "no": "Tekstvariabelkort.\n\nDette kortet vil utføres når en variabel har hatt en bestemt verdi i en spesifikk periode.\n\nNår du for eksempel bruker en betingelse som 'lik tekst i 5 sekunder', betyr Utfør én gang at dette kortet vil bli utløst én gang etter at betingelsen er oppfylt og forblir sann i 5 sekunder. Gjentatte ganger betyr at så lenge betingelsen er oppfylt, vil dette kortet bli utført hvert 5. sekund.\n\nFortsetter å fungere etter omstart av Homey/App.",
+          "sv": "Textvariabelkort.\n\nDetta kort kommer att köras när en variabel har haft ett visst värde under en specifik tidsperiod.\n\nNär du t.ex. använder ett villkor som 'lika med text i 5 sekunder' betyder Kör en gång att detta kort kommer att triggas en gång efter att villkoret har uppfyllts och förblir sant i 5 sekunder. Upprepade gånger betyder att så länge villkoret är uppfyllt, kommer detta kort att köras var 5:e sekund.\n\nFortsätter att fungera efter omstart av Homey/App.",
+          "pl": "Karta zmiennej tekstowej.\n\nTa karta zostanie wykonana, gdy zmienna będzie miała określoną wartość przez określony czas.\n\nNa przykład, używając warunku 'równe tekstowi przez 5 sekund', Wykonaj raz oznacza, że karta zostanie uruchomiona raz po spełnieniu warunku i pozostaniu prawdziwym przez 5 sekund. Powtarzaj oznacza, że tak długo, jak warunek jest spełniony, karta będzie wykonywana co 5 sekund.\n\nDziała nadal po ponownym uruchomieniu Homey/Aplikacji.",
+          "ru": "Карточка текстовой переменной.\n\nЭта карта будет выполняться, когда переменная имеет определенное значение в течение заданного периода времени.\n\nНапример, при использовании условия 'равно тексту в течение 5 секунд' Выполнить один раз означает, что эта карта будет срабатывать один раз после того, как условие выполнено и остается истинным в течение 5 секунд. Повторно означает, что пока условие выполняется, эта карта будет выполняться каждые 5 секунд.\n\nПродолжает работать после перезапуска Homey/приложения.",
+          "ko": "텍스트 변수 카드.\n\n변수가 특정 값으로 일정 기간 동안 유지될 때 이 카드는 실행됩니다.\n\n예를 들어, '텍스트와 같음 5초 동안'이라는 조건을 사용할 때, '한 번 실행'은 조건이 충족되고 5초 동안 유지된 후 이 카드가 한 번 트리거된다는 의미입니다. '반복 실행'은 조건이 충족되는 한 이 카드가 5초마다 실행된다는 의미입니다.\n\nHomey/앱 재시작 후에도 계속 작동합니다.",
+          "ar": "بطاقة متغير نصي.\n\nسيتم تنفيذ هذه البطاقة عندما يكون للمتغير قيمة معينة لفترة محددة.\n\nعند استخدام شرط مثل \"يساوي النص لمدة 5 ثوانٍ\" يعني التنفيذ مرة واحدة أن هذه البطاقة ستُفعّل مرة واحدة بعد تحقق الشرط وبقائه صحيحًا لمدة 5 ثوانٍ. أما \"بشكل متكرر\" فيعني أنه طالما تحقق الشرط، سيتم تنفيذ هذه البطاقة كل 5 ثوانٍ.\n\nتستمر في العمل بعد إعادة تشغيل Homey/التطبيق."
         },
         "args": [
           {
@@ -1504,19 +1534,19 @@
           "ar": "عندما يكون [[variable]] [[condition]] [[value]] لمدة [[time]] [[unit]]، قم بتنفيذ [[execute]]"
         },
         "hint": {
-          "en": "This card will execute when a variable has been a certain value for a specific period.\n\nWhen f.i. using a condition of 'equal to Yes for 5 seconds' Execute once means this card will be triggered once after the condition has been met and stays true for 5 seconds. Repeatedly means, as long as the condition is met, this card will be executed every 5 seconds.\n\nKeeps working after Homey/App Restart.",
-          "nl": "Deze kaart wordt uitgevoerd wanneer een variabele een bepaalde waarde heeft gedurende een specifieke periode.\n\nBijvoorbeeld, als je een voorwaarde gebruikt van 'gelijk aan Ja voor 5 seconden', betekent Uitvoeren eenmaal dat deze kaart één keer wordt geactiveerd nadat aan de voorwaarde is voldaan en deze 5 seconden waar blijft. Herhaaldelijk betekent dat, zolang aan de voorwaarde wordt voldaan, deze kaart elke 5 seconden wordt uitgevoerd.\n\nBlijft werken na een Homey/App herstart.",
-          "da": "Dette kort vil blive udført, når en variabel har haft en bestemt værdi i en specifik periode.\n\nNår man f.eks. bruger en betingelse som 'lig med Ja i 5 sekunder', betyder Udfør én gang, at dette kort vil blive udløst én gang, efter at betingelsen er opfyldt og forbliver sand i 5 sekunder. Gentagne gange betyder, at så længe betingelsen er opfyldt, vil dette kort blive udført hver 5. sekund.\n\nFortsætter med at fungere efter Homey/App-genstart.",
-          "de": "Diese Karte wird ausgeführt, wenn eine Variable für einen bestimmten Zeitraum einen bestimmten Wert hat.\n\nWenn Sie z.B. eine Bedingung von 'gleich Ja für 5 Sekunden' verwenden, bedeutet \"Einmal ausführen\", dass diese Karte einmal ausgelöst wird, nachdem die Bedingung erfüllt ist und 5 Sekunden lang wahr bleibt. \"Wiederholt\" bedeutet, dass diese Karte alle 5 Sekunden ausgeführt wird, solange die Bedingung erfüllt ist.\n\nFunktioniert weiterhin nach einem Neustart von Homey/App.",
-          "es": "Esta tarjeta se ejecutará cuando una variable haya tenido un cierto valor durante un período específico.\n\nPor ejemplo, al usar una condición de 'igual a Sí durante 5 segundos', Ejecutar una vez significa que esta tarjeta se activará una vez después de que se cumpla la condición y se mantenga verdadera durante 5 segundos. Repetidamente significa que, mientras se cumpla la condición, esta tarjeta se ejecutará cada 5 segundos.\n\nSigue funcionando después de reiniciar Homey/Aplicación.",
-          "fr": "Cette carte s'exécutera lorsqu'une variable aura une certaine valeur pendant une période spécifique.\n\nPar exemple, en utilisant une condition de 'égal à Oui pendant 5 secondes', Exécuter une fois signifie que cette carte sera déclenchée une fois après que la condition a été remplie et reste vraie pendant 5 secondes. Répéter signifie que, tant que la condition est remplie, cette carte sera exécutée toutes les 5 secondes.\n\nContinue de fonctionner après le redémarrage de Homey/App.",
-          "it": "Questa scheda verrà eseguita quando una variabile avrà un determinato valore per un periodo specifico.\n\nAd esempio, utilizzando una condizione di 'uguale a Sì per 5 secondi', Esegui una volta significa che questa scheda verrà attivata una volta dopo che la condizione è stata soddisfatta e rimane vera per 5 secondi. Ripetutamente significa che, finché la condizione è soddisfatta, questa scheda verrà eseguita ogni 5 secondi.\n\nContinua a funzionare dopo il riavvio di Homey/App.",
-          "no": "Dette kortet vil utføres når en variabel har hatt en bestemt verdi i en spesifikk periode.\n\nNår du for eksempel bruker en betingelse som 'lik Ja i 5 sekunder', betyr Utfør én gang at dette kortet vil bli utløst én gang etter at betingelsen er oppfylt og forblir sann i 5 sekunder. Gjentatte ganger betyr at så lenge betingelsen er oppfylt, vil dette kortet bli utført hvert 5. sekund.\n\nFortsetter å fungere etter omstart av Homey/App.",
-          "sv": "Detta kort kommer att köras när en variabel har haft ett visst värde under en specifik tidsperiod.\n\nNär du t.ex. använder ett villkor som 'lika med Ja i 5 sekunder' innebär Kör en gång att detta kort kommer att utlösas en gång efter att villkoret har uppfyllts och förblir sant i 5 sekunder. Upprepande innebär att så länge villkoret är uppfyllt, kommer detta kort att köras var 5:e sekund.\n\nFortsätter att fungera efter omstart av Homey/App.",
-          "pl": "Ta karta zostanie wykonana, gdy zmienna będzie miała określoną wartość przez określony czas.\n\nNa przykład, używając warunku 'równe Tak przez 5 sekund', Wykonaj raz oznacza, że ta karta zostanie uruchomiona raz po spełnieniu warunku i pozostaniu prawdziwym przez 5 sekund. Powtarzaj oznacza, że tak długo, jak warunek jest spełniony, ta karta będzie wykonywana co 5 sekund.\n\nDziała nadal po ponownym uruchomieniu Homey/Aplikacji.",
-          "ru": "Эта карта будет выполняться, когда переменная имеет определенное значение в течение заданного периода.\n\nНапример, при использовании условия 'равно Да в течение 5 секунд' Выполнить один раз означает, что эта карта будет срабатывать один раз после того, как условие выполнено и остается истинным в течение 5 секунд. Повторно означает, что пока условие выполняется, эта карта будет выполняться каждые 5 секунд.\n\nПродолжает работать после перезапуска Homey/приложения.",
-          "ko": "변수가 특정 값으로 일정 기간 동안 유지될 때 이 카드는 실행됩니다.\n\n예를 들어, '5초 동안 Yes와 같음'이라는 조건을 사용할 때, '한 번 실행'은 조건이 충족되고 5초 동안 유지된 후 이 카드가 한 번 트리거된다는 의미입니다. '반복 실행'은 조건이 충족되는 한 이 카드가 5초마다 실행된다는 의미입니다.\n\nHomey/앱 재시작 후에도 계속 작동합니다.",
-          "ar": "سيتم تنفيذ هذه البطاقة عندما يكون للمتغير قيمة معينة لفترة محددة.\n\nعند استخدام شرط مثل 'مساوي لـ نعم لمدة 5 ثوانٍ'، فإن التنفيذ مرة واحدة يعني أن هذه البطاقة سيتم تفعيلها مرة واحدة بعد تحقق الشرط وبقائه صحيحًا لمدة 5 ثوانٍ. التنفيذ بشكل متكرر يعني أنه طالما تحقق الشرط، سيتم تنفيذ هذه البطاقة كل 5 ثوانٍ.\n\nتستمر في العمل بعد إعادة تشغيل Homey/التطبيق."
+          "en": "Yes/no variable card.\n\nThis card will execute when a variable has been a certain value for a specific period.\n\nWhen f.i. using a condition of 'equal to Yes for 5 seconds' Execute once means this card will be triggered once after the condition has been met and stays true for 5 seconds. Repeatedly means, as long as the condition is met, this card will be executed every 5 seconds.\n\nKeeps working after Homey/App Restart.",
+          "nl": "Ja/nee-variabelekaart.\n\nDeze kaart wordt uitgevoerd wanneer een variabele een bepaalde waarde heeft gedurende een specifieke periode.\n\nBijvoorbeeld, als je een voorwaarde gebruikt van 'gelijk aan Ja voor 5 seconden', betekent Uitvoeren eenmaal dat deze kaart één keer wordt geactiveerd nadat aan de voorwaarde is voldaan en deze 5 seconden waar blijft. Herhaaldelijk betekent dat, zolang aan de voorwaarde wordt voldaan, deze kaart elke 5 seconden wordt uitgevoerd.\n\nBlijft werken na een Homey/App herstart.",
+          "da": "Ja/nej-variabelkort.\n\nDette kort vil blive udført, når en variabel har haft en bestemt værdi i en specifik periode.\n\nNår man f.eks. bruger en betingelse som 'lig med Ja i 5 sekunder', betyder Udfør én gang, at dette kort vil blive udløst én gang, efter at betingelsen er opfyldt og forbliver sand i 5 sekunder. Gentagne gange betyder, at så længe betingelsen er opfyldt, vil dette kort blive udført hver 5. sekund.\n\nFortsætter med at fungere efter Homey/App-genstart.",
+          "de": "Ja/Nein-Variablenkarte.\n\nDiese Karte wird ausgeführt, wenn eine Variable für einen bestimmten Zeitraum einen bestimmten Wert hat.\n\nWenn Sie z.B. eine Bedingung von 'gleich Ja für 5 Sekunden' verwenden, bedeutet \"Einmal ausführen\", dass diese Karte einmal ausgelöst wird, nachdem die Bedingung erfüllt ist und 5 Sekunden lang wahr bleibt. \"Wiederholt\" bedeutet, dass diese Karte alle 5 Sekunden ausgeführt wird, solange die Bedingung erfüllt ist.\n\nFunktioniert weiterhin nach einem Neustart von Homey/App.",
+          "es": "Tarjeta de variable sí/no.\n\nEsta tarjeta se ejecutará cuando una variable haya tenido un cierto valor durante un período específico.\n\nPor ejemplo, al usar una condición de 'igual a Sí durante 5 segundos', Ejecutar una vez significa que esta tarjeta se activará una vez después de que se cumpla la condición y se mantenga verdadera durante 5 segundos. Repetidamente significa que, mientras se cumpla la condición, esta tarjeta se ejecutará cada 5 segundos.\n\nSigue funcionando después de reiniciar Homey/Aplicación.",
+          "fr": "Carte de variable oui/non.\n\nCette carte s'exécutera lorsqu'une variable aura une certaine valeur pendant une période spécifique.\n\nPar exemple, en utilisant une condition de 'égal à Oui pendant 5 secondes', Exécuter une fois signifie que cette carte sera déclenchée une fois après que la condition a été remplie et reste vraie pendant 5 secondes. Répéter signifie que, tant que la condition est remplie, cette carte sera exécutée toutes les 5 secondes.\n\nContinue de fonctionner après le redémarrage de Homey/App.",
+          "it": "Scheda variabile sì/no.\n\nQuesta scheda verrà eseguita quando una variabile avrà un determinato valore per un periodo specifico.\n\nAd esempio, utilizzando una condizione di 'uguale a Sì per 5 secondi', Esegui una volta significa che questa scheda verrà attivata una volta dopo che la condizione è stata soddisfatta e rimane vera per 5 secondi. Ripetutamente significa che, finché la condizione è soddisfatta, questa scheda verrà eseguita ogni 5 secondi.\n\nContinua a funzionare dopo il riavvio di Homey/App.",
+          "no": "Ja/nei-variabelkort.\n\nDette kortet vil utføres når en variabel har hatt en bestemt verdi i en spesifikk periode.\n\nNår du for eksempel bruker en betingelse som 'lik Ja i 5 sekunder', betyr Utfør én gang at dette kortet vil bli utløst én gang etter at betingelsen er oppfylt og forblir sann i 5 sekunder. Gjentatte ganger betyr at så lenge betingelsen er oppfylt, vil dette kortet bli utført hvert 5. sekund.\n\nFortsetter å fungere etter omstart av Homey/App.",
+          "sv": "Ja/nej-variabelkort.\n\nDetta kort kommer att köras när en variabel har haft ett visst värde under en specifik tidsperiod.\n\nNär du t.ex. använder ett villkor som 'lika med Ja i 5 sekunder' innebär Kör en gång att detta kort kommer att utlösas en gång efter att villkoret har uppfyllts och förblir sant i 5 sekunder. Upprepande innebär att så länge villkoret är uppfyllt, kommer detta kort att köras var 5:e sekund.\n\nFortsätter att fungera efter omstart av Homey/App.",
+          "pl": "Karta zmiennej tak/nie.\n\nTa karta zostanie wykonana, gdy zmienna będzie miała określoną wartość przez określony czas.\n\nNa przykład, używając warunku 'równe Tak przez 5 sekund', Wykonaj raz oznacza, że ta karta zostanie uruchomiona raz po spełnieniu warunku i pozostaniu prawdziwym przez 5 sekund. Powtarzaj oznacza, że tak długo, jak warunek jest spełniony, ta karta będzie wykonywana co 5 sekund.\n\nDziała nadal po ponownym uruchomieniu Homey/Aplikacji.",
+          "ru": "Карточка переменной да/нет.\n\nЭта карта будет выполняться, когда переменная имеет определенное значение в течение заданного периода.\n\nНапример, при использовании условия 'равно Да в течение 5 секунд' Выполнить один раз означает, что эта карта будет срабатывать один раз после того, как условие выполнено и остается истинным в течение 5 секунд. Повторно означает, что пока условие выполняется, эта карта будет выполняться каждые 5 секунд.\n\nПродолжает работать после перезапуска Homey/приложения.",
+          "ko": "예/아니요 변수 카드.\n\n변수가 특정 값으로 일정 기간 동안 유지될 때 이 카드는 실행됩니다.\n\n예를 들어, '5초 동안 Yes와 같음'이라는 조건을 사용할 때, '한 번 실행'은 조건이 충족되고 5초 동안 유지된 후 이 카드가 한 번 트리거된다는 의미입니다. '반복 실행'은 조건이 충족되는 한 이 카드가 5초마다 실행된다는 의미입니다.\n\nHomey/앱 재시작 후에도 계속 작동합니다.",
+          "ar": "بطاقة متغير نعم/لا.\n\nسيتم تنفيذ هذه البطاقة عندما يكون للمتغير قيمة معينة لفترة محددة.\n\nعند استخدام شرط مثل 'مساوي لـ نعم لمدة 5 ثوانٍ'، فإن التنفيذ مرة واحدة يعني أن هذه البطاقة سيتم تفعيلها مرة واحدة بعد تحقق الشرط وبقائه صحيحًا لمدة 5 ثوانٍ. التنفيذ بشكل متكرر يعني أنه طالما تحقق الشرط، سيتم تنفيذ هذه البطاقة كل 5 ثوانٍ.\n\nتستمر في العمل بعد إعادة تشغيل Homey/التطبيق."
         },
         "args": [
           {
@@ -1919,7 +1949,22 @@
               "ar": "النص"
             }
           }
-        ]
+        ],
+        "hint": {
+          "en": "Text variable card; the value supports BLL coding with {[...]}.",
+          "nl": "Tekstvariabelekaart; de waarde ondersteunt BLL-codering met {[...]}.",
+          "da": "Tekstvariabelkort; værdien understøtter BLL-kode med {[...]}.",
+          "de": "Textvariablenkarte; der Wert unterstützt BLL-Code mit {[...]}.",
+          "es": "Tarjeta de variable de texto; el valor admite código BLL con {[...]}.",
+          "fr": "Carte de variable texte ; la valeur accepte du code BLL avec {[...]}.",
+          "it": "Scheda variabile di testo; il valore supporta codice BLL con {[...]}.",
+          "no": "Tekstvariabelkort; verdien støtter BLL-kode med {[...]}.",
+          "sv": "Textvariabelkort; värdet stöder BLL-kod med {[...]}.",
+          "pl": "Karta zmiennej tekstowej; wartość obsługuje kod BLL z {[...]}.",
+          "ru": "Карточка текстовой переменной; значение поддерживает код BLL с {[...]}.",
+          "ko": "텍스트 변수 카드; 값에 {[...]} BLL 코드를 사용할 수 있습니다.",
+          "ar": "بطاقة متغير نصي؛ تدعم القيمة تعليمات BLL باستخدام {[...]}."
+        }
       },
       {
         "id": "variable_starts_with",
@@ -2022,7 +2067,22 @@
               "ar": "النص (* مدعوم من BLL)"
             }
           }
-        ]
+        ],
+        "hint": {
+          "en": "Text variable card.",
+          "nl": "Tekstvariabelekaart.",
+          "da": "Tekstvariabelkort.",
+          "de": "Textvariablenkarte.",
+          "es": "Tarjeta de variable de texto.",
+          "fr": "Carte de variable texte.",
+          "it": "Scheda variabile di testo.",
+          "no": "Tekstvariabelkort.",
+          "sv": "Textvariabelkort.",
+          "pl": "Karta zmiennej tekstowej.",
+          "ru": "Карточка текстовой переменной.",
+          "ko": "텍스트 변수 카드.",
+          "ar": "بطاقة متغير نصي."
+        }
       },
       {
         "id": "variable_matches_string",
@@ -2125,7 +2185,22 @@
               "ar": "النص (* مدعوم من BLL)"
             }
           }
-        ]
+        ],
+        "hint": {
+          "en": "Text variable card.",
+          "nl": "Tekstvariabelekaart.",
+          "da": "Tekstvariabelkort.",
+          "de": "Textvariablenkarte.",
+          "es": "Tarjeta de variable de texto.",
+          "fr": "Carte de variable texte.",
+          "it": "Scheda variabile di testo.",
+          "no": "Tekstvariabelkort.",
+          "sv": "Textvariabelkort.",
+          "pl": "Karta zmiennej tekstowej.",
+          "ru": "Карточка текстовой переменной.",
+          "ko": "텍스트 변수 카드.",
+          "ar": "بطاقة متغير نصي."
+        }
       },
       {
         "id": "variable_matches_number",
@@ -2229,7 +2304,22 @@
               "ar": "٠٫٠١"
             }
           }
-        ]
+        ],
+        "hint": {
+          "en": "Number variable card.",
+          "nl": "Getalvariabelekaart.",
+          "da": "Talvariabelkort.",
+          "de": "Zahlenvariablenkarte.",
+          "es": "Tarjeta de variable numérica.",
+          "fr": "Carte de variable numérique.",
+          "it": "Scheda variabile numerica.",
+          "no": "Tallvariabelkort.",
+          "sv": "Talvariabelkort.",
+          "pl": "Karta zmiennej liczbowej.",
+          "ru": "Карточка числовой переменной.",
+          "ko": "숫자 변수 카드.",
+          "ar": "بطاقة متغير رقمي."
+        }
       },
       {
         "id": "variable_greater_than",
@@ -2333,7 +2423,22 @@
               "ar": "٠٫٠١"
             }
           }
-        ]
+        ],
+        "hint": {
+          "en": "Number variable card.",
+          "nl": "Getalvariabelekaart.",
+          "da": "Talvariabelkort.",
+          "de": "Zahlenvariablenkarte.",
+          "es": "Tarjeta de variable numérica.",
+          "fr": "Carte de variable numérique.",
+          "it": "Scheda variabile numerica.",
+          "no": "Tallvariabelkort.",
+          "sv": "Talvariabelkort.",
+          "pl": "Karta zmiennej liczbowej.",
+          "ru": "Карточка числовой переменной.",
+          "ko": "숫자 변수 카드.",
+          "ar": "بطاقة متغير رقمي."
+        }
       },
       {
         "id": "variable_less_than",
@@ -2437,7 +2542,22 @@
               "ar": "٠٫٠١"
             }
           }
-        ]
+        ],
+        "hint": {
+          "en": "Number variable card.",
+          "nl": "Getalvariabelekaart.",
+          "da": "Talvariabelkort.",
+          "de": "Zahlenvariablenkarte.",
+          "es": "Tarjeta de variable numérica.",
+          "fr": "Carte de variable numérique.",
+          "it": "Scheda variabile numerica.",
+          "no": "Tallvariabelkort.",
+          "sv": "Talvariabelkort.",
+          "pl": "Karta zmiennej liczbowej.",
+          "ru": "Карточка числовой переменной.",
+          "ko": "숫자 변수 카드.",
+          "ar": "بطاقة متغير رقمي."
+        }
       },
       {
         "id": "variable_is_equal",
@@ -2506,7 +2626,22 @@
               "ar": "متغير نعم/لا"
             }
           }
-        ]
+        ],
+        "hint": {
+          "en": "Yes/no variable card.",
+          "nl": "Ja/nee-variabelekaart.",
+          "da": "Ja/nej-variabelkort.",
+          "de": "Ja/Nein-Variablenkarte.",
+          "es": "Tarjeta de variable sí/no.",
+          "fr": "Carte de variable oui/non.",
+          "it": "Scheda variabile sì/no.",
+          "no": "Ja/nei-variabelkort.",
+          "sv": "Ja/nej-variabelkort.",
+          "pl": "Karta zmiennej tak/nie.",
+          "ru": "Карточка переменной да/нет.",
+          "ko": "예/아니요 변수 카드.",
+          "ar": "بطاقة متغير نعم/لا."
+        }
       },
       {
         "id": "expression",
@@ -2575,7 +2710,22 @@
               "ar": "$v1$ > 100 و $v1$ < 200 و $b1$"
             }
           }
-        ]
+        ],
+        "hint": {
+          "en": "Math.js expression card. Refer to a variable as $name$.",
+          "nl": "Math.js-expressiekaart. Verwijs naar een variabele met $naam$.",
+          "da": "Math.js-udtrykskort. Henvis til en variabel med $navn$.",
+          "de": "Math.js-Ausdruckskarte. Eine Variable wird als $Name$ angegeben.",
+          "es": "Tarjeta de expresión Math.js. Usa $nombre$ para una variable.",
+          "fr": "Carte d’expression Math.js. Utilisez $nom$ pour une variable.",
+          "it": "Scheda espressione Math.js. Usa $nome$ per una variabile.",
+          "no": "Math.js-uttrykkskort. Henvis til en variabel med $navn$.",
+          "sv": "Math.js-uttryckskort. Ange en variabel som $namn$.",
+          "pl": "Karta wyrażenia Math.js. Użyj $nazwa$ dla zmiennej.",
+          "ru": "Карточка выражения Math.js. Укажите переменную как $имя$.",
+          "ko": "Math.js 표현식 카드. 변수는 $이름$으로 참조합니다.",
+          "ar": "بطاقة تعبير Math.js. أشر إلى المتغير بصيغة $الاسم$."
+        }
       },
       {
         "id": "bl_expression",
@@ -2644,7 +2794,22 @@
               "ar": "\"test\" === \"test\" && 1 < 2"
             }
           }
-        ]
+        ],
+        "hint": {
+          "en": "BLL expression card: enter JavaScript without {[...]}.",
+          "nl": "BLL-expressiekaart: voer JavaScript in zonder {[...]}.",
+          "da": "BLL-udtrykskort: indtast JavaScript uden {[...]}.",
+          "de": "BLL-Ausdruckskarte: JavaScript ohne {[...]} eingeben.",
+          "es": "Tarjeta de expresión BLL: introduce JavaScript sin {[...]}.",
+          "fr": "Carte d’expression BLL : saisissez du JavaScript sans {[...]}.",
+          "it": "Scheda espressione BLL: inserisci JavaScript senza {[...]}.",
+          "no": "BLL-uttrykkskort: skriv JavaScript uten {[...]}.",
+          "sv": "BLL-uttryckskort: ange JavaScript utan {[...]}.",
+          "pl": "Karta wyrażenia BLL: wpisz JavaScript bez {[...]}.",
+          "ru": "Карточка выражения BLL: введите JavaScript без {[...]}.",
+          "ko": "BLL 표현식 카드: {[...]} 없이 JavaScript를 입력하세요.",
+          "ar": "بطاقة تعبير BLL: أدخل JavaScript دون {[...]}."
+        }
       }
     ],
     "actions": [
@@ -2860,7 +3025,22 @@
               "ar": "النتيجة المنسقة"
             }
           }
-        ]
+        ],
+        "hint": {
+          "en": "Date and time formatting card.",
+          "nl": "Datum- en tijdopmaakkaart.",
+          "da": "Kort til dato- og tidsformatering.",
+          "de": "Karte zur Datums- und Zeitformatierung.",
+          "es": "Tarjeta de formato de fecha y hora.",
+          "fr": "Carte de formatage de date et d’heure.",
+          "it": "Scheda di formattazione data e ora.",
+          "no": "Kort for dato- og tidsformatering.",
+          "sv": "Kort för datum- och tidsformatering.",
+          "pl": "Karta formatowania daty i czasu.",
+          "ru": "Карточка форматирования даты и времени.",
+          "ko": "날짜 및 시간 서식 카드.",
+          "ar": "بطاقة تنسيق التاريخ والوقت."
+        }
       },
       {
         "id": "format_time",
@@ -3020,7 +3200,22 @@
               "ar": "نتيجة منسقة"
             }
           }
-        ]
+        ],
+        "hint": {
+          "en": "Duration formatting card.",
+          "nl": "Tijdsduuropmaakkaart.",
+          "da": "Kort til formatering af varighed.",
+          "de": "Karte zur Formatierung einer Dauer.",
+          "es": "Tarjeta de formato de duración.",
+          "fr": "Carte de formatage de durée.",
+          "it": "Scheda di formattazione della durata.",
+          "no": "Kort for formatering av varighet.",
+          "sv": "Kort för formatering av varaktighet.",
+          "pl": "Karta formatowania czasu trwania.",
+          "ru": "Карточка форматирования длительности.",
+          "ko": "기간 서식 카드.",
+          "ar": "بطاقة تنسيق المدة."
+        }
       },
       {
         "id": "format_number",
@@ -3359,7 +3554,22 @@
               "ar": "النتيجة المنسقة"
             }
           }
-        ]
+        ],
+        "hint": {
+          "en": "Number formatting card.",
+          "nl": "Getalopmaakkaart.",
+          "da": "Kort til talformatering.",
+          "de": "Karte zur Zahlenformatierung.",
+          "es": "Tarjeta de formato numérico.",
+          "fr": "Carte de formatage numérique.",
+          "it": "Scheda di formattazione numerica.",
+          "no": "Kort for tallformatering.",
+          "sv": "Kort för talformatering.",
+          "pl": "Karta formatowania liczb.",
+          "ru": "Карточка форматирования чисел.",
+          "ko": "숫자 서식 카드.",
+          "ar": "بطاقة تنسيق الأرقام."
+        }
       },
       {
         "id": "format_json_csv",
@@ -3592,7 +3802,22 @@
               "ar": "CSV (ملف القيم المفصولة بفواصل)"
             }
           }
-        ]
+        ],
+        "hint": {
+          "en": "JSON to CSV formatting card.",
+          "nl": "JSON-naar-CSV-opmaakkaart.",
+          "da": "Kort til formatering fra JSON til CSV.",
+          "de": "Karte zur Formatierung von JSON in CSV.",
+          "es": "Tarjeta de conversión de JSON a CSV.",
+          "fr": "Carte de conversion JSON vers CSV.",
+          "it": "Scheda di conversione da JSON a CSV.",
+          "no": "Kort for formatering fra JSON til CSV.",
+          "sv": "Kort för formatering från JSON till CSV.",
+          "pl": "Karta konwersji JSON na CSV.",
+          "ru": "Карточка преобразования JSON в CSV.",
+          "ko": "JSON을 CSV로 변환하는 카드.",
+          "ar": "بطاقة تحويل JSON إلى CSV."
+        }
       },
       {
         "id": "format_json_xlsx",
@@ -3866,7 +4091,21 @@
             }
           }
         ],
-        "hint": "Check the App settings --> Exports for more schema examples."
+        "hint": {
+          "en": "JSON to Excel formatting card.\n\nCheck the App settings --> Exports for more schema examples.",
+          "nl": "JSON-naar-Excel-opmaakkaart.\n\nBekijk App-instellingen → Exports voor meer schemavoorbeelden.",
+          "da": "Kort til formatering fra JSON til Excel.\n\nSe Appindstillinger → Eksporter for flere skemaeksempler.",
+          "de": "Karte zur Formatierung von JSON in Excel.\n\nWeitere Schemabeispiele finden Sie unter App-Einstellungen → Exporte.",
+          "es": "Tarjeta de conversión de JSON a Excel.\n\nConsulta Ajustes de la aplicación → Exportaciones para ver más ejemplos de esquemas.",
+          "fr": "Carte de conversion JSON vers Excel.\n\nConsultez Paramètres de l’application → Exports pour d’autres exemples de schémas.",
+          "it": "Scheda di conversione da JSON a Excel.\n\nConsulta Impostazioni app → Esportazioni per altri esempi di schema.",
+          "no": "Kort for formatering fra JSON til Excel.\n\nSe Appinnstillinger → Eksporter for flere skjemaeksempler.",
+          "sv": "Kort för formatering från JSON till Excel.\n\nSe Appinställningar → Exporter för fler schemaexempel.",
+          "pl": "Karta konwersji JSON na Excel.\n\nWięcej przykładów schematów znajdziesz w Ustawienia aplikacji → Eksporty.",
+          "ru": "Карточка преобразования JSON в Excel.\n\nДругие примеры схем см. в настройках приложения → Экспорт.",
+          "ko": "JSON을 Excel로 변환하는 카드.\n\n스키마 예제는 앱 설정 → 내보내기에서 확인하세요.",
+          "ar": "بطاقة تحويل JSON إلى Excel.\n\nراجع إعدادات التطبيق ← التصدير لمزيد من أمثلة المخططات."
+        }
       },
       {
         "id": "execute_bl_expression_tag",
@@ -3938,19 +4177,19 @@
           }
         ],
         "hint": {
-          "en": "Executes a BLL-expression (without {[...]}) and returns it as a tag.",
-          "nl": "Voert een BLL-expressie uit (zonder {[...]}) en geeft deze terug als een tag.",
-          "da": "Udfører et BLL-udtryk (uden {[...]}) og returnerer det som et tag.",
-          "de": "Führt einen BLL-Ausdruck aus (ohne {[...]}) und gibt ihn als Tag zurück.",
-          "es": "Ejecuta una expresión BLL (sin {[...]}) y la devuelve como una etiqueta.",
-          "fr": "Exécute une expression BLL (sans {[...]}) et la renvoie sous forme de balise.",
-          "it": "Esegue un'espressione BLL (senza {[...]}) e la restituisce come tag.",
-          "no": "Utfører et BLL-uttrykk (uten {[...]}) og returnerer det som en tag.",
-          "sv": "Kör ett BLL-uttryck (utan {[...]}) och returnerar det som en tagg.",
-          "pl": "Wykonuje wyrażenie BLL (bez {[...]}) i zwraca je jako tag.",
-          "ru": "Выполняет выражение BLL (без {[...]}) и возвращает его в виде тега.",
-          "ko": "BLL 표현식을 실행하고 태그로 반환합니다 (중괄호 없이).",
-          "ar": "ينفذ تعبير BLL (بدون {[...]}) ويعيده كعلامة."
+          "en": "BLL expression card: enter JavaScript without {[...]}.\n\nExecutes a BLL-expression (without {[...]}) and returns it as a tag.",
+          "nl": "BLL-expressiekaart: voer JavaScript in zonder {[...]}.\n\nVoert een BLL-expressie uit (zonder {[...]}) en geeft deze terug als een tag.",
+          "da": "BLL-udtrykskort: indtast JavaScript uden {[...]}.\n\nUdfører et BLL-udtryk (uden {[...]}) og returnerer det som et tag.",
+          "de": "BLL-Ausdruckskarte: JavaScript ohne {[...]} eingeben.\n\nFührt einen BLL-Ausdruck aus (ohne {[...]}) und gibt ihn als Tag zurück.",
+          "es": "Tarjeta de expresión BLL: introduce JavaScript sin {[...]}.\n\nEjecuta una expresión BLL (sin {[...]}) y la devuelve como una etiqueta.",
+          "fr": "Carte d’expression BLL : saisissez du JavaScript sans {[...]}.\n\nExécute une expression BLL (sans {[...]}) et la renvoie sous forme de balise.",
+          "it": "Scheda espressione BLL: inserisci JavaScript senza {[...]}.\n\nEsegue un'espressione BLL (senza {[...]}) e la restituisce come tag.",
+          "no": "BLL-uttrykkskort: skriv JavaScript uten {[...]}.\n\nUtfører et BLL-uttrykk (uten {[...]}) og returnerer det som en tag.",
+          "sv": "BLL-uttryckskort: ange JavaScript utan {[...]}.\n\nKör ett BLL-uttryck (utan {[...]}) och returnerar det som en tagg.",
+          "pl": "Karta wyrażenia BLL: wpisz JavaScript bez {[...]}.\n\nWykonuje wyrażenie BLL (bez {[...]}) i zwraca je jako tag.",
+          "ru": "Карточка выражения BLL: введите JavaScript без {[...]}.\n\nВыполняет выражение BLL (без {[...]}) и возвращает его в виде тега.",
+          "ko": "BLL 표현식 카드: {[...]} 없이 JavaScript를 입력하세요.\n\nBLL 표현식을 실행하고 태그로 반환합니다 (중괄호 없이).",
+          "ar": "بطاقة تعبير BLL: أدخل JavaScript دون {[...]}.\n\nينفذ تعبير BLL (بدون {[...]}) ويعيده كعلامة."
         },
         "tokens": [
           {
@@ -4101,19 +4340,19 @@
           }
         ],
         "hint": {
-          "en": "Supports BLL-coding (with {[...]}) and returns it as a tag.",
-          "nl": "Ondersteunt BLL-codering (met {[...]}) en geeft het terug als een tag.",
-          "da": "Understøtter BLL-kodning (med {[...]}) og returnerer det som et tag.",
-          "de": "Unterstützt BLL-Codierung (mit {[...]}) und gibt es als Tag zurück.",
-          "es": "Admite la codificación BLL (con {[...]}) y la devuelve como una etiqueta.",
-          "fr": "Prend en charge le codage BLL (avec {[...]}) et le renvoie sous forme de balise.",
-          "it": "Supporta la codifica BLL (con {[...]}) e la restituisce come tag.",
-          "no": "Støtter BLL-koding (med {[...]}) og returnerer det som en tag.",
-          "sv": "Stöder BLL-kodning (med {[...]}) och returnerar det som en tagg.",
-          "pl": "Obsługuje kodowanie BLL (z {[...]}) i zwraca je jako tag.",
-          "ru": "Поддерживает кодирование BLL (с {[...]}) и возвращает его в виде тега.",
-          "ko": "BLL-코딩({[...]})을 지원하며 이를 태그로 반환합니다.",
-          "ar": "يدعم ترميز BLL (مع {[...]}) ويعيده كعلامة."
+          "en": "Text card; use {[...]} for BLL coding.\n\nSupports BLL-coding (with {[...]}) and returns it as a tag.",
+          "nl": "Tekstkaart; gebruik {[...]} voor BLL-codering.\n\nOndersteunt BLL-codering (met {[...]}) en geeft het terug als een tag.",
+          "da": "Tekstkort; brug {[...]} til BLL-kode.\n\nUnderstøtter BLL-kodning (med {[...]}) og returnerer det som et tag.",
+          "de": "Textkarte; für BLL-Code {[...]} verwenden.\n\nUnterstützt BLL-Codierung (mit {[...]}) und gibt es als Tag zurück.",
+          "es": "Tarjeta de texto; usa {[...]} para código BLL.\n\nAdmite la codificación BLL (con {[...]}) y la devuelve como una etiqueta.",
+          "fr": "Carte texte ; utilisez {[...]} pour le code BLL.\n\nPrend en charge le codage BLL (avec {[...]}) et le renvoie sous forme de balise.",
+          "it": "Scheda di testo; usa {[...]} per il codice BLL.\n\nSupporta la codifica BLL (con {[...]}) e la restituisce come tag.",
+          "no": "Tekstkort; bruk {[...]} for BLL-kode.\n\nStøtter BLL-koding (med {[...]}) og returnerer det som en tag.",
+          "sv": "Textkort; använd {[...]} för BLL-kod.\n\nStöder BLL-kodning (med {[...]}) och returnerar det som en tagg.",
+          "pl": "Karta tekstowa; użyj {[...]} dla kodu BLL.\n\nObsługuje kodowanie BLL (z {[...]}) i zwraca je jako tag.",
+          "ru": "Текстовая карточка; используйте {[...]} для кода BLL.\n\nПоддерживает кодирование BLL (с {[...]}) и возвращает его в виде тега.",
+          "ko": "텍스트 카드; BLL 코드에 {[...]}를 사용하세요.\n\nBLL-코딩({[...]})을 지원하며 이를 태그로 반환합니다.",
+          "ar": "بطاقة نصية؛ استخدم {[...]} لتعليمات BLL.\n\nيدعم ترميز BLL (مع {[...]}) ويعيده كعلامة."
         },
         "tokens": [
           {
@@ -4228,19 +4467,19 @@
           "ar": "قم بتعيين [[variable]] إلى [[expression]]"
         },
         "hint": {
-          "en": "Set any variable to a BLL-expression (without {[...]}).",
-          "nl": "Stel een variabele in op een BLL-expressie (zonder {[...]}).",
-          "da": "Indstil en hvilken som helst variabel til et BLL-udtryk (uden {[...]}).",
-          "de": "Setze eine beliebige Variable auf einen BLL-Ausdruck (ohne {[...]}).",
-          "es": "Establece cualquier variable en una expresión BLL (sin {[...]}).",
-          "fr": "Définissez n'importe quelle variable sur une expression BLL (sans {[...]}).",
-          "it": "Imposta qualsiasi variabile su un'espressione BLL (senza {[...]}).",
-          "no": "Sett hvilken som helst variabel til et BLL-uttrykk (uten {[...]}).",
-          "sv": "Ställ in en variabel till ett BLL-uttryck (utan {[...]}).",
-          "pl": "Ustaw dowolną zmienną na wyrażenie BLL (bez {[...]}).",
-          "ru": "Установите любую переменную на выражение BLL (без {[...]}).",
-          "ko": "어떤 변수를 BLL 표현식으로 설정하세요 (중괄호 {[...]} 없이).",
-          "ar": "قم بتعيين أي متغير إلى تعبير BLL (بدون {[...]})."
+          "en": "BLL expression card: enter JavaScript without {[...]}.\n\nSet any variable to a BLL-expression (without {[...]}).",
+          "nl": "BLL-expressiekaart: voer JavaScript in zonder {[...]}.\n\nStel een variabele in op een BLL-expressie (zonder {[...]}).",
+          "da": "BLL-udtrykskort: indtast JavaScript uden {[...]}.\n\nIndstil en hvilken som helst variabel til et BLL-udtryk (uden {[...]}).",
+          "de": "BLL-Ausdruckskarte: JavaScript ohne {[...]} eingeben.\n\nSetze eine beliebige Variable auf einen BLL-Ausdruck (ohne {[...]}).",
+          "es": "Tarjeta de expresión BLL: introduce JavaScript sin {[...]}.\n\nEstablece cualquier variable en una expresión BLL (sin {[...]}).",
+          "fr": "Carte d’expression BLL : saisissez du JavaScript sans {[...]}.\n\nDéfinissez n'importe quelle variable sur une expression BLL (sans {[...]}).",
+          "it": "Scheda espressione BLL: inserisci JavaScript senza {[...]}.\n\nImposta qualsiasi variabile su un'espressione BLL (senza {[...]}).",
+          "no": "BLL-uttrykkskort: skriv JavaScript uten {[...]}.\n\nSett hvilken som helst variabel til et BLL-uttrykk (uten {[...]}).",
+          "sv": "BLL-uttryckskort: ange JavaScript utan {[...]}.\n\nStäll in en variabel till ett BLL-uttryck (utan {[...]}).",
+          "pl": "Karta wyrażenia BLL: wpisz JavaScript bez {[...]}.\n\nUstaw dowolną zmienną na wyrażenie BLL (bez {[...]}).",
+          "ru": "Карточка выражения BLL: введите JavaScript без {[...]}.\n\nУстановите любую переменную на выражение BLL (без {[...]}).",
+          "ko": "BLL 표현식 카드: {[...]} 없이 JavaScript를 입력하세요.\n\n어떤 변수를 BLL 표현식으로 설정하세요 (중괄호 {[...]} 없이).",
+          "ar": "بطاقة تعبير BLL: أدخل JavaScript دون {[...]}.\n\nقم بتعيين أي متغير إلى تعبير BLL (بدون {[...]})."
         },
         "args": [
           {
@@ -4347,19 +4586,19 @@
           "ar": "اضبط [[variable]] على [[value]]"
         },
         "hint": {
-          "en": "You can set any variable with this card and it supports BLL-coding.",
-          "nl": "Je kunt met deze kaart elke variabele instellen en het ondersteunt BLL-codering.",
-          "da": "Du kan indstille enhver variabel med dette kort, og det understøtter BLL-kodning.",
-          "de": "Du kannst mit dieser Karte jede Variable festlegen und sie unterstützt BLL-Codierung.",
-          "es": "Puedes establecer cualquier variable con esta tarjeta y admite codificación BLL.",
-          "fr": "Vous pouvez définir n'importe quelle variable avec cette carte et elle prend en charge le codage BLL.",
-          "it": "Puoi impostare qualsiasi variabile con questa scheda e supporta la codifica BLL.",
-          "no": "Du kan sette hvilken som helst variabel med dette kortet, og det støtter BLL-koding.",
-          "sv": "Du kan ställa in vilken variabel som helst med detta kort och det stöder BLL-kodning.",
-          "pl": "Możesz ustawić dowolną zmienną za pomocą tej karty, a także obsługuje kodowanie BLL.",
-          "ru": "Вы можете установить любую переменную с помощью этой карты, и она поддерживает кодирование BLL.",
-          "ko": "이 카드를 사용하여 모든 변수를 설정할 수 있으며 BLL 코딩을 지원합니다.",
-          "ar": "يمكنك تعيين أي متغير باستخدام هذه البطاقة وهي تدعم ترميز BLL."
+          "en": "Variable card; the text value supports BLL coding with {[...]}.\n\nYou can set any variable with this card and it supports BLL-coding.",
+          "nl": "Variabelekaart; de tekstwaarde ondersteunt BLL-codering met {[...]}.\n\nJe kunt met deze kaart elke variabele instellen en het ondersteunt BLL-codering.",
+          "da": "Variabelkort; tekstværdien understøtter BLL-kode med {[...]}.\n\nDu kan indstille enhver variabel med dette kort, og det understøtter BLL-kodning.",
+          "de": "Variablenkarte; der Textwert unterstützt BLL-Code mit {[...]}.\n\nDu kannst mit dieser Karte jede Variable festlegen und sie unterstützt BLL-Codierung.",
+          "es": "Tarjeta de variable; el valor de texto admite código BLL con {[...]}.\n\nPuedes establecer cualquier variable con esta tarjeta y admite codificación BLL.",
+          "fr": "Carte de variable ; la valeur texte accepte du code BLL avec {[...]}.\n\nVous pouvez définir n'importe quelle variable avec cette carte et elle prend en charge le codage BLL.",
+          "it": "Scheda variabile; il valore di testo supporta codice BLL con {[...]}.\n\nPuoi impostare qualsiasi variabile con questa scheda e supporta la codifica BLL.",
+          "no": "Variabelkort; tekstverdien støtter BLL-kode med {[...]}.\n\nDu kan sette hvilken som helst variabel med dette kortet, og det støtter BLL-koding.",
+          "sv": "Variabelkort; textvärdet stöder BLL-kod med {[...]}.\n\nDu kan ställa in vilken variabel som helst med detta kort och det stöder BLL-kodning.",
+          "pl": "Karta zmiennej; wartość tekstowa obsługuje kod BLL z {[...]}.\n\nMożesz ustawić dowolną zmienną za pomocą tej karty, a także obsługuje kodowanie BLL.",
+          "ru": "Карточка переменной; текстовое значение поддерживает код BLL с {[...]}.\n\nВы можете установить любую переменную с помощью этой карты, и она поддерживает кодирование BLL.",
+          "ko": "변수 카드; 텍스트 값에 {[...]} BLL 코드를 사용할 수 있습니다.\n\n이 카드를 사용하여 모든 변수를 설정할 수 있으며 BLL 코딩을 지원합니다.",
+          "ar": "بطاقة متغير؛ تدعم القيمة النصية تعليمات BLL باستخدام {[...]}.\n\nيمكنك تعيين أي متغير باستخدام هذه البطاقة وهي تدعم ترميز BLL."
         },
         "args": [
           {
@@ -4466,19 +4705,19 @@
           "ar": "اضبط [[variable]] على [[value]]"
         },
         "hint": {
-          "en": "Type the name of a variable and select it to create a new variable.",
-          "nl": "Typ de naam van een variabele en selecteer deze om een nieuwe variabele te maken.",
-          "da": "Skriv navnet på en variabel og vælg den for at oprette en ny variabel.",
-          "de": "Geben Sie den Namen einer Variablen ein und wählen Sie sie aus, um eine neue Variable zu erstellen.",
-          "es": "Escribe el nombre de una variable y selecciónala para crear una nueva variable.",
-          "fr": "Tapez le nom d'une variable et sélectionnez-la pour créer une nouvelle variable.",
-          "it": "Digita il nome di una variabile e selezionala per creare una nuova variabile.",
-          "no": "Skriv inn navnet på en variabel og velg den for å opprette en ny variabel.",
-          "sv": "Skriv namnet på en variabel och välj den för att skapa en ny variabel.",
-          "pl": "Wpisz nazwę zmiennej i wybierz ją, aby utworzyć nową zmienną.",
-          "ru": "Введите имя переменной и выберите его, чтобы создать новую переменную.",
-          "ko": "변수 이름을 입력하고 선택하여 새 변수를 만드세요.",
-          "ar": "اكتب اسم المتغير وحدده لإنشاء متغير جديد."
+          "en": "Text variable card; the value supports BLL coding with {[...]}.\n\nType the name of a variable and select it to create a new variable.",
+          "nl": "Tekstvariabelekaart; de waarde ondersteunt BLL-codering met {[...]}.\n\nTyp de naam van een variabele en selecteer deze om een nieuwe variabele te maken.",
+          "da": "Tekstvariabelkort; værdien understøtter BLL-kode med {[...]}.\n\nSkriv navnet på en variabel og vælg den for at oprette en ny variabel.",
+          "de": "Textvariablenkarte; der Wert unterstützt BLL-Code mit {[...]}.\n\nGeben Sie den Namen einer Variablen ein und wählen Sie sie aus, um eine neue Variable zu erstellen.",
+          "es": "Tarjeta de variable de texto; el valor admite código BLL con {[...]}.\n\nEscribe el nombre de una variable y selecciónala para crear una nueva variable.",
+          "fr": "Carte de variable texte ; la valeur accepte du code BLL avec {[...]}.\n\nTapez le nom d'une variable et sélectionnez-la pour créer une nouvelle variable.",
+          "it": "Scheda variabile di testo; il valore supporta codice BLL con {[...]}.\n\nDigita il nome di una variabile e selezionala per creare una nuova variabile.",
+          "no": "Tekstvariabelkort; verdien støtter BLL-kode med {[...]}.\n\nSkriv inn navnet på en variabel og velg den for å opprette en ny variabel.",
+          "sv": "Textvariabelkort; värdet stöder BLL-kod med {[...]}.\n\nSkriv namnet på en variabel och välj den för att skapa en ny variabel.",
+          "pl": "Karta zmiennej tekstowej; wartość obsługuje kod BLL z {[...]}.\n\nWpisz nazwę zmiennej i wybierz ją, aby utworzyć nową zmienną.",
+          "ru": "Карточка текстовой переменной; значение поддерживает код BLL с {[...]}.\n\nВведите имя переменной и выберите его, чтобы создать новую переменную.",
+          "ko": "텍스트 변수 카드; 값에 {[...]} BLL 코드를 사용할 수 있습니다.\n\n변수 이름을 입력하고 선택하여 새 변수를 만드세요.",
+          "ar": "بطاقة متغير نصي؛ تدعم القيمة تعليمات BLL باستخدام {[...]}.\n\nاكتب اسم المتغير وحدده لإنشاء متغير جديد."
         },
         "args": [
           {
@@ -4585,19 +4824,19 @@
           "ar": "اضبط [[variable]] على [[value]]"
         },
         "hint": {
-          "en": "Type the name of a variable and select it to create a new variable.",
-          "nl": "Typ de naam van een variabele en selecteer deze om een nieuwe variabele te maken.",
-          "da": "Skriv navnet på en variabel og vælg den for at oprette en ny variabel.",
-          "de": "Geben Sie den Namen einer Variablen ein und wählen Sie sie aus, um eine neue Variable zu erstellen.",
-          "es": "Escribe el nombre de una variable y selecciónala para crear una nueva variable.",
-          "fr": "Tapez le nom d'une variable et sélectionnez-la pour créer une nouvelle variable.",
-          "it": "Digita il nome di una variabile e selezionala per creare una nuova variabile.",
-          "no": "Skriv inn navnet på en variabel og velg den for å opprette en ny variabel.",
-          "sv": "Skriv namnet på en variabel och välj den för att skapa en ny variabel.",
-          "pl": "Wpisz nazwę zmiennej i wybierz ją, aby utworzyć nową zmienną.",
-          "ru": "Введите имя переменной и выберите его, чтобы создать новую переменную.",
-          "ko": "변수 이름을 입력하고 선택하여 새 변수를 만드세요.",
-          "ar": "اكتب اسم المتغير وحدده لإنشاء متغير جديد."
+          "en": "Number variable card.\n\nType the name of a variable and select it to create a new variable.",
+          "nl": "Getalvariabelekaart.\n\nTyp de naam van een variabele en selecteer deze om een nieuwe variabele te maken.",
+          "da": "Talvariabelkort.\n\nSkriv navnet på en variabel og vælg den for at oprette en ny variabel.",
+          "de": "Zahlenvariablenkarte.\n\nGeben Sie den Namen einer Variablen ein und wählen Sie sie aus, um eine neue Variable zu erstellen.",
+          "es": "Tarjeta de variable numérica.\n\nEscribe el nombre de una variable y selecciónala para crear una nueva variable.",
+          "fr": "Carte de variable numérique.\n\nTapez le nom d'une variable et sélectionnez-la pour créer une nouvelle variable.",
+          "it": "Scheda variabile numerica.\n\nDigita il nome di una variabile e selezionala per creare una nuova variabile.",
+          "no": "Tallvariabelkort.\n\nSkriv inn navnet på en variabel og velg den for å opprette en ny variabel.",
+          "sv": "Talvariabelkort.\n\nSkriv namnet på en variabel och välj den för att skapa en ny variabel.",
+          "pl": "Karta zmiennej liczbowej.\n\nWpisz nazwę zmiennej i wybierz ją, aby utworzyć nową zmienną.",
+          "ru": "Карточка числовой переменной.\n\nВведите имя переменной и выберите его, чтобы создать новую переменную.",
+          "ko": "숫자 변수 카드.\n\n변수 이름을 입력하고 선택하여 새 변수를 만드세요.",
+          "ar": "بطاقة متغير رقمي.\n\nاكتب اسم المتغير وحدده لإنشاء متغير جديد."
         },
         "args": [
           {
@@ -4706,19 +4945,19 @@
           "ar": "اضبط [[variable]] على [[boolean_value]]"
         },
         "hint": {
-          "en": "Type the name of a variable and select it to create a new variable.",
-          "nl": "Typ de naam van een variabele en selecteer deze om een nieuwe variabele te maken.",
-          "da": "Skriv navnet på en variabel og vælg den for at oprette en ny variabel.",
-          "de": "Geben Sie den Namen einer Variablen ein und wählen Sie sie aus, um eine neue Variable zu erstellen.",
-          "es": "Escribe el nombre de una variable y selecciónala para crear una nueva variable.",
-          "fr": "Tapez le nom d'une variable et sélectionnez-la pour créer une nouvelle variable.",
-          "it": "Digita il nome di una variabile e selezionala per creare una nuova variabile.",
-          "no": "Skriv inn navnet på en variabel og velg den for å opprette en ny variabel.",
-          "sv": "Skriv namnet på en variabel och välj den för att skapa en ny variabel.",
-          "pl": "Wpisz nazwę zmiennej i wybierz ją, aby utworzyć nową zmienną.",
-          "ru": "Введите имя переменной и выберите его, чтобы создать новую переменную.",
-          "ko": "변수 이름을 입력하고 선택하여 새 변수를 만드세요.",
-          "ar": "اكتب اسم المتغير وحدده لإنشاء متغير جديد."
+          "en": "Yes/no variable card.\n\nType the name of a variable and select it to create a new variable.",
+          "nl": "Ja/nee-variabelekaart.\n\nTyp de naam van een variabele en selecteer deze om een nieuwe variabele te maken.",
+          "da": "Ja/nej-variabelkort.\n\nSkriv navnet på en variabel og vælg den for at oprette en ny variabel.",
+          "de": "Ja/Nein-Variablenkarte.\n\nGeben Sie den Namen einer Variablen ein und wählen Sie sie aus, um eine neue Variable zu erstellen.",
+          "es": "Tarjeta de variable sí/no.\n\nEscribe el nombre de una variable y selecciónala para crear una nueva variable.",
+          "fr": "Carte de variable oui/non.\n\nTapez le nom d'une variable et sélectionnez-la pour créer une nouvelle variable.",
+          "it": "Scheda variabile sì/no.\n\nDigita il nome di una variabile e selezionala per creare una nuova variabile.",
+          "no": "Ja/nei-variabelkort.\n\nSkriv inn navnet på en variabel og velg den for å opprette en ny variabel.",
+          "sv": "Ja/nej-variabelkort.\n\nSkriv namnet på en variabel och välj den för att skapa en ny variabel.",
+          "pl": "Karta zmiennej tak/nie.\n\nWpisz nazwę zmiennej i wybierz ją, aby utworzyć nową zmienną.",
+          "ru": "Карточка переменной да/нет.\n\nВведите имя переменной и выберите его, чтобы создать новую переменную.",
+          "ko": "예/아니요 변수 카드.\n\n변수 이름을 입력하고 선택하여 새 변수를 만드세요.",
+          "ar": "بطاقة متغير نعم/لا.\n\nاكتب اسم المتغير وحدده لإنشاء متغير جديد."
         },
         "args": [
           {
@@ -4863,19 +5102,19 @@
           "ar": "اضبط [[variable]] على [[value]]"
         },
         "hint": {
-          "en": "Type the name of a variable and select it to create a new variable.",
-          "nl": "Typ de naam van een variabele en selecteer deze om een nieuwe variabele te maken.",
-          "da": "Skriv navnet på en variabel og vælg den for at oprette en ny variabel.",
-          "de": "Geben Sie den Namen einer Variablen ein und wählen Sie sie aus, um eine neue Variable zu erstellen.",
-          "es": "Escribe el nombre de una variable y selecciónala para crear una nueva variable.",
-          "fr": "Tapez le nom d'une variable et sélectionnez-la pour créer une nouvelle variable.",
-          "it": "Digita il nome di una variabile e selezionala per creare una nuova variabile.",
-          "no": "Skriv inn navnet på en variabel og velg den for å opprette en ny variabel.",
-          "sv": "Skriv namnet på en variabel och välj den för att skapa en ny variabel.",
-          "pl": "Wpisz nazwę zmiennej i wybierz ją, aby utworzyć nową zmienną.",
-          "ru": "Введите имя переменной и выберите его, чтобы создать новую переменную.",
-          "ko": "변수 이름을 입력하고 선택하여 새 변수를 만드세요.",
-          "ar": "اكتب اسم المتغير وحدده لإنشاء متغير جديد."
+          "en": "Yes/no variable card.\n\nType the name of a variable and select it to create a new variable.",
+          "nl": "Ja/nee-variabelekaart.\n\nTyp de naam van een variabele en selecteer deze om een nieuwe variabele te maken.",
+          "da": "Ja/nej-variabelkort.\n\nSkriv navnet på en variabel og vælg den for at oprette en ny variabel.",
+          "de": "Ja/Nein-Variablenkarte.\n\nGeben Sie den Namen einer Variablen ein und wählen Sie sie aus, um eine neue Variable zu erstellen.",
+          "es": "Tarjeta de variable sí/no.\n\nEscribe el nombre de una variable y selecciónala para crear una nueva variable.",
+          "fr": "Carte de variable oui/non.\n\nTapez le nom d'une variable et sélectionnez-la pour créer une nouvelle variable.",
+          "it": "Scheda variabile sì/no.\n\nDigita il nome di una variabile e selezionala per creare una nuova variabile.",
+          "no": "Ja/nei-variabelkort.\n\nSkriv inn navnet på en variabel og velg den for å opprette en ny variabel.",
+          "sv": "Ja/nej-variabelkort.\n\nSkriv namnet på en variabel och välj den för att skapa en ny variabel.",
+          "pl": "Karta zmiennej tak/nie.\n\nWpisz nazwę zmiennej i wybierz ją, aby utworzyć nową zmienną.",
+          "ru": "Карточка переменной да/нет.\n\nВведите имя переменной и выберите его, чтобы создать новую переменную.",
+          "ko": "예/아니요 변수 카드.\n\n변수 이름을 입력하고 선택하여 새 변수를 만드세요.",
+          "ar": "بطاقة متغير نعم/لا.\n\nاكتب اسم المتغير وحدده لإنشاء متغير جديد."
         },
         "args": [
           {
@@ -4981,19 +5220,19 @@
           "ar": "زيادة [[variable]] بمقدار [[value]]"
         },
         "hint": {
-          "en": "Type the name of a variable and select it to create a new variable.",
-          "nl": "Typ de naam van een variabele en selecteer deze om een nieuwe variabele te maken.",
-          "da": "Skriv navnet på en variabel og vælg den for at oprette en ny variabel.",
-          "de": "Geben Sie den Namen einer Variablen ein und wählen Sie sie aus, um eine neue Variable zu erstellen.",
-          "es": "Escribe el nombre de una variable y selecciónala para crear una nueva variable.",
-          "fr": "Tapez le nom d'une variable et sélectionnez-la pour créer une nouvelle variable.",
-          "it": "Digita il nome di una variabile e selezionala per creare una nuova variabile.",
-          "no": "Skriv inn navnet på en variabel og velg den for å opprette en ny variabel.",
-          "sv": "Skriv namnet på en variabel och välj den för att skapa en ny variabel.",
-          "pl": "Wpisz nazwę zmiennej i wybierz ją, aby utworzyć nową zmienną.",
-          "ru": "Введите имя переменной и выберите его, чтобы создать новую переменную.",
-          "ko": "변수 이름을 입력하고 선택하여 새 변수를 만드세요.",
-          "ar": "اكتب اسم المتغير وحدده لإنشاء متغير جديد."
+          "en": "Number variable card.\n\nType the name of a variable and select it to create a new variable.",
+          "nl": "Getalvariabelekaart.\n\nTyp de naam van een variabele en selecteer deze om een nieuwe variabele te maken.",
+          "da": "Talvariabelkort.\n\nSkriv navnet på en variabel og vælg den for at oprette en ny variabel.",
+          "de": "Zahlenvariablenkarte.\n\nGeben Sie den Namen einer Variablen ein und wählen Sie sie aus, um eine neue Variable zu erstellen.",
+          "es": "Tarjeta de variable numérica.\n\nEscribe el nombre de una variable y selecciónala para crear una nueva variable.",
+          "fr": "Carte de variable numérique.\n\nTapez le nom d'une variable et sélectionnez-la pour créer une nouvelle variable.",
+          "it": "Scheda variabile numerica.\n\nDigita il nome di una variabile e selezionala per creare una nuova variabile.",
+          "no": "Tallvariabelkort.\n\nSkriv inn navnet på en variabel og velg den for å opprette en ny variabel.",
+          "sv": "Talvariabelkort.\n\nSkriv namnet på en variabel och välj den för att skapa en ny variabel.",
+          "pl": "Karta zmiennej liczbowej.\n\nWpisz nazwę zmiennej i wybierz ją, aby utworzyć nową zmienną.",
+          "ru": "Карточка числовой переменной.\n\nВведите имя переменной и выберите его, чтобы создать новую переменную.",
+          "ko": "숫자 변수 카드.\n\n변수 이름을 입력하고 선택하여 새 변수를 만드세요.",
+          "ar": "بطاقة متغير رقمي.\n\nاكتب اسم المتغير وحدده لإنشاء متغير جديد."
         },
         "args": [
           {
@@ -5100,19 +5339,19 @@
           "ar": "تقليل [[variable]] بمقدار [[value]]"
         },
         "hint": {
-          "en": "Type the name of a variable and select it to create a new variable.",
-          "nl": "Typ de naam van een variabele en selecteer deze om een nieuwe variabele te maken.",
-          "da": "Skriv navnet på en variabel og vælg den for at oprette en ny variabel.",
-          "de": "Geben Sie den Namen einer Variablen ein und wählen Sie sie aus, um eine neue Variable zu erstellen.",
-          "es": "Escribe el nombre de una variable y selecciónala para crear una nueva variable.",
-          "fr": "Tapez le nom d'une variable et sélectionnez-la pour créer une nouvelle variable.",
-          "it": "Digita il nome di una variabile e selezionala per creare una nuova variabile.",
-          "no": "Skriv inn navnet på en variabel og velg den for å opprette en ny variabel.",
-          "sv": "Skriv namnet på en variabel och välj den för att skapa en ny variabel.",
-          "pl": "Wpisz nazwę zmiennej i wybierz ją, aby utworzyć nową zmienną.",
-          "ru": "Введите имя переменной и выберите его, чтобы создать новую переменную.",
-          "ko": "변수 이름을 입력하고 선택하여 새 변수를 만드세요.",
-          "ar": "اكتب اسم المتغير وحدده لإنشاء متغير جديد."
+          "en": "Number variable card.\n\nType the name of a variable and select it to create a new variable.",
+          "nl": "Getalvariabelekaart.\n\nTyp de naam van een variabele en selecteer deze om een nieuwe variabele te maken.",
+          "da": "Talvariabelkort.\n\nSkriv navnet på en variabel og vælg den for at oprette en ny variabel.",
+          "de": "Zahlenvariablenkarte.\n\nGeben Sie den Namen einer Variablen ein und wählen Sie sie aus, um eine neue Variable zu erstellen.",
+          "es": "Tarjeta de variable numérica.\n\nEscribe el nombre de una variable y selecciónala para crear una nueva variable.",
+          "fr": "Carte de variable numérique.\n\nTapez le nom d'une variable et sélectionnez-la pour créer une nouvelle variable.",
+          "it": "Scheda variabile numerica.\n\nDigita il nome di una variabile e selezionala per creare una nuova variabile.",
+          "no": "Tallvariabelkort.\n\nSkriv inn navnet på en variabel og velg den for å opprette en ny variabel.",
+          "sv": "Talvariabelkort.\n\nSkriv namnet på en variabel och välj den för att skapa en ny variabel.",
+          "pl": "Karta zmiennej liczbowej.\n\nWpisz nazwę zmiennej i wybierz ją, aby utworzyć nową zmienną.",
+          "ru": "Карточка числовой переменной.\n\nВведите имя переменной и выберите его, чтобы создать новую переменную.",
+          "ko": "숫자 변수 카드.\n\n변수 이름을 입력하고 선택하여 새 변수를 만드세요.",
+          "ar": "بطاقة متغير رقمي.\n\nاكتب اسم المتغير وحدده لإنشاء متغير جديد."
         },
         "args": [
           {
@@ -5287,7 +5526,22 @@
               "ar": "Math.js تعبير"
             }
           }
-        ]
+        ],
+        "hint": {
+          "en": "Math.js expression card. Refer to a variable as $name$.",
+          "nl": "Math.js-expressiekaart. Verwijs naar een variabele met $naam$.",
+          "da": "Math.js-udtrykskort. Henvis til en variabel med $navn$.",
+          "de": "Math.js-Ausdruckskarte. Eine Variable wird als $Name$ angegeben.",
+          "es": "Tarjeta de expresión Math.js. Usa $nombre$ para una variable.",
+          "fr": "Carte d’expression Math.js. Utilisez $nom$ pour une variable.",
+          "it": "Scheda espressione Math.js. Usa $nome$ per una variabile.",
+          "no": "Math.js-uttrykkskort. Henvis til en variabel med $navn$.",
+          "sv": "Math.js-uttryckskort. Ange en variabel som $namn$.",
+          "pl": "Karta wyrażenia Math.js. Użyj $nazwa$ dla zmiennej.",
+          "ru": "Карточка выражения Math.js. Укажите переменную как $имя$.",
+          "ko": "Math.js 표현식 카드. 변수는 $이름$으로 참조합니다.",
+          "ar": "بطاقة تعبير Math.js. أشر إلى المتغير بصيغة $الاسم$."
+        }
       },
       {
         "id": "flip_boolean_variable",
@@ -5322,19 +5576,19 @@
           "ar": "اقلب [[variable]]"
         },
         "hint": {
-          "en": "Type the name of a variable and select it to create a new variable.",
-          "nl": "Typ de naam van een variabele en selecteer deze om een nieuwe variabele te maken.",
-          "da": "Skriv navnet på en variabel og vælg den for at oprette en ny variabel.",
-          "de": "Geben Sie den Namen einer Variablen ein und wählen Sie sie aus, um eine neue Variable zu erstellen.",
-          "es": "Escribe el nombre de una variable y selecciónala para crear una nueva variable.",
-          "fr": "Tapez le nom d'une variable et sélectionnez-la pour créer une nouvelle variable.",
-          "it": "Digita il nome di una variabile e selezionala per creare una nuova variabile.",
-          "no": "Skriv inn navnet på en variabel og velg den for å opprette en ny variabel.",
-          "sv": "Skriv namnet på en variabel och välj den för att skapa en ny variabel.",
-          "pl": "Wpisz nazwę zmiennej i wybierz ją, aby utworzyć nową zmienną.",
-          "ru": "Введите имя переменной и выберите его, чтобы создать новую переменную.",
-          "ko": "변수 이름을 입력하고 선택하여 새 변수를 만드세요.",
-          "ar": "اكتب اسم المتغير وحدده لإنشاء متغير جديد."
+          "en": "Yes/no variable card.\n\nType the name of a variable and select it to create a new variable.",
+          "nl": "Ja/nee-variabelekaart.\n\nTyp de naam van een variabele en selecteer deze om een nieuwe variabele te maken.",
+          "da": "Ja/nej-variabelkort.\n\nSkriv navnet på en variabel og vælg den for at oprette en ny variabel.",
+          "de": "Ja/Nein-Variablenkarte.\n\nGeben Sie den Namen einer Variablen ein und wählen Sie sie aus, um eine neue Variable zu erstellen.",
+          "es": "Tarjeta de variable sí/no.\n\nEscribe el nombre de una variable y selecciónala para crear una nueva variable.",
+          "fr": "Carte de variable oui/non.\n\nTapez le nom d'une variable et sélectionnez-la pour créer une nouvelle variable.",
+          "it": "Scheda variabile sì/no.\n\nDigita il nome di una variabile e selezionala per creare una nuova variabile.",
+          "no": "Ja/nei-variabelkort.\n\nSkriv inn navnet på en variabel og velg den for å opprette en ny variabel.",
+          "sv": "Ja/nej-variabelkort.\n\nSkriv namnet på en variabel och välj den för att skapa en ny variabel.",
+          "pl": "Karta zmiennej tak/nie.\n\nWpisz nazwę zmiennej i wybierz ją, aby utworzyć nową zmienną.",
+          "ru": "Карточка переменной да/нет.\n\nВведите имя переменной и выберите его, чтобы создать новую переменную.",
+          "ko": "예/아니요 변수 카드.\n\n변수 이름을 입력하고 선택하여 새 변수를 만드세요.",
+          "ar": "بطاقة متغير نعم/لا.\n\nاكتب اسم المتغير وحدده لإنشاء متغير جديد."
         },
         "args": [
           {
@@ -5406,19 +5660,19 @@
           "ar": "تنفيذ [[variable]]"
         },
         "hint": {
-          "en": "Type the name of a variable and select it to create a new variable.",
-          "nl": "Typ de naam van een variabele en selecteer deze om een nieuwe variabele te maken.",
-          "da": "Skriv navnet på en variabel og vælg den for at oprette en ny variabel.",
-          "de": "Geben Sie den Namen einer Variablen ein und wählen Sie sie aus, um eine neue Variable zu erstellen.",
-          "es": "Escribe el nombre de una variable y selecciónala para crear una nueva variable.",
-          "fr": "Tapez le nom d'une variable et sélectionnez-la pour créer une nouvelle variable.",
-          "it": "Digita il nome di una variabile e selezionala per creare una nuova variabile.",
-          "no": "Skriv inn navnet på en variabel og velg den for å opprette en ny variabel.",
-          "sv": "Skriv namnet på en variabel och välj den för att skapa en ny variabel.",
-          "pl": "Wpisz nazwę zmiennej i wybierz ją, aby utworzyć nową zmienną.",
-          "ru": "Введите имя переменной и выберите его, чтобы создать новую переменную.",
-          "ko": "변수 이름을 입력하고 선택하여 새 변수를 만드세요.",
-          "ar": "اكتب اسم المتغير وحدده لإنشاء متغير جديد."
+          "en": "Trigger variable card.\n\nType the name of a variable and select it to create a new variable.",
+          "nl": "Triggervariabelekaart.\n\nTyp de naam van een variabele en selecteer deze om een nieuwe variabele te maken.",
+          "da": "Udløservariabelkort.\n\nSkriv navnet på en variabel og vælg den for at oprette en ny variabel.",
+          "de": "Auslöservariablenkarte.\n\nGeben Sie den Namen einer Variablen ein und wählen Sie sie aus, um eine neue Variable zu erstellen.",
+          "es": "Tarjeta de variable de activación.\n\nEscribe el nombre de una variable y selecciónala para crear una nueva variable.",
+          "fr": "Carte de variable déclencheur.\n\nTapez le nom d'une variable et sélectionnez-la pour créer une nouvelle variable.",
+          "it": "Scheda variabile trigger.\n\nDigita il nome di una variabile e selezionala per creare una nuova variabile.",
+          "no": "Utløservariabelkort.\n\nSkriv inn navnet på en variabel og velg den for å opprette en ny variabel.",
+          "sv": "Utlösarvariabelkort.\n\nSkriv namnet på en variabel och välj den för att skapa en ny variabel.",
+          "pl": "Karta zmiennej wyzwalającej.\n\nWpisz nazwę zmiennej i wybierz ją, aby utworzyć nową zmienną.",
+          "ru": "Карточка переменной-триггера.\n\nВведите имя переменной и выберите его, чтобы создать новую переменную.",
+          "ko": "트리거 변수 카드.\n\n변수 이름을 입력하고 선택하여 새 변수를 만드세요.",
+          "ar": "بطاقة متغير تشغيل.\n\nاكتب اسم المتغير وحدده لإنشاء متغير جديد."
         },
         "args": [
           {
@@ -5637,7 +5891,22 @@
               "ar": "المتغيرات"
             }
           }
-        ]
+        ],
+        "hint": {
+          "en": "Variable export card.",
+          "nl": "Variabelenexportkaart.",
+          "da": "Kort til eksport af variabler.",
+          "de": "Karte zum Exportieren von Variablen.",
+          "es": "Tarjeta de exportación de variables.",
+          "fr": "Carte d’exportation des variables.",
+          "it": "Scheda di esportazione variabili.",
+          "no": "Kort for eksport av variabler.",
+          "sv": "Kort för export av variabler.",
+          "pl": "Karta eksportu zmiennych.",
+          "ru": "Карточка экспорта переменных.",
+          "ko": "변수 내보내기 카드.",
+          "ar": "بطاقة تصدير المتغيرات."
+        }
       },
       {
         "id": "get_variable_properties",
@@ -5746,7 +6015,22 @@
               "ar": "آخر تغيير (التاريخ والوقت)"
             }
           }
-        ]
+        ],
+        "hint": {
+          "en": "Variable properties card.",
+          "nl": "Variabele-eigenschappenkaart.",
+          "da": "Kort til variabelegenskaber.",
+          "de": "Karte für Variableneigenschaften.",
+          "es": "Tarjeta de propiedades de variable.",
+          "fr": "Carte des propriétés de variable.",
+          "it": "Scheda proprietà della variabile.",
+          "no": "Kort for variabelegenskaper.",
+          "sv": "Kort för variabelegenskaper.",
+          "pl": "Karta właściwości zmiennej.",
+          "ru": "Карточка свойств переменной.",
+          "ko": "변수 속성 카드.",
+          "ar": "بطاقة خصائص المتغير."
+        }
       }
     ]
   },
@@ -5943,6 +6227,11 @@
     "getExports": {
       "method": "GET",
       "path": "/exports",
+      "public": false
+    },
+    "importVariables": {
+      "method": "POST",
+      "path": "/importvariables",
       "public": false
     },
     "getLocales": {

@@ -29,4 +29,11 @@ Zmiennymi można także nadal zarządzać z poziomu ekranu ustawień. Te zmienne
 Funkcja: Dodaj $timenow$ jako specjalną zmienną dla mathjs. Pobierze to aktualny czas w sekundach od epoki. Ta zmienna nie jest przechowywana w przeglądzie, ale używana w wyrażeniach.
 Funkcja: Dodano #DD (dzień), #MM (miesiąc), #YYYY (rok), #HH (godziny), #mm (minuty), #SS (sekundy) jako zastrzeżone słowa obok timenow w flowach mathjs. Możesz teraz na przykład przypisać #HH do zmiennej, aby uzyskać godziny. Ponadto zmieniłem timenow na #timenow dla spójności.
 
+Nowości w wersji 4.3.0:
+* Mniejsze zużycie pamięci i mniej powtarzanych operacji przy formatowaniu, wyrażeniach BLL, eksporcie i przesyłaniu plików.
+* Przetłumaczone wskazówki kart Flow rozróżniają dane wejściowe Tekst, BLL i Math.js.
+* Poprawki asynchronicznych wyników BLL, eksportu CSV base64, wyzwalaczy utrzymujących warunek i synchronizacji urządzeń.
+* Bezpieczniejszy import zmiennych: anulowanie jest respektowane, a wszystkie dane są sprawdzane przed zastąpieniem. Import nadal zastępuje istniejące zmienne i ich Insights.
+* Ściślejsza walidacja numeryczna API i czytelniejsze błędy dla nieobsługiwanych formatów eksportu i bibliotek.
+
 Zobacz forum społecznościowe, aby uzyskać więcej informacji!

@@ -1,181 +1,130 @@
-Welcome to the Better Logic Library.
+# Better Logic Library
 
-An advanced logic library with variable and library management for Homey.
+Advanced logic, variable management and shared libraries for Homey.
 
-This apps supplies your Homey with Better Logic and Libraries:
-* Variable management in a smart, integrated way.
-* Advanced action- and conditioncards with Better Logic, like Math.js.
-* Devices to directly manage the variables.
-* Datetime formatting, fully customisable, shared with other apps.
-* BLL coding and BLL expressions to use directly within other apps flowcards.
-* Custom functions to use within BLL coding and BLL expressions.
-* Libraries to use within BLL coding and BLL expressions, like Math.js and Lodash.
-* A File Server that can be consumed by other apps, like Simple (Sys) LOG, to serve files on you LAN or to download them on the Homey Mobile App or the Developertools.
-* Libraries for other Apps to consume, reducing app sizes and redundancies and improving management.
-* APIs for variable management, using the File Server or other BLL functions.
+## Features
 
-Check out the (new) App Settings for all features and explanations, like BLL coding in supported apps!
+- Manage text, number, yes/no and trigger variables, with tags for use in Flows.
+- Create variables directly from supported Flow-card pickers.
+- Use Text, BLL and Math.js action and condition cards, with localized hints
+  explaining how their inputs are interpreted.
+- Trigger Flows when variables are set, change, cross a numeric-change threshold,
+  or meet a condition for a chosen duration.
+- Control variables through BitFlip, NumSlide and Trigger devices.
+- Format dates, durations and numbers using configurable locales, time zones and
+  custom formats.
+- Use BLL expressions and custom functions in this app and other apps that support
+  Better Logic Library.
+- Convert JSON to CSV or Excel and export variables as JSON, CSV or Excel.
+- Share downloads and receive uploads through the file server.
+- Let other apps use BLL's libraries and APIs.
 
-Datetime formatting reuses up to 32 Intl formatters per loaded datetime module,
-keyed by locale, time zone, and formatting options. Dates and formatted results
-are not cached. Locale/format settings changes and module shutdown clear the
-cache. This reduces repeated formatter construction in apps that display many
-timestamps without changing their date-format settings or Excel generation.
-Number formatting similarly reuses at most 32 Intl formatters per loaded
-number module, without caching values or formatted results. Locale changes and
-module shutdown clear the cache. Default precision handles scientific notation
-such as `1e-7`, as well as `NaN` and infinity, without a decimal-parsing error.
+## Getting started
 
-Example BLL coding: When you place this within a textargument:  - Hello, today is {[date("dddd")]} -, BLL will automaticly find those expressions within the texts and decode them, resulting in - Hello, today is monday - .
+Open the app settings to manage variables, custom functions, formatting, exports
+and the file server.
 
-Each distinct expression is evaluated once per decoded text, including expressions
-returning `0`, `false`, or an empty string. Results are not cached between calls;
-separate evaluations continue to use fresh JavaScript contexts.
+To create a variable in a supported Flow card, type its name in the variable
+picker, select the new-variable suggestion and save the Flow. Save before using
+its tag. Automatically created variables are removed when they are no longer
+referenced by the relevant Flow cards. Variables created manually in settings are
+not automatically removed.
 
-Math.js uses one shared instance within the BLL app to reduce memory usage.
-Calling `math.config(...)` or `math.import(...)` changes that shared instance
-and affects subsequent mathjs evaluations, not just the current JavaScript
-expression. Other Homey apps that load the math module keep their own instances.
+BLL-supported text can contain expressions inside `{[` and `]}`:
 
-The bundled Excel writer avoids an extra full-workbook buffer copy on Node.js
-while preserving its `Uint8Array` result and browser fallback. Shared strings
-such as `constructor` and `__proto__` are stored as ordinary cell text.
+```text
+Hello, today is {[date("dddd")]}.
+The answer is {[6 * 7]}.
+```
 
-Download expiry releases its payload, upload stream, and timer. Other downloads
-remain available until their own expiry, and upload success is returned only
-after the file has finished writing. Closing the server also clears pending
-downloads and their timers and cancels unfinished request bodies.
-Sustained-condition timers retain their original
-Homey handles for cancellation without storing those handles in settings.
-Datetime, number, and JSON modules detach their listeners from the original API
-even when an older npm bridge has already cleared or replaced its API reference.
+Check each card's hint: plain Text, BLL expressions and Math.js expressions do not
+all interpret input in the same way.
 
-Further: Manage variables directly in flows!
+## Version 4.3.0 highlights
 
-Just type a variable name within any when- and thencard and select it from the list: the variable will be automaticly created.
-If you want to use the tag, press save first.
-Variables that were automaticly created from within flows will also be automaticly deleted when they are no longer used in flowcards.
-Variables can also still be managed from the settings screen. These variables will not be automaticly deleted if not used, but must be manually deleted.
+### Performance and resource use
 
-And the Delete All button has a confirm now!
+- Reuse bounded date/time and number formatter caches without caching values or
+  formatted results.
+- Avoid repeated evaluation of identical expressions within one decoded text,
+  including expressions returning `0`, `false` or an empty string.
+- Reuse the app's Math.js instance and numeric Insights logs, and load locale
+  lists only when needed.
+- Avoid an extra workbook-buffer copy during Excel generation.
+- Release download payloads, upload streams, timers and library listeners when
+  they are no longer needed.
 
+### Flow cards and devices
 
-V1.0.5
-* Bug: Possible fix loading incorrect data from settings
-* Bug: App tried to create insights for strings which is not possible
+- Add localized hints distinguishing Text, BLL and Math.js cards.
+- Resolve asynchronous BLL expression results before filling returned tags.
+- Fix CSV base64 output.
+- Match sustained triggers to their variable, comparison, duration and execution
+  mode, and cancel timers using their original Homey handles.
+- Initialize BitFlip and NumSlide from their current variable values, and keep
+  devices paired after app startup synchronized.
 
-V1.0.4
-* Bug: Slider was limited from 0 to 1
+### Settings, imports and APIs
 
-V1.0.3
-* Bug: Fixed new variables only showing up after the app
-* Bug: Updated styling of numslide pairing page
+- Keep variable controls disabled until settings finish loading and report load
+  errors rather than treating failures as an empty variable list.
+- Respect import cancellation, validate the entire import before replacing
+  variables, and reject overlapping imports.
+- Improve variable-tag tracking and Insights cleanup.
+- Require complete, finite numeric API inputs and reject arithmetic overflow.
+- Return explicit errors for unsupported export formats or unavailable libraries,
+  and report download-generation and startup failures.
+- Provide the shared `/api-ready` endpoint and `api-ready` event for consuming apps.
+- Update the `betterlogiclibrary` npm dependency to `1.0.6`.
 
-V1.0.2 Release version 1 to stable.
+The complete localized release history is in [.homeychangelog.json](./.homeychangelog.json).
 
-V1.0.1 Update link to forum.... Its just nice ;)
+## Upgrade and data safety
 
-V1.0.0
-Rewrite to SDK 2 !!
+Existing variables and saved Flows do not need to be recreated for this update.
+Keep a variable export as a backup before using import.
 
-V0.9.12
-* Ooops, sorry :(
+**Import replaces the existing variables and their Insights.** Cancelling the
+confirmation leaves them unchanged. Input validation happens before replacement;
+it is not a rollback mechanism for failures during replacement.
 
-V0.9.11
-* Hotfix: Only store changed variables in insights to prevent storage loss
+Numeric API values must be complete decimal or exponent values, for example
+`12.5`, `-2` or `1e3`. Partial values such as `2oops`, `NaN` and infinity are
+rejected. Clients relying on permissive numeric parsing must send valid numbers.
 
-V0.9.10
-* Feature: Add NumSlide device. When adding, first you have to specify the min, max and step size. After that you can select your number variable.
-* Feature: Add Trigger variable with action cards. This trigger fires one time when being triggered
-* Feature: Add Trigger device to create a button that can trigger
-* Feature: Add trigger to API. Call
-	* PUT for increment: HTTP://HOMEYADDRES/api/app/net.i-dev.betterlogic/trigger/VARIABLENAME This triggers the given variable
+## Integration and implementation notes
 
+- Date/time and number modules each retain at most 32 Intl formatters per loaded
+  module. Locale/format changes and module shutdown clear the relevant cache.
+- Expression results are reused only within the same decoded text, not between
+  calls. Separate evaluations use fresh JavaScript contexts.
+- Math.js configuration and imports are shared within the BLL app:
+  `math.config(...)` and `math.import(...)` affect later evaluations in that app.
+  Other apps loading the Math.js library keep their own instances.
+- Excel output preserves its `Uint8Array` result and browser fallback. Shared
+  strings such as `constructor` and `__proto__` remain ordinary cell text.
+- Expiring one download does not remove other available downloads. Upload success
+  is returned only after writing finishes; server shutdown also cancels unfinished
+  requests and clears its timers.
+- Consuming apps should check availability, subscribe to `api-ready`, and confirm
+  readiness through `GET /api-ready` before using BLL APIs.
 
-V0.9.9
-* Hotfix: Removed the tokens from the trigger cards. If you need the value, use the TAG. Sorry if I broke your flow.
+## Development
 
-V0.9.8
-* Feature: Add global TAG support
-* Feature: Added NumSlide device for numeric value changes. It ranges from 0-100 with steps of 0.5
-* Feature: Changed the i and d in increment to increment and decrement (left the i and d for backward compatibility)
-* Feature: Added #DD (day), #MM (month), #YYYY (year), #HH (hours), #mm (minutes) #SS (seconds) as reserved words next to timenow in the mathjs flows. You can now for example assign #HH to a variable to get the hours. Also I changed timenow to #timenow for consistency.
-* Bug: Replace filter with find when looking up devices
-* Bug: Fixed delete all function so it also removes all Insights
+Requires Homey SDK 3; the app's minimum Homey version is defined in `app.json`.
 
-V0.9.7
-* Feature: Add increment or decrement to API. Call
-	* PUT for increment: HTTP://HOMEYADDRES/api/app/net.i-dev.betterlogic/VARIABLENAME/i/VALUE  Increments the variable with the given value
-	* PUT for decrement: HTTP://HOMEYADDRES/api/app/net.i-dev.betterlogic/VARIABLENAME/d/VALUE  Decrements the variable with the given value
-* Bug: Delete all insights on delete all
-* Typo: Change casing of boolean in the variable type dropdown
-* Bug: Fixed the date time representation in the grid
-* Bug: Fixed the variable grid. It was very broken when editing in a filtered list. Sorry for people who lost variables due to this bug.
-* Bug: Bitflip was not working after an update. This is fixed
+Run the automated tests and validate the app:
 
-V0.9.6
-* Feature: Add decimal support in the number action cards. This will work starting from Homey V0.10
-* Feature: Turn on insights for boolean and number values. Existing variables will also be turned on
-* Feature: Implement backup and restore of variables offline
-* Bug: Fix propagation of updates from bitflip
-* Bug: Fix a bug where setting a variable with the same value did not trigger the variable set card
-* Added a donate button as requested by MartijnDeRhoter
+```sh
+npm test
+homey app validate
+```
 
-V0.9.5
-* Switch to tools category
+Local validation is not a substitute for testing the applicable functionality on
+the supported Homey test devices.
 
-V0.9.4
-* Hotfix: Fix initialization of empty collection after deleted
-* Added some extra logging
+## Documentation and support
 
-V0.9.3
-* Hotfix: Fix variable loss after homey update to 0.8.27
-
-
-V0.9.2
-* Feature: Add Mathjs.org action card. Only number output is supported. (Be aware, there is no syntax validation)
-    * For supported features see http://mathjs.org/docs/expressions/syntax.html
-	* An example could be $var1$ + 100. This is then assigned to the selected number value
-* Feature: Add $timenow$ as a special variable for mathjs. This will retrieve the current time in seconds since epoch This variable is not stored in the overview, but used in expressions.
-	* In the condition flow this can be used to test if a certain time is passed. $timenow$ > $storedTime$ + 1800 (half an hour)
-    * In the action flow this can be used to create a time in the future by donig $timenow$ + 1800 (half an hour)
-* Feature: Add card that triggers when a variable is set but is or is not changed
-	* The last changed date/time in the grid overview is now changed to the last set date/time
-
-V0.9.1
-* Feature: Add Mathjs.org condition card. Currently only boolean logic is supported. (Be aware, there is no syntax validation)
-    * For supported features see http://mathjs.org/docs/expressions/syntax.html
-	* An example could be $var1$ > 100 and $var1$ < 200 and $bool1$
-* Feature: Add card that triggers on change of one of the specified variables (Be aware, there is no syntax validation)
-
-V0.9.0
-* After testing it is very stable, so almost at version 1.
-* Removed: Insights is removed for now until Athom stabalized the API for bool, int and string
-* Feature: Add toggle of boolean (true->false or false->true) to API support
-    * PUT: HTTP://HOMEYADDRES/api/app/net.i-dev.betterlogic/VARIABLENAME/toggle This will force to flip the boolean value
-* Feature: Enable authorization on the API.	   
-* Feature: Add 'text starts with' condition
-* Bugfix: Dont change last changed timestamp when value is edited manually but not changed.
-
-V0.1.0
-
-* BREAKING CHANGE: Due to renaming bool values to boolean all variables and cards need to be re-added.
-* Bugfix: Dropdown was not working for boolean values in the .
-* Feature: Added BitFlip device to switch a boolean value from the device and phone app.
-* Feature: Added API support to GET, GET all variables and SET (post) a value.
-	* GET: HTTP://HOMEYADDRES/api/app/net.i-dev.betterlogic/VARIABLENAME
-	* GET: HTTP://HOMEYADDRES/api/app/net.i-dev.betterlogic/ALL (Get all variables)
-	* PUT: HTTP://HOMEYADDRES/api/app/net.i-dev.betterlogic/VARIABLENAME/VALUE  //Please ensure that the value matches the type, otherwise it will not be set.
-* Feature: Add date time last changed to settings screen with format (YYYY-MM-DD HH-MM-SS)
-* Feature: Implement insights. (note that bool and string values are not displayed yet in the module)
-* Feature: Implement card that can set all variables. It converts the type. If the type matches the value is setted
-* Feature: Implement trigger card that triggers on a number change. (minimal difference, minimal increase or minimal decrease)
-
-V0.0.3
-* Bugfix: Add more variable checks to prevent crashes on flows that contain variables that are deleted.
-
-V0.0.2
-* Bugfix: Bug that prevented creating variables when app is first installed.
-
-V0.0.1
-* Initial release
+- [Wiki](https://github.com/Qluster-IT/nl.qluster-it.BetterLogicLibrary/wiki)
+- [Community forum](https://community.homey.app/t/71876)
+- [Report an issue](https://github.com/Qluster-IT/nl.qluster-it.BetterLogicLibrary/issues)

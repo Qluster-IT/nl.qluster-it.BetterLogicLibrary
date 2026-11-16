@@ -1,6 +1,6 @@
 {
   "name": "net.i-dev.betterlogic",
-  "version": "1.4.11",
+  "version": "4.3.0",
   "main": "app.js",
   "--author": "arie@qluster-it.nl",
   "scripts": {

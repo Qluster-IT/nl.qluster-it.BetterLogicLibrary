@@ -23,6 +23,8 @@ async function createSustained(execute = 'every_time') {
   const factory = m.exports;
   const timers = new Map();
   const cards = new Map();
+  const listeners = new Map();
+  const states = [];
   const saved = new Map();
   const variable = { name: 'temperature', type: 'number', value: 10, lastChangedTick: Date.now() };
   let args = [{
@@ -54,10 +56,10 @@ async function createSustained(execute = 'every_time') {
       getTriggerCard(id) {
         if (!cards.has(id)) {
           const card = new EventEmitter();
-          card.registerRunListener = () => card;
+          card.registerRunListener = listener => { listeners.set(id, listener); return card; };
           card.getArgument = () => ({ registerAutocompleteListener() {} });
           card.getArgumentValues = async () => id === 'variable_number_sustained' ? args : [];
-          card.trigger = async () => { triggered++; };
+          card.trigger = async (tokens, state) => { triggered++; states.push(state); };
           cards.set(id, card);
         }
         return cards.get(id);
@@ -70,7 +72,7 @@ async function createSustained(execute = 'every_time') {
   });
   await new Promise(resolve => setImmediate(resolve));
   return {
-    factory, timers, saved, variable, cards,
+    factory, timers, saved, variable, cards, listeners, states,
     triggered: () => triggered,
     removeArguments: () => { args = []; },
     fire() {
@@ -94,6 +96,22 @@ test('cancelled sustained timers release the original Homey handles across repea
   }
   const state = saved.get('Sustained_number').variables.temperature.sustained[0];
   assert.equal(typeof state.timeoutId, 'number');
+});
+
+test('sustained trigger state selects only its matching variable and execution mode', async () => {
+  const fixture = await createSustained('one_time');
+  fixture.fire();
+  const listener = fixture.listeners.get('variable_number_sustained');
+  const args = {
+    variable: { name: fixture.variable.name }, condition: 'greater_than', value: 5,
+    time: 30, unit: 'seconds', execute: 'one_time'
+  };
+  const state = fixture.states[0];
+  assert.equal(await listener(args, state), true);
+  assert.equal(await listener({ ...args, execute: 'every_time' }, state), false);
+  assert.equal(await listener({ ...args, value: 6 }, state), false);
+  assert.equal(await listener({ ...args, variable: { name: 'other' } }, state), false);
+  assert.equal(await listener(args, { ...state, variable: undefined }), false);
 });
 
 test('repeating timers and removed sustained Flow arguments release their handles', async () => {

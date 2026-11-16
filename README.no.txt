@@ -29,4 +29,11 @@ Variabler kan også fortsatt håndteres fra innstillingsskjermen. Disse variable
 Funksjon: Legg til $timenow$ som en spesiell variabel for mathjs. Dette vil hente den nåværende tiden i sekunder siden epoken. Denne variabelen er ikke lagret i oversikten, men brukes i uttrykk.
 Funksjon: La til #DD (dag), #MM (måned), #YYYY (år), #HH (timer), #mm (minutter) #SS (sekunder) som reserverte ord ved siden av timenow i mathjs-flyt. Du kan nå for eksempel tilordne #HH til en variabel for å få timene. Jeg endret også timenow til #timenow for konsistens.
 
+Nytt i 4.3.0:
+* Lavere minnebruk og mindre gjentatt arbeid ved formatering, BLL-uttrykk, eksport og filoverføringer.
+* Oversatte flytkorttips skiller mellom inndata for Tekst, BLL og Math.js.
+* Rettelser for asynkrone BLL-resultater, CSV-base64-eksport, vedvarende utløsere og enhetssynkronisering.
+* Tryggere variabelimport: Avbryting respekteres, og alle data valideres før erstatning. Import erstatter fortsatt eksisterende variabler og deres Insights.
+* Strengere numerisk API-validering og tydeligere feil ved eksportformater og biblioteker som ikke støttes.
+
 Se fellesskapsforumet for mer informasjon!

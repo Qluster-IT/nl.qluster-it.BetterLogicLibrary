@@ -29,4 +29,11 @@ Variabler kan stadig håndteres fra indstillingsskærmen. Disse variabler vil ik
 Funktion: Tilføj $timenow$ som en speciel variabel til mathjs. Dette vil hente den aktuelle tid i sekunder siden epoch. Denne variabel gemmes ikke i oversigten, men bruges i udtryk.
 Funktion: Tilføjet #DD (dag), #MM (måned), #YYYY (år), #HH (timer), #mm (minutter), #SS (sekunder) som reserverede ord ved siden af timenow i mathjs-flows. Du kan nu for eksempel tildele #HH til en variabel for at få timerne. Jeg har også ændret timenow til #timenow for konsistens.
 
+Nyt i 4.3.0:
+* Lavere hukommelsesforbrug og mindre gentaget arbejde ved formatering, BLL-udtryk, eksport og filoverførsler.
+* Oversatte Flowkorttips skelner mellem input til Tekst, BLL og Math.js.
+* Rettelser til asynkrone BLL-resultater, CSV-base64-eksport, vedvarende udløsere og enhedssynkronisering.
+* Sikrere variabelimport: Annullering respekteres, og alle data valideres før erstatning. Import erstatter stadig eksisterende variabler og deres Insights.
+* Strengere numerisk API-validering og tydeligere fejl ved ikke-understøttede eksportformater og biblioteker.
+
 Se community-forummet for mere information!

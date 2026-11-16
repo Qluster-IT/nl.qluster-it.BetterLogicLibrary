@@ -30,4 +30,11 @@ Feature: Add $timenow$ as a special variable for mathjs. This will retrieve the 
 Feature: Added #DD (day), #MM (month), #YYYY (year), #HH (hours), #mm (minutes) #SS (seconds) as reserved words next to timenow in the mathjs flows. You can now for example assign #HH to a variable to get the hours. Also I changed timenow to #timenow for consistency.
 
 
+New in 4.3.0:
+* Lower memory use and less repeated work in formatting, BLL expressions, exports and file transfers.
+* Localized Flow-card hints distinguish Text, BLL and Math.js inputs.
+* Fixes for asynchronous BLL results, CSV base64 exports, sustained triggers and device synchronization.
+* Safer variable import: cancellation is respected and all input is validated before replacement. Import still replaces existing variables and their Insights.
+* Stricter numeric API validation and clearer errors for unsupported export formats and libraries.
+
 See the community forum for more information!

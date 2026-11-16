@@ -105,6 +105,29 @@ test('a variables download that cannot be generated is logged for every file typ
   ]);
 });
 
+test('unsupported exports and link creation failures reject instead of returning success', async t => {
+  const filename = require.resolve('../api');
+  const m = new Module(filename, module);
+  m.filename = filename;
+  m.paths = module.paths;
+  m.require = id => id === './lib/variablemanager.js' ? {} : Module.prototype.require.call(m, id);
+  m._compile(fs.readFileSync(filename, 'utf8'), filename);
+  const errors = [];
+  const homey = {
+    app: { exportsSettings: { csvFilename: 'vars', jsonFilename: 'vars', xlsxFilename: 'vars' } },
+    error: (...args) => errors.push(args),
+    __: key => key
+  };
+  t.mock.method(BL, 'decode', async name => name);
+  const failure = new Error('file server unavailable');
+  t.mock.method(BL, 'getDownloadUrl', async () => { throw failure; });
+  await assert.rejects(m.exports.getVariablesDownloadUrl({ homey, params: { returnType: 'invalid' } }), /Unsupported export format/);
+  for (const returnType of ['csv', 'xlsx', 'json']) {
+    await assert.rejects(m.exports.getVariablesDownloadUrl({ homey, params: { returnType } }), error => error === failure);
+  }
+  assert.equal(errors.length, 4);
+});
+
 for (const name of ['dateTime', 'number', 'json']) {
   test(`${name} removes its own realtime listener when the bridge API is cleared or replaced`, async () => {
     for (const replacement of [null, new EventEmitter()]) {

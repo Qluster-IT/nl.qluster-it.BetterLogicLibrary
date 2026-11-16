@@ -355,6 +355,10 @@
 
         vm.loadVariables = function () {
             vm.homey.get('variables', function (err, newVariables) {
+                if (err) {
+                    vm.homey.alert(err);
+                    return;
+                }
                 if (!newVariables) {
                     newVariables = [];
                 }
@@ -417,12 +421,21 @@
         };
 
         vm.import = function () {
-            var newVars = angular.fromJson(vm.importJson);
-            vm.deleteAll();
-            newVars.forEach(function (variable) {
-                storeVariable(variable);
+            let newVars;
+            try {
+                newVars = angular.fromJson(vm.importJson);
+            } catch (error) {
+                vm.homey.alert(error);
+                return;
+            }
+            vm.homey.confirm('Are you sure you wish to delete ALL variables?', 'warning', function (err, confirmed) {
+                if (err) return vm.homey.alert(err);
+                if (!confirmed) return;
+                vm.homey.api('POST', '/importvariables', { variables: newVars }, function (error) {
+                    if (error) return vm.homey.alert(error);
+                    vm.loadVariables();
+                });
             });
-            vm.variables = newVars;
         };
 
         vm.editVariable = function (variable) {

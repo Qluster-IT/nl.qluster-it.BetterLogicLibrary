@@ -54,7 +54,6 @@ module.exports =
                 case "mathjs": return { file: await readFile(__dirname + '/lib/util/math.js', { encoding: 'utf8' }) };
                 case "datetime": return { file: await readFile(__dirname + '/bll/dateTime.js', { encoding: 'utf8' }) };
                 case "number": return { file: await readFile(__dirname + '/bll/number.js', { encoding: 'utf8' }) };
-                case "coding": return { file: await readFile(__dirname + '/bll/coding.js', { encoding: 'utf8' }) };
                 case "proto": return { file: await readFile(__dirname + '/bll/proto.js', { encoding: 'utf8' }) };
                 case "json": return { file: await readFile(__dirname + '/bll/json.js', { encoding: 'utf8' }) };
                 case "write-excel-file-min": return { file: await readFile(__dirname + '/lib/write-excel-file-min.js', { encoding: 'utf8' }) };
@@ -93,6 +92,10 @@ module.exports =
     async getExports({ homey }) {
         return await homey.app.exportsSettings;
     },
+    async importVariables({ body }) {
+        await variableManager.importVariables(body.variables);
+        return "OK";
+    },
     async getVariablesDownloadUrl({ homey, params: { returnType } }) {
         try {
 
@@ -112,17 +115,13 @@ module.exports =
                 case 'xlsx':
                 case 'xlsx_base64':
                     {
-                        try {
-                            let filename = homey.app.exportsSettings && homey.app.exportsSettings.xlsxFilename ?
-                                await BL.decode(homey.app.exportsSettings.xlsxFilename) :
-                                "Vars " + BL.datetime.toString('datetimeshort') + '.xlsx';
+                        let filename = homey.app.exportsSettings && homey.app.exportsSettings.xlsxFilename ?
+                            await BL.decode(homey.app.exportsSettings.xlsxFilename) :
+                            "Vars " + BL.datetime.toString('datetimeshort') + '.xlsx';
 
-                            const link = await BL.getDownloadUrl({ contentType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', filename });
-                            fillVariablesDownload(homey, link, returnType, 'buffer');
-                            return link;
-                        } catch (error) {
-                            homey.error(error);
-                        }
+                        const link = await BL.getDownloadUrl({ contentType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', filename });
+                        fillVariablesDownload(homey, link, returnType, 'buffer');
+                        return link;
                     }
                     break;
                 case 'json': {
@@ -135,14 +134,17 @@ module.exports =
                     fillVariablesDownload(homey, link, returnType, 'text');
                     return link;
                 }
+                default:
+                    throw new Error("Unsupported export format: " + returnType);
             }
 
             //return homey.app.getVariables({ returnType, callback });
 
         } catch (error) {
-            //homey.error(error);
+            homey.error(`Variables download (${returnType}) could not be created`, error);
             let msg = error.message || error;
             if (msg.indexOf('App Not Ready') > -1) throw new Error(homey.__('bllNotRunning'));
+            throw error;
         }
     },
     async getLocales({ homey }) {
@@ -198,15 +200,18 @@ module.exports =
             if (variable.type !== "number") {
                 throw new Error("Can only increment or decrement numbers");
             }
-            if (params.action.toLowerCase() === "i" || params.action.toLowerCase() === "increment") {
-                await variableManager.updateVariable(variable.name, variable.value + parseFloat(params.value), variable.type);
-                return "OK";
+            if (!isNumber(params.value)) {
+                throw new Error("Incorrect value for number: " + params.value);
             }
-            if (params.action.toLowerCase() === "d" || params.action.toLowerCase() === "decrement") {
-                await variableManager.updateVariable(variable.name, variable.value - parseFloat(params.value), variable.type);
-                return "OK";
+            const amount = Number(params.value);
+            const value = params.action.toLowerCase() === "i" || params.action.toLowerCase() === "increment"
+                ? variable.value + amount
+                : variable.value - amount;
+            if (!Number.isFinite(value)) {
+                throw new Error("Result must be a finite number");
             }
-            throw new Error("Incorect call");
+            await variableManager.updateVariable(variable.name, value, variable.type);
+            return "OK";
         }
     },
 
@@ -229,7 +234,7 @@ module.exports =
                 }
                 if (variable.type === "number") {
                     if (isNumber(params.value)) {
-                        await variableManager.updateVariable(variable.name, parseFloat(params.value), variable.type);
+                        await variableManager.updateVariable(variable.name, Number(params.value), variable.type);
                         return "OK";
                     }
                     throw new Error("Incorrect value for number: " + params.value);
@@ -256,4 +261,8 @@ module.exports =
 };
 
 
-function isNumber(obj) { return !isNaN(parseFloat(obj)); }
+function isNumber(obj) {
+    return (typeof obj === 'string' || typeof obj === 'number') &&
+        /^[+-]?(?:\d+\.?\d*|\.\d+)(?:e[+-]?\d+)?$/i.test(String(obj).trim()) &&
+        Number.isFinite(Number(obj));
+}

@@ -32,6 +32,14 @@ function createApp(context = {}) {
   return app;
 }
 
+test('library delivery explicitly rejects unavailable and unknown modules', async () => {
+  const app = createApp();
+  for (const name of ['coding', 'not-a-library']) {
+    await assert.rejects(app.getLibrary(name), /Unsupported library/);
+  }
+  assert.match((await app.getLibrary('number')).file, /module\.exports/);
+});
+
 function createExpressionCards() {
   const bridge = {};
   const actions = new Map();

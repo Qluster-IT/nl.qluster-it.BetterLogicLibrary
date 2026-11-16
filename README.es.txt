@@ -29,4 +29,11 @@ Las variables también pueden seguir gestionándose desde la pantalla de ajustes
 Función: Añadir $timenow$ como una variable especial para mathjs. Esto recuperará el tiempo actual en segundos desde la época. Esta variable no se almacena en el resumen, pero se usa en expresiones.
 Función: Se añadieron #DD (día), #MM (mes), #YYYY (año), #HH (horas), #mm (minutos) #SS (segundos) como palabras reservadas junto a timenow en los flujos de mathjs. Ahora puedes, por ejemplo, asignar #HH a una variable para obtener las horas. También cambié timenow a #timenow por consistencia.
 
+Novedades de 4.3.0:
+* Menor uso de memoria y menos trabajo repetido al formatear, evaluar expresiones BLL, exportar y transferir archivos.
+* Sugerencias traducidas en las tarjetas Flow distinguen las entradas de Texto, BLL y Math.js.
+* Correcciones para resultados BLL asíncronos, exportaciones CSV en base64, disparadores sostenidos y sincronización de dispositivos.
+* Importación de variables más segura: se respeta la cancelación y se valida toda la entrada antes de reemplazar datos. Importar sigue reemplazando las variables existentes y sus Insights.
+* Validación numérica más estricta en la API y errores más claros para formatos de exportación y bibliotecas no compatibles.
+
 ¡Consulta el foro de la comunidad para más información!

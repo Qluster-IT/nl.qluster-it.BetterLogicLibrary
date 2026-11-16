@@ -164,9 +164,6 @@ class BLL {
         }
         BL.homey.log('BLL.init done');
         
-        // let coding = await this.getLibrary('coding'); 
-        // let codingClass = this.requireFromString(coding.file, '');
-        // BL.coding = BLL.coding = new codingClass();        
         return this;
     }
     async getApi() {

@@ -144,10 +144,10 @@
                             </div>
                         </div>
                         <div class="form-group mb-1">
-                            <button class="btn btn-primary" type="button" ng-disabled="!vm.newVariable.name||!vm.newVariable.type" ng-click="vm.addVariable()" data-i18n="Add variable">Add variable</button>
-                            <button class="btn btn-secondary" type="button" ng-click="vm.showExport()" data-i18n="Export">Export</button>
-                            <button class="btn btn-secondary" type="button" ng-click="vm.showImport()" data-i18n="Import">Import</button>
-                            <button class="btn btn-secondary" type="button" ng-click="vm.deleteAll()" data-i18n="Delete All">Delete All</button>
+                            <button class="btn btn-primary hy-nostyle" type="button" ng-disabled="!vm.variables||!vm.newVariable.name||!vm.newVariable.type" ng-click="vm.addVariable()" data-i18n="Add variable">Add variable</button>
+                            <button class="btn btn-secondary hy-nostyle" type="button" ng-disabled="!vm.variables" ng-click="vm.showExport()" data-i18n="Export">Export</button>
+                            <button class="btn btn-secondary hy-nostyle" type="button" ng-disabled="!vm.variables" ng-click="vm.showImport()" data-i18n="Import">Import</button>
+                            <button class="btn btn-secondary hy-nostyle" type="button" ng-disabled="!vm.variables" ng-click="vm.deleteAll()" data-i18n="Delete All">Delete All</button>
                         </div>
                         <h6 data-i18n="Be_aware_removing_variable">* Be aware that removing variables will corrupt flows that are using that variable.</h6>
                     </form>
