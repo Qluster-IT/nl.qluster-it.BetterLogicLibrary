@@ -81,6 +81,45 @@ test('flow factories register without loading a second mathjs bundle', () => {
   assert.equal(requests.includes('../util/math.js'), false);
 });
 
+test('CSV formatting returns UTF-8 base64 for the same CSV as the plain format', async t => {
+  const actions = new Map();
+  const card = id => ({
+    registerRunListener(listener) { actions.set(id, listener); return this; },
+    getArgument() { return this; },
+    registerAutocompleteListener() { return this; }
+  });
+  const app = createApp();
+  app.log = () => {};
+  app.error = () => {};
+  app.setExports = async () => {};
+  app.initFileServerFromSettings = async () => {};
+  app.setFunctions = async () => {};
+  app.homey = {
+    settings: { get: async key => key === 'locale' ? { default: 'en-US' } : true, on() {} },
+    clock: { getTimezone: () => 'UTC' },
+    flow: { getActionCard: card },
+    api: { realtime: async () => {} },
+    setTimeout() {},
+    log() {},
+    error() {}
+  };
+  const previousHomey = BL.homey;
+  const previousJson = BL._json;
+  t.after(() => { BL.homey = previousHomey; BL.json = previousJson; });
+  t.mock.method(BL, 'init', async () => { BL.homey = app.homey; });
+  const csv = 'name,value\ncaf\u00e9,\ud83d\ude0a';
+  BL.json = { toCsv: async () => csv };
+
+  await app.onInit();
+  assert.equal(app.apiReady, true);
+  const format = actions.get('format_json_csv');
+  const args = { json: '[{"name":"caf\u00e9","value":"\ud83d\ude0a"}]', unwindArrays: false, expandArrayObjects: false };
+  assert.deepEqual(await format({ ...args, returnType: 'csv' }), { result: csv });
+  const encoded = await format({ ...args, returnType: 'csv_base64' });
+  assert.deepEqual(encoded, { result: Buffer.from(csv, 'utf8').toString('base64') });
+  assert.equal(Buffer.from(encoded.result, 'base64').toString('utf8'), csv);
+});
+
 test('math expression cards share VM imports and preserve results and errors', async () => {
   const { bridge, actions, conditions, updates } = createExpressionCards();
   bridge.math = require('../lib/util/math.js').create();

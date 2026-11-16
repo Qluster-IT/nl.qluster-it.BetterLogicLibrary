@@ -835,7 +835,7 @@ class BetterLogic extends Homey.App {
 									unwindArrays: args.unwindArrays
 								});
 								if (args.returnType == 'csv_base64') {
-									result.result = Buffer.from(result.csv).toString('base64');
+									result.result = Buffer.from(result.result).toString('base64');
 								}
 								break;
 						}
