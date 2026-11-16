@@ -2,56 +2,6 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Select Homey",
-      "type": "node",
-      "request": "launch",
-      "cwd": "${workspaceFolder}",
-      "runtimeExecutable": "homey",
-      "args": [
-        "select",
-        "-n",
-        "Homey"
-      ]
-    },
-    {
-      "name": "Select HP2026",
-      "type": "node",
-      "request": "launch",
-      "cwd": "${workspaceFolder}",
-      "runtimeExecutable": "homey",
-      "args": [
-        "select",
-        "-n",
-        "Homey Pro van Arie J."
-      ]
-    },
-    {
-      "name": "Launch app on Homey",
-      "type": "node",
-      "request": "launch",
-      "cwd": "${workspaceFolder}",
-      "runtimeExecutable": "homey",
-      "args": [
-        "app",
-        "run"
-      ],
-      "outputCapture": "std",
-      "serverReadyAction": {
-        "pattern": "Debugger listening on",
-        "action": "startDebugging",
-        "name": "Attach to Homey"
-      }
-    },
-    {
-      "name": "Attach to Homey",
-      "type": "node",
-      "request": "attach",
-      "address": "192.168.1.17",
-      "port": 9216,
-      "localRoot": "${workspaceFolder}",
-      "remoteRoot": "/"
-    },
-    {
       "name": "Launch app on HP2026",
       "type": "node",
       "request": "launch",
@@ -80,6 +30,60 @@
       "restart": true
     },
     {
+      "name": "Launch app on HP2023",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "homey",
+      "args": [
+        "app",
+        "run",
+        "--remote"
+      ],
+      "outputCapture": "std",
+      "serverReadyAction": {
+        "pattern": "Debugger listening on",
+        "action": "startDebugging",
+        "name": "Attach to HP2023"
+      }
+    },
+    {
+      "name": "Attach to HP2023",
+      "type": "node",
+      "request": "attach",
+      "address": "192.168.1.242",
+      "port": 9216,
+      "localRoot": "${workspaceFolder}",
+      "remoteRoot": "/app/",
+      "restart": true
+    },
+    {
+      "name": "Launch app on HP2019",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "homey",
+      "args": [
+        "app",
+        "run"
+      ],
+      "outputCapture": "std",
+      "serverReadyAction": {
+        "pattern": "Debugger listening on",
+        "action": "startDebugging",
+        "name": "Attach to HP2019"
+      }
+    },
+    {
+      "name": "Attach to HP2019",
+      "type": "node",
+      "request": "attach",
+      "address": "192.168.1.239",
+      "port": 9216,
+      "localRoot": "${workspaceFolder}",
+      "remoteRoot": "/"
+    },
+    {
       "name": "Launch app on Docker",
       "type": "node",
       "request": "launch",
@@ -105,6 +109,42 @@
       "localRoot": "${workspaceFolder}",
       "remoteRoot": "/app/",
       "restart": true
+    },
+    {
+      "name": "Select HP2026",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "homey",
+      "args": [
+        "select",
+        "-n",
+        "Homey"
+      ]
+    },
+    {
+      "name": "Select HP2023",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "homey",
+      "args": [
+        "select",
+        "-n",
+        "HP2023"
+      ]
+    },
+    {
+      "name": "Select HP2019",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "homey",
+      "args": [
+        "select",
+        "-n",
+        "HP2019"
+      ]
     }
   ]
 }
