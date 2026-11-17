@@ -911,6 +911,8 @@ class Codes {
     this.arrays['fractionalSecondCodesArr'] = 'getFractionalSecond';
     /** @private */
     this.array = BL._.sortBy(BL._.flatMap(this.arrays, (val, key) => { return BL._.map(this[key], (code, format) => { return { code: code.key, format: code.val, func: val, customisable: code.customisable }; }); }), (x) => -x.code.length); //return { name:key, func:val, list:this[key]}; });
+    this.baseArray = this.array;
+    this.matchArray = this.array;
 
     /** @private */
     this.timeDayCodesArr = BL._.sortBy(BL._.map(DateTime.timeDayCodes, (x, key) => { return { key, val: x }; }, 'key.length'));
@@ -965,10 +967,16 @@ class DateTime {
     dateTimeStatics.customFormats = locale ? locale.customDateFormats : undefined;
     dateTimeStatics.locale = locale ? locale.default : await BL.homey.i18n.getLanguage();
     dateTimeStatics.timeZone = BL.homey.clock.getTimezone();
+    dateTimeFormatters.clear();
     DateTime.updateFormats();
     this.onRealtime = (event, data) => {
       switch (event) {
-        case "bllSetLocale": dateTimeStatics.locale = data.default; dateTimeStatics.formats = data.dateFormats; dateTimeStatics.customFormats = data.customDateFormats; DateTime.updateFormats();
+        case "bllSetLocale":
+          if (dateTimeStatics.locale !== data.default) dateTimeFormatters.clear();
+          dateTimeStatics.locale = data.default;
+          dateTimeStatics.formats = data.dateFormats;
+          dateTimeStatics.customFormats = data.customDateFormats;
+          DateTime.updateFormats();
       }
     };
     dateTimeStatics.api.on('realtime', this.onRealtime);
@@ -1124,40 +1132,47 @@ class DateTime {
 
   /** @private */
   static updateFormats() {
-    dateTimeFormatters.clear();
-    this.codes.init();
-    if (dateTimeStatics.formats) for (const format in dateTimeStatics.formats) {
-      if (Object.hasOwnProperty.call(dateTimeStatics.formats, format)) {
-        const customFormat = dateTimeStatics.formats[format];
-        let f = BL._.find(this.codes.array, a => a.customisable && a.code === format);
-        if (f) {
-          //BL.homey.log('f before: ', f);
-          f.originalFunc = f.func;
-          f.format = customFormat;
-          f.func = 'formatCustom';
-          f.customized = true;
-          //BL.homey.log('f after : ', f);
+    const defaultsChanged = !dateTimeStatics.formatsInitialized ||
+      !BL._.isEqual(dateTimeStatics.appliedFormats, dateTimeStatics.formats);
+    const customChanged = !dateTimeStatics.formatsInitialized ||
+      !BL._.isEqual(dateTimeStatics.appliedCustomFormats, dateTimeStatics.customFormats);
+    if (!defaultsChanged && !customChanged) return;
+
+    if (defaultsChanged) {
+      dateTimeFormatters.clear();
+      dateTimeStatics.builtInCodes = this.codes.baseArray.map(code => code.customisable ? { ...code } : code);
+      if (dateTimeStatics.formats) for (const format in dateTimeStatics.formats) {
+        if (Object.hasOwnProperty.call(dateTimeStatics.formats, format)) {
+          const code = dateTimeStatics.builtInCodes.find(item => item.customisable && item.code === format);
+          if (code) {
+            code.originalFunc = code.func;
+            code.format = dateTimeStatics.formats[format];
+            code.func = 'formatCustom';
+            code.customized = true;
+          }
         }
       }
+      dateTimeStatics.appliedFormats = BL._.cloneDeep(dateTimeStatics.formats);
     }
-    if (dateTimeStatics.customFormats) {
-      for (let i = 0; i < dateTimeStatics.customFormats.length; i++) {
-        const format = dateTimeStatics.customFormats[i];
-        this.codes.array.push({ format: format.format, func: 'formatCustom', originalFunc: 'formatCustom', customized: true, code: format.name, custom: true });
-        //const customFormat = dateTimeStatics.customFormats[format];
-        // let f = BL._.find(this.codes.array, a=> a.customisable && a.code===format );
-        // if(f) {
-        //   //BL.homey.log('f before: ', f);
-        //   f.originalFunc = f.func;
-        //   f.format = customFormat;
-        //   f.func = 'formatCustom';
-        //   f.customized = true;
-        //   //BL.homey.log('f after : ', f);
-        // }
-      }
-      this.codes.array = BL._.sortBy(this.codes.array, (x) => -x.code.length);
-    }
-    //BL.homey.log('updateFormats', this.codes.array);
+    const customCodes = (dateTimeStatics.customFormats || []).map(format => ({
+      format: format.format, func: 'formatCustom', originalFunc: 'formatCustom',
+      customized: true, code: format.name, custom: true
+    }));
+    const codes = [...dateTimeStatics.builtInCodes, ...customCodes];
+    // Formatting must match longer codes first, independently of display order.
+    this.codes.matchArray = BL._.sortBy(codes, (x) => -x.code.length);
+    const builtInNames = [
+      ...Object.keys(this.dateTimeCodes),
+      ...Object.keys(this.dateCodes),
+      ...Object.keys(this.timeCodes)
+    ];
+    this.codes.array = [
+      ...customCodes,
+      ...builtInNames.map(name => dateTimeStatics.builtInCodes.find(code => code.customisable && code.code === name)),
+      ...dateTimeStatics.builtInCodes.filter(code => !code.customisable)
+    ];
+    dateTimeStatics.appliedCustomFormats = BL._.cloneDeep(dateTimeStatics.customFormats);
+    dateTimeStatics.formatsInitialized = true;
   }
 
   static get(dt) { return new DateTime(undefined, undefined, dt || DateTime.date); }
@@ -1669,7 +1684,7 @@ class DateTime {
   format(coding, noCustomized, codes) {
     if (!coding || !coding.length) return coding;
     let r = '';
-    codes = codes || (noCustomized === true ? BL._.filter(DateTime.codes.array, x => !x.customized) : DateTime.codes.array);
+    codes = codes || (noCustomized === true ? BL._.filter(DateTime.codes.matchArray, x => !x.customized) : DateTime.codes.matchArray);
     //BL.homey.log('format', codes);
     let stringMode = false;
     for (let i = 0; i < coding.length; i++) {

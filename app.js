@@ -29,6 +29,26 @@ class BetterLogic extends Homey.App {
 	static get dateTime() { return this._dateTime; }
 	static set dateTime(v) { this._dateTime = v; }
 
+	getDateTimeFormatSuggestions(query, args) {
+		const names = [
+			...BL.datetime.codes.array.filter(code => code.customisable || code.custom).map(code => code.code),
+			'dd-MM-yyyy', 'dd-MM-yyyy HH:mm', 'dd-MM-yyyy HH:mm:ss', 'HH:mm', 'HH:mm:ss'
+		];
+		const uniqueNames = [...new Set(names)];
+		const search = query ? query.toLowerCase() : '';
+		const matches = uniqueNames.filter(name => name.toLowerCase().includes(search));
+		if (query && !uniqueNames.includes(query)) matches.unshift(query);
+		return matches.map(name => ({
+			name,
+			description: BL.datetime.toString(
+				name,
+				args.date && args.date != 'undefined' ? args.date : undefined,
+				args.locale && args.locale.id ? args.locale.id : undefined,
+				args.timeZone && args.timeZone.id ? args.timeZone.id : undefined
+			)
+		}));
+	}
+
 	getNow(format) {
 		let r = new Date().toLocaleString('nl',
 			{
@@ -507,32 +527,7 @@ class BetterLogic extends Homey.App {
 						};
 					})
 					.getArgument('format')
-					.registerAutocompleteListener((query, args) => {
-						let r = [
-							{ name: 'shortdate' },
-							{ name: 'date' },
-							{ name: 'DATE' },
-							{ name: 'LONGDATE' },
-							{ name: 'DATETIME' },
-							{ name: 'datetime' },
-							{ name: 'dd-MM-yyyy' },
-							{ name: 'dd-MM-yyyy HH:mm' },
-							{ name: 'dd-MM-yyyy HH:mm:ss' },
-							{ name: 'HH:mm' },
-							{ name: 'HH:mm:ss' },
-						];
-						BL.L._.each(r, x => x.description = BL.datetime.toString(x.name,
-							args.date && args.date != 'undefined' ? args.date : undefined,
-							args.locale && args.locale.id ? args.locale.id : undefined,
-							args.timeZone && args.timeZone.id ? args.timeZone.id : undefined));
-						if (query && query.length) r.unshift({
-							name: query, description: BL.datetime.toString(query,
-								args.date && args.date != 'undefined' ? args.date : undefined,
-								args.locale && args.locale.id ? args.locale.id : undefined,
-								args.timeZone && args.timeZone.id ? args.timeZone.id : undefined)
-						});
-						return r;
-					});
+					.registerAutocompleteListener((query, args) => this.getDateTimeFormatSuggestions(query, args));
 				format_datetime.getArgument('locale')
 					.registerAutocompleteListener((query, args) => {
 						query = query && query.length ? query.toLowerCase() : null;

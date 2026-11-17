@@ -26,11 +26,4 @@ Basta digitare un nome di variabile in qualsiasi scheda when e then e selezionar
 Funzionalità: aggiungi $timenow$ come variabile speciale per mathjs. Questo recupererà l'ora corrente in secondi dall'epoch. Questa variabile non è memorizzata nella panoramica, ma utilizzata nelle espressioni.
 Funzionalità: aggiunti #DD (giorno), #MM (mese), #YYYY (anno), #HH (ore), #mm (minuti) #SS (secondi) come parole riservate accanto a timenow nei flussi mathjs. Ora puoi, per esempio, assegnare #HH a una variabile per ottenere le ore. Ho anche cambiato timenow in #timenow per coerenza.
 
-Novità della versione 4.3.0:
-* Minore uso di memoria e meno lavoro ripetuto per formattazione, espressioni BLL, esportazioni e trasferimenti di file.
-* Suggerimenti tradotti nelle schede Flow distinguono gli input Testo, BLL e Math.js.
-* Correzioni per risultati BLL asincroni, esportazioni CSV in base64, trigger prolungati e sincronizzazione dei dispositivi.
-* Importazione delle variabili più sicura: l'annullamento viene rispettato e tutti i dati vengono convalidati prima della sostituzione. L'importazione sostituisce comunque le variabili esistenti e i relativi Insights.
-* Convalida numerica più rigorosa dell'API ed errori più chiari per formati di esportazione e librerie non supportati.
-
 Consulta il forum della community per ulteriori informazioni!

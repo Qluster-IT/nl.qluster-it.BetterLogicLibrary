@@ -2,6 +2,8 @@
 
 const assert = require('node:assert/strict');
 const { EventEmitter } = require('node:events');
+const fs = require('node:fs');
+const Module = require('node:module');
 const test = require('node:test');
 const { BL } = require('betterlogiclibrary');
 
@@ -135,7 +137,7 @@ test('complex arguments and custom date receivers preserve their original delega
   assert.equal(new DateTime('en-US', 'UTC', 'unchanged').getDateTimeByFormat('long'), 'unchanged');
 });
 
-test('locale and custom-format updates invalidate formatters without changing BLL format semantics', async t => {
+test('locale and format changes preserve BLL format semantics', async t => {
   const { DateTime, api } = await createDateTime(t);
   const count = countFormatters(t);
   const date = new Date('2026-03-29T01:02:03.456Z');
@@ -158,7 +160,152 @@ test('locale and custom-format updates invalidate formatters without changing BL
   const warmed = count();
   api.emit('realtime', 'bllSetLocale', settings);
   DateTime.toString('datetime', date);
-  assert.ok(count() > warmed);
+  assert.equal(count(), warmed);
+});
+
+test('custom-only changes update shared formats without rebuilding tables or clearing formatters', async t => {
+  const { DateTime, api } = await createDateTime(t);
+  const count = countFormatters(t);
+  const codes = DateTime.codes;
+  const init = t.mock.method(codes, 'init');
+  const timeArray = codes.timeArray;
+  const defaultCode = codes.array.find(code => code.code === 'datetime' && code.customisable);
+  const date = '2026-03-29T01:02:03.456Z';
+  const builtIn = () => DateTime.toString('DATE', date, 'en-US', 'UTC');
+  builtIn();
+  const settings = { default: 'en-US', customDateFormats: [{ name: 'myStamp', format: 'yyyy-MM-dd' }] };
+  api.emit('realtime', 'bllSetLocale', settings);
+  assert.equal(DateTime.toString('myStamp', date, undefined, 'UTC'), '2026-03-29');
+  assert.equal(codes.timeArray, timeArray);
+  assert.equal(codes.array.find(code => code.code === 'datetime' && code.customisable), defaultCode);
+  const afterCustom = count();
+  builtIn();
+  assert.equal(count(), afterCustom);
+  const unchanged = codes.array;
+  api.emit('realtime', 'bllSetLocale', settings);
+  assert.equal(codes.array, unchanged);
+
+  settings.customDateFormats[0].format = 'HH:mm';
+  api.emit('realtime', 'bllSetLocale', settings);
+  assert.equal(DateTime.toString('myStamp', date, undefined, 'UTC'), '01:02');
+  settings.customDateFormats[0].name = 'renamedStamp';
+  settings.customDateFormats.push({ name: 'secondStamp', format: 'yyyy' });
+  api.emit('realtime', 'bllSetLocale', settings);
+  assert.deepEqual(codes.array.filter(code => code.custom).map(code => code.code), ['renamedStamp', 'secondStamp']);
+  assert.equal(DateTime.toString('renamedStamp', date, undefined, 'UTC'), '01:02');
+  settings.customDateFormats.reverse();
+  api.emit('realtime', 'bllSetLocale', settings);
+  assert.deepEqual(codes.array.filter(code => code.custom).map(code => code.code), ['secondStamp', 'renamedStamp']);
+  settings.customDateFormats.length = 0;
+  api.emit('realtime', 'bllSetLocale', settings);
+  assert.deepEqual(codes.array.filter(code => code.custom), []);
+  const beforeBuiltIn = count();
+  builtIn();
+  assert.equal(count(), beforeBuiltIn);
+  assert.equal(init.mock.callCount(), 0);
+});
+
+test('default-format changes and removal restore their original behavior', async t => {
+  const { DateTime, api } = await createDateTime(t);
+  const codes = DateTime.codes;
+  const init = t.mock.method(codes, 'init');
+  const timeArray = codes.timeArray;
+  const date = '2026-03-29T01:02:03.456Z';
+  const initial = DateTime.toString('datetime', date, undefined, 'UTC');
+  const settings = { default: 'en-US', dateFormats: { datetime: 'yyyy-MM-dd' } };
+  api.emit('realtime', 'bllSetLocale', settings);
+  assert.equal(DateTime.toString('datetime', date, undefined, 'UTC'), '2026-03-29');
+  settings.dateFormats.datetime = 'HH:mm';
+  api.emit('realtime', 'bllSetLocale', settings);
+  assert.equal(DateTime.toString('datetime', date, undefined, 'UTC'), '01:02');
+  delete settings.dateFormats.datetime;
+  api.emit('realtime', 'bllSetLocale', settings);
+  assert.equal(DateTime.toString('datetime', date, undefined, 'UTC'), initial);
+  assert.equal(codes.timeArray, timeArray);
+  assert.equal(init.mock.callCount(), 0);
+});
+
+test('date/time Flow suggestions track configured formats and search without changing format case', async t => {
+  const { DateTime, api } = await createDateTime(t);
+  const previous = BL._datetime;
+  BL.datetime = DateTime;
+  t.after(() => { BL._datetime = previous; });
+  const filename = require.resolve('../app');
+  const m = new Module(filename, module);
+  m.filename = filename;
+  m.paths = module.paths;
+  m.require = id => {
+    if (id === 'homey') return { App: class {} };
+    if (id === './lib/variablemanager.js' || id === './lib/FileServer.js') return {};
+    return Module.prototype.require.call(m, id);
+  };
+  m._compile(fs.readFileSync(filename, 'utf8'), filename);
+  const app = new m.exports();
+  const args = { date: '2026-03-29T01:02:03.456Z', locale: { id: 'nl-NL' }, timeZone: { id: 'Europe/Amsterdam' } };
+  const suggestions = query => app.getDateTimeFormatSuggestions(query, args);
+
+  api.emit('realtime', 'bllSetLocale', {
+    default: 'en-US',
+    dateFormats: { datetime: 'yyyy-MM-dd HH:mm:ss' },
+    customDateFormats: [
+      { name: 'MyStamp', format: 'yyyy-MM-dd HH:mm' },
+      { name: 'VeryLongCustomDate', format: 'yyyy-MM-dd' }
+    ]
+  });
+  const all = suggestions('');
+  for (const name of ['DATE', 'date', 'DATETIMELONG', 'TIMELONG', 'MyStamp', 'dd-MM-yyyy', 'HH:mm:ss']) {
+    const item = all.find(x => x.name === name);
+    assert.ok(item, `Missing ${name}`);
+    assert.equal(item.description, DateTime.toString(name, args.date, args.locale.id, args.timeZone.id));
+  }
+  assert.equal(new Set(all.map(x => x.name)).size, all.length);
+  const defaultNames = [
+    ...Object.keys(DateTime.dateTimeCodes),
+    ...Object.keys(DateTime.dateCodes),
+    ...Object.keys(DateTime.timeCodes)
+  ];
+  const names = all.map(x => x.name);
+  assert.deepEqual(names.slice(0, 2), ['MyStamp', 'VeryLongCustomDate']);
+  assert.deepEqual(names.slice(2, 2 + defaultNames.length), defaultNames);
+  assert.deepEqual(names.slice(2 + defaultNames.length), ['dd-MM-yyyy', 'dd-MM-yyyy HH:mm', 'dd-MM-yyyy HH:mm:ss', 'HH:mm', 'HH:mm:ss']);
+  const sharedNames = DateTime.codes.array.filter(code => code.customisable || code.custom).map(code => code.code);
+  assert.deepEqual(sharedNames, ['MyStamp', 'VeryLongCustomDate', ...defaultNames]);
+  const defaultArgs = { date: args.date, timeZone: args.timeZone };
+  assert.equal(app.getDateTimeFormatSuggestions('datetime', defaultArgs)
+    .find(x => x.name === 'datetime').description, '2026-03-29 03:02:03');
+
+  const filtered = suggestions('date');
+  assert.ok(filtered.some(x => x.name === 'date'));
+  assert.ok(filtered.some(x => x.name === 'DATE'));
+  assert.ok(filtered.every(x => x.name.toLowerCase().includes('date')));
+  assert.equal(filtered.filter(x => x.name === 'date').length, 1);
+  assert.ok(filtered.findIndex(x => x.name === 'VeryLongCustomDate') < filtered.findIndex(x => x.name === 'shortdate'));
+  const custom = suggestions('mYs');
+  assert.equal(custom[0].name, 'mYs');
+  assert.ok(custom.some(x => x.name === 'MyStamp'));
+  assert.ok(custom.every(x => x.name.toLowerCase().includes('mys')));
+  assert.equal(custom[0].description, DateTime.toString('mYs', args.date, args.locale.id, args.timeZone.id));
+
+  api.emit('realtime', 'bllSetLocale', {
+    default: 'en-US', customDateFormats: [{ name: 'NewStamp', format: 'yyyy' }]
+  });
+  assert.ok(suggestions('').some(x => x.name === 'NewStamp'));
+  assert.ok(!suggestions('').some(x => x.name === 'MyStamp'));
+});
+
+test('shared display ordering preserves longest-match formatting for overlapping codes', async t => {
+  const { DateTime, api } = await createDateTime(t);
+  const date = '2026-03-29T01:02:03.456Z';
+  api.emit('realtime', 'bllSetLocale', {
+    default: 'en-US',
+    dateFormats: { datetime: 'yyyy-MM-dd HH:mm:ss' },
+    customDateFormats: [{ name: 'dateCustom', format: 'yyyy-MM-dd' }]
+  });
+  assert.equal(DateTime.toString('yyyy-MM-dd HH:mm:ss.fff', date, 'en-US', 'UTC'), '2026-03-29 01:02:03.456');
+  assert.equal(DateTime.toString('dateCustom', date, undefined, 'UTC'), '2026-03-29');
+  assert.equal(DateTime.toString('datetime', date, undefined, 'UTC'), '2026-03-29 01:02:03');
+  assert.equal(DateTime.toString('DATELONG', date, 'en-US', 'UTC'),
+    new Date(date).toLocaleString('en-US', { dateStyle: 'full', timeZone: 'UTC' }));
 });
 
 test('the formatter cache retains a bounded working set and evicts old configurations', async t => {

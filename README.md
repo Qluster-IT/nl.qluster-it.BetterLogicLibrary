@@ -24,6 +24,10 @@ Advanced logic, variable management and shared libraries for Homey.
 Open the app settings to manage variables, custom functions, formatting, exports
 and the file server.
 
+The date/time Flow card suggests configured formats first, followed by built-in
+formats and example patterns, with formatted previews. Type to search without
+case sensitivity or enter a custom format.
+
 To create a variable in a supported Flow card, type its name in the variable
 picker, select the new-variable suggestion and save the Flow. Save before using
 its tag. Automatically created variables are removed when they are no longer
@@ -44,6 +48,14 @@ The answer is {[6 * 7]}.
 
 Check each card's hint: plain Text, BLL expressions and Math.js expressions do not
 all interpret input in the same way.
+
+## Version 4.3.1 highlights
+
+- The date/time Flow card offers searchable formats and previews, with custom
+  formats first and built-in formats grouped consistently.
+- Updating custom date/time formats reuses code tables and cached formatters
+  instead of rebuilding them in every app using the shared module.
+- Update the `betterlogiclibrary` npm dependency to `1.0.7`.
 
 ## Version 4.3.0 highlights
 
@@ -100,7 +112,8 @@ rejected. Clients relying on permissive numeric parsing must send valid numbers.
 ## Integration and implementation notes
 
 - Date/time and number modules each retain at most 32 Intl formatters per loaded
-  module. Locale/format changes and module shutdown clear the relevant cache.
+  module. Date/time locale or default-format changes and module shutdown clear
+  its cache; custom-format changes reuse the existing code tables and cache.
 - Expression results are reused only within the same decoded text, not between
   calls. Separate evaluations use fresh JavaScript contexts.
 - Math.js configuration and imports are shared within the BLL app:

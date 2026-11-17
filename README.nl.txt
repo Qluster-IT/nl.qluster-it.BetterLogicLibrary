@@ -30,11 +30,4 @@ Toegevoegd: voeg $timenow$ toe als een speciale variabele voor mathjs. Hiermee w
 Toegevoegd: #DD (dag), #MM (maand), #JJJJ (jaar), #HH (uren), #mm (minuten) #SS (seconden) toegevoegd als gereserveerde woorden naast timenow in de wiskundestromen. U kunt nu bijvoorbeeld #HH toekennen aan een variabele om de uren te krijgen. Ook heb ik timenow veranderd in #timenow voor consistentie.
 
 
-Nieuw in 4.3.0:
-* Lager geheugengebruik en minder herhaald werk bij opmaak, BLL-expressies, exports en bestandsoverdrachten.
-* Vertaalde flowkaarthints onderscheiden invoer voor Tekst, BLL en Math.js.
-* Oplossingen voor asynchrone BLL-resultaten, CSV-base64-export, aanhoudende triggers en apparaatsynchronisatie.
-* Veiliger importeren van variabelen: annuleren wordt gerespecteerd en alle invoer wordt vóór vervanging gevalideerd. Importeren vervangt nog steeds bestaande variabelen en hun Insights.
-* Strengere numerieke API-validatie en duidelijkere fouten voor niet-ondersteunde exportformaten en bibliotheken.
-
 Bekijk het communityforum voor meer informatie!
