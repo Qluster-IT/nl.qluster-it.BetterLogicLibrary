@@ -998,6 +998,7 @@ class BetterLogic extends Homey.App {
 
 	async onUninit() {
 		this.apiReady = false;
+		variableManager.destroy();
 		if (this.fileServer) await this.fileServer.destroy();
 	}
 

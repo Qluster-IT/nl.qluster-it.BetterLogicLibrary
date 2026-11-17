@@ -30,6 +30,11 @@ its tag. Automatically created variables are removed when they are no longer
 referenced by the relevant Flow cards. Variables created manually in settings are
 not automatically removed.
 
+On older Homeys (including HP2019), removing the final BLL cards from a Flow may
+not send a change notification. A legacy-only check once per day reconciles
+automatic variables with saved Flow references; app startup also reconciles them.
+Other Homeys continue to rely on Flow-card updates without this periodic check.
+
 BLL-supported text can contain expressions inside `{[` and `]}`:
 
 ```text
