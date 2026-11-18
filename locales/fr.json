@@ -1,4 +1,17 @@
 {
+  "settingsDownload": {
+    "preparing": "Préparation du téléchargement…",
+    "ready": "Lien de téléchargement prêt. Si le téléchargement ne démarre pas, utilisez Télécharger maintenant. Ce lien est temporaire.",
+    "reservationFailed": "Impossible de demander le téléchargement. Vérifiez votre connexion et exportez à nouveau.",
+    "generationFailed": "Impossible de créer ou de transférer l’exportation. Veuillez réessayer.",
+    "timeout": "La demande de téléchargement a expiré. Veuillez exporter à nouveau.",
+    "networkFailed": "Impossible de vérifier les liens de téléchargement. Vérifiez votre connexion ; votre navigateur peut aussi bloquer cette vérification. Essayez Télécharger maintenant ou exportez à nouveau.",
+    "openUnconfirmed": "Le navigateur n’a pas confirmé l’ouverture du téléchargement. Si rien ne s’est ouvert, utilisez Télécharger maintenant.",
+    "openFailed": "Impossible d’ouvrir le téléchargement. Utilisez Télécharger maintenant.",
+    "expired": "Ce lien de téléchargement a peut-être expiré. Exportez à nouveau pour obtenir un nouveau lien.",
+    "manual": "Télécharger maintenant",
+    "cloud": "Télécharger via internet"
+  },
   "exportFailed": "Impossible de créer ou de transférer l’export. Veuillez réessayer.",
   "Variables": "Variables",
   "Coding": "Codage",

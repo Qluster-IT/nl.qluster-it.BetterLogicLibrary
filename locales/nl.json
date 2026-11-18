@@ -1,4 +1,17 @@
 {
+	"settingsDownload": {
+		"preparing": "Download voorbereiden…",
+		"ready": "Downloadlink gereed. Start de download niet? Gebruik Nu downloaden. Deze link is tijdelijk.",
+		"reservationFailed": "De download kon niet worden aangevraagd. Controleer je verbinding en exporteer opnieuw.",
+		"generationFailed": "De export kon niet worden aangemaakt of geüpload. Probeer het opnieuw.",
+		"timeout": "De downloadaanvraag duurde te lang. Exporteer opnieuw.",
+		"networkFailed": "De downloadlinks konden niet worden gecontroleerd. Controleer je verbinding; je browser kan deze controle ook blokkeren. Probeer Nu downloaden of exporteer opnieuw.",
+		"openUnconfirmed": "De browser heeft het openen van de download niet bevestigd. Gebruik Nu downloaden als er niets is geopend.",
+		"openFailed": "De download kon niet worden geopend. Gebruik Nu downloaden.",
+		"expired": "Deze downloadlink is mogelijk verlopen. Exporteer opnieuw voor een nieuwe link.",
+		"manual": "Nu downloaden",
+		"cloud": "Downloaden via internet"
+	},
 	"exportFailed": "De export kon niet worden gemaakt of geüpload. Probeer het opnieuw.",
 	"Variables":"Variabelen",
 	"Coding":"Codering",

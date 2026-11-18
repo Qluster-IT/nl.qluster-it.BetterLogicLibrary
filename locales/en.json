@@ -1,4 +1,17 @@
 {
+	"settingsDownload": {
+		"preparing": "Preparing download…",
+		"ready": "Download link ready. If no download starts, use Download now. This link is temporary.",
+		"reservationFailed": "Could not request the download. Check your connection and export again.",
+		"generationFailed": "The export could not be created or uploaded. Please try again.",
+		"timeout": "The download request timed out. Please export again.",
+		"networkFailed": "Could not verify the download links. Check your connection; your browser may also block this check. Try Download now, or export again.",
+		"openUnconfirmed": "The browser did not confirm opening the download. If nothing opened, use Download now.",
+		"openFailed": "Could not open the download. Use Download now.",
+		"expired": "This download link may have expired. Export again for a new link.",
+		"manual": "Download now",
+		"cloud": "Download via internet"
+	},
 	"exportFailed": "The export could not be created or uploaded. Please try again.",
 	"Variables":"Variables",
 	"Coding":"Coding",

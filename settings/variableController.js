@@ -14,6 +14,9 @@
 
 
         const view = $scope.view = { id: undefined, bottom: undefined, autoUpdate: true, downloadFileLink: undefined, isBusy: false };
+        const settingsDownload = $window.SettingsDownload.bind({
+            homey, scope: $scope, view, http: $http, path: '/getvariablesdownloadurl/'
+        });
         const temp = $scope.temp = { dateFormats: {} };
         const vars = $scope.vars = {
             locales: [],
@@ -284,18 +287,7 @@
             vm.homey.set('javascript_functions', angular.copy($scope.functions));
         };
 
-        $scope.downloadFile = async (type) => {
-            view.isBusy = true;
-            view.downloadFileLink = null;
-            try {
-                let downloadLink = await $bl.api("GET", "/getvariablesdownloadurl/" + type);
-                if (!downloadLink) throw new Error(homey.__('exportFailed'));
-                view.downloadFileLink = downloadLink;
-            } catch (error) {
-                $scope.$apply(() => { view.isBusy = false; });
-                homey.alert(error.message || homey.__('exportFailed'));
-            }
-        };
+        $scope.downloadFile = settingsDownload.start;
 
 
         vm.init = async function () {
@@ -319,25 +311,6 @@
 
 
                 vm.loadVariables();
-
-                homey.on('downloadFileReady', (link) => {
-                    console.log('downloadFileReady');
-                    if (!view.downloadFileLink || view.downloadFileLink.token !== link.token) return;
-                    $http.get(link.localTestUrl, { timeout: 1000 }).catch((err) => {
-                        //if(x) $bl.openURL(link.cloudUrl);
-                        if (err) $bl.openURL(link.cloudUrl);
-                        view.isBusy = false;
-                    }).then((x) => {
-                        if (x) $bl.openURL(link.localUrl);
-                        view.isBusy = false;
-                    });
-                });
-
-                homey.on('downloadFileFailed', (failed) => {
-                    if (!view.isBusy || (view.downloadFileLink && view.downloadFileLink.token !== failed.token)) return;
-                    $scope.$apply(() => { view.isBusy = false; });
-                    homey.alert(failed.message || homey.__('exportFailed'));
-                });
 
                 vm.homey.on('variable_changed', function ({ variable, date }) {
                     if (!view.autoUpdate) return;

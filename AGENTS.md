@@ -12,10 +12,14 @@ This is a Homey app. Before making changes, read and follow the general instruct
 
 - The bundled Excel writer must keep widths at most 255, reject cells over 32,767 characters explicitly without truncating their data, XML-escape sheet names and declare all worksheets in the package content types. Preserve its `Uint8Array` return type and browser fallback.
 - Emit font properties in SpreadsheetML schema order (bold/italic before size, color, name and family). XML well-formedness and desktop Excel opening are not sufficient checks for mobile Excel compatibility; validate the workbook with the Open XML SDK when investigating repair warnings.
+- Custom number-format IDs start at 164, with matching declarations and cell references. Define the Normal base style and explicit cell-style references. Frozen rows select `bottomLeft`, frozen columns select `topRight`, and combined freezes select `bottomRight`; never activate a nonexistent pane.
 - Shared downloads resolve and call ready callbacks only after a complete successful upload. Preserve byte-view offsets and empty files, and reject HTTP, network, timeout and callback failures. Settings downloads report failures through `downloadFileFailed`.
+- Variable download links accept `csv`, `xlsx`, and `json`, not Base64 formats. Stream all three to the file server and publish only after the upload finishes; do not buffer the complete file or encode it as Base64 on this path. Flow tokens retain their original buffered/Base64 formats. JSON streaming preserves native array `toJSON(index)` semantics; snapshot variable rows before asynchronous consumption.
+- File reservations must wait for a successful listener bind. Expiry and shutdown must settle pending writes/renames before deleting token directories; never log download tokens or payloads. Hosted local/cloud downloads are served by Homey's userdata proxy, not the internal upload listener.
 
 ## HP2023 test fixtures
 
+- In remote developer mode, BLL waits for the Node debugger at startup. Resume it from VS Code or send `Runtime.runIfWaitingForDebugger` using the inspector connection, then verify `/api-ready` before running tests. A reachable debugger alone does not mean the app has initialized.
 - Reuse the Advanced Flows in the `Better Logic Library` Flow folder and the `BLL Test Number`, `BLL Test Text`, and `BLL Test Boolean` variables. Run the Flows sequentially because they share these variables.
 - Reuse the `BLL Test Boolean` and `BLL Test Pair True` BitFlip devices, `BLL Test Number` NumSlide device, and `BLL Test Trigger` Trigger device in the `Better Logic Library` zone. The `Test - Device variable synchronization` Advanced Flow exercises their synchronization.
 - Keep the `BLLTestDouble` custom function and `BLLTestDate` custom date format as fixtures for the `Test - Settings fixtures and variable properties` Advanced Flow.

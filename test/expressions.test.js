@@ -89,7 +89,7 @@ test('flow factories register without loading a second mathjs bundle', () => {
   assert.equal(requests.includes('../util/math.js'), false);
 });
 
-test('CSV formatting returns UTF-8 base64 for the same CSV as the plain format', async t => {
+async function createFormatCards(t, json) {
   const actions = new Map();
   const card = id => ({
     registerRunListener(listener) { actions.set(id, listener); return this; },
@@ -115,17 +115,38 @@ test('CSV formatting returns UTF-8 base64 for the same CSV as the plain format',
   const previousJson = BL._json;
   t.after(() => { BL.homey = previousHomey; BL.json = previousJson; });
   t.mock.method(BL, 'init', async () => { BL.homey = app.homey; });
-  const csv = 'name,value\ncaf\u00e9,\ud83d\ude0a';
-  BL.json = { toCsv: async () => csv };
+  BL.json = json;
 
   await app.onInit();
   assert.equal(app.apiReady, true);
-  const format = actions.get('format_json_csv');
+  return actions;
+}
+
+test('CSV formatting returns UTF-8 base64 for the same CSV as the plain format', async t => {
+  const csv = 'name,value\ncaf\u00e9,\ud83d\ude0a';
+  const format = (await createFormatCards(t, { toCsv: async () => csv })).get('format_json_csv');
   const args = { json: '[{"name":"caf\u00e9","value":"\ud83d\ude0a"}]', unwindArrays: false, expandArrayObjects: false };
   assert.deepEqual(await format({ ...args, returnType: 'csv' }), { result: csv });
   const encoded = await format({ ...args, returnType: 'csv_base64' });
   assert.deepEqual(encoded, { result: Buffer.from(csv, 'utf8').toString('base64') });
   assert.equal(Buffer.from(encoded.result, 'base64').toString('utf8'), csv);
+});
+
+test('Excel Flow passes ordinary JSON rows through but preserves the legacy path for numeric keys', async t => {
+  const calls = [];
+  const format = (await createFormatCards(t, {
+    toExcel: async (rows, options) => {
+      calls.push({ rows, options });
+      return options.outputBase64 ? 'UEs=' : Uint8Array.of(80, 75);
+    }
+  })).get('format_json_xlsx');
+  assert.deepEqual(await format({ json: '[{"name":"first"},{"active":false}]', returnType: 'xlsx_base64' }), { result: 'UEs=' });
+  assert.deepEqual(calls[0].rows, [{ name: 'first' }, { active: false }]);
+  assert.deepEqual(calls[0].options.objectKeys, ['name', 'active']);
+  assert.equal(calls[0].options.outputBase64, true);
+  await format({ json: '[{"name":"first"},{"0":"second"}]', returnType: 'xlsx_base64' });
+  assert.equal(calls[1].options.objectKeys, undefined);
+  assert.deepEqual(calls[1].rows.map(row => row.map(cell => cell?.value)), [['0', 'Name'], ['first'], ['second', undefined]]);
 });
 
 test('math expression cards share VM imports and preserve results and errors', async () => {

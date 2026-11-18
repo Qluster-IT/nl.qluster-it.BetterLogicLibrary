@@ -28,18 +28,21 @@ blModule.factory('$bl', ['$q', function ($q) {
     }
     function api(type, path, data, callback) {
         let defer = $q.defer();
-        Homey.api(type, path, data, (err, val) => {
-            if (err) {
-                $scope.$apply(() => {
-                    defer.reject(err);
-                    return Homey.alert(err);
+        try {
+            Homey.api(type, path, data, (err, val) => {
+                $scope.$evalAsync(() => {
+                    if (err) {
+                        defer.reject(err);
+                        Homey.alert(err);
+                        return;
+                    }
+                    try {
+                        if (callback) callback(val);
+                        defer.resolve(val);
+                    } catch (error) { defer.reject(error); }
                 });
-            }
-            $scope.$apply(() => {
-                if (callback) callback(val);
-                defer.resolve(val);
             });
-        });
+        } catch (error) { defer.reject(error); }
         return defer.promise;
     }
 

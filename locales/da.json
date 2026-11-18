@@ -1,4 +1,17 @@
 {
+  "settingsDownload": {
+    "preparing": "Forbereder download…",
+    "ready": "Downloadlinket er klar. Hvis download ikke starter, skal du bruge Download nu. Linket er midlertidigt.",
+    "reservationFailed": "Download kunne ikke anmodes. Kontrollér forbindelsen, og eksportér igen.",
+    "generationFailed": "Eksporten kunne ikke oprettes eller uploades. Prøv igen.",
+    "timeout": "Downloadanmodningen tog for lang tid. Eksportér igen.",
+    "networkFailed": "Downloadlinkene kunne ikke kontrolleres. Kontrollér forbindelsen; din browser kan også blokere kontrollen. Prøv Download nu, eller eksportér igen.",
+    "openUnconfirmed": "Browseren bekræftede ikke, at downloaden blev åbnet. Brug Download nu, hvis intet blev åbnet.",
+    "openFailed": "Downloaden kunne ikke åbnes. Brug Download nu.",
+    "expired": "Dette downloadlink kan være udløbet. Eksportér igen for at få et nyt link.",
+    "manual": "Download nu",
+    "cloud": "Download via internettet"
+  },
   "exportFailed": "Eksporten kunne ikke oprettes eller uploades. Prøv igen.",
   "Variables": "Variable",
   "Coding": "Kodning",

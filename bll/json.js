@@ -9,7 +9,7 @@ const { BL } = require("betterlogiclibrary");
 
 //https://www.npmjs.com/package/write-excel-file?activeTab=readme#cdn
 const writeXlsxFile = BL.submodules["write-excel-file-min"];
-const { json2csvAsync } = BL.submodules["json2csv"];
+const { json2csvAsync, json2csvChunks } = BL.submodules["json2csv"];
 let realtimeApi;
 
 
@@ -46,6 +46,42 @@ class Json {
     delete this.onRealtime;
   }
 
+  static toJson(data, { outputStream = false } = {}) {
+    if (!outputStream) return JSON.stringify(data);
+    const { Readable } = require('stream');
+    if (!data || (!Array.isArray(data) && typeof data[Symbol.iterator] !== 'function'
+      && typeof data[Symbol.asyncIterator] !== 'function')) {
+      throw new TypeError('Streaming JSON requires an array or iterable');
+    }
+    if (typeof data.toJSON === 'function') {
+      return Readable.from([JSON.stringify(data)], { objectMode: false });
+    }
+    const length = Array.isArray(data) ? data.length : undefined;
+    const rows = length === undefined ? data : (function* () {
+      for (let index = 0; index < length; index++) yield data[index];
+    })();
+    return Readable.from((async function* () {
+      let parts = ['['];
+      let size = 1;
+      let index = 0;
+      for await (const row of rows) {
+        const key = String(index);
+        const wrapped = JSON.stringify({ [key]: row });
+        const json = wrapped === '{}' ? 'null' : wrapped.slice(key.length + 4, -1);
+        const part = (index++ ? ',' : '') + json;
+        parts.push(part);
+        size += part.length;
+        if (size >= 8192) {
+          yield parts.join('');
+          parts = [];
+          size = 0;
+        }
+      }
+      parts.push(']');
+      yield parts.join('');
+    })(), { objectMode: false, highWaterMark: 16384 });
+  }
+
   /**
    * 
    * @param {import('./d.ts/json.toExcel').SheetData|import('./d.ts/json.toExcel').SheetData[]} data 
@@ -57,7 +93,13 @@ class Json {
 
   }
 
+  // outputStream is a Node-only opt-in; callers must consume the returned Readable.
   static async toCsv(data, options) {
+    if (options?.outputStream === true) {
+      const { Readable } = require('stream');
+      const chunks = json2csvChunks ? await json2csvChunks(data, options) : [await json2csvAsync(data, options)];
+      return Readable.from(chunks, { objectMode: false });
+    }
     return await json2csvAsync(data, options);
 
   }

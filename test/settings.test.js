@@ -5,6 +5,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const test = require('node:test');
 const vm = require('node:vm');
+const SettingsDownload = require('../assets/js/settings-download');
 
 function createController() {
   let controller;
@@ -18,14 +19,14 @@ function createController() {
     set: (...args) => { calls.push(args); },
     alert: error => { calls.push(['alert', error]); }
   };
-  const scope = { $apply: callback => callback() };
+  const scope = { $apply: callback => callback(), $on() {} };
   const angular = {
     module: () => ({ controller: (name, definition) => { controller = definition.at(-1); } }),
     fromJson: JSON.parse
   };
   const source = fs.readFileSync(path.resolve(__dirname, '..', 'settings', 'variableController.js'), 'utf8');
   vm.runInNewContext(source, { angular, _: require('../assets/js/lodash.min.js'), console, Date });
-  const instance = new controller(scope, { init() {}, api() {} }, { Homey: homey }, {});
+  const instance = new controller(scope, { init() {}, api() {} }, { Homey: homey, SettingsDownload }, {});
   return { instance, calls, confirm: value => confirm(null, value) };
 }
 

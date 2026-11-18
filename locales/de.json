@@ -1,4 +1,17 @@
 {
+  "settingsDownload": {
+    "preparing": "Download wird vorbereitet…",
+    "ready": "Download-Link bereit. Falls kein Download startet, verwende Jetzt herunterladen. Dieser Link ist nur vorübergehend gültig.",
+    "reservationFailed": "Der Download konnte nicht angefordert werden. Prüfe deine Verbindung und exportiere erneut.",
+    "generationFailed": "Der Export konnte nicht erstellt oder hochgeladen werden. Bitte versuche es erneut.",
+    "timeout": "Zeitüberschreitung bei der Download-Anfrage. Bitte exportiere erneut.",
+    "networkFailed": "Die Download-Links konnten nicht geprüft werden. Prüfe deine Verbindung; auch dein Browser kann diese Prüfung blockieren. Verwende Jetzt herunterladen oder exportiere erneut.",
+    "openUnconfirmed": "Der Browser hat das Öffnen des Downloads nicht bestätigt. Falls nichts geöffnet wurde, verwende Jetzt herunterladen.",
+    "openFailed": "Der Download konnte nicht geöffnet werden. Verwende Jetzt herunterladen.",
+    "expired": "Dieser Download-Link ist möglicherweise abgelaufen. Exportiere erneut, um einen neuen Link zu erhalten.",
+    "manual": "Jetzt herunterladen",
+    "cloud": "Über das Internet herunterladen"
+  },
   "exportFailed": "Der Export konnte nicht erstellt oder hochgeladen werden. Bitte erneut versuchen.",
   "Variables": "Variablen",
   "Coding": "Programmierung",

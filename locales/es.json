@@ -1,4 +1,17 @@
 {
+  "settingsDownload": {
+    "preparing": "Preparando descarga…",
+    "ready": "Enlace de descarga listo. Si la descarga no comienza, usa Descargar ahora. Este enlace es temporal.",
+    "reservationFailed": "No se pudo solicitar la descarga. Comprueba tu conexión y vuelve a exportar.",
+    "generationFailed": "No se pudo crear o subir la exportación. Inténtalo de nuevo.",
+    "timeout": "La solicitud de descarga ha tardado demasiado. Vuelve a exportar.",
+    "networkFailed": "No se pudieron comprobar los enlaces de descarga. Comprueba tu conexión; el navegador también puede bloquear esta comprobación. Prueba Descargar ahora o vuelve a exportar.",
+    "openUnconfirmed": "El navegador no confirmó la apertura de la descarga. Si no se abrió nada, usa Descargar ahora.",
+    "openFailed": "No se pudo abrir la descarga. Usa Descargar ahora.",
+    "expired": "Este enlace de descarga puede haber caducado. Vuelve a exportar para obtener uno nuevo.",
+    "manual": "Descargar ahora",
+    "cloud": "Descargar por internet"
+  },
   "exportFailed": "No se pudo crear o cargar la exportación. Inténtalo de nuevo.",
   "Variables": "Variables",
   "Coding": "Codificación",

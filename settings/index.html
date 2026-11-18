@@ -46,6 +46,7 @@
     <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
 
     <script type="text/javascript" src="../assets/js/bll.module.js"></script>
+    <script type="text/javascript" src="../assets/js/settings-download.js"></script>
     <link href="../assets/css/bll.css" rel="stylesheet" />
 
     <script type="text/javascript" src="variableController.js"></script>
@@ -54,7 +55,13 @@
 </head>
 
 <body ng-controller="VariableSettingsController as vm" class="main-body container-fluid h-100 g-0 d-flex flex-column" ng-class="{'show-buttons':temp.showButtons}">
-    <div class="busyOverlay" ng-show="view.isBusy"></div>
+    <div class="busyOverlay" ng-show="view.isBusy || view.downloadBusy"></div>
+    <section class="alert alert-info m-1" ng-if="view.downloadStatus || view.downloadError" aria-live="polite" aria-atomic="true">
+        <p class="mb-1" ng-if="view.downloadStatus" ng-bind="view.downloadStatus"></p>
+        <p class="text-danger mb-1" role="alert" ng-if="view.downloadError" ng-bind="view.downloadError"></p>
+        <a class="hy-nostyle btn btn-primary btn-sm" ng-if="view.downloadUrl" ng-href="{{view.downloadUrl}}" target="_blank" rel="noopener noreferrer" data-i18n="settingsDownload.manual">Download now</a>
+        <a class="hy-nostyle btn btn-outline-primary btn-sm" ng-if="view.downloadCloudUrl" ng-href="{{view.downloadCloudUrl}}" target="_blank" rel="noopener noreferrer" data-i18n="settingsDownload.cloud">Download via internet</a>
+    </section>
     <nav class="navbar sticky-top navbar-expand font-dark navbar-dark bg-dark">
         <div class="container-fluid p-0">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

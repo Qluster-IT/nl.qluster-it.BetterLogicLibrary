@@ -107,6 +107,38 @@ test('the api-ready endpoint reflects the startup lifecycle', async () => {
   assert.deepEqual(await getApiReady({ homey }), { ready: false });
 });
 
+test('JSON variable downloads stream a row snapshot while ordinary and Base64 exports retain their formats', async () => {
+  const filename = require.resolve('../app');
+  const m = new Module(filename, module);
+  const variables = [{ name: 'Example', value: 'caf\u00e9', type: 'string' }];
+  const previous = BL.submodules;
+  BL.submodules = { json2csv: {} };
+  let Json;
+  try { Json = require('../bll/json'); } finally { BL.submodules = previous; }
+  const homey = { __: key => key, app: {}, error: assert.fail };
+  const library = { _: require('../assets/js/lodash.min.js'), homey, json: Json };
+  m.filename = filename;
+  m.paths = module.paths;
+  m.require = id => {
+    if (id === 'homey') return { App: class {} };
+    if (id === 'betterlogiclibrary') return { BL: library };
+    if (id === './lib/variablemanager.js') return { getVariables: async () => variables };
+    if (id === './lib/FileServer.js') return {};
+    return Module.prototype.require.call(m, id);
+  };
+  m._compile(fs.readFileSync(filename, 'utf8'), filename);
+  const app = new m.exports();
+  app.homey = homey;
+  const expected = JSON.stringify(variables);
+  assert.equal(await app.getVariables({ returnType: 'json' }), expected);
+  assert.equal(Buffer.from(await app.getVariables({ returnType: 'json_base64', streamJson: true }), 'base64').toString(), expected);
+  const stream = await app.getVariables({ returnType: 'json', streamJson: true });
+  variables[0].value = 'updated while uploading';
+  const chunks = [];
+  for await (const chunk of stream) chunks.push(chunk);
+  assert.equal(Buffer.concat(chunks).toString('utf8'), expected);
+});
+
 test('a variables download that cannot be generated is logged for every file type', async t => {
   const filename = require.resolve('../api');
   const m = new Module(filename, module);
@@ -140,7 +172,7 @@ test('a variables download that cannot be generated is logged for every file typ
   assert.deepEqual(realtime, Array(3).fill(['downloadFileFailed', { token: 'download', message: 'settings unavailable' }]));
 });
 
-test('Base64 variable downloads are decoded by the uploader, not written as workbook or CSV text', async t => {
+test('variable download links request streaming formats and still support buffered content', async t => {
   const filename = require.resolve('../api');
   const m = new Module(filename, module);
   m.filename = filename;
@@ -148,11 +180,18 @@ test('Base64 variable downloads are decoded by the uploader, not written as work
   m.require = id => id === './lib/variablemanager.js' ? {} : Module.prototype.require.call(m, id);
   m._compile(fs.readFileSync(filename, 'utf8'), filename);
   const timers = [];
-  const payloads = { csv_base64: 'bmFtZSx2YWx1ZQo=', xlsx_base64: 'UEsDBA==' };
+  const { Readable } = require('node:stream');
+  const stream = Readable.from([Buffer.from('PK')]);
+  const payloads = { csv: 'name,value\n', xlsx: stream, json: '[]' };
   const homey = {
     app: {
-      exportsSettings: { csvFilename: 'vars', xlsxFilename: 'vars' },
-      getVariables: async ({ returnType }) => payloads[returnType]
+      exportsSettings: { csvFilename: 'vars', xlsxFilename: 'vars', jsonFilename: 'vars' },
+      getVariables: async ({ returnType, streamExcel, streamJson, streamCsv }) => {
+        assert.equal(Boolean(streamExcel), returnType.startsWith('xlsx'));
+        assert.equal(streamJson, returnType === 'json');
+        assert.equal(streamCsv, returnType === 'csv');
+        return payloads[returnType];
+      }
     },
     api: { realtime() {} },
     setTimeout: callback => timers.push(callback),
@@ -168,7 +207,7 @@ test('Base64 variable downloads are decoded by the uploader, not written as work
     await timers.shift()();
   }
   assert.deepEqual(uploaded.map(({ callback, ...options }) => options),
-    Object.values(payloads).map(base64 => ({ link, base64 })));
+    [{ link, text: payloads.csv }, { link, stream }, { link, text: payloads.json }]);
 });
 
 test('unsupported exports and link creation failures reject instead of returning success', async t => {
@@ -186,12 +225,15 @@ test('unsupported exports and link creation failures reject instead of returning
   };
   t.mock.method(BL, 'decode', async name => name);
   const failure = new Error('file server unavailable');
-  t.mock.method(BL, 'getDownloadUrl', async () => { throw failure; });
-  await assert.rejects(m.exports.getVariablesDownloadUrl({ homey, params: { returnType: 'invalid' } }), /Unsupported export format/);
+  const reserve = t.mock.method(BL, 'getDownloadUrl', async () => { throw failure; });
+  for (const returnType of ['invalid', 'csv_base64', 'xlsx_base64', 'json_base64']) {
+    await assert.rejects(m.exports.getVariablesDownloadUrl({ homey, params: { returnType } }), /Unsupported export format/);
+  }
+  assert.equal(reserve.mock.callCount(), 0);
   for (const returnType of ['csv', 'xlsx', 'json']) {
     await assert.rejects(m.exports.getVariablesDownloadUrl({ homey, params: { returnType } }), error => error === failure);
   }
-  assert.equal(errors.length, 4);
+  assert.equal(errors.length, 7);
 });
 
 for (const name of ['dateTime', 'number', 'json']) {

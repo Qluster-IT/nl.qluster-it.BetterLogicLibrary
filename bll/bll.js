@@ -2,21 +2,27 @@
 const { BL } = require("betterlogiclibrary");
 //var querystring = require('querystring');
 const http = require('http');
+const { pipeline } = require('stream');
 const { types } = require('util');
 
 const DOWNLOAD_UPLOAD_TIMEOUT = 60 * 1000;
 
-function prepareDownloadBody({ buffer, base64, json, text, callback }) {
+function prepareDownloadBody({ buffer, base64, json, text, stream, callback }) {
     if (callback !== undefined && typeof callback !== 'function') {
         throw new TypeError('Download callback must be a function');
     }
 
-    const fields = Object.entries({ buffer, base64, json, text }).filter(([, value]) => value !== undefined);
+    const fields = Object.entries({ buffer, base64, json, text, stream }).filter(([, value]) => value !== undefined);
     if (!fields.length) return;
     if (fields.length !== 1) throw new TypeError('Provide only one download body');
 
     const [[field, value]] = fields;
     switch (field) {
+        case 'stream':
+            if (!value || typeof value.pipe !== 'function' || typeof value.destroy !== 'function') {
+                throw new TypeError('Download stream must be a Node readable stream');
+            }
+            return { type: 'application/octet-stream', body: value, streaming: true };
         case 'buffer':
             if (!types.isUint8Array(value)) throw new TypeError('Download buffer must be a Buffer or Uint8Array');
             return { type: 'application/octet-stream', body: Buffer.from(value.buffer, value.byteOffset, value.byteLength) };
@@ -47,7 +53,7 @@ function prepareDownloadBody({ buffer, base64, json, text, callback }) {
     }
 }
 
-async function uploadDownload(link, { type, body }, { contentType, callback }) {
+async function uploadDownload(link, { type, body, streaming }, { contentType, callback }) {
     if (!link || typeof link.host !== 'string' || !link.host ||
         !['number', 'string'].includes(typeof link.port) || !/^\d+$/.test(String(link.port)) ||
         Number(link.port) < 1 || Number(link.port) > 65535 ||
@@ -55,7 +61,8 @@ async function uploadDownload(link, { type, body }, { contentType, callback }) {
         throw new TypeError('Invalid download upload link');
     }
 
-    const headers = { 'Content-Type': type, 'Content-Length': Buffer.byteLength(body) };
+    const headers = { 'Content-Type': type };
+    if (!streaming) headers['Content-Length'] = Buffer.byteLength(body);
     const accept = contentType || link.contentType;
     if (accept !== undefined) {
         if (typeof accept !== 'string') throw new TypeError('Download content type must be a string');
@@ -97,11 +104,15 @@ async function uploadDownload(link, { type, body }, { contentType, callback }) {
                 if (!request.writableFinished || !responseEnded) interrupted();
             });
             timeout = setTimeout(() => reject(new Error('Download upload timed out')), DOWNLOAD_UPLOAD_TIMEOUT);
-            request.end(body);
+            if (streaming) {
+                body.once('error', reject);
+                pipeline(body, request, error => { if (error) reject(error); });
+            } else request.end(body);
         });
     } finally {
         clearTimeout(timeout);
         if (request) request.destroy();
+        if (streaming) body.destroy();
     }
 
     if (callback) await callback(link);

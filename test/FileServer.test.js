@@ -10,17 +10,19 @@ const { Writable } = require('node:stream');
 const test = require('node:test');
 const { BL } = require('betterlogiclibrary');
 
-async function createServer(t, { autoShutdown = true, writable, removalError } = {}) {
+async function createServer(t, { autoShutdown = true, writable, removalError, mkdirGate, renameGate, port = 0 } = {}) {
   const timers = new Map();
   const directories = new Set();
   const removed = [];
+  const published = [];
+  const discarded = [];
   const errors = [];
-  const network = { address: '127.0.0.1' };
+  const network = { address: '127.0.0.1', identityReads: 0 };
   let closed = 0;
   const fakeHttp = {
     createServer() {
       const server = new EventEmitter();
-      server.listen = () => server;
+      server.listen = (port, callback) => { setImmediate(callback); return server; };
       server.close = callback => { closed++; setImmediate(callback); };
       return server;
     }
@@ -31,15 +33,19 @@ async function createServer(t, { autoShutdown = true, writable, removalError } =
   m.paths = module.paths;
   m.require = function (id) {
     if (id === 'http') return writable ? http : fakeHttp;
+    if (id === 'fs/promises') return {
+      mkdir: async name => { if (mkdirGate) await mkdirGate(); directories.add(name); },
+      rename: async (from, to) => { if (renameGate) await renameGate(); published.push([from, to]); },
+      rm: async (name, options) => {
+        if (options.recursive) {
+          if (removalError) throw removalError;
+          directories.delete(name);
+          removed.push(name);
+        } else discarded.push(name);
+      }
+    };
     if (id === 'fs') return {
       ...fs,
-      existsSync: name => directories.has(name),
-      mkdirSync: name => directories.add(name),
-      rmSync(name) {
-        if (removalError) throw removalError;
-        directories.delete(name);
-        removed.push(name);
-      },
       createWriteStream: () => writable()
     };
     return Module.prototype.require.call(this, id);
@@ -47,7 +53,10 @@ async function createServer(t, { autoShutdown = true, writable, removalError } =
   m._compile(fs.readFileSync(filename, 'utf8'), filename);
   const server = new m.exports();
   const homey = {
-    cloud: { getLocalAddress: async () => `${network.address}:80`, getHomeyId: async () => 'test' },
+    cloud: {
+      getLocalAddress: async () => `${network.address}:80`,
+      getHomeyId: async () => { network.identityReads++; return 'test'; }
+    },
     log() {},
     error(...args) { errors.push(args); },
     setTimeout(callback) {
@@ -61,11 +70,15 @@ async function createServer(t, { autoShutdown = true, writable, removalError } =
     }
   };
   BL.homey = homey;
-  await server.init({ homey, settings: { port: 0, autoStart: false, autoShutdown, fileAvailableDuration: 60 } });
+  await server.init({ homey, settings: { port, autoStart: false, autoShutdown, fileAvailableDuration: 60 } });
   t.after(() => server.close());
   return {
-    server, timers, directories, removed, errors, network,
+    server, timers, directories, removed, errors, network, published, discarded,
     closed: () => closed,
+    addDirectory(token) {
+      directories.add(`/userdata/getfile/${token}/`);
+      server.files[token].hasDirectory = true;
+    },
     async expire(token) {
       const handle = server.files[token].timeout;
       const callback = timers.get(handle);
@@ -79,8 +92,8 @@ test('one expiring download does not stop the server or remove other available f
   const fixture = await createServer(t);
   const first = await fixture.server.getDownloadUrl({ base64: '', filename: 'first.txt' });
   const second = await fixture.server.getDownloadUrl({ base64: 'dGVzdA==', filename: 'second.txt' });
-  fixture.directories.add(`/userdata/getfile/${first.token}/`);
-  fixture.directories.add(`/userdata/getfile/${second.token}/`);
+  fixture.addDirectory(first.token);
+  fixture.addDirectory(second.token);
   await fixture.expire(first.token);
   assert.equal(fixture.closed(), 0);
   assert.deepEqual(Object.keys(fixture.server.files), [second.token]);
@@ -120,7 +133,7 @@ test('cleanup errors are reported after all payloads and timers have been releas
   const fixture = await createServer(t, { removalError: new Error('disk error') });
   for (let i = 0; i < 2; i++) {
     const file = await fixture.server.getDownloadUrl({ base64: 'dGVzdA==', filename: `${i}.txt` });
-    fixture.directories.add(`/userdata/getfile/${file.token}/`);
+    fixture.addDirectory(file.token);
   }
   await assert.rejects(fixture.server.close(), error =>
     error instanceof AggregateError && error.errors.length === 2);
@@ -133,19 +146,19 @@ test('expiry still shuts down an empty server when disk cleanup fails', async t 
   const failure = new Error('disk error');
   const fixture = await createServer(t, { removalError: failure });
   const file = await fixture.server.getDownloadUrl({ base64: 'dGVzdA==', filename: 'file.txt' });
-  fixture.directories.add(`/userdata/getfile/${file.token}/`);
+  fixture.addDirectory(file.token);
   await fixture.expire(file.token);
   assert.equal(fixture.closed(), 1);
   assert.equal(fixture.timers.size, 0);
   assert.deepEqual(fixture.server.files, {});
-  assert.ok(fixture.errors.some(args => args[1] === failure));
+  assert.deepEqual(fixture.errors, [['FileServer expiry', 'Error']]);
 });
 
-async function upload(server, token, body, headers) {
+async function upload(server, token, body, headers, method = 'POST') {
   return new Promise((resolve, reject) => {
     const request = http.request({
       host: '127.0.0.1', port: server.port,
-      path: `/getfile/${token}/file.bin`, method: 'POST', headers
+      path: `/getfile/${token}/file.bin`, method, headers
     }, response => {
       response.resume();
       response.on('end', () => resolve(response.statusCode));
@@ -171,10 +184,13 @@ test('binary uploads report success only after the output stream finishes', asyn
   assert.equal(await upload(fixture.server, file.token, bytes), 200);
   assert.equal(finished, true);
   assert.deepEqual(Buffer.concat(received), bytes);
+  const destination = `/userdata/getfile/${file.token}/file.bin`;
+  assert.deepEqual(fixture.published, [[destination + '.partial', destination]]);
   assert.equal(fixture.timers.size, 1, 'Only the download expiry timer should remain');
   assert.equal(fixture.server.files[file.token].uploadController, undefined);
   assert.deepEqual(fixture.errors, []);
 });
+
 
 test('an upload addressed to another host is answered once and not stored', async t => {
   let opened = 0;
@@ -201,6 +217,8 @@ test('a download link uses the Homey address that is current when the link is cr
   assert.equal(file.host, '192.168.1.99');
   assert.equal(file.url, `http://192.168.1.99:${fixture.server.port}${file.path}`);
   assert.equal(file.localUrl.startsWith('https://192-168-1-99.homey.homeylocal.com/'), true);
+  assert.equal(file.cloudUrl, `https://test.connect.athom.com/app/net.i-dev.betterlogic/userdata${file.path}file.txt`);
+  assert.equal(fixture.network.identityReads, 1);
 });
 
 test('a rejected overlapping upload does not announce that the original file is ready', { timeout: 5000 }, async t => {
@@ -220,6 +238,7 @@ test('a rejected overlapping upload does not announce that the original file is 
   try {
     await writing;
     fixture.server.files[file.token].defer.promise.then(() => { ready = true; });
+    assert.equal(await upload(fixture.server, file.token, undefined, undefined, 'GET'), 400);
     assert.equal(await upload(fixture.server, file.token, Buffer.from('overlap')), 400);
     assert.equal(ready, false);
   } finally {
@@ -233,7 +252,7 @@ test('a rejected overlapping upload does not announce that the original file is 
 test('upload write errors are handled and release their timeout and stream', async t => {
   const fixture = await createServer(t, {
     writable: () => new Writable({
-      write(chunk, encoding, callback) { callback(new Error('disk full')); }
+      write(chunk, encoding, callback) { callback(Object.assign(new Error('disk full'), { code: 'ENOSPC' })); }
     })
   });
   const file = await fixture.server.getDownloadUrl({ contentType: 'application/octet-stream', filename: 'file.bin' });
@@ -243,7 +262,9 @@ test('upload write errors are handled and release their timeout and stream', asy
   assert.ok(result === 400 || result.code === 'ECONNRESET');
   assert.equal(fixture.timers.size, 1);
   assert.equal(fixture.server.files[file.token].uploadController, undefined);
-  assert.ok(fixture.errors.some(args => args[1]?.message === 'disk full'));
+  assert.deepEqual(fixture.errors, [['File request failed', 'ENOSPC']]);
+  assert.deepEqual(fixture.published, []);
+  assert.deepEqual(fixture.discarded, [`/userdata/getfile/${file.token}/file.bin.partial`]);
 });
 
 test('expiry aborts an unfinished upload and releases its stream and timers', { timeout: 5000 }, async t => {
@@ -286,7 +307,7 @@ test('shutdown cancels incomplete fallback requests and clears their Homey deadl
   const incoming = once(fixture.server.server, 'request');
   request = http.request({
     host: '127.0.0.1', port: fixture.server.port,
-    path: '/getfile/missing/file.bin', method: 'POST'
+    path: '/getfile/missing/file.bin', method: 'POST', headers: { 'Content-Type': 'text/json' }
   });
   request.on('error', error => assert.equal(error.code, 'ECONNRESET'));
   request.on('response', response => response.resume());
@@ -323,4 +344,62 @@ test('JSON body downloads preserve binary data and release their request deadlin
   assert.equal(fixture.server.transfers.size, 0);
   assert.equal(fixture.timers.size, 1);
   assert.deepEqual(fixture.errors, []);
+});
+
+test('reservations wait for a successful bind and retry after a bind failure', { timeout: 5000 }, async t => {
+  const blocker = http.createServer();
+  blocker.listen(0);
+  await once(blocker, 'listening');
+  t.after(() => { if (blocker.listening) blocker.close(); });
+  const fixture = await createServer(t, {
+    port: blocker.address().port,
+    writable: () => assert.fail('No file should be opened')
+  });
+  const attempts = await Promise.allSettled([fixture.server.getDownloadUrl(), fixture.server.getDownloadUrl()]);
+  assert.ok(attempts.every(attempt => attempt.status === 'rejected' && attempt.reason.code === 'EADDRINUSE'));
+  assert.equal(attempts[0].reason, attempts[1].reason, 'Both calls awaited the same bind');
+  assert.equal(fixture.timers.size, 0);
+  assert.equal(fixture.server.server, undefined);
+  await new Promise(resolve => blocker.close(resolve));
+  const links = await Promise.all([fixture.server.getDownloadUrl(), fixture.server.getDownloadUrl()]);
+  assert.notEqual(links[0].token, links[1].token);
+  assert.equal(fixture.server.server.listening, true);
+});
+
+test('expiry during address refresh cannot strand a new reservation on a closed server', async t => {
+  const fixture = await createServer(t);
+  const old = await fixture.server.getDownloadUrl();
+  let release;
+  fixture.server.homey.cloud.getLocalAddress = () => new Promise(resolve => { release = resolve; });
+  const reservation = fixture.server.getDownloadUrl();
+  await fixture.expire(old.token);
+  assert.equal(fixture.closed(), 1);
+  release('127.0.0.2:80');
+  const link = await reservation;
+  assert.ok(fixture.server.server);
+  assert.deepEqual(Object.keys(fixture.server.files), [link.token]);
+  assert.equal(link.host, '127.0.0.2');
+});
+
+test('expiry waits for an in-flight rename before removing the directory', { timeout: 5000 }, async t => {
+  let renaming;
+  const started = new Promise(resolve => { renaming = resolve; });
+  let release;
+  const gate = new Promise(resolve => { release = resolve; });
+  const fixture = await createServer(t, {
+    autoShutdown: false,
+    writable: () => new Writable({ write(chunk, encoding, callback) { callback(); } }),
+    renameGate: () => { renaming(); return gate; }
+  });
+  const file = await fixture.server.getDownloadUrl({ filename: 'file.bin' });
+  fixture.server.port = fixture.server.server.address().port;
+  const request = upload(fixture.server, file.token, Buffer.from('data'));
+  await started;
+  const expiration = fixture.expire(file.token);
+  assert.deepEqual(fixture.removed, [], 'Removal must not race the rename');
+  release();
+  assert.equal(await request, 400);
+  await expiration;
+  assert.equal(fixture.directories.size, 0);
+  assert.equal(fixture.timers.size, 0);
 });

@@ -1,4 +1,17 @@
 {
+  "settingsDownload": {
+    "preparing": "Przygotowywanie pobierania…",
+    "ready": "Link do pobrania jest gotowy. Jeśli pobieranie się nie rozpocznie, użyj Pobierz teraz. Ten link jest tymczasowy.",
+    "reservationFailed": "Nie udało się zażądać pobrania. Sprawdź połączenie i ponów eksport.",
+    "generationFailed": "Nie udało się utworzyć lub przesłać eksportu. Spróbuj ponownie.",
+    "timeout": "Upłynął limit czasu żądania pobrania. Ponów eksport.",
+    "networkFailed": "Nie udało się sprawdzić linków do pobrania. Sprawdź połączenie; przeglądarka również może blokować to sprawdzenie. Spróbuj Pobierz teraz lub ponów eksport.",
+    "openUnconfirmed": "Przeglądarka nie potwierdziła otwarcia pobierania. Jeśli nic się nie otworzyło, użyj Pobierz teraz.",
+    "openFailed": "Nie udało się otworzyć pobierania. Użyj Pobierz teraz.",
+    "expired": "Ten link do pobrania mógł wygasnąć. Ponów eksport, aby uzyskać nowy link.",
+    "manual": "Pobierz teraz",
+    "cloud": "Pobierz przez internet"
+  },
   "exportFailed": "Nie udało się utworzyć lub przesłać eksportu. Spróbuj ponownie.",
   "Variables": "Zmienne",
   "Coding": "Kodowanie",

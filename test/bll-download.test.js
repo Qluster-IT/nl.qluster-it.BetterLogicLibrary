@@ -4,6 +4,7 @@ const assert = require('node:assert/strict');
 const { once } = require('node:events');
 const http = require('node:http');
 const { setImmediate: nextTurn } = require('node:timers/promises');
+const { Readable } = require('node:stream');
 const test = require('node:test');
 const { BL } = require('betterlogiclibrary');
 const { BLL } = require('../bll/bll');
@@ -102,6 +103,27 @@ test('2xx must finish before the callback starts, and the callback must finish b
   assert.equal(resolved, false);
   finishCallback();
   assert.equal(await pending, link);
+  assert.equal(callback.mock.callCount(), 1);
+});
+
+test('streamed uploads use chunked transfer and never call ready on source failure', async t => {
+  const chunks = [];
+  const link = await uploadServer(t, (req, res) => {
+    req.on('error', () => {});
+    assert.equal(req.headers['transfer-encoding'], 'chunked');
+    req.on('data', chunk => chunks.push(chunk));
+    req.on('end', () => res.writeHead(204).end());
+  });
+  const callback = t.mock.fn();
+  await bll.setDownloadUrl({ link, stream: Readable.from([Buffer.from('PK'), Buffer.from(' workbook')]), callback });
+  assert.equal(Buffer.concat(chunks).toString(), 'PK workbook');
+  const failure = new Error('worksheet generation failed');
+  const failing = Readable.from((async function* () {
+    yield Buffer.from('partial workbook');
+    await nextTurn();
+    throw failure;
+  })());
+  await assert.rejects(bll.setDownloadUrl({ link, stream: failing, callback }), error => error === failure);
   assert.equal(callback.mock.callCount(), 1);
 });
 

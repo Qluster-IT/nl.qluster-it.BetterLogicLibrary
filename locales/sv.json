@@ -1,4 +1,17 @@
 {
+  "settingsDownload": {
+    "preparing": "Förbereder hämtning…",
+    "ready": "Hämtningslänken är klar. Om hämtningen inte startar, använd Hämta nu. Länken är tillfällig.",
+    "reservationFailed": "Det gick inte att begära hämtningen. Kontrollera anslutningen och exportera igen.",
+    "generationFailed": "Det gick inte att skapa eller ladda upp exporten. Försök igen.",
+    "timeout": "Begäran om hämtning tog för lång tid. Exportera igen.",
+    "networkFailed": "Det gick inte att kontrollera hämtningslänkarna. Kontrollera anslutningen; även webbläsaren kan blockera kontrollen. Prova Hämta nu eller exportera igen.",
+    "openUnconfirmed": "Webbläsaren bekräftade inte att hämtningen öppnades. Använd Hämta nu om inget öppnades.",
+    "openFailed": "Det gick inte att öppna hämtningen. Använd Hämta nu.",
+    "expired": "Den här hämtningslänken kan ha gått ut. Exportera igen för att få en ny länk.",
+    "manual": "Hämta nu",
+    "cloud": "Hämta via internet"
+  },
   "exportFailed": "Exporten kunde inte skapas eller laddas upp. Försök igen.",
   "Variables": "Variabler",
   "Coding": "Kodning",

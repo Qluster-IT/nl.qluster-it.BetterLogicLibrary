@@ -23,12 +23,33 @@ Excel exports cap column widths at Excel's supported maximum without shortening
 the cell contents. Cells longer than 32,767 characters fail with an explicit
 error; use JSON or CSV for those values. Sheet names are XML escaped and every
 worksheet is declared in multi-sheet workbooks. Font styles follow the Excel
-schema, including bold headers, for compatibility with mobile Excel.
+schema, including bold headers. Custom number formats, default cell styles and
+frozen-header selections follow Excel's conventions for mobile compatibility.
+Large Excel exports compress worksheet data as it is generated, reducing
+memory use and file size. On Homey, native asynchronous compression also
+keeps other app work responsive during exports. Workbooks with many distinct
+strings can write text directly into cells instead of retaining it all in
+the shared string table. The Excel Flow card also avoids building a second
+copy of ordinary JSON object rows before writing them. On Homey, compressed
+worksheet data flows straight into the archive, without collecting a full
+compressed worksheet first. Base64 exports encode the archive in chunks
+without holding a separate binary copy of the workbook.
+Variable download links support CSV, XLSX, and JSON. Downloads stream to disk
+without building the complete file in memory. Base64 remains available for
+Flow exports, not for download links. CSV/JSON conversion still returns text
+by default; Node callers can opt into a readable stream with `outputStream`.
+Buffered files and Base64 results still need to fit in memory.
 
 The shared download helper accepts binary byte views, including `Uint8Array`
 slices, and empty text files. It resolves and calls the ready callback only after
 a successful upload. HTTP failures, interrupted uploads and timeouts reject;
 settings downloads display failures instead of leaving a ready-looking link.
+Settings try the local download first, then the cloud connection, and offer
+temporary manual links with visible network errors and bounded waiting times.
+Links still expire according to the file server's availability setting.
+File reservations wait for the server to start, and incomplete uploads are
+never published. Expiry and shutdown cancel pending uploads before removing
+their temporary files.
 
 ## Getting started
 
@@ -62,11 +83,17 @@ all interpret input in the same way.
 
 ## Version 4.3.1 highlights
 
+- **Lower peak memory for large exports.** CSV, JSON, and Excel variable
+  downloads stream to disk instead of keeping the entire file in memory.
+  Large Excel Flow exports also use less memory.
+- Settings downloads try the local connection first, then the internet
+  connection. If a download doesn't start, the settings page offers temporary
+  links and shows any errors.
+- Improved Excel compatibility for formatted cells and frozen headers.
 - The date/time Flow card offers searchable formats and previews, with custom
   formats first and built-in formats grouped consistently.
 - Updating custom date/time formats reuses code tables and cached formatters
   instead of rebuilding them in every app using the shared module.
-- Update the `betterlogiclibrary` npm dependency to `1.0.7`.
 
 ## Version 4.3.0 highlights
 

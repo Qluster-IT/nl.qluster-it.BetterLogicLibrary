@@ -1,4 +1,17 @@
 {
+  "settingsDownload": {
+    "preparing": "Preparazione del download…",
+    "ready": "Link per il download pronto. Se il download non parte, usa Scarica ora. Questo link è temporaneo.",
+    "reservationFailed": "Impossibile richiedere il download. Controlla la connessione ed esporta di nuovo.",
+    "generationFailed": "Impossibile creare o caricare l’esportazione. Riprova.",
+    "timeout": "La richiesta di download è scaduta. Esporta di nuovo.",
+    "networkFailed": "Impossibile verificare i link per il download. Controlla la connessione; anche il browser potrebbe bloccare questa verifica. Prova Scarica ora oppure esporta di nuovo.",
+    "openUnconfirmed": "Il browser non ha confermato l’apertura del download. Se non si è aperto nulla, usa Scarica ora.",
+    "openFailed": "Impossibile aprire il download. Usa Scarica ora.",
+    "expired": "Questo link per il download potrebbe essere scaduto. Esporta di nuovo per ottenere un nuovo link.",
+    "manual": "Scarica ora",
+    "cloud": "Scarica tramite internet"
+  },
   "exportFailed": "Impossibile creare o caricare l’esportazione. Riprova.",
   "Variables": "Variabili",
   "Coding": "Codifica",

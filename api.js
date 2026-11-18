@@ -16,11 +16,17 @@ const utcDate = "2023-03-15T12:13:27.952Z";
 function fillVariablesDownload(homey, link, returnType, contentKey) {
     homey.setTimeout(async () => {
         try {
-            const content = await homey.app.getVariables({ returnType });
-            await BL.setDownloadUrl({ link, [contentKey]: content, callback: ready => homey.api.realtime('downloadFileReady', ready) });
+            const content = await homey.app.getVariables({ returnType, streamExcel: returnType === 'xlsx',
+                streamJson: returnType === 'json', streamCsv: returnType === 'csv' });
+            await BL.setDownloadUrl({ link, [content && typeof content.pipe === 'function' ? 'stream' : contentKey]: content,
+                callback: ready => homey.api.realtime('downloadFileReady', ready) });
         } catch (error) {
             homey.error(`Variables download (${returnType}) could not be generated`, error);
-            homey.api.realtime('downloadFileFailed', { token: link.token, message: error.message });
+            try {
+                await homey.api.realtime('downloadFileFailed', { token: link.token, message: error.message });
+            } catch (notificationError) {
+                homey.error('Variables download failure could not be reported', notificationError);
+            }
         }
     }, 0);
 }
@@ -102,26 +108,24 @@ module.exports =
 
             switch (returnType) {
                 case 'csv':
-                case 'csv_base64':
                     {
                         let filename = homey.app.exportsSettings && homey.app.exportsSettings.csvFilename ?
                             await BL.decode(homey.app.exportsSettings.csvFilename) :
                             "Vars " + BL.datetime.toString('datetimeshort') + '.csv';
 
                         const link = await BL.getDownloadUrl({ contentType: 'text/csv', filename });
-                        fillVariablesDownload(homey, link, returnType, returnType === 'csv_base64' ? 'base64' : 'text');
+                        fillVariablesDownload(homey, link, returnType, 'text');
                         return link;
                     }
                     break;
                 case 'xlsx':
-                case 'xlsx_base64':
                     {
                         let filename = homey.app.exportsSettings && homey.app.exportsSettings.xlsxFilename ?
                             await BL.decode(homey.app.exportsSettings.xlsxFilename) :
                             "Vars " + BL.datetime.toString('datetimeshort') + '.xlsx';
 
                         const link = await BL.getDownloadUrl({ contentType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', filename });
-                        fillVariablesDownload(homey, link, returnType, returnType === 'xlsx_base64' ? 'base64' : 'buffer');
+                        fillVariablesDownload(homey, link, returnType, 'stream');
                         return link;
                     }
                     break;

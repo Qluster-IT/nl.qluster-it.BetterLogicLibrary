@@ -23,6 +23,19 @@ async function readFile(path, ops) { return await readFileAsync(path, ops); }
 
 const vm = require('vm');
 
+function excelObjectKeys(rows) {
+	if (!Array.isArray(rows) || rows.length === 0) return undefined;
+	const keys = new Set();
+	for (const row of rows) {
+		if (!row || typeof row !== 'object' || Array.isArray(row)) return undefined;
+		for (const key of Object.keys(row)) {
+			// These keys can change the legacy header order or collide with inherited names.
+			if (key in Object.prototype || (String(key >>> 0) === key && key !== '4294967295')) return undefined;
+			keys.add(key);
+		}
+	}
+	return Array.from(keys);
+}
 
 class BetterLogic extends Homey.App {
 
@@ -824,7 +837,8 @@ class BetterLogic extends Homey.App {
 						switch (args.returnType || 'csv') {
 							case "csv":
 							case "csv_base64":
-								let arr = BL._.toArray(JSON.parse(args.json));
+								const json = JSON.parse(args.json);
+								const arr = Array.isArray(json) ? json : BL._.toArray(json);
 								result.result = await BL.json.toCsv(arr, {
 									useDateIso8601Format: true, emptyFieldValue: '', expandArrayObjects: args.expandArrayObjects,
 									unwindArrays: args.unwindArrays
@@ -853,14 +867,17 @@ class BetterLogic extends Homey.App {
 								let json = JSON.parse(args.json);
 
 								let schema;
-								if (!args.schema) {
+								let objectKeys;
+								if (args.schema) {
+									schema = eval(args.schema);
+								}
+								else if ((objectKeys = excelObjectKeys(json)) === undefined) {
 									let headers = {};
 									for (let i = 0; i < json.length; i++) {
 										const row = json[i];
 										if (!BL._.isArray(row)) {
 											for (const columnKey in row) {
 												if (Object.hasOwnProperty.call(row, columnKey)) {
-													const column = row[columnKey];
 													if (!headers[columnKey]) headers[columnKey] = {
 														value: columnKey.substring(0, 1).toUpperCase() + columnKey.substring(1),
 														fontWeight: 'bold'
@@ -881,20 +898,15 @@ class BetterLogic extends Homey.App {
 									headers = BL._.toArray(headers);
 									json.unshift(headers);
 								}
-								else {
-									schema = eval(args.schema);
-								}
-								let xlsxBuffer = await BL.json.toExcel(json, {
+								result.result = await BL.json.toExcel(json, {
 									schema,
+									objectKeys,
+									outputBase64: args.returnType === 'xlsx_base64',
 									sheet: args.sheetName || undefined,//: 'Log',// + BL.datetime.toString('datetime'),
 									stickyRowsCount: args.stickyRowsCount !== undefined ? args.stickyRowsCount : 1,
 									buffer: true, //returnType == 'xlsx' ? true : false,
 									dateFormat: args.defaultDate //|| 'yyyy-mm-ddThh:mm:ss'
 								});
-								result.result = xlsxBuffer;
-								if (args.returnType == 'xlsx_base64') {
-									result.result = Buffer.from(result.result).toString('base64');
-								}
 								break;
 						}
 
@@ -1061,14 +1073,15 @@ class BetterLogic extends Homey.App {
 	}
 
 
-	async getVariables({ returnType, maxSizeKb }) {
+	async getVariables({ returnType, maxSizeKb, streamExcel = false, streamJson = false, streamCsv = false }) {
 		const vars = await variableManager.getVariables();
 		let result;
 		switch (returnType) {
 			case 'csv':
 			case 'csv_base64':
 				{
-					result = await BL.json.toCsv(vars, { useDateIso8601Format: true, emptyFieldValue: '' });
+					result = await BL.json.toCsv(vars, { useDateIso8601Format: true, emptyFieldValue: '',
+						...(streamCsv && returnType === 'csv' ? { outputStream: true } : {}) });
 					if (maxSizeKb && result.length > maxSizeKb) result = substring(result, 0, (maxSizeKb * 1000));
 					if (returnType == 'csv_base64') {
 						result = Buffer.from(result).toString('base64');
@@ -1119,18 +1132,15 @@ class BetterLogic extends Homey.App {
 							value: x => x.lastChanged ? new Date(x.lastChanged).toISOString() : null,
 							width: new Date().toISOString().length // iso dates
 						});
-						let xlsxBuffer = await BL.json.toExcel(vars, {
+						return await BL.json.toExcel(vars, {
 							schema,
+							outputBase64: !streamExcel && returnType === 'xlsx_base64',
+							outputStream: streamExcel,
 							sheet: BL.homey.__('Variables'),// + BL.datetime.toString('datetime'),
 							stickyRowsCount: 1,
 							buffer: true, //returnType == 'xlsx' ? true : false,
 							//dateFormat: 'yyyy-mm-ddThh:mm:ss'
 						});
-						result = xlsxBuffer;
-						if (returnType == 'xlsx_base64') {
-							result = Buffer.from(result).toString('base64');
-						}
-						return result;
 					} catch (error) {
 						this.homey.error(error);
 						throw error;
@@ -1139,6 +1149,9 @@ class BetterLogic extends Homey.App {
 				break;
 			case 'json':
 			case 'json_base64': {
+				if (streamJson && returnType === 'json') {
+					return BL.json.toJson(vars.map(variable => ({ ...variable })), { outputStream: true });
+				}
 				result = JSON.stringify(vars);
 				if (returnType == 'json_base64') {
 					result = Buffer.from(result).toString('base64');
