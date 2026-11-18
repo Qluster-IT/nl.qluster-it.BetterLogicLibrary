@@ -1132,7 +1132,8 @@ class BetterLogic extends Homey.App {
 						}
 						return result;
 					} catch (error) {
-						homey.error(error);
+						this.homey.error(error);
+						throw error;
 					}
 				}
 				break;

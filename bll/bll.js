@@ -1,8 +1,112 @@
 
-const { BL, Defer } = require("betterlogiclibrary");
+const { BL } = require("betterlogiclibrary");
 //var querystring = require('querystring');
-var http = require('http');
+const http = require('http');
+const { types } = require('util');
 
+const DOWNLOAD_UPLOAD_TIMEOUT = 60 * 1000;
+
+function prepareDownloadBody({ buffer, base64, json, text, callback }) {
+    if (callback !== undefined && typeof callback !== 'function') {
+        throw new TypeError('Download callback must be a function');
+    }
+
+    const fields = Object.entries({ buffer, base64, json, text }).filter(([, value]) => value !== undefined);
+    if (!fields.length) return;
+    if (fields.length !== 1) throw new TypeError('Provide only one download body');
+
+    const [[field, value]] = fields;
+    switch (field) {
+        case 'buffer':
+            if (!types.isUint8Array(value)) throw new TypeError('Download buffer must be a Buffer or Uint8Array');
+            return { type: 'application/octet-stream', body: Buffer.from(value.buffer, value.byteOffset, value.byteLength) };
+        case 'base64': {
+            if (typeof value !== 'string') throw new TypeError('Download base64 must be a string');
+            const encoded = value.replace(/\s/g, '');
+            if (!/^[A-Za-z0-9+/_-]*={0,2}$/.test(encoded) ||
+                (encoded.endsWith('=') ? encoded.length % 4 !== 0 : encoded.length % 4 === 1)) {
+                throw new TypeError('Invalid Base64 download body');
+            }
+            return { type: 'application/octet-stream', body: Buffer.from(encoded, 'base64') };
+        }
+        case 'json':
+            try {
+                if (typeof value === 'string') {
+                    JSON.parse(value);
+                    return { type: 'text/json', body: value };
+                }
+                const body = JSON.stringify(value);
+                if (body !== undefined) return { type: 'text/json', body };
+            } catch (_) {
+                // Do not expose input snippets from JSON errors.
+            }
+            throw new TypeError('Invalid JSON download body');
+        case 'text':
+            if (typeof value !== 'string') throw new TypeError('Download text must be a string');
+            return { type: 'text/plain', body: value };
+    }
+}
+
+async function uploadDownload(link, { type, body }, { contentType, callback }) {
+    if (!link || typeof link.host !== 'string' || !link.host ||
+        !['number', 'string'].includes(typeof link.port) || !/^\d+$/.test(String(link.port)) ||
+        Number(link.port) < 1 || Number(link.port) > 65535 ||
+        typeof link.path !== 'string' || !link.path.startsWith('/')) {
+        throw new TypeError('Invalid download upload link');
+    }
+
+    const headers = { 'Content-Type': type, 'Content-Length': Buffer.byteLength(body) };
+    const accept = contentType || link.contentType;
+    if (accept !== undefined) {
+        if (typeof accept !== 'string') throw new TypeError('Download content type must be a string');
+        headers.Accept = accept;
+    }
+
+    let request;
+    let timeout;
+    try {
+        await new Promise((resolve, reject) => {
+            const interrupted = () => reject(new Error('Download upload was interrupted'));
+            let responseEnded = false;
+            const complete = () => {
+                if (request.writableFinished && responseEnded) resolve();
+            };
+
+            request = http.request({
+                host: link.host, port: link.port, path: link.path, method: 'POST', headers
+            }, response => {
+                response.on('aborted', interrupted);
+                response.on('error', interrupted);
+                response.on('close', () => {
+                    if (!response.complete) interrupted();
+                });
+                if (!(response.statusCode >= 200 && response.statusCode < 300)) {
+                    reject(new Error(`Download upload failed with HTTP ${response.statusCode}`));
+                    return;
+                }
+                response.on('end', () => {
+                    if (!response.complete) return interrupted();
+                    responseEnded = true;
+                    complete();
+                });
+                response.resume();
+            });
+            request.on('error', () => reject(new Error('Download upload network error')));
+            request.on('finish', complete);
+            request.on('close', () => {
+                if (!request.writableFinished || !responseEnded) interrupted();
+            });
+            timeout = setTimeout(() => reject(new Error('Download upload timed out')), DOWNLOAD_UPLOAD_TIMEOUT);
+            request.end(body);
+        });
+    } finally {
+        clearTimeout(timeout);
+        if (request) request.destroy();
+    }
+
+    if (callback) await callback(link);
+    return link;
+}
 
 class BLL {
 
@@ -255,86 +359,17 @@ class BLL {
 
     }
 
-    async getDownloadUrl({ base64, contentType, buffer, json, text, filename, callback } = {}) {
-        try {
-            const api = BL.Current.api;
-            const link = await api.post('/getdownloadurl/', { contentType, filename });
-
-            if (buffer || base64 || json || text) {
-                return await this.setDownloadUrl({ link, base64, contentType, buffer, json, text, filename, callback })
-            }
-            else return link;
-
-        } catch (error) {
-            throw new Error(error);
-        }
+    async getDownloadUrl(options = {}) {
+        const { contentType, filename } = options;
+        const upload = prepareDownloadBody(options);
+        const link = await BL.Current.api.post('/getdownloadurl/', { contentType, filename });
+        return upload ? uploadDownload(link, upload, options) : link;
     }
-    async setDownloadUrl({ link, base64, contentType, buffer, json, text, filename, callback } = {}) {
-        try {
-            const defer = new Defer();
 
-            let type = 'base64';
-            if (buffer !== undefined) type = 'application/octet-stream';
-            else if (json !== undefined) type = 'text/json';
-            else if (text !== undefined) type = 'text/plain';
-
-            const plain = !buffer;
-
-            const send = buffer || base64 || json || text;
-            if (send !== undefined) {
-                const post_options = {
-                    host: link.host,
-                    port: link.port,
-                    path: link.path,
-                    method: 'POST',
-                    headers: {
-                        'Accept': contentType || link.contentType,
-                        'Content-Type': type,
-                        'Content-Length': Buffer.byteLength(send) // buffer !== undefined ? Buffer.byteLength(buffer) : send.length
-                    }
-                };
-                //BL.homey.log('send length', buffer !== undefined ? Buffer.byteLength(buffer) : send.length);
-
-                // Set up the request
-                const post_req = http.request(post_options, function (res) {
-                    res.setEncoding('utf8');
-                    res.on('data', function (chunk) {
-                    });
-                    res.on('end', function (chunk) {
-                        defer.resolve(link);
-                        post_req.destroy();
-                        BL.clearObj(defer);
-                        if (callback) callback(link);
-                    });
-                });
-                post_req.on('error', (e) => {
-                    if (e) BL.homey.error('Bll.send file e', e);
-                    defer.reject(e);
-                    post_req.destroy();
-                    BL.clearObj(defer);
-                });
-
-                if (plain) post_req.write(send, (error) => {
-                    if (error) BL.homey.error('Bll.send file error', error);
-                    post_req.end();
-                });
-                else
-                    post_req.write(send, 'binary', (error) => {
-                        if (error) BL.homey.error('Bll.send file error', error);
-                        post_req.end();
-                    });
-
-                if (callback) return link;
-                else return defer.promise;
-
-            }
-            else return link;
-
-        } catch (error) {
-            BL.homey.error('BLL.setDownloadUrl error:\n', error);
-            //throw new Error(error);
-            return link;
-        }
+    async setDownloadUrl(options = {}) {
+        const upload = prepareDownloadBody(options);
+        if (!upload) throw new TypeError('Download body is required');
+        return uploadDownload(options.link, upload, options);
     }
 
 }

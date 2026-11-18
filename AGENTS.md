@@ -8,6 +8,12 @@ This is a Homey app. Before making changes, read and follow the general instruct
 
 - Keep emitting the `running`, `running_2x`, and `running_3x` realtime events while older installed NPM package copies depend on them. The current BLL NPM package does not listen for these events. Once all consuming apps have migrated to its `/api-ready` handshake, remove these emissions.
 
+## Export compatibility
+
+- The bundled Excel writer must keep widths at most 255, reject cells over 32,767 characters explicitly without truncating their data, XML-escape sheet names and declare all worksheets in the package content types. Preserve its `Uint8Array` return type and browser fallback.
+- Emit font properties in SpreadsheetML schema order (bold/italic before size, color, name and family). XML well-formedness and desktop Excel opening are not sufficient checks for mobile Excel compatibility; validate the workbook with the Open XML SDK when investigating repair warnings.
+- Shared downloads resolve and call ready callbacks only after a complete successful upload. Preserve byte-view offsets and empty files, and reject HTTP, network, timeout and callback failures. Settings downloads report failures through `downloadFileFailed`.
+
 ## HP2023 test fixtures
 
 - Reuse the Advanced Flows in the `Better Logic Library` Flow folder and the `BLL Test Number`, `BLL Test Text`, and `BLL Test Boolean` variables. Run the Flows sequentially because they share these variables.

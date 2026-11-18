@@ -286,15 +286,15 @@
 
         $scope.downloadFile = async (type) => {
             view.isBusy = true;
-            //let opt = { returnType: type };
-            let downloadLink = await $bl.api("GET", "/getvariablesdownloadurl/" + type);
-            if (!downloadLink) {
-                $scope.$apply(() => {
-                    (view.isBusy = false);
-                });
-                return (view.isBusy = false);
-            } else
+            view.downloadFileLink = null;
+            try {
+                let downloadLink = await $bl.api("GET", "/getvariablesdownloadurl/" + type);
+                if (!downloadLink) throw new Error(homey.__('exportFailed'));
                 view.downloadFileLink = downloadLink;
+            } catch (error) {
+                $scope.$apply(() => { view.isBusy = false; });
+                homey.alert(error.message || homey.__('exportFailed'));
+            }
         };
 
 
@@ -333,6 +333,11 @@
                     });
                 });
 
+                homey.on('downloadFileFailed', (failed) => {
+                    if (!view.isBusy || (view.downloadFileLink && view.downloadFileLink.token !== failed.token)) return;
+                    $scope.$apply(() => { view.isBusy = false; });
+                    homey.alert(failed.message || homey.__('exportFailed'));
+                });
 
                 vm.homey.on('variable_changed', function ({ variable, date }) {
                     if (!view.autoUpdate) return;

@@ -20,6 +20,7 @@ function fillVariablesDownload(homey, link, returnType, contentKey) {
             await BL.setDownloadUrl({ link, [contentKey]: content, callback: ready => homey.api.realtime('downloadFileReady', ready) });
         } catch (error) {
             homey.error(`Variables download (${returnType}) could not be generated`, error);
+            homey.api.realtime('downloadFileFailed', { token: link.token, message: error.message });
         }
     }, 0);
 }
@@ -108,7 +109,7 @@ module.exports =
                             "Vars " + BL.datetime.toString('datetimeshort') + '.csv';
 
                         const link = await BL.getDownloadUrl({ contentType: 'text/csv', filename });
-                        fillVariablesDownload(homey, link, returnType, 'text');
+                        fillVariablesDownload(homey, link, returnType, returnType === 'csv_base64' ? 'base64' : 'text');
                         return link;
                     }
                     break;
@@ -120,7 +121,7 @@ module.exports =
                             "Vars " + BL.datetime.toString('datetimeshort') + '.xlsx';
 
                         const link = await BL.getDownloadUrl({ contentType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', filename });
-                        fillVariablesDownload(homey, link, returnType, 'buffer');
+                        fillVariablesDownload(homey, link, returnType, returnType === 'xlsx_base64' ? 'base64' : 'buffer');
                         return link;
                     }
                     break;

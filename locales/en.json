@@ -1,4 +1,5 @@
 {
+	"exportFailed": "The export could not be created or uploaded. Please try again.",
 	"Variables":"Variables",
 	"Coding":"Coding",
 	"Locale Timezone":"Locale \\ Timezone",

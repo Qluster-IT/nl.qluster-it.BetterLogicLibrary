@@ -1,4 +1,5 @@
 {
+  "exportFailed": "내보내기 파일을 만들거나 업로드할 수 없습니다. 다시 시도하세요.",
   "Variables": "변수",
   "Coding": "코딩",
   "Locale Timezone": "로케일 \\ 시간대",

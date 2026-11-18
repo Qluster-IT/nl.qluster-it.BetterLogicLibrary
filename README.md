@@ -19,6 +19,17 @@ Advanced logic, variable management and shared libraries for Homey.
 - Share downloads and receive uploads through the file server.
 - Let other apps use BLL's libraries and APIs.
 
+Excel exports cap column widths at Excel's supported maximum without shortening
+the cell contents. Cells longer than 32,767 characters fail with an explicit
+error; use JSON or CSV for those values. Sheet names are XML escaped and every
+worksheet is declared in multi-sheet workbooks. Font styles follow the Excel
+schema, including bold headers, for compatibility with mobile Excel.
+
+The shared download helper accepts binary byte views, including `Uint8Array`
+slices, and empty text files. It resolves and calls the ready callback only after
+a successful upload. HTTP failures, interrupted uploads and timeouts reject;
+settings downloads display failures instead of leaving a ready-looking link.
+
 ## Getting started
 
 Open the app settings to manage variables, custom functions, formatting, exports

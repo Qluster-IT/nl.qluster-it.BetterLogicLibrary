@@ -1,4 +1,5 @@
 {
+  "exportFailed": "No se pudo crear o cargar la exportación. Inténtalo de nuevo.",
   "Variables": "Variables",
   "Coding": "Codificación",
   "Locale Timezone": "Zona horaria local",

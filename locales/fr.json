@@ -1,4 +1,5 @@
 {
+  "exportFailed": "Impossible de créer ou de transférer l’export. Veuillez réessayer.",
   "Variables": "Variables",
   "Coding": "Codage",
   "Locale Timezone": "Fuseau horaire local",
